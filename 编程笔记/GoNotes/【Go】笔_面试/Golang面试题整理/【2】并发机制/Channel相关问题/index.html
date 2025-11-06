@@ -251,49 +251,49 @@
 
 
 
-<h1 id="channel">Channel 相关问题</h1>
-<h1 id="channel_1">关闭一个已经关闭的 Channel 会发生什么？</h1>
+<h1 id="channel">Channel 相关问题<a class="headerlink" href="#channel" title="Permanent link">&para;</a></h1>
+<h1 id="channel_1">关闭一个已经关闭的 Channel 会发生什么？<a class="headerlink" href="#channel_1" title="Permanent link">&para;</a></h1>
 <p>题目来源：哔哩哔哩</p>
 <p><font style="color:rgb(18, 18, 18);">关闭已经关闭的 Channel 会发生 panic。</font></p>
-<h1 id="channel_2"><font style="color:rgb(0, 0, 0);">Channel 有缓存和没缓存的区别是什么？</font></h1>
+<h1 id="channel_2"><font style="color:rgb(0, 0, 0);">Channel 有缓存和没缓存的区别是什么？</font><a class="headerlink" href="#channel_2" title="Permanent link">&para;</a></h1>
 <p>题目来源：哔哩哔哩</p>
 <p>无缓冲的与有缓冲 channel 有着重大差别，那就是一个是同步的 一个是非同步的。</p>
 <p>比如：</p>
-<pre><code class="language-go">c1:=make(chan int)        //无缓冲
-c2:=make(chan int,1)      //有缓冲
-c1&lt;-1
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">c1</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w">        </span><span class="c1">//无缓冲</span>
+<span class="nx">c2</span><span class="o">:=</span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">      </span><span class="c1">//有缓冲</span>
+<span class="nx">c1</span><span class="o">&lt;-</span><span class="mi">1</span>
+</code></pre></div>
 <p><strong>无缓冲</strong>： 不仅仅是向 c1 通道放 1，而是一直要等有别的携程 &lt;-c1 接手了这个参数，那么 c1&lt;-1 才会继续下去，要不然就一直阻塞着。</p>
 <p><strong>有缓冲</strong>： c2&lt;-1 则不会阻塞，因为缓冲大小是 1 （其实是缓冲大小为 0 )，只有当放第二个值的时候，第一个还没被人拿走，这时候才会阻塞。</p>
-<h1 id="channel_3">读写关闭的 Channel 是什么后果</h1>
+<h1 id="channel_3">读写关闭的 Channel 是什么后果<a class="headerlink" href="#channel_3" title="Permanent link">&para;</a></h1>
 <p>自己简单的尝试了一下：</p>
-<pre><code class="language-go">func main(){
-    ch := make(chan int,3)
-    ch &lt;- 2
-    ch &lt;- 3
-    close(ch)
-    for item:=range ch{
-        fmt.Println(item)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">item</span><span class="o">:=</span><span class="k">range</span><span class="w"> </span><span class="nx">ch</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><img alt="1668357802528-a4c84c9e-d8d7-4096-8483-d49558315ea1.png" src="../img/VDCPzwncZLDT5GZP/1668357802528-a4c84c9e-d8d7-4096-8483-d49558315ea1-595832.png" /></p>
 <p>是可以正常读取出来的，而且不会造成死锁。</p>
-<pre><code class="language-go">func main(){
-    ch := make(chan int,3)
-    ch &lt;- 2
-    ch &lt;- 3
-    close(ch)   
-    item,state := &lt;-ch
-    fmt.Println(item,state)
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span><span class="w">   </span>
+<span class="w">    </span><span class="nx">item</span><span class="p">,</span><span class="nx">state</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">state</span><span class="p">)</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <p><img alt="1668357911714-0a230d2a-bfad-4b5f-b7d2-4a0c86a8653f.png" src="../img/VDCPzwncZLDT5GZP/1668357911714-0a230d2a-bfad-4b5f-b7d2-4a0c86a8653f-473557.png" /></p>
 <p>关闭了之后读完了，也不会报错：</p>
 <p><img alt="1668357984966-50ce128a-6b34-46cd-8888-0567ec17d3db.png" src="../img/VDCPzwncZLDT5GZP/1668357984966-50ce128a-6b34-46cd-8888-0567ec17d3db-681878.png" />只不过后面读取的数继续读取的返回的state是false。</p>
 <p>回答：如果channel 有元素还未读到，则会正确读到chan内的值，哪怕已经关闭了。写的话，就会Panic。</p>
-<h1 id="channel_4">Channel 的使用场景</h1>
+<h1 id="channel_4">Channel 的使用场景<a class="headerlink" href="#channel_4" title="Permanent link">&para;</a></h1>
 <ul>
 <li><strong>数据交流</strong>：当作并发的 buffer 或者 queue，解决生产者 - 消费者问题。多个 goroutine 可以并发当作生产者（Producer）和消费者（Consumer）。</li>
 <li><strong>数据传递</strong>：一个goroutine将数据交给另一个goroutine，相当于把数据的拥有权托付出去。</li>

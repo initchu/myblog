@@ -310,12 +310,12 @@
 
 
 
-<h1 id="10-go">10 Go 语言的依赖管理</h1>
-<h2 id="go">Go语言的依赖管理</h2>
+<h1 id="10-go">10 Go 语言的依赖管理<a class="headerlink" href="#10-go" title="Permanent link">&para;</a></h1>
+<h2 id="go">Go语言的依赖管理<a class="headerlink" href="#go" title="Permanent link">&para;</a></h2>
 <p>依赖指的是编一个程序不可能所有的代码都是自己写，我们需要使用大量的第三方库，我们把程序的功能建立在别人已经实现的基础设施上面。</p>
 <p>依赖管理有三个发展阶段：GOPATH, GOVENDOR, go mod<br />
 GOPATH不怎么好用，于是 GOVENDOR 短暂的出现了。go mod 出现在2018年，相较于前两种，go mod 可以更好的进行依赖管理。</p>
-<h2 id="gopath">GOPATH</h2>
+<h2 id="gopath">GOPATH<a class="headerlink" href="#gopath" title="Permanent link">&para;</a></h2>
 <p>GOPATH的管理方式简单来讲，就是不来管理。</p>
 <p>所有的包都去 GOPATH 里面找，所以这样 GOPATH 就又大又繁琐。</p>
 <p><font style="color:rgb(51, 51, 51);">GOPATH可以直接使用</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;go get&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">命令下载第三方的包，有以下三个文件存放相关的代码。</font></p>
@@ -333,7 +333,7 @@ GOPATH不怎么好用，于是 GOVENDOR 短暂的出现了。go mod 出现在201
 <p><font style="color:rgb(51, 51, 51);">2是该项目的GOPATH，可以选择该项目使用的GOPATH，一开始建立项目的时候，只有Global GOPATH，最好不要使用全局环境；</font></p>
 <p><font style="color:rgb(51, 51, 51);">3是是否使用系统环境的GOPATH，取消勾选；</font></p>
 <p><font style="color:rgb(51, 51, 51);">4是将当前项目作为一个GOPATH。</font></p>
-<h2 id="govendor"><font style="color:rgb(51, 51, 51);">GOVENDOR</font></h2>
+<h2 id="govendor"><font style="color:rgb(51, 51, 51);">GOVENDOR</font><a class="headerlink" href="#govendor" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>假设有如下场景：</p>
 <p>你的工程引用了一些外部包，且这些包仍有更新的可能，或者你们项目组另外开发一些公用包，且还在并行开发迭代中，如果你的项目代码本来运行稳定，却因为外部包的更新导致运行出现问题，你是不是很郁闷？所以为了开发时或者部署时，将外部包版本确定，在go1.6之后引入vendor目录，即你的项目工程中，多了个vendor目录，执行go build的时候，会在vendor目录下边寻找你引用的外部包，这样每次编译的时候，当外部包修改，测试通过后，将新的外部包内容替换到vendor中，不断的迭代更新，保证了外部包的稳定，也不会影响到你当前的代码了。</p>
@@ -343,7 +343,7 @@ GOPATH不怎么好用，于是 GOVENDOR 短暂的出现了。go mod 出现在201
 </blockquote>
 <p>每个项目都有自己的vendor目录，存放在第三方库，因为有时候过于复杂，就诞生了大量的第三方依赖管理工具：glide, dep, go dep, ..</p>
 <p>由于不好用，就被淘汰掉了。</p>
-<h2 id="go-mod"><font style="color:rgb(51, 51, 51);">Go mod</font></h2>
+<h2 id="go-mod"><font style="color:rgb(51, 51, 51);">Go mod</font><a class="headerlink" href="#go-mod" title="Permanent link">&para;</a></h2>
 <p>在 goland 2021.2版本中，Go 选项现在是 Go modules 项目的默认选项。</p>
 <p><font style="color:rgb(51, 51, 51);">包管理模式解决了以上两种依赖管理的问题</font></p>
 <ol>
@@ -357,23 +357,23 @@ GOPATH不怎么好用，于是 GOVENDOR 短暂的出现了。go mod 出现在201
 <p>参考链接： <a href="https://juejin.cn/post/6844903808942735368">https://juejin.cn/post/6844903808942735368</a>
 </p>
 </blockquote>
-<h3 id="_1">案例</h3>
+<h3 id="_1">案例<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>在两个工程文件里面，互相调用的时候，应该如何写呢？</p>
 <p>在同一个 gopath <code>D:\study\go</code>下，例如，<code>D:\study\go\hello</code> ，<code>D:\study\go\studyGoMod</code>这个两个工程文件。</p>
 <p>假如在<code>D:\study\go\studyGoMod</code>中的<code>.go</code>文件想要调用<code>hello</code>工程里面的方法。</p>
 <p>就需要在在<code>D:\study\go\studyGoMod</code>的 go.mod 中，设置如下代码：</p>
-<pre><code class="language-go">module goModStudy
+<div class="highlight"><pre><span></span><code><span class="nx">module</span><span class="w"> </span><span class="nx">goModStudy</span>
 
-go 1.17
+<span class="k">go</span><span class="w"> </span><span class="mf">1.17</span>
 
-require (
-    go.com/hello v 0.0.0
-)
+<span class="nx">require</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">go</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">hello</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="mf">0.0.0</span>
+<span class="p">)</span>
 
-replace(
-    go.com/hello =&gt; ../hello
-)
-</code></pre>
+<span class="nx">replace</span><span class="p">(</span>
+<span class="w">    </span><span class="k">go</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">hello</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">..</span><span class="o">/</span><span class="nx">hello</span>
+<span class="p">)</span>
+</code></pre></div>
 <p>❗👾注意：在<code>hello</code>中，被调用的方法，不应该在在<code>main</code>包，也就是不在<code>package main</code>中。</p>
 <blockquote>
 <p>更新: 2022-05-02 09:33:31<br />

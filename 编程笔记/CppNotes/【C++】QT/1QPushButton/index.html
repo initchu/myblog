@@ -251,65 +251,64 @@
 
 
 
-<h1 id="1-qpushbutton">1 QPushButton</h1>
-<h1 id="qt">创建QT程序</h1>
+<h1 id="1-qpushbutton">1 QPushButton<a class="headerlink" href="#1-qpushbutton" title="Permanent link">&para;</a></h1>
+<h1 id="qt">创建QT程序<a class="headerlink" href="#qt" title="Permanent link">&para;</a></h1>
 <p><img alt="1691065132391-a815426e-ee00-4dd8-86f6-ffefeb5f1f2f.png" src="../img/GX3kISZfZ32ICRgX/1691065132391-a815426e-ee00-4dd8-86f6-ffefeb5f1f2f-698732.png" /></p>
 <p>QWidget 有两个子类: QMainWindow 和 QDialog . QWidget 这里会创建 .h 和 .cpp 。</p>
 <p><img alt="1691065286904-3b83c142-150b-4700-827f-421dd01f94a6.png" src="../img/GX3kISZfZ32ICRgX/1691065286904-3b83c142-150b-4700-827f-421dd01f94a6-375440.png" /></p>
-<h1 id="qpushbutton">QPushButton 的使用</h1>
+<h1 id="qpushbutton">QPushButton 的使用<a class="headerlink" href="#qpushbutton" title="Permanent link">&para;</a></h1>
 <p>Header： #include<QPushButton></p>
 <p>qmake： QT += network</p>
 <p>父类是 QAbstractButton ,</p>
 <p>QAbstractButton 的父类是 QWidget，QWidget 的父类是 QObject。</p>
-<pre><code class="language-cpp">#include &quot;mywidget.h&quot;
-#include &lt;QApplication&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mywidget.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QApplication&gt;</span>
 
-int main(int argc, char *argv[])
-{
-    // a 应用程序对象，在Qt中，应用程序对象有且仅有一个
-    QApplication a(argc,argv);
-    //窗口对象 myWidget父类 -&gt; QWidget
-    myWidget w;
-    //窗口对象 默认不会显示，必须调用 show 方法显示窗口
-    w.show();
-    //让应用程序对象进入消息循环
-    //让代码阻塞到这行
-    return a.exec();
-}
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// a 应用程序对象，在Qt中，应用程序对象有且仅有一个</span>
+<span class="w">    </span><span class="n">QApplication</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//窗口对象 myWidget父类 -&gt; QWidget</span>
+<span class="w">    </span><span class="n">myWidget</span><span class="w"> </span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//窗口对象 默认不会显示，必须调用 show 方法显示窗口</span>
+<span class="w">    </span><span class="n">w</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//让应用程序对象进入消息循环</span>
+<span class="w">    </span><span class="c1">//让代码阻塞到这行</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mywidget.h&quot;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QPushButton&gt;</span>
 
-</code></pre>
-<pre><code class="language-cpp">#include &quot;mywidget.h&quot;
-#include &lt;QPushButton&gt;
 
+<span class="n">myWidget</span><span class="o">::</span><span class="n">myWidget</span><span class="p">(</span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//创建第一个按钮</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//btn-&gt;show();//以顶层的方式弹出窗口控件</span>
+<span class="w">    </span><span class="c1">//让btn对象依赖在 myWidget窗口中</span>
+<span class="w">    </span><span class="n">btn</span><span class="o">-&gt;</span><span class="n">setParent</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//显示文本</span>
+<span class="w">    </span><span class="n">btn</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;第一个按钮&quot;</span><span class="p">);</span>
 
-myWidget::myWidget(QWidget *parent)
-    : QWidget(parent)
-{
-    //创建第一个按钮
-    QPushButton * btn  = new QPushButton;
-    //btn-&gt;show();//以顶层的方式弹出窗口控件
-    //让btn对象依赖在 myWidget窗口中
-    btn-&gt;setParent(this);
-    //显示文本
-    btn-&gt;setText(&quot;第一个按钮&quot;);
+<span class="w">    </span><span class="c1">//创建第二个按钮,按照控件的大小创建窗口</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;第二个按钮&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">);</span>
 
-    //创建第二个按钮,按照控件的大小创建窗口
-    QPushButton * btn2 = new QPushButton(&quot;第二个按钮&quot;,this);
+<span class="w">    </span><span class="c1">//移动btn2窗口</span>
+<span class="w">    </span><span class="n">btn2</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
 
-    //移动btn2窗口
-    btn2-&gt;move(100,100);
+<span class="w">    </span><span class="c1">//重置窗口大小</span>
+<span class="w">    </span><span class="n">resize</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">400</span><span class="p">);</span>
 
-    //重置窗口大小
-    resize(600,400);
+<span class="w">    </span><span class="c1">//设置固定窗口大小</span>
+<span class="w">    </span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">400</span><span class="p">);</span>
 
-    //设置固定窗口大小
-    setFixedSize(600,400);
-
-    //设置窗口标题
-    setWindowTitle(&quot;第一个窗口&quot;);
-}
-</code></pre>
-<h1 id="api">按钮控件常用 API</h1>
+<span class="w">    </span><span class="c1">//设置窗口标题</span>
+<span class="w">    </span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&quot;第一个窗口&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="api">按钮控件常用 API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h1>
 <p>创建：<code>QPushButton *btn = new QPushButton;</code></p>
 <p>设置父亲： <code>setParent(this);</code></p>
 <p>设置文本： <code>setText("文字");</code></p>

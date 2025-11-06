@@ -268,92 +268,83 @@
 
 
 
-<h1 id="_1">单双链表的实现</h1>
-<h2 id="_2">单链表</h2>
+<h1 id="_1">单双链表的实现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">单链表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>使用带head头的单向链表实现，完成增删改查操作。</p>
-<pre><code class="language-go">package main
-type LinkNode struct{
-    value int
-    next *LinkNode
-}
-//第一种插入方法，直接插入到链表结尾
-func InsertNode(head *LinkNode, newNode *LinkNode){
-    temp := head
-    for{
-        if temp == nil{
-            break
-        }
-        temp = temp.next //指针后移
-    }
-    temp.next = newNode
-}
-//第二种插入方法，根据value有序插入
-func InserNode2(head *LinkNode, newNode *LinkNOde){
-    temp := head
-    flag := true
-    for{
-        if temp == nil{
-            break
-        }else if temp.next.value &gt;= newNode.next.value{
-            break
-        }else if temp.next.no == newNode.next.value{
-            //链表中有这个结点
-            flag = false
-            break
-        }
-        temp = temp.next
-    }
-    if !flag{
-        fmt.Println(&quot;已经存在value = &quot;,newNode.value)
-        return
-    }else{
-        //插入在temp的后面
-        newNode.next = temp.next
-        temp.next = newNode
-    }
-}
-//显示链表的所有结点value
-func ShowLinkNode(head *LinkNode){
-    temp := head
-    if temp.next = nil{
-        return -1
-    }
-    for{
-        print(temp.value)
-        temp = temp.next
-        if temp.next == nul{
-            break
-        }
-    }
-}
-func DelNode(head *LinkNode, val int){
-    temp := head
-    falg := false
-    for{
-        if temp.next == nil{
-            break
-        }else if temp.next.value == val{
-            flag = true
-            break
-        }
-        temp = temp.next
-    }
-    if falg{
-        temp.next = temp.next.next
-    }else{
-        fmt.Println(&quot;删除的不存在&quot;)
-    }
-}
-
-
-
-
-
-
-
-
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">LinkNode</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">next</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNode</span>
+<span class="p">}</span>
+<span class="c1">//第一种插入方法，直接插入到链表结尾</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">InsertNode</span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNode</span><span class="p">,</span><span class="w"> </span><span class="nx">newNode</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNode</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">temp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="c1">//指针后移</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">newNode</span>
+<span class="p">}</span>
+<span class="c1">//第二种插入方法，根据value有序插入</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">InserNode2</span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNode</span><span class="p">,</span><span class="w"> </span><span class="nx">newNode</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNOde</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">temp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span>
+<span class="w">    </span><span class="nx">flag</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">newNode</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">value</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">no</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">newNode</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">value</span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//链表中有这个结点</span>
+<span class="w">            </span><span class="nx">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">flag</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;已经存在value = &quot;</span><span class="p">,</span><span class="nx">newNode</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//插入在temp的后面</span>
+<span class="w">        </span><span class="nx">newNode</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span>
+<span class="w">        </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">newNode</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//显示链表的所有结点value</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ShowLinkNode</span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNode</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">temp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="nx">temp</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">nul</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">DelNode</span><span class="p">(</span><span class="nx">head</span><span class="w"> </span><span class="o">*</span><span class="nx">LinkNode</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">temp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">head</span>
+<span class="w">    </span><span class="nx">falg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">val</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">flag</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">temp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">falg</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">temp</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">next</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;删除的不存在&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-01-19 18:00:43<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/dlf5n0">https://www.yuque.com/xiaoshan_wgo/codingnotes/dlf5n0</a></p>

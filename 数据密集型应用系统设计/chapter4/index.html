@@ -570,7 +570,7 @@
 <li>向后兼容：新代码可以读旧数据。容易。</li>
 <li>向前兼容：旧代码可以读新数据。难。</li>
 </ul>
-<h2 id="_1">编码数据的格式</h2>
+<h2 id="_1">编码数据的格式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>程序通常（至少）使用两种形式的数据：</p>
 <ol>
 <li>在内存中，数据保存在对象，结构体，列表，数组，哈希表，树等中。 这些数据结构针对CPU的高效访问和操作进行了优化（通常使用指针）。</li>
@@ -581,7 +581,7 @@
 <li>从内存中表示到字节序列的转换称为 <strong>编码（Encoding）</strong> （也称为<strong>序列化（serialization）</strong> 或<strong>编组（marshalling）</strong>）；</li>
 <li>反过来称为<strong>解码（Decoding）</strong>ii（<strong>解析（Parsing）</strong>，<strong>反序列化（deserialization）</strong>，<strong>反编组( unmarshalling）</strong>）译i。</li>
 </ul>
-<h3 id="_2">语言特定的格式</h3>
+<h3 id="_2">语言特定的格式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>许多编程语言都内建了将内存对象编码为字节序列的支持。例如，Java有java.io.Serializable ，Ruby有Marshal，Python有pickle . </p>
 <p>这些库很方便，但是有深层次问题：</p>
 <ul>
@@ -591,7 +591,7 @@
 <li>效率也不高。</li>
 </ul>
 <p>只适合临时使用。</p>
-<h3 id="jsonxml">JSON，XML和二进制变体</h3>
+<h3 id="jsonxml">JSON，XML和二进制变体<a class="headerlink" href="#jsonxml" title="Permanent link">&para;</a></h3>
 <p>跨语言的编码：JSON，XML和CSV，属于文本格式，因此具有人类可读性。
 除了语法问题外，还有问题：</p>
 <ul>
@@ -602,45 +602,47 @@
 <li>CSV 没有模式，行列的含义完全由应用程序指定。格式模糊。</li>
 </ul>
 <p>虽然问题多，但是大家对这些达成了意见一致。</p>
-<h4 id="_3">二进制编码</h4>
+<h4 id="_3">二进制编码<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <p>当数据很多的时候，数据格式的选择会有很大影响。
 JSON比XML简洁，但与二进制格式相比还是太占空间。现在有很多二进制格式的 JSON（MessagePack，BSON，BJSON，UBJSON，BISON和Smile等）。
-JSON 字符串是：</p>
-<pre><code class="language-shell">{
-    &quot;userName&quot;: &quot;Martin&quot;,
-    &quot;favoriteNumber&quot;: 1337,
-    &quot;interests&quot;: [&quot;daydreaming&quot;, &quot;hacking&quot;]
-}
-</code></pre>
-<p>MessagePack 编码的 Json 举例：
+JSON 字符串是：
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;userName&quot;</span>:<span class="w"> </span><span class="s2">&quot;Martin&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;favoriteNumber&quot;</span>:<span class="w"> </span><span class="m">1337</span>,
+<span class="w">    </span><span class="s2">&quot;interests&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;daydreaming&quot;</span>,<span class="w"> </span><span class="s2">&quot;hacking&quot;</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div>
+MessagePack 编码的 Json 举例：
 <img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1632801011597-49f06a44-2195-4e80-a553-6df45cc56595.png" />
 二进制编码长度为66个字节，仅略小于文本JSON编码所取的81个字节（删除了空白)。</p>
-<h3 id="thriftprotocol-buffers">Thrift与Protocol Buffers</h3>
+<h3 id="thriftprotocol-buffers">Thrift与Protocol Buffers<a class="headerlink" href="#thriftprotocol-buffers" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Protocol Buffers最初是在Google开发的，Thrift最初是在Facebook开发的，并且在2007~2008年都是开源的，都是二进制编码库。</li>
 <li>Thrift和Protocol Buffers都需要一个模式来编码任何数据。</li>
 </ul>
 <p><strong>接口定义语言（IDL）</strong> 来描述模式。</p>
 <ul>
-<li>Thrift 比如：</li>
-</ul>
-<pre><code class="language-c">struct Person {
-    1: required string       userName,
-    2: optional i64          favoriteNumber,
-    3: optional list&lt;string&gt; interests
-}
-</code></pre>
-<ul>
-<li>Protocol Buffers的等效模式定义看起来非常相似：</li>
-</ul>
-<pre><code class="language-protobuf">message Person {
-    required string user_name       = 1;
-    optional int64  favorite_number = 2;
-    repeated string interests       = 3;
-}
-</code></pre>
-<ul>
-<li>Thrift和Protocol Buffers每一个都带有一个代码生成工具，可以调用此代码对模式进行编码和解码。</li>
+<li>
+<p>Thrift 比如：
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="n">string</span><span class="w">       </span><span class="n">userName</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="n">i64</span><span class="w">          </span><span class="n">favoriteNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">3</span><span class="o">:</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="n">list</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interests</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Protocol Buffers的等效模式定义看起来非常相似：
+<div class="highlight"><pre><span></span><code><span class="kd">message</span><span class="w"> </span><span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">required</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="na">user_name</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">optional</span><span class="w"> </span><span class="kt">int64</span><span class="w">  </span><span class="na">favorite_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">repeated</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="na">interests</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Thrift和Protocol Buffers每一个都带有一个代码生成工具，可以调用此代码对模式进行编码和解码。</p>
+</li>
 </ul>
 <p>Thrift 编码格式</p>
 <ul>
@@ -673,42 +675,42 @@ JSON 字符串是：</p>
 <li>模式中每个字段标记为是否为必须，但对编码无影响。</li>
 <li>区别在于，如果字段设置为必须，但是未设置，那么运行时检查会失败。</li>
 </ul>
-<h4 id="_4">字段标签和模式演变</h4>
+<h4 id="_4">字段标签和模式演变<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>字段标记很重要！可以改字段的名字，但是不能改字段标记。</strong></li>
 <li>向前兼容：可以添加新字段，只要有一个新的标记号码。</li>
 <li>向后兼容：在模式初始部署之后，<strong>添加的每个字段必须是可选的或具有默认值</strong>。否则之前的代码会检查失败。</li>
 <li>删除字段：只能删除<strong>可选字段</strong>；不能再次使用相同的标签号码。</li>
 </ul>
-<h4 id="_5">数据类型和模式演变</h4>
+<h4 id="_5">数据类型和模式演变<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <ul>
 <li>数据类型可以被改变：int32 升级 int64，新代码可以读取旧代码写入的数据（补0）；但是旧代码不能解析新数据（int32 读取 int64 会被截断）</li>
 <li>Protobuf 一个细节：没有列表类型，只有 <code>repeated</code>，因此可以把可选字段改为重复字段。</li>
 <li>Thrift 不能把更改为列表参数，但优点是可以嵌套列表。</li>
 </ul>
-<h3 id="avro">Avro</h3>
+<h3 id="avro">Avro<a class="headerlink" href="#avro" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Apache Avro 是另一种二进制编码格式。</li>
 <li>Avro 有两种模式语言：一种（Avro IDL）用于人工编辑，一种（基于JSON）更易于机器读取。</li>
 </ul>
-<p>举例：</p>
-<pre><code class="language-c">record Person {
-    string                userName;
-    union { null, long }  favoriteNumber = null;
-    array&lt;string&gt;         interests;
-}
-</code></pre>
+<p>举例：
+<div class="highlight"><pre><span></span><code><span class="n">record</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">string</span><span class="w">                </span><span class="n">userName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">union</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">null</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="n">favoriteNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">null</span><span class="p">;</span>
+<span class="w">    </span><span class="n">array</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="w">         </span><span class="n">interests</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <p>等价的JSON表示：</p>
-<pre><code class="language-json">{
-    &quot;type&quot;: &quot;record&quot;,
-    &quot;name&quot;: &quot;Person&quot;,
-    &quot;fields&quot;: [
-        {&quot;name&quot;: &quot;userName&quot;, &quot;type&quot;: &quot;string&quot;},
-        {&quot;name&quot;: &quot;favoriteNumber&quot;, &quot;type&quot;: [&quot;null&quot;, &quot;long&quot;], &quot;default&quot;: null},
-        {&quot;name&quot;: &quot;interests&quot;, &quot;type&quot;: {&quot;type&quot;: &quot;array&quot;, &quot;items&quot;: &quot;string&quot;}
-    ] 
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;record&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Person&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;userName&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;favoriteNumber&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;long&quot;</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;interests&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>注意：没有标签号码。</li>
 <li>Avro二进制编码只有32个字节长，最紧凑的。</li>
@@ -719,17 +721,17 @@ JSON 字符串是：</p>
 <li>必须按照顺序遍历字段才能解码。</li>
 <li>编码和解码必须使用完全相同的模式。</li>
 </ul>
-<h4 id="writerreader">Writer模式与Reader模式</h4>
+<h4 id="writerreader">Writer模式与Reader模式<a class="headerlink" href="#writerreader" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Avro的关键思想是Writer模式和Reader模式不必是相同的 - 他们只需要兼容。</li>
 <li>当数据解码（读取）时，Avro库通过并排查看Writer模式和Reader模式并将数据从Writer模式转换到Reader模式来解决差异。（即数据读取的时候，会对比 Writer模式 和 Reader模式 的字段，然后就知道怎么读了）</li>
 </ul>
 <p><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1632887145105-0da3eac4-c1f8-49d9-bc31-a92238f92625.png" /></p>
-<h4 id="_6">模式演变规则</h4>
+<h4 id="_6">模式演变规则<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <ul>
 <li>为了保持兼容性，您只能添加或删除具有默认值的字段。 </li>
 </ul>
-<h4 id="writer">但Writer模式到底是什么？</h4>
+<h4 id="writer">但Writer模式到底是什么？<a class="headerlink" href="#writer" title="Permanent link">&para;</a></h4>
 <p>对于一段特定的编码数据，Reader如何知道其Writer模式？
 答案取决于Avro使用的上下文。举几个例子：</p>
 <ul>
@@ -740,7 +742,7 @@ JSON 字符串是：</p>
 <li>通过网络连接发送记录</li>
 <li>他们可以在连接设置上协商模式版本，然后在连接的生命周期中使用该模式。</li>
 </ul>
-<h4 id="_7">动态生成的模式</h4>
+<h4 id="_7">动态生成的模式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Avro方法的一个优点是架构不包含任何标签号码。</li>
 </ul>
@@ -751,7 +753,7 @@ JSON 字符串是：</p>
 <li>当数据库模式发生变化，直接生成新的 Avro 模式，导出数据。自动兼容。</li>
 <li>而用 Thrift 或者 PB，需要手动写字段标签。</li>
 </ul>
-<h4 id="_8">代码生成和动态类型的语言</h4>
+<h4 id="_8">代码生成和动态类型的语言<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Thrift 和 Protobuf 依赖于代码生成</li>
 <li>在定义了模式之后，可以使用您选择的编程语言生成实现此模式的代码。</li>
@@ -759,7 +761,7 @@ JSON 字符串是：</p>
 <li>在动态类型编程语言（如JavaScript，Ruby或Python）中，生成代码没有太多意义，因为没有编译时类型检查器来满足。</li>
 <li>Avro为静态类型编程语言提供了可选的代码生成功能，但是它也可以在不生成任何代码的情况下使用。</li>
 </ul>
-<h3 id="_9">模式的优点</h3>
+<h3 id="_9">模式的优点<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Protocol Buffers，Thrift和Avro都使用模式来描述二进制编码格式。</li>
 <li>他们的模式语言比XML模式或者JSON模式简单得多，也支持更详细的验证规则。</li>
@@ -770,14 +772,14 @@ JSON 字符串是：</p>
 <li>维护一个模式的数据库允许您在部署任何内容之前检查模式更改的向前和向后兼容性。</li>
 <li>对于静态类型编程语言的用户来说，从模式生成代码的能力是有用的，因为它可以在编译时进行类型检查。</li>
 </ul>
-<h2 id="_10">数据流的类型</h2>
+<h2 id="_10">数据流的类型<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>数据在流程之间流动的一些常见的方式：</p>
 <ul>
 <li>通过数据库</li>
 <li>通过服务调用</li>
 <li>通过异步消息传递</li>
 </ul>
-<h3 id="_11">数据库中的数据流</h3>
+<h3 id="_11">数据库中的数据流<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li>如果只有一个进程访问数据库，向后兼容性显然是必要的。</li>
 <li>一般来说，会有多个进程访问数据库，可能会有某些进程运行较新代码、某些运行较旧的代码。因此数据库也经常需要向前兼容。</li>
@@ -785,25 +787,25 @@ JSON 字符串是：</p>
 <li>用旧代码读取并重新写入数据库时，有可能会导致数据丢失。</li>
 </ul>
 <p><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1633665482803-0f0f81b1-9abc-4171-b532-577637eecfe6.png" /></p>
-<h4 id="_12">在不同的时间写入不同的值</h4>
+<h4 id="_12">在不同的时间写入不同的值<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
 <ul>
 <li>单一的数据库中，可能有一些值是五毫秒前写的，而一些值是五年前写的。</li>
 <li>架构演变允许整个数据库看起来好像是用单个模式编码的，即使底层存储可能包含用模式的各种历史版本编码的记录。</li>
 </ul>
-<h4 id="_13">归档存储</h4>
+<h4 id="_13">归档存储<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
 <ul>
 <li>建立数据库快照，比如备份或者加载到数据仓库：即使有不同时代的模式版本的混合，但通常使用最新模式进行编码。</li>
 <li>由于数据转储是一次写入的，以后不变，所以 Avro 对象容器文件等格式非常适合。</li>
 <li>也是很好的机会，把数据编码成面向分析的列式格式。</li>
 </ul>
-<h3 id="restrpc">服务中的数据流：REST与RPC</h3>
+<h3 id="restrpc">服务中的数据流：REST与RPC<a class="headerlink" href="#restrpc" title="Permanent link">&para;</a></h3>
 <ul>
 <li>网络通信方式：常见安排是客户端+服务器</li>
 <li>Web 服务：通过 GET 和 POST 请求</li>
 <li>服务端可以是另一个服务的客户端：微服务架构。</li>
 <li>微服务架构允许某个团队能够经常发布新版本服务，期望服务的新旧版本同时运行。</li>
 </ul>
-<h4 id="web">Web服务</h4>
+<h4 id="web">Web服务<a class="headerlink" href="#web" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>当服务使用HTTP作为底层通信协议时，可称之为Web服务</strong>。</li>
 <li>有两种流行的Web服务方法：REST和SOAP。</li>
@@ -823,7 +825,7 @@ JSON 字符串是：</p>
 <li>尽管SOAP及其各种扩展表面上是标准化的，但是不同厂商的实现之间的互操作性往往会造成问题。</li>
 <li>尽管许多大型企业仍然使用SOAP，但在大多数小公司中已经不再受到青睐。</li>
 </ul>
-<h4 id="rpc">远程过程调用（RPC）的问题</h4>
+<h4 id="rpc">远程过程调用（RPC）的问题<a class="headerlink" href="#rpc" title="Permanent link">&para;</a></h4>
 <p>RPC模型试图向远程网络服务发出请求，看起来与在同一进程中调用编程语言中的函数或方法相同（这种抽象称为位置透明）。</p>
 <p>RPC 的缺陷：</p>
 <ul>
@@ -834,7 +836,7 @@ JSON 字符串是：</p>
 <li>调用本地函数时，可以高效地将引用（指针）传递给本地内存中的对象。当你发出一个网络请求时，所有这些参数都需要被编码成可以通过网络发送的一系列字节。如果参数是像数字或字符串这样的基本类型倒是没关系，但是对于较大的对象很快就会变成问题。</li>
 <li>客户端和服务端可以用不同的编程语言实现，RPC 框架必须把数据类型做翻译，可能会出问题。</li>
 </ul>
-<h4 id="rpc_1">RPC的当前方向</h4>
+<h4 id="rpc_1">RPC的当前方向<a class="headerlink" href="#rpc_1" title="Permanent link">&para;</a></h4>
 <p>RPC 不会消失。</p>
 <ul>
 <li>Thrift和Avro带有RPC支持</li>
@@ -852,7 +854,7 @@ JSON 字符串是：</p>
 <li>能被所有主流的编程语言和平台支持</li>
 <li>大量可用的工具的生态系统</li>
 </ul>
-<h4 id="rpc_2">数据编码与RPC的演化</h4>
+<h4 id="rpc_2">数据编码与RPC的演化<a class="headerlink" href="#rpc_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>可演化性，重要的是可以独立更改和部署RPC客户端和服务器。</li>
 <li>我们可以做个假定：<strong>假定所有的服务器都会先更新，其次是所有的客户端。</strong></li>
@@ -866,7 +868,7 @@ JSON 字符串是：</p>
 </ul>
 <p>服务的提供者无法控制其客户，所以可能无限期保持兼容性。
 对于 RESTful API，常用方法是在 URL 或者 HTTP Accept 头部使用版本号。</p>
-<h3 id="_14">消息传递中的数据流</h3>
+<h3 id="_14">消息传递中的数据流<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>与直接RPC相比，使用消息代理（消息队列）有几个优点：</p>
 <ul>
 <li>如果收件人不可用或过载，可以充当缓冲区，从而提高系统的可靠性。</li>
@@ -880,7 +882,7 @@ JSON 字符串是：</p>
 <li>消息传递通常是单向的：发送者通常不期望收到其消息的回复。</li>
 <li>通信模式是异步的：发送者不会等待消息被传递，而只是发送它，然后忘记它。</li>
 </ul>
-<h4 id="_15">消息代理</h4>
+<h4 id="_15">消息代理<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
 <ul>
 <li>RabbitMQ，ActiveMQ，HornetQ，NATS和Apache Kafka这样的开源实现已经流行起来。</li>
 <li>通常情况下，消息代理的使用方式如下：</li>
@@ -891,7 +893,7 @@ JSON 字符串是：</p>
 <li>消息代理通常不会执行任何特定的数据模型，消息知识包含一些元数据的字节序列，可以用任何编码格式。</li>
 <li>如果消费者重新发布消息到另一个主题，则消息保留未知字段，防止前面数据库环境中描述的问题。</li>
 </ul>
-<h4 id="actor">分布式的Actor框架</h4>
+<h4 id="actor">分布式的Actor框架<a class="headerlink" href="#actor" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Actor模型是单个进程中并发的编程模型。</li>
 <li>逻辑被封装在actor中，而不是直接处理线程（以及竞争条件，锁定和死锁的相关问题）。</li>
@@ -921,7 +923,7 @@ JSON 字符串是：</p>
 <li>Orleans 默认使用不支持滚动升级部署的自定义数据编码格式; 要部署新版本的应用程序，您需要设置一个新的集群，将流量从旧集群迁移到新集群，然后关闭旧集群。 像Akka一样，可以使用自定义序列化插件。</li>
 <li>在Erlang OTP中，对记录模式进行更改是非常困难的（尽管系统具有许多为高可用性设计的功能）。 滚动升级是可能的，但需要仔细计划。</li>
 </ul>
-<h2 id="_16">本章小结</h2>
+<h2 id="_16">本章小结<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ul>
 <li>本章探讨了编码数据结构的方式。</li>
 <li>许多服务需要支持滚动升级：向前、向后兼容性。</li>

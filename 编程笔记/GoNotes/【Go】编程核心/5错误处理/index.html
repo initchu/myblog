@@ -268,40 +268,40 @@
 
 
 
-<h1 id="5">5 错误处理</h1>
+<h1 id="5">5 错误处理<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
 <p>在很多情况下，代码运行时候出现了错误<code>panic</code>，就导致了整个程序的崩溃，所以引出了<strong>错误处理</strong>。</p>
-<h2 id="_1">错误处理的基本使用</h2>
+<h2 id="_1">错误处理的基本使用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>我们希望，当错误发生后，可以捕获到错误，并进行处理，保证程序可以继续执行。</p>
 <p>在golang中，不支持传统的 <code>try...catch...finally</code>这种处理，引入的处理方式为: <code>defer, panic, recover</code>。</p>
-<pre><code class="language-go">func test(){
-    //使用defer+recover来捕获和处理异常
-    defer func(){
-        err := recover()
-        if err != recover()
-        if err != nil{
-            fmt.Println(&quot;err = &quot;,err)
-        }
-    }()
-    num1 := 10
-    num2 := 0
-    res := num1 / num2
-    fmt.Println(&quot;res =&quot;, res)
-}
-func main(){
-    test()
-    fmt.Println(&quot;继续执行...&quot;)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//使用defer+recover来捕获和处理异常</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">(){</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">()</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">recover</span><span class="p">()</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;err = &quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="w">    </span><span class="nx">num1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="nx">num2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">num1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">num2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;res =&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">test</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;继续执行...&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Go语言的错误设计是通过返回值的方式，来强迫调用者对错误进行处理，要么你忽略，要么你处理（处理也可以是继续返回给调用者）。例如：</p>
-<pre><code class="language-go">func main() {
-    conent,err:=ioutil.ReadFile(&quot;filepath&quot;)
-    if err !=nil{
-        //错误处理
-    }else {
-        fmt.Println(string(conent))
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">conent</span><span class="p">,</span><span class="nx">err</span><span class="o">:=</span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;filepath&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//错误处理</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">conent</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-02-24 14:55:58<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/pnrpbc">https://www.yuque.com/xiaoshan_wgo/codingnotes/pnrpbc</a></p>

@@ -835,23 +835,23 @@
 
 
 
-<h1 id="springmvc">SpringMVC</h1>
-<h3 id="springmvc_1">SpringMVC系列</h3>
+<h1 id="springmvc">SpringMVC<a class="headerlink" href="#springmvc" title="Permanent link">&para;</a></h1>
+<h3 id="springmvc_1">SpringMVC系列<a class="headerlink" href="#springmvc_1" title="Permanent link">&para;</a></h3>
 <hr />
-<h4 id="springmvc_2">第一章、SpringMVC的引言</h4>
-<h5 id="11-springmvc">1.1 什么是SpringMVC</h5>
-<pre><code class="language-markdown">1. 概念： SpringMVC是基于Spring Framework衍生而来的一个MVC框架。主要解决了原有MVC框架开发过程中,控制器（Controller)的问题。
-</code></pre>
+<h4 id="springmvc_2">第一章、SpringMVC的引言<a class="headerlink" href="#springmvc_2" title="Permanent link">&para;</a></h4>
+<h5 id="11-springmvc">1.1 什么是SpringMVC<a class="headerlink" href="#11-springmvc" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 概念： SpringMVC是基于Spring Framework衍生而来的一个MVC框架。主要解决了原有MVC框架开发过程中,控制器（Controller)的问题。
+</code></pre></div>
 <ul>
 <li><strong>SpringMVC是一个MVC框架</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. MVC是一个架构思想，在JavaEE开发中多用于Web开发。
-2. 应用MVC架构思想开发应用，会把一个项目划分为了3个层次，M(Model) 模型层,V(View) 视图层,C(Controller) 控制层。
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> MVC是一个架构思想，在JavaEE开发中多用于Web开发。
+<span class="k">2.</span> 应用MVC架构思想开发应用，会把一个项目划分为了3个层次，M(Model) 模型层,V(View) 视图层,C(Controller) 控制层。
         View       JSP
         Model      Service+DAO
         Controller Servlet
-3. MVC这种分层开发，体现了面向对象各司其职的设计思想，也更加有利于后续的项目维护（修改）。
-</code></pre>
+<span class="k">3.</span> MVC这种分层开发，体现了面向对象各司其职的设计思想，也更加有利于后续的项目维护（修改）。
+</code></pre></div>
 <ul>
 <li><strong>为什么要基于Spring Framework</strong> <ul>
 <li>通过工厂(容器)创建对象，解耦合 (IOC DI)。</li>
@@ -866,662 +866,662 @@
 </li>
 <li><strong>原有MVC开发中控制器存在的问题</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. 原有MVC开发中的控制器是通过哪些技术实现的？
-2. 这些技术在实现控制器时，存在着哪些问题？
-</code></pre>
-<pre><code>-  **原有控制器的实现技术** 
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 原有MVC开发中的控制器是通过哪些技术实现的？
+<span class="k">2.</span> 这些技术在实现控制器时，存在着哪些问题？
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **原有控制器的实现技术** 
     * Servlet [基于Java Model2模式]
     * Struts2中的Action
 -  **Servlet实现控制器存在的问题** 
     *  **控制器的核心作用**
-</code></pre>
+</code></pre></div>
 <p><img alt="1641193877181-0dfe227f-5b09-471a-bdba-346e2669547f.png" src="../img/Q3eGMPdnfRAprnn2/1641193877181-0dfe227f-5b09-471a-bdba-346e2669547f-094255.png" /></p>
-<pre><code class="language-markdown">1. 接受用户的请求，调用业务功能（Service)，并根据处理结果控制程序的运行流程。
-</code></pre>
-<pre><code>    *  **控制器的核心代码**
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 接受用户的请求，调用业务功能（Service)，并根据处理结果控制程序的运行流程。
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>    *  **控制器的核心代码**
+</code></pre></div>
 <p><img alt="1641193909363-92874a44-2fae-4a43-aee3-3713844e09d6.png" src="../img/Q3eGMPdnfRAprnn2/1641193909363-92874a44-2fae-4a43-aee3-3713844e09d6-493764.png" /></p>
-<pre><code class="language-markdown">1. 接受client请求参数
-2. 调用业务对象（Service)
-3. 流程跳转（页面跳转）
-</code></pre>
-<pre><code>    *  **控制器存在的问题** 
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 接受client请求参数
+<span class="k">2.</span> 调用业务对象（Service)
+<span class="k">3.</span> 流程跳转（页面跳转）
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>    *  **控制器存在的问题** 
         +  接受client请求参数
-</code></pre>
+</code></pre></div>
 <p><img alt="1641193980680-16f8eebb-d274-43fd-b278-dce3a2d88f6a.png" src="../img/Q3eGMPdnfRAprnn2/1641193980680-16f8eebb-d274-43fd-b278-dce3a2d88f6a-863389.png" /> </p>
-<pre><code class="language-markdown">1. 代码冗余
-2. 只能接受字符串类型的数据，需要手工进行类型转换
-3. 无法自动封装对象
-</code></pre>
-<pre><code>        +  调用业务对象（Service)
-</code></pre>
-<pre><code class="language-java">UserService userService = new UserServiceImpl(); //耦合代码
-boolean isLogin = userService.login(name,password);
-</code></pre>
-<pre><code class="language-markdown">1. 通过new的方式获得业务对象（service)，存在耦合
-</code></pre>
-<pre><code>        +  流程跳转(页面跳转)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 代码冗余
+<span class="k">2.</span> 只能接受字符串类型的数据，需要手工进行类型转换
+<span class="k">3.</span> 无法自动封装对象
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>        +  调用业务对象（Service)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserServiceImpl</span><span class="p">();</span><span class="w"> </span><span class="c1">//耦合代码</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">isLogin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userService</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">password</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 通过new的方式获得业务对象（service)，存在耦合
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>        +  流程跳转(页面跳转)
+</code></pre></div>
 <p><img alt="1641194019819-10d0b396-baa0-491e-af4e-e08a662e6db4.png" src="../img/Q3eGMPdnfRAprnn2/1641194019819-10d0b396-baa0-491e-af4e-e08a662e6db4-656159.png" /></p>
-<pre><code class="language-markdown">1. 跳转路径耦合
-2. 与视图层技术的耦合
-</code></pre>
-<h5 id="12-springmvc">1.2  SpringMVC课程的学习要点</h5>
-<h6 id="121-springmvc">1.2.1 SpringMVC的三种开发模式</h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 跳转路径耦合
+<span class="k">2.</span> 与视图层技术的耦合
+</code></pre></div>
+<h5 id="12-springmvc">1.2  SpringMVC课程的学习要点<a class="headerlink" href="#12-springmvc" title="Permanent link">&para;</a></h5>
+<h6 id="121-springmvc">1.2.1 SpringMVC的三种开发模式<a class="headerlink" href="#121-springmvc" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>传统视图开发【基础课程讲解】</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. 通过作用域（request,session)进行数据的传递。
-2. 通过视图层技术进行数据的展示（JSP,FreeMarker,Thymeleaf)。
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 通过作用域（request,session)进行数据的传递。
+<span class="k">2.</span> 通过视图层技术进行数据的展示（JSP,FreeMarker,Thymeleaf)。
+</code></pre></div>
 <ul>
 <li><strong>前后端分离开发【MVC高级课程讲解】</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. 多种新的请求发送方式
-2. Restful的访问
-3. 通过HttpMessageConverter进行数据响应
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 多种新的请求发送方式
+<span class="k">2.</span> Restful的访问
+<span class="k">3.</span> 通过HttpMessageConverter进行数据响应
+</code></pre></div>
 <ul>
 <li><strong>Spring5 WebFlux开发【独立课程讲解】</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. 替换传统JavaWeb开发的一种新的Web开发方式。
-2. 通过NettyServer,进行Web通信。
-</code></pre>
-<h6 id="122">1.2.2 控制器开发</h6>
-<pre><code class="language-markdown">1. 接受client请求参数
-2. 调用业务对象
-3. 流程跳转
-</code></pre>
-<h3 id="springmvc_3">SpringMVC系列</h3>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 替换传统JavaWeb开发的一种新的Web开发方式。
+<span class="k">2.</span> 通过NettyServer,进行Web通信。
+</code></pre></div>
+<h6 id="122">1.2.2 控制器开发<a class="headerlink" href="#122" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 接受client请求参数
+<span class="k">2.</span> 调用业务对象
+<span class="k">3.</span> 流程跳转
+</code></pre></div>
+<h3 id="springmvc_3">SpringMVC系列<a class="headerlink" href="#springmvc_3" title="Permanent link">&para;</a></h3>
 <hr />
-<h4 id="springmvc_4">第二章、第一个SpringMVC程序的开发</h4>
-<h5 id="21">2.1 开发版本</h5>
-<pre><code class="language-markdown">1. JDK1.8+
-2. Maven3.6+
-3. IDEA2021+
-4. SpringFramework 5.1.4 
-5. Tomcat8.5.29
-6. MySQL5.7.18
-</code></pre>
-<h5 id="22">2.2 环境搭建</h5>
-<h6 id="221-jar">2.2.1 <strong>引入相关相关jar</strong></h6>
-<pre><code class="language-xml">&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<h4 id="springmvc_4">第二章、第一个SpringMVC程序的开发<a class="headerlink" href="#springmvc_4" title="Permanent link">&para;</a></h4>
+<h5 id="21">2.1 开发版本<a class="headerlink" href="#21" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> JDK1.8+
+<span class="k">2.</span> Maven3.6+
+<span class="k">3.</span> IDEA2021+
+<span class="k">4.</span> SpringFramework 5.1.4 
+<span class="k">5.</span> Tomcat8.5.29
+<span class="k">6.</span> MySQL5.7.18
+</code></pre></div>
+<h5 id="22">2.2 环境搭建<a class="headerlink" href="#22" title="Permanent link">&para;</a></h5>
+<h6 id="221-jar">2.2.1 <strong>引入相关相关jar</strong><a class="headerlink" href="#221-jar" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-webmvc<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-  &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
-  &lt;version&gt;3.1.0&lt;/version&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">  </span><span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
-  &lt;artifactId&gt;jstl&lt;/artifactId&gt;
-  &lt;version&gt;1.2&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>jstl<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
-  &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
-  &lt;version&gt;2.3.1&lt;/version&gt;
-  &lt;scope&gt;provided&lt;/scope&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>javax.servlet.jsp<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>javax.servlet.jsp-api<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>2.3.1<span class="nt">&lt;/version&gt;</span>
+<span class="w">  </span><span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-core<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-beans<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-test<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-tx<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-jdbc<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-  &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
-  &lt;version&gt;2.0.2&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>mybatis-spring<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>2.0.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-  &lt;artifactId&gt;druid&lt;/artifactId&gt;
-  &lt;version&gt;1.1.18&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>com.alibaba<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>druid<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.1.18<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;mysql&lt;/groupId&gt;
-  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-  &lt;version&gt;5.1.48&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>mysql<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>mysql-connector-java<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.48<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
-  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
-  &lt;version&gt;3.4.6&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.mybatis<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>mybatis<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>3.4.6<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;junit&lt;/groupId&gt;
-  &lt;artifactId&gt;junit&lt;/artifactId&gt;
-  &lt;version&gt;4.13&lt;/version&gt;
-  &lt;scope&gt;test&lt;/scope&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>4.13<span class="nt">&lt;/version&gt;</span>
+<span class="w">  </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-  &lt;version&gt;5.1.4.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-context<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.4.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-  &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
-  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.springframework<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>spring-aop<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>5.1.14.RELEASE<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
-  &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
-  &lt;version&gt;1.8.8&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.aspectj<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>aspectjrt<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.8.8<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
-  &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
-  &lt;version&gt;1.8.3&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.aspectj<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>aspectjweaver<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.8.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-  &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
-  &lt;version&gt;1.7.25&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>slf4j-api<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.7.25<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
-  &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
-  &lt;version&gt;1.7.25&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.slf4j<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>jcl-over-slf4j<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.7.25<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-  &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
-  &lt;version&gt;1.2.3&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>ch.qos.logback<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>logback-classic<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.2.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
-  &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
-  &lt;version&gt;1.2.3&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>ch.qos.logback<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>logback-core<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.2.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.logback-extensions&lt;/groupId&gt;
-  &lt;artifactId&gt;logback-ext-spring&lt;/artifactId&gt;
-  &lt;version&gt;0.1.4&lt;/version&gt;
-&lt;/dependency&gt;
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.logback-extensions<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>logback-ext-spring<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>0.1.4<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
 
-&lt;dependency&gt;
-  &lt;groupId&gt;org.yaml&lt;/groupId&gt;
-  &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
-  &lt;version&gt;1.25&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
+<span class="nt">&lt;dependency&gt;</span>
+<span class="w">  </span><span class="nt">&lt;groupId&gt;</span>org.yaml<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;artifactId&gt;</span>snakeyaml<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>1.25<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
 <blockquote>
 <p><strong>注意 SpringMVC比前面我们所学习的Spring，就多引入了一个jar包，叫做spring-webmvc.jar</strong>
 </p>
 </blockquote>
-<h6 id="222">2.2.2 配置文件</h6>
+<h6 id="222">2.2.2 配置文件<a class="headerlink" href="#222" title="Permanent link">&para;</a></h6>
 <blockquote>
 <p><strong>SpringMVC的配置文件,就是Spring的配置文件。</strong>
 </p>
 </blockquote>
-<pre><code class="language-markdown">1. 名字可以随便命名,本次课程取名dispatcher.xml。
-2. 放置路径可以根据需要，随意放置,本次课程放置在资源目录的根下。
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 名字可以随便命名,本次课程取名dispatcher.xml。
+<span class="k">2.</span> 放置路径可以根据需要，随意放置,本次课程放置在资源目录的根下。
+</code></pre></div>
 <p><img alt="1641194179456-22a31dc5-6a34-42e9-b74a-7662d63714ce.png" src="../img/Q3eGMPdnfRAprnn2/1641194179456-22a31dc5-6a34-42e9-b74a-7662d63714ce-789333.png" /></p>
-<h6 id="223">2.2.3 <strong>初始化配置</strong></h6>
+<h6 id="223">2.2.3 <strong>初始化配置</strong><a class="headerlink" href="#223" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>web.xml</strong> </li>
 </ul>
-<pre><code class="language-xml">&lt;servlet&gt;
-  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
-  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-  &lt;!--用于配置SpringMVC的配置文件--&gt;
-  &lt;init-param&gt;
-    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-    &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;
-  &lt;/init-param&gt;
-  &lt;!--设置servlet在Tomcat启动时自动加载创建--&gt;
-  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-&lt;/servlet&gt;
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;servlet&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servlet-class&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="nt">&lt;/servlet-class&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!--用于配置SpringMVC的配置文件--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-name&gt;</span>contextConfigLocation<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-value&gt;</span>classpath:dispatcher.xml<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!--设置servlet在Tomcat启动时自动加载创建--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
+<span class="nt">&lt;/servlet&gt;</span>
 
-&lt;servlet-mapping&gt;
-  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
-  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-</code></pre>
+<span class="nt">&lt;servlet-mapping&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/servlet-mapping&gt;</span>
+</code></pre></div>
 <p><strong>DispatcherServlet</strong> </p>
-<pre><code class="language-java">1. DispatcherServlet称为前端控制器（中央控制器）
-2. DispatcherServlet的核心作用：
-        1. 用于创建Spring的工厂（容器）。
-           ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;dispatcher.xml&quot;);
-           因为DispatcherServlet封装的Spring工厂（容器）只能读取xml，所以无法迁移到纯注解编程
-        2. 控制SpringMVC内部的运行流程。
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">DispatcherServlet称为前端控制器</span><span class="err">（</span><span class="n">中央控制器</span><span class="err">）</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">DispatcherServlet的核心作用</span><span class="err">：</span>
+<span class="w">        </span><span class="mf">1.</span><span class="w"> </span><span class="n">用于创建Spring的工厂</span><span class="err">（</span><span class="n">容器</span><span class="err">）。</span>
+<span class="w">           </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathXmlApplicationContext</span><span class="p">(</span><span class="s">&quot;dispatcher.xml&quot;</span><span class="p">);</span>
+<span class="w">           </span><span class="n">因为DispatcherServlet封装的Spring工厂</span><span class="err">（</span><span class="n">容器</span><span class="err">）</span><span class="n">只能读取xml</span><span class="err">，</span><span class="n">所以无法迁移到纯注解编程</span>
+<span class="w">        </span><span class="mf">2.</span><span class="w"> </span><span class="n">控制SpringMVC内部的运行流程</span><span class="err">。</span>
+</code></pre></div>
 <p><strong>SpringMVC的配置文件dispacher.xml</strong> </p>
-<pre><code class="language-xml">&lt;mvc:annotation-driven/&gt;
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;mvc:annotation-driven/&gt;</span>
 
-&lt;context:component-scan base-package=&quot;com.baizhiedu&quot;/&gt;
-</code></pre>
+<span class="nt">&lt;context:component-scan</span><span class="w"> </span><span class="na">base-package=</span><span class="s">&quot;com.baizhiedu&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div>
 <p><strong>mvc:annotation-driven</strong> </p>
-<pre><code class="language-xml"># &lt;mvc:annotation-driven/&gt; 这段配置的主要作用：引入SpringMVC的核心功能。 
-# 主要引入了2个核心类型
-# 1.RequestMappingHandlerMapping
-# 2.RequestMappingHandlerAdapter
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span><span class="nt">&lt;mvc:annotation-driven/&gt;</span><span class="w"> </span>这段配置的主要作用：引入SpringMVC的核心功能。<span class="w"> </span>
+#<span class="w"> </span>主要引入了2个核心类型
+#<span class="w"> </span>1.RequestMappingHandlerMapping
+#<span class="w"> </span>2.RequestMappingHandlerAdapter
 
-1. RequestMappingHandlerMapping实现了HandlerMapping接口【了解】
-        它会处理@RequestMapping注解，并将其注册到请求映射表中。
-2. RequestMappingHandlerAdapter实现了 HandlerAdapter接口【了解】
-        它是处理请求的适配器，确定调用某个符合要求的控制器类中具体服务的方法。
-</code></pre>
+1.<span class="w"> </span>RequestMappingHandlerMapping实现了HandlerMapping接口【了解】
+<span class="w">        </span>它会处理@RequestMapping注解，并将其注册到请求映射表中。
+2.<span class="w"> </span>RequestMappingHandlerAdapter实现了<span class="w"> </span>HandlerAdapter接口【了解】
+<span class="w">        </span>它是处理请求的适配器，确定调用某个符合要求的控制器类中具体服务的方法。
+</code></pre></div>
 <p><strong>SpringMVC对mvc:annotation-driven的封装</strong><br />
 <img alt="1641194215545-b56b59b8-b048-44e1-8f39-99383d1a6219.png" src="../img/Q3eGMPdnfRAprnn2/1641194215545-b56b59b8-b048-44e1-8f39-99383d1a6219-247548.png" /><br />
 <strong>context:component-scan</strong>  </p>
-<pre><code class="language-xml">&lt;servlet&gt;
-  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
-  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-  &lt;!--用于配置SpringMVC的配置文件--&gt;
-  &lt;init-param&gt;
-    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-    &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;
-  &lt;/init-param&gt;
-  &lt;!--设置servlet在Tomcat启动时自动加载创建--&gt;
-  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-&lt;/servlet&gt;
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;servlet&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servlet-class&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="nt">&lt;/servlet-class&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!--用于配置SpringMVC的配置文件--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-name&gt;</span>contextConfigLocation<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-value&gt;</span>classpath:dispatcher.xml<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!--设置servlet在Tomcat启动时自动加载创建--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
+<span class="nt">&lt;/servlet&gt;</span>
 
-&lt;servlet-mapping&gt;
-  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
-  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-</code></pre>
-<h5 id="23">2.3 编码开发</h5>
-<h6 id="231">2.3.1 思路分析</h6>
+<span class="nt">&lt;servlet-mapping&gt;</span>
+<span class="w">  </span><span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/servlet-mapping&gt;</span>
+</code></pre></div>
+<h5 id="23">2.3 编码开发<a class="headerlink" href="#23" title="Permanent link">&para;</a></h5>
+<h6 id="231">2.3.1 思路分析<a class="headerlink" href="#231" title="Permanent link">&para;</a></h6>
 <p><img alt="1641194339879-f2c25936-c3bd-4395-8634-365e9324a313.png" src="../img/Q3eGMPdnfRAprnn2/1641194339879-f2c25936-c3bd-4395-8634-365e9324a313-519733.png" /></p>
-<pre><code class="language-markdown">#  基本流程
-1. 开发一个类在上面加入@Controller注解
-2. 提供一个控制器方法:参数是HttpServletRequest,HttpServletResponse,返回值是String的，同时加入@RequestMapping注解定义请求路径
-3. 在控制方法中，完成核心开发功能，把对应JSP页面的路径，作为方法的返回值返回。
-</code></pre>
-<h6 id="232">2.3.2 编码</h6>
-<pre><code class="language-java">@Controller
-public class FirstController {
+<div class="highlight"><pre><span></span><code><span class="gh">#  基本流程</span>
+<span class="k">1.</span> 开发一个类在上面加入@Controller注解
+<span class="k">2.</span> 提供一个控制器方法:参数是HttpServletRequest,HttpServletResponse,返回值是String的，同时加入@RequestMapping注解定义请求路径
+<span class="k">3.</span> 在控制方法中，完成核心开发功能，把对应JSP页面的路径，作为方法的返回值返回。
+</code></pre></div>
+<h6 id="232">2.3.2 编码<a class="headerlink" href="#232" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="nd">@Controller</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FirstController</span><span class="w"> </span><span class="p">{</span>
 
-  @RequestMapping(&quot;/first&quot;)
-  public String first(HttpServletRequest request, HttpServletResponse response) {
+<span class="w">  </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-    System.out.println(&quot;FirstController.first&quot;);
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;FirstController.first&quot;</span><span class="p">);</span>
 
-    return &quot;/result.jsp&quot;;
-  }
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/result.jsp&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-必须要进行@Controller注解的扫描，&lt;context:component-scan base-package=&quot;com.baizhiedu&quot;/&gt;
-</code></pre>
-<h6 id="233">2.3.3 一个控制器中，提供多个服务方法</h6>
+<span class="n">必须要进行</span><span class="nd">@Controller注解的扫描</span><span class="err">，</span><span class="o">&lt;</span><span class="n">context</span><span class="p">:</span><span class="n">component</span><span class="o">-</span><span class="n">scan</span><span class="w"> </span><span class="n">base</span><span class="o">-</span><span class="n">package</span><span class="o">=</span><span class="s">&quot;com.baizhiedu&quot;</span><span class="o">/&gt;</span>
+</code></pre></div>
+<h6 id="233">2.3.3 一个控制器中，提供多个服务方法<a class="headerlink" href="#233" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>Servlet作为控制器，一个类中只能提供一个服务方法</strong>   </li>
 </ul>
-<pre><code class="language-markdown">1. Servlet开发中，明确控制器的方法必须实现接口规定的service(HttpServletRequest,HttpServletResponse)方法，一个类中是能实现一次，所以一个类中只能有一个服务方法。
-</code></pre>
-<pre><code class="language-java">http://localhost:8989/basic/loginServlet
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> Servlet开发中，明确控制器的方法必须实现接口规定的service(HttpServletRequest,HttpServletResponse)方法，一个类中是能实现一次，所以一个类中只能有一个服务方法。
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/loginServlet</span>
 
-public class LoginServlet extends HttpServlet {
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) 
-                                                       throws ServletException, IOException {
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoginServlet</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HttpServlet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span>
+<span class="w">                                                       </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
 
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>SpringMVC的控制器，一个类中可以提供多个对外服务的方法</strong>   </li>
 </ul>
-<pre><code class="language-markdown">1. SpringMVC控制器，没有对于方法名字的限制，所以可以提供多个服务方法
-</code></pre>
-<pre><code class="language-java">http://localhost:8989/basic/first
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> SpringMVC控制器，没有对于方法名字的限制，所以可以提供多个服务方法
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/first</span>
 
-http://localhost:8989/basic/second
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/second</span>
 
-@Controller
-public class FirstController {
+<span class="nd">@Controller</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FirstController</span><span class="w"> </span><span class="p">{</span>
 
-  @RequestMapping(&quot;/first&quot;)
-  public String first(HttpServletRequest request, HttpServletResponse response) {
-        //第一个控制器功能
-    return &quot;/result.jsp&quot;;
-  }
+<span class="w">  </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//第一个控制器功能</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/result.jsp&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-  @RequestMapping(value=&quot;/second&quot;) //在注解使用时，如果只有一个value属性的话，value属性名，可以省略。
-  public String second(HttpServletRequest request, HttpServletResponse response) {
-    //第二个控制器功能
-    return &quot;/result.jsp&quot;;
-  }
+<span class="w">  </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">&quot;/second&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">//在注解使用时，如果只有一个value属性的话，value属性名，可以省略。</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">second</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//第二个控制器功能</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/result.jsp&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-}
-</code></pre>
-<h6 id="234">2.3.4 注意</h6>
-<pre><code class="language-markdown">1. SpringMVC我们开发的Controller，也称之为Handler（SpringMVC内部的叫法）
-</code></pre>
-<h5 id="24">2.4 第一个程序的细节分析</h5>
-<h6 id="241-springmvc">2.4.1 一种类型的SpringMVC控制器被创建几次</h6>
-<pre><code class="language-markdown">1. 回顾:Servlet控制器被创建的次数
+<span class="p">}</span>
+</code></pre></div>
+<h6 id="234">2.3.4 注意<a class="headerlink" href="#234" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> SpringMVC我们开发的Controller，也称之为Handler（SpringMVC内部的叫法）
+</code></pre></div>
+<h5 id="24">2.4 第一个程序的细节分析<a class="headerlink" href="#24" title="Permanent link">&para;</a></h5>
+<h6 id="241-springmvc">2.4.1 一种类型的SpringMVC控制器被创建几次<a class="headerlink" href="#241-springmvc" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 回顾:Servlet控制器被创建的次数
         一种类型的Servlet，只会被Tomcat创建一次，所以Servlet是单实例的。
 
-2. Servlet是单实例并不是单例设计模式
+<span class="k">2.</span> Servlet是单实例并不是单例设计模式
 
-3. SpringMVC的控制器被Spring创建的次数
+<span class="k">3.</span> SpringMVC的控制器被Spring创建的次数
         可以只创建一次，也可以创建多次，默认是只创建一次。
         控制器创建的次数，是由@Scope注解决定的。
 
-4. 默认情况下SpringMVC的控制器只会被创建一次，会存在线程安全的问题。
-</code></pre>
-<h6 id="242-requestmapping">2.4.2 @RequestMapping注解</h6>
-<pre><code class="language-java">1. 核心作用：为控制器方法提供外部访问的url路径。
+<span class="k">4.</span> 默认情况下SpringMVC的控制器只会被创建一次，会存在线程安全的问题。
+</code></pre></div>
+<h6 id="242-requestmapping">2.4.2 @RequestMapping注解<a class="headerlink" href="#242-requestmapping" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">核心作用</span><span class="err">：</span><span class="n">为控制器方法提供外部访问的url路径</span><span class="err">。</span>
 
- http://localhost:8989/basic/first
+<span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/first</span>
 
- @RequestMapping(&quot;/first&quot;)
- public String first(HttpServletRequest request, HttpServletResponse response)
-</code></pre>
+<span class="w"> </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li><strong>路径分割符  / 可以省略</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/spring-mvc1/first
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/spring-mvc1/first</span>
 
-@RequestMapping(&quot;first&quot;)
-public String first(HttpServletRequest request, HttpServletResponse response) 
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;first&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span>
 
-http://localhost:8989/spring-mvc1/first/third
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/spring-mvc1/first/third</span>
 
-@RequestMapping(&quot;first/third&quot;)
-public String first(HttpServletRequest request, HttpServletResponse response) 
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;first/third&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span>
 
-#注意 多级目录开头可以不写 /
-</code></pre>
+<span class="err">#</span><span class="n">注意</span><span class="w"> </span><span class="n">多级目录开头可以不写</span><span class="w"> </span><span class="o">/</span>
+</code></pre></div>
 <ul>
 <li><strong>在一个控制器方法上映射多个路径</strong><br />
 <strong>应用方式</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/basic/first
-http://localhost:8989/basic/third
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/first</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/third</span>
 
-@Controller
-public class FirstController {
+<span class="nd">@Controller</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FirstController</span><span class="w"> </span><span class="p">{</span>
 
-  @RequestMapping(value={&quot;/first&quot;,&quot;/third&quot;})
-  public String first(HttpServletRequest request, HttpServletResponse response) {
+<span class="w">  </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;/first&quot;</span><span class="p">,</span><span class="s">&quot;/third&quot;</span><span class="p">})</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-    System.out.println(&quot;FirstController.first&quot;);
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;FirstController.first&quot;</span><span class="p">);</span>
 
-    return &quot;/result.jsp&quot;;
-  }
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/result.jsp&quot;</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>Controller类上加入@RequestMapping注解</strong><br />
 <strong>应用方式</strong> </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/basic/user/addUser
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/user/addUser</span>
 
-http://localhost:8989/basic/user/deleteUser
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/user/deleteUser</span>
 
-@Controller
-@RequestMapping(&quot;/user&quot;)
-public class UserController {
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span>
 
-    @RequestMapping(&quot;/addUser&quot;)
-    public String addUser() {
-        System.out.println(&quot;UserController.addUser&quot;);
-        return &quot;/index.jsp&quot;;
-    }
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/addUser&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">addUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;UserController.addUser&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/index.jsp&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    @RequestMapping(&quot;/deleteUser&quot;)
-    public String deleteUser() {
-        System.out.println(&quot;UserController.deleteUser&quot;);
-        return &quot;/index.jsp&quot;;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/deleteUser&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">deleteUser</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;UserController.deleteUser&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;/index.jsp&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>设计目的</strong><br />
 <img alt="1641194387534-0172496b-595e-48dd-a6a8-a0b72da9fc4e.png" src="../img/Q3eGMPdnfRAprnn2/1641194387534-0172496b-595e-48dd-a6a8-a0b72da9fc4e-394519.png" /><br />
 <strong>结论</strong>  </p>
-<pre><code class="language-markdown">1. 可以更好的按照功能，进行不同模块的区分,有利于项目的管理。
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 可以更好的按照功能，进行不同模块的区分,有利于项目的管理。
+</code></pre></div>
 <ul>
 <li><strong>@RequestMapping限定用户的请求方式</strong> <ul>
 <li><strong>请求方式</strong> </li>
 </ul>
 </li>
 </ul>
-<pre><code class="language-java">1. 所谓请求方式指的就是Web开发中的 POST请求与GET请求
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">所谓请求方式指的就是Web开发中的</span><span class="w"> </span><span class="n">POST请求与GET请求</span>
+</code></pre></div>
 <p><strong>回顾:Web开发中的POST请求与GET请求的区别</strong><br />
 <strong>  两种请求提交数据的区别</strong> </p>
-<pre><code class="language-java">1. GET请求:通过请求行(地址栏)提交数据(QueryString)，明文数据提交，不安全，提交的数据量小(不能超过2048字节)
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">GET请求</span><span class="p">:</span><span class="n">通过请求行</span><span class="p">(</span><span class="n">地址栏</span><span class="p">)</span><span class="n">提交数据</span><span class="p">(</span><span class="n">QueryString</span><span class="p">)</span><span class="err">，</span><span class="n">明文数据提交</span><span class="err">，</span><span class="n">不安全</span><span class="err">，</span><span class="n">提交的数据量小</span><span class="p">(</span><span class="n">不能超过2048字节</span><span class="p">)</span>
 
-        http://localhost:8989/basic/user/queryUser?name=sunshuai&amp;password=123456
+<span class="w">        </span><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/user/queryUser?name=sunshuai&amp;password=123456</span>
 
-2. POST请求: 通过请求体提交数据，密文提交（不是加密，指的是一般用户不可见），相对安全，提交数据量大(理论上没有限制)
-</code></pre>
+<span class="mf">2.</span><span class="w"> </span><span class="n">POST请求</span><span class="p">:</span><span class="w"> </span><span class="n">通过请求体提交数据</span><span class="err">，</span><span class="n">密文提交</span><span class="err">（</span><span class="n">不是加密</span><span class="err">，</span><span class="n">指的是一般用户不可见</span><span class="err">），</span><span class="n">相对安全</span><span class="err">，</span><span class="n">提交数据量大</span><span class="p">(</span><span class="n">理论上没有限制</span><span class="p">)</span>
+</code></pre></div>
 <p>**  两种请求发起方式的区别**  </p>
-<pre><code class="language-java">1. GET方式
-   浏览器地址栏:  http://localhost:8989/basic/firstController/first
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">GET方式</span>
+<span class="w">   </span><span class="n">浏览器地址栏</span><span class="p">:</span><span class="w">  </span><span class="n">http</span><span class="p">:</span><span class="c1">//localhost:8989/basic/firstController/first</span>
 
-   超级链接:     &lt;a href=&quot;${pageContext.request.contextPath}/firstController/first&quot;&gt;超级链接&lt;/a&gt;
+<span class="w">   </span><span class="nl">超级链接</span><span class="p">:</span><span class="w">     </span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;${pageContext.request.contextPath}/firstController/first&quot;</span><span class="o">&gt;</span><span class="n">超级链接</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
 
-   表单:        &lt;from action=&quot;${pageContext.request.contextPath}/firstController/first&quot;&gt;&lt;/form&gt;
+<span class="w">   </span><span class="nl">表单</span><span class="p">:</span><span class="w">        </span><span class="o">&lt;</span><span class="n">from</span><span class="w"> </span><span class="n">action</span><span class="o">=</span><span class="s">&quot;${pageContext.request.contextPath}/firstController/first&quot;</span><span class="o">&gt;&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 
-   javascript: location.href=;
+<span class="w">   </span><span class="nl">javascript</span><span class="p">:</span><span class="w"> </span><span class="n">location</span><span class="p">.</span><span class="na">href</span><span class="o">=</span><span class="p">;</span>
 
-   ajax:       $.ajax({url:url,type:&quot;get&quot;,...})
+<span class="w">   </span><span class="nl">ajax</span><span class="p">:</span><span class="w">       </span><span class="n">$</span><span class="p">.</span><span class="na">ajax</span><span class="p">({</span><span class="n">url</span><span class="p">:</span><span class="n">url</span><span class="p">,</span><span class="n">type</span><span class="p">:</span><span class="s">&quot;get&quot;</span><span class="p">,...})</span>
 
-   专属工具或者库：POSTMAN、POSTWOMAN、RestfulToolKits、RestTemplate、HttpClient、OKHttp、NSMutableURLRequest
+<span class="w">   </span><span class="n">专属工具或者库</span><span class="err">：</span><span class="n">POSTMAN</span><span class="err">、</span><span class="n">POSTWOMAN</span><span class="err">、</span><span class="n">RestfulToolKits</span><span class="err">、</span><span class="n">RestTemplate</span><span class="err">、</span><span class="n">HttpClient</span><span class="err">、</span><span class="n">OKHttp</span><span class="err">、</span><span class="n">NSMutableURLRequest</span>
 
-2. POST方式
-   表单:       &lt;from action=&quot;${pageContext.request.contextPath}/firstController/first&quot; method=&quot;post&quot;&gt;&lt;/form&gt;
+<span class="mf">2.</span><span class="w"> </span><span class="n">POST方式</span>
+<span class="w">   </span><span class="n">表单</span><span class="p">:</span><span class="w">       </span><span class="o">&lt;</span><span class="n">from</span><span class="w"> </span><span class="n">action</span><span class="o">=</span><span class="s">&quot;${pageContext.request.contextPath}/firstController/first&quot;</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 
-   ajax:      $.ajax({url:url,type:&quot;post&quot;,...})
+<span class="w">   </span><span class="nl">ajax</span><span class="p">:</span><span class="w">      </span><span class="n">$</span><span class="p">.</span><span class="na">ajax</span><span class="p">({</span><span class="n">url</span><span class="p">:</span><span class="n">url</span><span class="p">,</span><span class="n">type</span><span class="p">:</span><span class="s">&quot;post&quot;</span><span class="p">,...})</span>
 
-   专属工具或者库：POSTMAN、POSTWOMAN、RestfulToolKits、RestTemplate、HttpClient、OKHttp、NSMutableURLRequest
-</code></pre>
-<pre><code>-  **@RequestMapping限定用户的请求方式**
-</code></pre>
-<pre><code class="language-java">1. 默认情况下:@RequestMapping注解，接受所有请求方式的访问（Post,Get,....）
+<span class="w">   </span><span class="n">专属工具或者库</span><span class="err">：</span><span class="n">POSTMAN</span><span class="err">、</span><span class="n">POSTWOMAN</span><span class="err">、</span><span class="n">RestfulToolKits</span><span class="err">、</span><span class="n">RestTemplate</span><span class="err">、</span><span class="n">HttpClient</span><span class="err">、</span><span class="n">OKHttp</span><span class="err">、</span><span class="n">NSMutableURLRequest</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **@RequestMapping限定用户的请求方式**
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">默认情况下</span><span class="p">:</span><span class="nd">@RequestMapping注解</span><span class="err">，</span><span class="n">接受所有请求方式的访问</span><span class="err">（</span><span class="n">Post</span><span class="p">,</span><span class="n">Get</span><span class="p">,....</span><span class="err">）</span>
 
-2. 通过@RequestMapping注解可以限定，某个控制器方法只接受特定的请求方式
-        @RequestMapping(method={RequestMethod.POST})
-        public String xxx(HttpServletRequest,HttpServletResponse)
+<span class="mf">2.</span><span class="w"> </span><span class="n">通过</span><span class="nd">@RequestMapping注解可以限定</span><span class="err">，</span><span class="n">某个控制器方法只接受特定的请求方式</span>
+<span class="w">        </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="p">{</span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">POST</span><span class="p">})</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">xxx</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">,</span><span class="n">HttpServletResponse</span><span class="p">)</span>
 
-        @RequestMapping(method={RequestMethod.GET})
-        public String xxx(HttpServletRequest,HttpServletResponse)
+<span class="w">        </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="p">{</span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">})</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">xxx</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">,</span><span class="n">HttpServletResponse</span><span class="p">)</span>
 
-3. @RequestMapping注解可以同时限定多种请求方式的访问
-        @RequestMapping(method={RequestMethod.GET,RequestMethod.POST})
-        public String xxx(HttpServletRequest,HttpServletResponse)
+<span class="mf">3.</span><span class="w"> </span><span class="nd">@RequestMapping注解可以同时限定多种请求方式的访问</span>
+<span class="w">        </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="p">{</span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">,</span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">POST</span><span class="p">})</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">xxx</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">,</span><span class="n">HttpServletResponse</span><span class="p">)</span>
 
-4. 当用户发起了@RequestMapping不支持的请求操作
-        SpringMVC在服务器端抛出一个405错误 Method Not Allowed
-</code></pre>
-<pre><code>-  **Http协议中其他的请求方式【了解】**
-</code></pre>
-<pre><code class="language-java">1. 除常规的POST，GET请求外，Http协议还提供了其他的请求方式
-        PUT、DELETE、OPTIONS...
+<span class="mf">4.</span><span class="w"> </span><span class="n">当用户发起了</span><span class="nd">@RequestMapping不支持的请求操作</span>
+<span class="w">        </span><span class="n">SpringMVC在服务器端抛出一个405错误</span><span class="w"> </span><span class="n">Method</span><span class="w"> </span><span class="n">Not</span><span class="w"> </span><span class="n">Allowed</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **Http协议中其他的请求方式【了解】**
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">除常规的POST</span><span class="err">，</span><span class="n">GET请求外</span><span class="err">，</span><span class="n">Http协议还提供了其他的请求方式</span>
+<span class="w">        </span><span class="n">PUT</span><span class="err">、</span><span class="n">DELETE</span><span class="err">、</span><span class="n">OPTIONS</span><span class="p">...</span>
 
-2. @RequestMapping注解，默认情况下也支持其他请求方式的访问，同时也可以根据需要进行限定。
-        @RequestMapping(method={RequestMethod.DELETE})
-        public String xxx(HttpServletRequest,HttpServletResponse)
+<span class="mf">2.</span><span class="w"> </span><span class="nd">@RequestMapping注解</span><span class="err">，</span><span class="n">默认情况下也支持其他请求方式的访问</span><span class="err">，</span><span class="n">同时也可以根据需要进行限定</span><span class="err">。</span>
+<span class="w">        </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="p">{</span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">DELETE</span><span class="p">})</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">xxx</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">,</span><span class="n">HttpServletResponse</span><span class="p">)</span>
 
-3. 除Post,Get这2种请求方式外，其他的请求方式浏览器支持的不好，可以使用专属工具或者库进行测试
+<span class="mf">3.</span><span class="w"> </span><span class="n">除Post</span><span class="p">,</span><span class="n">Get这2种请求方式外</span><span class="err">，</span><span class="n">其他的请求方式浏览器支持的不好</span><span class="err">，</span><span class="n">可以使用专属工具或者库进行测试</span>
 
-4. 其他的请求方式，大多数不支持响应视图技术（JSP,Thymeleaf),只能返回简单字符串或者JSON数据。
-</code></pre>
-<h6 id="243">2.4.3 控制器方法参数</h6>
-<pre><code class="language-markdown">1. SpringMVC在控制器方法参数设计的过程中，非常灵活，可以支持多种参数的设置方式，非常强大，它也把这种设计，叫做数据绑定。
-</code></pre>
+<span class="mf">4.</span><span class="w"> </span><span class="n">其他的请求方式</span><span class="err">，</span><span class="n">大多数不支持响应视图技术</span><span class="err">（</span><span class="n">JSP</span><span class="p">,</span><span class="n">Thymeleaf</span><span class="p">),</span><span class="n">只能返回简单字符串或者JSON数据</span><span class="err">。</span>
+</code></pre></div>
+<h6 id="243">2.4.3 控制器方法参数<a class="headerlink" href="#243" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> SpringMVC在控制器方法参数设计的过程中，非常灵活，可以支持多种参数的设置方式，非常强大，它也把这种设计，叫做数据绑定。
+</code></pre></div>
 <ul>
 <li><strong>代码一</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
-public String first(HttpServletRequest request, HttpServletResponse response)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li><strong>代码二</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
-public String first(HttpServletRequest request)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li><strong>代码三</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
-public String first(HttpServletResponse response)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li><strong>代码四</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
-public String first(HttpServletRequest request, HttpServletResponse response,HttpSession session)
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="p">)</span>
 
-注意：HttpSession也可以单独使用 或者 组合使用 
-     ServletContext(application) 不能应用在控制器方法中，做形参
-     session.getServletContext();
-         request.getSession().getServletContext();
-</code></pre>
+<span class="n">注意</span><span class="err">：</span><span class="n">HttpSession也可以单独使用</span><span class="w"> </span><span class="n">或者</span><span class="w"> </span><span class="n">组合使用</span><span class="w"> </span>
+<span class="w">     </span><span class="nf">ServletContext</span><span class="p">(</span><span class="n">application</span><span class="p">)</span><span class="w"> </span><span class="n">不能应用在控制器方法中</span><span class="err">，</span><span class="n">做形参</span>
+<span class="w">     </span><span class="n">session</span><span class="p">.</span><span class="na">getServletContext</span><span class="p">();</span>
+<span class="w">         </span><span class="n">request</span><span class="p">.</span><span class="na">getSession</span><span class="p">().</span><span class="na">getServletContext</span><span class="p">();</span>
+</code></pre></div>
 <ul>
 <li><strong>代码五</strong> <br />
 <strong>思考：</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
-public String first()
-</code></pre>
-<pre><code class="language-markdown">1. 上述五种代码形式,在后续开发中，那种更加常用？
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/first&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">first</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 上述五种代码形式,在后续开发中，那种更加常用？
         前四种不推荐的原因是：与Servlet API 解耦合。
         第五种不推荐的原因是：单纯这种方式使用，无法接受client的请求参数
 
         后续的课程中，还会进行详细讲解
-</code></pre>
-<h6 id="244">2.4.4 视图解析器（页面跳转）</h6>
+</code></pre></div>
+<h6 id="244">2.4.4 视图解析器（页面跳转）<a class="headerlink" href="#244" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>目前页面跳存在的问题</strong> <br />
 <img alt="1641194550486-a8c4ab23-a0f3-43c0-a75f-04beb10d8b73.png" src="../img/Q3eGMPdnfRAprnn2/1641194550486-a8c4ab23-a0f3-43c0-a75f-04beb10d8b73-808850.png" /></li>
 </ul>
-<pre><code class="language-markdown">1. 控制器中的跳转路径与实际视图路径存在耦合。
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 控制器中的跳转路径与实际视图路径存在耦合。
+</code></pre></div>
 <ul>
 <li><strong>视图解析器ViewResolver</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. 通过视图解析器(ViewResolver)，就可以解决跳转路径与实际视图路径耦合的问题。
-</code></pre>
-<pre><code>-  **思路分析**
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 通过视图解析器(ViewResolver)，就可以解决跳转路径与实际视图路径耦合的问题。
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **思路分析**
+</code></pre></div>
 <p><img alt="1641194583304-491109e1-f8a5-4d75-bc9c-d82a82aa1571.png" src="../img/Q3eGMPdnfRAprnn2/1641194583304-491109e1-f8a5-4d75-bc9c-d82a82aa1571-509502.png" />
     -  <strong>开发步骤</strong><br />
 <strong>配置文件开发</strong> <br />
 <strong>注解开发</strong>  </p>
-<pre><code class="language-java">&lt;bean id=&quot;resolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
-     &lt;!--路径--&gt;
-     &lt;property name=&quot;prefix&quot; value=&quot;/&quot;/&gt;
-     &lt;!--文件类型--&gt;
-     &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
-&lt;/bean&gt;
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">bean</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;resolver&quot;</span><span class="w"> </span><span class="kd">class</span><span class="err">=&quot;</span><span class="nc">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">web</span><span class="p">.</span><span class="na">servlet</span><span class="p">.</span><span class="na">view</span><span class="p">.</span><span class="na">InternalResourceViewResolver</span><span class="s">&quot;&gt;</span>
+<span class="s">     &lt;!--路径--&gt;</span>
+<span class="s">     &lt;property name=&quot;</span><span class="n">prefix</span><span class="s">&quot; value=&quot;</span><span class="o">/</span><span class="s">&quot;/&gt;</span>
+<span class="s">     &lt;!--文件类型--&gt;</span>
+<span class="s">     &lt;property name=&quot;</span><span class="n">suffix</span><span class="s">&quot; value=&quot;</span><span class="p">.</span><span class="na">jsp</span><span class="s">&quot;/&gt;</span>
+<span class="s">&lt;/bean&gt;</span>
 
-@Controller
-public class FirstController {
+<span class="s">@Controller</span>
+<span class="s">public class FirstController {</span>
 
-  @RequestMapping(&quot;/first&quot;)
-  public String first(HttpServletRequest request, HttpServletResponse response) {
+<span class="s">  @RequestMapping(&quot;</span><span class="o">/</span><span class="n">first</span><span class="s">&quot;)</span>
+<span class="s">  public String first(HttpServletRequest request, HttpServletResponse response) {</span>
 
-    System.out.println(&quot;FirstController.first&quot;);
+<span class="s">    System.out.println(&quot;</span><span class="n">FirstController</span><span class="p">.</span><span class="na">first</span><span class="s">&quot;);</span>
 
-    return &quot;result&quot;; //实际处理时 SpringMVC就会把视图解析器与控制器方法中的逻辑视图名进行拼接 / result .jsp
-  }
-}
-</code></pre>
-<pre><code class="language-java">@Configuration
-public class AppConfig {
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix(&quot;/&quot;);
-        viewResolver.setSuffix(&quot;.jsp&quot;);
-        return viewResolver;
-    }
-}
+<span class="s">    return &quot;</span><span class="n">result</span><span class="s">&quot;; //实际处理时 SpringMVC就会把视图解析器与控制器方法中的逻辑视图名进行拼接 / result .jsp</span>
+<span class="s">  }</span>
+<span class="s">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AppConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ViewResolver</span><span class="w"> </span><span class="nf">viewResolver</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">InternalResourceViewResolver</span><span class="w"> </span><span class="n">viewResolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InternalResourceViewResolver</span><span class="p">();</span>
+<span class="w">        </span><span class="n">viewResolver</span><span class="p">.</span><span class="na">setPrefix</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">viewResolver</span><span class="p">.</span><span class="na">setSuffix</span><span class="p">(</span><span class="s">&quot;.jsp&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">viewResolver</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-注意：
-     1. AppConfig配置Bean应该放置到&lt;context:component-scan/&gt; 扫描的路径下。
-     2. 结合前面所讲，目前因为DispatcherServlet封装的Spring工厂（容器）只能读取xml，所以无法进行纯注解替换。
-</code></pre>
-<h6 id="245-springmvc">2.4.5 SpringMVC配置文件的默认设置【了解】</h6>
-<pre><code class="language-xml">1. 如果在web.xml中没有设置SpringMVC配置文件的的路径,系统会查找默认配置文件
-     &lt;servlet&gt;
-     &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
-     &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-     &lt;!--
-     &lt;init-param&gt;
-       &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
-       &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;
-     &lt;/init-param&gt;
-     --&gt;
-     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-   &lt;/servlet&gt;
-   &lt;servlet-mapping&gt;
-     &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
-     &lt;url-pattern&gt;/&lt;/url-pattern&gt;
-   &lt;/servlet-mapping&gt;
+<span class="n">注意</span><span class="err">：</span>
+<span class="w">     </span><span class="mf">1.</span><span class="w"> </span><span class="n">AppConfig配置Bean应该放置到</span><span class="o">&lt;</span><span class="n">context</span><span class="p">:</span><span class="n">component</span><span class="o">-</span><span class="n">scan</span><span class="o">/&gt;</span><span class="w"> </span><span class="n">扫描的路径下</span><span class="err">。</span>
+<span class="w">     </span><span class="mf">2.</span><span class="w"> </span><span class="n">结合前面所讲</span><span class="err">，</span><span class="n">目前因为DispatcherServlet封装的Spring工厂</span><span class="err">（</span><span class="n">容器</span><span class="err">）</span><span class="n">只能读取xml</span><span class="err">，</span><span class="n">所以无法进行纯注解替换</span><span class="err">。</span>
+</code></pre></div>
+<h6 id="245-springmvc">2.4.5 SpringMVC配置文件的默认设置【了解】<a class="headerlink" href="#245-springmvc" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code>1.<span class="w"> </span>如果在web.xml中没有设置SpringMVC配置文件的的路径,系统会查找默认配置文件
+<span class="w">     </span><span class="nt">&lt;servlet&gt;</span>
+<span class="w">     </span><span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">     </span><span class="nt">&lt;servlet-class&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="nt">&lt;/servlet-class&gt;</span>
+<span class="w">     </span><span class="cm">&lt;!--</span>
+<span class="cm">     &lt;init-param&gt;</span>
+<span class="cm">       &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span>
+<span class="cm">       &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;</span>
+<span class="cm">     &lt;/init-param&gt;</span>
+<span class="cm">     --&gt;</span>
+<span class="w">     </span><span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/servlet&gt;</span>
+<span class="w">   </span><span class="nt">&lt;servlet-mapping&gt;</span>
+<span class="w">     </span><span class="nt">&lt;servlet-name&gt;</span>dispatcher<span class="nt">&lt;/servlet-name&gt;</span>
+<span class="w">     </span><span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="w">   </span><span class="nt">&lt;/servlet-mapping&gt;</span>
 
-2. SpringMVC默认配置文件的名字，放置位置是
-   /WEB-INF/[servlet-name]-servlet.xml
+2.<span class="w"> </span>SpringMVC默认配置文件的名字，放置位置是
+<span class="w">   </span>/WEB-INF/[servlet-name]-servlet.xml
 
-   根据上述配置:SpringMVC配置文件的默认名字是
-   /WEB-INF/dispatcher-servlet.xml
-</code></pre>
-<h3 id="springmvc_5">SpringMVC系列</h3>
+<span class="w">   </span>根据上述配置:SpringMVC配置文件的默认名字是
+<span class="w">   </span>/WEB-INF/dispatcher-servlet.xml
+</code></pre></div>
+<h3 id="springmvc_5">SpringMVC系列<a class="headerlink" href="#springmvc_5" title="Permanent link">&para;</a></h3>
 <hr />
-<h4 id="springmvc_6">第三章、SpringMVC控制器开发详解 一</h4>
-<h5 id="31">3.1 核心要点</h5>
+<h4 id="springmvc_6">第三章、SpringMVC控制器开发详解 一<a class="headerlink" href="#springmvc_6" title="Permanent link">&para;</a></h4>
+<h5 id="31">3.1 核心要点<a class="headerlink" href="#31" title="Permanent link">&para;</a></h5>
 <blockquote>
 <ol>
 <li><strong>接受客户端(client)请求参数 [讲解]</strong></li>
@@ -1529,114 +1529,114 @@ public class AppConfig {
 <li><strong>页面跳转</strong></li>
 </ol>
 </blockquote>
-<h5 id="32-client">3.2 控制器接受客户端(client)请求参数详解</h5>
-<h6 id="321-webclient">3.2.1 回顾：Web开发中如何接受Client请求参数</h6>
+<h5 id="32-client">3.2 控制器接受客户端(client)请求参数详解<a class="headerlink" href="#32-client" title="Permanent link">&para;</a></h5>
+<h6 id="321-webclient">3.2.1 回顾：Web开发中如何接受Client请求参数<a class="headerlink" href="#321-webclient" title="Permanent link">&para;</a></h6>
 <p><img alt="1641194647385-2d81f880-1901-4e18-919a-bdba966c19ae.png" src="../img/Q3eGMPdnfRAprnn2/1641194647385-2d81f880-1901-4e18-919a-bdba966c19ae-723497.png" /></p>
-<h6 id="322-servlet-apiclient">3.2.2 基于Servlet API接受Client请求参数</h6>
-<pre><code class="language-java"> String name     = request.getParameter(&quot;name&quot;);
- String password = request.getParameter(&quot;password&quot;);
+<h6 id="322-servlet-apiclient">3.2.2 基于Servlet API接受Client请求参数<a class="headerlink" href="#322-servlet-apiclient" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">);</span>
+<span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">);</span>
 
 
-@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
 
-    @RequestMapping(&quot;/param1&quot;)
-    public String param1(HttpServletRequest request, HttpServletResponse response) {
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-        String name     = request.getParameter(&quot;name&quot;);
-        String password = request.getParameter(&quot;password&quot;);
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getParameter</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">);</span>
 
-        return &quot;param1&quot;;
-    }
-}
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param1&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-注意：这种方式虽然最为直观、简单、但是代码冗余多且与ServletAPI存在耦合，所以在SpringMVC开发中并不建议使用。
-</code></pre>
-<h6 id="323-client">3.2.3 基于简单变量接受Client请求参数</h6>
-<pre><code class="language-markdown">1. 所谓简单变量：指的就是8种基本类型+String这些类型的变量。把这些类型的变量，作为控制器⽅法的形参，⽤于接受client提交的数据。
-</code></pre>
+<span class="n">注意</span><span class="err">：</span><span class="n">这种方式虽然最为直观</span><span class="err">、</span><span class="n">简单</span><span class="err">、</span><span class="n">但是代码冗余多且与ServletAPI存在耦合</span><span class="err">，</span><span class="n">所以在SpringMVC开发中并不建议使用</span><span class="err">。</span>
+</code></pre></div>
+<h6 id="323-client">3.2.3 基于简单变量接受Client请求参数<a class="headerlink" href="#323-client" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 所谓简单变量：指的就是8种基本类型+String这些类型的变量。把这些类型的变量，作为控制器⽅法的形参，⽤于接受client提交的数据。
+</code></pre></div>
 <ul>
 <li><strong>思路分析</strong><br />
 <img alt="1641194687407-47900c3d-6a9a-4f8c-9ec4-481183735ccc.png" src="../img/Q3eGMPdnfRAprnn2/1641194687407-47900c3d-6a9a-4f8c-9ec4-481183735ccc-596278.png" /></li>
 <li><strong>代码</strong>  </li>
 </ul>
-<pre><code class="language-java">@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
+<div class="highlight"><pre><span></span><code><span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
 
-    @RequestMapping(&quot;/param2&quot;)
-    public String param2(String name, String password) {
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-        return &quot;param2&quot;;
-    }
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param2&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>细节分析</strong> <ul>
 <li><strong>常见类型自动转换</strong>   </li>
 </ul>
 </li>
 </ul>
-<pre><code class="language-java">客户端请求：http://localhost:8989/springmvc1/param/param2?name=sunshuai&amp;age=10 
+<div class="highlight"><pre><span></span><code><span class="n">客户端请求</span><span class="err">：</span><span class="n">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/param/param2?name=sunshuai&amp;age=10 </span>
 
-HTTP协议：传递的是 name &quot;sunshuai&quot; age &quot;10&quot;
+<span class="n">HTTP协议</span><span class="err">：</span><span class="n">传递的是</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="s">&quot;sunshuai&quot;</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="s">&quot;10&quot;</span>
 
-@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
 
-    @RequestMapping(&quot;/param2&quot;)
-    public String param2(String name, int age) {
-
-
-        return &quot;param2&quot;;
-    }
-
-}
-
-SpringMVC底层针对于age接受数据时会自动调用 int age = Integer.parseInt(&quot;10&quot;);
-</code></pre>
-<pre><code class="language-markdown">1. 常见类型泛指：8种基本类型及其包装器，String等常见类型。
-2. Date日期等特殊类型，默认不支持，需要程序员自定义类型转换器【后续讲解】
-</code></pre>
-<pre><code>-  **基本类型尽量使用包装器**
-</code></pre>
-<pre><code class="language-java">客户端请求：http://localhost:8989/springmvc1/param/param2?name=sunshuai&amp;age=10
-
-          http://localhost:8989/springmvc1/param/param2?name=sunshuai 
-
-@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
-
-    @RequestMapping(&quot;/param2&quot;)
-    public String param2(String name, int age) {
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 
-        return &quot;param2&quot;;
-    }
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param2&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
+<span class="p">}</span>
 
-程序报错：原因在于age参数。age在提交数据时没有提交内容，等同于null。而参数中age使用了int类型，是基本类型，无法存储null值，所以产生了错误。
-改正方式：
-         1. age参数使用包装器类型，可以存储null值
-       2. 为age参数设置默认值，但是需要@RequestParam注解配合使用。【后续讲解】
-</code></pre>
-<h6 id="324-pojoclient">3.2.4 基于POJO类型接受Client请求参数</h6>
+<span class="n">SpringMVC底层针对于age接受数据时会自动调用</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="s">&quot;10&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 常见类型泛指：8种基本类型及其包装器，String等常见类型。
+<span class="k">2.</span> Date日期等特殊类型，默认不支持，需要程序员自定义类型转换器【后续讲解】
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **基本类型尽量使用包装器**
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">客户端请求</span><span class="err">：</span><span class="n">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/param/param2?name=sunshuai&amp;age=10</span>
+
+<span class="w">          </span><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/param/param2?name=sunshuai </span>
+
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param2&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="n">程序报错</span><span class="err">：</span><span class="n">原因在于age参数</span><span class="err">。</span><span class="n">age在提交数据时没有提交内容</span><span class="err">，</span><span class="n">等同于null</span><span class="err">。</span><span class="n">而参数中age使用了int类型</span><span class="err">，</span><span class="n">是基本类型</span><span class="err">，</span><span class="n">无法存储null值</span><span class="err">，</span><span class="n">所以产生了错误</span><span class="err">。</span>
+<span class="n">改正方式</span><span class="err">：</span>
+<span class="w">         </span><span class="mf">1.</span><span class="w"> </span><span class="n">age参数使用包装器类型</span><span class="err">，</span><span class="n">可以存储null值</span>
+<span class="w">       </span><span class="mf">2.</span><span class="w"> </span><span class="n">为age参数设置默认值</span><span class="err">，</span><span class="n">但是需要</span><span class="nd">@RequestParam注解配合使用</span><span class="err">。【</span><span class="n">后续讲解</span><span class="err">】</span>
+</code></pre></div>
+<h6 id="324-pojoclient">3.2.4 基于POJO类型接受Client请求参数<a class="headerlink" href="#324-pojoclient" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>什么是POJO</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. POJO全程叫做Plain Ordinary Java Object（简单的Java对象)
-2. POJO类型对象的特点是：
-        1. 类型中如果存在成员变量，必须提供set get方法。
-        2. 提供默认无参构造
-        3. 可以实现Serializable，也可以不实现
-        4. 不实现容器或者框架所规定的接口
-3. 用户根据业务封装的实体、DTO这些类型就是POJO。
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> POJO全程叫做Plain Ordinary Java Object（简单的Java对象)
+<span class="k">2.</span> POJO类型对象的特点是：
+<span class="w">        </span><span class="k">1.</span> 类型中如果存在成员变量，必须提供set get方法。
+<span class="w">        </span><span class="k">2.</span> 提供默认无参构造
+<span class="w">        </span><span class="k">3.</span> 可以实现Serializable，也可以不实现
+<span class="w">        </span><span class="k">4.</span> 不实现容器或者框架所规定的接口
+<span class="k">3.</span> 用户根据业务封装的实体、DTO这些类型就是POJO。
+</code></pre></div>
 <ul>
 <li><strong>使用场景</strong></li>
 </ul>
@@ -1644,49 +1644,49 @@ public class ParamController {
 <ul>
 <li><strong>代码</strong>  </li>
 </ul>
-<pre><code class="language-java">public class User implements Serializable {
-    private String name;
-    private String password;
-    private Integer age;
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span>
 
-@RequestMapping(&quot;/param3&quot;)
-public String param3(User user) {
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param3&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param3</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-  return &quot;param3&quot;;
-}
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param3&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-http://localhost:8989/springmvc1/xxController?name=suns&amp;password=123456&amp;age=10
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/xxController?name=suns&amp;password=123456&amp;age=10</span>
 
-&lt;a href=&quot;/springmvc1/xxxController?name=suns&amp;password=123456&amp;age=10&quot;&gt;发送请求&lt;/a&gt;
+<span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;/springmvc1/xxxController?name=suns&amp;password=123456&amp;age=10&quot;</span><span class="o">&gt;</span><span class="n">发送请求</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
 
-姓名: &lt;input type=&quot;text&quot;     name=&quot;name&quot;/&gt;
-密码: &lt;input type=&quot;password&quot; name=&quot;password'/&gt;
-年龄: &lt;input type=&quot;text&quot;     name =&quot;age&quot;/&gt;
+<span class="nl">姓名</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w">     </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span><span class="o">/&gt;</span>
+<span class="nl">密码</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;password&#39;/&gt;</span>
+<span class="s">年龄: &lt;input type=&quot;</span><span class="n">text</span><span class="s">&quot;     name =&quot;</span><span class="n">age</span><span class="s">&quot;/&gt;</span>
 
-POJO的成员变量的名字要和请求参数的key或者表单name属性的值严格对应。
-</code></pre>
+<span class="s">POJO的成员变量的名字要和请求参数的key或者表单name属性的值严格对应。</span>
+</code></pre></div>
 <ul>
 <li><strong>注意1</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/springmvc1/xxxController?name=sunshuai&amp;password=123456&amp;age=10
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/xxxController?name=sunshuai&amp;password=123456&amp;age=10</span>
 
-@RequestMapping(&quot;/param3&quot;)
-public String param3(String name,User user) {
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param3&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param3</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-  return &quot;param3&quot;;
-}
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param3&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-name形参与user对象中的name属性，都会获取对应的内容。这个特点在后续学习前端后端分离开发时，是会使用。
-</code></pre>
+<span class="n">name形参与user对象中的name属性</span><span class="err">，</span><span class="n">都会获取对应的内容</span><span class="err">。</span><span class="n">这个特点在后续学习前端后端分离开发时</span><span class="err">，</span><span class="n">是会使用</span><span class="err">。</span>
+</code></pre></div>
 <ul>
 <li><strong>注意2</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1. 如果SpringMVC发现控制器形参类型，是8种基本类型+String的话，他会通过形参名与请求参数的key对应，接受数据。
-2. 如果SpringMVC发现控制器形参类型，不是8种基本类型+String的话，他会查找对应形参类型的属性名与请求参数的key对应，接受数据
-3. 如果存在自定义类型转换器不适用于上述规律 【后续讲解】
-</code></pre>
-<h6 id="325">3.2.5 接受一组简单变量的请求参数</h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 如果SpringMVC发现控制器形参类型，是8种基本类型+String的话，他会通过形参名与请求参数的key对应，接受数据。
+<span class="k">2.</span> 如果SpringMVC发现控制器形参类型，不是8种基本类型+String的话，他会查找对应形参类型的属性名与请求参数的key对应，接受数据
+<span class="k">3.</span> 如果存在自定义类型转换器不适用于上述规律 【后续讲解】
+</code></pre></div>
+<h6 id="325">3.2.5 接受一组简单变量的请求参数<a class="headerlink" href="#325" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>使用场景</strong></li>
 </ul>
@@ -1694,465 +1694,465 @@ name形参与user对象中的name属性，都会获取对应的内容。这个�
 <ul>
 <li><strong>代码</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/param1&quot;)
-public String param1(int[] ids) {
-  for (int i : ids) {
-    System.out.println(&quot;i = &quot; + i);
-  }
-  return &quot;result1&quot;;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;i = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;result1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>细节分析</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/param1&quot;)
-public String param1(List&lt;Integer&gt; ids) {
-  for (Integer id : ids) {
-    System.out.println(&quot;id = &quot; + id);
-  }
-  return &quot;result1&quot;;
-}
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;id = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;result1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-抛出异常：SpringMVC无法提供具体的实现类，实例化形参。
+<span class="n">抛出异常</span><span class="err">：</span><span class="n">SpringMVC无法提供具体的实现类</span><span class="err">，</span><span class="n">实例化形参</span><span class="err">。</span>
 
-@RequestMapping(&quot;/param1&quot;)
-public String param1(ArrayList&lt;Integer&gt; ids) {
-  for (Integer id : ids) {
-    System.out.println(&quot;id = &quot; + id);
-  }
-  return &quot;result1&quot;;
-}
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;id = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;result1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-没有异常，但是接受不到数据：SpringMVC会按照POJO的匹配方式，进行成员变量查找。
-</code></pre>
-<h6 id="326-pojo">3.2.6 接受一组POJO类型对象的请求参数</h6>
+<span class="n">没有异常</span><span class="err">，</span><span class="n">但是接受不到数据</span><span class="err">：</span><span class="n">SpringMVC会按照POJO的匹配方式</span><span class="err">，</span><span class="n">进行成员变量查找</span><span class="err">。</span>
+</code></pre></div>
+<h6 id="326-pojo">3.2.6 接受一组POJO类型对象的请求参数<a class="headerlink" href="#326-pojo" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>使用场景</strong><br />
 <img alt="1641194766789-9edfec92-7d9e-4015-a314-3f3482f527b6.png" src="../img/Q3eGMPdnfRAprnn2/1641194766789-9edfec92-7d9e-4015-a314-3f3482f527b6-617963.png" /></li>
 <li><strong>代码</strong>  </li>
 </ul>
-<pre><code class="language-java">&lt;form action=&quot;${pageContext.request.contextPath}/param/param1&quot; method=&quot;post&quot;&gt;
-  userName1:&lt;input type=&quot;text&quot; name=&quot;users[0].name&quot;/&gt;    &lt;br/&gt;
-  password1:&lt;input type=&quot;text&quot; name=&quot;users[0].password&quot;/&gt;&lt;br/&gt;
-  age1      &lt;input type=&quot;text&quot; name=&quot;users[0].age&quot;/&gt;     &lt;br/&gt;
-  &lt;hr/&gt;
-  userName2&lt;input type=&quot;text&quot;  name=&quot;users[1].name&quot;/&gt;     &lt;br/&gt;
-  password2&lt;input type=&quot;text&quot;  name=&quot;users[1].password&quot;/&gt; &lt;br/&gt;
-  age2     &lt;input type=&quot;text&quot;  name=&quot;users[1].age&quot;/&gt;      &lt;br/&gt;
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="n">action</span><span class="o">=</span><span class="s">&quot;${pageContext.request.contextPath}/param/param1&quot;</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">userName1</span><span class="p">:</span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;users[0].name&quot;</span><span class="o">/&gt;</span><span class="w">    </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+<span class="w">  </span><span class="n">password1</span><span class="p">:</span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;users[0].password&quot;</span><span class="o">/&gt;&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+<span class="w">  </span><span class="n">age1</span><span class="w">      </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;users[0].age&quot;</span><span class="o">/&gt;</span><span class="w">     </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+<span class="w">  </span><span class="o">&lt;</span><span class="n">hr</span><span class="o">/&gt;</span>
+<span class="w">  </span><span class="n">userName2</span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;users[1].name&quot;</span><span class="o">/&gt;</span><span class="w">     </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+<span class="w">  </span><span class="n">password2</span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;users[1].password&quot;</span><span class="o">/&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
+<span class="w">  </span><span class="n">age2</span><span class="w">     </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w">  </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;users[1].age&quot;</span><span class="o">/&gt;</span><span class="w">      </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span>
 
-  &lt;input type=&quot;submit&quot; value=&quot;reg&quot;/&gt;
-&lt;/form&gt;
+<span class="w">  </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;reg&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 
 
-public class UsersDTO {
-  private List&lt;User&gt; users = new ArrayList&lt;&gt;();
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UsersDTO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
-  public List&lt;User&gt; getUsers() {
-    return users;
-  }
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUsers</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">users</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-  public void setUsers(List&lt;User&gt; users) {
-    this.users = users;
-  }
-}
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setUsers</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-@RequestMapping(&quot;/param1&quot;)
-public String param1(UsersDTO usersDTO) {
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="n">UsersDTO</span><span class="w"> </span><span class="n">usersDTO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-  List&lt;User&gt; users = usersDTO.getUsers();
+<span class="w">  </span><span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usersDTO</span><span class="p">.</span><span class="na">getUsers</span><span class="p">();</span>
 
-  for (User user : users) {
-    System.out.println(&quot;user = &quot; + user);
-  }
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;user = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">user</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
 
-  return &quot;param1&quot;;
-}
-</code></pre>
-<h5 id="33-client">3.3 接受Client请求参数的总结</h5>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h5 id="33-client">3.3 接受Client请求参数的总结<a class="headerlink" href="#33-client" title="Permanent link">&para;</a></h5>
 <p><img alt="1641194884226-3f83862c-3d2d-49a4-9ee6-73790a6e5d5c.png" src="../img/Q3eGMPdnfRAprnn2/1641194884226-3f83862c-3d2d-49a4-9ee6-73790a6e5d5c-412902.png" /></p>
-<h5 id="34-requestparam">3.4 @RequestParam注解</h5>
-<pre><code class="language-java">1.  @RequestParam注解：用于修饰控制器方法的形参。
+<h5 id="34-requestparam">3.4 @RequestParam注解<a class="headerlink" href="#34-requestparam" title="Permanent link">&para;</a></h5>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w">  </span><span class="nd">@RequestParam注解</span><span class="err">：</span><span class="n">用于修饰控制器方法的形参</span><span class="err">。</span>
 
-    @RequestMapping(&quot;/param1&quot;)
-    public String param1(@RequestParam String name,@RequestParam String password){
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">){</span>
 
-        }
-</code></pre>
-<h6 id="341-requestparam">3.4.1 @RequestParam注解详解</h6>
+<span class="w">        </span><span class="p">}</span>
+</code></pre></div>
+<h6 id="341-requestparam">3.4.1 @RequestParam注解详解<a class="headerlink" href="#341-requestparam" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>解决请求参数与方法形参名字不一致的问题</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/springmvc1/paramContrller/param?n=sunshuai&amp;p=123456
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/paramContrller/param?n=sunshuai&amp;p=123456</span>
 
-&lt;a href=&quot;/springmvc1/paramController/param?n=sunshuai&amp;p=123456&quot;&gt;点击&lt;/a&gt;
+<span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;/springmvc1/paramController/param?n=sunshuai&amp;p=123456&quot;</span><span class="o">&gt;</span><span class="n">点击</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
 
-&lt;form action=&quot;/springmvc1/paramController/param&quot; method=&quot;post&quot;&gt;
-   username：&lt;input type=&quot;text&quot;    name=&quot;n&quot;/&gt;
-   password: &lt;input type=&quot;password&quot; name=&quot;p&quot;/&gt;
-&lt;/form&gt;
+<span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="n">action</span><span class="o">=</span><span class="s">&quot;/springmvc1/paramController/param&quot;</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+<span class="w">   </span><span class="n">username</span><span class="err">：</span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w">    </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;n&quot;</span><span class="o">/&gt;</span>
+<span class="w">   </span><span class="n">password</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;p&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 
-@RequestMapping(&quot;/param1&quot;)
-public String param1(@RequestParam（&quot;n&quot;) String name,@RequestParam(&quot;p&quot;) String password){
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="err">（</span><span class="s">&quot;n&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">){</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>注意</strong>  </li>
 </ul>
-<pre><code class="language-java">1.  @RequestParam注解简写形式：不书写value属性的内容，@RequestParam默认会把对应形参名作为value属性的值。
-    @RequestMapping(&quot;/param1&quot;)
-    public String param1(@RequestParam(&quot;n&quot;) String name,@RequestParam(&quot;p&quot;) String password){
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w">  </span><span class="nd">@RequestParam注解简写形式</span><span class="err">：</span><span class="n">不书写value属性的内容</span><span class="err">，</span><span class="nd">@RequestParam默认会把对应形参名作为value属性的值</span><span class="err">。</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="s">&quot;n&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="nd">@RequestParam</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">){</span>
 
-    }
-    @RequestMapping(&quot;/param1&quot;)
-    public String param1(@RequestParam String name,@RequestParam String password){
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">){</span>
 
-    }
+<span class="w">    </span><span class="p">}</span>
 
-2.  使用了@RequestParam注解的形参，客户端必须传递数据，不能省略。否则报错。后面的相关知识点可以解决这个问题。
+<span class="mf">2.</span><span class="w">  </span><span class="n">使用了</span><span class="nd">@RequestParam注解的形参</span><span class="err">，</span><span class="n">客户端必须传递数据</span><span class="err">，</span><span class="n">不能省略</span><span class="err">。</span><span class="n">否则报错</span><span class="err">。</span><span class="n">后面的相关知识点可以解决这个问题</span><span class="err">。</span>
 
-3.  POJO类型的形参，不能与@RequestParam注解联用。
-        报400错误
+<span class="mf">3.</span><span class="w">  </span><span class="n">POJO类型的形参</span><span class="err">，</span><span class="n">不能与</span><span class="nd">@RequestParam注解联用</span><span class="err">。</span>
+<span class="w">        </span><span class="n">报400错误</span>
 
-4.  典型的应用场景
-    http://localhost:8989/springmvc1/paramContrller/param1?id&lt;=10
-    @RequestMapping(&quot;/param1&quot;)
-    public String param1(@RequestParam（&quot;id&lt;&quot;) Integer id) {
+<span class="mf">4.</span><span class="w">  </span><span class="n">典型的应用场景</span>
+<span class="w">    </span><span class="n">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/paramContrller/param1?id&lt;=10</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="err">（</span><span class="s">&quot;id&lt;&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-    }
-    在前后端分离的开发中会涉及的到
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">在前后端分离的开发中会涉及的到</span>
+</code></pre></div>
 <ul>
 <li><strong>@RequestParam的required属性</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1.  在使用@RequestParam注解时，可以应用required属性。
+<div class="highlight"><pre><span></span><code><span class="k">1.</span>  在使用@RequestParam注解时，可以应用required属性。
         required = true时：@RequestParam修饰的控制器方法参数，客户端必须提交数据，否则报错，默认值
         required = false时:@RequestParam修饰的控制器方法参数，客户端可以传递数，也可以不传递。
 
-2.  解决使用@RequestParam注解，客户端必须传递数据的问题。
-</code></pre>
+<span class="k">2.</span>  解决使用@RequestParam注解，客户端必须传递数据的问题。
+</code></pre></div>
 <ul>
 <li><strong>@RequestParam的defaultValue属性</strong> <ul>
 <li><strong>客户端没有提交数据的时候，给对应的形参提供默认值</strong>  </li>
 </ul>
 </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/springmvc1/paramContrller/param1?name=sunshuai
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/paramContrller/param1?name=sunshuai</span>
 
-@RequestMapping(&quot;/param1&quot;)
-public String param1(@RequestParam String name, @RequestParam(defaultValue = &quot;99999&quot;) String password) {
-  System.out.println(&quot;name = &quot; + name);
-  System.out.println(&quot;password = &quot; + password);
-  return &quot;param1&quot;;
-}
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;99999&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;name = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;password = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">password</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-注意：如果使用了defaultValue,则required属性也默认被设置成了false
-</code></pre>
-<pre><code>-  **解决控制器方法形参，使用包装器的问题**
-</code></pre>
-<pre><code class="language-java">客户端请求：http://localhost:8989/springmvc1/param/param2?name=sunshuai 
+<span class="n">注意</span><span class="err">：</span><span class="n">如果使用了defaultValue</span><span class="p">,</span><span class="n">则required属性也默认被设置成了false</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **解决控制器方法形参，使用包装器的问题**
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">客户端请求</span><span class="err">：</span><span class="n">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/param/param2?name=sunshuai </span>
 
-@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
 
-    @RequestMapping(&quot;/param2&quot;)
-    public String param2(String name, int age) {
-
-
-        return &quot;param2&quot;;
-    }
-
-}
-
-解决方案1：
-@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
-
-    @RequestMapping(&quot;/param2&quot;)
-    public String param2(String name, Integer age) {
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 
-        return &quot;param2&quot;;
-    }
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param2&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
+<span class="p">}</span>
 
-解决方案2：
-@Controller
-@RequestMapping(&quot;/param&quot;)
-public class ParamController {
+<span class="n">解决方案1</span><span class="err">：</span>
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
 
-    @RequestMapping(&quot;/param2&quot;)
-    public String param2(String name, @RequestParam(defaultValue = &quot;0&quot;) int age) {
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
 
-        return &quot;param2&quot;;
-    }
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param2&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
-</code></pre>
-<pre><code>-  **defaultValue典型的使用场景**
-</code></pre>
-<pre><code class="language-java">默认值操作，一个典型的应用场景是：分页首页查询，不传页号的设计
+<span class="p">}</span>
 
-http://localhost:8989/ems/employee/findAllEmployees
-http://localhost:8989/ems/employee/findAllEmployees?pageNum=2
-http://localhost:8989/ems/employee/findAllEmployees?pageNum=3
+<span class="n">解决方案2</span><span class="err">：</span>
+<span class="nd">@Controller</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParamController</span><span class="w"> </span><span class="p">{</span>
 
-@RequestMapping(&quot;/findAllEmployees&quot;)
-public String findAllEmployees(Model model, @RequestParam(value = &quot;pageNum&quot;,defaultValue = &quot;1&quot;) Integer pageNum)
-</code></pre>
-<h5 id="35">3.5 中文请求参数的乱码问题</h5>
-<h6 id="351-javaweb">3.5.1 回顾JavaWeb开发中中文乱码的解决方案</h6>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param2</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param2&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **defaultValue典型的使用场景**
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">默认值操作</span><span class="err">，</span><span class="n">一个典型的应用场景是</span><span class="err">：</span><span class="n">分页首页查询</span><span class="err">，</span><span class="n">不传页号的设计</span>
+
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/ems/employee/findAllEmployees</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/ems/employee/findAllEmployees?pageNum=2</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/ems/employee/findAllEmployees?pageNum=3</span>
+
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/findAllEmployees&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">findAllEmployees</span><span class="p">(</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="nd">@RequestParam</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;pageNum&quot;</span><span class="p">,</span><span class="n">defaultValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">pageNum</span><span class="p">)</span>
+</code></pre></div>
+<h5 id="35">3.5 中文请求参数的乱码问题<a class="headerlink" href="#35" title="Permanent link">&para;</a></h5>
+<h6 id="351-javaweb">3.5.1 回顾JavaWeb开发中中文乱码的解决方案<a class="headerlink" href="#351-javaweb" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>GET请求乱码的解决方案</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/springmvc1/paramContrller/param?name=孙帅&amp;p=123456
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/springmvc1/paramContrller/param?name=孙帅&amp;p=123456</span>
 
 
-TOMCAT8以前版本:
+<span class="nl">TOMCAT8以前版本</span><span class="p">:</span>
 
-$TOMCAT_HOME/conf/server.xml
+<span class="n">$TOMCAT_HOME</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="na">xml</span>
 
-&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;
-           connectionTimeout=&quot;20000&quot;
-           redirectPort=&quot;8443&quot;
-           URIEncoding=&quot;UTF-8&quot;/&gt;
+<span class="o">&lt;</span><span class="n">Connector</span><span class="w"> </span><span class="n">port</span><span class="o">=</span><span class="s">&quot;8080&quot;</span><span class="w"> </span><span class="n">protocol</span><span class="o">=</span><span class="s">&quot;HTTP/1.1&quot;</span>
+<span class="w">           </span><span class="n">connectionTimeout</span><span class="o">=</span><span class="s">&quot;20000&quot;</span>
+<span class="w">           </span><span class="n">redirectPort</span><span class="o">=</span><span class="s">&quot;8443&quot;</span>
+<span class="w">           </span><span class="n">URIEncoding</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="o">/&gt;</span>
 
-TOMCAT8版本及后续版本:
+<span class="nl">TOMCAT8版本及后续版本</span><span class="p">:</span>
 
-Tomcat8及其后续版本中，修改了Connector相关源码，已经默认支持UTF-8字符集。但是如果使用GBK还需要上述配置
-</code></pre>
+<span class="n">Tomcat8及其后续版本中</span><span class="err">，</span><span class="n">修改了Connector相关源码</span><span class="err">，</span><span class="n">已经默认支持UTF</span><span class="o">-</span><span class="mi">8</span><span class="n">字符集</span><span class="err">。</span><span class="n">但是如果使用GBK还需要上述配置</span>
+</code></pre></div>
 <ul>
 <li><strong>POST请求乱码的解决方案</strong>  </li>
 </ul>
-<pre><code class="language-java">&lt;form action=&quot;/springmvc1/paramController/param&quot; method=&quot;post&quot;&gt;
-     username：&lt;input type=&quot;text&quot;     name=&quot;name&quot;/&gt;
-     password: &lt;input type=&quot;password&quot; name=&quot;password&quot;/&gt;
-&lt;/form&gt;
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="n">action</span><span class="o">=</span><span class="s">&quot;/springmvc1/paramController/param&quot;</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span><span class="o">&gt;</span>
+<span class="w">     </span><span class="n">username</span><span class="err">：</span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w">     </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span><span class="o">/&gt;</span>
+<span class="w">     </span><span class="n">password</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
 
-底层解决方案：
-       request.setCharaceterEncoding(&quot;UTF-8&quot;)
+<span class="n">底层解决方案</span><span class="err">：</span>
+<span class="w">       </span><span class="n">request</span><span class="p">.</span><span class="na">setCharaceterEncoding</span><span class="p">(</span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
 
-开发常用方式：
-       通过过滤器解决
+<span class="n">开发常用方式</span><span class="err">：</span>
+<span class="w">       </span><span class="n">通过过滤器解决</span>
 
- public class EncodingFilter implements Filter {
+<span class="w"> </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EncodingFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span>
 
-    @Override
-      public void doFilter(ServletRequest req,ServletResponse resp,FilterChain chain){
-        HttpServletRequest request = (HttpServletRequest) req;
-          request.setCharacterEncoding(&quot;UTF-8&quot;);
-      }
-}
-</code></pre>
-<h5 id="36-springmvc">3.6 SpringMVC的类型转换器</h5>
-<h6 id="361-springmvc">3.6.1 SpringMVC中的内置类型转换器</h6>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">,</span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">){</span>
+<span class="w">        </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="w"> </span><span class="n">req</span><span class="p">;</span>
+<span class="w">          </span><span class="n">request</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="s">&quot;UTF-8&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h5 id="36-springmvc">3.6 SpringMVC的类型转换器<a class="headerlink" href="#36-springmvc" title="Permanent link">&para;</a></h5>
+<h6 id="361-springmvc">3.6.1 SpringMVC中的内置类型转换器<a class="headerlink" href="#361-springmvc" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>分析</strong><br />
 <img alt="1641194925177-cb09ce03-f451-4b61-bee2-ba802aaeeba9.png" src="../img/Q3eGMPdnfRAprnn2/1641194925177-cb09ce03-f451-4b61-bee2-ba802aaeeba9-624305.png" /></li>
 <li><strong>内置类型转换器的概念</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1.  SpringMVC提供了内置类型转换器，把客户端提交的字符串类型的请求参数，转换成控制器方法参数需要的数据类型。
+<div class="highlight"><pre><span></span><code><span class="k">1.</span>  SpringMVC提供了内置类型转换器，把客户端提交的字符串类型的请求参数，转换成控制器方法参数需要的数据类型。
 
-2.  SpringMVC并不是对于所有的类型，都提供了内置的类型转换器，他只是提供了常见类型的转换器
+<span class="k">2.</span>  SpringMVC并不是对于所有的类型，都提供了内置的类型转换器，他只是提供了常见类型的转换器
                 比如：8种基本类型，常见的集合类型等
-</code></pre>
+</code></pre></div>
 <ul>
 <li><strong>原理分析</strong><br />
 <img alt="1641194955582-979e2ca7-0f47-4242-b9ce-8eceadf9d112.png" src="../img/Q3eGMPdnfRAprnn2/1641194955582-979e2ca7-0f47-4242-b9ce-8eceadf9d112-851928.png" /></li>
 </ul>
-<pre><code class="language-markdown">1. 在SpringMVC启动时，会通过&lt;mvc:annotation-driven/&gt; 把FormattingConversionServiceFactoryBean。引入到SpringMVC体系中。FormattingConversionServiceFactoryBean存储了SpringMVC中所有的内置类型转换器。后续client提交请求参数时，如果对应控制器方法形参不是字符串类型，那么FormattingConversionServiceFactoryBean就会调用对应的类型转化器，进行类型转换，最终完成控制器方法形参的赋值。
-</code></pre>
-<h6 id="362-springmvc">3.6.2 SpringMVC中自定义类型转换器</h6>
-<pre><code class="language-markdown">1. SpringMVC在接受客户端提交请求参数时，如果请求参数对应的控制器方法形参，是非常规数据类型，SpringMVC默认情况下无法进行类型转换。会抛出异常，程序员可以通过自定义类型转换器解决上述问题。
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> 在SpringMVC启动时，会通过&lt;mvc:annotation-driven/&gt; 把FormattingConversionServiceFactoryBean。引入到SpringMVC体系中。FormattingConversionServiceFactoryBean存储了SpringMVC中所有的内置类型转换器。后续client提交请求参数时，如果对应控制器方法形参不是字符串类型，那么FormattingConversionServiceFactoryBean就会调用对应的类型转化器，进行类型转换，最终完成控制器方法形参的赋值。
+</code></pre></div>
+<h6 id="362-springmvc">3.6.2 SpringMVC中自定义类型转换器<a class="headerlink" href="#362-springmvc" title="Permanent link">&para;</a></h6>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> SpringMVC在接受客户端提交请求参数时，如果请求参数对应的控制器方法形参，是非常规数据类型，SpringMVC默认情况下无法进行类型转换。会抛出异常，程序员可以通过自定义类型转换器解决上述问题。
         如：日期类型
-</code></pre>
+</code></pre></div>
 <ul>
 <li><strong>思路分析</strong><br />
 <img alt="1641194983705-58c9cb5e-5949-4a2e-9f4c-8e4744103fd7.png" src="../img/Q3eGMPdnfRAprnn2/1641194983705-58c9cb5e-5949-4a2e-9f4c-8e4744103fd7-739535.png" /></li>
 <li><strong>编码</strong>  </li>
 </ul>
-<pre><code class="language-java">public class DateConverter implements Converter&lt;String, Date&gt; {
-  @Override
-  public Date convert(String source) {
-    Date result = null;
-    try {
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
-      result = simpleDateFormat.parse(source);
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    return result;
-  }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DateConverter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Converter</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Date</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nd">@Override</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">source</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Date</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">SimpleDateFormat</span><span class="w"> </span><span class="n">simpleDateFormat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SimpleDateFormat</span><span class="p">(</span><span class="s">&quot;yyyy-MM-dd&quot;</span><span class="p">);</span>
+<span class="w">      </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">simpleDateFormat</span><span class="p">.</span><span class="na">parse</span><span class="p">(</span><span class="n">source</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">ParseException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-&lt;!--配置类型转换器，让Spring进行对象的创建--&gt;
-&lt;bean id=&quot;converter&quot; class=&quot;com.baizhiedu.DateConverter&quot;&gt;
-&lt;/bean&gt;
+<span class="o">&lt;!--</span><span class="n">配置类型转换器</span><span class="err">，</span><span class="n">让Spring进行对象的创建</span><span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">bean</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;converter&quot;</span><span class="w"> </span><span class="kd">class</span><span class="err">=&quot;</span><span class="nc">com</span><span class="p">.</span><span class="na">baizhiedu</span><span class="p">.</span><span class="na">DateConverter</span><span class="s">&quot;&gt;</span>
+<span class="s">&lt;/bean&gt;</span>
 
-&lt;!--进行类型转换器注册，让SpringMVC能够识别日期类型转换的类型转换器--&gt;
-&lt;bean id=&quot;formattingConversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
-  &lt;property name=&quot;converters&quot;&gt;
-    &lt;set&gt;
-      &lt;ref bean=&quot;converter&quot;/&gt;
-    &lt;/set&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<span class="s">&lt;!--进行类型转换器注册，让SpringMVC能够识别日期类型转换的类型转换器--&gt;</span>
+<span class="s">&lt;bean id=&quot;</span><span class="n">formattingConversionService</span><span class="s">&quot; class=&quot;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">format</span><span class="p">.</span><span class="na">support</span><span class="p">.</span><span class="na">FormattingConversionServiceFactoryBean</span><span class="s">&quot;&gt;</span>
+<span class="s">  &lt;property name=&quot;</span><span class="n">converters</span><span class="s">&quot;&gt;</span>
+<span class="s">    &lt;set&gt;</span>
+<span class="s">      &lt;ref bean=&quot;</span><span class="n">converter</span><span class="s">&quot;/&gt;</span>
+<span class="s">    &lt;/set&gt;</span>
+<span class="s">  &lt;/property&gt;</span>
+<span class="s">&lt;/bean&gt;</span>
 
-&lt;mvc:annotation-driven conversion-service=&quot;formattingConversionService&quot;/&gt;
+<span class="s">&lt;mvc:annotation-driven conversion-service=&quot;</span><span class="n">formattingConversionService</span><span class="s">&quot;/&gt;</span>
 
 
-&lt;!--上述第一步 第二步写法 还可以合二为一--&gt;
-&lt;bean id=&quot;formattingConversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
-  &lt;property name=&quot;converters&quot;&gt;
-    &lt;set&gt;
-       &lt;bean id=&quot;converter&quot; class=&quot;com.baizhiedu.DateConverter&quot;/&gt;
-    &lt;/set&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
-</code></pre>
-<h5 id="37">3.7 接受其他请求数据</h5>
-<h6 id="371">3.7.1 动态参数收集</h6>
+<span class="s">&lt;!--上述第一步 第二步写法 还可以合二为一--&gt;</span>
+<span class="s">&lt;bean id=&quot;</span><span class="n">formattingConversionService</span><span class="s">&quot; class=&quot;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">format</span><span class="p">.</span><span class="na">support</span><span class="p">.</span><span class="na">FormattingConversionServiceFactoryBean</span><span class="s">&quot;&gt;</span>
+<span class="s">  &lt;property name=&quot;</span><span class="n">converters</span><span class="s">&quot;&gt;</span>
+<span class="s">    &lt;set&gt;</span>
+<span class="s">       &lt;bean id=&quot;</span><span class="n">converter</span><span class="s">&quot; class=&quot;</span><span class="n">com</span><span class="p">.</span><span class="na">baizhiedu</span><span class="p">.</span><span class="na">DateConverter</span><span class="s">&quot;/&gt;</span>
+<span class="s">    &lt;/set&gt;</span>
+<span class="s">  &lt;/property&gt;</span>
+<span class="s">&lt;/bean&gt;</span>
+</code></pre></div>
+<h5 id="37">3.7 接受其他请求数据<a class="headerlink" href="#37" title="Permanent link">&para;</a></h5>
+<h6 id="371">3.7.1 动态参数收集<a class="headerlink" href="#371" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>分析</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/param/param2/param1?name=sunshuai
-http://localhost:8989/param/param2/param1?name=xiaohei
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param2/param1?name=sunshuai</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param2/param1?name=xiaohei</span>
 
-@RequestMapping(&quot;/param10&quot;)
-public String param10(String name) {
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param10&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param10</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-  return &quot;param1&quot;;
-}
-</code></pre>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>单值动态参数收集</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/param/param2/param1?name=sunshuai
-http://localhost:8989/param/param2/param1?age=10
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param2/param1?name=sunshuai</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param2/param1?age=10</span>
 
 
-@RequestMapping(&quot;/param10&quot;)
-public String param10(@RequestParam Map&lt;String, String&gt; param) {
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param10&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param10</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-  return &quot;param1&quot;;
-}
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-注意：如果需要接受动态参数，必须保证Map的形参前面加入@RequestParam注解，否则接受不到数据。
-</code></pre>
+<span class="n">注意</span><span class="err">：</span><span class="n">如果需要接受动态参数</span><span class="err">，</span><span class="n">必须保证Map的形参前面加入</span><span class="nd">@RequestParam注解</span><span class="err">，</span><span class="n">否则接受不到数据</span><span class="err">。</span>
+</code></pre></div>
 <ul>
 <li><strong>多值动态参数收集</strong>  </li>
 </ul>
-<pre><code class="language-java">http://localhost:8989/param/param10?id=1&amp;id=2&amp;id=3
+<div class="highlight"><pre><span></span><code><span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param10?id=1&amp;id=2&amp;id=3</span>
 
-第一种解决思路：
+<span class="n">第一种解决思路</span><span class="err">：</span>
 
-@RequestMapping(&quot;/param1&quot;)
-public String param1(int[] id) {
-  for (int i : ids) {
-    System.out.println(&quot;i = &quot; + i);
-  }
-  return &quot;result1&quot;;
-}
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param1</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ids</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;i = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;result1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-问题：
-http://localhost:8989/param/param10?id=1&amp;id=2&amp;id=3
-http://localhost:8989/param/param10?name=sunshuai1&amp;name=sunshuai2&amp;name=sunshuai3
+<span class="n">问题</span><span class="err">：</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param10?id=1&amp;id=2&amp;id=3</span>
+<span class="nl">http</span><span class="p">:</span><span class="c1">//localhost:8989/param/param10?name=sunshuai1&amp;name=sunshuai2&amp;name=sunshuai3</span>
 
-第二种解决思路：
+<span class="n">第二种解决思路</span><span class="err">：</span>
 
-@RequestMapping(&quot;/param11&quot;)
-public String param11(@RequestParam MultiValueMap&lt;String, String&gt; params) {
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/param11&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">param11</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">MultiValueMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-  System.out.println(&quot;ParamController.param11&quot;);
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;ParamController.param11&quot;</span><span class="p">);</span>
 
-  return &quot;param1&quot;;
-}
-</code></pre>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;param1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>典型应用场景</strong><br />
 <img alt="1641195019126-d6f3a880-e9a5-468b-900b-ff5ae0534ff6.png" src="../img/Q3eGMPdnfRAprnn2/1641195019126-d6f3a880-e9a5-468b-900b-ff5ae0534ff6-881330.png" /></li>
 </ul>
-<h6 id="372-cookie">3.7.2 接受cookie数据</h6>
+<h6 id="372-cookie">3.7.2 接受cookie数据<a class="headerlink" href="#372-cookie" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>Servlet中获取的方式</strong>  </li>
 </ul>
-<pre><code class="language-java">#Cookie创建的代码
-Cookie cookie = new Cookie(&quot;name&quot;,&quot;value&quot;);
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="n">Cookie创建的代码</span>
+<span class="n">Cookie</span><span class="w"> </span><span class="n">cookie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cookie</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">,</span><span class="s">&quot;value&quot;</span><span class="p">);</span>
 
-#核心代码
-Cookie[] cookies = request.getCookies();
-for (Cookie cookie : cookies) {
-  if (&quot;cookieName&quot;.equals(cookie.getName())) {
-    System.out.println(&quot;cookie.getValue() = &quot; + cookie.getValue());
-  }
-}
-</code></pre>
+<span class="err">#</span><span class="n">核心代码</span>
+<span class="n">Cookie</span><span class="o">[]</span><span class="w"> </span><span class="n">cookies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getCookies</span><span class="p">();</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cookie</span><span class="w"> </span><span class="n">cookie</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">cookies</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;cookieName&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">cookie</span><span class="p">.</span><span class="na">getName</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;cookie.getValue() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cookie</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>SpringMVC中获取Cookie</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/other1&quot;)
-public String other1(HttpServletRequest request) {
-  Cookie[] cookies = request.getCookies();
-  for (Cookie cookie : cookies) {
-    if (&quot;name&quot;.equals(cookie.getName())) {
-      System.out.println(&quot;cookie.getValue() = &quot; + cookie.getValue());
-    }
-  }
-  return &quot;other1&quot;;
-}
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/other1&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">other1</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Cookie</span><span class="o">[]</span><span class="w"> </span><span class="n">cookies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getCookies</span><span class="p">();</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Cookie</span><span class="w"> </span><span class="n">cookie</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">cookies</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">cookie</span><span class="p">.</span><span class="na">getName</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;cookie.getValue() = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">cookie</span><span class="p">.</span><span class="na">getValue</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;other1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-# 第一种基于Servlet API获取Cookie，存在与Servlet API的耦合问题，不建议后续使用
+<span class="err">#</span><span class="w"> </span><span class="n">第一种基于Servlet</span><span class="w"> </span><span class="n">API获取Cookie</span><span class="err">，</span><span class="n">存在与Servlet</span><span class="w"> </span><span class="n">API的耦合问题</span><span class="err">，</span><span class="n">不建议后续使用</span>
 
 
-@RequestMapping(&quot;/other2&quot;)
-public String other2(@CookieValue(&quot;name&quot;) String cookieValue) {
-  System.out.println(&quot;OtherController.other1 &quot;+cookieValue );
-  return &quot;other2&quot;;
-}
-</code></pre>
-<h6 id="373">3.7.3 接受请求头数据</h6>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/other2&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">other2</span><span class="p">(</span><span class="nd">@CookieValue</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cookieValue</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;OtherController.other1 &quot;</span><span class="o">+</span><span class="n">cookieValue</span><span class="w"> </span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;other2&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h6 id="373">3.7.3 接受请求头数据<a class="headerlink" href="#373" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>什么是请求头</strong>  </li>
 </ul>
-<pre><code class="language-markdown">1.  Http协议规定：客户端浏览器在发起请求时，除了提交数据外，还会通过请求头向服务器端提交一些额外的附加息。
+<div class="highlight"><pre><span></span><code><span class="k">1.</span>  Http协议规定：客户端浏览器在发起请求时，除了提交数据外，还会通过请求头向服务器端提交一些额外的附加息。
         比如语言信息，浏览器的版本，客户端操作系统类型，是否缓存数据等信息。
 
-2.  在后续的开发中，特殊场景下，甚至会自定义请求头携带一些特殊数据。
-</code></pre>
+<span class="k">2.</span>  在后续的开发中，特殊场景下，甚至会自定义请求头携带一些特殊数据。
+</code></pre></div>
 <ul>
 <li><strong>获取请求头的方式</strong> <ul>
 <li><strong>Servlet中的获取方式</strong>  </li>
 </ul>
 </li>
 </ul>
-<pre><code class="language-java">#核心代码
-String value = request.getHeader(&quot;key&quot;);
-</code></pre>
-<pre><code>-  **SpringMVC中的获取方式**
-</code></pre>
-<pre><code class="language-java">@RequestMapping(&quot;/other3&quot;)
-public String other3(HttpServletRequest request) {
-  String host = request.getHeader(&quot;host&quot;);
-  System.out.println(&quot;host = &quot; + host);
-  return &quot;other3&quot;;
-}
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="n">核心代码</span>
+<span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&quot;key&quot;</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>-  **SpringMVC中的获取方式**
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/other3&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">other3</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;host = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">host</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;other3&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-# 第一种基于Servlet API获取请求头，存在与Servlet API的耦合问题，不建议后续使用
+<span class="err">#</span><span class="w"> </span><span class="n">第一种基于Servlet</span><span class="w"> </span><span class="n">API获取请求头</span><span class="err">，</span><span class="n">存在与Servlet</span><span class="w"> </span><span class="n">API的耦合问题</span><span class="err">，</span><span class="n">不建议后续使用</span>
 
-@RequestMapping(&quot;/other4&quot;)
-public String other4(@RequestHeader(&quot;host&quot;) String host) {
-  System.out.println(&quot;@RequestHeader host = &quot; + host);
-  return &quot;other4&quot;;
-}
-</code></pre>
-<h3 id="springmvc_7">SpringMVC系列</h3>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/other4&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">other4</span><span class="p">(</span><span class="nd">@RequestHeader</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;@RequestHeader host = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">host</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;other4&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="springmvc_7">SpringMVC系列<a class="headerlink" href="#springmvc_7" title="Permanent link">&para;</a></h3>
 <hr />
-<h4 id="springmvc_8">第四章、SpringMVC控制器开发详解 二</h4>
-<h5 id="41">4.1 核心要点</h5>
+<h4 id="springmvc_8">第四章、SpringMVC控制器开发详解 二<a class="headerlink" href="#springmvc_8" title="Permanent link">&para;</a></h4>
+<h5 id="41">4.1 核心要点<a class="headerlink" href="#41" title="Permanent link">&para;</a></h5>
 <blockquote>
 <ol>
 <li><strong>接受客户端(client)请求参数 [讲解完毕]</strong></li>
@@ -2160,117 +2160,117 @@ public String other4(@RequestHeader(&quot;host&quot;) String host) {
 <li><strong>页面跳转</strong></li>
 </ol>
 </blockquote>
-<h5 id="42-springmvcssm">4.2 SpringMVC控制器调用业务对象【SSM整合】</h5>
-<h6 id="421">4.2.1 核心思路分析</h6>
+<h5 id="42-springmvcssm">4.2 SpringMVC控制器调用业务对象【SSM整合】<a class="headerlink" href="#42-springmvcssm" title="Permanent link">&para;</a></h5>
+<h6 id="421">4.2.1 核心思路分析<a class="headerlink" href="#421" title="Permanent link">&para;</a></h6>
 <p><img alt="1641195090057-96fc53bc-5745-42f1-aab1-aade17a469a2.png" src="../img/Q3eGMPdnfRAprnn2/1641195090057-96fc53bc-5745-42f1-aab1-aade17a469a2-149557.png" /></p>
-<h6 id="422">4.2.2 编码</h6>
+<h6 id="422">4.2.2 编码<a class="headerlink" href="#422" title="Permanent link">&para;</a></h6>
 <ul>
 <li><strong>dispatcher.xml</strong>  </li>
 </ul>
-<pre><code class="language-xml">&lt;context:component-scan base-package=&quot;com.baizhiedu&quot;/&gt;
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;context:component-scan</span><span class="w"> </span><span class="na">base-package=</span><span class="s">&quot;com.baizhiedu&quot;</span><span class="nt">/&gt;</span>
 
-&lt;mvc:annotation-driven/&gt;
+<span class="nt">&lt;mvc:annotation-driven/&gt;</span>
 
-&lt;bean id=&quot;resolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
-  &lt;!--路径--&gt;
-  &lt;property name=&quot;prefix&quot; value=&quot;/jsp/&quot;/&gt;
-  &lt;!--文件类型--&gt;
-  &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
-&lt;/bean&gt;
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;resolver&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!--路径--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;prefix&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;/jsp/&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!--文件类型--&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;suffix&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;.jsp&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
 
-&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
-  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
-  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/suns?useSSL=false&quot;/&gt;
-  &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
-  &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
-&lt;/bean&gt;
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;dataSource&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;driverClassName&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;com.mysql.jdbc.Driver&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;url&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;jdbc:mysql://localhost:3306/suns?useSSL=false&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;username&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;root&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;password&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;123456&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
 
-&lt;bean id=&quot;sqlSessionFactoryBean&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
-  &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
-  &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.baizhiedu.entity&quot;/&gt;
-  &lt;property name=&quot;mapperLocations&quot;&gt;
-    &lt;list&gt;
-      &lt;value&gt;classpath:com.baizhiedu.mapper/*Mapper.xml&lt;/value&gt;
-    &lt;/list&gt;
-  &lt;/property&gt;
-&lt;/bean&gt;
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;sqlSessionFactoryBean&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;dataSource&quot;</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;dataSource&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;typeAliasesPackage&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;com.baizhiedu.entity&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;mapperLocations&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;list&gt;</span>
+<span class="w">      </span><span class="nt">&lt;value&gt;</span>classpath:com.baizhiedu.mapper/*Mapper.xml<span class="nt">&lt;/value&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/list&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
 
-&lt;bean id=&quot;mapperScannerConfigurer&quot; class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
-  &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactoryBean&quot;/&gt;
-  &lt;property name=&quot;basePackage&quot; value=&quot;com.baizhiedu.dao&quot;/&gt;
-&lt;/bean&gt;
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;mapperScannerConfigurer&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;sqlSessionFactoryBeanName&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;sqlSessionFactoryBean&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;basePackage&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;com.baizhiedu.dao&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
 
-&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
-  &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
-&lt;/bean&gt;
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;transactionManager&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;dataSource&quot;</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;dataSource&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
 
-&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
-</code></pre>
+<span class="nt">&lt;tx:annotation-driven</span><span class="w"> </span><span class="na">transaction-manager=</span><span class="s">&quot;transactionManager&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div>
 <ul>
 <li><strong>DAO</strong>  </li>
 </ul>
-<pre><code class="language-java">public class User{
-  private Integer id;
-  private String name;
-  private String password;
-  set get  
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">User</span><span class="p">{</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
+<span class="w">  </span><span class="n">set</span><span class="w"> </span><span class="n">get</span><span class="w">  </span>
+<span class="p">}</span>
 
-create table t_user(
-    id integer primary key auto_increment,
-    name varchar(12),
-    password varchar(12)
-);
+<span class="n">create</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="nf">t_user</span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">integer</span><span class="w"> </span><span class="n">primary</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="n">auto_increment</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nf">varchar</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="nf">varchar</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="p">);</span>
 
 
-public interface UserDAO {
-    public void save(User user);
-}
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserDAO</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">);</span>
+<span class="p">}</span>
 
-&lt;mapper namespace=&quot;com.baizhiedu.dao.UserDAO&quot;&gt;
-   &lt;insert id=&quot;save&quot; parameterType=&quot;User&quot;&gt;
-       insert into t_user (name,password) values (#{name},#{password})
-   &lt;/insert&gt;
-&lt;/mapper&gt;
-</code></pre>
+<span class="o">&lt;</span><span class="n">mapper</span><span class="w"> </span><span class="n">namespace</span><span class="o">=</span><span class="s">&quot;com.baizhiedu.dao.UserDAO&quot;</span><span class="o">&gt;</span>
+<span class="w">   </span><span class="o">&lt;</span><span class="n">insert</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="s">&quot;save&quot;</span><span class="w"> </span><span class="n">parameterType</span><span class="o">=</span><span class="s">&quot;User&quot;</span><span class="o">&gt;</span>
+<span class="w">       </span><span class="n">insert</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="nf">t_user</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="p">(</span><span class="err">#</span><span class="p">{</span><span class="n">name</span><span class="p">},</span><span class="err">#</span><span class="p">{</span><span class="n">password</span><span class="p">})</span>
+<span class="w">   </span><span class="o">&lt;/</span><span class="n">insert</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">mapper</span><span class="o">&gt;</span>
+</code></pre></div>
 <ul>
 <li><strong>Service</strong>  </li>
 </ul>
-<pre><code class="language-java">public interface UserService {
-    public void register(User user);
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">);</span>
+<span class="p">}</span>
 
-@Service
-@Transactional
-public class UserServiceImpl implements UserService {
+<span class="nd">@Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserServiceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="p">{</span>
 
-    @Autowired
-    private UserDAO userDAO;
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserDAO</span><span class="w"> </span><span class="n">userDAO</span><span class="p">;</span>
 
-    @Override
-    public void register(User user) {
-        userDAO.save(user);
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">userDAO</span><span class="p">.</span><span class="na">save</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong>Controller</strong>  </li>
 </ul>
-<pre><code class="language-java">@RequestMapping(&quot;/user&quot;)
-public class UserController {
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserController</span><span class="w"> </span><span class="p">{</span>
 
-    @Autowired
-    private UserService userService;
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">UserService</span><span class="w"> </span><span class="n">userService</span><span class="p">;</span>
 
-    @RequestMapping(&quot;/addUser&quot;)
-    public String addUser(User user) {
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/addUser&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">addUser</span><span class="p">(</span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-        userService.register(user);
+<span class="w">        </span><span class="n">userService</span><span class="p">.</span><span class="na">register</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
 
-        return &quot;addUser&quot;;
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;addUser&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-01-12 22:10:04<br />
 原文: <a href="https://www.yuque.com/u12209896/it1egr/cdvr8w">https://www.yuque.com/u12209896/it1egr/cdvr8w</a></p>

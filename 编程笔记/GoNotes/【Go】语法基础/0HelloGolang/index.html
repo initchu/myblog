@@ -337,24 +337,24 @@
 
 
 
-<h1 id="0-hello-golang">0 Hello Golang</h1>
-<h2 id="golang">你好，Golang！</h2>
-<pre><code class="language-go">package main
-import &quot;fmt&quot;
-func main(){
-    fmt.Println(&quot;Hello Golang!&quot;)
-}
-//单行注释
+<h1 id="0-hello-golang">0 Hello Golang<a class="headerlink" href="#0-hello-golang" title="Permanent link">&para;</a></h1>
+<h2 id="golang">你好，Golang！<a class="headerlink" href="#golang" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello Golang!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">//单行注释</span>
 
-/*
-这
-是
-多
-行
-注
-释
- */
-</code></pre>
+<span class="cm">/*</span>
+<span class="cm">这</span>
+<span class="cm">是</span>
+<span class="cm">多</span>
+<span class="cm">行</span>
+<span class="cm">注</span>
+<span class="cm">释</span>
+<span class="cm"> */</span>
+</code></pre></div>
 <ol>
 <li><font style="color:rgb(51, 51, 51);">第一行内容为“package main”，它表示这个源码文件属于main包。main包是每个Go应用程序都包含的包，有且只有一个。</font></li>
 <li><font style="color:rgb(51, 51, 51);">第二行内容是“import “fmt"”，它的作用是导入名为“fmt”的包，目的在于稍后使用fmt包提供的各种能力。一旦某个包被导入，它必须被使用。</font></li>
@@ -362,8 +362,8 @@ func main(){
 <li><font style="color:rgb(51, 51, 51);">第四行调用了fmt包中的Println()函数，这个函数的作用是将特定的内容输出到控制台上。</font></li>
 <li><font style="color:rgb(51, 51, 51);">第五行是main()函数的结束。</font></li>
 </ol>
-<h2 id="sdk">SDK 命令行工具</h2>
-<h3 id="go-build"><font style="color:rgb(51, 51, 51);">go build</font></h3>
+<h2 id="sdk">SDK 命令行工具<a class="headerlink" href="#sdk" title="Permanent link">&para;</a></h2>
+<h3 id="go-build"><font style="color:rgb(51, 51, 51);">go build</font><a class="headerlink" href="#go-build" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51, 51, 51);">go build命令的作用是编译Go源码，并生成可执行的文件。</font></p>
 <p><font style="color:rgb(51, 51, 51);">Go SDK 自 1.9 版本开始就支持并发编译了，能尽可能地发挥电脑的最大性能完成编译，所以 Go 源码的编译速度是非常快的。在编译过程中，除了我们自己写的代码外，如果使用了第三方的包，这些包会被一同编译。当我们执行go build命令后，会搜索当前目录下的go源码并完成编译。go build 命令还允许附加参数，方便开发者对编译参数进行配置，具体如下表所示：</font></p>
 <table>
@@ -402,7 +402,7 @@ func main(){
 </table>
 <p><font style="color:rgb(51, 51, 51);">此外，如果我们希望只编译某个go源码文件或包，可在go build命令后添加文件或包名。例如，现有file1.go、file2.go和file3.go，我们只希望编译file1.go，便可如下执行：</font></p>
 <p><code>go build file1.go</code></p>
-<h3 id="go-clean"><font style="color:rgb(51, 51, 51);">go clean</font></h3>
+<h3 id="go-clean"><font style="color:rgb(51, 51, 51);">go clean</font><a class="headerlink" href="#go-clean" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51, 51, 51);">go clean命令可以清理当前目录内的所有编译生成的文件，具体包括：</font></p>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">当前目录下生成的与包名或者 Go 源码文件同名的可执行文件，以及当前目录中_obj和_test目录中名为_testmain.go、test.out、build.out、a.out以及后缀为.5、.6、.8、.a、.o和.so的文件，这些文件通常是执行go build命令后生成的；</font></li>
@@ -445,11 +445,11 @@ func main(){
 </tbody>
 </table>
 <p><font style="color:rgb(51, 51, 51);">在团队式开发中，通常在每次提交代码前执行go clean命令，防止提交编译时生成的文件。</font></p>
-<h3 id="go-run"><font style="color:rgb(51, 51, 51);">go run</font></h3>
+<h3 id="go-run"><font style="color:rgb(51, 51, 51);">go run</font><a class="headerlink" href="#go-run" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51, 51, 51);">go run命令的作用是直接运行go源码，不在当前目录下生成任何可执行的文件。</font></p>
 <p><font style="color:rgb(51, 51, 51);">从原理上讲，go run只是将编译后生成的可执行文件放到临时目录中执行，工作目录仍然为当前目录。同时，go run命令允许添加参数，这些参数将作为go程序的可接受参数使用。</font></p>
 <p><font style="color:rgb(51, 51, 51);">由此可见，go run命令同样会执行编译操作。但要注意的是，go run不适用于包的执行。</font></p>
-<h3 id="gofmt"><font style="color:rgb(51, 51, 51);">gofmt</font></h3>
+<h3 id="gofmt"><font style="color:rgb(51, 51, 51);">gofmt</font><a class="headerlink" href="#gofmt" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51, 51, 51);">gofmt命令的作用是将代码按照Go语言官方提供的代码风格进行格式化操作。</font></p>
 <p><font style="color:rgb(51, 51, 51);"></font><font style="color:rgb(51, 51, 51);">gofmt和go fmt是两个不同的命令</font><font style="color:rgb(51, 51, 51);">。go fmt命令是gofmt的封装，go fmt支持两个参数：-n和-x，分别表示仅输出格式化时执行的命令，以及执行格式化并输出格式化时执行的命令。</font></p>
 <p><font style="color:rgb(51, 51, 51);">执行gofmt命令时，可指定文件或目录，也可不指定。当不指定时，gofmt命令会搜索当前目录中的go源码文件，并执行相应的格式化操作。</font></p>
@@ -508,14 +508,14 @@ func main(){
 💡 提示：使用 -s 参数进行源码简化的规则请参考：</p>
 <p>https://pkg.go.dev/cmd/gofmt#hdr-the_simplify_command</p>
 <p>:::</p>
-<h3 id="go-install"><font style="color:rgb(51, 51, 51);">go install</font></h3>
+<h3 id="go-install"><font style="color:rgb(51, 51, 51);">go install</font><a class="headerlink" href="#go-install" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51, 51, 51);">go install命令的作用和go build类似，都是将源码编译为可执行的文件，附加参数也基本通用，这里就不再赘述了。区别在于：</font></p>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">go install命令在编译源码后，会将可执行文件或库文件安装到约定的目录下；</font></li>
 <li><font style="color:rgb(51, 51, 51);">go install命令生成的可执行文件使用包名来命名；</font></li>
 <li><font style="color:rgb(51, 51, 51);">默认情况下，go install命令会将可执行文件安装到GOPATH\bin目录下，依赖的三方包会被安装到GOPATH\bin目录下。</font></li>
 </ul>
-<h3 id="go-get"><font style="color:rgb(51, 51, 51);">go get</font></h3>
+<h3 id="go-get"><font style="color:rgb(51, 51, 51);">go get</font><a class="headerlink" href="#go-get" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51, 51, 51);">go get命令的作用是获取源码包，这一操作包含两个步骤，分别是下载源码和执行go intall命令进行安装。使用时，仅需将源码仓库地址追加到go get后即可（访问</font><a href="https://link.juejin.cn/?target=https%3A%2F%2Fpkg.go.dev%2F">pkg.go.dev/</a><font style="color:rgb(51, 51, 51);">，搜索包名，在包详情页可以找到仓库地址），例如：</font></p>
 <p>go get github.com/ethereum/go-ethereum </p>
 <p><font style="color:rgb(51, 51, 51);">go get命令还允许附加参数，具体参数和作用如下表所示：</font></p>

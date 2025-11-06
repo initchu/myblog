@@ -580,52 +580,52 @@
 
 
 
-<h1 id="_1">字符串/编码</h1>
-<h3 id="string-stringbuilderstringbuffer">String 和 StringBuilder、StringBuffer 的区别?</h3>
+<h1 id="_1">字符串/编码<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h3 id="string-stringbuilderstringbuffer">String 和 StringBuilder、StringBuffer 的区别?<a class="headerlink" href="#string-stringbuilderstringbuffer" title="Permanent link">&para;</a></h3>
 <p>Java 平台提供了两种类型的字符串：String和StringBuffer / StringBuilder，它们可以储存和操作字符串。其中String是只读字符串，也就意味着String引用的字符串内容是不能被改变的。而StringBuffer和StringBuilder类表示的字符串对象可以直接进行修改。StringBuilder是JDK 1.5中引入的，它和StringBuffer的方法完全相同，区别在于它是在单线程环境下使用的，因为它的所有方面都没有被synchronized修饰，因此它的效率也比StringBuffer略高。</p>
 <p>补充1：有一个面试题问：有没有哪种情况用+做字符串连接比调用 StringBuffer / StringBuilder 对象的 append 方法性能更好？如果连接后得到的字符串在静态存储区中是早已存在的，那么用+做字符串连接是优于 StringBuffer / StringBuilder的append方法的。</p>
 <p>补充2：下面也是一个面试题，问程序的输出，看看自己能不能说出正确答案。</p>
-<h3 id="string">是否可以继承String 类?</h3>
+<h3 id="string">是否可以继承String 类?<a class="headerlink" href="#string" title="Permanent link">&para;</a></h3>
 <p>String 类是final类，不可以被继承。</p>
 <p>补充：继承String本身就是一个错误的行为，对String类型最好的重用方式是关联（HAS-A）而不是继承（IS-A）。</p>
-<h3 id="stringstringbufferstringbuilder">String、StringBuffer、StringBuilder 区别</h3>
+<h3 id="stringstringbufferstringbuilder">String、StringBuffer、StringBuilder 区别<a class="headerlink" href="#stringstringbufferstringbuilder" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">都是字符串类，String 类中使用字符数组保存字符串，因有 final 修饰符，String 对象是不可变的，每次对 String 操作都会生成新的 String 对象，这样效率低，且浪费内存空间。但线程安全。 </font></p>
 <p><font style="color:rgb(51,51,51);">StringBuilder 和 StringBuffer 也是使用字符数组保存字符，但这两种对象都是可变的，即对字符串进行 append 操作，不会产生新的对象。它们的区别是：StringBuffer 对方法加了同步锁，是线程安全的，StringBuilder 非线程安全。 </font></p>
-<h3 id="string_1">String 为什么要设计成不可变的？</h3>
+<h3 id="string_1">String 为什么要设计成不可变的？<a class="headerlink" href="#string_1" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(0,0,0);">1）字符串常量池需要 String 不可变。因为 String 设计成不可变，当创建一个 String 对象时，若此字符串值已经存在于常量池中，则不会创建一个新的对象，而是引用已经存在的对象。如果字符串变量允许必变，会导致各种逻辑错误，如改变一个对象会影响到另一个独立对象。 </font></p>
 <p><font style="color:rgb(0,0,0);">2）String 对象可以缓存 hashCode。字符串的不可变性保证了 hash 码的唯一性，因此可以缓存 String 的 hashCode，这样不用每次去重新计算哈希码。在进行字符串比较时，可以直接比较 hashCode，提高了比较性能。</font></p>
 <p><font style="color:rgb(0,0,0);">3）安全性。String 被许多 java 类用来当作参数，如 url 地址，文件 path 路径，反射机制所需的 Strign 参数等，若 String 可变，将会引起各种安全隐患。</font></p>
-<h3 id="java-string">对Java 中 String 的了解</h3>
+<h3 id="java-string">对Java 中 String 的了解<a class="headerlink" href="#java-string" title="Permanent link">&para;</a></h3>
 <ol>
 <li><font style="color:rgb(0,0,0);">String 类是 final 型，固 String 类不能被继承，它的成员方法也都默认为 final 方法。String 对象一旦创建就固定不变了，对 String 对象的任何改变都不影响到原对象，相关的任何改变操作都会生成新的 String 对象。 </font></li>
 <li><font style="color:rgb(0,0,0);">String 类是通过 char 数组来保存字符串的，String 对 equals 方法进行了重定，比较的是值相等。 </font></li>
 </ol>
-<pre><code class="language-java">String a = &quot;test&quot;; 
-String b = &quot;test&quot;; 
-String c = new String(&quot;test&quot;); 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">;</span><span class="w"> </span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">;</span><span class="w"> </span>
+<span class="n">String</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(0,0,0);">a、b 和字面上的 test 都是指向 JVM 字符串常量池中的"test"对象，他们指向同一个对象。而new 关键字一定会产生一个对象 test，该对象存储在堆中。所以 new String("test")产生了两个对象，保存在栈中的 c 和保存在堆中的 test。而在 java 中根本就不存在两个完全一模一样的字符串对象，故在堆中的 test 应该是引用字符串常量池中的 test。 </font></p>
 <p><font style="color:rgb(0,0,0);">例：</font></p>
-<pre><code class="language-java">String str1 = &quot;abc&quot;; //栈中开辟一块空间存放引用 str1，str1 指向池中 String 常量&quot;abc&quot; 
-String str2 = &quot;def&quot;; //栈中开辟一块空间存放引用 str2，str2 指向池中 String 常量&quot;def&quot; 
-String str3 = str1 + str2;//栈中开辟一块空间存放引用 str3 
-//str1+str2 通过 StringBuilder 的最后一步 toString()方法返回一个新的 String 对象&quot;abcdef&quot; 
-//会在堆中开辟一块空间存放此对象，引用str3指向堆中的(str1+str2)所返回的新String对象。 
-System.out.println(str3 == &quot;abcdef&quot;);//返回 false 
-/*
-因为 str3 指向堆中的&quot;abcdef&quot;对象，而&quot;abcdef&quot;是字符池中的对象，所以结果为 false。JVM 
-对 String str=&quot;abc&quot;对象放在常量池是在编译时做的，而 String str3=str1+str2 是在运行时才知 
-道的，new 对象也是在运行时才做的。 
-*/
-</code></pre>
-<h3 id="stringfinalfinalfinal">String类是final的，它的所有成员变量也都是final的,为什么是final的？</h3>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">str1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">//栈中开辟一块空间存放引用 str1，str1 指向池中 String 常量&quot;abc&quot; </span>
+<span class="n">String</span><span class="w"> </span><span class="n">str2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;def&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">//栈中开辟一块空间存放引用 str2，str2 指向池中 String 常量&quot;def&quot; </span>
+<span class="n">String</span><span class="w"> </span><span class="n">str3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">str2</span><span class="p">;</span><span class="c1">//栈中开辟一块空间存放引用 str3 </span>
+<span class="c1">//str1+str2 通过 StringBuilder 的最后一步 toString()方法返回一个新的 String 对象&quot;abcdef&quot; </span>
+<span class="c1">//会在堆中开辟一块空间存放此对象，引用str3指向堆中的(str1+str2)所返回的新String对象。 </span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">str3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;abcdef&quot;</span><span class="p">);</span><span class="c1">//返回 false </span>
+<span class="cm">/*</span>
+<span class="cm">因为 str3 指向堆中的&quot;abcdef&quot;对象，而&quot;abcdef&quot;是字符池中的对象，所以结果为 false。JVM </span>
+<span class="cm">对 String str=&quot;abc&quot;对象放在常量池是在编译时做的，而 String str3=str1+str2 是在运行时才知 </span>
+<span class="cm">道的，new 对象也是在运行时才做的。 </span>
+<span class="cm">*/</span>
+</code></pre></div>
+<h3 id="stringfinalfinalfinal">String类是final的，它的所有成员变量也都是final的,为什么是final的？<a class="headerlink" href="#stringfinalfinalfinal" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">1. </font><strong><font style="color:rgb(51,51,51);">线程安全</font></strong><font style="color:rgb(51,51,51);">。</font></p>
 <p><font style="color:rgb(51,51,51);">同一个字符串实例可以被多个线程共享，因为字符串不可变，本身就是线程安全的。</font></p>
 <p><font style="color:rgb(51,51,51);">2. </font><strong><font style="color:rgb(51,51,51);">支持hash映射和缓存。</font></strong></p>
 <p><font style="color:rgb(51,51,51);">因为String的hash值经常会使用到，比如作为 Map 的键，不可变的特性使得 hash 值也不会变，不需要重新计算。</font></p>
 <p><font style="color:rgb(51,51,51);">3. </font><strong><font style="color:rgb(51,51,51);">字符串常量池优化</font></strong><font style="color:rgb(51,51,51);">。</font></p>
 <p><font style="color:rgb(51,51,51);">String对象创建之后，会缓存到字符串常量池中，下次需要创建同样的对象时，可以直接返回缓存的引用。</font></p>
-<h3 id="string-stringbuffer-stringbuilder">String, StringBuffer 和 StringBuilder区别</h3>
+<h3 id="string-stringbuffer-stringbuilder">String, StringBuffer 和 StringBuilder区别<a class="headerlink" href="#string-stringbuffer-stringbuilder" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong><font style="color:rgb(51,51,51);">可变性</font></strong><ul>
 <li><font style="color:rgb(51,51,51);">String 不可变</font></li>
@@ -639,7 +639,7 @@ System.out.println(str3 == &quot;abcdef&quot;);//返回 false
 </ul>
 </li>
 </ol>
-<h3 id="string_2">String 类的常用方法有哪些？</h3>
+<h3 id="string_2">String 类的常用方法有哪些？<a class="headerlink" href="#string_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li><font style="color:rgb(51,51,51);">indexOf()：返回指定字符的索引。</font></li>
 <li><font style="color:rgb(51,51,51);">charAt()：返回指定索引处的字符。</font></li>
@@ -653,25 +653,25 @@ System.out.println(str3 == &quot;abcdef&quot;);//返回 false
 <li><font style="color:rgb(51,51,51);">substring()：截取字符串。</font></li>
 <li><font style="color:rgb(51,51,51);">equals()：字符串比较。</font></li>
 </ol>
-<h3 id="new-stringdabin">new String("dabin")会创建几个对象？</h3>
+<h3 id="new-stringdabin">new String("dabin")会创建几个对象？<a class="headerlink" href="#new-stringdabin" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">使用这种方式会创建两个字符串对象（前提是字符串常量池中没有 "dabin" 这个字符串对象）。</font></p>
 <p><font style="color:rgb(51,51,51);">"dabin"  属于字符串字面量，因此编译时期会在字符串常量池中创建一个字符串对象，指向这个</font></p>
 <p><font style="color:rgb(51,51,51);">"dabin" 字符串字面量；</font></p>
 <p><font style="color:rgb(51,51,51);">使用 new 的方式会在堆中创建一个字符串对象。</font></p>
-<h3 id="string_3">String 为什么不可变？</h3>
+<h3 id="string_3">String 为什么不可变？<a class="headerlink" href="#string_3" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">先看下Java8 String类的源码：</font></p>
-<pre><code class="language-java">public final class String
-    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence {
-    /** The value is used for character storage. */ 
-    private final char value[];
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">String</span>
+<span class="w">    </span><span class="kd">implements</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">Serializable</span><span class="p">,</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">CharSequence</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/** The value is used for character storage. */</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">value</span><span class="o">[]</span><span class="p">;</span>
 
-    /** Cache the hash code for the string */ 
-    private int hash; // Default to 0
-}
-</code></pre>
-<h3 id="string_4">String类能被继承吗？为什么？</h3>
+<span class="w">    </span><span class="cm">/** Cache the hash code for the string */</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span><span class="w"> </span><span class="c1">// Default to 0</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="string_4">String类能被继承吗？为什么？<a class="headerlink" href="#string_4" title="Permanent link">&para;</a></h3>
 <p>不能，final修饰的类</p>
-<h3 id="stringstringbufferstringbuilder_1">String、StringBuffer和StringBuilder 区别（⼩⽶、乐视、百度）</h3>
+<h3 id="stringstringbufferstringbuilder_1">String、StringBuffer和StringBuilder 区别（⼩⽶、乐视、百度）<a class="headerlink" href="#stringstringbufferstringbuilder_1" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(153,153,153);">String：适⽤于少量的字符串操作的情况 </font></p>
 <p><font style="color:rgb(153,153,153);">StringBuilder：适⽤于单线程下在字符缓冲区进⾏⼤量操作的情况（⾮线程安全） </font></p>
 <p><font style="color:rgb(153,153,153);">StringBuffer：适⽤多线程下在字符缓冲区进⾏⼤量操作的情况（线程安全） </font></p>
@@ -680,7 +680,7 @@ System.out.println(str3 == &quot;abcdef&quot;);//返回 false
 <p><a href="https://www.cnblogs.com/su-feng/p/6659064.html">Java中的String，StringBuilder，StringBuffer三者的区别 - 酥风 - 博客园</a> 
 </p>
 </blockquote>
-<h3 id="stringobjecthashcodetostringequalshashcode">String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？</h3>
+<h3 id="stringobjecthashcodetostringequalshashcode">String有重写Object的hashcode和toString吗？如果重写equals不重写hashcode会出现什么问题？<a class="headerlink" href="#stringobjecthashcodetostringequalshashcode" title="Permanent link">&para;</a></h3>
 <ul>
 <li>String有重写Object的hashcode和toString吗？</li>
 </ul>
@@ -695,7 +695,7 @@ System.out.println(str3 == &quot;abcdef&quot;);//返回 false
 <li>重写equals不重写hashcode会出现什么问题</li>
 </ul>
 <p>在存储散列集合时(如Set类)，如果<code>原对象.equals(新对象)</code>，但没有对hashCode重写，即两个对象拥有不同的 hashCode，则在集合中将会存储两个值相同的对象，从而导致混淆。因此在重写equals方法时，必须重写hashCode方法。</p>
-<h3 id="stringstringbufferstringbuilderstring">String、StringBuffer、StringBuilder以及对String不变性的理解</h3>
+<h3 id="stringstringbufferstringbuilderstring">String、StringBuffer、StringBuilder以及对String不变性的理解<a class="headerlink" href="#stringstringbufferstringbuilderstring" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>String、StringBuffer、StringBuilder</strong><ul>
 <li>都是 final 类, 都不允许被继承;</li>
@@ -713,21 +713,21 @@ System.out.println(str3 == &quot;abcdef&quot;);//返回 false
 </ul>
 </li>
 </ul>
-<h3 id="string-stringbuffer-stringbuilder-string">String StringBuffer 和StringBuilder 的区别是什么？String 为什么是不可变的？</h3>
+<h3 id="string-stringbuffer-stringbuilder-string">String StringBuffer 和StringBuilder 的区别是什么？String 为什么是不可变的？<a class="headerlink" href="#string-stringbuffer-stringbuilder-string" title="Permanent link">&para;</a></h3>
 <ul>
 <li>** <strong>**<font style="color:rgb(36,41,46);">可变性</font></strong></li>
 </ul>
 <p><font style="color:rgb(36,41,46);">简单的来说：String 类中使用final 关键字和字符数组保存字符串，private final char value[]，所以String 对象是不可变的。而StringBuilder 与StringBuffer 都继承自AbstractStringBuilder 类，在AbstractStringBuilder 中也是使用字符数组保存字符串char[]value 但是没有用final 关键字修饰，所以这两种对象都是可变的。</font></p>
 <p><font style="color:rgb(36,41,46);">StringBuilder 与StringBuffer 的构造方法都是调用父类构造方法也就是AbstractStringBuilder 实现的，大家可以自行查阅源码。</font></p>
 <p><font style="color:rgb(36,41,46);">AbstractStringBuilder.java</font></p>
-<pre><code class="language-java">abstract class AbstractStringBuilder implements Appendable, CharSequence { 
-    char[] value;
-    int count; AbstractStringBuilder() {
-    }
-    AbstractStringBuilder(int capacity) { 
-        value = new char[capacity];
-    }
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AbstractStringBuilder</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Appendable</span><span class="p">,</span><span class="w"> </span><span class="n">CharSequence</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="p">;</span><span class="w"> </span><span class="n">AbstractStringBuilder</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">AbstractStringBuilder</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">capacity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="o">[</span><span class="n">capacity</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong><font style="color:rgb(36,41,46);">线程安全性</font></strong></li>
 </ul>
@@ -740,10 +740,10 @@ System.out.println(str3 == &quot;abcdef&quot;);//返回 false
 <p><font style="color:rgb(36,41,46);">1. 操作少量的数据：String</font></p>
 <p><font style="color:rgb(36,41,46);">2. 单线程操作字符串缓冲区下操作大量数据：StringBuilder</font></p>
 <p><font style="color:rgb(36,41,46);">3. 多线程操作字符串缓冲区下操作大量数据：StringBuffer</font></p>
-<h3 id="stringbuffer">StringBuffer的实现方式，容量如何扩充</h3>
+<h3 id="stringbuffer">StringBuffer的实现方式，容量如何扩充<a class="headerlink" href="#stringbuffer" title="Permanent link">&para;</a></h3>
 <p>StringBuffer是通过char[]来实现的。</p>
 <p>默认长度是16，在进行串的append的时，StringBuffer会检测剩余容量，适时会重新扩充，而扩容的同时，会创建一个新的数组,并将原来的数组内容复制到新的数组里面。</p>
-<h3 id="stringstringbufferstringbuilder_2">String、StringBuffer和StringBuilder的区别</h3>
+<h3 id="stringstringbufferstringbuilder_2">String、StringBuffer和StringBuilder的区别<a class="headerlink" href="#stringstringbufferstringbuilder_2" title="Permanent link">&para;</a></h3>
 <p><strong>String 字符串常量<br />
 </strong><strong>StringBuffer 字符串变量（线程安全）<br />
 </strong><strong>StringBuilder 字符串变量（非线程安全）</strong><br />
@@ -768,7 +768,7 @@ StringBuffer 上的主要操作是 append 和 insert 方法，可重载这些方
 <font style="color:rgb(255,0,0);">在大部分情况下 StringBuilder &gt; StringBuffer</font></p>
 <p><strong>java.lang.StringBuilde</strong><br />
 java.lang.StringBuilder一个可变的字符序列是5.0新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）。如果可能，建议优先采用该类，因为在大多数实现中，它比 StringBuffer 要快。两者的方法基本相同。</p>
-<h3 id="string-stringbuffer">String 和StringBuffer的区别</h3>
+<h3 id="string-stringbuffer">String 和StringBuffer的区别<a class="headerlink" href="#string-stringbuffer" title="Permanent link">&para;</a></h3>
 <p>简单地说，就是一个变量和常量的关系。StringBuffer对象的内容可以修改；而String对象一旦产生后就不可以被修改，重新赋值其实是两个对象。<br />
 StringBuffer的内部实现方式和String不同，StringBuffer在进行字符串处理时，不生成新的对象，在内存使用上要优于String类。所以在实际使用时，如果经常需要对一个字符串进行修改，例如插入、删除等操作，使用StringBuffer要更加适合一些。<br />
 String:在String类中没有用来改变已有字符串中的某个字符的方法，由于不能改变一个<a href="http://lib.csdn.net/base/java">Java</a>字符串中的某个单独字符，所以在JDK文档中称String类的对象是不可改变的。然而，不可改变的字符串具有一个很大的优点:编译器可以把字符串设为共享的。 <br />
@@ -776,12 +776,12 @@ StringBuffer:StringBuffer类属于一种辅助类，可预先分配指定长度�
 StringBuffer是线程安全的，在多线程程序中也可以很方便的进行使用，但是程序的执行效率相对来说就要稍微慢一些。<br />
 StringBuffer的常用方法<br />
 StringBuffer类中的方法要偏重于对字符串的变化例如追加、插入和删除等，这个也是StringBuffer和String类的主要区别。</p>
-<h3 id="string_5">String 是否可以继承， “+” 怎样实现?</h3>
+<h3 id="string_5">String 是否可以继承， “+” 怎样实现?<a class="headerlink" href="#string_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>String</code> 是 <code>final</code> 类，不可继承。</li>
 <li><code>+</code> 是通过 <code>StringBuilder</code>（或 <code>StringBuffer</code>） 类，和 <code>append</code> 方法实现</li>
 </ul>
-<h3 id="string_6">String为啥不可变，在内存中的具体形态？</h3>
+<h3 id="string_6">String为啥不可变，在内存中的具体形态？<a class="headerlink" href="#string_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>String是final修饰的类；</li>
 <li><code>String</code> 使用 <code>final char value[]</code> 来存放字符序列。<br />
@@ -791,7 +791,7 @@ StringBuffer类中的方法要偏重于对字符串的变化例如追加、插�
 <p><a href="https://blog.csdn.net/weixin_40391011/article/details/104073793">Java9 String底层数组的变化_清风不灭的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="stringstringbufferstringbuilder_3">String、StringBuffer和StringBuilder区别</h3>
+<h3 id="stringstringbufferstringbuilder_3">String、StringBuffer和StringBuilder区别<a class="headerlink" href="#stringstringbufferstringbuilder_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>线程是否安全<ul>
 <li>StringBuffer：线程安全</li>
@@ -812,11 +812,11 @@ StringBuffer类中的方法要偏重于对字符串的变化例如追加、插�
 </ul>
 </li>
 </ul>
-<h3 id="stringstringbufferstringbuilder_4">String、StringBuffer与StringBuilder的区别</h3>
+<h3 id="stringstringbufferstringbuilder_4">String、StringBuffer与StringBuilder的区别<a class="headerlink" href="#stringstringbufferstringbuilder_4" title="Permanent link">&para;</a></h3>
 <p>String 是final修饰的，字符串常量，<strong><font style="color:rgb(255,0,0);">String对象一旦创建之后该对象是不可更改的</font></strong></p>
 <p>StringBuffer 字符串变量，<strong><font style="color:rgb(255,0,0);">对象可变</font></strong>，线程安全，适合多线程下字符缓冲区大量操作</p>
 <p>StringBuider 字符串变量，<strong><font style="color:rgb(255,0,0);">对象可变</font></strong>，线程不安全，适用单线程下载字符缓冲区进行大量操作的情况，都是继承<font style="color:rgb(0,0,0);">AbstractStringBuilder </font>super.容量为16</p>
-<h3 id="_2"><font style="color:rgb(51,51,51);">常见编码⽅式</font></h3>
+<h3 id="_2"><font style="color:rgb(51,51,51);">常见编码⽅式</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><font style="color:rgb(77, 77, 77);">ASCII码</font></li>
 <li><font style="color:rgb(77, 77, 77);">ISO-8859-1</font></li>
@@ -828,20 +828,20 @@ StringBuffer类中的方法要偏重于对字符串的变化例如追加、插�
 <p><a href="https://blog.csdn.net/daqi1983/article/details/124510986">Java中常用编码格式及I/O操作中的编码_axinawang的博客-CSDN博客_java 编码格式</a>
 </p>
 </blockquote>
-<h3 id="utf-8">utf-8 编码中的中⽂占⼏个字节？数字⼏个字节 ?</h3>
+<h3 id="utf-8">utf-8 编码中的中⽂占⼏个字节？数字⼏个字节 ?<a class="headerlink" href="#utf-8" title="Permanent link">&para;</a></h3>
 <p>⼀个utf8数字占1个字节，⼀个utf8英⽂字母占1个字节，少数是汉字每个占⽤3个字节，多数占⽤4个字节。</p>
-<h3 id="utf-8_1">utf-8 编码中的中文占几个字节？</h3>
+<h3 id="utf-8_1">utf-8 编码中的中文占几个字节？<a class="headerlink" href="#utf-8_1" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(0,0,0);">utf-8 是一种变长编码技术，utf-8 编码中的中文占用的字节不确定，可能 2 个、3 个、4 个。</font></p>
-<h3 id="gb2312iso-8859-1">怎样将GB2312编码的字符串转换为ISO-8859-1编码的字符串？</h3>
+<h3 id="gb2312iso-8859-1">怎样将GB2312编码的字符串转换为ISO-8859-1编码的字符串？<a class="headerlink" href="#gb2312iso-8859-1" title="Permanent link">&para;</a></h3>
 <p>代码如下所示:</p>
 <p>String s1 = "你好";</p>
 <p>String s2 = newString(s1.getBytes("GB2312"), "ISO-8859-1");</p>
-<h3 id="_3">如何实现字符串的反转及替换？</h3>
+<h3 id="_3">如何实现字符串的反转及替换？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>方法很多，可以自己写实现也可以使用String或StringBuffer / StringBuilder中的方法。有一道很常见的面试题是用递归实现字符串反转，代码如下所示：</p>
 <p><img alt="1664380575925-0bbdbf46-fb7c-48ad-8358-485a249b5938.png" src="../img/uhqa_0A6_4RAtX6n/1664380575925-0bbdbf46-fb7c-48ad-8358-485a249b5938-858914.png" /></p>
-<h3 id="string-snew-stringxyz"><code>String s=new String(“xyz”);</code>创建了几个字符串对象？</h3>
+<h3 id="string-snew-stringxyz"><code>String s=new String(“xyz”);</code>创建了几个字符串对象？<a class="headerlink" href="#string-snew-stringxyz" title="Permanent link">&para;</a></h3>
 <p>两个对象，一个是静态存储区的"xyz",一个是用new创建在堆上的对象。</p>
-<h3 id="_4">字符串操作。</h3>
+<h3 id="_4">字符串操作。<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li><font style="color:rgb(34,34,34);background-color:rgb(255,255,255);">(1)字符串的连接</font></li>
 </ul>
@@ -929,31 +929,31 @@ StringBuffer类中的方法要偏重于对字符串的变化例如追加、插�
 <p><font style="background-color:rgb(255,255,255);">该方法用字符串replacement的内容替换当前字符串中遇到的第一个和字符串regex相一致的子串,并将产生的新字符串返回. </font></p>
 <p><font style="background-color:rgb(255,255,255);">3)public String replaceAll(String regex, String replacement)</font></p>
 <p><font style="background-color:rgb(255,255,255);">该方法用字符串replacement的内容替换当前字符串中遇到的所有和字符串regex相一致的子串,并将产生的新字符串返回. </font></p>
-<h3 id="stringbuffer_1">创建StringBuffer类对象</h3>
+<h3 id="stringbuffer_1">创建StringBuffer类对象<a class="headerlink" href="#stringbuffer_1" title="Permanent link">&para;</a></h3>
 <p><font style="background-color:rgb(255,255,255);">StringBuffer类对象表示的是字符串变量,每一个StringBuffer类对象都是可以扩充和修改的字符串变量.以下是常用的StringBuffer类构造函数:</font></p>
 <p><font style="background-color:rgb(255,255,255);">(1)public StringBuffer()</font></p>
 <p><font style="background-color:rgb(255,255,255);">(2)public StringBuffer(int length) </font></p>
 <p><font style="background-color:rgb(255,255,255);">(3)public StringBuffer(String str)  </font></p>
 <p><font style="background-color:rgb(255,255,255);"></font></p>
-<h3 id="101stringstringbufferstringbuilder">101.String、StringBuffer和StringBuilder的区别</h3>
+<h3 id="101stringstringbufferstringbuilder">101.String、StringBuffer和StringBuilder的区别<a class="headerlink" href="#101stringstringbufferstringbuilder" title="Permanent link">&para;</a></h3>
 <p>可能是因为毕业季，最近有非常多的应届生来咨询我面试相关的问题。这不，今天有一位应届生找到我，说面试被问到这样一道面试题：请谈谈String、StringBuffer和StringBuilder 的区别。其实呢，这是一道老生常谈的题，光背八股文还是非常简单的。</p>
 <p>既然，大家有这方面的需求，今天我还是给大家分享一下我的理解。</p>
 <p>关于String、StringBuffer、StringBuilder的区别，我从以下四个方面来理解：</p>
-<h4 id="1">1、值可变性方面</h4>
+<h4 id="1">1、值可变性方面<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <p><img alt="1671122101040-a26364da-674e-4e7d-84d2-2cd598bdd8ca.png" src="../img/uhqa_0A6_4RAtX6n/1671122101040-a26364da-674e-4e7d-84d2-2cd598bdd8ca-026663.png" /></p>
 <p>String内部的value值是final修饰的，所以它是不可变类。因此，每次修改String的值，都会产生一个新的对象。</p>
 <p>而StringBuffer和StringBuilder是可变类，它们在字符串变更的时候，不会产生新的对象。</p>
-<h4 id="2">2、线程安全方面</h4>
+<h4 id="2">2、线程安全方面<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <p><img alt="1671122106611-d52a7923-1fd8-488b-9cb0-235a6d41be71.png" src="../img/uhqa_0A6_4RAtX6n/1671122106611-d52a7923-1fd8-488b-9cb0-235a6d41be71-370008.png" /></p>
 <p>String是不可变类，所以它是线程安全的。</p>
 <p>StringBuffer是线程安全的，因为它每个操作方法都加了synchronized同步关键字。</p>
 <p>而StringBuilder不是线程安全的。如果在多线程环境下对字符串进行操作，建议使用StringBuffer，单线程情况下，才建议使用StringBuilder。</p>
-<h4 id="3">3、性能方面</h4>
+<h4 id="3">3、性能方面<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <p><img alt="1671122115062-2540c107-965f-49c8-8802-273540c62724.png" src="../img/uhqa_0A6_4RAtX6n/1671122115062-2540c107-965f-49c8-8802-273540c62724-360571.png" /></p>
 <p>String的性能是最低的，因为它不可变，意味着在做字符串拼接和修改的时候，需要反复地重新创建新的对象和分配内存。</p>
 <p>其次是StringBuffer，它要比String性能高，因为它的可变性使得字符串可以直接被修改。</p>
 <p>性能最高的是StringBuilder，因为 StringBuffer加了同步锁，而StringBuilder是无阻塞的。</p>
-<h4 id="4">4、数据存储方面</h4>
+<h4 id="4">4、数据存储方面<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <p><img alt="1671122135839-23a4e8a1-3a65-4784-84db-b3643e4cba3d.png" src="../img/uhqa_0A6_4RAtX6n/1671122135839-23a4e8a1-3a65-4784-84db-b3643e4cba3d-828699.png" /></p>
 <p>String存储在字符串常量池中，而StringBuffer和StringBuilder存储在堆内存空间。</p>
 <p>最后再补充一下， StringBuilder 和StringBuffer都是派生自AbstractStringBuilder这个抽象类。</p>

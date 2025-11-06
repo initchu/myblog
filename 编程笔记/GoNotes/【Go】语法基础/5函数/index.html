@@ -251,8 +251,8 @@
 
 
 
-<h1 id="5">5 函数</h1>
-<h1 id="_1">底层分析</h1>
+<h1 id="5">5 函数<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<h1 id="_1">底层分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <ol>
 <li>给方法输入，方法返回结果</li>
 <li>函数-调用过程<ol>
@@ -263,129 +263,128 @@
 </li>
 <li>return</li>
 </ol>
-<h1 id="_2">细节说明</h1>
-<h1 id="_3"><img alt="1636879332160-924c36b7-e8b0-46bb-a17d-73c5eb782538.png" src="../img/NZbpFg1X3nfvU65A/1636879332160-924c36b7-e8b0-46bb-a17d-73c5eb782538-940776.png" />函数类型</h1>
+<h1 id="_2">细节说明<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<h1 id="_3"><img alt="1636879332160-924c36b7-e8b0-46bb-a17d-73c5eb782538.png" src="../img/NZbpFg1X3nfvU65A/1636879332160-924c36b7-e8b0-46bb-a17d-73c5eb782538-940776.png" />函数类型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(51, 51, 51);">函数类型(function types)是一种很特殊的类型，它表示着所有拥有同样的入参类型和返回值类型的函数集合。如下这一行代码，定义了一个名叫 Greeting 的函数类型：</font></p>
-<pre><code class="language-go">type Greeting func(name string) string  
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Greeting</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">这种类型有两个特征：</font></p>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">只接收一个参数 ，并且该参数的类型为 string</font></li>
 <li><font style="color:rgb(51, 51, 51);">返回值也只有一个参数，其类型为 string</font></li>
 </ul>
 <p><font style="color:rgb(51, 51, 51);">一个函数只要满足这些特征，那么它就可以通过如下方式将该函数转换成 Greeting 类型的函数对象(也即 greet)</font></p>
-<pre><code class="language-go">func english(name string) string { 
-    return &quot;Hello, &quot; + name 
-} 
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">english</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
 
-// 转换成 Greeting 类型的函数对象 
-greet := Greeting(english) 
-// 或者 
-var greet Greeting = english 
-</code></pre>
+<span class="c1">// 转换成 Greeting 类型的函数对象 </span>
+<span class="nx">greet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Greeting</span><span class="p">(</span><span class="nx">english</span><span class="p">)</span><span class="w"> </span>
+<span class="c1">// 或者 </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">greet</span><span class="w"> </span><span class="nx">Greeting</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">english</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">greet 做为 Greeting 类型的对象，也拥有 Greeting 类型的所有方法，比如下面的 say 方法。</font></p>
-<pre><code class="language-go">func (g Greeting) say(n string) { 
-    fmt.Println(g(n)) 
-} 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">g</span><span class="w"> </span><span class="nx">Greeting</span><span class="p">)</span><span class="w"> </span><span class="nx">say</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">g</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">直接调用并不会报错。</font></p>
-<pre><code class="language-go">greet.say(&quot;World&quot;) 
-</code></pre>
-<pre><code class="language-go">package main 
+<div class="highlight"><pre><span></span><code><span class="nx">greet</span><span class="p">.</span><span class="nx">say</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w"> </span>
 
-import &quot;fmt&quot; 
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span><span class="w"> </span>
 
-// Greeting function types 
-type Greeting func(name string) string 
+<span class="c1">// Greeting function types </span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Greeting</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span>
 
-func (g Greeting) say(n string) { 
-    fmt.Println(g(n)) 
-} 
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">g</span><span class="w"> </span><span class="nx">Greeting</span><span class="p">)</span><span class="w"> </span><span class="nx">say</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">g</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
 
-func english(name string) string { 
-    return &quot;Hello, &quot; + name 
-} 
+<span class="kd">func</span><span class="w"> </span><span class="nx">english</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
 
-func main() { 
-    greet := Greeting(english) 
-    greet.say(&quot;World&quot;) 
-} 
-// output: Hello, World 
-</code></pre>
-<h1 id="_4">实例练习</h1>
-<pre><code class="language-go">package main
-import (
-    &quot;fmt&quot;
-    &quot;math&quot;
-    &quot;reflect&quot;
-    &quot;runtime&quot;
-)
-func eval(a,b int, op string) (int,error) {
-    switch op {
-    case &quot;+&quot;:
-        return a + b,nil
-    case &quot;-&quot;:
-        return a - b,nil
-    case &quot;*&quot;:
-        return a * b,nil
-    case &quot;/&quot;:
-        q,_ := div(a,b)
-        return q,nil
-    default:
-        return 0, fmt.Errorf(
-            &quot;unsupported operation: %s&quot;, op)
-    }
-}
-func swap(a, b int)(int, int){
-    return b, a
-}
-func div(a,b int)(int, int){
-    return a / b, a % b
-}
-func div1(a, b int)(q, r int){
-    q = a / b
-    r = a % b
-    return a / b, a % b
-}
-func apply(op func(int, int) int , a, b int) int{
-    //反射获得函数真正的指针
-    p :=reflect.ValueOf(op).Pointer()
-    opName := runtime.FuncForPC(p).Name()
-    fmt.Printf(&quot;Calling function %s with args &quot;+ &quot;(%d, %d)&quot;, opName, a, b)
-    return op(a,b)
-}
-func sum(numbers ...int) int{//函数可以传一个可变的参数列表
-    s := 0
-    //注意range的用法
-    for i:= range numbers{
-        s += numbers[i]
-    }
-    return s
-}
-func pow(a,b int) int{
-    return int(math.Pow(float64(a),float64(b)))
-}
-func main() {
-    fmt.Println(eval(3,4,&quot;*&quot;))
-    fmt.Println(div(13,3))
-    if result, err := eval(3,4,&quot;x&quot;);err != nil{
-        fmt.Println(result)
-    }
-    q,r := div1(13,3)
-    fmt.Println(q,r)
-    fmt.Println(apply(pow,3,4))
-    //写一个匿名函数用来调用
-    fmt.Println(apply(
-        func(a int,b int) int{
-            return int(math.Pow(
-                float64(a),float64(b)))
-        },3 ,4))
-    fmt.Println(sum(1,2,3,4,5))
-    a, b := swap(3,4)
-    fmt.Println(a, b)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">greet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Greeting</span><span class="p">(</span><span class="nx">english</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">greet</span><span class="p">.</span><span class="nx">say</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">)</span><span class="w"> </span>
+<span class="p">}</span><span class="w"> </span>
+<span class="c1">// output: Hello, World </span>
+</code></pre></div>
+<h1 id="_4">实例练习<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math&quot;</span>
+<span class="w">    </span><span class="s">&quot;reflect&quot;</span>
+<span class="w">    </span><span class="s">&quot;runtime&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">eval</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">op</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">op</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;+&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;-&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">q</span><span class="p">,</span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">div</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">q</span><span class="p">,</span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;unsupported operation: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">op</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">div</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">div1</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)(</span><span class="nx">q</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">q</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">apply</span><span class="p">(</span><span class="nx">op</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//反射获得函数真正的指针</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">ValueOf</span><span class="p">(</span><span class="nx">op</span><span class="p">).</span><span class="nx">Pointer</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">opName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">FuncForPC</span><span class="p">(</span><span class="nx">p</span><span class="p">).</span><span class="nx">Name</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Calling function %s with args &quot;</span><span class="o">+</span><span class="w"> </span><span class="s">&quot;(%d, %d)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">opName</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">op</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">sum</span><span class="p">(</span><span class="nx">numbers</span><span class="w"> </span><span class="o">...</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="p">{</span><span class="c1">//函数可以传一个可变的参数列表</span>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="c1">//注意range的用法</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">numbers</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">numbers</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">s</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">pow</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">Pow</span><span class="p">(</span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">float64</span><span class="p">(</span><span class="nx">b</span><span class="p">)))</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">eval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s">&quot;*&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">div</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">eval</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s">&quot;x&quot;</span><span class="p">);</span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">q</span><span class="p">,</span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">div1</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">q</span><span class="p">,</span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">apply</span><span class="p">(</span><span class="nx">pow</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="w">    </span><span class="c1">//写一个匿名函数用来调用</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">apply</span><span class="p">(</span>
+<span class="w">        </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">Pow</span><span class="p">(</span>
+<span class="w">                </span><span class="nb">float64</span><span class="p">(</span><span class="nx">a</span><span class="p">),</span><span class="nb">float64</span><span class="p">(</span><span class="nx">b</span><span class="p">)))</span>
+<span class="w">        </span><span class="p">},</span><span class="mi">3</span><span class="w"> </span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-12-01 01:21:50<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/fsrkn6">https://www.yuque.com/xiaoshan_wgo/codingnotes/fsrkn6</a></p>

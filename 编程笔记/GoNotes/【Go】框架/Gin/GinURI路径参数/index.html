@@ -251,62 +251,62 @@
 
 
 
-<h1 id="gin-uri">Gin URI 路径参数</h1>
+<h1 id="gin-uri">Gin URI 路径参数<a class="headerlink" href="#gin-uri" title="Permanent link">&para;</a></h1>
 <p>获取 URI ，path 路径参数。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.Default()
-    //用两个斜线分割的URI，路径参数
-    r.GET(&quot;/:name/:age&quot;, func(c *gin.Context) {
-        //获取路径参数
-        name := c.Param(&quot;name&quot;)
-        age := c.Param(&quot;age&quot;)
-        c.JSON(http.StatusOK,gin.H{
-            &quot;name&quot;:name,
-            &quot;age&quot;:age,
-        })
-    })
-    r.Run()
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">//用两个斜线分割的URI，路径参数</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/:name/:age&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//获取路径参数</span>
+<span class="w">        </span><span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="nx">name</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="nx">age</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>再加一条 path：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.Default()
-    //用两个斜线分割的URI，路径参数
-    r.GET(&quot;/user/:name/:age&quot;, func(c *gin.Context) {
-        //获取路径参数
-        name := c.Param(&quot;name&quot;)
-        age := c.Param(&quot;age&quot;)
-        c.JSON(http.StatusOK,gin.H{
-            &quot;name&quot;:name,
-            &quot;age&quot;:age,
-        })
-    })
-    //再写路径的时候，注意路由的冲突匹配问题
-    r.GET(&quot;/blog/:year/:month&quot;, func(c *gin.Context) {
-        year := c.Param(&quot;year&quot;)
-        month := c.Param(&quot;month&quot;)
-        c.JSON(http.StatusOK,gin.H{
-            &quot;year&quot;:year,
-            &quot;month&quot;:month,
-        })
-    })
-    r.Run()
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">//用两个斜线分割的URI，路径参数</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/user/:name/:age&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//获取路径参数</span>
+<span class="w">        </span><span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="nx">name</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="nx">age</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//再写路径的时候，注意路由的冲突匹配问题</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/blog/:year/:month&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">year</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;year&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">month</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;month&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;year&quot;</span><span class="p">:</span><span class="nx">year</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;month&quot;</span><span class="p">:</span><span class="nx">month</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-04-27 20:50:53<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/wonlri">https://www.yuque.com/xiaoshan_wgo/codingnotes/wonlri</a></p>

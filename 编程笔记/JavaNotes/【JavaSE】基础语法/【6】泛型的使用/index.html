@@ -346,182 +346,182 @@
 
 
 
-<h1 id="6">【6】 泛型的使用</h1>
-<h2 id="_1">泛型引入</h2>
+<h1 id="6">【6】 泛型的使用<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<h2 id="_1">泛型引入<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>为了统计学生成绩，要求设计一个 Score 对象，包括课程名称、课程号、课程成绩，但是成绩分为两种，一种是以<code>优秀、良好、合格</code>来作为结果，还有一种就是 60.0、75.5、92.5 这样的数字分数，那么现在该如何去设计这样的一个 Score 类呢？现在的问题就是，成绩可能是 String 类型，也可能是 Integer 类型，如何才能很好的去存可能出现的两种类型呢？</p>
-<pre><code class="language-java">public class Score {     
-    String name;     
-    String id;     
-    Object score;  //因为Object是所有类型的父类，因此既可以存放Integer也能存放String
-    public Score(String name, String id, Object score) {     
-        this.name = name;
-        this.id = id;     
-        this.score = score;
-    } 
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Score</span><span class="w"> </span><span class="p">{</span><span class="w">     </span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">     </span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">     </span>
+<span class="w">    </span><span class="n">Object</span><span class="w"> </span><span class="n">score</span><span class="p">;</span><span class="w">  </span><span class="c1">//因为Object是所有类型的父类，因此既可以存放Integer也能存放String</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Score</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">     </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span><span class="w">     </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 <p>以上的方法虽然很好地解决了多种类型存储问题，但是 Object 类型在编译阶段并不具有良好的类型判断能力，很容易出现以下的情况：</p>
 <p>使用 Object 类型作为引用，取值只能进行强制类型转换，显然无法在编译期确定类型是否安全，项目中代码量非常之大，进行类型比较又会导致额外的开销和增加代码量，如果不经比较就很容易出现类型转换异常，代码的健壮性有所欠缺！（此方法虽然可行，但并不是最好的方法）</p>
 <p>为了解决以上问题，JDK1.5 新增了泛型，它能够在编译阶段就检查类型安全，大大提升开发效率。</p>
 <p>泛型将数据类型的确定控制在了编译阶段，在编写代码的时候就能明确泛型的类型！如果类型不符合，将无法通过编译！</p>
-<h2 id="_2">泛型的使用</h2>
-<h3 id="_3">泛型类</h3>
+<h2 id="_2">泛型的使用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">泛型类<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>泛型类的定义，实际上就是普通的类多了一个类型参数，也就是在使用时需要指定具体的泛型类型。泛型的名称一般取单个大写字母，比如 T 代表 Type，也就是<strong>类型</strong>的英文单词首字母，当然也可以添加数字和其他的字符。</p>
 <p>在一个普通类型中定义泛型，泛型T称为<strong>参数化类型</strong>，在定义泛型类的引用时，需要<strong>明确指出类型</strong>：</p>
-<pre><code class="language-java">Score&lt;String&gt; score = new Score&lt;String&gt;(&quot;数据结构与算法基础&quot;, &quot;EP074512&quot;, &quot;优秀&quot;);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Score</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;数据结构与算法基础&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EP074512&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;优秀&quot;</span><span class="p">);</span>
+</code></pre></div>
 <p>此时类中的泛型 T 已经被替换为 String 了，在我们获取此对象的泛型属性时，编译器会直接告诉我们类型。</p>
 <p>泛型无法使用基本类型，如果需要基本类型，只能使用基本类型的包装类进行替换！</p>
-<pre><code class="language-java">Score&lt;double&gt; score = new Score&lt;double&gt;(&quot;数据结构与算法基础&quot;, &quot;EP074512&quot;, 90.5);  //编译不通过
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Score</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;数据结构与算法基础&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EP074512&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">90.5</span><span class="p">);</span><span class="w">  </span><span class="c1">//编译不通过</span>
+</code></pre></div>
 <p>那么为什么泛型无法使用基本类型呢？回想上一节提到的类型擦除，其实就很好理解了。由于 JVM 没有泛型概念，因此泛型最后还是会被编译器编译为 Object，并采用强制类型转换的形式进行类型匹配，而我们的基本数据类型和引用类型之间无法进行类型转换，所以只能使用基本类型的包装类来处理。</p>
-<h3 id="_4">类的泛型方法</h3>
+<h3 id="_4">类的泛型方法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>泛型方法的使用也很简单，我们只需要把它当做一个未知的类型来使用即可：</p>
-<pre><code class="language-java">public T getScore() {    //若方法的返回值类型为泛型，那么编译器会自动进行推断
-    return score;
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">//若方法的返回值类型为泛型，那么编译器会自动进行推断</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="p">}</span>
 
-public void setScore(T score) {   //若方法的形式参数为泛型，那么实参只能是定义时的类型
-    this.score = score;
-}
-</code></pre>
-<pre><code class="language-java">Score&lt;String&gt; score = new Score&lt;String&gt;(&quot;数据结构与算法基础&quot;, &quot;EP074512&quot;, &quot;优秀&quot;);
-score.setScore(10);   //编译不通过，因为只接受String类型
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setScore</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">//若方法的形式参数为泛型，那么实参只能是定义时的类型</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Score</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;数据结构与算法基础&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EP074512&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;优秀&quot;</span><span class="p">);</span>
+<span class="n">score</span><span class="p">.</span><span class="na">setScore</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">   </span><span class="c1">//编译不通过，因为只接受String类型</span>
+</code></pre></div>
 <p>同样地，静态方法无法直接使用类定义的泛型（注意是无法直接使用，静态方法可以使用泛型）。</p>
-<h3 id="_5">自定义泛型方法</h3>
+<h3 id="_5">自定义泛型方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>那么如果我想在静态方法中使用泛型呢？首先我们要明确之前为什么无法使用泛型，因为之前我们的泛型定义是在类上的，只有明确具体的类型才能开始使用，也就是创建对象时完成类型确定，但是静态方法不需要依附于对象，那么只能在使用时再来确定了，所以静态方法可以使用泛型，但是需要单独定义：</p>
-<pre><code class="language-java">public static &lt;E&gt; void test(E e){   //在方法定义前声明泛型
-  System.out.println(e);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">e</span><span class="p">){</span><span class="w">   </span><span class="c1">//在方法定义前声明泛型</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>同理，成员方法也能自行定义泛型，在实际使用时再进行类型确定：</p>
-<pre><code class="language-java">public &lt;E&gt; void test(E e){
-  System.out.println(e);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">  </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>其实，无论是泛型类还是泛型方法，再使用时一定要能够进行类型推断，明确类型才行。</p>
 <p>注意一定要区分类定义的泛型和方法前定义的泛型！</p>
-<h3 id="_6">泛型引用</h3>
+<h3 id="_6">泛型引用<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>可以看到我们在定义一个泛型类的引用时，需要在后面指出此类型：</p>
-<pre><code class="language-java">Score&lt;Integer&gt; score;  //声明泛型为Integer类型
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="p">;</span><span class="w">  </span><span class="c1">//声明泛型为Integer类型</span>
+</code></pre></div>
 <p>如果不希望指定类型，或是希望此引用类型可以引用任意泛型的<code>Score</code>类对象，可以使用<code>?</code>通配符，来表示自动匹配任意的可用类型：</p>
-<pre><code class="language-java">Score&lt;?&gt; score;   //score可以引用任意的Score类型对象了！
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">score</span><span class="p">;</span><span class="w">   </span><span class="c1">//score可以引用任意的Score类型对象了！</span>
+</code></pre></div>
 <p>那么使用通配符之后，得到的泛型成员变量会是什么类型呢？</p>
-<pre><code class="language-java">Object o = score.getScore();   //只能变为Object
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">.</span><span class="na">getScore</span><span class="p">();</span><span class="w">   </span><span class="c1">//只能变为Object</span>
+</code></pre></div>
 <p>因为使用了通配符，编译器就无法进行类型推断，所以只能使用原始类型。</p>
 <p>在学习了泛型的界限后，我们还会继续了解通配符的使用。</p>
-<h3 id="_7">泛型的界限</h3>
+<h3 id="_7">泛型的界限<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>现在有一个新的需求，现在没有 String 类型的成绩了，但是成绩依然可能是整数，也可能是小数，这时我们不希望用户将泛型指定为除数字类型外的其他类型，我们就需要使用到泛型的上界定义：</p>
-<pre><code class="language-java">public class Score&lt;T extends Number&gt; {   //设定泛型上界，必须是Number的子类
-    private final String name;
-    private final String id;
-    private T score;
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Score</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">//设定泛型上界，必须是Number的子类</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
 
-    public Score(String name, String id, T score) {
-        this.name = name;
-        this.id = id;
-        this.score = score;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Score</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public T getScore() {
-        return score;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>通过<code>extends</code>关键字进行上界限定，只有指定类型或指定类型的子类才能作为类型参数。</p>
 <p>同样的，泛型通配符也支持泛型的界限：</p>
-<pre><code class="language-java">Score&lt;? extends Number&gt; score;  //限定为匹配Number及其子类的类型
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="p">;</span><span class="w">  </span><span class="c1">//限定为匹配Number及其子类的类型</span>
+</code></pre></div>
 <p>同理，既然泛型有上限，那么也有下限：</p>
-<pre><code class="language-java">Score&lt;? super Integer&gt; score;   //限定为匹配Integer及其父类
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">super</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="p">;</span><span class="w">   </span><span class="c1">//限定为匹配Integer及其父类</span>
+</code></pre></div>
 <p>通过<code>super</code>关键字进行下界限定，只有指定类型或指定类型的父类才能作为类型参数。</p>
 <p>图解如下：</p>
 <p><img alt="b_0_201912091523263309.png" src="../img/_rsHdN1RlP-fcv_Y/1643941303078-f5e5f62b-ce20-4abc-a3c2-0e99b16299f8-152159.png" /></p>
 <p><img alt="b_0_201912091523264595.jpg" src="../img/_rsHdN1RlP-fcv_Y/1643941303059-4aa52791-73f4-448f-bab3-9133ea85d850-078941.jpeg" /></p>
 <p>那么限定了上界后，我们再来使用这个对象的泛型成员，会变成什么类型呢？</p>
-<pre><code class="language-java">Score&lt;? extends Number&gt; score = new Score&lt;&gt;(&quot;数据结构与算法基础&quot;, &quot;EP074512&quot;, 10);
-Number o = score.getScore();    //得到的结果为上界类型
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;?</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Score</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">&quot;数据结构与算法基础&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EP074512&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="n">Number</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">.</span><span class="na">getScore</span><span class="p">();</span><span class="w">    </span><span class="c1">//得到的结果为上界类型</span>
+</code></pre></div>
 <p>也就是说，一旦我们指定了上界后，编译器就将范围从原始类型<code>Object</code>提升到我们指定的上界<code>Number</code>，但是依然无法明确具体类型。思考：那如果定义下限呢？</p>
 <p>那么既然我们可以给泛型类限定上界，现在我们来看编译后结果呢：</p>
-<pre><code class="language-java">//使用javap -l 进行反编译
-public class com.test.Score&lt;T extends java.lang.Number&gt; {
-  public com.test.Score(java.lang.String, java.lang.String, T);
-    LineNumberTable:
-      line 8: 0
-      line 9: 4
-      line 10: 9
-      line 11: 14
-      line 12: 19
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
-          0      20     0  this   Lcom/test/Score;
-          0      20     1  name   Ljava/lang/String;
-          0      20     2    id   Ljava/lang/String;
-          0      20     3 score   Ljava/lang/Number;   //可以看到score的类型直接被编译为Number类
+<div class="highlight"><pre><span></span><code><span class="c1">//使用javap -l 进行反编译</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Score</span><span class="o">&lt;</span><span class="n">T</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">Number</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Score</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LineNumberTable</span><span class="p">:</span>
+<span class="w">      </span><span class="n">line</span><span class="w"> </span><span class="mi">8</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">      </span><span class="n">line</span><span class="w"> </span><span class="mi">9</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">      </span><span class="n">line</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span>
+<span class="w">      </span><span class="n">line</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span>
+<span class="w">      </span><span class="n">line</span><span class="w"> </span><span class="mi">12</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span>
+<span class="w">    </span><span class="n">LocalVariableTable</span><span class="p">:</span>
+<span class="w">      </span><span class="n">Start</span><span class="w">  </span><span class="n">Length</span><span class="w">  </span><span class="n">Slot</span><span class="w">  </span><span class="n">Name</span><span class="w">   </span><span class="n">Signature</span>
+<span class="w">          </span><span class="mi">0</span><span class="w">      </span><span class="mi">20</span><span class="w">     </span><span class="mi">0</span><span class="w">  </span><span class="k">this</span><span class="w">   </span><span class="n">Lcom</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">Score</span><span class="p">;</span>
+<span class="w">          </span><span class="mi">0</span><span class="w">      </span><span class="mi">20</span><span class="w">     </span><span class="mi">1</span><span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span>
+<span class="w">          </span><span class="mi">0</span><span class="w">      </span><span class="mi">20</span><span class="w">     </span><span class="mi">2</span><span class="w">    </span><span class="n">id</span><span class="w">   </span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span>
+<span class="w">          </span><span class="mi">0</span><span class="w">      </span><span class="mi">20</span><span class="w">     </span><span class="mi">3</span><span class="w"> </span><span class="n">score</span><span class="w">   </span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">Number</span><span class="p">;</span><span class="w">   </span><span class="c1">//可以看到score的类型直接被编译为Number类</span>
 
-  public T getScore();
-    LineNumberTable:
-      line 15: 0
-    LocalVariableTable:
-      Start  Length  Slot  Name   Signature
-          0       5     0  this   Lcom/test/Score;
-}
-</code></pre>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getScore</span><span class="p">();</span>
+<span class="w">    </span><span class="n">LineNumberTable</span><span class="p">:</span>
+<span class="w">      </span><span class="n">line</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">LocalVariableTable</span><span class="p">:</span>
+<span class="w">      </span><span class="n">Start</span><span class="w">  </span><span class="n">Length</span><span class="w">  </span><span class="n">Slot</span><span class="w">  </span><span class="n">Name</span><span class="w">   </span><span class="n">Signature</span>
+<span class="w">          </span><span class="mi">0</span><span class="w">       </span><span class="mi">5</span><span class="w">     </span><span class="mi">0</span><span class="w">  </span><span class="k">this</span><span class="w">   </span><span class="n">Lcom</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">Score</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>因此，一旦确立上限后，编译器会自动将类型提升到上限类型。</p>
-<h3 id="_8">钻石运算符</h3>
+<h3 id="_8">钻石运算符<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>我们发现，每次创建泛型对象都需要在前后都标明类型，但是实际上后面的类型声明是可以去掉的，因为我们在传入参数时或定义泛型类的引用时，就已经明确了类型，因此 JDK1.7 提供了钻石运算符来简化代码：</p>
-<pre><code class="language-java">Score&lt;Integer&gt; score = new Score&lt;Integer&gt;(&quot;数据结构与算法基础&quot;, &quot;EP074512&quot;, 10);  //1.7之前
+<div class="highlight"><pre><span></span><code><span class="n">Score</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Score</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;数据结构与算法基础&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EP074512&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">  </span><span class="c1">//1.7之前</span>
 
-Score&lt;Integer&gt; score = new Score&lt;&gt;(&quot;数据结构与算法基础&quot;, &quot;EP074512&quot;, 10);  //1.7之后
-</code></pre>
-<h3 id="_9">泛型与多态</h3>
+<span class="n">Score</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Score</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">&quot;数据结构与算法基础&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;EP074512&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">  </span><span class="c1">//1.7之后</span>
+</code></pre></div>
+<h3 id="_9">泛型与多态<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>泛型不仅仅可以可以定义在类上，同时也能定义在接口上：</p>
-<pre><code class="language-java">public interface ScoreInterface&lt;T&gt; {
-    T getScore();
-    void setScore(T t);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ScoreInterface</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="nf">getScore</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">setScore</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">t</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>当实现此接口时，我们可以选择在实现类明确泛型类型或是继续使用此泛型，让具体创建的对象来确定类型。</p>
-<pre><code class="language-java">public class Score&lt;T&gt; implements ScoreInterface&lt;T&gt;{   //将Score转变为泛型类&lt;T&gt;
-    private final String name;
-    private final String id;
-    private T score;
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Score</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ScoreInterface</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span><span class="w">   </span><span class="c1">//将Score转变为泛型类&lt;T&gt;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
 
-    public Score(String name, String id, T score) { 
-        this.name = name;
-        this.id = id;
-        this.score = score;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Score</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public T getScore() {
-        return score;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">getScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    @Override
-    public void setScore(T score) {
-        this.score = score;
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class StringScore implements ScoreInterface&lt;String&gt;{   //在实现时明确类型
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setScore</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringScore</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">ScoreInterface</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">{</span><span class="w">   </span><span class="c1">//在实现时明确类型</span>
 
-    @Override
-    public String getScore() {
-        return null;
-    }
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    @Override
-    public void setScore(String s) {
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setScore</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2023-01-06 11:47:58<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/tlki5wuhdityfet8">https://www.yuque.com/xiaoshan_wgo/codingnotes/tlki5wuhdityfet8</a></p>

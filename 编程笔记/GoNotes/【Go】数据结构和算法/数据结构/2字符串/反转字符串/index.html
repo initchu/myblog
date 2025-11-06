@@ -251,7 +251,7 @@
 
 
 
-<h1 id="_1">反转字符串</h1>
+<h1 id="_1">反转字符串<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。</p>
 <p>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。</p>
 <p>示例 1：</p>
@@ -263,13 +263,13 @@
 <p>来源：力扣（LeetCode）</p>
 <p>链接：<a href="https://leetcode-cn.com/problems/reverse-string">https://leetcode-cn.com/problems/reverse-string</a></p>
 <p>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<pre><code class="language-go">func reverseString(s []byte) {
-    for left, right := 0, len(s)-1; left &lt; right; left++ {
-        s[left], s[right] = s[right], s[left]
-        right--
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">reverseString</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">left</span><span class="p">,</span><span class="w"> </span><span class="nx">right</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">left</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">right</span><span class="p">;</span><span class="w"> </span><span class="nx">left</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="p">[</span><span class="nx">left</span><span class="p">],</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">right</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">right</span><span class="p">],</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">left</span><span class="p">]</span>
+<span class="w">        </span><span class="nx">right</span><span class="o">--</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>将<code>s[0] s[1] ... s[n-1]</code>以<code>s[n-1] ... s[1] s[0]</code> 的形式输出，可以发现，前后无非就是将<code>s[i]</code>和 <code>s[n - i - 1]</code>交换了个位置。</p>
 <p>那我们可以使用<strong>双指针</strong>的方式解决这道问题，维护一个左指针 left 和右指针 right。</p>
 <p>初始化 left 指向数组首元素，right 指向数组右元素。</p>

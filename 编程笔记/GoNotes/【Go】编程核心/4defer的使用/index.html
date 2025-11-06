@@ -292,66 +292,63 @@
 
 
 
-<h1 id="4-defer">4 defer 的使用</h1>
+<h1 id="4-defer">4 defer 的使用<a class="headerlink" href="#4-defer" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(36, 41, 46);background-color:rgb(251, 251, 251);">defer的作用是： 你只需要在调用普通函数或方法前加上关键字defer，就完成了defer所需要的语法。当defer语句被执行时，跟在defer后面的函数会被延迟执行。直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，不论包含defer语句的函数是通过return正常结束，还是由于panic导致的异常结束。你可以在一个函数中执行多条defer语句，它们的执行顺序与声明顺序相反。</font></p>
-<h2 id="_1">资源管理与出错处理</h2>
+<h2 id="_1">资源管理与出错处理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>比如我们打开一个文件要关闭，“打开”和“关闭”是对应出现的。</p>
 <p><strong>引入defer的概念，是为了保证程序结束的时候发生。</strong></p>
-<h3 id="_2">简单实例</h3>
-<pre><code class="language-go">package main
+<h3 id="_2">简单实例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func tryDefer(){
-    defer fmt.Println(1)
-    fmt.Println(2)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">tryDefer</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    tryDefer()
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">tryDefer</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>结果：</p>
-<pre><code class="language-go">2
-1
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="mi">2</span>
+<span class="mi">1</span>
+</code></pre></div>
 <p>实例练习2：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func tryDefer(){
-    defer fmt.Println(1)
-    defer fmt.Println(2)
-    fmt.Println(3)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">tryDefer</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    tryDefer()
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">tryDefer</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>结果</p>
-<pre><code class="language-go">3
-2
-1
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="mi">3</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+</code></pre></div>
 <p><strong>defer相当于有个栈，defer不怕中间有return，panic。</strong></p>
-<h3 id="_3">应用实例</h3>
+<h3 id="_3">应用实例<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>在 defer 中回滚数据库的事务</p>
-<pre><code class="language-go">func createPost(db *gorm.DB) error {
-    tx := db.Begin()
-    defer tx.Rollback()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">createPost</span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">tx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Begin</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">Rollback</span><span class="p">()</span>
 
-    if err := tx.Create(&amp;Post{Author: &quot;Draveness&quot;}).Error; err != nil {
-        return err
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">Post</span><span class="p">{</span><span class="nx">Author</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Draveness&quot;</span><span class="p">}).</span><span class="nx">Error</span><span class="p">;</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return tx.Commit().Error
-}
-
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">tx</span><span class="p">.</span><span class="nx">Commit</span><span class="p">().</span><span class="nx">Error</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(0, 0, 0);">在使用数据库事务时，我们可以使用上面的代码在创建事务后就立刻调用 Rollback 保证事务一定会回滚。哪怕事务真的执行成功了，那么调用 tx.Commit() 之后再执行 tx.Rollback() 也不会影响已经提交的事务。</font></p>
 <p><font style="color:rgb(0, 0, 0);"></font></p>
 <blockquote>

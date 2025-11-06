@@ -523,9 +523,9 @@
 
 
 
-<h1 id="_1">青训营刷题打卡题目</h1>
+<h1 id="_1">青训营刷题打卡题目<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><a href="https://juejin.cn/user/3386151545092589">题目来源点这里</a></p>
-<h2 id="golang-pluginpluginlookup"><font style="color:rgb(62, 62, 62);">一、【多选】Golang 通过</font><code>plugin.(*Plugin).Lookup</code><font style="color:rgb(62, 62, 62);">函数可以查找到插件里面定义的哪些东西？</font></h2>
+<h2 id="golang-pluginpluginlookup"><font style="color:rgb(62, 62, 62);">一、【多选】Golang 通过</font><code>plugin.(*Plugin).Lookup</code><font style="color:rgb(62, 62, 62);">函数可以查找到插件里面定义的哪些东西？</font><a class="headerlink" href="#golang-pluginpluginlookup" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(62, 62, 62);">a. 变量<br />
 </font><font style="color:rgb(62, 62, 62);">b. 函数<br />
 </font><font style="color:rgb(62, 62, 62);">c. 类型<br />
@@ -541,7 +541,7 @@ func (p *Plugin) Lookup(symName string) (Symbol, error)<br />
 Lookup searches for a symbol named symName in plugin p. A symbol is any exported variable or function. It reports an error if the symbol is not found. It is safe for concurrent use by multiple goroutines.
 </p>
 </blockquote>
-<h2 id="x-y-3km"><font style="color:rgb(62, 62, 62);">二、假如在抖音中发布视频时，可以选择带上位置信息，请设计一种数据结构或方案，用于存储检索位置信息（简化为平面坐标 x, y），以实现搜索附近视频的功能（如附近 3km）。</font></h2>
+<h2 id="x-y-3km"><font style="color:rgb(62, 62, 62);">二、假如在抖音中发布视频时，可以选择带上位置信息，请设计一种数据结构或方案，用于存储检索位置信息（简化为平面坐标 x, y），以实现搜索附近视频的功能（如附近 3km）。</font><a class="headerlink" href="#x-y-3km" title="Permanent link">&para;</a></h2>
 <p><strong>答案 &amp; 解析：</strong></p>
 <p>:::success
 坐标范围检索，有四叉树、geohash 等几种标准解法。这道题本质<strong>并不是</strong>考察对高阶算法的掌握，而是想发掘在学习教材 btree 等基础二分思想后，能否进一步思考解出更复杂的问题；<br />
@@ -559,7 +559,7 @@ Lookup searches for a symbol named symName in plugin p. A symbol is any exported
 WHERE (x &gt; x0 - 1500) AND (x &lt; x0 + 1500) AND (y &gt; y0 - 1500) AND (y &lt; y0 + 1500)</li>
 </ul>
 <p>:::</p>
-<h2 id="join">三、【多选】下列关于Join 运算不正确的是()</h2>
+<h2 id="join">三、【多选】下列关于Join 运算不正确的是()<a class="headerlink" href="#join" title="Permanent link">&para;</a></h2>
 <p>a. Nested Loop Join 不能使用索引做优化。<br />
 b. 如果左表太大，不能放入内存中，则不能使用 Hash Join。<br />
 c. 如果 Join 的一个输入表在 Join Key 上有序，则一定会使用 Sort Merge Join。<br />
@@ -571,12 +571,12 @@ Nested Loop Join 可以使用索引优化（Index Nested Loop Join）；<br />
 如果左表太大，不能放入内存，可以先对量表做分区，再对每个分区做 Hash Join （Parititioned Hash Join）；<br />
 如果Join的一个输入表在Join Key上有序，也可以 Hash Join，具体使用哪种 Join 方式取决于优化器的代价估计结果。</p>
 <p>:::</p>
-<h2 id="arrs-k-k-on">四、给定一个正整数数组 arrs 和整数 K ，请找出该数组内乘积小于等于 k 的连续的子数组的个数，算法时间复杂度o(n)。</h2>
+<h2 id="arrs-k-k-on">四、给定一个正整数数组 arrs 和整数 K ，请找出该数组内乘积小于等于 k 的连续的子数组的个数，算法时间复杂度o(n)。<a class="headerlink" href="#arrs-k-k-on" title="Permanent link">&para;</a></h2>
 <p>:::success
 <strong>解析：</strong></p>
 <p>双指针思想，对于每个right, 不断单调的移动left，直到满足需求。</p>
 <p>:::</p>
-<h2 id="_2">五、【多选】绝大多数硬盘可以提供哪些写入保证？</h2>
+<h2 id="_2">五、【多选】绝大多数硬盘可以提供哪些写入保证？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>a. 单个sector原子写入<br />
 b. 单个page原子写入<br />
 c. 硬盘顺序执行文件系统发送的操作<br />
@@ -588,64 +588,63 @@ d；<br />
 在随时可能断电的情况下，大多数硬件能提供单个sector的原子性写入；但是也有少数硬件连单个sector的写入都无法保证；如果一个page对应多个sector，则单个page的完整写入总是无法得到保障。更加详细的情况可以查看这个讨论：<a href="https://link.juejin.cn?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%3A%2F%2Fstackoverflow.com%2Fquestions%2F2009063%2Fare-disk-sector-writes-atomic">crash - Are disk sector writes atomic?</a>。<br />
 对于同时发给硬盘的多个操作（比如写多个不连续的sector），硬盘并不保证操作的顺序。结合其弱原子性，所以硬盘可能处在任何一个中间状态。这主要是由于机械硬盘的寻址优化策略和固态/机械硬盘的缓存策略导致的。</p>
 <p>:::</p>
-<h2 id="1">六、判断一棵二叉树是否是平衡二叉树。（平衡二叉树要求：树中节点左右子树树高差不超过1。）</h2>
+<h2 id="1">六、判断一棵二叉树是否是平衡二叉树。（平衡二叉树要求：树中节点左右子树树高差不超过1。）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p><strong>答案 &amp; 解析：</strong></p>
 <p>:::success
 <strong>解法一（常规解法）：</strong><br />
 分别求左右子树的深度，再进行判断、递归。（此方法会遍历一个节点多次，效率不高。）</p>
 <p>:::</p>
-<pre><code class="language-cpp">bool IsBalanced_Solution1 (BinaryTreeNode * pRoot )
-{
-    if ( pRoot == NULL ) return true ;
-    int left = TreeDepth ( pRoot-&gt;m_pLeft );
-    int right = TreeDepth ( pRoot-&gt;m_pRight );
-    int diff = left - right ;
-    if ( diff &gt;1|| diff &lt;-1 ) return false ;
-    return IsBalanced_Solution1 ( pRoot - &gt;m_pLeft ) &amp;&amp; IsBalanced_Solution1 ( pRoot - &gt;m_pRight );
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="nf">IsBalanced_Solution1</span><span class="w"> </span><span class="p">(</span><span class="n">BinaryTreeNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pRoot</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">pRoot</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TreeDepth</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">pRoot</span><span class="o">-&gt;</span><span class="n">m_pLeft</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TreeDepth</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">pRoot</span><span class="o">-&gt;</span><span class="n">m_pRight</span><span class="w"> </span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">&gt;</span><span class="mi">1</span><span class="o">||</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="mi">-1</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">IsBalanced_Solution1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">pRoot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">&gt;</span><span class="n">m_pLeft</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">IsBalanced_Solution1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">pRoot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">&gt;</span><span class="n">m_pRight</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>:::success
 <strong>解法二（更高效的解法）：</strong><br />
 解决了遍历一个问题多次的问题。用后序遍历的方式遍历二叉树的每一个节点，在遍历到一个节点之前我们就已经遍历了它的左右子树。只要在遍历每个节点的时候记录深度，就可以一边遍历一边判断每个节点是不是平衡的。</p>
 <p>:::</p>
-<pre><code class="language-cpp">bool IsBalanced_Solution2(BinaryTreeNode * pRoot)
-{
-    int depth = 0 ;
-    return IsBalanced(pRoot,&amp; depth);
-}
-bool IsBalanced(BinaryTreeNode * pRoot, int* pDepth)
-{
-    if (pRoot == NULL)
-    {
-        *pDepth=0 ;
-        return true ;
-    }
-    int left, right;
-    if (IsBalanced(pRoot-&gt; m_pLeft,&amp; left) &amp;&amp; IsBalanced(pRoot-&gt; m_pRight,&amp; right))
-    {
-        int diff = left - right;
-        if (diff &lt;=1&amp;&amp; diff&gt;=-1 )
-        {
-            *pDepth = 1 + (left&gt; right ? left : right);
-            return true ;
-        }
-    }
-    return false ;
-}
-</code></pre>
-<h2 id="go-test">七、【单选】go test 默认是以什么顺序执行测试的？</h2>
+<div class="highlight"><pre><span></span><code><span class="kt">bool</span><span class="w"> </span><span class="nf">IsBalanced_Solution2</span><span class="p">(</span><span class="n">BinaryTreeNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pRoot</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">IsBalanced</span><span class="p">(</span><span class="n">pRoot</span><span class="p">,</span><span class="o">&amp;</span><span class="w"> </span><span class="n">depth</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">IsBalanced</span><span class="p">(</span><span class="n">BinaryTreeNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pRoot</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">pDepth</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pRoot</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="o">*</span><span class="n">pDepth</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">right</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">IsBalanced</span><span class="p">(</span><span class="n">pRoot</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m_pLeft</span><span class="p">,</span><span class="o">&amp;</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">IsBalanced</span><span class="p">(</span><span class="n">pRoot</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">m_pRight</span><span class="p">,</span><span class="o">&amp;</span><span class="w"> </span><span class="n">right</span><span class="p">))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">right</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">diff</span><span class="o">&gt;=</span><span class="mi">-1</span><span class="w"> </span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="o">*</span><span class="n">pDepth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="o">&gt;</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">right</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="go-test">七、【单选】go test 默认是以什么顺序执行测试的？<a class="headerlink" href="#go-test" title="Permanent link">&para;</a></h2>
 <p>a. 多个 module 并发执行，单 module 下多个测试并发执行<br />
 b. 多个 module 并发执行，单 module 下多个测试串行执行<br />
 c. 多个 module 串行执行，单 module 下多个测试并发执行<br />
 d. 多个 module 串行执行，单 module 下多个测试串行执行</p>
-<h4 id="_3">答案 &amp; 解析</h4>
+<h4 id="_3">答案 &amp; 解析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <p>:::success
 b；<br />
 多个 modules 会并发编译，然后并发执行测试，除非添加了额外的参数-p=1。单个 modules 下多个测试会串行执行，除非在测试函数内执行t.Parallel()。</p>
 <p>:::</p>
-<h2 id="url-20g-url-url-512m-10-url">八、【分布式文件处理，获取最多的 URL】如果有一个 20g 的日志文件，日志文件记录着用户访问过的 url，每一行为一个 url，给你一台 512M 的主机，找出出现次数最多的 10 个 url。</h2>
-<h4 id="_4">解析</h4>
+<h2 id="url-20g-url-url-512m-10-url">八、【分布式文件处理，获取最多的 URL】如果有一个 20g 的日志文件，日志文件记录着用户访问过的 url，每一行为一个 url，给你一台 512M 的主机，找出出现次数最多的 10 个 url。<a class="headerlink" href="#url-20g-url-url-512m-10-url" title="Permanent link">&para;</a></h2>
+<h4 id="_4">解析<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <p>:::success
 <strong>Top K算法：使用堆排序算法＋大顶堆＋10 个元素的数组。</strong></p>
 <ul>
@@ -655,21 +654,21 @@ b；<br />
 <li>可以得到 1024 个小文件中的出现次数最多的 IP，再依据常规的排序算法得到总体上出现次数最多的 IP；</li>
 </ul>
 <p>:::</p>
-<h2 id="sql">九、【单选】使用 SQL 语句进行分组检索时，为了去掉不满足条件的分组，应当</h2>
+<h2 id="sql">九、【单选】使用 SQL 语句进行分组检索时，为了去掉不满足条件的分组，应当<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h2>
 <p>a. 使用 WHERE 子句<br />
 b. 在 GROUPBY 后面使用 HAVING 子句<br />
 c. 先使用 WHERE 子句，再使用 HAVING 子句<br />
 d. 先使用 HAVING 子句，再使用 WHERE 子句</p>
-<h4 id="_5">答案 &amp; 解析</h4>
+<h4 id="_5">答案 &amp; 解析<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>:::success
 c；<br />
 having 是对分组统计结果进行筛选，where 是对基础数据进行筛选。</p>
 <p>为什么没有选 b： 这个与sql执行过程有关，where 在最开始发挥作用，having对group by之后的结果发挥作用，所以选择尽量前置，降低group by等阶段的操作数据量。 b 的意思是把where的选择放到having里，所以相当于所有选择都后置了。 注意理解题意哟。</p>
 <p>:::</p>
-<h2 id="key-value-map-setkey-string-value-stringgetkey-string-stringdelkey-string">十、实现一个 key 为字符串，value 也是字符串的，而且并发安全的 map，拥有方法 set(key string, value string)、get(key string) string、del(key string)。</h2>
+<h2 id="key-value-map-setkey-string-value-stringgetkey-string-stringdelkey-string">十、实现一个 key 为字符串，value 也是字符串的，而且并发安全的 map，拥有方法 set(key string, value string)、get(key string) string、del(key string)。<a class="headerlink" href="#key-value-map-setkey-string-value-stringgetkey-string-stringdelkey-string" title="Permanent link">&para;</a></h2>
 <p><strong>扩展要求1：</strong> 字典初始有64个桶，当有一半以上的队列有多个元素时，进行自动扩容，将桶的数量翻倍。<br />
 <strong>扩展要求2：</strong> 当一半以上的队列都为空或只有一个元素，并且这种情况持续1分钟，则自动缩容，最小缩容到64队列。</p>
-<h4 id="_6">解析</h4>
+<h4 id="_6">解析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>:::success
 为了满足基础要求，可以实现一个 hash map，并且加一个大锁（读写锁或者互斥锁都可以）即可实现；更近一步，可以考虑为每个桶加一把独立的锁，可以实现更小粒度的锁。接下来可以使用 go test 的 banchmark 能力去测试下不同读写压力、不同锁粒度、不同类型的锁下的性能对比。</p>
 <p>如果为了实现字典的自动扩缩容，则需要实现两个 hash map，一个是 current hash map，另一个是 next hash map。在每次读写中，将 current hash map 中的几个key迁移到 next hash map。在读操作中，先找current hash map，如果key不存在，再找next hash map；在写操作中，会先删除current hash map中这个key，再写入next hash map。随着不断的读写，则会慢慢 current hash map 会为空，此时将 next hash map 改成current hash map 即可。</p>
@@ -687,7 +686,7 @@ having 是对分组统计结果进行筛选，where 是对基础数据进行筛�
 </ol>
 <p>也记录一下不为空的桶的数量。</p>
 <p>:::</p>
-<h2 id="python">十一、【单选】下列关于 Python 的说法错误的是?</h2>
+<h2 id="python">十一、【单选】下列关于 Python 的说法错误的是?<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
 <p>a. Python 是强类型语言<br />
 b. Python 中所有变量本质上都是指针<br />
 c. Python 运行时会根据类型提示(type hints)检查变量类型<br />
@@ -697,7 +696,7 @@ d. CPython 不支持尾递归优化</p>
 c；<br />
 Python 运行时并不会检查变量类型, 类型提示主要给第三方工具使用, 比如 IDE 可以据此给出方法/属性的自动补全建议。</p>
 <p>:::</p>
-<h2 id="n-task-tasks-k-execute">十二、给定包含 N 个任务 task 的数组 tasks 和整数 K，和一个可并发调用的执行函数 execute，要求实现以下逻辑：</h2>
+<h2 id="n-task-tasks-k-execute">十二、给定包含 N 个任务 task 的数组 tasks 和整数 K，和一个可并发调用的执行函数 execute，要求实现以下逻辑：<a class="headerlink" href="#n-task-tasks-k-execute" title="Permanent link">&para;</a></h2>
 <ol>
 <li>execute并发调用次数不超过10</li>
 <li>以最快速度执行完所有task</li>
@@ -707,51 +706,50 @@ Python 运行时并不会检查变量类型, 类型提示主要给第三方工�
 <p>:::success
 <font style="color:rgb(62, 62, 62);">利用并发 + channel 缓冲区实现。</font></p>
 <p>:::</p>
-<pre><code class="language-go">type Task int
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Task</span><span class="w"> </span><span class="kt">int</span>
 
-func handle(tasks []Task, execute func(task Task)) {
-   wg := sync.WaitGroup{}
-   ch := make(chan struct{}, 10)
-   for i, _ := range tasks {
-      ch &lt;- struct{}{}
-      wg.Add(1)
-      task := tasks[i]
-      go func() {
-         defer wg.Done()
-         // execute task
-         execute(task)
-         &lt;-ch
-      }()
-   }
-   wg.Wait()
-}
-
-</code></pre>
-<h2 id="http1x">十三、【多选】下面关于 HTTP1.x 的性能优化方式，正确的有：</h2>
+<span class="kd">func</span><span class="w"> </span><span class="nx">handle</span><span class="p">(</span><span class="nx">tasks</span><span class="w"> </span><span class="p">[]</span><span class="nx">Task</span><span class="p">,</span><span class="w"> </span><span class="nx">execute</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">task</span><span class="w"> </span><span class="nx">Task</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nx">wg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">{}</span>
+<span class="w">   </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{},</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">tasks</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}{}</span>
+<span class="w">      </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">      </span><span class="nx">task</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tasks</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="w">      </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">         </span><span class="c1">// execute task</span>
+<span class="w">         </span><span class="nx">execute</span><span class="p">(</span><span class="nx">task</span><span class="p">)</span>
+<span class="w">         </span><span class="o">&lt;-</span><span class="nx">ch</span>
+<span class="w">      </span><span class="p">}()</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="http1x">十三、【多选】下面关于 HTTP1.x 的性能优化方式，正确的有：<a class="headerlink" href="#http1x" title="Permanent link">&para;</a></h2>
 <p>a. 对域名进行分片，使得客户端可以创建更多的 TCP 连接提高请求并发度<br />
 b. 设置 Connection: Keep-Alive Header 保持长连接，减少 TCP 连接握手的开销<br />
 c. 利用 ServerPush 将页面上的关键静态资源直接推送到客户端，无需等待客户端请求<br />
 d. 将小的静态资源直接嵌入到页面中，减少 HTTP 请求次数</p>
-<h4 id="_7"><strong>答案 &amp; 解析</strong></h4>
+<h4 id="_7"><strong>答案 &amp; 解析</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>:::success
 a，b，d；<br />
 ServerPush 为 HTTP2 协议才具备的能力，无法应用在 HTTP1.x 的优化中。</p>
 <p>:::</p>
-<h2 id="onlogn-o1-k">十四、时间复杂度 O(nlogn) 空间复杂度 O(1) (非递归) 的限制下从单链表中找出第 K 大的节点 。</h2>
-<h4 id="_8"><strong>答案 &amp; 解析</strong></h4>
+<h2 id="onlogn-o1-k">十四、时间复杂度 O(nlogn) 空间复杂度 O(1) (非递归) 的限制下从单链表中找出第 K 大的节点 。<a class="headerlink" href="#onlogn-o1-k" title="Permanent link">&para;</a></h2>
+<h4 id="_8"><strong>答案 &amp; 解析</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p>:::success
 快排思路的逆向，快排递归思路是对序列持续拆成两个子序列处理，逆向过程就是每 2 个相邻的元素做合并排序，然后每相邻 4 个相邻的元素合并排序（因为之前一轮已经使这 4 个元素由两个长度为 2 的子序列构成），然后 8 个，16 个，直到覆盖整个原始序列。</p>
 <p>:::</p>
-<h2 id="_9">十五、【单选】以下描述正确的是：</h2>
+<h2 id="_9">十五、【单选】以下描述正确的是：<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>a. 表达式和运算符都是执行计划的组成部分。<br />
 b. 在火山模型中，执行计划子节点对应的运算符执行完成后，父节点对应的运算符才能开始执行。<br />
 c. 排序算法仅仅在 Sort 运算符中使用。<br />
 d. 当使用 Index Scan 的时候，任何情况下都需要再回表读取数据。</p>
-<h4 id="_10"><strong>答案 &amp; 解析</strong></h4>
+<h4 id="_10"><strong>答案 &amp; 解析</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
 <p>:::success
 a； 在火山模型中，很多情况下执行计划子节点和父节点的运算符是同时执行的。排序算法也可以在 Join，Aggregation 等运算符中使用。Index Scan 如果能够覆盖所有的查询字段，不需要再回表读取数据。</p>
 <p>:::</p>
-<h2 id="_11">十六、某应用需要一个可靠的审核管道，为大量用户提供文章的审核入口，并对接了专业的文章审核团队，请为该管道设计一个数据结构。【实现一个并发安全的环形队列】</h2>
+<h2 id="_11">十六、某应用需要一个可靠的审核管道，为大量用户提供文章的审核入口，并对接了专业的文章审核团队，请为该管道设计一个数据结构。【实现一个并发安全的环形队列】<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p><strong>要求：</strong></p>
 <ul>
 <li>因为审核团队的人力有限，管道要起到流量控制作用，满了之后文章无法提交审核</li>
@@ -760,7 +758,7 @@ a； 在火山模型中，很多情况下执行计划子节点和父节点的运
 <li>进入审核管道的文章不能遗失、重复</li>
 <li>每天有大量的文章送审，要尽可能节省审核管道的开销</li>
 </ul>
-<h4 id="_12"><strong>答案 &amp; 解析</strong></h4>
+<h4 id="_12"><strong>答案 &amp; 解析</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
 <p>:::success
 首先，提炼题目要求：实现一个并发安全的环形队列，进阶/加分项是可以无锁；<br />
 然后，并发安全的环形队列的实现是相对比较简单的，主要考察数组的下标操作和边界情况的考虑；<br />

@@ -310,8 +310,8 @@
 
 
 
-<h1 id="9-json">9 Json 序列化</h1>
-<h2 id="json">一、Json的基本介绍</h2>
+<h1 id="9-json">9 Json 序列化<a class="headerlink" href="#9-json" title="Permanent link">&para;</a></h1>
+<h2 id="json">一、Json的基本介绍<a class="headerlink" href="#json" title="Permanent link">&para;</a></h2>
 <p>Json是一种<strong>轻量级的数据交换格式</strong>，易于人阅读和编写，同时也易于机器的解析和生成。</p>
 <p><code>key:value</code></p>
 <p>场景：</p>
@@ -320,93 +320,91 @@
 <p>举例：</p>
 <p>tcp编程中的应用：用go写了聊天系统。</p>
 <p>客户端A          数组-&gt;序列化</p>
-<pre><code>      后台服务器Go   中转
-</code></pre>
+<div class="highlight"><pre><span></span><code>      后台服务器Go   中转
+</code></pre></div>
 <p>客户端B          反序列化-&gt;数组</p>
-<h2 id="json_1">二、Json格式和在线解析</h2>
-<h3 id="_1">格式</h3>
+<h2 id="json_1">二、Json格式和在线解析<a class="headerlink" href="#json_1" title="Permanent link">&para;</a></h2>
+<h3 id="_1">格式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>在JS语言中，一切都是对象。因此，任何的数据类型都可以通过Json来表示，例如字符串、数组、对象、数组、map、结构体等。</p>
 <p>JSON键值对是用来保存数据的一种方式，键值对组合中的键名写在前面<code>""</code>，使用冒号<code>：</code>分隔，然后紧接着值。</p>
 <p><code>{"name":"tom","age":18,"address":["beijing","shanghai"]}</code></p>
 <p><font style="color:#D46B08;">任何数据类型都可以转成JSON格式。</font></p>
-<h3 id="_2">在线解析网站</h3>
+<h3 id="_2">在线解析网站<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><a href="https://www.json.cn">https://www.json.cn</a></p>
-<h2 id="map">三、结构体和切片 Map 切片序列化</h2>
+<h2 id="map">三、结构体和切片 Map 切片序列化<a class="headerlink" href="#map" title="Permanent link">&para;</a></h2>
 <p>json序列化是指，将有key-value结构的数据类型（比如结构体，map，切片）序列化成json字符串的操作。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;encoding/json&quot;
-    &quot;fmt&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
 
-type Monster struct {
-    Name string
-    Age int
-    Birthday string
-    Sal float64
-    Skill string
-}
-func testStruct(){
-    monster := Monster{
-        Name :&quot;Niu&quot;,
-        Age : 500,
-        Sal :8000.0,
-        Skill:&quot;bit&quot;,
-    }
-    data,err := json.Marshal(&amp;monster)
-    if err != nil{
-        fmt.Printf(&quot;序列化错误 err=%v\n&quot;,err)
-    }
-    fmt.Printf(&quot;monster序列化后=%v\n&quot;,data)
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Monster</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Birthday</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Sal</span><span class="w"> </span><span class="kt">float64</span>
+<span class="w">    </span><span class="nx">Skill</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">testStruct</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">monster</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Monster</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w"> </span><span class="p">:</span><span class="s">&quot;Niu&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Age</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Sal</span><span class="w"> </span><span class="p">:</span><span class="mf">8000.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Skill</span><span class="p">:</span><span class="s">&quot;bit&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">monster</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;序列化错误 err=%v\n&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;monster序列化后=%v\n&quot;</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    //演示将结构体，map,切片序列化
-    testStruct()
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//演示将结构体，map,切片序列化</span>
+<span class="w">    </span><span class="nx">testStruct</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>加个切片序列化的代码:</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;encoding/json&quot;
-    &quot;fmt&quot;
-)
-func testSlice(){
-    var slice []map[string]interface{}
-    var m1 map[string]interface{}
-    //使用map之前，需要先用make
-    m1 = make(map[string]interface{})
-    m1[&quot;name&quot;] = &quot;jack&quot;
-    m1[&quot;age&quot;] = &quot;7&quot;
-    m1[&quot;address&quot;] = &quot;Beijing&quot;
-    slice = append(slice,m1)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">testSlice</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">m1</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="c1">//使用map之前，需要先用make</span>
+<span class="w">    </span><span class="nx">m1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="w">    </span><span class="nx">m1</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;jack&quot;</span>
+<span class="w">    </span><span class="nx">m1</span><span class="p">[</span><span class="s">&quot;age&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;7&quot;</span>
+<span class="w">    </span><span class="nx">m1</span><span class="p">[</span><span class="s">&quot;address&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Beijing&quot;</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="nx">m1</span><span class="p">)</span>
 
-    var m2 map[string]interface{}
-    //使用map之前，需要先用make
-    m2 = make(map[string]interface{})
-    m2[&quot;name&quot;] = &quot;tom&quot;
-    m2[&quot;age&quot;] = &quot;20&quot;
-    m2[&quot;address&quot;] = &quot;Shanghai&quot;
-    slice = append(slice,m2)
-    //将切片进行序列化操作
-    data,err := json.Marshal(slice)
-    if err != nil{
-        fmt.Printf(&quot;序列号错误 err=%v\n&quot;,err)
-    }
-    fmt.Printf(&quot;slice序列化后=%v\n&quot;,string(data))
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">m2</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="c1">//使用map之前，需要先用make</span>
+<span class="w">    </span><span class="nx">m2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+<span class="w">    </span><span class="nx">m2</span><span class="p">[</span><span class="s">&quot;name&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;tom&quot;</span>
+<span class="w">    </span><span class="nx">m2</span><span class="p">[</span><span class="s">&quot;age&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;20&quot;</span>
+<span class="w">    </span><span class="nx">m2</span><span class="p">[</span><span class="s">&quot;address&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Shanghai&quot;</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="nx">m2</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//将切片进行序列化操作</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;序列号错误 err=%v\n&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;slice序列化后=%v\n&quot;</span><span class="p">,</span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
 
-}
+<span class="p">}</span>
 
-func main() {
-    //演示将结构体，map,切片序列化
-    testStruct()
-    testSlice()
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//演示将结构体，map,切片序列化</span>
+<span class="w">    </span><span class="nx">testStruct</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">testSlice</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-07-03 14:29:30<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/go2ofc">https://www.yuque.com/xiaoshan_wgo/codingnotes/go2ofc</a></p>

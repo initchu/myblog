@@ -295,12 +295,12 @@
 
 
 
-<h1 id="2-socket-tcp">2 Socket - TCP 编程</h1>
+<h1 id="2-socket-tcp">2 Socket - TCP 编程<a class="headerlink" href="#2-socket-tcp" title="Permanent link">&para;</a></h1>
 <p><code>Socket</code>是<code>BSD UNIX</code>的进程通信机制，称作”套接字”，用于描述IP地址和端口，是一个通信链的句柄。</p>
 <p><code>Socket</code>可以理解为TCP/IP网络的<code>API</code>，它定义了许多函数或例程，程序员可以用它们来开发<code>TCP/IP</code>网络上的应用程序。电脑上运行的应用程序。</p>
 <p><code>Socket</code>是应用层与TCP/IP协议族通信的中间软件抽象层。</p>
 <p>在设计模式中，<code>Socket</code>其实就是一个<font style="color:#1890FF;">门面模式</font>，它把复杂的TCP/IP协议族隐藏在<code>Socket</code>后面，对用户来说只需要调用<code>Socket</code>规定的相关函数，让<code>Socket</code>去组织符合指定的协议数据然后进行通信。</p>
-<h2 id="socket">Socket 服务端和客户端的处理流程</h2>
+<h2 id="socket">Socket 服务端和客户端的处理流程<a class="headerlink" href="#socket" title="Permanent link">&para;</a></h2>
 <p><strong>服务端的处理流程：</strong></p>
 <ol>
 <li>监听端口</li>
@@ -314,104 +314,102 @@
 <li>关闭连接</li>
 </ol>
 <p><img alt="画板" src="../img/xF9ayP1hK8XoSsUH/1646042678160-42c067d5-3850-4bdc-bdde-c0d530bcf461-108183.jpeg" /></p>
-<h2 id="_1">案例分析</h2>
+<h2 id="_1">案例分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>编写一个服务器端程序，在8888端口监听，可以和多个客户端创建连接，连接成功后，<strong>客户端可以发送单行数据，服务端接收数据并显示在终端上</strong>，先使用telnet来测试，然后编写在客户端程序来测试。</p>
 <p><img alt="查看net包的使用案例" src="../img/xF9ayP1hK8XoSsUH/1646042785886-0a6792bb-1550-4e97-98ff-f1298995e8e6-192337.png" /></p>
 <p><img alt="Listener接口的使用" src="../img/xF9ayP1hK8XoSsUH/1646042849645-4d2b777b-637b-4bcb-a652-4b7d5b96a456-701608.png" /></p>
 <p><img alt="Listener 中的 Conn 接口" src="../img/xF9ayP1hK8XoSsUH/1646043290208-b9b056b1-8f5c-4148-af96-94a6bee57329-376474.png" /></p>
 <p><img alt="Dial 函数" src="../img/xF9ayP1hK8XoSsUH/1646043723995-a0f4a59f-4b0a-4049-bf2d-293f2058c659-764818.png" /></p>
 <p><img alt="Addr 接口" src="../img/xF9ayP1hK8XoSsUH/1646044006219-f6b01227-9079-436f-bf4c-e85c9ddac7c1-974309.png" /></p>
-<h2 id="_2">服务端代码</h2>
-<pre><code class="language-go">package main
-import(
-    &quot;fmt&quot;
-    &quot;net&quot;
-)
-func process(conn net.Conn){//接收实现conn接口的数据
-    //循环地接收客户端发送的数据
-    defer conn.Close()//关闭conn
+<h2 id="_2">服务端代码<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">process</span><span class="p">(</span><span class="nx">conn</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Conn</span><span class="p">){</span><span class="c1">//接收实现conn接口的数据</span>
+<span class="w">    </span><span class="c1">//循环地接收客户端发送的数据</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="c1">//关闭conn</span>
 
-    for{
-        //创建一个新的切片
-        buf := make([]byte, 1024)
-        //conn.Read
-        //等待客户端通过conn发送信息
-        //如果客户端没有write[发送]，那么协程就一直阻塞在这里。
-        fmt.Println(&quot;服务端在等待客户端%s 发送信息\n&quot;, conn.RemoteAddr().String())
-        n, err := conn.Read(buf)
-        if err != nil {
-            fmt.Println(&quot;客户端已退出 err=&quot;, err)
-            return
-        }
-        //显示客户端发送的内容到服务器的终端
-        fmt.Print(string(buf[:n]))
-}
-func main(){
-    fmt.Println(&quot;服务器开启监听&quot;)
-    //net.Listen(&quot;tcp&quot;,&quot;0.0.0.0:8888&quot;)
-    //tcp表示使用的网络协议是tcp
-    //0.0.0.0:8888表示在本地监听8888端口
-    listen, err := net.Listen(&quot;tcp&quot;,&quot;0.0.0.0:8888&quot;)
-    if err != nil{
-        fmt.Println(&quot;listen err=&quot;, err)
-        return
-    }
-    defer listen.Close() //延时关闭listen
-    //循环不停的等待客户端来连接
-    for{
-        fmt.Println(&quot;等待客户端来连接&quot;)
-        conn, err := listen.Accept()
-        if err != nil{
-            fmt.Println(&quot;Accept() err =&quot;,err)
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//创建一个新的切片</span>
+<span class="w">        </span><span class="nx">buf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">//conn.Read</span>
+<span class="w">        </span><span class="c1">//等待客户端通过conn发送信息</span>
+<span class="w">        </span><span class="c1">//如果客户端没有write[发送]，那么协程就一直阻塞在这里。</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;服务端在等待客户端%s 发送信息\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">().</span><span class="nx">String</span><span class="p">())</span>
+<span class="w">        </span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;客户端已退出 err=&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//显示客户端发送的内容到服务器的终端</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">[:</span><span class="nx">n</span><span class="p">]))</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;服务器开启监听&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//net.Listen(&quot;tcp&quot;,&quot;0.0.0.0:8888&quot;)</span>
+<span class="w">    </span><span class="c1">//tcp表示使用的网络协议是tcp</span>
+<span class="w">    </span><span class="c1">//0.0.0.0:8888表示在本地监听8888端口</span>
+<span class="w">    </span><span class="nx">listen</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="s">&quot;0.0.0.0:8888&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;listen err=&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">listen</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">//延时关闭listen</span>
+<span class="w">    </span><span class="c1">//循环不停的等待客户端来连接</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;等待客户端来连接&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">listen</span><span class="p">.</span><span class="nx">Accept</span><span class="p">()</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Accept() err =&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
 
-        }else {
-            fmt.Printf(&quot;Accept() suc con=%v\n 客户端ip = %v\n&quot;, conn, conn.RemoteAdder().String())
-        }
-        //开启协程，为客户端服务
-        go process(conn)
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Accept() suc con=%v\n 客户端ip = %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">RemoteAdder</span><span class="p">().</span><span class="nx">String</span><span class="p">())</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//开启协程，为客户端服务</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">process</span><span class="p">(</span><span class="nx">conn</span><span class="p">)</span>
 
-        //cmd 中 telnet+IP:端口 可以测试是否有人监听连接这个端口
-    }
- }
-
-</code></pre>
-<h2 id="_3">客户端代码</h2>
-<pre><code class="language-go">package main
-import(
-    &quot;fmt&quot;
-    &quot;net&quot;
-    &quot;os&quot;
-)
-func main(){
-    conn, err := net.Dial(&quot;tcp&quot;,&quot;192.168.20.53:8888&quot;)
-    if err != nil{
-        fmt.Println(&quot;client dial err=&quot;, err)
-        return
-    }
-    //功能一：客户端可以发送单行数据，然后就退出
-    reader := bufio.NewReader(os.Stdin)//Stdin 代表标准输入，终端
-    for{
-        //从终端不停的读取用户输入，并发送给服务器
-        line, err := reader.ReadString('\n')//ReadString返回字符串
-        if err != nil {
-            fmt.Println(&quot;readString err=&quot;,err)
-        }
-        //如果用户输入的是exit就退出
-        line := strings.Trim(line,&quot; \r\n&quot;)
-        if line == &quot;exit&quot;{
-            fmt.Println(&quot;客户端退出&quot;)
-            break
-        }
-        //将line发送给服务器
-        _, err := conn.Write([]byte(line + &quot;\n&quot;))//把字符串转成切片
-        if err != nil{
-            fmt.Println(&quot;conn.Write err=&quot;,err)
-        }
-        //fmt.Printf(&quot;客户端发送了 %d 字节的数据, 并退出&quot;, n)
-    }
-}
-
-</code></pre>
+<span class="w">        </span><span class="c1">//cmd 中 telnet+IP:端口 可以测试是否有人监听连接这个端口</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">客户端代码<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="s">&quot;192.168.20.53:8888&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;client dial err=&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//功能一：客户端可以发送单行数据，然后就退出</span>
+<span class="w">    </span><span class="nx">reader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bufio</span><span class="p">.</span><span class="nx">NewReader</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdin</span><span class="p">)</span><span class="c1">//Stdin 代表标准输入，终端</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//从终端不停的读取用户输入，并发送给服务器</span>
+<span class="w">        </span><span class="nx">line</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadString</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span><span class="c1">//ReadString返回字符串</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;readString err=&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//如果用户输入的是exit就退出</span>
+<span class="w">        </span><span class="nx">line</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Trim</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span><span class="s">&quot; \r\n&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;exit&quot;</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;客户端退出&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//将line发送给服务器</span>
+<span class="w">        </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">line</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">))</span><span class="c1">//把字符串转成切片</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;conn.Write err=&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//fmt.Printf(&quot;客户端发送了 %d 字节的数据, 并退出&quot;, n)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-07-29 13:35:07<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/uk95h7">https://www.yuque.com/xiaoshan_wgo/codingnotes/uk95h7</a></p>

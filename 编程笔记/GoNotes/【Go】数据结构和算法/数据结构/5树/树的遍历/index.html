@@ -277,66 +277,66 @@
 
 
 
-<h1 id="_1">树的遍历</h1>
-<h2 id="_2">前中后序</h2>
+<h1 id="_1">树的遍历<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">前中后序<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>也叫深度优先遍历，根据访问根节点的顺序不同，分为前中后序遍历。</p>
-<pre><code class="language-go">func preorderTraversal(root *TreeNode) []int {
-    res := []int{}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">preorderTraversal</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{}</span>
 
-    var preOrder func(*TreeNode)
-    preOrder = func(root *TreeNode) {
-        if root == nil {
-            return
-        }
-        res = append(res, root.Val)
-        preOrder(root.Left)
-        preOrder(root.Right)
-    }
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">preOrder</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">preOrder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">preOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">preOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    preOrder(root)
-    return res
-}
-</code></pre>
-<pre><code class="language-go">func inorderTraversal(root *TreeNode) []int {
-    res := []int{}
+<span class="w">    </span><span class="nx">preOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">inorderTraversal</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{}</span>
 
-    var inOrder func(*TreeNode)
-    inOrder = func(root *TreeNode) {
-        if root == nil {
-            return
-        }
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">inOrder</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">inOrder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        inOrder(root.Left)
-        res = append(res, root.Val)
-        inOrder(root.Right)
-    }
+<span class="w">        </span><span class="nx">inOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">inOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    inOrder(root)
-    return res
-}
-</code></pre>
-<pre><code class="language-go">func postorderTraversal(root *TreeNode) []int {
-    res := []int{}
+<span class="w">    </span><span class="nx">inOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">postorderTraversal</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{}</span>
 
-    var postOrder func(*TreeNode)
-    postOrder = func(root *TreeNode) {
-        if root == nil {
-            return
-        }
-        postOrder(root.Left)
-        postOrder(root.Right)
-        res = append(res, root.Val)
-    }
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">postOrder</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">postOrder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">postOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">postOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    postOrder(root)
-    return res
-}
-</code></pre>
+<span class="w">    </span><span class="nx">postOrder</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>区别就是交换了<code>res = append(res, root.Val)</code>，在</p>
 <p>postOrder(root.Left)</p>
 <p>postOrder(root.Right)</p>
 <p>前中后的顺序。</p>
-<h2 id="_3">层序</h2>
+<h2 id="_3">层序<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>层序也叫做广度优先遍历。是一层层的进行遍历。</p>
 <p>使用辅助队列。</p>
 <ol>
@@ -345,42 +345,42 @@
 <li>访问出队的右，入队</li>
 </ol>
 <p>一句话速记：<strong>出队一个，左右入队。</strong></p>
-<pre><code class="language-go">/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
-func levelOrder(root *TreeNode) [][]int{
-    var res [][]int
-    arr := []*TreeNode{root}
-    if root == nil{
-        return res
-    }
-    // 当队列为空就返回结果，不为空就进入循环
-    for len(arr) &gt; 0{
-        size := len(arr)
-        curRes := []int{} // 定义一个切片来存储出队列的值
-        // 遍历队列
-        for i := 0;i &lt; size;i++{
-            node := arr[i] // 临时变量存储队列中的元素
-            curRes = append(curRes,node.Val) // 将队列中元素的值加入到这个切片里。
-            //寻找队列里元素的左右孩子，如果不为空就入队
-            if node.Left != nil{
-                arr = append(arr,node.Left)
-            }
-            if node.Right != nil{
-                arr = append(arr,node.Right)
-            }
-        }
-        arr = arr[size:] // 遍历队列结束后，把上一层对应的元素出队。
-        res = append(res,curRes) // 把所有结果加入到最后的结果上
-    }
-    return res
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * Definition for a binary tree node.</span>
+<span class="cm"> * type TreeNode struct {</span>
+<span class="cm"> *     Val int</span>
+<span class="cm"> *     Left *TreeNode</span>
+<span class="cm"> *     Right *TreeNode</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">levelOrder</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">{</span><span class="nx">root</span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 当队列为空就返回结果，不为空就进入循环</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">size</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">curRes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 定义一个切片来存储出队列的值</span>
+<span class="w">        </span><span class="c1">// 遍历队列</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">size</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">node</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="c1">// 临时变量存储队列中的元素</span>
+<span class="w">            </span><span class="nx">curRes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">curRes</span><span class="p">,</span><span class="nx">node</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span><span class="w"> </span><span class="c1">// 将队列中元素的值加入到这个切片里。</span>
+<span class="w">            </span><span class="c1">//寻找队列里元素的左右孩子，如果不为空就入队</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">arr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span><span class="nx">node</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">arr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span><span class="nx">node</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">arr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="nx">size</span><span class="p">:]</span><span class="w"> </span><span class="c1">// 遍历队列结束后，把上一层对应的元素出队。</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="nx">curRes</span><span class="p">)</span><span class="w"> </span><span class="c1">// 把所有结果加入到最后的结果上</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-05-16 20:46:36<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/yz8s4q">https://www.yuque.com/xiaoshan_wgo/codingnotes/yz8s4q</a></p>

@@ -310,8 +310,8 @@
 
 
 
-<h1 id="css">CSS</h1>
-<h2 id="1">1 概念</h2>
+<h1 id="css">CSS<a class="headerlink" href="#css" title="Permanent link">&para;</a></h1>
+<h2 id="1">1 概念<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>概念：CSS(Cascading Style Sheets)  ，通常称为CSS样式表或<strong>层叠样式表</strong>（级联样式表）。</li>
 <li>作用：<ul>
@@ -320,20 +320,20 @@
 </ul>
 </li>
 </ul>
-<h2 id="2-css">2 引入CSS样式表的方式</h2>
-<h3 id="1_1">1 行内式（内联样式）</h3>
+<h2 id="2-css">2 引入CSS样式表的方式<a class="headerlink" href="#2-css" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">1 行内式（内联样式）<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
 <p>是通过标签的style属性来设置元素的样式</p>
-<pre><code class="language-css">&lt;div style=&quot;color: red; font-size: 12px;&quot;&gt;青春不常在，抓紧谈恋爱&lt;/div&gt;
-</code></pre>
-<h3 id="2">2 内部样式表</h3>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="nt">div</span><span class="w"> </span><span class="nt">style</span><span class="o">=</span><span class="s2">&quot;color: red; font-size: 12px;&quot;</span><span class="o">&gt;</span><span class="nt">青春不常在</span><span class="err">，</span><span class="nt">抓紧谈恋爱</span><span class="o">&lt;/</span><span class="nt">div</span><span class="o">&gt;</span>
+</code></pre></div>
+<h3 id="2">2 内部样式表<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>是将CSS代码集中写在HTML文档头部标签中，并且用style标签定义。</p>
-<pre><code class="language-css">&lt;style&gt;
-     div {
-        color: red;
-        font-size: 12px;
-     }
-&lt;/style&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;</span><span class="nt">style</span><span class="o">&gt;</span>
+<span class="w">     </span><span class="nt">div</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">red</span><span class="p">;</span>
+<span class="w">        </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="o">&lt;/</span><span class="nt">style</span><span class="o">&gt;</span>
+</code></pre></div>
 <ul>
 <li>注意：<ul>
 <li>style标签一般位于head标签中，当然理论上他可以放在HTML文档的任何地方。</li>
@@ -341,15 +341,15 @@
 </ul>
 </li>
 </ul>
-<h3 id="3">3 外部样式表</h3>
+<h3 id="3">3 外部样式表<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>是将所有的样式放在一个或多个以<strong>.CSS</strong>为扩展名的外部样式表文件中，</li>
 <li>通过link标签将外部样式表文件链接到HTML文档中</li>
 </ul>
-<pre><code class="language-html">&lt;head&gt;
-  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css文件路径&quot;&gt;
-&lt;/head&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;css文件路径&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</code></pre></div>
 <ul>
 <li>注意：<ul>
 <li>link 是个单标签</li>
@@ -380,13 +380,13 @@
 </tbody>
 </table>
 <hr />
-<h1 id="_1">二、层叠与继承</h1>
-<h2 id="1_2">1 层叠性</h2>
+<h1 id="_1">二、层叠与继承<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="1_2">1 层叠性<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h2>
 <p><font style="color:#333333;">Stylesheets </font><strong>cascade（样式表层叠）</strong><font style="color:#333333;"> </font></p>
 <p>有三个因素需要考虑，根据重要性排序如下，前面的更重要：</p>
-<h3 id="1_3">1. 重要性</h3>
+<h3 id="1_3">1. 重要性<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h3>
 <p>在CSS中，属性值后面加上 !important 可以让这条规则优先于其他规则。</p>
-<h3 id="2_1">2. 优先级</h3>
+<h3 id="2_1">2. 优先级<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><strong>优先级:!important语法 &gt;行内式&gt; ID选择器 &gt; 类选择器 &gt; 元素选择器</strong>
 </p>
@@ -456,9 +456,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="3_1">3. 资源顺序</h3>
+<h3 id="3_1">3. 资源顺序<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
 <p><font style="color:#333333;">简单的说，css规则的顺序很重要；当应用两条同级别的规则到一个元素的时候，写在后面的就是实际使用的规则。</font></p>
-<h2 id="2_2">2 继承性</h2>
+<h2 id="2_2">2 继承性<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>关于文字样式的，都能够继承； 所有关于盒子的、定位的、布局的属性都不能继承。</li>
 <li><font style="color:#333333;">哪些属性属于默认继承很大程度上是由常识决定的。</font></li>
@@ -483,7 +483,7 @@
 <li>页面属性默认不继承：size、page-break-before、page-break-after</li>
 <li>声音属性默认不继承：pause-before、pause-after、pause、cue-before、cue-after、cue、play-during</li>
 </ul>
-<h3 id="_2">控制继承</h3>
+<h3 id="_2">控制继承<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>[inherit](https://developer.mozilla.org/zh-CN/docs/Web/CSS/inherit)</code>设置该属性会使子元素属性和父元素相同。实际上，就是 "开启继承".</li>
 <li><code>[initial](https://developer.mozilla.org/zh-CN/docs/Web/CSS/initial)</code>设置属性值和浏览器默认样式相同。如果浏览器默认样式中未设置且该属性是自然继承的，那么会设置为 <code>inherit</code> 。</li>
@@ -491,9 +491,9 @@
 </ul>
 <p>注：initial 和 unset 不被IE支持， 还有一个新的属性, <code>[revert](https://developer.mozilla.org/zh-CN/docs/Web/CSS/revert)</code>， 只有很少的浏览器支持。</p>
 <hr />
-<h1 id="display">三、显示模式（display）</h1>
+<h1 id="display">三、显示模式（display）<a class="headerlink" href="#display" title="Permanent link">&para;</a></h1>
 <p>标签以什么方式进行显示，比如div 自己占一行， 比如span 一行可以放很多个。HTML标签一般分为块标签和行内标签两种类型，它们也称块元素和行内元素。</p>
-<h2 id="1-block-level">1 块级元素(block-level)</h2>
+<h2 id="1-block-level">1 块级元素(block-level)<a class="headerlink" href="#1-block-level" title="Permanent link">&para;</a></h2>
 <p>每个块元素通常都会独自占据一整行或多整行，可以对其设置宽度、高度、对齐等属性，常用于网页布局和网页结构的搭建。常见的块元素有<h1>~<h6>、<p>、<div>、<ul>、<ol>、<li>等，其中<div>标签是最典型的块元素。</p>
 <p><strong>块级元素的特点：</strong></p>
 <ul>
@@ -503,7 +503,7 @@
 <li>是一个容器及盒子，里面可以放行内或者块级元素。</li>
 <li>同理还有这些标签h1,h2,h3,h4,h5,h6,dt，他们都是文字类块级标签，里面不能放其他块级元素。</li>
 </ul>
-<h2 id="2-inline-level">2 行内元素(inline-level)</h2>
+<h2 id="2-inline-level">2 行内元素(inline-level)<a class="headerlink" href="#2-inline-level" title="Permanent link">&para;</a></h2>
 <p>常见的行内元素有<a>、<strong>、<b>、<em>、<i>、<del>、<s>、<ins>、<u>、<span>等，其中<span>标签最典型的行内元素。有的地方称为内联元素</p>
 <p><strong>行内元素的特点：</strong></p>
 <ul>
@@ -512,7 +512,7 @@
 <li><strong><font style="color:#F5222D;">默认宽度就是它本身内容的宽度</font></strong><font style="color:#F5222D;">。</font></li>
 <li>行内元素只能容纳文本或则其他行内元素。</li>
 </ul>
-<h2 id="3-inline-block">3 行内块元素（inline-block）</h2>
+<h2 id="3-inline-block">3 行内块元素（inline-block）<a class="headerlink" href="#3-inline-block" title="Permanent link">&para;</a></h2>
 <p>在行内元素中有几个特殊的标签——<img />、<input />、<td>，可以对它们设置宽高和对齐属性，有些资料可能会称它们为行内块元素。</p>
 <p><strong>行内块元素的特点：</strong></p>
 <ul>
@@ -526,7 +526,7 @@
 <li><font style="color:rgb(77, 77, 77);">标签之间不换行（不优雅）</font></li>
 <li><font style="color:rgb(77, 77, 77);">给父元素设置font-size:0 ，</font><strong><font style="color:rgb(77, 77, 77);">子元素别忘了设置font-size</font></strong></li>
 </ul>
-<h2 id="4">4 总结</h2>
+<h2 id="4">4 总结<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -561,18 +561,18 @@
 </tr>
 </tbody>
 </table>
-<h1 id="_3">四、元素的显示与隐藏</h1>
+<h1 id="_3">四、元素的显示与隐藏<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">目的（本质）   让一个元素在页面中消失或者显示出来</font></li>
 </ul>
-<h3 id="71-display"><font style="color:rgb(51, 51, 51);">7.1. display 显示（重点）</font></h3>
+<h3 id="71-display"><font style="color:rgb(51, 51, 51);">7.1. display 显示（重点）</font><a class="headerlink" href="#71-display" title="Permanent link">&para;</a></h3>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">display 设置或检索对象是否及如何显示。</font></li>
 <li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;display: none&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);"> 隐藏对象</font></li>
 <li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;display：block&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">  除了转换为块级元素之外，同时还有显示元素的意思。</font></li>
 <li><font style="color:rgb(51, 51, 51);">特点： display 隐藏元素后，</font><strong><font style="color:rgb(51, 51, 51);">不再占</font></strong><font style="color:rgb(51, 51, 51);">有原来的位置。</font></li>
 </ul>
-<h3 id="72-visibility"><font style="color:rgb(51, 51, 51);">7.2. visibility 可见性 （了解）</font></h3>
+<h3 id="72-visibility"><font style="color:rgb(51, 51, 51);">7.2. visibility 可见性 （了解）</font><a class="headerlink" href="#72-visibility" title="Permanent link">&para;</a></h3>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">visibility 属性用于指定一个元素应可见还是隐藏。</font></li>
 <li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;visibility：visible&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">　元素可视</font></li>
@@ -585,7 +585,7 @@
 </li>
 <li><font style="color:rgb(51, 51, 51);">如果隐藏元素不想要原来位置， 就用 display：none (用处更多 重点）</font></li>
 </ul>
-<h3 id="73-overflow"><font style="color:rgb(51, 51, 51);">7.3. overflow 溢出（重点）</font></h3>
+<h3 id="73-overflow"><font style="color:rgb(51, 51, 51);">7.3. overflow 溢出（重点）</font><a class="headerlink" href="#73-overflow" title="Permanent link">&para;</a></h3>
 <ul>
 <li><font style="color:rgb(51, 51, 51);">overflow 属性指定了如果内容溢出一个元素的框（超过其指定高度及宽度） 时，会发生什么。</font></li>
 </ul>
@@ -624,7 +624,7 @@
 </ol>
 </li>
 </ul>
-<h3 id="74"><font style="color:rgb(51, 51, 51);">7.4. 显示与隐藏总结</font></h3>
+<h3 id="74"><font style="color:rgb(51, 51, 51);">7.4. 显示与隐藏总结</font><a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>

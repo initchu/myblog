@@ -373,9 +373,9 @@
 
 
 
-<h1 id="_1">常用注解</h1>
+<h1 id="_1">常用注解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><a href="https://juejin.cn/post/7179038534711967800?searchId=202310201526191139C8794A8CFE1D5101#heading-1">肝了一周总结的SpringBoot常用注解大全，一目了然！ - 掘金</a></p>
-<h2 id="_2">一、注解详解</h2>
+<h2 id="_2">一、注解详解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -474,7 +474,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_3">二、注解列表如下</h2>
+<h2 id="_3">二、注解列表如下<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>@SpringBootApplication：包含了 @ComponentScan、@Configuration 和 @EnableAutoConfiguration 注解。其中</p>
 <p>@ComponentScan：让 spring Boot 扫描到 Configuration 类并把它加入到程序上下文。</p>
 <p>@Configuration ：等同于 spring 的 XML 配置文件；使用 Java 代码可以检查类型安全。</p>
@@ -486,7 +486,7 @@
 <p>@PathVariable：获取参数。</p>
 <p>@JsonBackReference：解决嵌套外链问题。</p>
 <p>@RepositoryRestResourcepublic：配合 spring-boot-starter-data-rest 使用。</p>
-<h2 id="jpa">三、JPA 注解</h2>
+<h2 id="jpa">三、JPA 注解<a class="headerlink" href="#jpa" title="Permanent link">&para;</a></h2>
 <p>@Entity：@Table(name=”“)：表明这是一个实体类。一般用于 jpa 这两个注解一般一块使用，但是如果表名和实体类名相同的话，@Table 可以省略</p>
 <p>@MappedSuperClass: 用在确定是父类的 entity 上。父类的属性子类可以继承。</p>
 <p>@NoRepositoryBean: 一般用作父类的 repository，有这个注解，spring 不会去实例化该 repository。</p>
@@ -498,7 +498,7 @@
 <p>@JsonIgnore：作用是 json 序列化时将 Java bean 中的一些属性忽略掉, 序列化和反序列化都受影响。</p>
 <p>@JoinColumn（name=”loginId”）: 一对一：本表中指向另一个表的外键。一对多：另一个表指向本表的外键。</p>
 <p>@OneToOne、@OneToMany、@ManyToOne：对应 hibernate 配置文件中的一对一，一对多，多对一。</p>
-<h2 id="springmvc">四、springMVC 相关注解</h2>
+<h2 id="springmvc">四、springMVC 相关注解<a class="headerlink" href="#springmvc" title="Permanent link">&para;</a></h2>
 <p>@RequestMapping：@RequestMapping(“/path”)表示该控制器处理所有 “/path” 的 UR L 请求。RequestMapping 是一个用来处理请求地址映射的注解，可用于类或方法上。</p>
 <p>用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。该注解有六个属性：</p>
 <ul>
@@ -510,23 +510,23 @@
 <li>produces: 指定返回的内容类型，仅当 request 请求头中的 (Accept) 类型中包含该指定类型才返回</li>
 </ul>
 <p>@RequestParam：用在方法的参数前面。</p>
-<pre><code class="language-plain">ini
+<div class="highlight"><pre><span></span><code>ini
 复制代码@RequestParam
 String a =request.getParameter(“a”)。
-</code></pre>
+</code></pre></div>
 <p>@PathVariable: 路径变量。</p>
 <p>参数与大括号里的名字一样要相同。</p>
-<h2 id="_4">五、全局异常处理</h2>
+<h2 id="_4">五、全局异常处理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>@ControllerAdvice：包含 @Component。可以被扫描到。统一处理异常。</p>
 <p>@ExceptionHandler（Exception.class）：用在方法上面表示遇到这个异常就执行以下方法。</p>
-<h2 id="_5">六、项目中具体配置解析和使用环境</h2>
-<h4 id="mappedsuperclass">@MappedSuperclass：</h4>
+<h2 id="_5">六、项目中具体配置解析和使用环境<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h4 id="mappedsuperclass">@MappedSuperclass：<a class="headerlink" href="#mappedsuperclass" title="Permanent link">&para;</a></h4>
 <ol>
 <li>@MappedSuperclass 注解使用在父类上面，是用来标识父类的</li>
 <li>@MappedSuperclass 标识的类表示其不能映射到数据库表，因为其不是一个完整的实体类，但是它所拥有的属性能够映射在其子类对用的数据库表中</li>
 <li>@MappedSuperclass 标识的类不能再有 @Entity 或 @Table 注解</li>
 </ol>
-<h4 id="column">@Column：</h4>
+<h4 id="column">@Column：<a class="headerlink" href="#column" title="Permanent link">&para;</a></h4>
 <p>\1. 当实体的属性与其映射的数据库表的列不同名时需要使用 @Column 标注说明，该属性通常置于实体的属性声明语句之前，还可与 @Id 标注一起使用。</p>
 <p>2.@Column 标注的常用属性是 name，用于设置映射数据库表的列名。此外，该标注还包含其它多个属性，如：unique、nullable、length、precision 等。具体如下：</p>
 <ul>
@@ -573,20 +573,20 @@ String a =request.getParameter(“a”)。
 <p>@javax.persistence.PostUpdate：更新后。</p>
 <p>@javax.persistence.PreRemove：删除前。</p>
 <p>@javax.persistence.PostRemove：删除后。</p>
-<h4 id="1">1）数据库查询</h4>
+<h4 id="1">1）数据库查询<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <p>@PostLoad 事件在下列情况下触发：</p>
 <p>执行 EntityManager.find() 或 getreference() 方法载入一个实体后。</p>
 <p>执行 JPQL 查询后。</p>
 <p>EntityManager.refresh() 方法被调用后。</p>
-<h4 id="2">2）数据库插入</h4>
+<h4 id="2">2）数据库插入<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <p>@PrePersist 和 @PostPersist 事件在实体对象插入到数据库的过程中发生：</p>
 <p>@PrePersist 事件在调用 persist() 方法后立刻发生，此时的数据还没有真正插入进数据库。</p>
 <p>@PostPersist 事件在数据已经插入进数据库后发生。</p>
-<h4 id="3">3）数据库更新</h4>
+<h4 id="3">3）数据库更新<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <p>@PreUpdate 和 @PostUpdate 事件的触发由更新实体引起：</p>
 <p>@PreUpdate 事件在实体的状态同步到数据库之前触发，此时的数据还没有真正更新到数据库。</p>
 <p>@PostUpdate 事件在实体的状态同步到数据库之后触发，同步在事务提交时发生。</p>
-<h4 id="4">4）数据库删除</h4>
+<h4 id="4">4）数据库删除<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <p>@PreRemove 和 @PostRemove 事件的触发由删除实体引起：</p>
 <p>@PreRemove 事件在实体从数据库删除之前触发，即在调用 remove() 方法删除时发生，此时的数据还没有真正从数据库中删除。</p>
 <p>@PostRemove 事件在实体从数据库中删除后触发。</p>

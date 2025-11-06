@@ -251,12 +251,12 @@
 
 
 
-<h1 id="0java">【0】Java 介绍</h1>
-<h1 id="java">Java语言概述</h1>
+<h1 id="0java">【0】Java 介绍<a class="headerlink" href="#0java" title="Permanent link">&para;</a></h1>
+<h1 id="java">Java语言概述<a class="headerlink" href="#java" title="Permanent link">&para;</a></h1>
 <p>是SUN(Stanford University Network，斯坦福大学网络公司) 1995年推出的一门高级编程语言。</p>
 <p>是一种面向Internet的编程语言。Java一开始富有吸引力是因为Java程序可以在Web浏览器中运行。这些Java程序被称为Java小程序（applet）。applet使用现代的图形用户界面与Web用户进行交互。applet内嵌在HTML代码中。</p>
 <p>随着Java技术在web方面的不断成熟，已经成为Web应用程序的首选开发语言。后台开发：Java、PHP、Python、Go、Node.js</p>
-<h2 id="java_1">Java 历史</h2>
+<h2 id="java_1">Java 历史<a class="headerlink" href="#java_1" title="Permanent link">&para;</a></h2>
 <p>1991年Green项目，开发语言最初命名为Oak (橡树)</p>
 <p>1994年，开发组意识到Oak 非常适合于互联网</p>
 <p>1996年，发布JDK 1.0，约8.3万个网页应用Java技术来制作</p>
@@ -273,7 +273,7 @@
 <p>2018年9月，发布JDK 11.0，版本号也称为18.9</p>
 <p>2019年3月20日，Java SE 12 发布。Java 12是短期支持版本。</p>
 <p>2019年9月23日，Java SE 13发布，此版本中添加了“文本块”，文本块是一个多行字符串文字，避免对大多数转义序列的需要，以可预测的方式自动格式化字符串，并在需要时让开发人员控制格式。</p>
-<h2 id="java_2">Java 技术体系平台</h2>
+<h2 id="java_2">Java 技术体系平台<a class="headerlink" href="#java_2" title="Permanent link">&para;</a></h2>
 <p>1、JavaSE(Java Standard Edition)标准版</p>
 <p>支持面向桌面级应用（如Windows下的应用程序）的Java平台，提供了完整的Java核心API，此版本以前称为J2SE</p>
 <p>2、JavaEE(Java Enterprise (企业) Edition)企业版</p>
@@ -287,7 +287,7 @@
 <p>Android平台应用：Android应用程序使用Java语言编写。Android开发水平的高低很大程度上取决于Java语言核心能力是否扎实。</p>
 <p>大数据平台开发：各类框架有Hadoop， spark (火花) ，storm，flink等，就这类技术生态圈来讲，还有各种中间件如flume，kafka，sqoop等等，这些框架以及工具大多数是用Java编写而成，但提供诸如Java，scala，Python，R等各种语言API供编程。</p>
 <p>移动领域应用：主要表现在消费和嵌入式领域，是指在各种小型设备上的应用，包括手机、PDA、机顶盒、汽车通信设备等。</p>
-<h1 id="java_3">Java 主要特性</h1>
+<h1 id="java_3">Java 主要特性<a class="headerlink" href="#java_3" title="Permanent link">&para;</a></h1>
 <ol>
 <li>Java 语言是<strong>易学的</strong>。Java 语言的语法与 C 语言和 C++ 语言很接近，使得大多数程序员很容易学习和使用 Java。</li>
 <li>Java 语言是<strong>强制面向对象</strong>的。Java 语言提供类、接口和继承等原语，为了简单起见，只支持类之间的单继承，但支持接口之间的多继承，并支持类与接口之间的实现机制（关键字为 implements (实施) ）。</li>
@@ -299,24 +299,24 @@
 <li>Java 是<strong>性能略高的</strong>。与那些解释型的高级脚本语言相比，Java 的性能还是较优的。</li>
 <li>Java 语言是<strong>原生支持多线程</strong>的。在 Java 语言中，线程是一种特殊的对象，它必须由 Thread 类或其子（孙）类来创建。</li>
 </ol>
-<h1 id="java_4">Java 程序运行机制及运行过程</h1>
-<h2 id="_1">特点一：面向对象</h2>
+<h1 id="java_4">Java 程序运行机制及运行过程<a class="headerlink" href="#java_4" title="Permanent link">&para;</a></h1>
+<h2 id="_1">特点一：面向对象<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>两个基本概念：类、对象</p>
 <p>三大特性：封装、继承、多态</p>
-<h2 id="_2">特点二：健壮性</h2>
+<h2 id="_2">特点二：健壮性<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>吸收了C/C++语言的优点，但去掉了其影响程序健壮性的部分（如指针、内存的申请与释放等），提供了一个相对安全的内存管理和访问机制</p>
-<h2 id="_3">特点三：跨平台性</h2>
+<h2 id="_3">特点三：跨平台性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>跨平台性：通过Java语言编写的应用程序在不同的系统平台上都可以运行。“Write once , Run Anywhere”</p>
 <p>原理：只要在需要运行java 应用程序的操作系统上，先安装一个Java虚拟机(JVM Java Virtual (虚拟) Machine) 即可。由JVM来负责Java程序在该系统中的运行。</p>
-<h1 id="java_5">Java 两种核心机制</h1>
-<h2 id="1java-java-virtalmachine">1、Java 虚拟机(Java VirtalMachine)</h2>
+<h1 id="java_5">Java 两种核心机制<a class="headerlink" href="#java_5" title="Permanent link">&para;</a></h1>
+<h2 id="1java-java-virtalmachine">1、Java 虚拟机(Java VirtalMachine)<a class="headerlink" href="#1java-java-virtalmachine" title="Permanent link">&para;</a></h2>
 <p>JVM 是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数据、内存、寄存器。</p>
 <p>对于不同的平台，有不同的虚拟机。</p>
 <p>只有某平台提供了对应的java虚拟机，java程序才可在此平台运行。</p>
 <p><img alt="1670765963203-2d1d1c39-bf98-4e9d-9521-22e7f449f4b6.png" src="../img/3iq7_WbMnNfm3RB7/1670765963203-2d1d1c39-bf98-4e9d-9521-22e7f449f4b6-823165.png" /></p>
 <p>Java虚拟机机制屏蔽了底层运行平台的差别，实现了“一次编译，到处运行”。</p>
 <p><img alt="1670765970280-f64385ba-9ef3-40ff-9539-c1425f0752f0.png" src="../img/3iq7_WbMnNfm3RB7/1670765970280-f64385ba-9ef3-40ff-9539-c1425f0752f0-398371.png" /></p>
-<h2 id="2garbage-collection">2、垃圾收集机制(Garbage Collection)</h2>
+<h2 id="2garbage-collection">2、垃圾收集机制(Garbage Collection)<a class="headerlink" href="#2garbage-collection" title="Permanent link">&para;</a></h2>
 <p>不再使用的内存空间应回收——垃圾回收。</p>
 <p>在C/C++等语言中，由程序员负责回收无用内存。</p>
 <p>Java 语言消除了程序员回收无用内存空间的责任：它提供一种系统级线程跟踪存储空间的分配情况。并在JVM空闲时，检查并释放那些可被释放的存储空间。</p>

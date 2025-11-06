@@ -251,9 +251,9 @@
 
 
 
-<h1 id="_1">并发多线程</h1>
-<h1 id="_2">多线程三种实现方式</h1>
-<h2 id="thread">实现多线程方式一：继承Thread类</h2>
+<h1 id="_1">并发多线程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="_2">多线程三种实现方式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<h2 id="thread">实现多线程方式一：继承Thread类<a class="headerlink" href="#thread" title="Permanent link">&para;</a></h2>
 <ul>
 <li>方法介绍 </li>
 </ul>
@@ -285,28 +285,27 @@
 </li>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">
-// MyThreadDemo.java
-public class MyThreadDemo {
-    public static void main(String[] args) {
-        MyThread my1 = new MyThread();
-        MyThread my2 = new MyThread();
+<div class="highlight"><pre><span></span><code><span class="c1">// MyThreadDemo.java</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThreadDemo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">my1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span>
+<span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">my2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span>
 
-        my1.start();
-        my2.start();
-    }
-}
+<span class="w">        </span><span class="n">my1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">my2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-class MyThread extends Thread {
-    @Override
-    public void run() {
-        for(int i=0; i&lt;100; i++) {
-            System.out.println(i);
-        }
-    }
-}
-</code></pre>
-<h2 id="runnable">实现多线程方式二：实现Runnable接口</h2>
+<span class="kd">class</span> <span class="nc">MyThread</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="runnable">实现多线程方式二：实现Runnable接口<a class="headerlink" href="#runnable" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Thread构造方法 </li>
 </ul>
@@ -339,35 +338,35 @@ class MyThread extends Thread {
 </li>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">class MyRunnable implements Runnable {
-    @Override
-    public void run() {
-        for(int i=0; i&lt;100; i++) {
-            System.out.println(Thread.currentThread().getName()+&quot;:&quot;+i);
-        }
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">MyRunnable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;:&quot;</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-public class MyRunnableDemo {
-    public static void main(String[] args) {
-        // 创建MyRunnable类的对象
-        MyRunnable my = new MyRunnable();
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyRunnableDemo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 创建MyRunnable类的对象</span>
+<span class="w">        </span><span class="n">MyRunnable</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRunnable</span><span class="p">();</span>
 
-        // 创建Thread类的对象，把MyRunnable对象作为构造方法的参数
-        // Thread(Runnable target)
-        // Thread t1 = new Thread(my);
-        // Thread t2 = new Thread(my);
-        // Thread(Runnable target, String name)
-        Thread t1 = new Thread(my, &quot;坦克&quot;);
-        Thread t2 = new Thread(my, &quot;飞机&quot;);
+<span class="w">        </span><span class="c1">// 创建Thread类的对象，把MyRunnable对象作为构造方法的参数</span>
+<span class="w">        </span><span class="c1">// Thread(Runnable target)</span>
+<span class="w">        </span><span class="c1">// Thread t1 = new Thread(my);</span>
+<span class="w">        </span><span class="c1">// Thread t2 = new Thread(my);</span>
+<span class="w">        </span><span class="c1">// Thread(Runnable target, String name)</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">my</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;坦克&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">my</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;飞机&quot;</span><span class="p">);</span>
 
-        // 启动线程
-        t1.start();
-        t2.start();
-    }
-}
-</code></pre>
-<h2 id="callable">实现多线程方式三: 实现Callable接口【应用】</h2>
+<span class="w">        </span><span class="c1">// 启动线程</span>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="callable">实现多线程方式三: 实现Callable接口【应用】<a class="headerlink" href="#callable" title="Permanent link">&para;</a></h2>
 <ul>
 <li>方法介绍 </li>
 </ul>
@@ -406,39 +405,39 @@ public class MyRunnableDemo {
 </li>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">public class MyCallable implements Callable&lt;String&gt; {
-    @Override
-    public String call() throws Exception {
-        for (int i = 0; i &lt; 100; i++) {
-            System.out.println(&quot;跟女孩表白&quot; + i);
-        }
-        //返回值就表示线程运行完毕之后的结果
-        return &quot;答应&quot;;
-    }
-}
-public class Demo {
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        //线程开启之后需要执行里面的call方法
-        MyCallable mc = new MyCallable();
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyCallable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;跟女孩表白&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//返回值就表示线程运行完毕之后的结果</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;答应&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ExecutionException</span><span class="p">,</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//线程开启之后需要执行里面的call方法</span>
+<span class="w">        </span><span class="n">MyCallable</span><span class="w"> </span><span class="n">mc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyCallable</span><span class="p">();</span>
 
-        //Thread t1 = new Thread(mc);
+<span class="w">        </span><span class="c1">//Thread t1 = new Thread(mc);</span>
 
-        //可以获取线程执行完毕之后的结果.也可以作为参数传递给Thread对象
-        FutureTask&lt;String&gt; ft = new FutureTask&lt;&gt;(mc);
+<span class="w">        </span><span class="c1">//可以获取线程执行完毕之后的结果.也可以作为参数传递给Thread对象</span>
+<span class="w">        </span><span class="n">FutureTask</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FutureTask</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">mc</span><span class="p">);</span>
 
-        //创建线程对象
-        Thread t1 = new Thread(ft);
+<span class="w">        </span><span class="c1">//创建线程对象</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">ft</span><span class="p">);</span>
 
-        //String s = ft.get(); get不能在开启线程之前，否则会阻塞在这里
-        //开启线程
-        t1.start();
+<span class="w">        </span><span class="c1">//String s = ft.get(); get不能在开启线程之前，否则会阻塞在这里</span>
+<span class="w">        </span><span class="c1">//开启线程</span>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 
-        String s = ft.get();
-        System.out.println(s);
-    }
-}
-</code></pre>
-<h2 id="_3">三种实现方式的对比</h2>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ft</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">三种实现方式的对比<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li>实现Runnable、Callable接口 <ul>
 <li>好处: 扩展性强，实现该接口的同时还可以继承其他的类</li>
@@ -451,8 +450,8 @@ public class Demo {
 </ul>
 </li>
 </ul>
-<h1 id="_4">常见成员方法</h1>
-<h2 id="_5">设置和获取线程名称</h2>
+<h1 id="_4">常见成员方法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<h2 id="_5">设置和获取线程名称<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
 <li>方法介绍 </li>
 </ul>
@@ -488,44 +487,44 @@ public class Demo {
 <ul>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">public class MyThread extends Thread {
-    public MyThread() {}
-    public MyThread(String name) {
-        super(name);
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThread</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyThread</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyThread</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    @Override
-    public void run() {
-        for (int i = 0; i &lt; 100; i++) {
-            System.out.println(getName()+&quot;:&quot;+i);
-        }
-    }
-}
-public class MyThreadDemo {
-    public static void main(String[] args) {
-        MyThread my1 = new MyThread();
-        MyThread my2 = new MyThread();
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getName</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;:&quot;</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThreadDemo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">my1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span>
+<span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">my2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span>
 
-        //void setName(String name)：将此线程的名称更改为等于参数 name
-        my1.setName(&quot;高铁&quot;);
-        my2.setName(&quot;飞机&quot;);
+<span class="w">        </span><span class="c1">//void setName(String name)：将此线程的名称更改为等于参数 name</span>
+<span class="w">        </span><span class="n">my1</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;高铁&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">my2</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;飞机&quot;</span><span class="p">);</span>
 
-        //Thread(String name)
-        MyThread my1 = new MyThread(&quot;高铁&quot;);
-        MyThread my2 = new MyThread(&quot;飞机&quot;);
+<span class="w">        </span><span class="c1">//Thread(String name)</span>
+<span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">my1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">(</span><span class="s">&quot;高铁&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">MyThread</span><span class="w"> </span><span class="n">my2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">(</span><span class="s">&quot;飞机&quot;</span><span class="p">);</span>
 
-        my1.start();
-        my2.start();
+<span class="w">        </span><span class="n">my1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">my2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 
-        //static Thread currentThread() 返回对当前正在执行的线程对象的引用
-        System.out.println(Thread.currentThread().getName()); // main
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="c1">//static Thread currentThread() 返回对当前正在执行的线程对象的引用</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span><span class="w"> </span><span class="c1">// main</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>:::color3
 <font style="color:rgb(44, 44, 54);">最后一行代码是在 main 方法中执行的，而在Java程序中，main 方法是程序的起点，它默认是运行在一个名为 "main" 的线程中的。因此，Thread.currentThread().getName() 在这里会输出 "main"，表示这是主线程。</font></p>
 <p>:::</p>
-<h2 id="_6">线程休眠</h2>
+<h2 id="_6">线程休眠<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li>相关方法 </li>
 </ul>
@@ -554,37 +553,37 @@ public class MyThreadDemo {
 <ul>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">class MyRunnable implements Runnable {
-    @Override
-    public void run() {
-        for (int i = 0; i &lt; 100; i++) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">MyRunnable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
 
-            System.out.println(Thread.currentThread().getName() + &quot;---&quot; + i);
-        }
-    }
-}
-public class Demo {
-    public static void main(String[] args) throws InterruptedException {
-        /*System.out.println(&quot;睡觉前&quot;);
-        Thread.sleep(3000);
-        System.out.println(&quot;睡醒了&quot;);*/
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;---&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*System.out.println(&quot;睡觉前&quot;);</span>
+<span class="cm">        Thread.sleep(3000);</span>
+<span class="cm">        System.out.println(&quot;睡醒了&quot;);*/</span>
 
-        MyRunnable mr = new MyRunnable();
+<span class="w">        </span><span class="n">MyRunnable</span><span class="w"> </span><span class="n">mr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRunnable</span><span class="p">();</span>
 
-        Thread t1 = new Thread(mr);
-        Thread t2 = new Thread(mr);
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">mr</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">mr</span><span class="p">);</span>
 
-        t1.start();
-        t2.start();
-    }
-}
-</code></pre>
-<h2 id="_7">线程优先级</h2>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_7">线程优先级<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li>线程调度 <ul>
 <li>两种调度方式 <ul>
@@ -626,41 +625,41 @@ public class Demo {
 <ul>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">public class MyCallable implements Callable&lt;String&gt; {
-    @Override
-    public String call() throws Exception {
-        for (int i = 0; i &lt; 100; i++) {
-            System.out.println(Thread.currentThread().getName() + &quot;---&quot; + i);
-        }
-        return &quot;线程执行完毕了&quot;;
-    }
-}
-public class Demo {
-    public static void main(String[] args) {
-        //优先级: 1 - 10 默认值:5
-        MyCallable mc = new MyCallable();
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyCallable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Callable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">call</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;---&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;线程执行完毕了&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//优先级: 1 - 10 默认值:5</span>
+<span class="w">        </span><span class="n">MyCallable</span><span class="w"> </span><span class="n">mc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyCallable</span><span class="p">();</span>
 
-        FutureTask&lt;String&gt; ft = new FutureTask&lt;&gt;(mc);
+<span class="w">        </span><span class="n">FutureTask</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FutureTask</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">mc</span><span class="p">);</span>
 
-        Thread t1 = new Thread(ft);
-        t1.setName(&quot;飞机&quot;);
-        t1.setPriority(10);
-        //System.out.println(t1.getPriority());//5
-        t1.start();
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">ft</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;飞机&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">setPriority</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//System.out.println(t1.getPriority());//5</span>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 
-        MyCallable mc2 = new MyCallable();
+<span class="w">        </span><span class="n">MyCallable</span><span class="w"> </span><span class="n">mc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyCallable</span><span class="p">();</span>
 
-        FutureTask&lt;String&gt; ft2 = new FutureTask&lt;&gt;(mc2);
+<span class="w">        </span><span class="n">FutureTask</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ft2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FutureTask</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">mc2</span><span class="p">);</span>
 
-        Thread t2 = new Thread(ft2);
-        t2.setName(&quot;坦克&quot;);
-        t2.setPriority(1);
-        //System.out.println(t2.getPriority());//5
-        t2.start();
-    }
-}
-</code></pre>
-<h2 id="_8">守护线程</h2>
+<span class="w">        </span><span class="n">Thread</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Thread</span><span class="p">(</span><span class="n">ft2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;坦克&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">setPriority</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//System.out.println(t2.getPriority());//5</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_8">守护线程<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ul>
 <li>相关方法 </li>
 </ul>
@@ -686,40 +685,40 @@ public class Demo {
 <li>当聊天窗口（非守护线程）关了，传输文件（守护线程）也被关掉的。</li>
 <li>代码演示 </li>
 </ul>
-<pre><code class="language-java">public class MyThread1 extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i &lt; 10; i++) {
-            System.out.println(getName() + &quot;---&quot; + i);
-        }
-    }
-}
-public class MyThread2 extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i &lt; 100; i++) {
-            System.out.println(getName() + &quot;---&quot; + i);
-        }
-    }
-}
-public class Demo {
-    public static void main(String[] args) {
-        MyThread1 t1 = new MyThread1();
-        MyThread2 t2 = new MyThread2();
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThread1</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;---&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyThread2</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;---&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Demo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MyThread1</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread1</span><span class="p">();</span>
+<span class="w">        </span><span class="n">MyThread2</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread2</span><span class="p">();</span>
 
-        t1.setName(&quot;线程1&quot;);
-        t2.setName(&quot;线程2&quot;);
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;线程1&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;线程2&quot;</span><span class="p">);</span>
 
-        //把第二个线程设置为守护线程
-        //当普通线程执行完之后,那么守护线程也没有继续运行下去的必要了.
-        t2.setDaemon(true);
+<span class="w">        </span><span class="c1">//把第二个线程设置为守护线程</span>
+<span class="w">        </span><span class="c1">//当普通线程执行完之后,那么守护线程也没有继续运行下去的必要了.</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">setDaemon</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 
-        t1.start();
-        t2.start();
-    }
-}
-</code></pre>
-<h2 id="_9">礼让线程（了解）</h2>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_9">礼让线程（了解）<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -737,30 +736,30 @@ public class Demo {
 <p>:::color3
 这个方法只是尽可能的会让结果均匀一些。</p>
 <p>:::</p>
-<pre><code class="language-java">public class ThreadDemo{
-    public static void main(String[] args){
-        MyTread t1  = new MyThread();
-        MyTread t2  = new MyThread();        
-        t1.setName(&quot;线程1&quot;);
-        t2.setName(&quot;线程2&quot;);
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadDemo</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="n">MyTread</span><span class="w"> </span><span class="n">t1</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span>
+<span class="w">        </span><span class="n">MyTread</span><span class="w"> </span><span class="n">t2</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyThread</span><span class="p">();</span><span class="w">        </span>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;线程1&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;线程2&quot;</span><span class="p">);</span>
 
-        t1.start();
-        t2.start();
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class MyTread extends Thread{
-    @Override
-    public void run(){
-        for(int i =1;i&lt;100;i++){
-            SyStem.out.println(getName + &quot;@&quot; + i);
-        }
-        // 表示出让当前 CPU 的执行权
-        Thread.yield();
-    }
-}
-</code></pre>
-<h2 id="_10">插入线程（了解）</h2>
+<span class="w">        </span><span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTread</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">            </span><span class="n">SyStem</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;@&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 表示出让当前 CPU 的执行权</span>
+<span class="w">        </span><span class="n">Thread</span><span class="p">.</span><span class="na">yield</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_10">插入线程（了解）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -778,57 +777,57 @@ public class Demo {
 <p>:::color3
 这个方法只是尽可能的会让结果均匀一些。</p>
 <p>:::</p>
-<pre><code class="language-java">public class ThreadDemo{
-    public static void main(String[] args){
-        MyTread t = new MyTread();
-        t.setName(&quot;土豆&quot;);
-        t.start();
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadDemo</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="n">MyTread</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyTread</span><span class="p">();</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;土豆&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
 
-        // 表示把t这个线程插入到当前线程之前
-        // t:土豆
-        // 当前线程：main
-        t.join();
+<span class="w">        </span><span class="c1">// 表示把t这个线程插入到当前线程之前</span>
+<span class="w">        </span><span class="c1">// t:土豆</span>
+<span class="w">        </span><span class="c1">// 当前线程：main</span>
+<span class="w">        </span><span class="n">t</span><span class="p">.</span><span class="na">join</span><span class="p">();</span>
 
-        //执行在main线程当中的
-        for(int i =0;i&lt;10;i++){
-            Sout(&quot;main线程&quot; + i);
-        }
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class MyTread extends Thread{
-    @Override
-    public void run(){
-        for(int i =1;i&lt;100;i++){
-            SyStem.out.println(getName + &quot;@&quot; + i);
-        }
-    }
-}
-</code></pre>
-<h1 id="_11">线程的生命周期</h1>
+<span class="w">        </span><span class="c1">//执行在main线程当中的</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">            </span><span class="n">Sout</span><span class="p">(</span><span class="s">&quot;main线程&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyTread</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">            </span><span class="n">SyStem</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">getName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;@&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_11">线程的生命周期<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h1>
 <p><img alt="线程的生命周期" src="../img/83K3LrHVUHMOzz-6/1716374228061-00003f67-75cd-4425-9497-8cec95e88504-620686.png" /></p>
 <p><img alt="线程的生命周期" src="../img/83K3LrHVUHMOzz-6/1716537133696-a90d1d26-85b1-4c5b-9609-6dfbbc91e2ab-452117.png" /></p>
-<h1 id="_12">线程同步问题</h1>
+<h1 id="_12">线程同步问题<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h1>
 <p>当多个线程操作同一个数据的时候会一些出现问题，比如：</p>
 <ul>
 <li>可能会超出范围</li>
 <li>相同的数据被访问了多次</li>
 </ul>
 <p>假设这三条线程，都在跑下述的代码：</p>
-<pre><code class="language-java">while(true){
-    if(ticket &lt; 100){
-        try {
-            Tread.sleep(10);
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }
-        ticket++;
-        sout(&quot;在卖第&quot;+ ticket + &quot;张票!&quot;);
-    }else{
-        break;
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Tread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">ticket</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sout</span><span class="p">(</span><span class="s">&quot;在卖第&quot;</span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;张票!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>假设线程1执行了ticket 99 自增变成了100，还没来得及打印，线程2 就开始ticket++ 就变成了101，所以这样的情况，就超出范围了。</p>
 <p>假设线程1，抢到了执行权，这个时候 线程1 睡觉 10 毫秒，然后 线程2 抢到了，线程2 开始睡 10 毫秒，这个时‘候线程3 就会进来，睡 10 毫秒，然后这三条会陆陆续续的醒来。后面继续假设，线程1醒来了，执行 ticket++，0 变成了 1，但是还没来得及打印呢，执行权被线程2抢走了，这个时候线程2的 ticket 可能也是1。这样就会发生相同的数据被访问了多次的情况。</p>
 <p>造成问题的核心原因：</p>
@@ -839,37 +838,37 @@ public class Demo {
 <ul>
 <li>给操作的这段代码给锁起来，其他的线程就算抢夺到了执行权也得等着。让他们执行线程。</li>
 </ul>
-<pre><code class="language-java">synchronized（锁）{
-    操作共享数据的代码
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">synchronized</span><span class="err">（</span><span class="n">锁</span><span class="err">）</span><span class="p">{</span>
+<span class="w">    </span><span class="n">操作共享数据的代码</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>锁有几个特点：</p>
 <ul>
 <li>锁默认打开，有一个线程进去了，锁自动关闭</li>
 <li>里面的代码全部执行完毕，线程出来，锁自动打开</li>
 </ul>
-<pre><code class="language-java">// 随便一个锁对象
-static Object obj = new Object();
+<div class="highlight"><pre><span></span><code><span class="c1">// 随便一个锁对象</span>
+<span class="kd">static</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="p">();</span>
 
 
 
-while(true){
-    // 同步代码块
-    synchronized(obj){
-        if(ticket &lt; 100){
-            try {
-                Tread.sleep(10);
-            }catch(InterruptedException e){
-                e.printStackTrace();
-            }
-            ticket++;
-            sout(&quot;在卖第&quot;+ ticket + &quot;张票!&quot;);
-        }else{
-            break;
-        }
-    }
-}
-</code></pre>
+<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// 同步代码块</span>
+<span class="w">    </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">obj</span><span class="p">){</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Tread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">ticket</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sout</span><span class="p">(</span><span class="s">&quot;在卖第&quot;</span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;张票!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>:::color3
 细节：</p>
 <ol>
@@ -881,111 +880,111 @@ while(true){
 </li>
 </ol>
 <p>:::</p>
-<pre><code class="language-java">// 表示这个类的所有的对象，都共享ticket数据
-static int ticket = 0;
+<div class="highlight"><pre><span></span><code><span class="c1">// 表示这个类的所有的对象，都共享ticket数据</span>
+<span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-while(true){
-    // 同步代码块
-    synchronized(MyThread.class){
-        if(ticket &lt; 100){
-            try {
-                Tread.sleep(10);
-            }catch(InterruptedException e){
-                e.printStackTrace();
-            }
-            ticket++;
-            sout(&quot;在卖第&quot;+ ticket + &quot;张票!&quot;);
-        }else{
-            break;
-        }
-    }
-}
-</code></pre>
+<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// 同步代码块</span>
+<span class="w">    </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">MyThread</span><span class="p">.</span><span class="na">class</span><span class="p">){</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Tread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">ticket</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sout</span><span class="p">(</span><span class="s">&quot;在卖第&quot;</span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;张票!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>加上锁的部分，所以这个时候线程的生命周期变成了：</p>
 <p><img alt="线程的生命周期" src="../img/83K3LrHVUHMOzz-6/1716537133696-a90d1d26-85b1-4c5b-9609-6dfbbc91e2ab-452117.png" /></p>
 <p><img alt="1716796937844-291e19a5-34db-4445-ba9f-10bf909cb3d2.png" src="../img/83K3LrHVUHMOzz-6/1716796937844-291e19a5-34db-4445-ba9f-10bf909cb3d2-148294.png" /></p>
-<h1 id="_13">同步方法</h1>
+<h1 id="_13">同步方法<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h1>
 <p>可以把synchronized关键字加到方法上。</p>
-<h2 id="_14">同步方法两个特点</h2>
+<h2 id="_14">同步方法两个特点<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ol>
 <li>同步方法是所属方法里面的所有的代码</li>
 <li>锁对象不能自己制定</li>
 </ol>
-<pre><code class="language-java">修饰符 synchronized 返回值类型 方法名（方法参数) {...}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">修饰符</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="n">返回值类型</span><span class="w"> </span><span class="n">方法名</span><span class="err">（</span><span class="n">方法参数</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span>
+</code></pre></div>
 <p>非静态：this</p>
 <p>静态：类字节码文件</p>
 <p>举个例子：</p>
-<pre><code class="language-java">public class MyRunnable implements Runnable{
-    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
-    int ticket = 0;
-    @Override
-    public void run(){
-        // 1. 循环
-        // 2.同步代码块（同步方法）
-        // 3.判断共享数据是否到了末尾，如果到了末尾
-        // 4.判断共享数据是否到了末尾，如果没到末尾
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyRunnable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// 1. 循环</span>
+<span class="w">        </span><span class="c1">// 2.同步代码块（同步方法）</span>
+<span class="w">        </span><span class="c1">// 3.判断共享数据是否到了末尾，如果到了末尾</span>
+<span class="w">        </span><span class="c1">// 4.判断共享数据是否到了末尾，如果没到末尾</span>
 
-        while(true){
-            synchronized(MyRunnable.class){
-                if(ticket == 100){
-                    break;
-                }else{
-                    try {
-                        Thread.sleep(10)
-                    }catch(InterruptedException){
-                        e.printStackTrace();
-                    }
-                    ticket ++;
-                    sout(Thread.getName() + ticket);
-                }
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">            </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">MyRunnable</span><span class="p">.</span><span class="na">class</span><span class="p">){</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="p">){</span>
+<span class="w">                        </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">ticket</span><span class="w"> </span><span class="o">++</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">sout</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
 
-            }
-        }
-    }
-}
-</code></pre>
-<pre><code class="language-java">public static void main(){
-    MyRunnable mr = new MyRunnable();
-    // 开启三个线程
-}
-</code></pre>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">MyRunnable</span><span class="w"> </span><span class="n">mr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyRunnable</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 开启三个线程</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>把上面的同步代码块，放到同步方法中：</p>
 <p>选中代码块，按下 IDEA 中 ctrl alt + M 就可以快速，抽出方法。</p>
-<pre><code class="language-java">public class MyRunnable implements Runnable{
-    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
-    int ticket = 0;
-    @Override
-    public void run(){
-        // 1. 循环
-        // 2.同步代码块（同步方法）
-        // 3.判断共享数据是否到了末尾，如果到了末尾
-        // 4.判断共享数据是否到了末尾，如果没到末尾
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyRunnable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// 1. 循环</span>
+<span class="w">        </span><span class="c1">// 2.同步代码块（同步方法）</span>
+<span class="w">        </span><span class="c1">// 3.判断共享数据是否到了末尾，如果到了末尾</span>
+<span class="w">        </span><span class="c1">// 4.判断共享数据是否到了末尾，如果没到末尾</span>
 
-        while(true){
-            synchronized(MyRunnable.class){
-                if(method()) break;
-            }
-        }
-    }
-    private synchronized boolean method(){
-        if(ticket == 100){
-            return true;
-        }else{
-            ticket ++;
-            sout(Thread.getName() + ticket);
-        }
-        return false;
-    }
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">            </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">MyRunnable</span><span class="p">.</span><span class="na">class</span><span class="p">){</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">method</span><span class="p">())</span><span class="w"> </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">synchronized</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">method</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">            </span><span class="n">ticket</span><span class="w"> </span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sout</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
-</code></pre>
-<h2 id="stringbuilder-stringbuffer">StringBuilder 和 StringBuffer</h2>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="stringbuilder-stringbuffer">StringBuilder 和 StringBuffer<a class="headerlink" href="#stringbuilder-stringbuffer" title="Permanent link">&para;</a></h2>
 <p>拼接字符串的时候经常会使用这两个方法？那这两个方法有什么区别呢？</p>
 <p>StringBuilder是线程不安全的，如果需要同步，建议使用 StringBuffer。</p>
 <p>观察远吗 发现 StringBuffer 所有的方法上都有 synchronized 。</p>
 <p>如果代码是单线程的，使用 StringBuilder 就行。</p>
-<h1 id="lock">Lock 锁</h1>
+<h1 id="lock">Lock 锁<a class="headerlink" href="#lock" title="Permanent link">&para;</a></h1>
 <p>前面的例子用的都是自动的锁，JDK 5 之后提供了一个新的锁对象 Lock。</p>
 <p>虽然我们可以理解同步代码块和同步方法的锁对象的问题，</p>
 <p>但是并没有直接看到哪里上了锁，在哪里释放了锁，</p>
@@ -998,176 +997,176 @@ while(true){
 </ul>
 <p>Lock 是接口不能直接实例化，这里采用它的的实现类 ReentrantLock 来实例化 ReentrantLock 的构造方法。</p>
 <p>ReentrantLock():创建一个 ReentrantLock 的实例。</p>
-<pre><code class="language-java">public class MyRunnable implements Runnable{
-    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
-    int ticket = 0;
-    Lock lock = new ReentrantLock();
-    @Override
-    public void run(){
-        // 1. 循环
-        // 2.同步代码块（同步方法）
-        // 3.判断共享数据是否到了末尾，如果到了末尾
-        // 4.判断共享数据是否到了末尾，如果没到末尾
-        while(true){
-            // synchronized(MyRunnable.class){
-            lock.lock():
-                if(ticket == 100){
-                    break;
-                }else{
-                    try {
-                        Thread.sleep(10)
-                    }catch(InterruptedException){
-                        e.printStackTrace();
-                    }
-                    ticket ++;
-                    sout(Thread.getName() + ticket);
-                }
-            lock.unlock();
-            //}
-        }
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyRunnable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Lock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">();</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// 1. 循环</span>
+<span class="w">        </span><span class="c1">// 2.同步代码块（同步方法）</span>
+<span class="w">        </span><span class="c1">// 3.判断共享数据是否到了末尾，如果到了末尾</span>
+<span class="w">        </span><span class="c1">// 4.判断共享数据是否到了末尾，如果没到末尾</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">            </span><span class="c1">// synchronized(MyRunnable.class){</span>
+<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">():</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="p">){</span>
+<span class="w">                        </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">ticket</span><span class="w"> </span><span class="o">++</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">sout</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">//}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>假设 线程1 一直在循环里面执行，当线程1执行到最后一次 ticket = 100，这个时候直接 break，但是我的锁还没有解锁。这个时候我的 线程2 和线程3都在等待，所以当下的时候我的锁没有停止，这个时候在break前面加上lock.unlock()也可以，但是lock.unlock()是一个扫尾的代码，所以为了简化，我们可以写在 finnally 里面，如下</p>
-<pre><code class="language-java">public class MyRunnable implements Runnable{
-    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
-    int ticket = 0;
-    Lock lock = new ReentrantLock();
-    @Override
-    public void run(){
-        // 1. 循环
-        // 2.同步代码块（同步方法）
-        // 3.判断共享数据是否到了末尾，如果到了末尾
-        // 4.判断共享数据是否到了末尾，如果没到末尾
-        while(true){
-            // synchronized(MyRunnable.class){
-            lock.lock():
-            try{    
-            if(ticket == 100){
-                    break;
-                }else{
-                    try {
-                        Thread.sleep(10)
-                    }catch(InterruptedException){
-                        e.printStackTrace();
-                    }
-                    ticket ++;
-                    sout(Thread.getName() + ticket);
-                }
-            }catch(InterruptedException e){
-                e.printStackTrace();
-            }finally{
-                lock.unlock();
-            }
-            lock.unlock();
-            //}
-        }
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyRunnable</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Runnable</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ticket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Lock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">();</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// 1. 循环</span>
+<span class="w">        </span><span class="c1">// 2.同步代码块（同步方法）</span>
+<span class="w">        </span><span class="c1">// 3.判断共享数据是否到了末尾，如果到了末尾</span>
+<span class="w">        </span><span class="c1">// 4.判断共享数据是否到了末尾，如果没到末尾</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">            </span><span class="c1">// synchronized(MyRunnable.class){</span>
+<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">lock</span><span class="p">():</span>
+<span class="w">            </span><span class="k">try</span><span class="p">{</span><span class="w">    </span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">ticket</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100</span><span class="p">){</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">Thread</span><span class="p">.</span><span class="na">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="p">){</span>
+<span class="w">                        </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">ticket</span><span class="w"> </span><span class="o">++</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">sout</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ticket</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span><span class="k">finally</span><span class="p">{</span>
+<span class="w">                </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="w">            </span><span class="c1">//}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>死锁错误：假设线程a，和线程b。两个不一样的锁，都在等着对方释放锁，这个时候程序就会卡死。</p>
 <p><img alt="1716792792344-a1dca34e-942f-48e0-809f-95db50ed534f.png" src="../img/83K3LrHVUHMOzz-6/1716792792344-a1dca34e-942f-48e0-809f-95db50ed534f-345460.png" /></p>
-<h1 id="_15">生产者和消费者</h1>
-<h2 id="_16">普通的等待唤醒机制</h2>
+<h1 id="_15">生产者和消费者<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h1>
+<h2 id="_16">普通的等待唤醒机制<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <p><img alt="案例" src="../img/83K3LrHVUHMOzz-6/1716793638626-cda5f6cf-0b08-4031-ae2c-6f060787d926-210544.png" /></p>
 <p><img alt="1716793652991-53d312bf-991c-4607-acfb-b3868dca1305.png" src="../img/83K3LrHVUHMOzz-6/1716793652991-53d312bf-991c-4607-acfb-b3868dca1305-909115.png" /></p>
-<pre><code class="language-java">public class Desk{
-    /**
-    * 作用：控制生产者和消费者的执行
-    **/
-    // 是否有面条 0:没有面条 1:有面条
-    public static int foodFlag = 0;
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Desk</span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">    * 作用：控制生产者和消费者的执行</span>
+<span class="cm">    **/</span>
+<span class="w">    </span><span class="c1">// 是否有面条 0:没有面条 1:有面条</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">foodFlag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-    // 总个数
-    public static int count = 10;
+<span class="w">    </span><span class="c1">// 总个数</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 
-    //锁对象
-    public static Object lock = new Object();
+<span class="w">    </span><span class="c1">//锁对象</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="p">();</span>
 
-}
-</code></pre>
-<pre><code class="language-java">public class Foodie extends Thread{
-    @Override
-    public void run(){
-        // 1. 循环
-        // 2. 同步代码块（同步方法）
-        // 3. 判断共享数据是否到了末尾（到了末尾）
-        // 4. 判断共享数据是否到了末尾（没有到末尾，执行核心逻辑）
-        while(true){
-            synchronized(Desk.lock){
-                if(Desk.conut==0){
-                    break;
-                }else{
-                    // 先去判断桌子上是否有吃的
-                    if(Desk.foodFlag == 0){
-                        // 没有就等待
-                        try{
-                            Desk.lock.wait(); //让当前线程和锁绑定
-                           }catch(InterruptedException e){
-                            e.printStackTrace();
-                        }
-                    }else{
-                        // 把吃的总数 -1
-                        Desk.count--;
-                        sout(吃,还能吃&quot;+Desk.count+&quot;碗&quot;);
-                        // 吃完之后，唤醒厨师继续做
-                        Desk.lock.notifyAll();
-                        // 修改桌子的状态
-                        Desk.foodFlag = 0;
-                    }
-                }
-            }
-        }
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class Cook extends Thread{
-    @Override
-    public void run(){
-        // 1. 循环
-        // 2. 同步代码块（同步方法）
-        // 3. 判断共享数据是否到了末尾（到了末尾）
-        // 4. 判断共享数据是否到了末尾（没有到末尾，执行核心逻辑）
-        while(true){
-            synchronized(Desk.lock){
-                if(Desk.conut == 0){
-                    break;
-                }else{
-                    // 判断桌子上是否有食物
-                    if(Desk.foodFlag==1){
-                        // 如果有，就等待
-                        try{
-                            Desk.lock.wait();
-                        }catch(InterruptedException e){
-                            e.printStackTrace();
-                        }
-                    }else{
-                        // 如果没有，就制作食物
-                        Desk.count++;
-                        sout(&quot;做了一碗食物&quot;);
-                        // 修改桌子上的食物状态
-                        Desk.foodFlag == 1;
-                        // 叫醒消费者
-                        Desk.lock.notifyAll();
-                    }
-                }
-            }
-        }
-    }
-}
-</code></pre>
-<pre><code class="language-java">public class ThreadDemo{
-    main{
-        Cook c = new Cook();
-        Foodie f = new Foodie();
-        c.setName(&quot;厨师&quot;);
-        f.setName(&quot;吃货&quot;);
-        c.start();
-        f.start();
-    }
-}
-</code></pre>
-<h2 id="_17">引入阻塞队列</h2>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Foodie</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// 1. 循环</span>
+<span class="w">        </span><span class="c1">// 2. 同步代码块（同步方法）</span>
+<span class="w">        </span><span class="c1">// 3. 判断共享数据是否到了末尾（到了末尾）</span>
+<span class="w">        </span><span class="c1">// 4. 判断共享数据是否到了末尾（没有到末尾，执行核心逻辑）</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">            </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">Desk</span><span class="p">.</span><span class="na">lock</span><span class="p">){</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">Desk</span><span class="p">.</span><span class="na">conut</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// 先去判断桌子上是否有吃的</span>
+<span class="w">                    </span><span class="k">if</span><span class="p">(</span><span class="n">Desk</span><span class="p">.</span><span class="na">foodFlag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                        </span><span class="c1">// 没有就等待</span>
+<span class="w">                        </span><span class="k">try</span><span class="p">{</span>
+<span class="w">                            </span><span class="n">Desk</span><span class="p">.</span><span class="na">lock</span><span class="p">.</span><span class="na">wait</span><span class="p">();</span><span class="w"> </span><span class="c1">//让当前线程和锁绑定</span>
+<span class="w">                           </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">                            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">// 把吃的总数 -1</span>
+<span class="w">                        </span><span class="n">Desk</span><span class="p">.</span><span class="na">count</span><span class="o">--</span><span class="p">;</span>
+<span class="w">                        </span><span class="n">sout</span><span class="p">(</span><span class="n">吃</span><span class="p">,</span><span class="n">还能吃</span><span class="s">&quot;+Desk.count+&quot;</span><span class="n">碗</span><span class="s">&quot;);</span>
+<span class="s">                        // 吃完之后，唤醒厨师继续做</span>
+<span class="s">                        Desk.lock.notifyAll();</span>
+<span class="s">                        // 修改桌子的状态</span>
+<span class="s">                        Desk.foodFlag = 0;</span>
+<span class="s">                    }</span>
+<span class="s">                }</span>
+<span class="s">            }</span>
+<span class="s">        }</span>
+<span class="s">    }</span>
+<span class="s">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Cook</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Thread</span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">// 1. 循环</span>
+<span class="w">        </span><span class="c1">// 2. 同步代码块（同步方法）</span>
+<span class="w">        </span><span class="c1">// 3. 判断共享数据是否到了末尾（到了末尾）</span>
+<span class="w">        </span><span class="c1">// 4. 判断共享数据是否到了末尾（没有到末尾，执行核心逻辑）</span>
+<span class="w">        </span><span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">){</span>
+<span class="w">            </span><span class="kd">synchronized</span><span class="p">(</span><span class="n">Desk</span><span class="p">.</span><span class="na">lock</span><span class="p">){</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">Desk</span><span class="p">.</span><span class="na">conut</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// 判断桌子上是否有食物</span>
+<span class="w">                    </span><span class="k">if</span><span class="p">(</span><span class="n">Desk</span><span class="p">.</span><span class="na">foodFlag</span><span class="o">==</span><span class="mi">1</span><span class="p">){</span>
+<span class="w">                        </span><span class="c1">// 如果有，就等待</span>
+<span class="w">                        </span><span class="k">try</span><span class="p">{</span>
+<span class="w">                            </span><span class="n">Desk</span><span class="p">.</span><span class="na">lock</span><span class="p">.</span><span class="na">wait</span><span class="p">();</span>
+<span class="w">                        </span><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">e</span><span class="p">){</span>
+<span class="w">                            </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">// 如果没有，就制作食物</span>
+<span class="w">                        </span><span class="n">Desk</span><span class="p">.</span><span class="na">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">                        </span><span class="n">sout</span><span class="p">(</span><span class="s">&quot;做了一碗食物&quot;</span><span class="p">);</span>
+<span class="w">                        </span><span class="c1">// 修改桌子上的食物状态</span>
+<span class="w">                        </span><span class="n">Desk</span><span class="p">.</span><span class="na">foodFlag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                        </span><span class="c1">// 叫醒消费者</span>
+<span class="w">                        </span><span class="n">Desk</span><span class="p">.</span><span class="na">lock</span><span class="p">.</span><span class="na">notifyAll</span><span class="p">();</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadDemo</span><span class="p">{</span>
+<span class="w">    </span><span class="n">main</span><span class="p">{</span>
+<span class="w">        </span><span class="n">Cook</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cook</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Foodie</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Foodie</span><span class="p">();</span>
+<span class="w">        </span><span class="n">c</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;厨师&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;吃货&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">c</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_17">引入阻塞队列<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <p><img alt="阻塞队列" src="../img/83K3LrHVUHMOzz-6/1716795997458-3b0c066c-b1ea-4b4e-a1ac-62d43eeb032c-040559.png" /></p>
 <p>请注意：生产者和消费者必须使用同一个阻塞队列。<img alt="1716796766162-3f947769-8826-420e-b6bf-164754f73806.png" src="../img/83K3LrHVUHMOzz-6/1716796766162-3f947769-8826-420e-b6bf-164754f73806-616866.png" /></p>
 <p><img alt="1716796828036-7faf88ed-4a10-4d78-aa56-1c695f700d43.png" src="../img/83K3LrHVUHMOzz-6/1716796828036-7faf88ed-4a10-4d78-aa56-1c695f700d43-997843.png" /></p>
@@ -1175,7 +1174,7 @@ while(true){
 <p><img alt="1716796931182-36b08276-a447-47cb-8f80-2bfc58ad6d95.png" src="../img/83K3LrHVUHMOzz-6/1716796931182-36b08276-a447-47cb-8f80-2bfc58ad6d95-636637.png" /></p>
 <p>在java虚拟机当中，只有当前状态，没有定义运行中的状态。</p>
 <p><img alt="线程的6种状态" src="../img/83K3LrHVUHMOzz-6/1716797071495-095f7572-8b56-468f-8a94-46c80d16378f-214413.png" /></p>
-<h1 id="_18">线程池</h1>
+<h1 id="_18">线程池<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h1>
 <p>线程池的实现思路：</p>
 <ol>
 <li>创建一个池子，池子是空的；<ol>
@@ -1191,54 +1190,54 @@ while(true){
 <p><img alt="1716800615313-dbff3c97-2b2a-4036-814f-a4950ee0ac2f.png" src="../img/83K3LrHVUHMOzz-6/1716800615313-dbff3c97-2b2a-4036-814f-a4950ee0ac2f-209548.png" /></p>
 <p>一般来说，线程池是不会被销毁的。</p>
 <p><img alt="1716800575131-981d0cda-11dc-4ddc-9ae6-f6e6c1dafefb.png" src="../img/83K3LrHVUHMOzz-6/1716800575131-981d0cda-11dc-4ddc-9ae6-f6e6c1dafefb-595761.png" /></p>
-<pre><code class="language-java">public static void main(String[] args) {
-    ExecutorService executorService = new ThreadPoolExecutor(3, 5, 1L, TimeUnit.SECONDS, new LinkedBlockingDeque&lt;&gt;(3), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
-    for (int i = 0; i &lt; 10; i++) {
-        executorService.execute(()-&gt;{
-            System.out.println(Thread.currentThread().getName()+&quot;办理业务&quot;);
-        });
-    }
-    executorService.shutdown();
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ExecutorService</span><span class="w"> </span><span class="n">executorService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1L</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedBlockingDeque</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">defaultThreadFactory</span><span class="p">(),</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ThreadPoolExecutor</span><span class="p">.</span><span class="na">AbortPolicy</span><span class="p">());</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">executorService</span><span class="p">.</span><span class="na">execute</span><span class="p">(()</span><span class="o">-&gt;</span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">getName</span><span class="p">()</span><span class="o">+</span><span class="s">&quot;办理业务&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">executorService</span><span class="p">.</span><span class="na">shutdown</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>结果就是五个线程办理业务。当i&lt;=3的时候，123个线程分别处理123，然后我因为LinkedBlockingDeque的大小可以等待3个人，所以当i&lt;=6的时候，我仍旧是123三个线程来处理，当7以上的时候，就可能要让线程45开始工作了，因为没有可以等待的业务了。</p>
-<pre><code class="language-java">pool-1-thread-1办理业务
-pool-1-thread-1办理业务
-pool-1-thread-1办理业务
-pool-1-thread-2办理业务
-pool-1-thread-4办理业务
-pool-1-thread-4办理业务
-pool-1-thread-5办理业务
-pool-1-thread-3办理业务
-pool-1-thread-2办理业务
-pool-1-thread-1办理业务
-</code></pre>
-<pre><code class="language-java">public ThreadPoolExecutor(int corePoolSize,
-                          int maximumPoolSize,
-                          long keepAliveTime,
-                          TimeUnit unit,
-                          BlockingQueue&lt;Runnable&gt; workQueue,
-                          ThreadFactory threadFactory,
-                          RejectedExecutionHandler handler) {
-    if (corePoolSize &lt; 0 ||
-        maximumPoolSize &lt;= 0 ||
-        maximumPoolSize &lt; corePoolSize ||
-        keepAliveTime &lt; 0)
-        throw new IllegalArgumentException();
-    if (workQueue == null || threadFactory == null || handler == null)
-        throw new NullPointerException();
-    this.acc = System.getSecurityManager() == null ?
-            null :
-            AccessController.getContext();
-    this.corePoolSize = corePoolSize;
-    this.maximumPoolSize = maximumPoolSize;
-    this.workQueue = workQueue;
-    this.keepAliveTime = unit.toNanos(keepAliveTime);
-    this.threadFactory = threadFactory;
-    this.handler = handler;
-}
-</code></pre>
-<h1 id="_19">自定义线程池</h1>
+<div class="highlight"><pre><span></span><code><span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">1</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">1</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">1</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">2</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">4</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">4</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">5</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">3</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">2</span><span class="n">办理业务</span>
+<span class="n">pool</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="mi">1</span><span class="n">办理业务</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="nf">ThreadPoolExecutor</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">corePoolSize</span><span class="p">,</span>
+<span class="w">                          </span><span class="kt">int</span><span class="w"> </span><span class="n">maximumPoolSize</span><span class="p">,</span>
+<span class="w">                          </span><span class="kt">long</span><span class="w"> </span><span class="n">keepAliveTime</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">TimeUnit</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">workQueue</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">ThreadFactory</span><span class="w"> </span><span class="n">threadFactory</span><span class="p">,</span>
+<span class="w">                          </span><span class="n">RejectedExecutionHandler</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">corePoolSize</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="n">maximumPoolSize</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="n">maximumPoolSize</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">corePoolSize</span><span class="w"> </span><span class="o">||</span>
+<span class="w">        </span><span class="n">keepAliveTime</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">();</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">workQueue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">threadFactory</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">NullPointerException</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">acc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">getSecurityManager</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span>
+<span class="w">            </span><span class="kc">null</span><span class="w"> </span><span class="p">:</span>
+<span class="w">            </span><span class="n">AccessController</span><span class="p">.</span><span class="na">getContext</span><span class="p">();</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">corePoolSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">corePoolSize</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">maximumPoolSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maximumPoolSize</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">workQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">workQueue</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">keepAliveTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unit</span><span class="p">.</span><span class="na">toNanos</span><span class="p">(</span><span class="n">keepAliveTime</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">threadFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">threadFactory</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handler</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_19">自定义线程池<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h1>
 <p>模拟饭店经营的场景，来自定义线程池，此类场景，有几大核心元素：</p>
 <ol>
 <li>正式员工数量</li>

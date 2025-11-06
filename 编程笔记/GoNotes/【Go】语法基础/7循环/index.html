@@ -304,78 +304,77 @@
 
 
 
-<h1 id="7">7 循环</h1>
-<h2 id="1">循环方式1</h2>
-<pre><code class="language-go">nums := []int{1, 2, 3, 4, 5, 6}
+<h1 id="7">7 循环<a class="headerlink" href="#7" title="Permanent link">&para;</a></h1>
+<h2 id="1">循环方式1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nx">nums</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">}</span>
 
-for i := 0; i &lt; len(nums); i++ {
-        fmt.Println(i)
-    }
-</code></pre>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p>格式还是<code>for</code>后面加<code>i</code>的变量的初始循环值，循环的长度，i++。</p>
-<h2 id="2">循环方式2</h2>
-<pre><code class="language-go">a, b := 1, 5
-for a &lt; b {
-        fmt.Println(a)
-        a++
-    }
-</code></pre>
+<h2 id="2">循环方式2<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">a</span><span class="o">++</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p>类似于while，和上面的循环方式1相比，省略了赋值和++</p>
-<h2 id="3">循环方式3</h2>
-<pre><code class="language-go">for index, value := range nums {
-        fmt.Printf(&quot;key: %v , value: %v
-    \n&quot;, index, value)
-    }
-</code></pre>
+<h2 id="3">循环方式3<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">nums</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;key: %v , value: %v</span>
+<span class="s">    \n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p>迭代的方式进行循环，这里的<code>index</code>为数组的下标，<code>value</code>为数组里面的值，可以忽略下标<code>index</code>或者值<code>value</code>，用下划线带代替，这样就可以避免引入无关的变量定义。</p>
 <p>这种循环的定义方式类似于python的<code>for key in nums[]</code>。</p>
-<h2 id="_1">死循环写法</h2>
-<pre><code class="language-go">for{
-}
-</code></pre>
-<h2 id="_2">案例练习</h2>
-<pre><code class="language-go">package main
+<h2 id="_1">死循环写法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">案例练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;bufio&quot;
-    &quot;fmt&quot;
-    &quot;os&quot;
-    &quot;strconv&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;bufio&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="w">    </span><span class="s">&quot;strconv&quot;</span>
+<span class="p">)</span>
 
-func convertToBin(n int) string{
-    result := &quot;&quot;
-    for ; n&gt;0 ; n /= 2{
-        lsb := n%2
-        result = strconv.Itoa(lsb) + result //每次的余数加到字符串的前面
-    }
-    return result
-}
-func printFile(filename string){
-    file,err := os.Open(filename)
-    if err != nil{
-        panic(err)
-    }
-    scanner := bufio.NewScanner(file) //一行行读
-    for scanner.Scan(){//直接for一个条件就可，没有起始条件和结束条件
-        fmt.Println(scanner.Text())
-    }
-}
-func forever(){
-    for { //死循环，go并发时候经常死循环
-        fmt.Println(&quot;abc&quot;)
-    }
-}
-func main() {
-    fmt.Println(
-        convertToBin(5),//101
-        convertToBin(13),//1101
-        )
-    printFile(&quot;abc.txt&quot;)
-    forever()
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">convertToBin</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">n</span><span class="p">&gt;</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">lsb</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">n</span><span class="o">%</span><span class="mi">2</span>
+<span class="w">        </span><span class="nx">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Itoa</span><span class="p">(</span><span class="nx">lsb</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="c1">//每次的余数加到字符串的前面</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">printFile</span><span class="p">(</span><span class="nx">filename</span><span class="w"> </span><span class="kt">string</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">scanner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bufio</span><span class="p">.</span><span class="nx">NewScanner</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span><span class="w"> </span><span class="c1">//一行行读</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">scanner</span><span class="p">.</span><span class="nx">Scan</span><span class="p">(){</span><span class="c1">//直接for一个条件就可，没有起始条件和结束条件</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">scanner</span><span class="p">.</span><span class="nx">Text</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">forever</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//死循环，go并发时候经常死循环</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">convertToBin</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="c1">//101</span>
+<span class="w">        </span><span class="nx">convertToBin</span><span class="p">(</span><span class="mi">13</span><span class="p">),</span><span class="c1">//1101</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="nx">printFile</span><span class="p">(</span><span class="s">&quot;abc.txt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">forever</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-01-04 16:11:41<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/ft5fu2">https://www.yuque.com/xiaoshan_wgo/codingnotes/ft5fu2</a></p>

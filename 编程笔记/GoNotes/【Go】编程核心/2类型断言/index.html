@@ -286,161 +286,160 @@
 
 
 
-<h1 id="2">2 类型断言</h1>
-<h2 id="_1">需求分析</h2>
+<h1 id="2">2 类型断言<a class="headerlink" href="#2" title="Permanent link">&para;</a></h1>
+<h2 id="_1">需求分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><strong>第一个例子：</strong></p>
-<pre><code class="language-go">package main
-type Usber interface{ //接口和它的两个没有实现的方法
-    Start()
-    Stop()
-}
-type Phone struct{
-}
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Usber</span><span class="w"> </span><span class="kd">interface</span><span class="p">{</span><span class="w"> </span><span class="c1">//接口和它的两个没有实现的方法</span>
+<span class="w">    </span><span class="nx">Start</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">Stop</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Phone</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="p">}</span>
 
-func (p Phone) Start(){ //程序员1写的方法
-    fmt.Println(&quot;手机开始工作。。&quot;)
-}
-func (p Phone) Stop(){//程序员2写的方法
-    fmt.Println(&quot;手机停止工作。。&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Phone</span><span class="p">)</span><span class="w"> </span><span class="nx">Start</span><span class="p">(){</span><span class="w"> </span><span class="c1">//程序员1写的方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;手机开始工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Phone</span><span class="p">)</span><span class="w"> </span><span class="nx">Stop</span><span class="p">(){</span><span class="c1">//程序员2写的方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;手机停止工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Computer struct{
-} 
-//定义个电脑类
+<span class="kd">type</span><span class="w"> </span><span class="nx">Computer</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="p">}</span><span class="w"> </span>
+<span class="c1">//定义个电脑类</span>
 
-func (c Computer) Working(usb Usber){ //电脑的方法是调用接口
-    usb.Start()
-    usb.Stop()
-    usb.Call()
-}
-func main(){
-    computer := Computer{} //电脑
-    phone := Phone{} //手机
-    computer.Working(phone) //电脑和手机工作
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Computer</span><span class="p">)</span><span class="w"> </span><span class="nx">Working</span><span class="p">(</span><span class="nx">usb</span><span class="w"> </span><span class="nx">Usber</span><span class="p">){</span><span class="w"> </span><span class="c1">//电脑的方法是调用接口</span>
+<span class="w">    </span><span class="nx">usb</span><span class="p">.</span><span class="nx">Start</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">usb</span><span class="p">.</span><span class="nx">Stop</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">usb</span><span class="p">.</span><span class="nx">Call</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">computer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Computer</span><span class="p">{}</span><span class="w"> </span><span class="c1">//电脑</span>
+<span class="w">    </span><span class="nx">phone</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Phone</span><span class="p">{}</span><span class="w"> </span><span class="c1">//手机</span>
+<span class="w">    </span><span class="nx">computer</span><span class="p">.</span><span class="nx">Working</span><span class="p">(</span><span class="nx">phone</span><span class="p">)</span><span class="w"> </span><span class="c1">//电脑和手机工作</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在这个例子中，如果我们的结构体<code>Phone</code>有一个方法是<code>Call()</code>，那么如果我们直接用电脑调用<code>usb.Call()</code>会产生<font style="color:#E8323C;">报错</font>。</p>
 <p><strong>第二个例子：</strong></p>
-<pre><code class="language-go">type Point struct{
-    x int
-    y int
-}
-func main(){
-    var a interface{}
-    var point Point{1,2}
-    a = point //空接口可以接收任意一个变量
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Point</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="nx">Point</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="c1">//空接口可以接收任意一个变量</span>
 
-    //如何将a赋给一个Point变量？
-    var b Point
-    b = a //可以吗? No.
-    fmt.Println(b)
-}
-</code></pre>
+<span class="w">    </span><span class="c1">//如何将a赋给一个Point变量？</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="nx">Point</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="c1">//可以吗? No.</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>如何将一个接口变量，赋给自定义类型的变量。</p>
-<h2 id="assert">类型断言Assert</h2>
-<pre><code class="language-go">type Point struct{
-    x int
-    y int
-}
-func main(){
-    var a interface{}
-    var point Point{1,2}
-    a = point //空接口可以接收任意一个变量
+<h2 id="assert">类型断言Assert<a class="headerlink" href="#assert" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Point</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="nx">Point</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">point</span><span class="w"> </span><span class="c1">//空接口可以接收任意一个变量</span>
 
-    //如何将a赋给一个Point变量？
-    var b Point
-    b = a.(Point)//类型断言
-    fmt.Println(b)
-}
-</code></pre>
+<span class="w">    </span><span class="c1">//如何将a赋给一个Point变量？</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="nx">Point</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">.(</span><span class="nx">Point</span><span class="p">)</span><span class="c1">//类型断言</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><code>b = a.(Point)</code> 表示判断a是否指向Point类型的变量，如果是就转成Point类型并赋给b变量，否则<font style="color:#E8323C;">报错</font>。</p>
 <p>类型断言的其他案例：</p>
-<pre><code class="language-go">func main(){
-    var x interface{}
-    var b float32 = 1.1
-    x = b
-    y := x.(float32) //除了float32的类型就会报错
-    fmt.Println(&quot;y的类型是%T，值是%v&quot;)
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">float32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.1</span>
+<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">    </span><span class="nx">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x</span><span class="p">.(</span><span class="kt">float32</span><span class="p">)</span><span class="w"> </span><span class="c1">//除了float32的类型就会报错</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;y的类型是%T，值是%v&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>注：进行类型断言的时候，如果类型不匹配，就会报panic，因此进行类型断言的时候，要确保原来的空接口指向的就是断言的类型。</strong>在进行类型断言的时候，添加如下检查机制：</p>
-<pre><code class="language-go">func main(){
-    var x interface{}
-    var b float32 = 1.1
-    x = b
-   if y,ok := x.(float); ok{
-       fmt.Println(&quot;y的类型是%T，值是%v&quot;)
-   } else{
-        fmt.Println(&quot;convert fail&quot;)
-    }
-}
-</code></pre>
-<h2 id="_2">案例分析</h2>
-<pre><code class="language-go">package main
-type Usber interface{ //接口和它的两个没有实现的方法
-    Start()
-    Stop()
-}
-type Phone struct{
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">float32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.1</span>
+<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x</span><span class="p">.(</span><span class="kt">float</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="p">{</span>
+<span class="w">       </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;y的类型是%T，值是%v&quot;</span><span class="p">)</span>
+<span class="w">   </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;convert fail&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">案例分析<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Usber</span><span class="w"> </span><span class="kd">interface</span><span class="p">{</span><span class="w"> </span><span class="c1">//接口和它的两个没有实现的方法</span>
+<span class="w">    </span><span class="nx">Start</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">Stop</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Phone</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="p">}</span>
 
-func (p Phone) Start(){ //程序员1写的方法
-    fmt.Println(&quot;手机开始工作。。&quot;)
-}
-func (p Phone) Stop(){//程序员2写的方法
-    fmt.Println(&quot;手机停止工作。。&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Phone</span><span class="p">)</span><span class="w"> </span><span class="nx">Start</span><span class="p">(){</span><span class="w"> </span><span class="c1">//程序员1写的方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;手机开始工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Phone</span><span class="p">)</span><span class="w"> </span><span class="nx">Stop</span><span class="p">(){</span><span class="c1">//程序员2写的方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;手机停止工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Computer struct{
-} 
-//定义个电脑类
+<span class="kd">type</span><span class="w"> </span><span class="nx">Computer</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="p">}</span><span class="w"> </span>
+<span class="c1">//定义个电脑类</span>
 
-func (c Computer) Working(usb Usber){ //电脑的方法是调用接口
-    usb.Start()
-    if phone, ok := usb.(Phone);ok{ //类型断言
-        phone.Call()
-    }
-    usb.Stop()
-}
-func main(){
-    var usbArr [3]Usb
-    usbArr[0] = Phone{&quot;vivo&quot;}
-    usbArr[1] = Phone{&quot;小米&quot;}
-    usbArr[2] = Camera{&quot;尼康&quot;}
-    var computer Computer
-    for _,v := range usbArr{
-        computer.Working(v)
-        fmt.Println()
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Computer</span><span class="p">)</span><span class="w"> </span><span class="nx">Working</span><span class="p">(</span><span class="nx">usb</span><span class="w"> </span><span class="nx">Usber</span><span class="p">){</span><span class="w"> </span><span class="c1">//电脑的方法是调用接口</span>
+<span class="w">    </span><span class="nx">usb</span><span class="p">.</span><span class="nx">Start</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">phone</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">usb</span><span class="p">.(</span><span class="nx">Phone</span><span class="p">);</span><span class="nx">ok</span><span class="p">{</span><span class="w"> </span><span class="c1">//类型断言</span>
+<span class="w">        </span><span class="nx">phone</span><span class="p">.</span><span class="nx">Call</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">usb</span><span class="p">.</span><span class="nx">Stop</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">usbArr</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="nx">Usb</span>
+<span class="w">    </span><span class="nx">usbArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Phone</span><span class="p">{</span><span class="s">&quot;vivo&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">usbArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Phone</span><span class="p">{</span><span class="s">&quot;小米&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">usbArr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Camera</span><span class="p">{</span><span class="s">&quot;尼康&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">computer</span><span class="w"> </span><span class="nx">Computer</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">usbArr</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">computer</span><span class="p">.</span><span class="nx">Working</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>案例2：判断输入的类型</p>
-<pre><code class="language-go">package main
-func TypeJudge(item ...interface{}){
-    for index, x := range items{
-        switch x.(type){//（type）是固定写法
-            case bool:
-                fmt.Printf(&quot;第%v个参数是bool类型%v&quot;,index,x)
-            case float64:
-                fmt.Printf(&quot;第%v个参数是float64类型%v&quot;,index,x)
-            case int, int32, int64:
-                fmt.Printf(&quot;第%v个参数是int类型%v&quot;,index,x)
-            case string:
-                fmt.Printf(&quot;第%v个参数是string类型%v&quot;,index,x) 
-            default:
-                fmt.Printf(&quot;第%v个参数是 类型不确定%v&quot;,index,x) 
-        }
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TypeJudge</span><span class="p">(</span><span class="nx">item</span><span class="w"> </span><span class="o">...</span><span class="kd">interface</span><span class="p">{}){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">items</span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">x</span><span class="p">.(</span><span class="kd">type</span><span class="p">){</span><span class="c1">//（type）是固定写法</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="kt">bool</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;第%v个参数是bool类型%v&quot;</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="kt">float64</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;第%v个参数是float64类型%v&quot;</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int32</span><span class="p">,</span><span class="w"> </span><span class="kt">int64</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;第%v个参数是int类型%v&quot;</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="kt">string</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;第%v个参数是string类型%v&quot;</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span>
+<span class="w">            </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;第%v个参数是 类型不确定%v&quot;</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">x</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main(){
-    var n1 float64 = 1.1
-    var n2 int32 = 30
-    var name string = &quot;syt&quot;
-    TypeJudge(n1, n2, name)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">n1</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">1.1</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">n2</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;syt&quot;</span>
+<span class="w">    </span><span class="nx">TypeJudge</span><span class="p">(</span><span class="nx">n1</span><span class="p">,</span><span class="w"> </span><span class="nx">n2</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-05-02 09:49:24<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/snn9pb">https://www.yuque.com/xiaoshan_wgo/codingnotes/snn9pb</a></p>

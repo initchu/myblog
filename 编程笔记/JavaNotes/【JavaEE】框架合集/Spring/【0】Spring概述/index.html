@@ -251,10 +251,10 @@
 
 
 
-<h1 id="0-spring">【0】 Spring 概述</h1>
+<h1 id="0-spring">【0】 Spring 概述<a class="headerlink" href="#0-spring" title="Permanent link">&para;</a></h1>
 <p>参考文章：</p>
 <p><a href="https://juejin.cn/post/7095532056632885284">深入浅出Spring 框架，原来以前白学了！ - 掘金</a></p>
-<h1 id="spring">Spring 框架概述</h1>
+<h1 id="spring">Spring 框架概述<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h1>
 <ol>
 <li>spring 是轻量级的开源的 Java EE 框架</li>
 <li>Spring 可以解决企业应用开发的复杂性</li>
@@ -264,7 +264,7 @@
 </ol>
 </li>
 </ol>
-<h1 id="spring_1">Spring 特点</h1>
+<h1 id="spring_1">Spring 特点<a class="headerlink" href="#spring_1" title="Permanent link">&para;</a></h1>
 <ol>
 <li>方便耦合，简化开发</li>
 <li>Aop 编程支持</li>
@@ -273,7 +273,7 @@
 <li>方便事务的操作</li>
 <li>降低 API 开发难度</li>
 </ol>
-<h1 id="spring_2">Spring 框架入门案例</h1>
+<h1 id="spring_2">Spring 框架入门案例<a class="headerlink" href="#spring_2" title="Permanent link">&para;</a></h1>
 <p>下载spring</p>
 <p><a href="https://repo.spring.io">https://repo.spring.io</a>/release/org/springframework/spring/</p>
 <p>5.2.6 是稳定版本。</p>
@@ -289,44 +289,44 @@
 </li>
 </ul>
 <p>在 src 目录下，创建 com.javastudy.spring5 包，在包中创建接口 UserDao，然后在接口中定义一个 say() /add()方法。</p>
-<pre><code class="language-java">package com.javastudy.spring5;
-public interface UserDao {
-    public void say();
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.javastudy.spring5</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserDao</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">say</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在这个 com.javastudy.spring5 包下，创建这个接口的实现类，UserDaoImpl，该类实现了接口的 say 方法。</p>
-<pre><code class="language-java">package com.javastudy.spring5;
-public class UserDaoImpl implements UserDao{
-    public void say(){
-        System.out.println(&quot;userDao say hello World！&quot;);
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.javastudy.spring5</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">UserDaoImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">UserDao</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">say</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;userDao say hello World！&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在 src 目录下，直接创建 applicationContext.xml 或者 bean1.xml 文件。在配置文件中创建一个 id 为 user 的 bean。【这种方式就是 IOC 操作（Bean 管理）的 XML 方式】</p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-  xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
-  &lt;bean id=&quot;userDao&quot; class=&quot;com.javastudy.spring5&quot;/&gt;
-&lt;/beans&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;beans</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
+<span class="w">  </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">  </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans</span>
+<span class="s">  http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;userDao&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;com.javastudy.spring5&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/beans&gt;</span>
+</code></pre></div>
 <p>2-5 行是约束配置，不需要被开发人员手写。</p>
 <p>在 com.javastudy.spring5 下，创建测试类 TestIOC，并在类中编写 main() 方法，在 main() 方法中，需要初始化 Spring 容器，并加载配置文件，然后通过 Spring 容器获取 userDao 实例，最后调用实例中的 say() 方法。</p>
-<pre><code class="language-java">package com.javastudy.spring5;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-public class TestIOC{
-    public static void main(String[] args){
-        //1. 初始化 spring 容器，加载配置文件
-        ApplicationContext applicationContext = new ClassPathXmlApplication(&quot;applicationContext.xml&quot;);
-        //2. 通过容器获取 userDao 实例
-        UserDao userDao = (UserDao) applicationContext.getBean(&quot;userDao&quot;);
-        //3. 调用实例中的 say（）方法
-        userDao.say();
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.javastudy.spring5</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.ApplicationContext</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.support.ClassPathXmlApplicationContext</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TestIOC</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">        </span><span class="c1">//1. 初始化 spring 容器，加载配置文件</span>
+<span class="w">        </span><span class="n">ApplicationContext</span><span class="w"> </span><span class="n">applicationContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClassPathXmlApplication</span><span class="p">(</span><span class="s">&quot;applicationContext.xml&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//2. 通过容器获取 userDao 实例</span>
+<span class="w">        </span><span class="n">UserDao</span><span class="w"> </span><span class="n">userDao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">UserDao</span><span class="p">)</span><span class="w"> </span><span class="n">applicationContext</span><span class="p">.</span><span class="na">getBean</span><span class="p">(</span><span class="s">&quot;userDao&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">//3. 调用实例中的 say（）方法</span>
+<span class="w">        </span><span class="n">userDao</span><span class="p">.</span><span class="na">say</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2023-01-05 09:27:52<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/suuwvghl7f7zyui1">https://www.yuque.com/xiaoshan_wgo/codingnotes/suuwvghl7f7zyui1</a></p>

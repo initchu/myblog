@@ -251,132 +251,132 @@
 
 
 
-<h1 id="4-rpc">4 RPC 编程</h1>
-<h1 id="rpc">RPC 的概念</h1>
+<h1 id="4-rpc">4 RPC 编程<a class="headerlink" href="#4-rpc" title="Permanent link">&para;</a></h1>
+<h1 id="rpc">RPC 的概念<a class="headerlink" href="#rpc" title="Permanent link">&para;</a></h1>
 <p>RPC（Remote Procedure Call）远程过程调用，是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议，简单的理解是一个节点请求另一个节点提供的服务。RPC 只是一套协议，基于这套协议规范来实现的框架都可以称为 RPC 框架，比较典型的有 Dubbo、Thrift 和 gRPC。</p>
 <p><font style="color:rgb(0, 0, 0);"></font></p>
 <p><font style="color:rgb(0, 0, 0);">RPC 是远程过程调用的方式之一，涉及调用方和被调用方两个进程的交互。因为 RPC 提供类似于本地方法调用的形式，所以对于调用方来说，调用 RPC 方法和调用本地方法并没有明显区别。发起 RPC 的进程通过参数等方式将信息传送给被调用方，然后被调用方处理结束后，再通过返回值将信息传递给调用方。这一过程对于开发人员来说是透明的，开发人员一般也无须知道双方底层是如何进行消息通信和信息传递的，这样可以让业务开发人员更专注于业务开发，而非底层细节。</font></p>
 <p><font style="color:rgb(0, 0, 0);"></font></p>
 <p><font style="color:rgb(0, 0, 0);">RPC 让程序之间的远程过程调用具有与本地调用类似的形式。比如说某个程序需要读取某个文件的数据，开发人员会在代码中执行 read 系统调用来获取数据。</font></p>
-<h1 id="_1"><img alt="本地调用" src="../img/SZqzcPuNRSQ6eDaE/1659403027303-cf61cf87-76f8-4b30-b7ef-18ddb3a01987-108977.png" />        <img alt="远程调用" src="../img/SZqzcPuNRSQ6eDaE/1659403034540-e1dcd207-4f5d-44a2-853d-3b5e8df95983-613349.png" /></h1>
+<h1 id="_1"><img alt="本地调用" src="../img/SZqzcPuNRSQ6eDaE/1659403027303-cf61cf87-76f8-4b30-b7ef-18ddb3a01987-108977.png" />        <img alt="远程调用" src="../img/SZqzcPuNRSQ6eDaE/1659403034540-e1dcd207-4f5d-44a2-853d-3b5e8df95983-613349.png" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(68, 68, 68);">RPC就是为了解决类似远程、跨内存空间、的函数/方法调用的。要实现RPC就需要解决以下三个问题。</font></p>
 <ol>
 <li><strong><font style="color:rgb(68, 68, 68);">如何确定要执行的函数？</font></strong><font style="color:rgb(68, 68, 68);"> 在本地调用中，函数主体通过函数指针函数指定，然后调用 add 函数，编译器通过函数指针函数自动确定 add 函数在内存中的位置。但是在 RPC 中，调用不能通过函数指针完成，因为它们的内存地址可能完全不同。因此，调用方和被调用方都需要维护一个{ function &lt;-&gt; ID }映射表，以确保调用正确的函数。</font></li>
 <li><strong><font style="color:rgb(68, 68, 68);">如何表达参数？</font></strong><font style="color:rgb(68, 68, 68);"> 本地过程调用中传递的参数是通过堆栈内存结构实现的，但 RPC 不能直接使用内存传递参数，因此参数或返回值需要在传输期间序列化并转换成字节流，反之亦然。</font></li>
 <li><strong><font style="color:rgb(68, 68, 68);">如何进行网络传输？</font></strong><font style="color:rgb(68, 68, 68);"> 函数的调用方和被调用方通常是通过网络连接的，也就是说，function ID 和序列化字节流需要通过网络传输，因此，只要能够完成传输，调用方和被调用方就不受某个网络协议的限制。.例如，一些 RPC 框架使用 TCP 协议，一些使用 HTTP。</font></li>
 </ol>
-<h1 id="rpc_1"><font style="color:rgb(0, 0, 0);">RPC 过程调用</font></h1>
+<h1 id="rpc_1"><font style="color:rgb(0, 0, 0);">RPC 过程调用</font><a class="headerlink" href="#rpc_1" title="Permanent link">&para;</a></h1>
 <p>例如 A+B 的调用：service 中间件。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-type Args struct {
-    X, Y int
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Args</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">X</span><span class="p">,</span><span class="w"> </span><span class="nx">Y</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
 
-// ServiceA 自定义一个结构体类型
-type ServiceA struct{}
+<span class="c1">// ServiceA 自定义一个结构体类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ServiceA</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-// Add 为ServiceA类型增加一个可导出的Add方法
-func (s *ServiceA) Add(args *Args, reply *int) error {
-    *reply = args.X + args.Y
-    return nil
-}
-</code></pre>
+<span class="c1">// Add 为ServiceA类型增加一个可导出的Add方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">*</span><span class="nx">ServiceA</span><span class="p">)</span><span class="w"> </span><span class="nx">Add</span><span class="p">(</span><span class="nx">args</span><span class="w"> </span><span class="o">*</span><span class="nx">Args</span><span class="p">,</span><span class="w"> </span><span class="nx">reply</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">*</span><span class="nx">reply</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">Y</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(68, 68, 68);">通过下面的代码将上面定义的 ServiceA 类型注册为一个服务，其 Add 方法就支持 RPC 调用了。</font></p>
-<pre><code class="language-go">// rpc demo/server.go
+<div class="highlight"><pre><span></span><code><span class="c1">// rpc demo/server.go</span>
 
-package main
+<span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;log&quot;
-    &quot;net&quot;
-    &quot;net/http&quot;
-    &quot;net/rpc&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;net&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/rpc&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    service := new(ServiceA)
-    rpc.Register(service) // 注册RPC服务
-    rpc.HandleHTTP()      // 基于HTTP协议
-    l, e := net.Listen(&quot;tcp&quot;, &quot;:9091&quot;)
-    if e != nil {
-        log.Fatal(&quot;listen error:&quot;, e)
-    }
-    http.Serve(l, nil)
-}
-</code></pre>
-<h2 id="_2">服务端</h2>
-<pre><code class="language-go">package main
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">service</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">ServiceA</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">rpc</span><span class="p">.</span><span class="nx">Register</span><span class="p">(</span><span class="nx">service</span><span class="p">)</span><span class="w"> </span><span class="c1">// 注册RPC服务</span>
+<span class="w">    </span><span class="nx">rpc</span><span class="p">.</span><span class="nx">HandleHTTP</span><span class="p">()</span><span class="w">      </span><span class="c1">// 基于HTTP协议</span>
+<span class="w">    </span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:9091&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;listen error:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Serve</span><span class="p">(</span><span class="nx">l</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">服务端<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;net/rpc&quot;
-    &quot;io&quot;
-    &quot;net&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/rpc&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;net&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-//创建一个int类型对象
-type Panda int 
+<span class="c1">//创建一个int类型对象</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Panda</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span>
 
-/**
-* argType是客户端发送过来的内容
-* replyType是服务端返回给客户端的内容
-*/
-func (this *Panda)GetInfo(argType int, replyType *int) error {//GetInfo首字母大小 因为要被外部访问
-    fmt.Println(&quot;打印对方发送过来的数据：&quot;,argType)
-    //执行
-    *replyType = argType + 123456
-    return nil
-}
+<span class="cm">/**</span>
+<span class="cm">* argType是客户端发送过来的内容</span>
+<span class="cm">* replyType是服务端返回给客户端的内容</span>
+<span class="cm">*/</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Panda</span><span class="p">)</span><span class="nx">GetInfo</span><span class="p">(</span><span class="nx">argType</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">replyType</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span><span class="c1">//GetInfo首字母大小 因为要被外部访问</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;打印对方发送过来的数据：&quot;</span><span class="p">,</span><span class="nx">argType</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//执行</span>
+<span class="w">    </span><span class="o">*</span><span class="nx">replyType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">argType</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">123456</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func pandatext(w http.ResponseWriter, r *http.Request) {
-    io.WriteString(w, &quot;hello panda&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">pandatext</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">io</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello panda&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    //客户端页面的请求
-    http.HandleFunc(&quot;/panda&quot;, pandatext)
-    //将类实例化为对象
-    pd := new(Panda)
-    //服务端注册一个对象，该对象就作为一个服务被暴露出去
-    rpc.Register(pd)
-    //连接到网络
-    rpc.HandleHTTP()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//客户端页面的请求</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/panda&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">pandatext</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//将类实例化为对象</span>
+<span class="w">    </span><span class="nx">pd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Panda</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//服务端注册一个对象，该对象就作为一个服务被暴露出去</span>
+<span class="w">    </span><span class="nx">rpc</span><span class="p">.</span><span class="nx">Register</span><span class="p">(</span><span class="nx">pd</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//连接到网络</span>
+<span class="w">    </span><span class="nx">rpc</span><span class="p">.</span><span class="nx">HandleHTTP</span><span class="p">()</span>
 
-    //监听端口
-    ln,err := net.Listen(&quot;tcp&quot;, &quot;:10086&quot;)
-    if err != nil {
-        fmt.Println(&quot;network error&quot;)
-    }
-    http.Serve(ln,nil)
+<span class="w">    </span><span class="c1">//监听端口</span>
+<span class="w">    </span><span class="nx">ln</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:10086&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;network error&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">Serve</span><span class="p">(</span><span class="nx">ln</span><span class="p">,</span><span class="kc">nil</span><span class="p">)</span>
 
-}
-</code></pre>
-<h2 id="_3">客户端</h2>
-<pre><code class="language-go">package main
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">客户端<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;net/rpc&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/rpc&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    //建立网络连接
-    cli, err := rpc.DialHTTP(&quot;tcp&quot;, &quot;127.0.0.1:10086&quot;)
-    if err != nil {
-        fmt.Println(&quot;network failed&quot;)
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//建立网络连接</span>
+<span class="w">    </span><span class="nx">cli</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rpc</span><span class="p">.</span><span class="nx">DialHTTP</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;127.0.0.1:10086&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;network failed&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    var pd int 
-    //客户端调用服务端GetInfo方法，并传递参数
-    err = cli.Call(&quot;Panda.GetInfo&quot;, 10086, &amp;pd)
-    if err != nil {
-        fmt.Println(&quot;call() failed&quot;)
-    }
-    fmt.Println(&quot;服务端输出的值：&quot;, pd)
-}
-</code></pre>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">pd</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">//客户端调用服务端GetInfo方法，并传递参数</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">cli</span><span class="p">.</span><span class="nx">Call</span><span class="p">(</span><span class="s">&quot;Panda.GetInfo&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10086</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">pd</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;call() failed&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;服务端输出的值：&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">pd</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-08-02 10:00:22<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/bh7wao">https://www.yuque.com/xiaoshan_wgo/codingnotes/bh7wao</a></p>

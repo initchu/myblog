@@ -304,23 +304,23 @@
 
 
 
-<h1 id="11-goroutine">11 Goroutine 协程和调度模型</h1>
-<h2 id="_1">主程序和协程的执行流程</h2>
+<h1 id="11-goroutine">11 Goroutine 协程和调度模型<a class="headerlink" href="#11-goroutine" title="Permanent link">&para;</a></h1>
+<h2 id="_1">主程序和协程的执行流程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>有一个程序，在主线程（进程）中开启一个goroutine，该协程每隔1秒输出"hello,world"，在主线程中也每隔1秒钟输出"hello,world"。输出10次之后退出程序。要求主线程和goroutine同时执行。</p>
-<pre><code class="language-go">func test(){
-    for i := 1;i &lt;= 10; i++{
-        fmt.Println(&quot;test () hello world&quot; + strconv.Itoa(i))
-        time.Sleep(time.Second) //休息一秒
-    }
-}
-func main(){
-    go test()
-    for i := 1; i&lt;=10 ; i++{
-        fmt.Println(&quot; main() hello,golang&quot; + strconv.Itoa(i))
-        time.Sleep(time.Second)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;test () hello world&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">//休息一秒</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">test</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;=</span><span class="mi">10</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot; main() hello,golang&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Itoa</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>结果显示:</p>
 <p>可以发现是主函数一次，test函数一次，交叉执行。</p>
 <p>mian 1</p>
@@ -337,46 +337,44 @@ func main(){
 </p>
 </blockquote>
 <p>Go协程和Go主线程的简单案例分析:</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    for i := 0; i&lt;10;i++ {
-        go func(i int){
-            for{
-                fmt.Printf(&quot;Hello from&quot;+
-                    &quot;goroutine %d\n&quot;,i)
-            }
-        }(i)
-    }
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">            </span><span class="k">for</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Hello from&quot;</span><span class="o">+</span>
+<span class="w">                    </span><span class="s">&quot;goroutine %d\n&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>来看这一串代码，结果什么都没显示就退出了。</p>
 <p>原因是:</p>
 <p>并发执行main 和 for func并发执行 还没来得及打印东西，main就退出了。</p>
 <p>应该在main函数的末尾加上<code>time.Sleep(time.Millisecond)</code></p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    for i := 0; i &lt; 1000; i++ {
-        go func(i int){
-            for{
-                fmt.Printf(&quot;Hello from&quot;+
-                    &quot;goroutine %d\n&quot;,i)
-            }
-        }(i)
-    }
-    time.Sleep(time.Millisecond)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">            </span><span class="k">for</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Hello from&quot;</span><span class="o">+</span>
+<span class="w">                    </span><span class="s">&quot;goroutine %d\n&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>总结，<strong>协程</strong>就是：</p>
 <ul>
 <li>轻量级“线程”</li>
@@ -384,7 +382,7 @@ func main() {
 <li>解释器/编译器/虚拟机层面的多任务</li>
 <li>多个协程可能在一个或者多个线程上运行</li>
 </ul>
-<h2 id="goroutine"><font style="color:rgb(51,51,51);">goroutine与线程的区别</font></h2>
+<h2 id="goroutine"><font style="color:rgb(51,51,51);">goroutine与线程的区别</font><a class="headerlink" href="#goroutine" title="Permanent link">&para;</a></h2>
 <p><strong><font style="color:rgb(51,51,51);">1、使用方面： </font></strong></p>
 <p><font style="color:rgb(51,51,51);">（1）goroutine比线程更加轻量级，可以轻松创建十万、百万，不用担心资源问题</font></p>
 <p><font style="color:rgb(51,51,51);">（2）goroutine与channel搭配使用，能够更加方便的实现高并发</font></p>
@@ -397,7 +395,7 @@ func main() {
 <p><font style="color:rgb(51,51,51);">2. goroutine调度由自身的调度器完成</font></p>
 <p><strong><font style="color:rgb(51,51,51);">3、goroutine与线程的联系： </font></strong></p>
 <p><font style="color:rgb(51,51,51);">（1）多个goroutine绑定在同一个线程上面，按照一定的调度算法执行 </font></p>
-<h2 id="goroutinempg"><font style="color:rgb(51,51,51);">goroutine调度模型MPG</font></h2>
+<h2 id="goroutinempg"><font style="color:rgb(51,51,51);">goroutine调度模型MPG</font><a class="headerlink" href="#goroutinempg" title="Permanent link">&para;</a></h2>
 <p><strong><font style="color:rgb(51,51,51);">1</font></strong><strong><font style="color:rgb(51,51,51);">、</font></strong><strong><font style="color:rgb(51,51,51);">M </font></strong></p>
 <p><font style="color:rgb(51,51,51);">代表一个在操作系统的主线程，所有的G(goroutine)任务最终都会在M上执行</font></p>
 <p><strong><font style="color:rgb(51,51,51);">2</font></strong><strong><font style="color:rgb(51,51,51);">、</font></strong><strong><font style="color:rgb(51,51,51);">P</font></strong><strong><font style="color:rgb(51,51,51);">（</font></strong><strong><font style="color:rgb(51,51,51);">Processor</font></strong><strong><font style="color:rgb(51,51,51);">）</font></strong></p>
@@ -415,107 +413,103 @@ func main() {
 <p><img alt="1644471731011-38d33ce7-c1e8-4b84-a5c8-28de0cb090fc.png" src="../img/N7qZuI5s7OeGqlqe/1644471731011-38d33ce7-c1e8-4b84-a5c8-28de0cb090fc-336518.png" /></p>
 <p><img alt="1644472014866-70f45438-8335-4f41-a831-d2070a264f9e.png" src="../img/N7qZuI5s7OeGqlqe/1644472014866-70f45438-8335-4f41-a831-d2070a264f9e-940164.png" /></p>
 <p>简单理解就是：假设有个厨子在炒菜，A先要了一百个菜，但是B和C只点了一个小炒菜。这时候当A的菜在煲汤的时候，厨子就可以先去把B和C的菜炒了，这样就能防止阻塞。</p>
-<h2 id="cpu">设置运行的CPU数</h2>
+<h2 id="cpu">设置运行的CPU数<a class="headerlink" href="#cpu" title="Permanent link">&para;</a></h2>
 <p><img alt="1644473180584-8fdf2b4d-1926-464b-bd86-92bfe85d1369.png" src="../img/N7qZuI5s7OeGqlqe/1644473180584-8fdf2b4d-1926-464b-bd86-92bfe85d1369-921201.png" /></p>
-<pre><code class="language-go">package main
-import &quot;runtime&quot;
-func main(){
-    cpuNum := runtime.NumCPU()
-    runtime.GOMAXPROCS(cpuNum-1)//预留一个CPU
-}
-</code></pre>
-<h2 id="_2">案例分析</h2>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;runtime&quot;</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">cpuNum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">NumCPU</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">GOMAXPROCS</span><span class="p">(</span><span class="nx">cpuNum</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="c1">//预留一个CPU</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">案例分析<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    for i := 0; i &lt; 10; i++ {
-        go func(i int){ //匿名函数开启协程，把外面的参数i传进去打印
-            for{
-                fmt.Printf(&quot;Hello from goroutine %d\n&quot;,i)//交不出控制权，就死在了里面
-            }
-        }(i)
-    }
-    //time.Sleep(time.Millisecond)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span><span class="w"> </span><span class="c1">//匿名函数开启协程，把外面的参数i传进去打印</span>
+<span class="w">            </span><span class="k">for</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Hello from goroutine %d\n&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span><span class="c1">//交不出控制权，就死在了里面</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//time.Sleep(time.Millisecond)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>如果没有加 <code>go func</code> 的 <code>go</code> 就会一直打印 <code>Hello from goroutine 0</code>。加了之后，就就什么都不会打印就直接退出来，<code>main</code>和<code>go func</code>并发执行，还来不及<code>print</code>，主函数的<code>i</code>到<code>10</code>就执行完了。这时候，我们需要取消<code>time.Sleep(time.Millisecond)</code>的注释，这样就能保证，每次<code>i++</code>的时候，可以<code>print hello</code>。</p>
 <p>上面的打印是IO操作，是交出来控制权的。但是下面的这个代码并没有。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    var a [10]int
-    for i := 0; i &lt; 10;i++ {
-        go func(i int){ //匿名函数开启协程
-            for{
-                a[i]++//交不出控制权，就死在了里面
-            }
-        }(i)
-    }
-    time.Sleep(time.Millisecond)
-    fmt.Println(a)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span><span class="w"> </span><span class="c1">//匿名函数开启协程</span>
+<span class="w">            </span><span class="k">for</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">++</span><span class="c1">//交不出控制权，就死在了里面</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在这种情况下运行，会占满CPU。</p>
 <p>可以在后面加上<code>runtime.Gosched()</code></p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;runtime&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;runtime&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    var a [10]int
-    for i := 0; i &lt; 10;i++ {
-        go func(i int){
-            for{
-                a[i]++
-                runtime.Gosched() //手动交出控制权
-            }
-        }(i)//这说明了匿名函数里面的i是取自外面for循环里面的i
-    }
-    time.Sleep(time.Millisecond)
-    fmt.Println(a)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">            </span><span class="k">for</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">++</span>
+<span class="w">                </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Gosched</span><span class="p">()</span><span class="w"> </span><span class="c1">//手动交出控制权</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span><span class="c1">//这说明了匿名函数里面的i是取自外面for循环里面的i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>取消<code>i</code>的传参，看看会发生什么事情。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;runtime&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;runtime&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    var a [10]int
-    for i := 0; i &lt; 10;i++ {
-        go func(){
-            for{
-                a[i]++
-                runtime.Gosched() //手动交出控制权
-            }
-        }()
-    }
-    time.Sleep(time.Millisecond)
-    fmt.Println(a)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(){</span>
+<span class="w">            </span><span class="k">for</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">++</span>
+<span class="w">                </span><span class="nx">runtime</span><span class="p">.</span><span class="nx">Gosched</span><span class="p">()</span><span class="w"> </span><span class="c1">//手动交出控制权</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:#E8323C;">报错！</font></p>
 <p><code>go run -race goroutine.go</code></p>
 <p><code>-race</code>检测数据访问的冲突</p>

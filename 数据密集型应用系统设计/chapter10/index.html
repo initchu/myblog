@@ -721,49 +721,49 @@
 <em><strong>流处理系统（准实时系统）</strong></em>
 介于在线系统和离线系统之间。消费输入并产生输出（不需要响应请求)，在事件发生不久就对事件进行操作。</p>
 <p>本章讨论批处理系统。</p>
-<h2 id="unix">使用Unix工具的批处理</h2>
+<h2 id="unix">使用Unix工具的批处理<a class="headerlink" href="#unix" title="Permanent link">&para;</a></h2>
 <p>从一个例子开始。
-Web 服务器，每次处理请求，在日志中附加一行。使用nginx默认的访问日志格式。</p>
-<pre><code class="language-sql">216.58.210.78 - - [27/Feb/2015:17:55:11 +0000] &quot;GET /css/typography.css HTTP/1.1&quot; 
-200 3377 &quot;http://martin.kleppmann.com/&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) 
-AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36&quot;
-</code></pre>
-<p>日志格式：</p>
-<pre><code class="language-sql"> $remote_addr - $remote_user [$time_local] &quot;$request&quot;
- $status $body_bytes_sent &quot;$http_referer&quot; &quot;$http_user_agent&quot;
-</code></pre>
-<h3 id="_1">简单日志分析</h3>
-<p>想在你的网站上找到五个最受欢迎的网页：</p>
-<pre><code class="language-sql">cat /var/log/nginx/access.log | #1
-    awk '{print $7}' | #2
-    sort             | #3
-    uniq -c          | #4
-    sort -r -n       | #5
-    head -n 5          #6
-</code></pre>
-<p>输出结果：</p>
-<pre><code class="language-sql">    4189 /favicon.ico
-    3631 /2013/05/24/improving-security-of-ssh-private-keys.html
-    2124 /2012/12/05/schema-evolution-in-avro-protocol-buffers-thrift.html
-    1369 /
-     915 /css/typography.css
-</code></pre>
-<p>特点：简单且强大。几分钟内完成许多数据分析，性能非常好。</p>
-<h4 id="_2">命令链与自定义程序</h4>
-<p>除了上述的 Unix 命令链。也可以用程序实现，例如在Ruby中：</p>
-<pre><code class="language-sql">counts = Hash.new(0)         # 1
-File.open('/var/log/nginx/access.log') do |file| 
-    file.each do |line|
-        url = line.split[6]  # 2
-        counts[url] += 1     # 3
-    end
-end
+Web 服务器，每次处理请求，在日志中附加一行。使用nginx默认的访问日志格式。
+<div class="highlight"><pre><span></span><code><span class="mi">216</span><span class="p">.</span><span class="mi">58</span><span class="p">.</span><span class="mi">210</span><span class="p">.</span><span class="mi">78</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">[</span><span class="mi">27</span><span class="o">/</span><span class="n">Feb</span><span class="o">/</span><span class="mi">2015</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">11</span><span class="w"> </span><span class="o">+</span><span class="mi">0000</span><span class="p">]</span><span class="w"> </span><span class="ss">&quot;GET /css/typography.css HTTP/1.1&quot;</span><span class="w"> </span>
+<span class="mi">200</span><span class="w"> </span><span class="mi">3377</span><span class="w"> </span><span class="ss">&quot;http://martin.kleppmann.com/&quot;</span><span class="w"> </span><span class="ss">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) </span>
+<span class="ss">AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.115 Safari/537.36&quot;</span>
+</code></pre></div>
+日志格式：
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="err">$</span><span class="n">remote_addr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="err">$</span><span class="n">remote_user</span><span class="w"> </span><span class="p">[</span><span class="err">$</span><span class="n">time_local</span><span class="p">]</span><span class="w"> </span><span class="ss">&quot;$request&quot;</span>
+<span class="w"> </span><span class="err">$</span><span class="n">status</span><span class="w"> </span><span class="err">$</span><span class="n">body_bytes_sent</span><span class="w"> </span><span class="ss">&quot;$http_referer&quot;</span><span class="w"> </span><span class="ss">&quot;$http_user_agent&quot;</span>
+</code></pre></div></p>
+<h3 id="_1">简单日志分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>想在你的网站上找到五个最受欢迎的网页：
+<div class="highlight"><pre><span></span><code><span class="n">cat</span><span class="w"> </span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="k">access</span><span class="p">.</span><span class="n">log</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">#</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">awk</span><span class="w"> </span><span class="s1">&#39;{print $7}&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">#</span><span class="mi">2</span>
+<span class="w">    </span><span class="n">sort</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="o">#</span><span class="mi">3</span>
+<span class="w">    </span><span class="n">uniq</span><span class="w"> </span><span class="o">-</span><span class="k">c</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="o">#</span><span class="mi">4</span>
+<span class="w">    </span><span class="n">sort</span><span class="w"> </span><span class="o">-</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="o">#</span><span class="mi">5</span>
+<span class="w">    </span><span class="n">head</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="mi">5</span><span class="w">          </span><span class="o">#</span><span class="mi">6</span>
+</code></pre></div>
+输出结果：
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="mi">4189</span><span class="w"> </span><span class="o">/</span><span class="n">favicon</span><span class="p">.</span><span class="n">ico</span>
+<span class="w">    </span><span class="mi">3631</span><span class="w"> </span><span class="o">/</span><span class="mi">2013</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">24</span><span class="o">/</span><span class="n">improving</span><span class="o">-</span><span class="k">security</span><span class="o">-</span><span class="k">of</span><span class="o">-</span><span class="n">ssh</span><span class="o">-</span><span class="n">private</span><span class="o">-</span><span class="n">keys</span><span class="p">.</span><span class="n">html</span>
+<span class="w">    </span><span class="mi">2124</span><span class="w"> </span><span class="o">/</span><span class="mi">2012</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="k">schema</span><span class="o">-</span><span class="n">evolution</span><span class="o">-</span><span class="k">in</span><span class="o">-</span><span class="n">avro</span><span class="o">-</span><span class="n">protocol</span><span class="o">-</span><span class="n">buffers</span><span class="o">-</span><span class="n">thrift</span><span class="p">.</span><span class="n">html</span>
+<span class="w">    </span><span class="mi">1369</span><span class="w"> </span><span class="o">/</span>
+<span class="w">     </span><span class="mi">915</span><span class="w"> </span><span class="o">/</span><span class="n">css</span><span class="o">/</span><span class="n">typography</span><span class="p">.</span><span class="n">css</span>
+</code></pre></div>
+特点：简单且强大。几分钟内完成许多数据分析，性能非常好。</p>
+<h4 id="_2">命令链与自定义程序<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>除了上述的 Unix 命令链。也可以用程序实现，例如在Ruby中：
+<div class="highlight"><pre><span></span><code><span class="n">counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Hash</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">         </span><span class="o">#</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">File</span><span class="p">.</span><span class="k">open</span><span class="p">(</span><span class="s1">&#39;/var/log/nginx/access.log&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">file</span><span class="o">|</span><span class="w"> </span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="k">each</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">line</span><span class="o">|</span>
+<span class="w">        </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">split</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w">  </span><span class="o">#</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="n">counts</span><span class="p">[</span><span class="n">url</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="o">#</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
 
-top5 = counts.map{|url, count| [count, url] }.sort.reverse[0...5] # 4
-top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
-</code></pre>
-<p>特点：不简洁，但可读性强。性能较差。</p>
-<h4 id="vs">排序 VS 内存中的聚合</h4>
+<span class="n">top5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counts</span><span class="p">.</span><span class="k">map</span><span class="err">{</span><span class="o">|</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="o">|</span><span class="w"> </span><span class="p">[</span><span class="k">count</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">]</span><span class="w"> </span><span class="err">}</span><span class="p">.</span><span class="n">sort</span><span class="p">.</span><span class="n">reverse</span><span class="p">[</span><span class="mi">0</span><span class="p">...</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">top5</span><span class="p">.</span><span class="k">each</span><span class="err">{</span><span class="o">|</span><span class="k">count</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="o">|</span><span class="w"> </span><span class="n">puts</span><span class="w"> </span><span class="ss">&quot;#{count} #{url}&quot;</span><span class="w"> </span><span class="err">}</span><span class="w">                   </span><span class="o">#</span><span class="w"> </span><span class="mi">5</span>
+</code></pre></div>
+特点：不简洁，但可读性强。性能较差。</p>
+<h4 id="vs">排序 VS 内存中的聚合<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h4>
 <p>上述两种做法的区别：</p>
 <ul>
 <li>Ruby 脚本在内存中保存了 URL 的哈希表，保存 URL 和其出现的次数。</li>
@@ -776,7 +776,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>GNU Coreutils（Linux）中的sort程序通过溢出至磁盘的方式来自动应对大于内存的数据集，并能同时使用多个CPU核进行并行排序。</li>
 <li>瓶颈可能是从磁盘读取输入文件的速度。</li>
 </ul>
-<h3 id="unix_1">Unix哲学</h3>
+<h3 id="unix_1">Unix哲学<a class="headerlink" href="#unix_1" title="Permanent link">&para;</a></h3>
 <p>Unix管道的发明者道格·麦克罗伊（Doug McIlroy）在1964年说：让数据像水管一样流动。</p>
 <ol>
 <li>让每个程序都做好一件事。要做一件新的工作，写一个新程序，而不是通过添加“功能”让老程序复杂化。</li>
@@ -786,7 +786,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 </ol>
 <p>这种方法 —— 自动化，快速原型设计，增量式迭代，对实验友好，将大型项目分解成可管理的块 —— 听起来非常像今天的敏捷开发和DevOps运动。奇怪的是，四十年来变化不大。</p>
 <p>Unix 怎么实现命令的可组合性？</p>
-<h4 id="_3">统一的接口</h4>
+<h4 id="_3">统一的接口<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <p>为什么要统一的接口？</p>
 <ul>
 <li>一个程序的输出作为另外一个程序的输入，那么必然要统一。</li>
@@ -808,7 +808,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>每条记录（即一行输入）的解析则更加模糊。 Unix工具通常通过空白或制表符将行分割成字段，但也使用CSV（逗号分隔），管道分隔和其他编码。</li>
 </ul>
 <p>今天，像Unix工具一样流畅地运行程序是一种例外，而不是规范。</p>
-<h4 id="_4">逻辑与布线相分离</h4>
+<h4 id="_4">逻辑与布线相分离<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <p>Unix 怎么做输入输出：</p>
 <ul>
 <li>Unix工具的另一个特点是使用标准输入（stdin）和标准输出（stdout）。</li>
@@ -824,7 +824,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>如果程序直接打开文件进行读取和写入，或者将另一个程序作为子进程启动，或者打开网络连接，那么I/O的布线就取决于程序本身了。</li>
 <li>它仍然可以被配置（例如通过命令行选项），但在Shell中对输入和输出进行布线的灵活性就少了。</li>
 </ul>
-<h4 id="_5">透明度和实验</h4>
+<h4 id="_5">透明度和实验<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>使Unix工具如此成功的部分原因是，它们使查看正在发生的事情变得非常容易：</p>
 <ul>
 <li>Unix命令的输入文件通常被视为不可变的。这意味着你可以随意运行命令，尝试各种命令行选项，而不会损坏输入文件。</li>
@@ -839,7 +839,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <ul>
 <li>Unix工具的最大局限在于它们只能在一台机器上运行 —— 而Hadoop这样的工具即应运而生。</li>
 </ul>
-<h2 id="mapreduce">MapReduce和分布式文件系统</h2>
+<h2 id="mapreduce">MapReduce和分布式文件系统<a class="headerlink" href="#mapreduce" title="Permanent link">&para;</a></h2>
 <p>MapReduce 是什么？</p>
 <ul>
 <li>有点像 Unix 工具，不过分布在数千台机器上。</li>
@@ -854,7 +854,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>为了容忍机器故障，文件块会被复制到多台机器上；</li>
 <li>可伸缩性很好：上万台机器，PB 级别存储。</li>
 </ul>
-<h3 id="mapreduce_1">MapReduce作业执行</h3>
+<h3 id="mapreduce_1">MapReduce作业执行<a class="headerlink" href="#mapreduce_1" title="Permanent link">&para;</a></h3>
 <p>MapReduce 怎么运行的？
 以上文中的 Web 服务器日志分析为例。</p>
 <ol>
@@ -882,7 +882,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <ul>
 <li>再编写第二个 MapReduce 作业并将第一个作业的输出用作第二个作业的输入来实现它。</li>
 </ul>
-<h4 id="mapreduce_2">分布式执行MapReduce</h4>
+<h4 id="mapreduce_2">分布式执行MapReduce<a class="headerlink" href="#mapreduce_2" title="Permanent link">&para;</a></h4>
 <p>MapReduce 和 Unix 管道的主要区别？</p>
 <ul>
 <li>MapReduce 在多个机器上并行执行计算，而无需编写代码来显式处理并行问题。</li>
@@ -923,7 +923,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>Reducer调用时会收到一个键，和一个迭代器作为参数，迭代器会顺序地扫过所有具有该键的记录（因为在某些情况可能无法完全放入内存中）。</li>
 <li>Reducer可以使用任意逻辑来处理这些记录，并且可以生成任意数量的输出记录。这些输出记录会写入分布式文件系统上的文件中（通常是在跑Reducer的机器本地磁盘上留一份，并在其他机器上留几份副本）。</li>
 </ul>
-<h4 id="mapreduce_3">MapReduce工作流</h4>
+<h4 id="mapreduce_3">MapReduce工作流<a class="headerlink" href="#mapreduce_3" title="Permanent link">&para;</a></h4>
 <p>单个MapReduce 的局限？</p>
 <ul>
 <li>单个MapReduce作业可以解决的问题范围很有限。</li>
@@ -947,7 +947,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>为了处理这些作业之间的依赖，有很多针对Hadoop的工作流调度器被开发出来，包括Oozie，Azkaban，Luigi，Airflow和Pinball </li>
 <li>在维护大量批处理作业时非常有用。在构建推荐系统时，由50到100个MapReduce作业组成的工作流是常见的；大型组织中，许多不同的团队可能运行不同的作业来读取彼此的输出。</li>
 </ul>
-<h3 id="reducejoin">Reduce侧Join与分组</h3>
+<h3 id="reducejoin">Reduce侧Join与分组<a class="headerlink" href="#reducejoin" title="Permanent link">&para;</a></h3>
 <p>第二章讨论过数据数据模型和查询语言的Join(连接)，这里讨论它是如何实现的。</p>
 <p>两条记录存在关联是很常见的：</p>
 <ul>
@@ -966,7 +966,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li><strong>但通常是需要计算大量记录的聚合</strong>。在这种情况下，特别是如果能在多台机器上并行处理时，扫描整个输入可能是相当合理的事情。</li>
 <li>因此，<strong>我们在批处理语义中讨论链接时，一般是同时处理所有用户的数据，而非某个特定用户的数据。</strong></li>
 </ul>
-<h3 id="_6">示例：用户活动事件分析</h3>
+<h3 id="_6">示例：用户活动事件分析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>一个批处理作业中join 的典型例子。左侧是事件日志，描述登录用户在网站上做的事情（称为<strong>活动事件（activity events）</strong> 或<strong>点击流数据（clickstream data）</strong>），右侧是用户数据库。 
 <img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1639625654252-da9094fa-a453-4609-a2cd-f1b107496c72.png" />
 <strong>分析任务</strong>需要将用户活动与用户档案信息相关联：例如，如果档案包含用户的年龄或出生日期，系统就可以确定哪些页面更受哪些年龄段的用户欢迎。</p>
@@ -986,7 +986,7 @@ top5.each{|count, url| puts &quot;#{count} #{url}&quot; }                   # 5
 <li>更好的方法是获取用户数据库的副本（ETL，数据仓库），并将它和用户行为日志放入同一个分布式文件系统中，如 HDFS。</li>
 <li>然后用MapReduce将所有相关记录集中到同一个地方进行高效处理。</li>
 </ul>
-<h4 id="_7">排序合并连接</h4>
+<h4 id="_7">排序合并连接<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>join 过程中 Mapper 的工作？
 Mapper的目的是从每个输入记录中提取一对键值，在上面 hadoop的 map reduce 的情况下，这个键就是用户ID：</p>
 <ul>
@@ -1010,7 +1010,7 @@ join 过程中怎么做分区？</p>
 <li>由于Reducer一次处理一个特定用户ID的所有记录，因此一次只需要将一条用户记录保存在内存中，而不需要通过网络发出任何请求。</li>
 <li>这个算法被称为<strong>排序合并连接（sort-merge join）</strong>，因为Mapper的输出是按键排序的，然后Reducer将来自join 两侧的有序记录列表合并在一起。</li>
 </ul>
-<h4 id="_8">把相关数据放在一起</h4>
+<h4 id="_8">把相关数据放在一起<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p>为什么需要把相关数据放在一起？</p>
 <ul>
 <li>在排序合并join 中，Mapper和排序过程确保了<strong>所有对特定用户ID执行join 操作的必须数据都被放在同一个地方</strong>：单次调用Reducer的地方。</li>
@@ -1029,7 +1029,7 @@ join 过程中怎么做分区？</p>
 <li>这种分离与数据库的典型用法形成了鲜明对比，从数据库中获取数据的请求经常出现在应用代码内部。</li>
 <li><strong>由于MapReduce处理了所有的网络通信，因此它也避免了让应用代码去担心部分故障</strong>，例如另一个节点的崩溃：MapReduce在不影响应用逻辑的情况下能透明地重试失败的任务。</li>
 </ul>
-<h4 id="_9">分组</h4>
+<h4 id="_9">分组<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
 <p>除了 join(连接) 之外，还有什么“把相关数据放在一起”的方法？</p>
 <ul>
 <li>常见的还有：按某个键对记录分组（如SQL中的GROUP BY子句）。</li>
@@ -1056,7 +1056,7 @@ join 过程中怎么做分区？</p>
 <li>可以通过使用会话cookie，用户ID或类似的标识符作为分组键，以将特定用户的所有活动事件放在一起来实现会话化</li>
 <li>与此同时，不同用户的事件仍然散布在不同的分区中</li>
 </ul>
-<h4 id="_10">处理偏斜</h4>
+<h4 id="_10">处理偏斜<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
 <p>什么是热键？</p>
 <ul>
 <li>如果存在与单个键关联的大量数据，则“将具有相同键的所有记录放到相同的位置”这种模式就被破坏了。</li>
@@ -1092,7 +1092,7 @@ join 过程中怎么做分区？</p>
 <li>第一个MapReduce阶段将记录发送到<strong>随机</strong>Reducer，以便<strong>每个Reducer只对热键的子集执行分组</strong>，为每个键输出一个更紧凑的中间聚合结果。</li>
 <li>然后，第二个MapReduce作业将所有来自第一阶段Reducer的中间聚合结果合并为每个键一个值。</li>
 </ul>
-<h3 id="map-join">Map侧 join</h3>
+<h3 id="map-join">Map侧 join<a class="headerlink" href="#map-join" title="Permanent link">&para;</a></h3>
 <p>怎么理解上文是 Reducer 侧 join ：</p>
 <ul>
 <li>上一节中的链接算法都是在 Reducer 中执行的，所以被称为 reduce 侧 join。</li>
@@ -1105,7 +1105,7 @@ join 过程中怎么做分区？</p>
 <li>如果你<strong>能</strong>对数据做出某些假设，就可以用 Map 侧 Join来加快速度。</li>
 <li>省掉了 Reducer 与排序的 MapReduce 作业，每个 mapper 都是简单的从分布式文件系统中读取一个输入，然后输出到文件系统，仅此而已。</li>
 </ul>
-<h3 id="_11">广播散列连接</h3>
+<h3 id="_11">广播散列连接<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p><strong>广播散列连接（broadcast hash join）</strong>：</p>
 <ul>
 <li>一个最简单场景是大数据集与小数据集连接的情况。要点在于小数据集需要足够小，以便可以将其全部加载到每个Mapper的内存中。</li>
@@ -1115,20 +1115,20 @@ join 过程中怎么做分区？</p>
 <li>Pig, Hive, Cascading和Crunch 都支持这种 join 。</li>
 <li>此外，还可以将较小输入存储在本地磁盘中，索引在内存中。</li>
 </ul>
-<h4 id="_12">分区散列连接</h4>
+<h4 id="_12">分区散列连接<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
 <ul>
 <li>如果Map侧 join 的输入以相同的方式进行<strong>分区</strong>，则散列连接方法可以独立应用于每个分区。</li>
 <li>每个Mapper只需要从输入两端各读取一个分区就足够了。</li>
 <li>好处是每个Mapper都可以在内存散列表中少放点数据。</li>
 <li><strong>适用场景</strong>：这种方法只有当连接两端输入有相同的分区数，且两侧的记录都是使用相同的键与相同的哈希函数做分区时才适用。如果输入是由之前执行过这种分组的MapReduce作业生成的，那么这可能是一个合理的假设。</li>
 </ul>
-<h4 id="map">Map侧合并连接</h4>
+<h4 id="map">Map侧合并连接<a class="headerlink" href="#map" title="Permanent link">&para;</a></h4>
 <ul>
 <li>如果数据集以相同的方式进行<strong>分区</strong>、还基于相同的键进行<strong>排序</strong>，那么还可以用 Map 侧连接的变体。</li>
 <li>输入是否小到能放到内存不重要。</li>
 <li>因为这时候Mapper同样可以执行<strong>归并</strong>操作（通常由Reducer执行）：按键递增的顺序依次读取两个输入文件，将具有相同键的记录配对。</li>
 </ul>
-<h4 id="mapreducemap">MapReduce工作流与Map侧连接</h4>
+<h4 id="mapreducemap">MapReduce工作流与Map侧连接<a class="headerlink" href="#mapreducemap" title="Permanent link">&para;</a></h4>
 <p>影响到输出：</p>
 <ul>
 <li>当下游作业使用MapReduce join 的输出时，Map侧连接或Reduce侧 join 的不同选择会影响输出的结构。</li>
@@ -1140,7 +1140,7 @@ join 过程中怎么做分区？</p>
 <li>Map侧连接也对输入数据集的大小，有序性和分区方式做出了更多假设。</li>
 <li>你必须了解数据按哪些键做的分区和排序，以及分区数量等。</li>
 </ul>
-<h3 id="_13">批处理工作流的输出</h3>
+<h3 id="_13">批处理工作流的输出<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>一个疑问：MapReduce处理完成之后的最终结果是什么？我们最开始为什么要跑这些作业？</p>
 <p>在数据库查询的场景中，我们将事务处理（OLTP）与分析两种目的区分开来：</p>
 <ul>
@@ -1153,7 +1153,7 @@ join 过程中怎么做分区？</p>
 <li>它和分析比较接近，因为批处理通常会扫过输入数据集的绝大部分。</li>
 <li>但批处理过程的输出通常不是报表，而是一些其他类型的结构。</li>
 </ul>
-<h4 id="_14">建立搜索索引</h4>
+<h4 id="_14">建立搜索索引<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
 <p>MapReduce诞生的背景</p>
 <ul>
 <li>Google 最初使用 MapReduce 是为其搜索引擎建立索引</li>
@@ -1179,7 +1179,7 @@ join 过程中怎么做分区？</p>
 </li>
 <li>另一种选择是<strong>增量建立索引</strong>。如果需要索引中添加，删除或更新文档，Lucene会写新的段文件，并在后台异步合并压缩段文件。</li>
 </ul>
-<h4 id="_15">键值存储作为批处理输出</h4>
+<h4 id="_15">键值存储作为批处理输出<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
 <p>除了建立搜索索引之外，批处理还有什么用途？</p>
 <ul>
 <li>构建机器学习系统，例如分类器（比如垃圾邮件过滤器，异常检测，图像识别）与推荐系统</li>
@@ -1213,7 +1213,7 @@ join 过程中怎么做分区？</p>
 <li>因为文件只读（不再修改），所以数据结构很简单，不用预写式日志（WAL）</li>
 <li>在Voldemort加载数据时，使用旧文件继续提供服务，当加载完成自动将查询切换到新文件。如果出现问题，则回滚。</li>
 </ul>
-<h4 id="_16">批处理输出的哲学</h4>
+<h4 id="_16">批处理输出的哲学<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
 <p>Unix哲学鼓励以显式指明数据流的方式进行实验：程序读取输入并写入输出。</p>
 <ul>
 <li>输入保持不变；没有副作用；可以随意改动或调试；</li>
@@ -1236,13 +1236,13 @@ join 过程中怎么做分区？</p>
 <li>大多数 Unix 工具都假设输入输出是无类型文本文件，所以它们必须做大量的输入解析工作（本章开头的日志分析示例使用 {print $7} 来提取URL）。</li>
 <li>在 Hadoop 上可以通过使用<strong>更结构化的文件格式消除一些低价值的语法转换</strong>：比如 Avro（请参阅“<strong>Avro</strong>”）和 Parquet（请参阅“<strong>列存储</strong>”）经常使用，因为它们提供了基于模式的高效编码，并允许模式随时间推移而演进（见<strong>第四章</strong>）。</li>
 </ul>
-<h3 id="hadoop">Hadoop与分布式数据库的对比</h3>
+<h3 id="hadoop">Hadoop与分布式数据库的对比<a class="headerlink" href="#hadoop" title="Permanent link">&para;</a></h3>
 <p>MapReduce 与 大规模并行处理（MPP， massively parallel processing）的区别？</p>
 <ul>
 <li>MPP数据库专注于在一组机器上并行执行分析SQL查询</li>
 <li>而MapReduce和分布式文件系统的组合则更像是一个可以运行任意程序的通用操作系统。</li>
 </ul>
-<h4 id="_17">存储多样性</h4>
+<h4 id="_17">存储多样性<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
 <p>分布式文件系统与数据库的区别？</p>
 <ul>
 <li>数据库要求你根据特定的模型（例如关系或文档）来构造数据</li>
@@ -1255,7 +1255,7 @@ join 过程中怎么做分区？</p>
 <li>转移了解释数据的负担：数据的解释成为消费者的问题（读时模式），有利于跨团队合作。</li>
 <li>这种方法被称为<strong>寿司原则（sushi principle）</strong>：“原始数据更好”</li>
 </ul>
-<h4 id="_18">处理模型的多样性</h4>
+<h4 id="_18">处理模型的多样性<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
 <p>MPP 数据库和 MapReduce 在处理模型上的区别？</p>
 <ul>
 <li>MPP 数据库是单体的，紧密集成的软件，负责磁盘上的存储布局，查询计划，调度和执行。</li>
@@ -1268,7 +1268,7 @@ join 过程中怎么做分区？</p>
 </ul>
 </li>
 </ul>
-<h4 id="_19">针对频繁故障设计</h4>
+<h4 id="_19">针对频繁故障设计<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
 <p>MPP 数据库和 MapReduce 在处理故障上的区别？</p>
 <ul>
 <li>与在线系统相比，批处理系统对故障不敏感。</li>
@@ -1287,11 +1287,11 @@ join 过程中怎么做分区？</p>
 <li>场景：如果优先级较高的任务需要更多的资源，则可以终止（抢占）同一台机器上较低优先级的任务以释放资源。从而提高资源利用率。</li>
 <li>在谷歌，运行一个小时的MapReduce任务有大约有5％的风险被终止，为了给更高优先级的进程挪地方。</li>
 </ul>
-<h2 id="mapreduce_4">MapReduce之后</h2>
+<h2 id="mapreduce_4">MapReduce之后<a class="headerlink" href="#mapreduce_4" title="Permanent link">&para;</a></h2>
 <p>MapReduce 是简单，但导致复杂任务从头编写任务繁重。
 很多高级编程模型被创造，如 Pig，Hive，Cascading，Crunch；
 MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
-<h3 id="_20">物化中间状态</h3>
+<h3 id="_20">物化中间状态<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <p>什么是物化中间状态？</p>
 <ul>
 <li>每个MapReduce作业都独立于其他任何作业，跨团队合作时，分布式系统的文件只是简单的中间状态（intermediate state）</li>
@@ -1308,7 +1308,7 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 </li>
 <li><strong>复制很浪费</strong>：将中间状态存储在分布式文件系统中意味着这些文件被<strong>复制</strong>到多个节点，对这些临时数据这么搞就比较过分了。</li>
 </ul>
-<h4 id="_21">数据流引擎</h4>
+<h4 id="_21">数据流引擎<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
 <p>为了解决上述问题，开发了数据流引擎：Spark, Tez, Flink。</p>
 <p>数据流引擎与 MapReduce 的区别？</p>
 <ul>
@@ -1332,7 +1332,7 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 <li>与MapReduce（为每个任务启动一个新的JVM）相比，现有Java虚拟机（JVM）进程可以重用来运行新算子，从而减少启动开销。</li>
 </ul>
 <p>使用数据流引擎执行与MapReduce工作流同样的计算，通常执行速度要明显快得多。</p>
-<h4 id="_22">容错</h4>
+<h4 id="_22">容错<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
 <p>完全物化中间状态至 HDFS 的优点？</p>
 <ul>
 <li>具有持久性，这使得MapReduce中的容错相当容易，任务失败时可以在另一台机器上重启。</li>
@@ -1354,14 +1354,14 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 <li>不是</li>
 <li>如果中间状态比原始数据小得多，或者计算量大，那么物化中间状态更好。</li>
 </ul>
-<h4 id="_23">关于物化的讨论</h4>
+<h4 id="_23">关于物化的讨论<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
 <p>流引擎的输入和输出与物化。</p>
 <ul>
 <li>排序算子必须消费全部的输入后才能输出，因子需要排序的算子都需要至少暂时累积状态。</li>
 <li>使用数据流引擎时，HDFS 上的物化数据集通常仍是作业的输入和输出。</li>
 <li>比起 MapReduce 的改进是，不用自己把中间状态写入文件了。</li>
 </ul>
-<h3 id="_24">图与迭代处理</h3>
+<h3 id="_24">图与迭代处理<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
 <p>批处理中为什么会处理图？</p>
 <ul>
 <li>目标是在整个图上执行某种离线处理或分析</li>
@@ -1372,7 +1372,7 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 而图处理中，数据本身具有图的性质。</p>
 </blockquote>
 <p>许多图算法是通过 BFS/DFS 实现的，MapReduce 实现它很低效，因为 MapReduce 是一条条处理的。</p>
-<h4 id="pregel">Pregel处理模型</h4>
+<h4 id="pregel">Pregel处理模型<a class="headerlink" href="#pregel" title="Permanent link">&para;</a></h4>
 <p>针对图批处理的优化 —— <strong>批量同步并行（BSP，Bulk Synchronous Parallel）</strong> 计算模型已经开始流行起来。</p>
 <ul>
 <li>其中，Apache Giraph ，Spark的GraphX API和Flink的Gelly API 实现了它。</li>
@@ -1385,14 +1385,14 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 <li>在每次迭代中，为每个顶点调用一个函数，将所有发送给它的消息传递给它 —— 就像调用Reducer一样。</li>
 <li>与MapReduce的不同之处在于，在Pregel模型中，顶点在一次迭代到下一次迭代的过程中会记住它的状态，所以这个函数只需要处理新的传入消息。如果图的某个部分没有被发送消息，那里就不需要做任何工作。</li>
 </ul>
-<h4 id="_25">容错</h4>
+<h4 id="_25">容错<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
 <p>Pregel作业怎么容错？</p>
 <ul>
 <li>消息批处理，且等待通信的次数减少了；每次迭代中发送的消息处理完成才能处理下一轮迭代。</li>
 <li>网络丢失、重复、延迟消息时，Pregel 能保证消息在其目标顶点恰好处理一次。</li>
 <li>迭代结束时，定期存档所有顶点的状态，持久化存储。</li>
 </ul>
-<h4 id="_26">并行执行</h4>
+<h4 id="_26">并行执行<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
 <ul>
 <li>图的分区取决于框架——比如顶点运行在哪台机器上，怎么通过网络通信。</li>
 <li>理想情况下，大量通信的顶点最好放在同一台机器上。</li>
@@ -1401,7 +1401,7 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 <li>如果图能放在单机内存中处理，单机算法很可能超过分布式处理。</li>
 <li>分布式处理图的并行算法是一个进行中的研究领域。</li>
 </ul>
-<h3 id="api">高级API和语言</h3>
+<h3 id="api">高级API和语言<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
 <p>目前大规模处理的能力已经具备，在研究的是改进编程模型，提高处理效率，扩大这些技术可以解决的问题集。</p>
 <ul>
 <li>Hive, Pig, Spark, Flink 等都有自己的高级数据流 API，很方便简单高效。</li>
@@ -1417,7 +1417,7 @@ MapReuce 是非常稳健，但其他工具可能快上几个量级。</p>
 <li>传统上，MPP数据库满足了商业智能分析和业务报表的需求</li>
 <li>而现在，随着批处理系统获得各种内置功能以及高级声明式算子，且随着MPP数据库变得更加灵活和易于编程，<strong>两者开始看起来相似了</strong>：最终，它们都只是存储和处理数据的系统。</li>
 </ul>
-<h2 id="_27">本章小结</h2>
+<h2 id="_27">本章小结<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h2>
 <p>输入输出</p>
 <ul>
 <li>在Unix世界中，允许程序与程序组合的统一接口是文件与管道；</li>

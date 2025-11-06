@@ -251,93 +251,92 @@
 
 
 
-<h1 id="3-http">3 HTTP 编程</h1>
-<h1 id="http">HTTP 的简单使用</h1>
-<h2 id="http-server">HTTP Server</h2>
+<h1 id="3-http">3 HTTP 编程<a class="headerlink" href="#3-http" title="Permanent link">&para;</a></h1>
+<h1 id="http">HTTP 的简单使用<a class="headerlink" href="#http" title="Permanent link">&para;</a></h1>
+<h2 id="http-server">HTTP Server<a class="headerlink" href="#http-server" title="Permanent link">&para;</a></h2>
 <p>服务端处理请求和响应</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func HelloHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, &quot;Hello!&quot;) //把返回的内容写入 http.ResponseWrite
-}
-func main() {
-    http.HandleFunc(&quot;/&quot;, HelloHandler)
-    http.ListenAndServe(&quot;:5656&quot;, nil)
-}
-</code></pre>
-<h2 id="http-client">HTTP Client</h2>
-<pre><code class="language-go">package main
+<span class="kd">func</span><span class="w"> </span><span class="nx">HelloHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello!&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">//把返回的内容写入 http.ResponseWrite</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">HelloHandler</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:5656&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="http-client">HTTP Client<a class="headerlink" href="#http-client" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;io&quot;
-    &quot;net/http&quot;
-    &quot;os&quot;
-    &quot;strings&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="p">)</span>
 
-func get() {
-    if resp, err := http.Get(&quot;http://127.0.0.1:8080&quot;); err != nil {
-        fmt.Println(&quot;err!&quot;)
-    } else {
-        defer resp.Body.Close()
-        io.Copy(os.Stdout, resp.Body)
-        os.Stdout.WriteString(&quot;\n&quot;)
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">get</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">resp</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;http://127.0.0.1:8080&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;err!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func post() {
-    reader := strings.NewReader(&quot;hello server&quot;)
-    if resp, err := http.Post(&quot;http://127.0.0.1:8080&quot;, &quot;text/plain&quot;, reader); err != nil {
-        fmt.Println(err)
-    } else {
-        defer resp.Body.Close()
-        io.Copy(os.Stdout, resp.Body)
-        os.Stdout.WriteString(&quot;\n&quot;)
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">post</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">reader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">NewReader</span><span class="p">(</span><span class="s">&quot;hello server&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">resp</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Post</span><span class="p">(</span><span class="s">&quot;http://127.0.0.1:8080&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;text/plain&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">reader</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-}
-func main() {
-    get()
-    post()
-}
-</code></pre>
-<h2 id="httprouter">httprouter 的使用</h2>
-<pre><code class="language-go">package main
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">get</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">post</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="httprouter">httprouter 的使用<a class="headerlink" href="#httprouter" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;github.com/julienschmidt/httprouter&quot;
-    &quot;io&quot;
-    &quot;net/http&quot;
-    &quot;os&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/julienschmidt/httprouter&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
 
-func getHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-    fmt.Printf(&quot;Method:%s\n&quot;, r.Method)
-    fmt.Println(&quot;request body:&quot;)
-    io.Copy(os.Stdout, r.Body)
-    fmt.Println()
-    w.Write([]byte(&quot;you &quot;))
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">getHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">,</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="nx">httprouter</span><span class="p">.</span><span class="nx">Params</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Method:%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Method</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;request body:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;you &quot;</span><span class="p">))</span>
+<span class="p">}</span>
 
-func main() {
-    router := httprouter.New()
-    router.POST(&quot;/user/:name/:type/*addr&quot;,getHandler)
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">httprouter</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/user/:name/:type/*addr&quot;</span><span class="p">,</span><span class="nx">getHandler</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>使用 router 编写路由规则，客户端请求的路径应于 router 的路径相对应，在上述代码中的 <code>/user/:name/:type/*addr</code>的含义是：</p>
 <p><code>/user/</code>：必须包含 /user/ 的路径进行请求</p>
 <p><code>/:name/</code>：赋值给<code>name</code>变量</p>
 <p><code>/*addr</code>：后面的参数全部赋值给<code>addr</code></p>
-<h1 id="_1">请求报文和响应报文的格式分析</h1>
-<h2 id="_2">请求报文格式查看</h2>
+<h1 id="_1">请求报文和响应报文的格式分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">请求报文格式查看<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>服务端逻辑：</p>
 <blockquote>
 <p><strong>先创建一个监听 Listenner，使用 net 包中的 Listen 方法，记得最后关闭监听；</strong></p>
@@ -347,50 +346,49 @@ func main() {
 <p><strong>切片截取有效数据。</strong>
 </p>
 </blockquote>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;log&quot;
-    &quot;net&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;net&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    //创建、监听socket
-    listenner, err := net.Listen(&quot;tcp&quot;, &quot;127.0.0.1:8000&quot;)
-    if err != nil {
-        log.Fatal(err) //log.Fatal()会产生panic
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//创建、监听socket</span>
+<span class="w">    </span><span class="nx">listenner</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;127.0.0.1:8000&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="c1">//log.Fatal()会产生panic</span>
+<span class="w">    </span><span class="p">}</span>
 
-    defer listenner.Close()
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">listenner</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-    conn, err := listenner.Accept() //阻塞等待客户端连接
-    if err != nil {
-        log.Println(err)
-        return
-    }
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">listenner</span><span class="p">.</span><span class="nx">Accept</span><span class="p">()</span><span class="w"> </span><span class="c1">//阻塞等待客户端连接</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    defer conn.Close() //此函数结束时，关闭连接套接字
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">//此函数结束时，关闭连接套接字</span>
 
-    //conn.RemoteAddr().String() 表示连接了一个远程客户端
-    ipAddr := conn.RemoteAddr().String()
-    fmt.Println(ipAddr, &quot;连接成功&quot;)
+<span class="w">    </span><span class="c1">//conn.RemoteAddr().String() 表示连接了一个远程客户端</span>
+<span class="w">    </span><span class="nx">ipAddr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">().</span><span class="nx">String</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ipAddr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;连接成功&quot;</span><span class="p">)</span>
 
-    buf := make([]byte, 4096) //缓冲区，用于接收客户端发送的数据
+<span class="w">    </span><span class="nx">buf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">)</span><span class="w"> </span><span class="c1">//缓冲区，用于接收客户端发送的数据</span>
 
-    //阻塞等待用户发送的数据
-    n, err := conn.Read(buf) //n代码接收数据的长度
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
+<span class="w">    </span><span class="c1">//阻塞等待用户发送的数据</span>
+<span class="w">    </span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span><span class="w"> </span><span class="c1">//n代码接收数据的长度</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    //切片截取，只截取有效数据
-    result := buf[:n]
-    fmt.Printf(&quot;接收到数据来自[%s]==&gt;:\n%s\n&quot;, ipAddr, string(result))
-}
-
-</code></pre>
+<span class="w">    </span><span class="c1">//切片截取，只截取有效数据</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">buf</span><span class="p">[:</span><span class="nx">n</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;接收到数据来自[%s]==&gt;:\n%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ipAddr</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>服务端运行成功。</p>
 <p><img alt="代码运行结果" src="../img/PmL2BPNAYfJqW2hZ/1649859213167-57051323-89e3-4e0b-8704-6fddb28a5a68-749532.png" /></p>
 <p>HTTP 请求报文由<u>请求行、请求头部、空行、请求包体</u>4个部分组成，如下图所示：</p>
@@ -458,65 +456,63 @@ func main() {
 <p><strong>请求包体</strong></p>
 <p>请求包体不在GET方法中使用，而是POST方法中使用。</p>
 <p>POST方法适用于需要客户填写表单的场合。与请求包体相关的最常使用的是包体类型Content-Type和包体长度Content-Length。</p>
-<h2 id="_3">响应报文查看</h2>
+<h2 id="_3">响应报文查看<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>客户端来查看服务端响应后的报文是什么。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-//服务端编写的业务逻辑处理程序
-func myHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintln(w, &quot;hello world&quot;)
-}
+<span class="c1">//服务端编写的业务逻辑处理程序</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">myHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintln</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    http.HandleFunc(&quot;/go&quot;, myHandler)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/go&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">myHandler</span><span class="p">)</span>
 
-    //在指定的地址进行监听，开启一个HTTP
-    http.ListenAndServe(&quot;127.0.0.1:8000&quot;, nil)
-}
+<span class="w">    </span><span class="c1">//在指定的地址进行监听，开启一个HTTP</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;127.0.0.1:8000&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-</code></pre>
-<pre><code class="language-go">package main
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;net&quot;</span>
+<span class="p">)</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;log&quot;
-    &quot;net&quot;
-)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//客户端主动连接服务器</span>
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;127.0.0.1:8000&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="c1">//log.Fatal()会产生panic</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-func main() {
-    //客户端主动连接服务器
-    conn, err := net.Dial(&quot;tcp&quot;, &quot;127.0.0.1:8000&quot;)
-    if err != nil {
-        log.Fatal(err) //log.Fatal()会产生panic
-        return
-    }
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">//关闭</span>
 
-    defer conn.Close() //关闭
+<span class="w">    </span><span class="nx">requestHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;GET /go HTTP/1.1\r\nAccept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*\r\nAccept-Language: zh-Hans-CN,zh-Hans;q=0.8,en-US;q=0.5,en;q=0.3\r\nUser-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)\r\nAccept-Encoding: gzip, deflate\r\nHost: 127.0.0.1:8000\r\nConnection: Keep-Alive\r\n\r\n&quot;</span>
 
-    requestHeader := &quot;GET /go HTTP/1.1\r\nAccept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*\r\nAccept-Language: zh-Hans-CN,zh-Hans;q=0.8,en-US;q=0.5,en;q=0.3\r\nUser-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)\r\nAccept-Encoding: gzip, deflate\r\nHost: 127.0.0.1:8000\r\nConnection: Keep-Alive\r\n\r\n&quot;
+<span class="w">    </span><span class="c1">//先发送请求包</span>
+<span class="w">    </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">requestHeader</span><span class="p">))</span>
 
-    //先发送请求包
-    conn.Write([]byte(requestHeader))
+<span class="w">    </span><span class="nx">buf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">)</span><span class="w"> </span><span class="c1">//缓冲区</span>
 
-    buf := make([]byte, 4096) //缓冲区
-
-    //阻塞等待服务器回复的数据
-    n, err := conn.Read(buf) //n代码接收数据的长度
-    if err != nil {
-        fmt.Println(err)
-        return
-    }
-    //切片截取，只截取有效数据
-    result := buf[:n]
-    fmt.Printf(&quot;接收到数据[%d]:\n%s\n&quot;, n, string(result))
-}
-
-</code></pre>
+<span class="w">    </span><span class="c1">//阻塞等待服务器回复的数据</span>
+<span class="w">    </span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span><span class="w"> </span><span class="c1">//n代码接收数据的长度</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//切片截取，只截取有效数据</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">buf</span><span class="p">[:</span><span class="nx">n</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;接收到数据[%d]:\n%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>客户端响应成功：</p>
 <p><img alt="1649902027384-e3700143-37f5-4ca1-a95f-1c6694641c34.png" src="../img/PmL2BPNAYfJqW2hZ/1649902027384-e3700143-37f5-4ca1-a95f-1c6694641c34-602186.png" /></p>
 <p>响应报文格式说明:</p>
@@ -625,37 +621,36 @@ func main() {
 <p>最后一个响应头部之后是一个空行，发送回车符和换行符，通知服务器以下不再有响应头部。</p>
 <p><strong>响应包体</strong></p>
 <p>服务器返回给客户端的文本信息。</p>
-<h1 id="http_1">完整的 HTTP 编程案例</h1>
-<h2 id="http_2">HTTP 服务端</h2>
-<pre><code class="language-go">package main
+<h1 id="http_1">完整的 HTTP 编程案例<a class="headerlink" href="#http_1" title="Permanent link">&para;</a></h1>
+<h2 id="http_2">HTTP 服务端<a class="headerlink" href="#http_2" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-//服务端编写的业务逻辑处理程序
-//hander函数： 具有func(w http.ResponseWriter, r *http.Requests)签名的函数
-//w 是给客户端回复数据，r 是读取客户端发送的数据
-func myHandler(w http.ResponseWriter, r *http.Request) {
-    fmt.Println(r.RemoteAddr, &quot;连接成功&quot;)  //r.RemoteAddr远程网络地址
-    fmt.Println(&quot;method = &quot;, r.Method) //请求方法
-    fmt.Println(&quot;url = &quot;, r.URL.Path)
-    fmt.Println(&quot;header = &quot;, r.Header)
-    fmt.Println(&quot;body = &quot;, r.Body)
-    w.Write([]byte(&quot;hello go&quot;)) //给客户端回复数据
-}
+<span class="c1">//服务端编写的业务逻辑处理程序</span>
+<span class="c1">//hander函数： 具有func(w http.ResponseWriter, r *http.Requests)签名的函数</span>
+<span class="c1">//w 是给客户端回复数据，r 是读取客户端发送的数据</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">myHandler</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">RemoteAddr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;连接成功&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">//r.RemoteAddr远程网络地址</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;method = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Method</span><span class="p">)</span><span class="w"> </span><span class="c1">//请求方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;url = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;header = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Header</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;body = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello go&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">//给客户端回复数据</span>
+<span class="p">}</span>
 
-func main() {
-    http.HandleFunc(&quot;/go&quot;, myHandler)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/go&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">myHandler</span><span class="p">)</span>
 
-    //该方法用于在指定的 TCP 网络地址 addr 进行监听，然后调用服务端处理程序来处理传入的连接请求。
-    //该方法有两个参数：第一个参数 addr 即监听地址；第二个参数表示服务端处理程序，通常为空
-    //第二个参数为空意味着服务端调用 http.DefaultServeMux 进行处理
-    http.ListenAndServe(&quot;127.0.0.1:8000&quot;, nil)
-}
-
-</code></pre>
+<span class="w">    </span><span class="c1">//该方法用于在指定的 TCP 网络地址 addr 进行监听，然后调用服务端处理程序来处理传入的连接请求。</span>
+<span class="w">    </span><span class="c1">//该方法有两个参数：第一个参数 addr 即监听地址；第二个参数表示服务端处理程序，通常为空</span>
+<span class="w">    </span><span class="c1">//第二个参数为空意味着服务端调用 http.DefaultServeMux 进行处理</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;127.0.0.1:8000&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>:::info
 注：</p>
 <ul>
@@ -666,45 +661,44 @@ func main() {
 <p>:::</p>
 <p>Go语言中<code>http package</code>包含<code>Handle</code>和<code>HandleFunc</code>两个函数。</p>
 <p>参考文章：<a href="https://www.jianshu.com/p/3b5c4fc0695c">https://www.jianshu.com/p/3b5c4fc0695c</a> 二者的区别。</p>
-<h2 id="http_3">HTTP 客户端</h2>
-<pre><code class="language-go">func main() {
+<h2 id="http_3">HTTP 客户端<a class="headerlink" href="#http_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-    //get方式请求一个资源
-    //resp, err := http.Get(&quot;http://www.baidu.com&quot;)
-    //resp, err := http.Get(&quot;http://www.neihan8.com/article/index.html&quot;)
-    resp, err := http.Get(&quot;http://127.0.0.1:8000/go&quot;)
-    if err != nil {
-        log.Println(err)
-        return
-    }
+<span class="w">    </span><span class="c1">//get方式请求一个资源</span>
+<span class="w">    </span><span class="c1">//resp, err := http.Get(&quot;http://www.baidu.com&quot;)</span>
+<span class="w">    </span><span class="c1">//resp, err := http.Get(&quot;http://www.neihan8.com/article/index.html&quot;)</span>
+<span class="w">    </span><span class="nx">resp</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;http://127.0.0.1:8000/go&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    defer resp.Body.Close() //关闭
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="c1">//关闭</span>
 
-    fmt.Println(&quot;header = &quot;, resp.Header)
-    fmt.Printf(&quot;resp status %s\nstatusCode %d\n&quot;, resp.Status, resp.StatusCode)
-    fmt.Printf(&quot;body type = %T\n&quot;, resp.Body)
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;header = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Header</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;resp status %s\nstatusCode %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Status</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">StatusCode</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;body type = %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
 
-    buf := make([]byte, 2048) //切片缓冲区
-    var tmp string
+<span class="w">    </span><span class="nx">buf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">)</span><span class="w"> </span><span class="c1">//切片缓冲区</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">tmp</span><span class="w"> </span><span class="kt">string</span>
 
-    for {
-        n, err := resp.Body.Read(buf) //读取body包内容
-        if err != nil &amp;&amp; err != io.EOF {
-            fmt.Println(err)
-            return
-        }
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">buf</span><span class="p">)</span><span class="w"> </span><span class="c1">//读取body包内容</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">EOF</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        if n == 0 {
-            fmt.Println(&quot;读取内容结束&quot;)
-            break
-        }
-        tmp += string(buf[:n]) //累加读取的内容
-    }
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;读取内容结束&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">tmp</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">buf</span><span class="p">[:</span><span class="nx">n</span><span class="p">])</span><span class="w"> </span><span class="c1">//累加读取的内容</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fmt.Println(&quot;buf = &quot;, string(tmp))
-}
-
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;buf = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">tmp</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-06-05 22:44:05<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/ym5t99">https://www.yuque.com/xiaoshan_wgo/codingnotes/ym5t99</a></p>

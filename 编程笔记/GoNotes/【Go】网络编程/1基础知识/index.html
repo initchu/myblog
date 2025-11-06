@@ -286,8 +286,8 @@
 
 
 
-<h1 id="1">1 基础知识</h1>
-<h2 id="_1">网络协议的概念</h2>
+<h1 id="1">1 基础知识<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<h2 id="_1">网络协议的概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>从应用的角度出发，协议可理解为“规则”，是数据传输和数据的解释的规则。</p>
 <blockquote>
 <p>假设， A、B双方欲传输文件。规定：</p>
@@ -301,11 +301,11 @@
 <p>由此，无论A、B之间传递何种文件，都是通过三次数据传输来完成。A、B之间形成了一个最简单的数据传输规则。双方都按此规则发送、接收数据。A、B之间达成的这个相互遵守的规则即为协议。</p>
 <p>这种仅在A、B之间被遵守的协议称之为<strong>原始协议</strong>。</p>
 <p>当此协议被更多的人采用，不断的增加、改进、维护、完善。最终形成一个稳定的、完整的文件传输协议，被广泛应用于各种文件传输过程中。该协议就成为一个<strong>标准协议</strong>。</p>
-<h2 id="_2">网络的分层模型</h2>
+<h2 id="_2">网络的分层模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>为了减少协议设计的复杂性，大多数网络模型均采用分层的方式来组织。每一层都有自己的功能，就像建筑物一样，每一层都靠下一层支持。每一层利用下一层提供的服务来为上一层提供服务，本层服务的实现细节对上层屏蔽。</p>
 <p><a href="https://www.yuque.com/xiaoshan_wgo/basic/ogzdx0#WP5EB">1 OSI七层模型和TCP/IP四层模型</a></p>
 <p>网络的每一层，都定义了很多协议。这些协议的总称，叫“TCP/IP 协议”。TCP/IP 协议是一个大家族，不仅仅只有 TCP 和 IP 协议，它还包括其它的协议。IP</p>
-<h2 id="ip">IP 端口</h2>
+<h2 id="ip">IP 端口<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h2>
 <p>如果把IP地址比作一间房子，端口就是出入这间房子的门，真正的房子只有几个门，但是一个IP地址的端口号可以有65536个，端口使用端口号来标记的，端口号只有整数，范围是0到65535。</p>
 <p><strong>0是保留端口</strong></p>
 <p><strong>1-1024是固定端口：</strong></p>
@@ -327,24 +327,24 @@
 <li>一旦一个端口被某个程序监听（占用），那么其他的程序就不能在该端口监听了</li>
 </ol>
 <p>计算机尽可能少开端口，一个端口只能被一个程序监听，如果使用<code>netstat -an</code>可以查看本机有哪些端口被监听。</p>
-<h1 id="http">HTTP 协议基础</h1>
+<h1 id="http">HTTP 协议基础<a class="headerlink" href="#http" title="Permanent link">&para;</a></h1>
 <ul>
 <li>http：超文本传输协议 Hyper Text Transfer Protocol</li>
 <li>http 属于应用层协议，它在传输层用的是 tcp 协议</li>
 <li>无状态，对事物处理没有记忆功能（对比 TCP 协议里面的确认号）如果要保存状态需要引用其他技术，如cookie</li>
 <li>无连接，每次连接只处理一个请求。后来通过keep-alive实现了长连接</li>
 </ul>
-<h2 id="_3">格式</h2>
+<h2 id="_3">格式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><img alt="1654004416063-7db3c12e-9468-44cd-b8e5-3b39dd0524b6.png" src="../img/f3l5eD1oAVHGseTH/1654004416063-7db3c12e-9468-44cd-b8e5-3b39dd0524b6-134251.png" /></p>
 <p><img alt="1654004424480-fab2b6a3-c096-42f3-93c2-a65f24001308.jpeg" src="../img/f3l5eD1oAVHGseTH/1654004424480-fab2b6a3-c096-42f3-93c2-a65f24001308-591970.jpeg" /></p>
-<pre><code class="language-plain">POST /post?id=1234&amp;page=1 HTTP/1.1
+<div class="highlight"><pre><span></span><code>POST /post?id=1234&amp;page=1 HTTP/1.1
 Content-Type:application/x-www-form-urlencoded
 
 name = manu&amp;message=this_is_great
-</code></pre>
-<h2 id="_4">请求正文</h2>
+</code></pre></div>
+<h2 id="_4">请求正文<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>GET 请求没有请求正文。</p>
-<h2 id="_5">请求方法</h2>
+<h2 id="_5">请求方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -389,10 +389,10 @@ name = manu&amp;message=this_is_great
 </table>
 <p>黄色：HTTP 1.0</p>
 <p>蓝色：HTTP 1.1</p>
-<h2 id="url">URL 相关内容</h2>
+<h2 id="url">URL 相关内容<a class="headerlink" href="#url" title="Permanent link">&para;</a></h2>
 <p>URI（uniform resource identifier）：统一资源定位符，用来唯一的标识一个资源</p>
 <p>URL（uniform resource locator）： 统一资源定位器，是一种具体的 URI，指明了如何 locate 这个资源</p>
-<h2 id="_6">请求头</h2>
+<h2 id="_6">请求头<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -454,7 +454,7 @@ name = manu&amp;message=this_is_great
 </tr>
 </tbody>
 </table>
-<h2 id="content-type">Content-Type</h2>
+<h2 id="content-type">Content-Type<a class="headerlink" href="#content-type" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>application/x-www-form-urlencoded</strong><ul>
 <li>浏览器的原生 form 表单，如果不设置 <code>Content-Type</code> 属性，则默认以<code>application/x-www-form-urlencoded</code> 方式传输数据</li>
@@ -475,24 +475,24 @@ name = manu&amp;message=this_is_great
 </ul>
 </li>
 </ul>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;methodCall&gt;
-  &lt;methodName&gt;examples.getStateName&lt;/methodName&gt;
-&lt;/methodCall&gt;
-</code></pre>
-<h2 id="get-post">GET 和 POST 的区别</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span><span class="nt">&lt;methodCall&gt;</span>
+<span class="w">  </span><span class="nt">&lt;methodName&gt;</span>examples.getStateName<span class="nt">&lt;/methodName&gt;</span>
+<span class="nt">&lt;/methodCall&gt;</span>
+</code></pre></div>
+<h2 id="get-post">GET 和 POST 的区别<a class="headerlink" href="#get-post" title="Permanent link">&para;</a></h2>
 <ul>
 <li>GET 的请求参数可以全部在 URL 里面，参数变时，URL 就变；post 可以把参数方到请求正文里面，参数变时候 URL 不变。</li>
 <li>虽然 HTTP 协议并没有对 URL 和请求正文做长度限制，但在实际中浏览器对 URL 的长度限制比请求正文要小很多，所以 POST 可以提交的数据比 GET 要大的多。</li>
 <li>GET 比 POST 更容易收到攻击（源于 GET 的参数直接暴露在 URL 中）。</li>
 </ul>
-<h1 id="cookiesessiontoken">Cookie、Session、Token</h1>
-<h2 id="cookie">Cookie</h2>
+<h1 id="cookiesessiontoken">Cookie、Session、Token<a class="headerlink" href="#cookiesessiontoken" title="Permanent link">&para;</a></h1>
+<h2 id="cookie">Cookie<a class="headerlink" href="#cookie" title="Permanent link">&para;</a></h2>
 <p>用户名和密码存在数据库中，每次登录都需要自己亲自输入用户名和密码。</p>
 <p>在网页中，使用 Cookie 可以让浏览器记住密码，免去多次输入用户名和密码的过程。</p>
 <p>但是直接存储并不够安全，于是出现了 Session 将用户名和密码进行加密。</p>
-<h2 id="session">Session</h2>
+<h2 id="session">Session<a class="headerlink" href="#session" title="Permanent link">&para;</a></h2>
 <p>用户名和密码发给服务器，服务器生成一串  Session ID 和会话结束时间，并把他们发送给浏览器，设置 Cookie, 会话结束时间就是 Cookie 的有效时间。但是如果有大量 ID 存储在服务器里面，可能就会崩溃。所以出现了JWT（JSON WEB TOKEN）。</p>
-<h2 id="token">Token</h2>
+<h2 id="token">Token<a class="headerlink" href="#token" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(64, 64, 64);">客户端频繁向服务端请求数据，服务端频繁的去数据库查询用户名和密码并进行对比，判断用户名和密码正确与否，并作出相应提示，在这样的背景下，Token 便应运而生。</font>Token 是服务端生成的一串字符串，以作客户端进行请求的一个令牌，当第一次登录后，服务器生成一个 Token 便将此 Token 返回给客户端，以后客户端只需带上这个Token 前来请求数据即可，无需再次带上用户名和密码。<font style="color:rgb(64, 64, 64);">使用Token的目的，Token的目的是为了减轻服务器的压力，减少频繁的查询数据库，使服务器更加健壮。</font></p>
 <blockquote>
 <p>更新: 2022-07-29 13:48:02<br />

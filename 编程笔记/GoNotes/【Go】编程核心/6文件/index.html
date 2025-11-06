@@ -328,8 +328,8 @@
 
 
 
-<h1 id="6">6 文件</h1>
-<h2 id="_1">一、文件的基本介绍</h2>
+<h1 id="6">6 文件<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一、文件的基本介绍<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>文件在程序中是以<strong>流</strong>的形式来操作的。</p>
 <p>文件是数据源；<strong>数据源</strong>就是保存数据的地方。</p>
 <p>流：是数据在数据源（文件）和程序（内存）之间经历的路径。 </p>
@@ -337,107 +337,106 @@
 <p><code>os.File</code>封装所有文件的相关操作，File是一个结构体。</p>
 <p><img alt="1637406889853-d0541e9e-a635-4e8a-8f90-ddc91657268c.png" src="../img/iwrcEmXwStI8oYRI/1637406889853-d0541e9e-a635-4e8a-8f90-ddc91657268c-556117.png" /></p>
 <p><code>File</code>是一个结构体。</p>
-<pre><code class="language-go">type File struct {
-    // 内含隐藏或非导出字段
-}
-</code></pre>
-<h2 id="_2">二. 打开文件和关闭文件</h2>
-<h3 id="1">1.打开文件</h3>
-<pre><code class="language-go">func Open(name string) (file *File, err error)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 内含隐藏或非导出字段</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">二. 打开文件和关闭文件<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="1">1.打开文件<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">Open</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">file</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">Open方法打开一个文件用于读取。如果操作成功，返回的文件对象的方法可用于读取数据；对应的文件描述符具有O_RDONLY模式。如果出错，错误底层类型是*PathError。</font></p>
-<h3 id="2">2.关闭文件：</h3>
-<pre><code class="language-go">func (f *File) Close() error
-</code></pre>
-<h3 id="3">3.案例练习</h3>
-<pre><code class="language-go">package main
+<h3 id="2">2.关闭文件：<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
+</code></pre></div>
+<h3 id="3">3.案例练习<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;os&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    //打开一个文件
-    //file的叫法
-    //1.file叫file对象
-    //2。file叫file指针
-    //3.file叫file文件句柄
-    file, err := os.Open(&quot;d:/solution2.rpt&quot;)
-    if err!=nil{
-        fmt.Println(&quot;open file err=&quot;,err)
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//打开一个文件</span>
+<span class="w">    </span><span class="c1">//file的叫法</span>
+<span class="w">    </span><span class="c1">//1.file叫file对象</span>
+<span class="w">    </span><span class="c1">//2。file叫file指针</span>
+<span class="w">    </span><span class="c1">//3.file叫file文件句柄</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;d:/solution2.rpt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;open file err=&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    //输出文件，查看文件内容,看出文件就是个指针
-    fmt.Printf(&quot;file=%v&quot;,file)
+<span class="w">    </span><span class="c1">//输出文件，查看文件内容,看出文件就是个指针</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;file=%v&quot;</span><span class="p">,</span><span class="nx">file</span><span class="p">)</span>
 
-    //关闭文件
-    if err := file.Close();err!=nil{
-        fmt.Println(&quot;close file err=&quot;,err)
-    }
-}
-
-</code></pre>
-<h2 id="reader">三、带缓冲的Reader读文件</h2>
+<span class="w">    </span><span class="c1">//关闭文件</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">();</span><span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;close file err=&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="reader">三、带缓冲的Reader读文件<a class="headerlink" href="#reader" title="Permanent link">&para;</a></h2>
 <p><img alt="1637408510884-a41b9a03-05f7-409a-bce9-d92de53c125c.png" src="../img/iwrcEmXwStI8oYRI/1637408510884-a41b9a03-05f7-409a-bce9-d92de53c125c-851107.png" /></p>
 <p>默认缓冲区为4096</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;bufio&quot;
-    &quot;fmt&quot;
-    &quot;io&quot;
-    &quot;os&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;bufio&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    //打开一个文件
-    //file的叫法
-    //1.file叫file对象
-    //2。file叫file指针
-    //3.file叫file文件句柄
-    file, err := os.Open(&quot;d:/solution2.rpt&quot;)
-    if err!=nil{
-        fmt.Println(&quot;open file err=&quot;,err)
-    }
-    //当函数退出时，要及时的关闭file
-    defer file.Close()//要及时关闭file句柄，否贼会有内存泄露
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//打开一个文件</span>
+<span class="w">    </span><span class="c1">//file的叫法</span>
+<span class="w">    </span><span class="c1">//1.file叫file对象</span>
+<span class="w">    </span><span class="c1">//2。file叫file指针</span>
+<span class="w">    </span><span class="c1">//3.file叫file文件句柄</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;d:/solution2.rpt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="o">!=</span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;open file err=&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//当函数退出时，要及时的关闭file</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="c1">//要及时关闭file句柄，否贼会有内存泄露</span>
 
-    //创建一个*Reader，是带缓冲的
-    reader := bufio.NewReader(file)
-    //循环读取文件的内容
-    for{
-        str,err := reader.ReadString('\n')//读到一个换行就结束
-        if err == io.EOF{//io.EOF表示文件的末尾
-            break
-        }
-        //输出内容
-        fmt.Print(str)
-    }
-    fmt.Println(&quot;文件读取结束&quot;)
-}
-</code></pre>
-<h2 id="_3">四、一次性读取文件</h2>
-<pre><code class="language-go">package main
+<span class="w">    </span><span class="c1">//创建一个*Reader，是带缓冲的</span>
+<span class="w">    </span><span class="nx">reader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bufio</span><span class="p">.</span><span class="nx">NewReader</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//循环读取文件的内容</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">str</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">reader</span><span class="p">.</span><span class="nx">ReadString</span><span class="p">(</span><span class="sc">&#39;\n&#39;</span><span class="p">)</span><span class="c1">//读到一个换行就结束</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">EOF</span><span class="p">{</span><span class="c1">//io.EOF表示文件的末尾</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//输出内容</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;文件读取结束&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">四、一次性读取文件<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;io/ioutil&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io/ioutil&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    //使用ioutil.ReaderFile一次性将文件读取到位
-    file := &quot;d:/solution2.rpt&quot;
-    content, err := ioutil.ReadFile(file)
-    if err != nil{
-        fmt.Printf(&quot;read file err=%v&quot;,err)
-    }
-    //把读取道德内容显示到终端
-    fmt.Printf(&quot;%v&quot;,content)// []byte
-    //这里没有显式的open文件，因此也不需要显式的Close文件
-    //因为，文件的Open和Close被封装到ReadFile函数内部
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//使用ioutil.ReaderFile一次性将文件读取到位</span>
+<span class="w">    </span><span class="nx">file</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;d:/solution2.rpt&quot;</span>
+<span class="w">    </span><span class="nx">content</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;read file err=%v&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//把读取道德内容显示到终端</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v&quot;</span><span class="p">,</span><span class="nx">content</span><span class="p">)</span><span class="c1">// []byte</span>
+<span class="w">    </span><span class="c1">//这里没有显式的open文件，因此也不需要显式的Close文件</span>
+<span class="w">    </span><span class="c1">//因为，文件的Open和Close被封装到ReadFile函数内部</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-01-17 20:45:35<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/zngbgv">https://www.yuque.com/xiaoshan_wgo/codingnotes/zngbgv</a></p>

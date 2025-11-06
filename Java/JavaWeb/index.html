@@ -349,8 +349,8 @@
 
 
 
-<h1 id="java-web">Java Web</h1>
-<h3 id="servlet">Servlet 是单例吗？</h3>
+<h1 id="java-web">Java Web<a class="headerlink" href="#java-web" title="Permanent link">&para;</a></h1>
+<h3 id="servlet">Servlet 是单例吗？<a class="headerlink" href="#servlet" title="Permanent link">&para;</a></h3>
 <p>Servlet 本身只是一个Java，<strong>并不是单例结构</strong>，所以 Servlet 是不是单例最终取决于运行它的 Web 容器。</p>
 <ul>
 <li>注解加载时默认是单例的。</li>
@@ -376,7 +376,7 @@
 <p><a href="https://www.cnblogs.com/wuxun1997/p/10769115.html">Servlet是单例的吗？ - 不想下火车的人 - 博客园</a>
 </p>
 </blockquote>
-<h3 id="servlet_1">多线程下 Servlet 怎么保证数据安全的？</h3>
+<h3 id="servlet_1">多线程下 Servlet 怎么保证数据安全的？<a class="headerlink" href="#servlet_1" title="Permanent link">&para;</a></h3>
 <p>一般是单例，我们用的都是 Servlet 的 service，一般不包含实例变量，只有共享代码，所以一般是安全的。</p>
 <p>如果有实例变量的话可以使用 <strong>synchronized</strong> 关键字进行加锁。</p>
 <p>当 Servlet 实现 SingleThreadModel 接口后，Tomcat 会为该 Servlet建一个对象池，这是<a href="https://www.yuque.com/joyo/java/duy501">享元模式</a>。</p>
@@ -385,14 +385,14 @@
 <p><a href="https://www.yuque.com/joyo/files/29812147">23种设计模式整理（很全）.pdf</a>
 </p>
 </blockquote>
-<h3 id="servlet_2">Servlet 的生命周期？</h3>
+<h3 id="servlet_2">Servlet 的生命周期？<a class="headerlink" href="#servlet_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>init</code> 一般在 web 容器初始化，或第一次调用 Servlet 时。</li>
 <li><code>service</code> 提供服务</li>
 <li><code>destroy</code> 终结</li>
 <li>回收</li>
 </ul>
-<h3 id="servletfilter">Servlet/filter作用、原理、配置</h3>
+<h3 id="servletfilter">Servlet/filter作用、原理、配置<a class="headerlink" href="#servletfilter" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Servlet</strong></li>
 </ul>
@@ -402,242 +402,242 @@
 <li><strong>Filter</strong></li>
 </ul>
 <p>Servlet中的过滤器Filter是实现了javax.Servlet.Filter接口的服务器端程序，主要的用途是<strong>过滤字符编码</strong>、做一些<strong>业务逻辑判断</strong>等。其工作原理是，只要你在web.xml文件配置好要拦截的客户端请求，它都会帮你拦截到请求，此时你就可以对请求或响应(Request、Response)统一设置编码，简化操作；同时还可进行逻辑判断，如用户是否已经登录、有没有权限访问该页面等等工作。它是随你的web应用启动而启动的，只初始化一次，以后就可以拦截相关请求，只有当你的web应用停止或重新部署的时候才销毁。</p>
-<pre><code class="language-java">package com.hello.web.listener;
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.hello.web.listener</span><span class="p">;</span>
 
-import java.io.IOException;
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.servlet.http.HttpServletResponse</span><span class="p">;</span>
 
-// 主要目的：过滤字符编码；其次，做一些应用逻辑判断等.
-// Filter跟web应用一起启动
-// 当web应用重新启动或销毁时，Filter也被销毁
-public class MyCharsetFilter implements Filter {
-    private FilterConfig config = null;
+<span class="c1">// 主要目的：过滤字符编码；其次，做一些应用逻辑判断等.</span>
+<span class="c1">// Filter跟web应用一起启动</span>
+<span class="c1">// 当web应用重新启动或销毁时，Filter也被销毁</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyCharsetFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">FilterConfig</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
 
-    public void destroy() {
-        System.out.println(&quot;MyCharsetFilter准备销毁...&quot;);
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;MyCharsetFilter准备销毁...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public void doFilter(ServletRequest arg0, ServletResponse arg1,FilterChain chain) throws IOException, ServletException {
-        // 强制类型转换
-        HttpServletRequest request = (HttpServletRequest) arg0;
-        HttpServletResponse response = (HttpServletResponse) arg1;
-        // 获取web.xm设置的编码集，设置到Request、Response中
-        request.setCharacterEncoding(config.getInitParameter(&quot;charset&quot;));
-        response.setContentType(config.getInitParameter(&quot;contentType&quot;));
-        response.setCharacterEncoding(config.getInitParameter(&quot;charset&quot;));
-        // 将请求转发到目的地
-        chain.doFilter(request, response);
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">arg0</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">arg1</span><span class="p">,</span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 强制类型转换</span>
+<span class="w">        </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="p">)</span><span class="w"> </span><span class="n">arg0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">HttpServletResponse</span><span class="p">)</span><span class="w"> </span><span class="n">arg1</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// 获取web.xm设置的编码集，设置到Request、Response中</span>
+<span class="w">        </span><span class="n">request</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="na">getInitParameter</span><span class="p">(</span><span class="s">&quot;charset&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setContentType</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="na">getInitParameter</span><span class="p">(</span><span class="s">&quot;contentType&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setCharacterEncoding</span><span class="p">(</span><span class="n">config</span><span class="p">.</span><span class="na">getInitParameter</span><span class="p">(</span><span class="s">&quot;charset&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">// 将请求转发到目的地</span>
+<span class="w">        </span><span class="n">chain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public void init(FilterConfig arg0) throws ServletException {
-        this.config = arg0;
-        System.out.println(&quot;MyCharsetFilter初始化...&quot;);
-    }
-}
-</code></pre>
-<pre><code class="language-xml">&lt;filter&gt;
-  &lt;filter-name&gt;filter&lt;/filter-name&gt;
-  &lt;filter-class&gt;dc.gz.filters.MyCharsetFilter&lt;/filter-class&gt;
-  &lt;init-param&gt;
-    &lt;param-name&gt;charset&lt;/param-name&gt;
-    &lt;param-value&gt;UTF-8&lt;/param-value&gt;
-  &lt;/init-param&gt;
-  &lt;init-param&gt;
-    &lt;param-name&gt;contentType&lt;/param-name&gt;
-    &lt;param-value&gt;text/html;charset=UTF-8&lt;/param-value&gt;
-  &lt;/init-param&gt;
-&lt;/filter&gt;
-&lt;filter-mapping&gt;
-  &lt;filter-name&gt;filter&lt;/filter-name&gt;
-  &lt;!-- * 代表截获所有的请求  或指定请求，如/test.do  /xxx.do --&gt;
-  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-&lt;/filter-mapping&gt;
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">FilterConfig</span><span class="w"> </span><span class="n">arg0</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arg0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;MyCharsetFilter初始化...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;filter&gt;</span>
+<span class="w">  </span><span class="nt">&lt;filter-name&gt;</span>filter<span class="nt">&lt;/filter-name&gt;</span>
+<span class="w">  </span><span class="nt">&lt;filter-class&gt;</span>dc.gz.filters.MyCharsetFilter<span class="nt">&lt;/filter-class&gt;</span>
+<span class="w">  </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-name&gt;</span>charset<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-value&gt;</span>UTF-8<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="w">  </span><span class="nt">&lt;init-param&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-name&gt;</span>contentType<span class="nt">&lt;/param-name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;param-value&gt;</span>text/html;charset=UTF-8<span class="nt">&lt;/param-value&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/init-param&gt;</span>
+<span class="nt">&lt;/filter&gt;</span>
+<span class="nt">&lt;filter-mapping&gt;</span>
+<span class="w">  </span><span class="nt">&lt;filter-name&gt;</span>filter<span class="nt">&lt;/filter-name&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- * 代表截获所有的请求  或指定请求，如/test.do  /xxx.do --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+<span class="nt">&lt;/filter-mapping&gt;</span>
+</code></pre></div>
 <hr />
 <p><font style="color:rgb(77, 77, 77);">spring中web.xml所包含的配置和作用：</font></p>
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;  
-&lt;web-app version=&quot;3.0&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;  
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;  
-         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;&gt;  
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><span class="w">  </span>
+<span class="nt">&lt;web-app</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;3.0&quot;</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee&quot;</span><span class="w">  </span>
+<span class="w">         </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="w">  </span>
+<span class="w">         </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;</span><span class="nt">&gt;</span><span class="w">  </span>
 
-    &lt;!-- 在Spring框架中是如何解决从页面传来的字符串的编码问题的呢？
-    下面我们来看看Spring框架给我们提供过滤器CharacterEncodingFilter  
-     这个过滤器就是针对于每次浏览器请求进行过滤的，然后再其之上添加了父类没有的功能即处理字符编码。  
-      其中encoding用来设置编码格式，forceEncoding用来设置是否理会
- request.getCharacterEncoding()方法，设置为true则强制覆盖之前的编码格式。--&gt;  
-    &lt;filter&gt;  
-        &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;  
-        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;  
-        &lt;init-param&gt;  
-            &lt;param-name&gt;encoding&lt;/param-name&gt;  
-            &lt;param-value&gt;UTF-8&lt;/param-value&gt;  
-        &lt;/init-param&gt;  
-        &lt;init-param&gt;  
-            &lt;param-name&gt;forceEncoding&lt;/param-name&gt;  
-            &lt;param-value&gt;true&lt;/param-value&gt;  
-        &lt;/init-param&gt;  
-    &lt;/filter&gt;  
-    &lt;filter-mapping&gt;  
-        &lt;filter-name&gt;characterEncodingFilter&lt;/filter-name&gt;  
-        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;  
-    &lt;/filter-mapping&gt;  
-    &lt;!-- 项目中使用Spring 时，applicationContext.xml配置文件中并没有BeanFactory，要想在业
-务层中的class 文件中直接引用Spring容器管理的bean可通过以下方式--&gt;  
-    &lt;!--1、在web.xml配置监听器ContextLoaderListener--&gt;  
-    &lt;!--ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。因为
-它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。
-使用servletContextListener接口，开发者能够在为客户端请求提供服务之前向servletContext中添任何对象，
-这个对象在servletcontxxt启动的时候被初始化，然后在ervletContext的整个运行期间都是可见的。
-    在ContextLoaderListener中关联了ContextLoader这个类，所以整个加载配置过程由ContextLoader来完成。  
-    它的API说明  
-    第一段说明ContextLoader可以由 ContextLoaderListener和ContextLoaderServlet生成。  
-    如果查看ContextLoaderServlet的API，可以看到它也关联了ContextLoader这个类而且它实现了HttpServlet这个接口  
-    第二段，ContextLoader创建的是 XmlWebApplicationContext这样一个类，它实现的接口是
-    WebApplicationContext-&gt;ConfigurableWebApplicationContext-&gt;ApplicationContext-&gt;  
-    BeanFactory，这样一来spring中的所有bean都由这个类来创建  
-    IUploaddatafileManager uploadmanager = (IUploaddatafileManager) ContextLoaderListener
-      .getCurrentWebApplicationContext().getBean(&quot;uploadManager&quot;);
-     --&gt;  
-    &lt;listener&gt;  
-        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;  
-    &lt;/listener&gt;  
-    &lt;!--2、部署applicationContext的xml文件--&gt;  
-    &lt;!--如果在web.xml中不写任何参数配置信息，默认的路径是&quot;/WEB-INF/applicationContext.xml，  
-    在WEB-INF目录下创建的xml文件的名称必须是applicationContext.xml。  
-    如果是要自定义文件名可以在web.xml里加入contextConfigLocation这个context参数：  
-    在&lt;param-value&gt; &lt;/param-value&gt;里指定相应的xml文件名，如果有多个xml文件，可以写在一起并以“,”号分隔。  
-    也可以这样applicationContext-*.xml采用通配符，比如这那个目录下有applicationContext-ibatis-base.xml，  
-    applicationContext-action.xml，applicationContext-ibatis-dao.xml等文件，都会一同被载入。  
-    在ContextLoaderListener中关联了ContextLoader这个类，所以整个加载配置过程由ContextLoader来完成。--&gt;  
-    &lt;context-param&gt;  
-        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;  
-        &lt;param-value&gt;classpath:spring/applicationContext.xml&lt;/param-value&gt;  
-    &lt;/context-param&gt;  
-    &lt;!--如果你的DispatcherServlet拦截&quot;/&quot;，为了实现REST风格，拦截了所有的请求，那么同时对*.js,*.jpg等静态文件的访问也就被拦截了。--&gt;  
-    &lt;!--方案一：激活Tomcat的defaultServlet来处理静态文件--&gt;  
-    &lt;!--要写在DispatcherServlet的前面， 让 defaultServlet先拦截请求，这样请求就不会进入Spring了，我想性能是最好的吧。--&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.css&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.swf&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.gif&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.jpg&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.png&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.js&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.html&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.xml&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.json&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;servlet-name&gt;default&lt;/servlet-name&gt;  
-        &lt;url-pattern&gt;*.map&lt;/url-pattern&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;!--使用Spring MVC,配置DispatcherServlet是第一步。DispatcherServlet是一个Servlet,,所以可以配置多个DispatcherServlet--&gt;  
-    &lt;!--DispatcherServlet是前置控制器，配置在web.xml文件中的。拦截匹配的请求，Servlet拦截匹配规则要自已定义，把拦截下来的请求，依据某某规则分发到目标Controller(我们写的Action)来处理。--&gt;  
-    &lt;servlet&gt;  
-        &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;&lt;!--在DispatcherServlet的初始化过程中，框架会在web应用的 WEB-INF文件夹下寻找名为[servlet-name]-servlet.xml 的配置文件，生成文件中定义的bean。--&gt;  
-        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;  
-        &lt;!--指明了配置文件的文件名，不使用默认配置文件名，而使用dispatcher-servlet.xml配置文件。--&gt;  
-        &lt;init-param&gt;  
-            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;  
-            &lt;!--其中&lt;param-value&gt;**.xml&lt;/param-value&gt; 这里可以使用多种写法--&gt;  
-            &lt;!--1、不写,使用默认值:/WEB-INF/&lt;servlet-name&gt;-servlet.xml--&gt;  
-            &lt;!--2、&lt;param-value&gt;/WEB-INF/classes/dispatcher-servlet.xml&lt;/param-value&gt;--&gt;  
-            &lt;!--3、&lt;param-value&gt;classpath*:dispatcher-servlet.xml&lt;/param-value&gt;--&gt;  
-            &lt;!--4、多个值用逗号分隔--&gt;  
-            &lt;param-value&gt;classpath:spring/dispatcher-servlet.xml&lt;/param-value&gt;  
-        &lt;/init-param&gt;  
-        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;&lt;!--是启动顺序，让这个Servlet随Servletp容器一起启动。--&gt;  
-    &lt;/servlet&gt;  
-    &lt;servlet-mapping&gt;  
-        &lt;!--这个Servlet的名字是dispatcher，可以有多个DispatcherServlet，是通过名字来区分的。每一个DispatcherServlet有自己的WebApplicationContext上下文对象。同时保存的ServletContext中和Request对象中.--&gt;  
-        &lt;!--ApplicationContext是Spring的核心，Context我们通常解释为上下文环境，我想用“容器”来表述它更容易理解一些，ApplicationContext则是“应用的容器”了:P，Spring把Bean放在这个容器中，在需要的时候，用getBean方法取出--&gt;  
-        &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;  
-        &lt;!--Servlet拦截匹配规则可以自已定义，当映射为@RequestMapping(&quot;/user/add&quot;)时，为例,拦截哪种URL合适？--&gt;  
-        &lt;!--1、拦截*.do、*.htm， 例如：/user/add.do,这是最传统的方式，最简单也最实用。不会导致静态文件（jpg,js,css）被拦截。--&gt;  
-        &lt;!--2、拦截/，例如：/user/add,可以实现现在很流行的REST风格。很多互联网类型的应用很喜欢这种风格的URL。弊端：会导致静态文件（jpg,js,css）被拦截后不能正常显示。 --&gt;  
-        &lt;url-pattern&gt;/&lt;/url-pattern&gt; &lt;!--会拦截URL中带“/”的请求。--&gt;  
-    &lt;/servlet-mapping&gt;  
-    &lt;welcome-file-list&gt;&lt;!--指定欢迎页面--&gt;  
-        &lt;welcome-file&gt;login.html&lt;/welcome-file&gt;  
-    &lt;/welcome-file-list&gt;  
-    &lt;error-page&gt; &lt;!--当系统出现404错误，跳转到页面nopage.html--&gt;  
-        &lt;error-code&gt;404&lt;/error-code&gt;  
-        &lt;location&gt;/nopage.html&lt;/location&gt;  
-    &lt;/error-page&gt;  
-    &lt;error-page&gt; &lt;!--当系统出现java.lang.NullPointerException，跳转到页面error.html--&gt;  
-        &lt;exception-type&gt;java.lang.NullPointerException&lt;/exception-type&gt;  
-        &lt;location&gt;/error.html&lt;/location&gt;  
-    &lt;/error-page&gt;  
-    &lt;session-config&gt;&lt;!--会话超时配置，单位分钟--&gt;  
-        &lt;session-timeout&gt;360&lt;/session-timeout&gt;  
-    &lt;/session-config&gt;  
-&lt;/web-app&gt;
-</code></pre>
+<span class="w">    </span><span class="cm">&lt;!-- 在Spring框架中是如何解决从页面传来的字符串的编码问题的呢？</span>
+<span class="cm">    下面我们来看看Spring框架给我们提供过滤器CharacterEncodingFilter  </span>
+<span class="cm">     这个过滤器就是针对于每次浏览器请求进行过滤的，然后再其之上添加了父类没有的功能即处理字符编码。  </span>
+<span class="cm">      其中encoding用来设置编码格式，forceEncoding用来设置是否理会</span>
+<span class="cm"> request.getCharacterEncoding()方法，设置为true则强制覆盖之前的编码格式。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;filter&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;filter-name&gt;</span>characterEncodingFilter<span class="nt">&lt;/filter-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;filter-class&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="nt">&lt;/filter-class&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;init-param&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&lt;param-name&gt;</span>encoding<span class="nt">&lt;/param-name&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&lt;param-value&gt;</span>UTF-8<span class="nt">&lt;/param-value&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;/init-param&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;init-param&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&lt;param-name&gt;</span>forceEncoding<span class="nt">&lt;/param-name&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&lt;param-value&gt;</span>true<span class="nt">&lt;/param-value&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;/init-param&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/filter&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;filter-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;filter-name&gt;</span>characterEncodingFilter<span class="nt">&lt;/filter-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/filter-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!-- 项目中使用Spring 时，applicationContext.xml配置文件中并没有BeanFactory，要想在业</span>
+<span class="cm">务层中的class 文件中直接引用Spring容器管理的bean可通过以下方式--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--1、在web.xml配置监听器ContextLoaderListener--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。因为</span>
+<span class="cm">它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。</span>
+<span class="cm">使用servletContextListener接口，开发者能够在为客户端请求提供服务之前向servletContext中添任何对象，</span>
+<span class="cm">这个对象在servletcontxxt启动的时候被初始化，然后在ervletContext的整个运行期间都是可见的。</span>
+<span class="cm">    在ContextLoaderListener中关联了ContextLoader这个类，所以整个加载配置过程由ContextLoader来完成。  </span>
+<span class="cm">    它的API说明  </span>
+<span class="cm">    第一段说明ContextLoader可以由 ContextLoaderListener和ContextLoaderServlet生成。  </span>
+<span class="cm">    如果查看ContextLoaderServlet的API，可以看到它也关联了ContextLoader这个类而且它实现了HttpServlet这个接口  </span>
+<span class="cm">    第二段，ContextLoader创建的是 XmlWebApplicationContext这样一个类，它实现的接口是</span>
+<span class="cm">    WebApplicationContext-&gt;ConfigurableWebApplicationContext-&gt;ApplicationContext-&gt;  </span>
+<span class="cm">    BeanFactory，这样一来spring中的所有bean都由这个类来创建  </span>
+<span class="cm">    IUploaddatafileManager uploadmanager = (IUploaddatafileManager) ContextLoaderListener</span>
+<span class="cm">      .getCurrentWebApplicationContext().getBean(&quot;uploadManager&quot;);</span>
+<span class="cm">     --&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;listener&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;listener-class&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="nt">&lt;/listener-class&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/listener&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--2、部署applicationContext的xml文件--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--如果在web.xml中不写任何参数配置信息，默认的路径是&quot;/WEB-INF/applicationContext.xml，  </span>
+<span class="cm">    在WEB-INF目录下创建的xml文件的名称必须是applicationContext.xml。  </span>
+<span class="cm">    如果是要自定义文件名可以在web.xml里加入contextConfigLocation这个context参数：  </span>
+<span class="cm">    在&lt;param-value&gt; &lt;/param-value&gt;里指定相应的xml文件名，如果有多个xml文件，可以写在一起并以“,”号分隔。  </span>
+<span class="cm">    也可以这样applicationContext-*.xml采用通配符，比如这那个目录下有applicationContext-ibatis-base.xml，  </span>
+<span class="cm">    applicationContext-action.xml，applicationContext-ibatis-dao.xml等文件，都会一同被载入。  </span>
+<span class="cm">    在ContextLoaderListener中关联了ContextLoader这个类，所以整个加载配置过程由ContextLoader来完成。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;context-param&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;param-name&gt;</span>contextConfigLocation<span class="nt">&lt;/param-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;param-value&gt;</span>classpath:spring/applicationContext.xml<span class="nt">&lt;/param-value&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/context-param&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--如果你的DispatcherServlet拦截&quot;/&quot;，为了实现REST风格，拦截了所有的请求，那么同时对*.js,*.jpg等静态文件的访问也就被拦截了。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--方案一：激活Tomcat的defaultServlet来处理静态文件--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--要写在DispatcherServlet的前面， 让 defaultServlet先拦截请求，这样请求就不会进入Spring了，我想性能是最好的吧。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.css<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.swf<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.gif<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.jpg<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.png<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.js<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.html<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.xml<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.json<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>default<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>*.map<span class="nt">&lt;/url-pattern&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--使用Spring MVC,配置DispatcherServlet是第一步。DispatcherServlet是一个Servlet,,所以可以配置多个DispatcherServlet--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="cm">&lt;!--DispatcherServlet是前置控制器，配置在web.xml文件中的。拦截匹配的请求，Servlet拦截匹配规则要自已定义，把拦截下来的请求，依据某某规则分发到目标Controller(我们写的Action)来处理。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>DispatcherServlet<span class="nt">&lt;/servlet-name&gt;</span><span class="cm">&lt;!--在DispatcherServlet的初始化过程中，框架会在web应用的 WEB-INF文件夹下寻找名为[servlet-name]-servlet.xml 的配置文件，生成文件中定义的bean。--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-class&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="nt">&lt;/servlet-class&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="cm">&lt;!--指明了配置文件的文件名，不使用默认配置文件名，而使用dispatcher-servlet.xml配置文件。--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;init-param&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&lt;param-name&gt;</span>contextConfigLocation<span class="nt">&lt;/param-name&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="cm">&lt;!--其中&lt;param-value&gt;**.xml&lt;/param-value&gt; 这里可以使用多种写法--&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="cm">&lt;!--1、不写,使用默认值:/WEB-INF/&lt;servlet-name&gt;-servlet.xml--&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="cm">&lt;!--2、&lt;param-value&gt;/WEB-INF/classes/dispatcher-servlet.xml&lt;/param-value&gt;--&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="cm">&lt;!--3、&lt;param-value&gt;classpath*:dispatcher-servlet.xml&lt;/param-value&gt;--&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="cm">&lt;!--4、多个值用逗号分隔--&gt;</span><span class="w">  </span>
+<span class="w">            </span><span class="nt">&lt;param-value&gt;</span>classpath:spring/dispatcher-servlet.xml<span class="nt">&lt;/param-value&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;/init-param&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;load-on-startup&gt;</span>1<span class="nt">&lt;/load-on-startup&gt;</span><span class="cm">&lt;!--是启动顺序，让这个Servlet随Servletp容器一起启动。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="cm">&lt;!--这个Servlet的名字是dispatcher，可以有多个DispatcherServlet，是通过名字来区分的。每一个DispatcherServlet有自己的WebApplicationContext上下文对象。同时保存的ServletContext中和Request对象中.--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="cm">&lt;!--ApplicationContext是Spring的核心，Context我们通常解释为上下文环境，我想用“容器”来表述它更容易理解一些，ApplicationContext则是“应用的容器”了:P，Spring把Bean放在这个容器中，在需要的时候，用getBean方法取出--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;servlet-name&gt;</span>DispatcherServlet<span class="nt">&lt;/servlet-name&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="cm">&lt;!--Servlet拦截匹配规则可以自已定义，当映射为@RequestMapping(&quot;/user/add&quot;)时，为例,拦截哪种URL合适？--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="cm">&lt;!--1、拦截*.do、*.htm， 例如：/user/add.do,这是最传统的方式，最简单也最实用。不会导致静态文件（jpg,js,css）被拦截。--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="cm">&lt;!--2、拦截/，例如：/user/add,可以实现现在很流行的REST风格。很多互联网类型的应用很喜欢这种风格的URL。弊端：会导致静态文件（jpg,js,css）被拦截后不能正常显示。 --&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;url-pattern&gt;</span>/<span class="nt">&lt;/url-pattern&gt;</span><span class="w"> </span><span class="cm">&lt;!--会拦截URL中带“/”的请求。--&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/servlet-mapping&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;welcome-file-list&gt;</span><span class="cm">&lt;!--指定欢迎页面--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;welcome-file&gt;</span>login.html<span class="nt">&lt;/welcome-file&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/welcome-file-list&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;error-page&gt;</span><span class="w"> </span><span class="cm">&lt;!--当系统出现404错误，跳转到页面nopage.html--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;error-code&gt;</span>404<span class="nt">&lt;/error-code&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;location&gt;</span>/nopage.html<span class="nt">&lt;/location&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/error-page&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;error-page&gt;</span><span class="w"> </span><span class="cm">&lt;!--当系统出现java.lang.NullPointerException，跳转到页面error.html--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;exception-type&gt;</span>java.lang.NullPointerException<span class="nt">&lt;/exception-type&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;location&gt;</span>/error.html<span class="nt">&lt;/location&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/error-page&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;session-config&gt;</span><span class="cm">&lt;!--会话超时配置，单位分钟--&gt;</span><span class="w">  </span>
+<span class="w">        </span><span class="nt">&lt;session-timeout&gt;</span>360<span class="nt">&lt;/session-timeout&gt;</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&lt;/session-config&gt;</span><span class="w">  </span>
+<span class="nt">&lt;/web-app&gt;</span>
+</code></pre></div>
 <hr />
 <blockquote>
 <p><a href="https://blog.csdn.net/h2604396739/article/details/84899251">web.xml中的配置，servlet，filter，listener的作用和原理_深山猿的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="servlet_3">Servlet的生命周期</h3>
+<h3 id="servlet_3">Servlet的生命周期<a class="headerlink" href="#servlet_3" title="Permanent link">&para;</a></h3>
 <p>Servlet接口定义了5个方法，其中前三个方法与Servlet生命周期相关：</p>
-<pre><code class="language-java">// 初始化
-void init(ServletConfig config) throws ServletException;
-// 服务
-void service(ServletRequest req, ServletResponse resp) throws ServletException, java.io.IOException;
-// 销毁
-void destory();
+<div class="highlight"><pre><span></span><code><span class="c1">// 初始化</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">ServletConfig</span><span class="w"> </span><span class="n">config</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">;</span>
+<span class="c1">// 服务</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">service</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">resp</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">IOException</span><span class="p">;</span>
+<span class="c1">// 销毁</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">destory</span><span class="p">();</span>
 
-// 获得servlet信息
-java.lang.String getServletInfo();
-// 获取servlet配置
-ServletConfig getServletConfig();
-</code></pre>
+<span class="c1">// 获得servlet信息</span>
+<span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="nf">getServletInfo</span><span class="p">();</span>
+<span class="c1">// 获取servlet配置</span>
+<span class="n">ServletConfig</span><span class="w"> </span><span class="nf">getServletConfig</span><span class="p">();</span>
+</code></pre></div>
 <p>生命周期：</p>
 <ul>
 <li>Web容器加载Servlet并将其实例化后，Servlet生命周期开始，容器运行其init()方法进行Servlet的初始化；</li>
 <li>请求到达时调用Servlet的service()方法，service()方法会根据需要调用与请求对应的doGet或doPost等方法；</li>
 <li>当服务器关闭或项目被卸载时服务器会将Servlet实例销毁，此时会调用Servlet的destroy()方法。</li>
 </ul>
-<h3 id="jspservlet">Jsp和Servlet的区别</h3>
+<h3 id="jspservlet">Jsp和Servlet的区别<a class="headerlink" href="#jspservlet" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Servlet是<strong>一个特殊的Java程序</strong>，它运行于服务器的JVM中，能够依靠服务器的支持向浏览器提供显示内容。<strong>JSP本质上是 Servlet的一种简易形式</strong>，JSP会被服务器处理成一个类似于Servlet的Java程序，可以简化页面内容的生成。</li>
 <li>Servlet和JSP最主要的不同点在于，Servlet的应用逻辑是在Java文件中，并且完全从表示层中的HTML分离开来。而JSP的情况是Java和 HTML可以组合成一个扩展名为.jsp的文件。有人说，Servlet就是在Java中写HTML，而JSP就是在HTML中写Java代码，当然这个说法是很片面且不够准确的。<strong>JSP侧重于视图</strong>，<strong>Servlet更侧重于控制逻辑</strong>，在MVC架构模式中，JSP适合充当视图（view）而Servlet适合充当控制器。</li>
 </ul>
-<h3 id="_1">保存会话状态有哪些方式？区别如何？</h3>
+<h3 id="_1">保存会话状态有哪些方式？区别如何？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>由于HTTP协议本身是无状态的，服务器为了区分不同的用户，就需要对用户会话进行跟踪。简单的说就是为用户进行登记，为用户分配唯一的ID，下一次用户在请求中包含此ID，服务器据此判断到底是哪一个用户。</p>
 <p>① URL重写：在URL中添加用户会话的信息作为请求的参数，或者将唯一的会话ID添加到URL结尾以标识一个会话。</p>
 <p>② 设置表单隐藏域：将和会话跟踪相关的字段添加到隐式表单域中，这些信息不会在浏览器中显示但是提交表单时会提交给服务器。</p>
 <p>①和②这两种方式很难处理跨越多个页面的信息传递，因为如果每次都要修改URL或在页面中添加隐式表单域来存储用户会话相关信息，事情将变得非常麻烦。</p>
 <p><strong>补充：</strong>HTML5中可以使用<strong>Web Storage</strong>技术通过JavaScript来保存数据，例如可以使用<strong>localStorage</strong>和 <strong>sessionStorage</strong>来保存用户会话的信息，也能够实现会话跟踪。</p>
-<h3 id="cookie-session">Cookie 和 Session 的区别</h3>
+<h3 id="cookie-session">Cookie 和 Session 的区别<a class="headerlink" href="#cookie-session" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Session 在服务器端，Cookie 在客户端（浏览器）</li>
 <li>Session 的运行依赖 Session id，而 Session id 是存在 Cookie 中的，也就是说，如果浏览器禁用了 Cookie ，同时 Session也会失效（但是可以通过其它方式实现，比如在 url 中传递 Session_id）</li>
@@ -647,7 +647,7 @@ ServletConfig getServletConfig();
 <li>Session会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能考虑到减轻服务器性能方面，应当使用 Cookie。</li>
 <li>单个Cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个Cookie。</li>
 </ul>
-<h3 id="socket">Socket 编程通常出现的异常有哪些，什么情况下会出现？</h3>
+<h3 id="socket">Socket 编程通常出现的异常有哪些，什么情况下会出现？<a class="headerlink" href="#socket" title="Permanent link">&para;</a></h3>
 <ul>
 <li>java.net.BindException: Address already in use: JVM_Bind<br />
 端口占用</li>
@@ -670,55 +670,55 @@ socket超时</li>
 <p><a href="https://blog.csdn.net/tianzhonghaoqing/article/details/120161221">socket异常分析_融极的博客-CSDN博客_socket连接错误及原因</a>
 </p>
 </blockquote>
-<h3 id="_2">过滤器和拦截器的区别</h3>
+<h3 id="_2">过滤器和拦截器的区别<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Filter 的使用</li>
 </ul>
 <p>首先，要使用 Filter，必须实现<code>javax.servlet.Filter</code>接口：</p>
-<pre><code class="language-java">public interface Filter {
-    //web应用加载进容器，Filter对象创建之后，执行init方法初始化，用于加载资源，只执行一次。 
-    public default void init(FilterConfig filterConfig) throws ServletException {}
-    //每次请求或响应被拦截时执行，可执行多次。
-    public void doFilter(ServletRequest request, ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException;
-    //web应用移除容器，服务器被正常关闭，则执行destroy方法，用于释放资源，只执行一次。
-    public default void destroy() {}
-}
-</code></pre>
-<pre><code>- init 和 destroy 是 default 方法，实现类可以不用实现。
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//web应用加载进容器，Filter对象创建之后，执行init方法初始化，用于加载资源，只执行一次。 </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">init</span><span class="p">(</span><span class="n">FilterConfig</span><span class="w"> </span><span class="n">filterConfig</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="c1">//每次请求或响应被拦截时执行，可执行多次。</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilter</span><span class="p">(</span><span class="n">ServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">ServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">chain</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">,</span><span class="w"> </span><span class="n">ServletException</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//web应用移除容器，服务器被正常关闭，则执行destroy方法，用于释放资源，只执行一次。</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">destroy</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>- init 和 destroy 是 default 方法，实现类可以不用实现。
 - doFilter 必须实现，也就是说，作为一个过滤器，doFilter 必须要定义。
 - doFlilter 方法中传进来的 FilterChain 对象用来调用下一个过滤器。
-</code></pre>
+</code></pre></div>
 <ul>
 <li>拦截器的使用</li>
 </ul>
-<pre><code class="language-java">public interface HandlerInterceptor {
-    //拦截handler的执行 --&gt; 在HanlerMapping决定适合的handler之后，[在HandlerAdater调用handler之前执行。]
-    default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-        throws Exception {
-        return true;
-    }
-    //拦截handler的执行 --&gt; [在HandlerAdapter调用handler之后]，在DispatcherServlet渲染视图之前执行
-    default void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-                            @Nullable ModelAndView modelAndView) throws Exception {
-    }
-    //视图渲染后调用，且只有preHandle结果为true，才会调用
-    default void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-                                 @Nullable Exception ex) throws Exception {
-    }
-}
-</code></pre>
-<pre><code class="language-java">//DispatcherServlet
-if (!mappedHandler.applyPreHandle(processedRequest, response)) {
-    return; //遍历所有的interceptors，调用preHandle方法，只有返回true，才能进行下去
-}
-// 这里也就是处理Contrller
-mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
-//视图渲染
-applyDefaultViewName(processedRequest, mv);
-//视图渲染之后调用
-mappedHandler.applyPostHandle(processedRequest, response, mv);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">HandlerInterceptor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//拦截handler的执行 --&gt; 在HanlerMapping决定适合的handler之后，[在HandlerAdater调用handler之前执行。]</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">preHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//拦截handler的执行 --&gt; [在HandlerAdapter调用handler之后]，在DispatcherServlet渲染视图之前执行</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">postHandle</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">,</span>
+<span class="w">                            </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">ModelAndView</span><span class="w"> </span><span class="n">modelAndView</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//视图渲染后调用，且只有preHandle结果为true，才会调用</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">afterCompletion</span><span class="p">(</span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">handler</span><span class="p">,</span>
+<span class="w">                                 </span><span class="nd">@Nullable</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">//DispatcherServlet</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mappedHandler</span><span class="p">.</span><span class="na">applyPreHandle</span><span class="p">(</span><span class="n">processedRequest</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="c1">//遍历所有的interceptors，调用preHandle方法，只有返回true，才能进行下去</span>
+<span class="p">}</span>
+<span class="c1">// 这里也就是处理Contrller</span>
+<span class="n">mv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ha</span><span class="p">.</span><span class="na">handle</span><span class="p">(</span><span class="n">processedRequest</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">mappedHandler</span><span class="p">.</span><span class="na">getHandler</span><span class="p">());</span>
+<span class="c1">//视图渲染</span>
+<span class="n">applyDefaultViewName</span><span class="p">(</span><span class="n">processedRequest</span><span class="p">,</span><span class="w"> </span><span class="n">mv</span><span class="p">);</span>
+<span class="c1">//视图渲染之后调用</span>
+<span class="n">mappedHandler</span><span class="p">.</span><span class="na">applyPostHandle</span><span class="p">(</span><span class="n">processedRequest</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">mv</span><span class="p">);</span>
+</code></pre></div>
 <ul>
 <li>过滤器与拦截器的区别<ul>
 <li>实现原理不同<ul>
@@ -739,14 +739,14 @@ mappedHandler.applyPostHandle(processedRequest, response, mv);
 <p>Interceptor 很像 Filter，但是 <u>Interceptor 只对 Handler 前后进行处理</u>。然而，Filter 运行交换请求对象和响应对象。</p>
 <p>Filter 使用 xml 配置，Interceptor 属于应用上下文</p>
 <p><img alt="1600131680713-1f602396-44ae-4a01-9a81-fbc0cc3703d2.png" src="../img/6roIRagQSQAwL7u3/1600131680713-1f602396-44ae-4a01-9a81-fbc0cc3703d2-890232.png" /></p>
-<pre><code>    * 过滤器：对请求在进入后 Servlet 之前或之后进行处理。
+<div class="highlight"><pre><span></span><code>    * 过滤器：对请求在进入后 Servlet 之前或之后进行处理。
     * 拦截器：对请求在 Handler【Controller】前后进行处理。
-</code></pre>
+</code></pre></div>
 <p><img alt="1600131680802-431bc7b7-9c28-4dae-94f3-984f27b36667.png" src="../img/6roIRagQSQAwL7u3/1600131680802-431bc7b7-9c28-4dae-94f3-984f27b36667-723959.png" /></p>
-<pre><code>- 执行顺序不同
-</code></pre>
+<div class="highlight"><pre><span></span><code>- 执行顺序不同
+</code></pre></div>
 <p>同时配置了过滤器和拦截器的情形：</p>
-<pre><code class="language-plain">MyFilter1 前
+<div class="highlight"><pre><span></span><code>MyFilter1 前
 MyFilter2 前
 MyInterceptor1 在Controller前执行
 MyInterceptor2 在Controller前执行
@@ -757,41 +757,41 @@ MyInterceptor2 视图渲染完成之后执行
 MyInterceptor1 视图渲染完成之后执行
 MyFilter2 后
 MyFilter1 后
-</code></pre>
-<pre><code>    * 过滤器的顺序
-</code></pre>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>    * 过滤器的顺序
+</code></pre></div>
 <p>每一次都将 <strong>chain 对象</strong>传入，达到最后接口回调的效果</p>
-<pre><code>    * 拦截器的顺序
-</code></pre>
+<div class="highlight"><pre><span></span><code>    * 拦截器的顺序
+</code></pre></div>
 <p>preHandle1 -&gt; preHande2 -&gt; 【Controller】 -&gt; postHandle2 -&gt; postHandle1 -&gt; afterCompletion2 -&gt; afterComplention1。preHandle 按照注册顺序，后两个与注册顺序相反。</p>
-<pre><code>        + 一个拦截器的 preHandle 为 false，则之后的所有拦截器都不会执行。
+<div class="highlight"><pre><span></span><code>        + 一个拦截器的 preHandle 为 false，则之后的所有拦截器都不会执行。
         + 一个拦截器的 preHandle 为 true，则这个拦截器的 triggerAfterCompletion 一定会执行。
         + 只有所有的拦截器 preHandler 都为 true，也就是正常执行，postHandle 才会执行。
 - 控制执行顺序方式不同
-</code></pre>
+</code></pre></div>
 <p>两者默认都是使用<strong>注册顺序</strong>，如果想要认为控制执行的顺序，方式略有不同：</p>
-<pre><code>    * 过滤器
+<div class="highlight"><pre><span></span><code>    * 过滤器
         + 如果想要强制改变，可以使用`@Order`注解。
     * 拦截器
         + 如果使用`order()`方法
-</code></pre>
-<pre><code class="language-java">@Order(2)
-@Component
-public class MyFilter1 implements Filter {}
-</code></pre>
-<pre><code class="language-java">@Component
-public class WebAdapter implements WebMvcConfigurer {
-    @Autowired
-    MyInterceptor1 myInterceptor1;
-    @Autowired
-    MyInterceptor2 myInterceptor2;
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(myInterceptor1).addPathPatterns(&quot;/**&quot;).order(2);
-        registry.addInterceptor(myInterceptor2).addPathPatterns(&quot;/**&quot;).order(1);
-    }
-}
-</code></pre>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Order</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyFilter1</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Filter</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">WebAdapter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">WebMvcConfigurer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="n">MyInterceptor1</span><span class="w"> </span><span class="n">myInterceptor1</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="n">MyInterceptor2</span><span class="w"> </span><span class="n">myInterceptor2</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addInterceptors</span><span class="p">(</span><span class="n">InterceptorRegistry</span><span class="w"> </span><span class="n">registry</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">addInterceptor</span><span class="p">(</span><span class="n">myInterceptor1</span><span class="p">).</span><span class="na">addPathPatterns</span><span class="p">(</span><span class="s">&quot;/**&quot;</span><span class="p">).</span><span class="na">order</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">registry</span><span class="p">.</span><span class="na">addInterceptor</span><span class="p">(</span><span class="n">myInterceptor2</span><span class="p">).</span><span class="na">addPathPatterns</span><span class="p">(</span><span class="s">&quot;/**&quot;</span><span class="p">).</span><span class="na">order</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>总结<ul>
 <li><strong>原理实现</strong>上：过滤器基于<strong>回调</strong>实现，而拦截器基于<strong>动态代理</strong>。</li>

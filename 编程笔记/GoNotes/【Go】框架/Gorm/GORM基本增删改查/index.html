@@ -251,24 +251,24 @@
 
 
 
-<h1 id="gorm">GORM 基本增删改查</h1>
+<h1 id="gorm">GORM 基本增删改查<a class="headerlink" href="#gorm" title="Permanent link">&para;</a></h1>
 <p><img alt="画板" src="../img/RQrYnZCGJ61N2xfi/1676966131176-bc8bb8d8-678a-4da1-95bd-ebd96395ef2b-161137.jpeg" /></p>
-<h1 id="_1">创建</h1>
-<pre><code class="language-go">package main
-func CreatedTest(){
-    dbres := GLOBAL_DB.Create(&amp;TestUser{Name:&quot;tt&quot;,Age:18}) //返回一个 db 指针
-    fmt.Println(dbres.Error,dbres.ROWsAffected) // 打印日志
-}
-</code></pre>
-<h1 id="_2">查询</h1>
-<pre><code class="language-go">package main
-func UpdateTest（）{
-    dbres := GLOBAL_DB.Create(&amp;TestUser{})
+<h1 id="_1">创建<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">CreatedTest</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">dbres</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">GLOBAL_DB</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">TestUser</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="s">&quot;tt&quot;</span><span class="p">,</span><span class="nx">Age</span><span class="p">:</span><span class="mi">18</span><span class="p">})</span><span class="w"> </span><span class="c1">//返回一个 db 指针</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">dbres</span><span class="p">.</span><span class="nx">Error</span><span class="p">,</span><span class="nx">dbres</span><span class="p">.</span><span class="nx">ROWsAffected</span><span class="p">)</span><span class="w"> </span><span class="c1">// 打印日志</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_2">查询<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">UpdateTest</span><span class="err">（）</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">dbres</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">GLOBAL_DB</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">TestUser</span><span class="p">{})</span>
 
-}
-</code></pre>
-<h1 id="_3">更新</h1>
-<h1 id="_4">删除</h1>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_3">更新<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<h1 id="_4">删除<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>更新: 2023-02-21 17:14:44<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/qiu8twemq8goktzn">https://www.yuque.com/xiaoshan_wgo/codingnotes/qiu8twemq8goktzn</a></p>

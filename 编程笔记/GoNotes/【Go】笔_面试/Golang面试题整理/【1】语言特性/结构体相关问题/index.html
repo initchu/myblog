@@ -307,14 +307,14 @@
 
 
 
-<h1 id="_1">结构体相关问题</h1>
-<h2 id="1">1. 空结构体占不占内存空间？/ 为什么使用空结构体？</h2>
-<h3 id="_2">题目解析</h3>
+<h1 id="_1">结构体相关问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="1">1. 空结构体占不占内存空间？/ 为什么使用空结构体？<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">题目解析<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(18, 18, 18);">空结构体是没有内存大小的结构体。</font></p>
 <p><font style="color:rgb(18, 18, 18);">通过 unsafe.Sizeof() 可以查看空结构体的宽度，代码如下：</font></p>
-<pre><code class="language-go">var s struct{}
-fmt.Println(unsafe.Sizeof(s)) // prints 0
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Sizeof</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span><span class="w"> </span><span class="c1">// prints 0</span>
+</code></pre></div>
 <p><font style="color:rgb(18, 18, 18);">准确的来说，空结构体有一个特殊起点： </font><code>zerobase</code><font style="color:rgb(18, 18, 18);"> 变量。</font><code>&lt;font style="color:rgb(18, 18, 18);"&gt;zerobase&lt;/font&gt;</code><font style="color:rgb(18, 18, 18);">是一个占用 8 个字节的</font><code>uintptr</code><font style="color:rgb(18, 18, 18);">全局变量。每次定义 </font><code>struct {}</code><font style="color:rgb(18, 18, 18);"> 类型的变量，编译器只是把</font><code>zerobase</code><font style="color:rgb(18, 18, 18);">变量的地址给出去。也就是说空结构体的变量的内存地址都是一样的。</font></p>
 <p>空结构体的使用场景主要有三种：</p>
 <ul>
@@ -322,9 +322,9 @@ fmt.Println(unsafe.Sizeof(s)) // prints 0
 <li>实现集合类型：在 Go 语言的标准库中并没有提供集合（Set）的相关实现，因此一般在代码中我们图方便，会直接用 map 来替代：<code>type Set map[string]struct{}</code>。</li>
 <li>实现空通道：在 Go channel 的使用场景中，常常会遇到通知型 channel，其不需要发送任何数据，只是用于协调 Goroutine 的运行，用于流转各类状态或是控制并发情况。</li>
 </ul>
-<h2 id="2-go-417">2. <font style="color:rgb(34, 34, 34);">Go 结构体是否可以比较，为什么？ 417</font></h2>
+<h2 id="2-go-417">2. <font style="color:rgb(34, 34, 34);">Go 结构体是否可以比较，为什么？ 417</font><a class="headerlink" href="#2-go-417" title="Permanent link">&para;</a></h2>
 <p>频次：1</p>
-<h3 id="_3">题目解析</h3>
+<h3 id="_3">题目解析<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>如果在两个不同的结构体类型之间进行比较（地址不同），则一定不能进行比较，除非强制转换成相同的结构体类型。</li>
 <li>如果在一个结构体中，需要看情况进行比较。在 Go 语言中，当其基本类型包含：slice、map、function 时，是不能比较的。</li>

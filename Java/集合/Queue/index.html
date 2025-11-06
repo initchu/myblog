@@ -412,8 +412,8 @@
 
 
 
-<h1 id="queue">Queue</h1>
-<h3 id="arraydeque">讲一下 ArrayDeque？</h3>
+<h1 id="queue">Queue<a class="headerlink" href="#queue" title="Permanent link">&para;</a></h1>
+<h3 id="arraydeque">讲一下 ArrayDeque？<a class="headerlink" href="#arraydeque" title="Permanent link">&para;</a></h3>
 <p>ArrayDeque 实现了 Deque 接口；</p>
 <p>ArrayDeque 实现了<strong>双端队列</strong>，内部使用<strong>循环数组</strong>实现，<strong>默认大小为 16</strong>。</p>
 <p>它的特点有： </p>
@@ -422,7 +422,7 @@
 <li><strong><u>根据元素内容查找和删除</u></strong><u>的</u><strong><u>效率比较低</u></strong>。 </li>
 <li>没有索引位置的概念，<u>不能根据索引位置进行操作</u>。 </li>
 </ol>
-<h3 id="arraydeque-linkedlist">ArrayDeque 和 LinkedList 的区别</h3>
+<h3 id="arraydeque-linkedlist">ArrayDeque 和 LinkedList 的区别<a class="headerlink" href="#arraydeque-linkedlist" title="Permanent link">&para;</a></h3>
 <p><strong>ArrayDeque </strong>和 <strong>LinkedList </strong>都实现了 <strong>Deque 接口</strong>；</p>
 <ul>
 <li><u>如果只需要从</u><strong><u>两端</u></strong><u>进行操作，</u><strong><u>ArrayDeque </u></strong><u>效率更高一些；</u></li>
@@ -437,7 +437,7 @@
 </li>
 </ul>
 </blockquote>
-<h3 id="java">用 Java 实现阻塞队列</h3>
+<h3 id="java">用 Java 实现阻塞队列<a class="headerlink" href="#java" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>这是一个相对艰难的多线程面试问题，它能达到很多的目的。</p>
 <p>第一，它可以检测侯选者是否能实际的用Java 线程写程序；</p>
@@ -446,68 +446,68 @@
 </blockquote>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">阻塞队列是一种特殊的队列，它可以在队列为空时阻塞读取操作，在队列已满时阻塞写入操作。在 Java 中，可以使用 java.util.concurrent 包中的 BlockingQueue 接口来实现阻塞队列。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">以下是一个简单的阻塞队列的实现示例：</font></p>
-<pre><code class="language-java">import java.util.concurrent.BlockingQueue;  
-import java.util.concurrent.LinkedBlockingQueue;  
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.BlockingQueue</span><span class="p">;</span><span class="w">  </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.LinkedBlockingQueue</span><span class="p">;</span><span class="w">  </span>
 
-public class BlockingQueueExample {  
-    private BlockingQueue&lt;String&gt; queue;  
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BlockingQueueExample</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">  </span>
 
-    public BlockingQueueExample() {  
-        this.queue = new LinkedBlockingQueue&lt;&gt;(10);  
-    }  
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BlockingQueueExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedBlockingQueue</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 
-    public void put(String item) throws InterruptedException {  
-        queue.put(item);  
-    }  
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="n">queue</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 
-    public String take() throws InterruptedException {  
-        return queue.take();  
-    }  
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">take</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">在上面的代码中，我们使用 LinkedBlockingQueue 类来实现阻塞队列。LinkedBlockingQueue 是一个线程安全的阻塞队列，它使用 BlockingQueue 接口的实现，同时添加了线程安全保证。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">在 put 方法中，我们使用 put 方法将元素添加到队列中。如果队列已满，put 方法将阻塞直到队列有空间。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">在 take 方法中，我们使用 take 方法从队列中获取元素。如果队列为空，take 方法将阻塞直到队列中有元素。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">当队列中有元素时，put 方法将继续执行并返回成功添加的元素；当队列中没有元素时，take 方法将返回一个默认的空字符串。</font></p>
-<h3 id="concurrentlinkedqueue-linkedblockingqueue">简述 ConcurrentLinkedQueue 和 LinkedBlockingQueue 的用处和不同之处</h3>
+<h3 id="concurrentlinkedqueue-linkedblockingqueue">简述 ConcurrentLinkedQueue 和 LinkedBlockingQueue 的用处和不同之处<a class="headerlink" href="#concurrentlinkedqueue-linkedblockingqueue" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">ConcurrentLinkedQueue 和 LinkedBlockingQueue 都是 Java 中实现队列的数据结构，它们的主要区别在于线程安全和阻塞模式。</font></p>
 <ol>
 <li><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">ConcurrentLinkedQueue 是一个线程安全的非阻塞队列，它可以在多个线程之间安全地共享。这意味着多个线程可以同时对队列进行读取或写入操作而不会相互干扰。这在多线程应用程序中非常重要，因为它可以避免线程之间的竞争条件和死锁问题。</font></li>
 <li><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">LinkedBlockingQueue 是一个线程安全的阻塞队列，它可以在队列已满时阻塞写入操作，在队列为空时阻塞读取操作。这种阻塞模式可以确保在队列满或空时，线程可以等待，直到有空间或元素可用。这在处理大量数据和高并发场景中非常重要。</font></li>
 </ol>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">因此，选择 ConcurrentLinkedQueue 还是 LinkedBlockingQueue主要取决于应用程序的需求和并发场景。对于需要高性能和线程安全的场景，可以选择 ConcurrentLinkedQueue；对于需要阻塞模式和更好的性能的场景，可以选择 LinkedBlockingQueue。</font></p>
-<h3 id="_1">如果想实现一个线程安全的队列，可以怎么实现？</h3>
+<h3 id="_1">如果想实现一个线程安全的队列，可以怎么实现？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">要实现一个线程安全的队列，可以使用 Java 中的 ConcurrentLinkedQueue 或 LinkedBlockingQueue。这两个类都是线程安全的，可以在多个线程之间安全地共享。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">ConcurrentLinkedQueue 是一个基于链表的线程安全队列，它使用了双向链表来维护队列中的元素。在添加元素时，如果队列已满，则插入操作将被阻塞，直到队列有空间。在删除元素时，如果队列为空，则删除操作将被阻塞，直到队列中有元素。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">LinkedBlockingQueue 是一个基于阻塞队列的线程安全队列，它使用了链表来维护队列中的元素。当队列已满时，put 方法将被阻塞，直到队列有空间。当队列为空时，take 方法将被阻塞，直到队列中有元素。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">使用这两个类来实现线程安全的队列非常简单，只需要将它们作为参数传递给其他方法即可。例如：</font></p>
-<pre><code class="language-java">import java.util.concurrent.ConcurrentLinkedQueue;  
-import java.util.concurrent.LinkedBlockingQueue;  
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ConcurrentLinkedQueue</span><span class="p">;</span><span class="w">  </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.LinkedBlockingQueue</span><span class="p">;</span><span class="w">  </span>
 
-public class ThreadSafeQueueExample {  
-    private ConcurrentLinkedQueue&lt;String&gt; queue;  
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ThreadSafeQueueExample</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ConcurrentLinkedQueue</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">  </span>
 
-    public ThreadSafeQueueExample() {  
-        this.queue = new ConcurrentLinkedQueue&lt;&gt;();  
-    }  
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ThreadSafeQueueExample</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ConcurrentLinkedQueue</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 
-    public void put(String item) throws InterruptedException {  
-        queue.add(item);  
-    }  
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 
-    public String take() throws InterruptedException {  
-        return queue.take();  
-    }  
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">take</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">take</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">在上面的代码中，我们创建了一个 ConcurrentLinkedQueue 对象和一个 LinkedBlockingQueue 对象，并将它们传递给其他方法。这些方法可以在多个线程之间安全地共享，并且可以避免线程之间的竞争条件和死锁问题。</font></p>
-<h3 id="_2">如果你提交任务时，线程池队列已满，这时会发生什么？</h3>
+<h3 id="_2">如果你提交任务时，线程池队列已满，这时会发生什么？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>这里区分一下：</p>
 <ol>
 <li>如果使用的是无界队列 <strong>LinkedBlockingQueue</strong>，可以继续添加任务到阻塞队列中等待执行，因为 LinkedBlockingQueue 可以近乎认为是一个无穷大的队列，可以无限存放任务，但是过多的任务可能导致内存溢出。Executors的线程池 <strong>SingleThreadExecutor、FixedThreadPool </strong>使用的是无界队列<strong>。</strong></li>
 <li>如果使用的是有界队列比如 <strong>ArrayBlockingQueue</strong>，任务首先会被添加到 ArrayBlockingQueue 中，ArrayBlockingQueue 满了，会根据 <strong>maximumPoolSize</strong> 的值增加线程数量，如果增加了线程数量还是处理不过来，ArrayBlockingQueue 继续满，那么则会使用<strong>拒绝策略</strong> RejectedExecutionHandler 处理满了的任务，默认是 <strong>AbortPolicy</strong>。</li>
 </ol>
-<h3 id="_3">你知道哪些常⽤的阻塞队列？</h3>
+<h3 id="_3">你知道哪些常⽤的阻塞队列？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>JDK7 提供了 7 个阻塞队列。分别是 </p>
 <ol>
 <li>ArrayBlockingQueue：⼀个由数组结构组成的有界阻塞队列。</li>
@@ -518,12 +518,12 @@ public class ThreadSafeQueueExample {
 <li>LinkedTransferQueue：⼀个由链表结构组成的⽆界阻塞队列。</li>
 <li>LinkedBlockingDeque：⼀个由链表结构组成的双向阻塞队列。</li>
 </ol>
-<h3 id="_4">阻塞队列</h3>
+<h3 id="_4">阻塞队列<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><a href="https://www.cnblogs.com/aspirant/p/8657801.html">BlockingQueue（阻塞队列）详解 - aspirant - 博客园</a>
 </p>
 </blockquote>
-<h3 id="-">什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？*</h3>
+<h3 id="-">什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？*<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
 <p><code>java.util.concurrent.BlockingQueue</code>的特性是：<strong>当队列是空</strong>的时，从队列中<strong>获取或删除</strong>元素的操作将<strong>会被阻塞</strong>，或者当<strong>队列是满时</strong>，往队列里添加元素的操作<strong>会被阻塞</strong>。</p>
 <p>阻塞队列不接受空值，当你尝试向队列中添加空值的时候，它会抛出NullPointerException。</p>
 <p>阻塞队列的实现都是<strong>线程安全</strong>的，所有的查询方法都是原子的并且使用了<strong>内部锁</strong>或者其他形式的并发控制。</p>
@@ -532,9 +532,9 @@ public class ThreadSafeQueueExample {
 <p>总结：空阻满阻
 </p>
 </blockquote>
-<h3 id="arrayblockingqueue">简单介绍下ArrayBlockingQueue</h3>
+<h3 id="arrayblockingqueue">简单介绍下ArrayBlockingQueue<a class="headerlink" href="#arrayblockingqueue" title="Permanent link">&para;</a></h3>
 <p><strong>ArrayBlockingQueue</strong>是规定大小的BlockingQueue，其构造函数必须带一个int参数来指明其大小。其所含的对象是以<strong>FIFO（先入先出）</strong>顺序排序的。</p>
-<h3 id="_5">延迟队列的实现方式</h3>
+<h3 id="_5">延迟队列的实现方式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">延迟队列（DelayQueue）是一种特殊的队列，它可以用来存储需要延迟执行的任务。这个队列会保存任务的执行器ID，并在任务到期时自动执行。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">延迟队列的实现方式有多种，以下是其中两种常见的方式：</font></p>
 <ol>
@@ -542,53 +542,53 @@ public class ThreadSafeQueueExample {
 </ol>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">ScheduledExecutorService 是 Java 中提供的一个用于执行定时任务的工具类。我们可以使用它来实现延迟队列。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">首先，我们需要创建一个 ScheduledExecutorService 实例，并将其绑定到一个 DelayQueue 对象上。然后，我们可以使用 scheduleAtFixedRate() 方法来定时执行任务。</font></p>
-<pre><code class="language-java">import java.util.concurrent.Executors;  
-import java.util.concurrent.ScheduledExecutorService;  
-import java.util.concurrent.TimeUnit;  
-import java.util.concurrent.atomic.AtomicReference;  
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.Executors</span><span class="p">;</span><span class="w">  </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.ScheduledExecutorService</span><span class="p">;</span><span class="w">  </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.TimeUnit</span><span class="p">;</span><span class="w">  </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.atomic.AtomicReference</span><span class="p">;</span><span class="w">  </span>
 
-public class DelayQueueWithScheduledExecutorService {  
-    private final DelayQueue&lt;Runnable&gt; queue;  
-    private final ScheduledExecutorService executor;  
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DelayQueueWithScheduledExecutorService</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DelayQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ScheduledExecutorService</span><span class="w"> </span><span class="n">executor</span><span class="p">;</span><span class="w">  </span>
 
-    public DelayQueueWithScheduledExecutorService() {  
-        this.queue = new DelayQueue&lt;&gt;();  
-        this.executor = Executors.newSingleThreadScheduledExecutor();  
-    }  
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DelayQueueWithScheduledExecutorService</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DelayQueue</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">  </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Executors</span><span class="p">.</span><span class="na">newSingleThreadScheduledExecutor</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 
-    public void addTask(Runnable task) {  
-        queue.add(task);  
-        executor.scheduleAtFixedRate(task, 0, 1, TimeUnit.SECONDS);  
-    }  
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addTask</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">  </span>
+<span class="w">        </span><span class="n">executor</span><span class="p">.</span><span class="na">scheduleAtFixedRate</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">TimeUnit</span><span class="p">.</span><span class="na">SECONDS</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">在上面的代码中，我们创建了一个 DelayQueueWithScheduledExecutorService 类，它包含一个 DelayQueue 对象和一个 ScheduledExecutorService 实例。我们使用 addTask() 方法将任务添加到队列中，并使用 scheduleAtFixedRate() 方法定时执行任务。</font></p>
 <ol>
 <li><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">使用 CountDownLatch</font></li>
 </ol>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">CountDownLatch 是 Java 中提供的一个用于协调多个线程的工具类。我们可以使用它来实现延迟队列。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">首先，我们需要创建一个 CountDownLatch 实例，并将其绑定到一个 DelayQueue 对象上。然后，我们可以使用 countDown() 方法来等待队列中的任务执行完成。</font></p>
-<pre><code class="language-java">import java.util.concurrent.CountDownLatch;  
-import java.util.concurrent.atomic.AtomicReference;  
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.CountDownLatch</span><span class="p">;</span><span class="w">  </span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.concurrent.atomic.AtomicReference</span><span class="p">;</span><span class="w">  </span>
 
-public class DelayQueueWithCountDownLatch {  
-    private final DelayQueue&lt;Runnable&gt; queue;  
-    private final CountDownLatch latch;  
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DelayQueueWithCountDownLatch</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">DelayQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span><span class="w">  </span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CountDownLatch</span><span class="w"> </span><span class="n">latch</span><span class="p">;</span><span class="w">  </span>
 
-    public DelayQueueWithCountDownLatch() {  
-        this.queue = new DelayQueue&lt;&gt;();  
-        this.latch = new CountDownLatch(1);  
-    }  
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">DelayQueueWithCountDownLatch</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DelayQueue</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">  </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">latch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CountDownLatch</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
 
-    public void addTask(Runnable task) {  
-        queue.add(task);  
-        latch.countDown();  
-    }  
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addTask</span><span class="p">(</span><span class="n">Runnable</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">        </span><span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">task</span><span class="p">);</span><span class="w">  </span>
+<span class="w">        </span><span class="n">latch</span><span class="p">.</span><span class="na">countDown</span><span class="p">();</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">在上面的代码中，我们创建了一个 DelayQueueWithCountDownLatch 类，它包含一个 DelayQueue 对象和一个 CountDownLatch 实例。我们使用 addTask() 方法将任务添加到队列中，并使用 countDown() 方法等待队列中的任务执行完成。</font></p>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">这两种方式都可以实现延迟队列，具体选择哪种方式取决于具体的应用场景和需求。</font></p>
-<h3 id="delayqueue">delayQueue和时间轮算法的异同</h3>
+<h3 id="delayqueue">delayQueue和时间轮算法的异同<a class="headerlink" href="#delayqueue" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">delayQueue和时间轮算法都是用来实现延迟任务的工具，但它们之间有一些异同点：</font></p>
 <ol>
 <li><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">实现原理不同：delayQueue是一个基于优先级队列（Priority Queue）实现的延迟队列，而时间轮算法则是一个基于事件驱动的延迟任务调度器。</font></li>
@@ -597,7 +597,7 @@ public class DelayQueueWithCountDownLatch {
 <li><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">并发性能不同：时间轮算法在处理大量延迟任务时，并发性能较好，而delayQueue在处理少量延迟任务时，并发性能较好。</font></li>
 </ol>
 <p><font style="color:rgb(5, 7, 59);background-color:rgb(253, 253, 254);">总的来说，delayQueue和时间轮算法都可以实现延迟任务，具体选择哪种方式需要根据具体的应用场景和需求来决定。</font></p>
-<h3 id="concurrentlinkedqueue"><font style="color:rgb(51,51,51);">ConcurrentLinkedQueue</font></h3>
+<h3 id="concurrentlinkedqueue"><font style="color:rgb(51,51,51);">ConcurrentLinkedQueue</font><a class="headerlink" href="#concurrentlinkedqueue" title="Permanent link">&para;</a></h3>
 <p><strong><font style="color:rgb(51,51,51);">非阻塞</font></strong><font style="color:rgb(51,51,51);">队列。高效的并发队列，使用</font><strong><font style="color:rgb(51,51,51);">链表</font></strong><font style="color:rgb(51,51,51);">实现。可以看做一个</font><strong><font style="color:rgb(51,51,51);">线程安全的 </font></strong><strong><font style="color:rgb(245,0,89);">LinkedList</font></strong><font style="color:rgb(245,0,89);"> </font><font style="color:rgb(51,51,51);">，通过 </font><strong><font style="color:rgb(51,51,51);">CAS</font></strong><font style="color:rgb(51,51,51);"> 操作实现。 </font></p>
 <p><font style="color:rgb(51,51,51);">如果对队列加锁的成本较高则适合使用无锁的 </font><font style="color:rgb(245,0,89);">ConcurrentLinkedQueue </font><font style="color:rgb(51,51,51);">来替代。适合在对性能要求相对较高，同时有</font><u><font style="color:rgb(51,51,51);">多个线程对队列进行读写</font></u><font style="color:rgb(51,51,51);">的场景。 </font></p>
 <p><strong><font style="color:rgb(51,51,51);">非阻塞队列中的几种主要方法： </font></strong></p>
@@ -609,7 +609,7 @@ public class DelayQueueWithCountDownLatch {
 <li><font style="color:rgb(51,51,51);"></font><font style="color:rgb(245,0,89);">peek() </font><font style="color:rgb(51,51,51);">：获取队首元素，若成功，则返回队首元素；否则返回 null </font></li>
 </ul>
 <p><font style="color:rgb(51,51,51);">对于非阻塞队列，一般情况下建议使用</font><strong><font style="color:rgb(51,51,51);">offer</font></strong><font style="color:rgb(51,51,51);">、</font><strong><font style="color:rgb(51,51,51);">poll</font></strong><font style="color:rgb(51,51,51);">和</font><strong><font style="color:rgb(51,51,51);">peek</font></strong><font style="color:rgb(51,51,51);">三个方法，不建议使用add和remove方法。因为</font><u><font style="color:rgb(51,51,51);">使用offer、poll和peek三个方法可以通过返回值判断操作成功与否</font></u><font style="color:rgb(51,51,51);">，而使用add和remove方法却不能达到这样的效果。</font></p>
-<h3 id="_6"><font style="color:rgb(51,51,51);">阻塞队列</font></h3>
+<h3 id="_6"><font style="color:rgb(51,51,51);">阻塞队列</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">阻塞队列是</font><code>&lt;font style="color:rgb(245,0,89);"&gt;java.util.concurrent&lt;/font&gt;</code><font style="color:rgb(51,51,51);">包下重要的数据结构， </font><font style="color:rgb(245,0,89);">BlockingQueue </font><font style="color:rgb(51,51,51);">提供了</font><strong><font style="color:rgb(51,51,51);">线程安全</font></strong><font style="color:rgb(51,51,51);">的队列访问方式：当阻塞队列进行插入数据时，如果队列已满，线程将会阻塞等待直到队列非满；从阻塞队列取数据时，如果队列已空，线程将会阻塞等待直到队列非空。并发包下很多高级同步类的实现都是基于</font><font style="color:rgb(245,0,89);">BlockingQueue </font><font style="color:rgb(51,51,51);">实现的。 </font></p>
 <p><font style="color:rgb(245,0,89);">BlockingQueue </font><font style="color:rgb(51,51,51);">适合用于作为</font><strong><font style="color:rgb(51,51,51);">数据共享</font></strong><font style="color:rgb(51,51,51);">的通道。 </font></p>
 <p><font style="color:rgb(51,51,51);">使用阻塞算法的队列</font><u><font style="color:rgb(51,51,51);">可以用一个锁（入队和出队用同一把锁）或两个锁（入队和出队用不同的锁）等方式来实现</font></u><font style="color:rgb(51,51,51);">。 </font></p>
@@ -618,7 +618,7 @@ public class DelayQueueWithCountDownLatch {
 <li><font style="color:rgb(51,51,51);">多线程支持，多个线程可以安全的访问队列 </font></li>
 <li><font style="color:rgb(51,51,51);">阻塞操作，当队列为空的时候，消费线程会阻塞等待队列不为空；当队列满了的时候，生产线程就会阻塞直到队列不满</font></li>
 </ol>
-<h3 id="jdk"><font style="color:rgb(51,51,51);">JDK提供的阻塞队列</font></h3>
+<h3 id="jdk"><font style="color:rgb(51,51,51);">JDK提供的阻塞队列</font><a class="headerlink" href="#jdk" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">JDK 7 提供了7个阻塞队列：</font></p>
 <ol>
 <li>ArrayBlockingQueue</li>
@@ -639,9 +639,9 @@ public class DelayQueueWithCountDownLatch {
 </ul>
 </li>
 </ol>
-<pre><code class="language-java">private static ArrayBlockingQueue&lt;Integer&gt; blockingQueue 
-    = new ArrayBlockingQueue&lt;Integer&gt;(10, true);//fair
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blockingQueue</span><span class="w"> </span>
+<span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="c1">//fair</span>
+</code></pre></div>
 <ul>
 <li><strong><font style="color:rgb(51,51,51);">LinkedBlockingQueue</font></strong><ul>
 <li><font style="color:rgb(245,0,88);">LinkedBlockingQueue </font><font style="color:rgb(51,51,51);">是一个用</font><strong><font style="color:rgb(51,51,51);">单向链表</font></strong><font style="color:rgb(51,51,51);">实现的有界队列，</font><u><font style="color:rgb(51,51,51);">可以当做</font></u><strong><u><font style="color:rgb(51,51,51);">无界</font></u></strong><u><font style="color:rgb(51,51,51);">队列也可以当做</font></u><strong><u><font style="color:rgb(51,51,51);">有界</font></u></strong><u><font style="color:rgb(51,51,51);">队列来使用</font></u><font style="color:rgb(51,51,51);">。</font></li>
@@ -674,67 +674,67 @@ public class DelayQueueWithCountDownLatch {
 </li>
 <li><strong><font style="color:rgb(51,51,51);">LinkedTransferQueue</font></strong></li>
 </ul>
-<pre><code class="language-java">private static ArrayBlockingQueue&lt;Integer&gt; blockingQueue 
-    = new ArrayBlockingQueue&lt;Integer&gt;(10, true); //fair
-</code></pre>
-<pre><code>- &lt;font style="color:rgb(51,51,51);"&gt;由&lt;/font&gt;**&lt;font style="color:rgb(51,51,51);"&gt;链表&lt;/font&gt;**&lt;font style="color:rgb(51,51,51);"&gt;结构组成的&lt;/font&gt;**&lt;font style="color:rgb(51,51,51);"&gt;无界阻塞&lt;/font&gt;**&lt;font style="color:rgb(51,51,51);"&gt;TransferQueue队列。相对于其他阻塞队列，多了 &lt;/font&gt;**&lt;font style="color:rgb(245,0,89);"&gt;tryTransfer&lt;/font&gt;**&lt;font style="color:rgb(245,0,89);"&gt; &lt;/font&gt;&lt;font style="color:rgb(51,51,51);"&gt;和 &lt;/font&gt;**&lt;font style="color:rgb(245,0,89);"&gt;transfer&lt;/font&gt;**&lt;font style="color:rgb(245,0,89);"&gt; &lt;/font&gt;&lt;font style="color:rgb(51,51,51);"&gt;方法。 &lt;/font&gt;
-- &lt;font style="color:rgb(51,51,51);"&gt;transfer方法：如果当前有消费者正在等待接收元素（take或者待时间限制的poll方法），transfer可以把生产者传入的元素立刻传给消费者。&lt;/font&gt;&lt;u&gt;&lt;font style="color:rgb(51,51,51);"&gt;如果没有消费者等待接收元素，则将元素放在队列的&lt;/font&gt;&lt;/u&gt;**&lt;u&gt;&lt;font style="color:rgb(51,51,51);"&gt;tail节点&lt;/font&gt;&lt;/u&gt;**&lt;font style="color:rgb(51,51,51);"&gt;，并等到该&lt;/font&gt;&lt;u&gt;&lt;font style="color:rgb(51,51,51);"&gt;元素被消费者消费了才返回&lt;/font&gt;&lt;/u&gt;&lt;font style="color:rgb(51,51,51);"&gt;。 &lt;/font&gt;
-- &lt;font style="color:rgb(51,51,51);"&gt;tryTransfer方法：用来试探生产者传入的元素能否直接传给消费者。&lt;/font&gt;&lt;u&gt;&lt;font style="color:rgb(51,51,51);"&gt;如果没有消费者在等待，则返回false&lt;/font&gt;&lt;/u&gt;&lt;font style="color:rgb(51,51,51);"&gt;。和上述方法的区别是该方法无论消费者是否接收，方法立即返回。而transfer方法是必须等到消费者消费了才返回。&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">blockingQueue</span><span class="w"> </span>
+<span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayBlockingQueue</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">//fair</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>- &lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;由&lt;/font&gt;**&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;链表&lt;/font&gt;**&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;结构组成的&lt;/font&gt;**&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;无界阻塞&lt;/font&gt;**&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;TransferQueue队列。相对于其他阻塞队列，多了 &lt;/font&gt;**&lt;font style=&quot;color:rgb(245,0,89);&quot;&gt;tryTransfer&lt;/font&gt;**&lt;font style=&quot;color:rgb(245,0,89);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;和 &lt;/font&gt;**&lt;font style=&quot;color:rgb(245,0,89);&quot;&gt;transfer&lt;/font&gt;**&lt;font style=&quot;color:rgb(245,0,89);&quot;&gt; &lt;/font&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;方法。 &lt;/font&gt;
+- &lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;transfer方法：如果当前有消费者正在等待接收元素（take或者待时间限制的poll方法），transfer可以把生产者传入的元素立刻传给消费者。&lt;/font&gt;&lt;u&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;如果没有消费者等待接收元素，则将元素放在队列的&lt;/font&gt;&lt;/u&gt;**&lt;u&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;tail节点&lt;/font&gt;&lt;/u&gt;**&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;，并等到该&lt;/font&gt;&lt;u&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;元素被消费者消费了才返回&lt;/font&gt;&lt;/u&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;。 &lt;/font&gt;
+- &lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;tryTransfer方法：用来试探生产者传入的元素能否直接传给消费者。&lt;/font&gt;&lt;u&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;如果没有消费者在等待，则返回false&lt;/font&gt;&lt;/u&gt;&lt;font style=&quot;color:rgb(51,51,51);&quot;&gt;。和上述方法的区别是该方法无论消费者是否接收，方法立即返回。而transfer方法是必须等到消费者消费了才返回。&lt;/font&gt;
+</code></pre></div>
 <ul>
 <li><strong><font style="color:rgb(51,51,51);">原理</font></strong></li>
 </ul>
 <p><font style="color:rgb(51,51,51);">JDK使用通知模式实现阻塞队列。所谓通知模式，就是当生产者往满的队列里添加元素时会阻塞生产者，当消费者消费了一个队列中的元素后，会通知生产者当前队列可用。 </font></p>
 <p><font style="color:rgb(51,51,51);">ArrayBlockingQueue使用Condition来实现：</font></p>
-<pre><code class="language-java">private final Condition notEmpty; 
-private final Condition notFull;
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Condition</span><span class="w"> </span><span class="n">notEmpty</span><span class="p">;</span><span class="w"> </span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Condition</span><span class="w"> </span><span class="n">notFull</span><span class="p">;</span>
 
-public ArrayBlockingQueue(int capacity, boolean fair) { 
-    if (capacity &lt;= 0)
-        throw new IllegalArgumentException(); 
-    this.items = new Object[capacity];
-    lock = new ReentrantLock(fair); 
-    notEmpty = lock.newCondition();
-    notFull = lock.newCondition();
-}
-
-
-public E take() throws InterruptedException { 
-    final ReentrantLock lock = this.lock; 
-    lock.lockInterruptibly();
-    try {
-        while (count == 0) // 队列为空时，阻塞当前消费者
-            notEmpty.await();
-        return dequeue();
-    } finally {
-        lock.unlock();
-    }
-}
+<span class="kd">public</span><span class="w"> </span><span class="nf">ArrayBlockingQueue</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">capacity</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">fair</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">capacity</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">();</span><span class="w"> </span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="o">[</span><span class="n">capacity</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="p">(</span><span class="n">fair</span><span class="p">);</span><span class="w"> </span>
+<span class="w">    </span><span class="n">notEmpty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">();</span>
+<span class="w">    </span><span class="n">notFull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">newCondition</span><span class="p">();</span>
+<span class="p">}</span>
 
 
-public void put(E e) throws InterruptedException {
-    checkNotNull(e);
-    final ReentrantLock lock = this.lock; lock.lockInterruptibly();
-    try {
-        while (count == items.length) 
-            notFull.await();
-        enqueue(e);
-    } finally {
-        lock.unlock();
-    }
-}
+<span class="kd">public</span><span class="w"> </span><span class="n">E</span><span class="w"> </span><span class="nf">take</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">lock</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">lock</span><span class="p">.</span><span class="na">lockInterruptibly</span><span class="p">();</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 队列为空时，阻塞当前消费者</span>
+<span class="w">            </span><span class="n">notEmpty</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">dequeue</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
 
-private void enqueue(E x) {
-    final Object[] items = this.items; 
-    items[putIndex] = x;
-    if (++putIndex == items.length) 
-        putIndex = 0;
-    count++;
-    notEmpty.signal(); // 队列不为空时，通知消费者获取元素
-}
-</code></pre>
-<h3 id="arrayblockingqueue_1">ArrayBlockingQueue</h3>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">InterruptedException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">checkNotNull</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">ReentrantLock</span><span class="w"> </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">lock</span><span class="p">;</span><span class="w"> </span><span class="n">lock</span><span class="p">.</span><span class="na">lockInterruptibly</span><span class="p">();</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span>
+<span class="w">            </span><span class="n">notFull</span><span class="p">.</span><span class="na">await</span><span class="p">();</span>
+<span class="w">        </span><span class="n">enqueue</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lock</span><span class="p">.</span><span class="na">unlock</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">enqueue</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="o">[]</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">items</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="n">items</span><span class="o">[</span><span class="n">putIndex</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="n">putIndex</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">items</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="n">putIndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="n">notEmpty</span><span class="p">.</span><span class="na">signal</span><span class="p">();</span><span class="w"> </span><span class="c1">// 队列不为空时，通知消费者获取元素</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="arrayblockingqueue_1">ArrayBlockingQueue<a class="headerlink" href="#arrayblockingqueue_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>基于<strong>数组</strong>、<strong>先进先出</strong>、<strong>线程安全</strong>，<u>可实现指定时间的阻塞读写</u>，并且容量可以限制</li>
 <li>组成：<strong>1个对象数组</strong> +<strong> 1把锁 ReentrantLock </strong>+<strong> 2个条件 Condition</strong></li>
@@ -764,7 +764,7 @@ private void enqueue(E x) {
 <li>锁的形式有公平与非公平两种</li>
 <li>在只有入队高并发或出队高并发的情况下，因为操作数组，且不需要扩容，性能很高</li>
 </ul>
-<h3 id="linkedblockingqueue">LinkedBlockingQueue</h3>
+<h3 id="linkedblockingqueue">LinkedBlockingQueue<a class="headerlink" href="#linkedblockingqueue" title="Permanent link">&para;</a></h3>
 <ul>
 <li>基于<strong>链表</strong>实现，<u>读写各用一把锁</u>，在高并发<strong>读写操作都多</strong>的情况下，性能优于 ArrayBlockingQueue</li>
 <li>组成：<strong>1个链表</strong> + <strong>2把锁</strong> + <strong>2个条件</strong></li>

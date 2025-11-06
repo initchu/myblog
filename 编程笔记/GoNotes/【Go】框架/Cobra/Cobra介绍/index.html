@@ -251,8 +251,8 @@
 
 
 
-<h1 id="cobra">Cobra 介绍</h1>
-<h1 id="_1">简要</h1>
+<h1 id="cobra">Cobra 介绍<a class="headerlink" href="#cobra" title="Permanent link">&para;</a></h1>
+<h1 id="_1">简要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>Cobra <font style="color:rgb(51, 51, 51);">是一个 cli 接口模式的应用程序框架，同时也是生成该框架的命令行工具。用户可以通过 </font>help <font style="color:rgb(51, 51, 51);">方式快速查看该二进制的使用方式。</font></p>
 <p>Cobra <font style="color:rgb(51, 51, 51);">主要包括以下部分：</font></p>
 <ul>
@@ -260,33 +260,33 @@
 <li>Args<font style="color:rgb(51, 51, 51);">：命令执行相关参数。</font></li>
 <li>Flags：<font style="color:rgb(51, 51, 51);">二进制命令的配置参数，可对应配置文件。参数可分为全局参数和子命令参数。参考：</font><a href="https://github.com/spf13/pflag">pflag library</a><font style="color:rgb(51, 51, 51);">。</font></li>
 </ul>
-<h1 id="_2"><font style="color:rgb(51, 51, 51);">安装</font></h1>
+<h1 id="_2"><font style="color:rgb(51, 51, 51);">安装</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(51, 51, 51);">通过以下操作可以在 </font>$GOPATH/bin <font style="color:rgb(51, 51, 51);">安装 cobra 的二进制命令。</font></p>
-<pre><code class="language-go">go get -u github.com/spf13/cobra/cobra
-</code></pre>
-<h1 id="_3"><font style="color:rgb(51, 51, 51);">使用</font></h1>
-<pre><code class="language-powershell"># cobra
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.
+<div class="highlight"><pre><span></span><code><span class="k">go</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="o">-</span><span class="nx">u</span><span class="w"> </span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">spf13</span><span class="o">/</span><span class="nx">cobra</span><span class="o">/</span><span class="nx">cobra</span>
+</code></pre></div>
+<h1 id="_3"><font style="color:rgb(51, 51, 51);">使用</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="c"># cobra</span>
+<span class="n">Cobra</span> <span class="n">is</span> <span class="n">a</span> <span class="nb">CLI </span><span class="n">library</span> <span class="k">for</span> <span class="n">Go</span> <span class="n">that</span> <span class="n">empowers</span> <span class="n">applications</span><span class="p">.</span>
+<span class="n">This</span> <span class="n">application</span> <span class="n">is</span> <span class="n">a</span> <span class="n">tool</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">needed</span> <span class="n">files</span>
+<span class="n">to</span> <span class="n">quickly</span> <span class="n">create</span> <span class="n">a</span> <span class="n">Cobra</span> <span class="n">application</span><span class="p">.</span>
 
-Usage:
-  cobra [command]
+<span class="n">Usage</span><span class="p">:</span>
+  <span class="n">cobra</span> <span class="no">[command]</span>
 
-Available Commands:
-  add         Add a command to a Cobra Application
-  help        Help about any command
-  init        Initialize a Cobra Application
+<span class="n">Available</span> <span class="n">Commands</span><span class="p">:</span>
+  <span class="n">add</span>         <span class="n">Add</span> <span class="n">a</span> <span class="n">command</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Cobra</span> <span class="n">Application</span>
+  <span class="n">help</span>        <span class="n">Help</span> <span class="n">about</span> <span class="n">any</span> <span class="n">command</span>
+  <span class="n">init</span>        <span class="n">Initialize</span> <span class="n">a</span> <span class="n">Cobra</span> <span class="n">Application</span>
 
-Flags:
-  -a, --author string    author name for copyright attribution (default &quot;YOUR NAME&quot;)
-      --config string    config file (default is $HOME/.cobra.yaml)
-  -h, --help             help for cobra
-  -l, --license string   name of license for the project
-      --viper            use Viper for configuration (default true)
+<span class="n">Flags</span><span class="p">:</span>
+  <span class="n">-a</span><span class="p">,</span> <span class="p">-</span><span class="n">-author</span> <span class="n">string</span>    <span class="n">author</span> <span class="n">name</span> <span class="k">for</span> <span class="n">copyright</span> <span class="n">attribution</span> <span class="p">(</span><span class="k">default</span> <span class="s2">&quot;YOUR NAME&quot;</span><span class="p">)</span>
+      <span class="p">-</span><span class="n">-config</span> <span class="n">string</span>    <span class="n">config</span> <span class="n">file</span> <span class="p">(</span><span class="k">default</span> <span class="n">is</span> <span class="nv">$HOME</span><span class="p">/.</span><span class="n">cobra</span><span class="p">.</span><span class="n">yaml</span><span class="p">)</span>
+  <span class="n">-h</span><span class="p">,</span> <span class="p">-</span><span class="n">-help</span>             <span class="n">help</span> <span class="k">for</span> <span class="n">cobra</span>
+  <span class="n">-l</span><span class="p">,</span> <span class="p">-</span><span class="n">-license</span> <span class="n">string</span>   <span class="n">name</span> <span class="n">of</span> <span class="n">license</span> <span class="k">for</span> <span class="n">the</span> <span class="n">project</span>
+      <span class="p">-</span><span class="n">-viper</span>            <span class="n">use</span> <span class="n">Viper</span> <span class="k">for</span> <span class="n">configuration</span> <span class="p">(</span><span class="k">default</span> <span class="n">true</span><span class="p">)</span>
 
-Use &quot;cobra [command] --help&quot; for more information about a command.
-</code></pre>
+<span class="n">Use</span> <span class="s2">&quot;cobra [command] --help&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">a</span> <span class="n">command</span><span class="p">.</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-08-03 12:57:46<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/lfsyeo">https://www.yuque.com/xiaoshan_wgo/codingnotes/lfsyeo</a></p>

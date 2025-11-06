@@ -251,62 +251,62 @@
 
 
 
-<h1 id="_1">青训营课程笔记</h1>
-<h1 id="202257-go">2022/5/7 Go 基础语法</h1>
-<h2 id="_2">基础语法</h2>
-<h2 id="_3">案例练习</h2>
-<h3 id="-">猜谜游戏 - 生成随机数</h3>
-<pre><code class="language-go">package main
-import (
-    &quot;fmt&quot;
-    &quot;math/rand&quot;
-)
-func main(){
-    maxNum := 100
-    secretNumber := rand.Intn(maxNum)
-    fmt.Println(&quot;The secret number is &quot;，secretNumber)
-}
-</code></pre>
+<h1 id="_1">青训营课程笔记<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="202257-go">2022/5/7 Go 基础语法<a class="headerlink" href="#202257-go" title="Permanent link">&para;</a></h1>
+<h2 id="_2">基础语法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">案例练习<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="-">猜谜游戏 - 生成随机数<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math/rand&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">maxNum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="nx">secretNumber</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Intn</span><span class="p">(</span><span class="nx">maxNum</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;The secret number is &quot;</span><span class="err">，</span><span class="nx">secretNumber</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>直接用 <code>rand.Intn</code>是随机生成一个随机数。</p>
 <p>想要每次生成不同随机数，需要引入时间戳。</p>
-<pre><code class="language-go">package main
-import (
-    &quot;fmt&quot;
-    &quot;math/rand&quot;
-)
-func main(){
-    maxNum := 100
-    rand.Seed(time.Now().UnixNano()) //给随机数引入时间戳
-    secreNumber := rand.Intn(maxNum) 
-    fmt.Println(&quot;The secret number is &quot;，secretNumber)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math/rand&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">maxNum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Seed</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">UnixNano</span><span class="p">())</span><span class="w"> </span><span class="c1">//给随机数引入时间戳</span>
+<span class="w">    </span><span class="nx">secreNumber</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Intn</span><span class="p">(</span><span class="nx">maxNum</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;The secret number is &quot;</span><span class="err">，</span><span class="nx">secretNumber</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在 <code>rand.Intn()</code>之前加一条语句：<code>rand.Seed(time.Now().UnixNano())</code>。</p>
 <p>生成随机数之后，要读取用户输入。</p>
 <p>可以采用 bufio 和 scan 的方式读取。</p>
-<h1 id="202265">2022/6/5 工程实践</h1>
-<h2 id="_4">并发编程</h2>
-<h3 id="goroutine">Goroutine</h3>
+<h1 id="202265">2022/6/5 工程实践<a class="headerlink" href="#202265" title="Permanent link">&para;</a></h1>
+<h2 id="_4">并发编程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="goroutine">Goroutine<a class="headerlink" href="#goroutine" title="Permanent link">&para;</a></h3>
 <p>Go开启携程</p>
-<h3 id="csp">CSP</h3>
+<h3 id="csp">CSP<a class="headerlink" href="#csp" title="Permanent link">&para;</a></h3>
 <p>通过通信共享内存</p>
-<h3 id="chanel">Chanel</h3>
+<h3 id="chanel">Chanel<a class="headerlink" href="#chanel" title="Permanent link">&para;</a></h3>
 <p>make()关键字创建</p>
 <p>分为有缓冲和无缓冲通道</p>
 <p>有缓冲的可以解决生产者和消费者的不均衡的效率问题</p>
-<h3 id="_5">并发安全</h3>
+<h3 id="_5">并发安全<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>用锁来保证并发安全问题</p>
 <p><code>lock sync.Mutex</code></p>
 <p>定义个 lock ，lock.Lock()加锁，lock.Unlock()</p>
-<h3 id="waitgroup">WaitGroup</h3>
+<h3 id="waitgroup">WaitGroup<a class="headerlink" href="#waitgroup" title="Permanent link">&para;</a></h3>
 <p>wg.Add +1</p>
 <p>wg.Done -1</p>
-<h2 id="_6">依赖管理</h2>
-<h3 id="gopath">GoPath</h3>
-<h3 id="go-vendor">Go vendor</h3>
-<h3 id="go-mod">Go mod</h3>
-<h2 id="_7">测试</h2>
-<h3 id="_8">单元测试</h3>
+<h2 id="_6">依赖管理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="gopath">GoPath<a class="headerlink" href="#gopath" title="Permanent link">&para;</a></h3>
+<h3 id="go-vendor">Go vendor<a class="headerlink" href="#go-vendor" title="Permanent link">&para;</a></h3>
+<h3 id="go-mod">Go mod<a class="headerlink" href="#go-mod" title="Permanent link">&para;</a></h3>
+<h2 id="_7">测试<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">单元测试<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p><img alt="1654412659815-da0dc797-e4c3-4420-b405-5c92247b2421.png" src="../img/IwzaC76BIhRt4Aed/1654412659815-da0dc797-e4c3-4420-b405-5c92247b2421-062480.png" /></p>
 <ul>
 <li>所有测试文件以_test.go 结尾</li>

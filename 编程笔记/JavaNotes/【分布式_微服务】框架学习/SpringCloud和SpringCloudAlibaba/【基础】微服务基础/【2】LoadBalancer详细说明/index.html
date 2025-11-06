@@ -251,168 +251,168 @@
 
 
 
-<h1 id="2loadbalancer">【2】LoadBalancer 详细说明</h1>
+<h1 id="2loadbalancer">【2】LoadBalancer 详细说明<a class="headerlink" href="#2loadbalancer" title="Permanent link">&para;</a></h1>
 <p>负载均衡到底是如何实现的？</p>
-<h1 id="_1">负载均衡</h1>
+<h1 id="_1">负载均衡<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>实际上，在添加<code>@LoadBalanced</code>注解之后，会启用拦截器对发起的服务调用请求进行拦截（注意这里是针对发起的请求进行拦截），叫做<code>LoadBalancerInterceptor</code>，它实现<code>ClientHttpRequestInterceptor</code>接口：</p>
-<pre><code class="language-java">@FunctionalInterface
-public interface ClientHttpRequestInterceptor {
-    ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@FunctionalInterface</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ClientHttpRequestInterceptor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ClientHttpResponse</span><span class="w"> </span><span class="nf">intercept</span><span class="p">(</span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">ClientHttpRequestExecution</span><span class="w"> </span><span class="n">execution</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>主要是对<code>intercept</code>方法的实现：</p>
-<pre><code class="language-java">public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, final ClientHttpRequestExecution execution) throws IOException {
-    URI originalUri = request.getURI();
-    String serviceName = originalUri.getHost();
-    Assert.state(serviceName != null, &quot;Request URI does not contain a valid hostname: &quot; + originalUri);
-    return (ClientHttpResponse)this.loadBalancer.execute(serviceName, this.requestFactory.createRequest(request, body, execution));
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">ClientHttpResponse</span><span class="w"> </span><span class="nf">intercept</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ClientHttpRequestExecution</span><span class="w"> </span><span class="n">execution</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">URI</span><span class="w"> </span><span class="n">originalUri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getURI</span><span class="p">();</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">serviceName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">originalUri</span><span class="p">.</span><span class="na">getHost</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Assert</span><span class="p">.</span><span class="na">state</span><span class="p">(</span><span class="n">serviceName</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Request URI does not contain a valid hostname: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">originalUri</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">ClientHttpResponse</span><span class="p">)</span><span class="k">this</span><span class="p">.</span><span class="na">loadBalancer</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">serviceName</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">requestFactory</span><span class="p">.</span><span class="na">createRequest</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">execution</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>打个断点看看实际是怎么在执行的，我看到：</p>
 <p><img alt="1747147530699-6ab08af0-4e2f-429a-a3fb-2995e753b4a7.webp" src="../img/B29dgh5rn2xK1ceG/1747147530699-6ab08af0-4e2f-429a-a3fb-2995e753b4a7-668061.webp" /></p>
 <p><img alt="1747147530734-5cf94cff-c15c-409b-85e6-b554bd147134.webp" src="../img/B29dgh5rn2xK1ceG/1747147530734-5cf94cff-c15c-409b-85e6-b554bd147134-324925.webp" /></p>
 <p>服务端会在发起请求时执行这些拦截器。</p>
 <p>那么这个拦截器做了什么事情呢，首先明确了，给过来的请求地址，并不是一个有效的主机名称，而是服务名称，那么怎么才能得到真正需要访问的主机名称呢，肯定是得找 Eureka/Nacos 获取的。</p>
 <p><code>loadBalancer.execute()</code>做了什么，它的具体实现为<code>BlockingLoadBalancerClient</code>：</p>
-<pre><code class="language-java">//从上面给进来了服务的名称和具体的请求实体
-public &lt;T&gt; T execute(String serviceId, LoadBalancerRequest&lt;T&gt; request) throws IOException {
-    String hint = this.getHint(serviceId);
-    LoadBalancerRequestAdapter&lt;T, DefaultRequestContext&gt; lbRequest = new LoadBalancerRequestAdapter(request, new DefaultRequestContext(request, hint));
-    Set&lt;LoadBalancerLifecycle&gt; supportedLifecycleProcessors = this.getSupportedLifecycleProcessors(serviceId);
-    supportedLifecycleProcessors.forEach((lifecycle) -&gt; {
-        lifecycle.onStart(lbRequest);
-    });
-    //可以看到在这里会调用choose方法自动获取对应的服务实例信息
-    ServiceInstance serviceInstance = this.choose(serviceId, lbRequest);
-    if (serviceInstance == null) {
-        supportedLifecycleProcessors.forEach((lifecycle) -&gt; {
-            lifecycle.onComplete(new CompletionContext(Status.DISCARD, lbRequest, new EmptyResponse()));
-        });
-        //没有发现任何此服务的实例就抛异常（之前的测试中可能已经遇到了）
-        throw new IllegalStateException(&quot;No instances available for &quot; + serviceId);
-    } else {
-        //成功获取到对应服务的实例，这时就可以发起HTTP请求获取信息了
-        return this.execute(serviceId, serviceInstance, lbRequest);
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">//从上面给进来了服务的名称和具体的请求实体</span>
+<span class="kd">public</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">serviceId</span><span class="p">,</span><span class="w"> </span><span class="n">LoadBalancerRequest</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">hint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getHint</span><span class="p">(</span><span class="n">serviceId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">LoadBalancerRequestAdapter</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">DefaultRequestContext</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lbRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LoadBalancerRequestAdapter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">DefaultRequestContext</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">hint</span><span class="p">));</span>
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">LoadBalancerLifecycle</span><span class="o">&gt;</span><span class="w"> </span><span class="n">supportedLifecycleProcessors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">getSupportedLifecycleProcessors</span><span class="p">(</span><span class="n">serviceId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">supportedLifecycleProcessors</span><span class="p">.</span><span class="na">forEach</span><span class="p">((</span><span class="n">lifecycle</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">lifecycle</span><span class="p">.</span><span class="na">onStart</span><span class="p">(</span><span class="n">lbRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="c1">//可以看到在这里会调用choose方法自动获取对应的服务实例信息</span>
+<span class="w">    </span><span class="n">ServiceInstance</span><span class="w"> </span><span class="n">serviceInstance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">choose</span><span class="p">(</span><span class="n">serviceId</span><span class="p">,</span><span class="w"> </span><span class="n">lbRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">serviceInstance</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">supportedLifecycleProcessors</span><span class="p">.</span><span class="na">forEach</span><span class="p">((</span><span class="n">lifecycle</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">lifecycle</span><span class="p">.</span><span class="na">onComplete</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CompletionContext</span><span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="na">DISCARD</span><span class="p">,</span><span class="w"> </span><span class="n">lbRequest</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">EmptyResponse</span><span class="p">()));</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="c1">//没有发现任何此服务的实例就抛异常（之前的测试中可能已经遇到了）</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;No instances available for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">serviceId</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//成功获取到对应服务的实例，这时就可以发起HTTP请求获取信息了</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">execute</span><span class="p">(</span><span class="n">serviceId</span><span class="p">,</span><span class="w"> </span><span class="n">serviceInstance</span><span class="p">,</span><span class="w"> </span><span class="n">lbRequest</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>所以，实际上在进行负载均衡的时候，会向Eureka发起请求，选择一个可用的对应服务，然后会返回此服务的主机地址等信息：</p>
 <p><img alt="1747147530521-32cf451b-4f26-4ceb-b255-008ccc1b3cb7.webp" src="../img/B29dgh5rn2xK1ceG/1747147530521-32cf451b-4f26-4ceb-b255-008ccc1b3cb7-530187.webp" /></p>
-<h1 id="_2">自定义负载均衡策略</h1>
+<h1 id="_2">自定义负载均衡策略<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p>LoadBalancer默认提供了两种负载均衡策略：</p>
 <ul>
 <li>RandomLoadBalancer - 随机分配策略</li>
 <li><strong>(默认)</strong> RoundRobinLoadBalancer - 轮询分配策略</li>
 </ul>
 <p>现在希望修改默认的负载均衡策略，可以进行指定，比如现在希望用户服务采用随机分配策略，需要先创建随机分配策略的配置类（不用加<code>@Configuration</code>）：</p>
-<pre><code class="language-java">public class LoadBalancerConfig {
-    //将官方提供的 RandomLoadBalancer 注册为Bean
-    @Bean
-    public ReactorLoadBalancer&lt;ServiceInstance&gt; randomLoadBalancer(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory){
-        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
-        return new RandomLoadBalancer(loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class), name);
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LoadBalancerConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//将官方提供的 RandomLoadBalancer 注册为Bean</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ReactorLoadBalancer</span><span class="o">&lt;</span><span class="n">ServiceInstance</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">randomLoadBalancer</span><span class="p">(</span><span class="n">Environment</span><span class="w"> </span><span class="n">environment</span><span class="p">,</span><span class="w"> </span><span class="n">LoadBalancerClientFactory</span><span class="w"> </span><span class="n">loadBalancerClientFactory</span><span class="p">){</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">environment</span><span class="p">.</span><span class="na">getProperty</span><span class="p">(</span><span class="n">LoadBalancerClientFactory</span><span class="p">.</span><span class="na">PROPERTY_NAME</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RandomLoadBalancer</span><span class="p">(</span><span class="n">loadBalancerClientFactory</span><span class="p">.</span><span class="na">getLazyProvider</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ServiceInstanceListSupplier</span><span class="p">.</span><span class="na">class</span><span class="p">),</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>接着需要为对应的服务指定负载均衡策略，直接使用注解即可：</p>
-<pre><code class="language-java">@Configuration
-@LoadBalancerClient(value = &quot;userservice&quot;,      //指定为 userservice 服务，只要是调用此服务都会使用指定的策略
-                    configuration = LoadBalancerConfig.class)   //指定刚刚定义好的配置类
-public class BeanConfig {
-    @Bean
-    @LoadBalanced
-    RestTemplate template(){
-        return new RestTemplate();
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@Configuration</span>
+<span class="nd">@LoadBalancerClient</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;userservice&quot;</span><span class="p">,</span><span class="w">      </span><span class="c1">//指定为 userservice 服务，只要是调用此服务都会使用指定的策略</span>
+<span class="w">                    </span><span class="n">configuration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoadBalancerConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span><span class="w">   </span><span class="c1">//指定刚刚定义好的配置类</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BeanConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="nd">@LoadBalanced</span>
+<span class="w">    </span><span class="n">RestTemplate</span><span class="w"> </span><span class="nf">template</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>接着在<code>BlockingLoadBalancerClient</code>中添加断点，观察是否采用指定的策略进行请求：</p>
 <p><img alt="1747147530779-ecb0ddc0-c915-4052-a312-1fb3943dd748.webp" src="../img/B29dgh5rn2xK1ceG/1747147530779-ecb0ddc0-c915-4052-a312-1fb3943dd748-743798.webp" /></p>
 <p><img alt="1747147530526-15870af7-f317-4919-bfa5-4f33f3431789.webp" src="../img/B29dgh5rn2xK1ceG/1747147530526-15870af7-f317-4919-bfa5-4f33f3431789-123392.webp" /></p>
 <p>发现访问 userservice 服务的策略已经更改为指定的策略了。</p>
-<h1 id="openfeign">OpenFeign实现负载均衡</h1>
+<h1 id="openfeign">OpenFeign实现负载均衡<a class="headerlink" href="#openfeign" title="Permanent link">&para;</a></h1>
 <p>官方文档：<a href="https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/">https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/</a></p>
 <p>Feign 和 RestTemplate 一样，也是 HTTP 客户端请求工具，但是它的使用方式更加便捷。首先是依赖：</p>
-<pre><code class="language-xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
-&lt;/dependency&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.cloud<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-cloud-starter-openfeign<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
 <p>接着在启动类添加<code>@EnableFeignClients</code>注解：</p>
-<pre><code class="language-java">@SpringBootApplication
-@EnableFeignClients
-public class BorrowApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(BorrowApplication.class, args);
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableFeignClients</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BorrowApplication</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">BorrowApplication</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>那么现在需要调用其他微服务提供的接口，该怎么做呢？直接创建一个对应服务的接口类即可：</p>
-<pre><code class="language-java">@FeignClient(&quot;userservice&quot;)   //声明为userservice服务的HTTP请求客户端
-public interface UserClient {
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nd">@FeignClient</span><span class="p">(</span><span class="s">&quot;userservice&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">//声明为userservice服务的HTTP请求客户端</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserClient</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>接着直接创建所需类型的方法，比如之前的：</p>
-<pre><code class="language-java">RestTemplate template = new RestTemplate();
-User user = template.getForObject(&quot;http://userservice/user/&quot;+uid, User.class);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">RestTemplate</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RestTemplate</span><span class="p">();</span>
+<span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">template</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="s">&quot;http://userservice/user/&quot;</span><span class="o">+</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">User</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
 <p>现在可以直接写成这样：</p>
-<pre><code class="language-java">@FeignClient(&quot;userservice&quot;)
-public interface UserClient {
+<div class="highlight"><pre><span></span><code><span class="nd">@FeignClient</span><span class="p">(</span><span class="s">&quot;userservice&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">UserClient</span><span class="w"> </span><span class="p">{</span>
 
-    //路径保证和其他微服务提供的一致即可
-    @RequestMapping(&quot;/user/{uid}&quot;)
-    User getUserById(@PathVariable(&quot;uid&quot;) int uid);  //参数和返回值也保持一致
-}
-</code></pre>
+<span class="w">    </span><span class="c1">//路径保证和其他微服务提供的一致即可</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/user/{uid}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="nf">getUserById</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="p">(</span><span class="s">&quot;uid&quot;</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">);</span><span class="w">  </span><span class="c1">//参数和返回值也保持一致</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>接着直接注入使用（有 Mybatis 那味了）：</p>
-<pre><code class="language-java">@Resource
-UserClient userClient;
+<div class="highlight"><pre><span></span><code><span class="nd">@Resource</span>
+<span class="n">UserClient</span><span class="w"> </span><span class="n">userClient</span><span class="p">;</span>
 
-@Override
-public UserBorrowDetail getUserBorrowDetailByUid(int uid) {
-    List&lt;Borrow&gt; borrow = mapper.getBorrowsByUid(uid);
+<span class="nd">@Override</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">UserBorrowDetail</span><span class="w"> </span><span class="nf">getUserBorrowDetailByUid</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Borrow</span><span class="o">&gt;</span><span class="w"> </span><span class="n">borrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">getBorrowsByUid</span><span class="p">(</span><span class="n">uid</span><span class="p">);</span>
 
-    User user = userClient.getUserById(uid);
-    //这里不用再写IP，直接写服务名称bookservice
-    List&lt;Book&gt; bookList = borrow
-            .stream()
-            .map(b -&gt; template.getForObject(&quot;http://bookservice/book/&quot;+b.getBid(), Book.class))
-            .collect(Collectors.toList());
-    return new UserBorrowDetail(user, bookList);
-}
-</code></pre>
+<span class="w">    </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userClient</span><span class="p">.</span><span class="na">getUserById</span><span class="p">(</span><span class="n">uid</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//这里不用再写IP，直接写服务名称bookservice</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bookList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">borrow</span>
+<span class="w">            </span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">template</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="s">&quot;http://bookservice/book/&quot;</span><span class="o">+</span><span class="n">b</span><span class="p">.</span><span class="na">getBid</span><span class="p">(),</span><span class="w"> </span><span class="n">Book</span><span class="p">.</span><span class="na">class</span><span class="p">))</span>
+<span class="w">            </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserBorrowDetail</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">bookList</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>访问，可以看到结果依然是正确的：</p>
 <p><img alt="1747147531831-01395bb1-9fbc-4589-b9f6-e4a428eedc43.webp" src="../img/B29dgh5rn2xK1ceG/1747147531831-01395bb1-9fbc-4589-b9f6-e4a428eedc43-126479.webp" /></p>
 <p>并且可以观察一下两个用户微服务的调用情况，也是以负载均衡的形式进行的。</p>
 <p>按照同样的方法，接着将图书管理服务的调用也改成接口形式：</p>
 <p><img alt="1747147532460-fa93e996-cfb6-42fa-9454-6543acbcbb98.webp" src="../img/B29dgh5rn2xK1ceG/1747147532460-fa93e996-cfb6-42fa-9454-6543acbcbb98-957519.webp" /></p>
 <p>最后的 Service 代码就变成了：</p>
-<pre><code class="language-java">@Service
-public class BorrowServiceImpl implements BorrowService {
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BorrowServiceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">BorrowService</span><span class="w"> </span><span class="p">{</span>
 
-    @Resource
-    BorrowMapper mapper;
+<span class="w">    </span><span class="nd">@Resource</span>
+<span class="w">    </span><span class="n">BorrowMapper</span><span class="w"> </span><span class="n">mapper</span><span class="p">;</span>
 
-    @Resource
-    UserClient userClient;
+<span class="w">    </span><span class="nd">@Resource</span>
+<span class="w">    </span><span class="n">UserClient</span><span class="w"> </span><span class="n">userClient</span><span class="p">;</span>
 
-    @Resource
-    BookClient bookClient;
+<span class="w">    </span><span class="nd">@Resource</span>
+<span class="w">    </span><span class="n">BookClient</span><span class="w"> </span><span class="n">bookClient</span><span class="p">;</span>
 
-    @Override
-    public UserBorrowDetail getUserBorrowDetailByUid(int uid) {
-        List&lt;Borrow&gt; borrow = mapper.getBorrowsByUid(uid);
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">UserBorrowDetail</span><span class="w"> </span><span class="nf">getUserBorrowDetailByUid</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">uid</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Borrow</span><span class="o">&gt;</span><span class="w"> </span><span class="n">borrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">getBorrowsByUid</span><span class="p">(</span><span class="n">uid</span><span class="p">);</span>
 
-        User user = userClient.getUserById(uid);
-        List&lt;Book&gt; bookList = borrow
-                .stream()
-                .map(b -&gt; bookClient.getBookById(b.getBid()))
-                .collect(Collectors.toList());
-        return new UserBorrowDetail(user, bookList);
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userClient</span><span class="p">.</span><span class="na">getUserById</span><span class="p">(</span><span class="n">uid</span><span class="p">);</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Book</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bookList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">borrow</span>
+<span class="w">                </span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">map</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">bookClient</span><span class="p">.</span><span class="na">getBookById</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="na">getBid</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserBorrowDetail</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="n">bookList</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>继续访问进行测试：</p>
 <p><img alt="1747147532465-96a416a0-0c26-45f9-8d3e-8333672b1db3.webp" src="../img/B29dgh5rn2xK1ceG/1747147532465-96a416a0-0c26-45f9-8d3e-8333672b1db3-614268.webp" /></p>
 <blockquote>

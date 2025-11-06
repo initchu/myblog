@@ -251,86 +251,85 @@
 
 
 
-<h1 id="_1">栈的实现</h1>
-<h1 id="_2">栈的理解</h1>
+<h1 id="_1">栈的实现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="_2">栈的理解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><strong>具有先进后出特性的线性结构，就是栈。</strong></p>
 <p><strong>传统方法定义：</strong></p>
 <ol>
 <li>栈的结构体包含三个部分：最大栈空间，栈顶下表，还有模拟栈的数组。</li>
 <li>定义栈的几个方法：Push 入栈，Pop 出栈、判断栈满、判断栈空、打印栈。</li>
 </ol>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;errors&quot;
-    &quot;fmt&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;errors&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
 
-type Stack struct {
-    maxNum int    //规定栈最多放几个元素
-    top    int    //目前栈顶的下标
-    arr    [5]int //模拟栈
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Stack</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">maxNum</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="c1">//规定栈最多放几个元素</span>
+<span class="w">    </span><span class="nx">top</span><span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="c1">//目前栈顶的下标</span>
+<span class="w">    </span><span class="nx">arr</span><span class="w">    </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="w"> </span><span class="c1">//模拟栈</span>
+<span class="p">}</span>
 
-func (this *Stack) Push(val int) (err error) {
-    if this.isFull() {
-        fmt.Println(&quot;stack full&quot;)
-        err = errors.New(&quot;stack full&quot;)
-        return
-    }
-    //开始入栈操作
-    //先向上走一步
-    this.top++
-    //再赋值
-    this.arr[this.top] = val
-    return
-}
-func (this *Stack) Pop() (val int, err error) {
-    if this.isEmpty() {
-        fmt.Println(&quot;stack empty&quot;)
-        err = errors.New(&quot;stack empty&quot;)
-        return
-    }
-    val = this.arr[this.top]
-    this.top--
-    return
-}
-func (this *Stack) List() (err error) {
-    if this.isEmpty() {
-        fmt.Println(&quot;stack empty&quot;)
-        err = errors.New(&quot;stack empty&quot;)
-        return
-    }
-    for i := this.top; i &gt;= 0; i-- {
-        fmt.Printf(&quot;arr[%d]=%d\n&quot;, i, this.arr[i])
-    }
-    return
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Stack</span><span class="p">)</span><span class="w"> </span><span class="nx">Push</span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">isFull</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;stack full&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;stack full&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//开始入栈操作</span>
+<span class="w">    </span><span class="c1">//先向上走一步</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="o">++</span>
+<span class="w">    </span><span class="c1">//再赋值</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">arr</span><span class="p">[</span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">val</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Stack</span><span class="p">)</span><span class="w"> </span><span class="nx">Pop</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;stack empty&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;stack empty&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">arr</span><span class="p">[</span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="o">--</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Stack</span><span class="p">)</span><span class="w"> </span><span class="nx">List</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;stack empty&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;stack empty&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">--</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;arr[%d]=%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
 
-func (this *Stack) isFull() bool {
-    return this.top+1 &gt;= this.maxNum
-}
-func (this *Stack) isEmpty() bool {
-    return this.top == -1
-}
-func main() {
-    var stack = &amp;Stack{
-        maxNum: 5,
-        top:    -1,
-    }
-    stack.Push(1)
-    stack.Push(2)
-    stack.Push(3)
-    stack.Push(4)
-    stack.Push(5)
-    stack.List()
-    val, _ := stack.Pop()
-    fmt.Println(&quot;弹出 &quot;, val)
-    stack.List()
-}
-
-</code></pre>
-<h1 id="leetcode">LeetCode 刷题</h1>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Stack</span><span class="p">)</span><span class="w"> </span><span class="nx">isFull</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">maxNum</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Stack</span><span class="p">)</span><span class="w"> </span><span class="nx">isEmpty</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">top</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">stack</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Stack</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">maxNum</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">top</span><span class="p">:</span><span class="w">    </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">List</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">stack</span><span class="p">.</span><span class="nx">Pop</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;弹出 &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stack</span><span class="p">.</span><span class="nx">List</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="leetcode">LeetCode 刷题<a class="headerlink" href="#leetcode" title="Permanent link">&para;</a></h1>
 <p>在 LeetCode 中，栈的方法主要是出栈和入栈，用切片来表示。</p>
 <ul>
 <li>定义一个字符栈：<code>stack := []string{}</code></li>

@@ -979,14 +979,14 @@
 
 
 
-<h1 id="map">Map</h1>
-<h3 id="hashmap">HashMap 实现原理</h3>
+<h1 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h1>
+<h3 id="hashmap">HashMap 实现原理<a class="headerlink" href="#hashmap" title="Permanent link">&para;</a></h3>
 <ul>
 <li>HashMap 使用<strong>数组+链表+红黑树</strong>（JDK 1.8 增加了红黑树部分）实现的；</li>
 <li>链表长度大于<strong> 8</strong>（<code>TREEIFY_THRESHOLD</code>）时，会把链表转换为红黑树；</li>
 <li>红黑树节点个数小于 <strong>6</strong>（<code>UNTREEIFY_THRESHOLD</code>）时才转化为<strong>链表</strong>，防止频繁的转化。</li>
 </ul>
-<h3 id="hash-hashmap">解决 Hash 冲突的办法有哪些？HashMap 用的哪种？</h3>
+<h3 id="hash-hashmap">解决 Hash 冲突的办法有哪些？HashMap 用的哪种？<a class="headerlink" href="#hash-hashmap" title="Permanent link">&para;</a></h3>
 <p>解决 Hash 冲突方法有：<strong>开放定址法</strong>、<strong>再哈希法</strong>、<strong>链地址法</strong>。</p>
 <p>HashMap 中采用的是<strong>链地址法</strong> 。</p>
 <blockquote>
@@ -1000,28 +1000,28 @@
 </li>
 </ul>
 </blockquote>
-<h3 id="hash">*** 使用的 Hash 算法？</h3>
+<h3 id="hash">*** 使用的 Hash 算法？<a class="headerlink" href="#hash" title="Permanent link">&para;</a></h3>
 <p>Hash 算法：取 key 的 hashCode 值、高位运算、取模运算。</p>
-<pre><code class="language-java">// 第一步 取hashCode值 
-h=key.hashCode();
-// 第二步 高位参与运算，减少冲突 
-h^(h&gt;&gt;&gt;16);
-// 第三步 取模运算
-return h&amp;(length-1);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 第一步 取hashCode值 </span>
+<span class="n">h</span><span class="o">=</span><span class="n">key</span><span class="p">.</span><span class="na">hashCode</span><span class="p">();</span>
+<span class="c1">// 第二步 高位参与运算，减少冲突 </span>
+<span class="n">h</span><span class="o">^</span><span class="p">(</span><span class="n">h</span><span class="o">&gt;&gt;&gt;</span><span class="mi">16</span><span class="p">);</span>
+<span class="c1">// 第三步 取模运算</span>
+<span class="k">return</span><span class="w"> </span><span class="n">h</span><span class="o">&amp;</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
 <p>在 JDK1.8 的实现中，优化了高位运算的算法，通过 hashCode() 的<strong>高16位异或低16位</strong>实现的：这么做可以<u>在数组比较小的时候，也能保证考虑到</u><strong><u>高低位</u></strong><u>都参与到 Hash 的计算中，可以减少冲突，同时不会有太大的开销。</u></p>
-<h3 id="hashmap-java8"><font style="color:#F5222D;">* HashMap 原理，java8 做的改变</font></h3>
+<h3 id="hashmap-java8"><font style="color:#F5222D;">* HashMap 原理，java8 做的改变</font><a class="headerlink" href="#hashmap-java8" title="Permanent link">&para;</a></h3>
 <p>从结构实现来讲，HashMap 是<strong>数组 + 链表 + 红黑树</strong>（JDK1.8 增加了红黑树部分）实现的。</p>
 <p>HashMap 最多只允许一条记录的键为 null，允许多条记录的值为 null。</p>
 <p>HashMap 非线程安全，ConcurrentHashMap 线程安全。</p>
 <p>解决碰撞：</p>
 <p>当出现冲突时，运用<strong>拉链法</strong>，将<strong>关键词为同义词的结点</strong>链接在一个<strong>单链表</strong>中。散列表长 m，则定义一个由 m 个头指针组成的指针数组 T，地址为 i 的结点插入以 T(i) 为头指针的单链表中。</p>
 <p>Java8 中，冲突的元素超过限制（&gt; 8 个），用<strong>红黑树</strong>替换链表。</p>
-<h3 id="hashmap_1">为什么建议设置 HashMap 的容量？</h3>
+<h3 id="hashmap_1">为什么建议设置 HashMap 的容量？<a class="headerlink" href="#hashmap_1" title="Permanent link">&para;</a></h3>
 <p>HashMap 有扩容机制，就是当达到扩容条件时会进行扩容。扩容条件就是<u>当 HashMap 中的</u><strong><u>元素个数</u></strong><u>超过</u><strong><u>临界值</u></strong><u>时就会自动扩容（</u><strong><u>threshold = loadFactor * capacity</u></strong><u>）</u>。</p>
 <p>如果我们没有设置初始容量大小，随着元素的不断增加，HashMap<strong>会发生多次扩容</strong>。而 HashMap <strong>每次扩容都需要重建 hash 表</strong>，非常影响性能。</p>
 <p>所以建议开发者在创建HashMap的时候指定初始化容量。</p>
-<h3 id="hashmap_2">** HashMap的扩容过程？</h3>
+<h3 id="hashmap_2">** HashMap的扩容过程？<a class="headerlink" href="#hashmap_2" title="Permanent link">&para;</a></h3>
 <p><strong>1.8 </strong>扩容机制：</p>
 <p>当元素个数大于 <strong>threshold</strong> 时，会进行扩容，使用 <strong>2 倍</strong>容量的<strong>数组</strong>代替原有数组。采用<strong>尾插入</strong>的方式将原数组元素拷贝到新数组。<u>1.8 扩容之后链表元素</u><strong><u>相对位置没有变化</u></strong><u>，而 1.7 扩容之后</u><strong><u>链表元素会倒置</u></strong>。</p>
 <p><strong><u>1.7 </u></strong><u>链表新节点采用的是</u><strong><u>头插法</u></strong>，这样在线程扩容迁移元素时，会将<strong>元素顺序改变</strong>，导致<u>两个线程中出现元素的相互指向而形成</u><strong><u>循环链表</u></strong>，1.8 采用了尾插法，避免了这种情况的发生。</p>
@@ -1071,7 +1071,7 @@ return h&amp;(length-1);
 <p><strong>视频演示</strong></p>
 <p>原视频地址：<a href="https://www.bilibili.com/video/BV1n541177Ea">https://www.bilibili.com/video/BV1n541177Ea</a></p>
 <p><a href="https://www.yuque.com/joyo/files/30101496">JDK7 的 HashMap 头插法循环的问题，这么难理解吗？.mp4</a></p>
-<h3 id="hashmap-put">HashMap 的 put 方法流程？</h3>
+<h3 id="hashmap-put">HashMap 的 put 方法流程？<a class="headerlink" href="#hashmap-put" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>基于 jdk1.8
 </p>
@@ -1085,34 +1085,34 @@ return h&amp;(length-1);
 <li>添加成功后会检查是否需要扩容</li>
 </ol>
 <p><a href="https://www.processon.com/embed/63637d220791295cf8e3e4ee">processon</a></p>
-<h3 id="hashmap-2">HashMap 的长度为什么是 2 的幂次方？</h3>
+<h3 id="hashmap-2">HashMap 的长度为什么是 2 的幂次方？<a class="headerlink" href="#hashmap-2" title="Permanent link">&para;</a></h3>
 <p>Hash 值的范围值比较大，使用之前需要先对数组的长度<strong>取模</strong>运算，得到的<strong>余数</strong>才是元素存放的位置也就是对应的<strong>数组下标</strong>。这个数组下标的计算方法是<code>(n - 1) &amp; hash</code>，n 代表数组长度。将 HashMap 的长度定为 <strong>2 的幂次方</strong>，这样就可以使用<code>(n - 1) &amp; hash</code>位运算代替 <strong>% 取余</strong>的操作，提高性能。</p>
 <blockquote>
 <p><img alt="1671429815467-91f408c8-8a41-4d17-9f35-858cb4edb950.png" src="../img/lqJFVFHTybgK9Pim/1671429815467-91f408c8-8a41-4d17-9f35-858cb4edb950-662813.png" /></p>
 <p><a href="https://blog.csdn.net/IT_Most/article/details/108945296">HashMap、HashTable和ConcurrentHashMap计算hash表索引的公式</a>
 </p>
 </blockquote>
-<h3 id="hashmap-075">为什么 HashMap 默认加载因子是 0.75？</h3>
+<h3 id="hashmap-075">为什么 HashMap 默认加载因子是 0.75？<a class="headerlink" href="#hashmap-075" title="Permanent link">&para;</a></h3>
 <p>先看下HashMap的默认构造函数：</p>
-<pre><code class="language-java">int threshold; // 容纳键值对的最大值 
-final float loadFactor; // 负载因子 
-int modCount; 
-int size;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">threshold</span><span class="p">;</span><span class="w"> </span><span class="c1">// 容纳键值对的最大值 </span>
+<span class="kd">final</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">loadFactor</span><span class="p">;</span><span class="w"> </span><span class="c1">// 负载因子 </span>
+<span class="kt">int</span><span class="w"> </span><span class="n">modCount</span><span class="p">;</span><span class="w"> </span>
+<span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+</code></pre></div>
 <p>Node[] table 的初始化长度 length 为 16，默认的 loadFactor 是 0.75，0.75 是对空间和时间效率的一个平衡选择，根据<strong>泊松分布</strong>，loadFactor 取 0.75 <strong>碰撞最小</strong>。一般不会修改，除非在时间和空间比较特殊的情况下 ： </p>
 <p>如果<strong>内存空间很多</strong>而又<strong>对时间效率要求很高</strong>，可以<strong>降低</strong>负载因子 loadFactor 的值 。 </p>
 <p>如果<strong>内存空间紧张</strong>而又<strong>对时间效率要求不高</strong>，可以<strong>增加</strong>负载因子 loadFactor 的值，这个值可以大于 1。 </p>
-<h3 id="hashmap-key">一般用什么作为 HashMap 的 key ?</h3>
+<h3 id="hashmap-key">一般用什么作为 HashMap 的 key ?<a class="headerlink" href="#hashmap-key" title="Permanent link">&para;</a></h3>
 <p>一般用 <strong>Integer</strong>、<strong>String</strong> 这种<strong>不可变类</strong>当 HashMap 当 key。String 类比较常用。 </p>
 <p>因为 String 是不可变的，所以在它<u>创建的时候</u><code>&lt;u&gt;hashCode&lt;/u&gt;</code><u>就被缓存了，不需要重新计算</u>。这就是 HashMap 中的 key 经常使用字符串的原因。 </p>
 <p>获取对象的时候要用到 equals() 和 hashCode() 方法，而 <u>Integer、String 这些类都已经重写了 </u></p>
 <p><u>hashCode() 以及 equals() 方法</u>，不需要自己去重写这两个方法。 </p>
-<h3 id="hashmap_3">HashMap 为什么线程不安全？</h3>
+<h3 id="hashmap_3">HashMap 为什么线程不安全？<a class="headerlink" href="#hashmap_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>JDK1.7 多线程下扩容死循环</strong>。<strong>JDK1.7 </strong>中的 HashMap 使用<strong>头插法</strong>插入元素，在多线程的环境下，扩容的时候有可能导致<strong>环形链表</strong>的出现，形成死循环。 </li>
 <li>在 <strong>JDK1.8 </strong>中，在多线程环境下，会发生<strong>数据覆盖</strong>的情况。 </li>
 </ul>
-<h3 id="hashmap-hashtable">HashMap 和 Hashtable 的区别？</h3>
+<h3 id="hashmap-hashtable">HashMap 和 Hashtable 的区别？<a class="headerlink" href="#hashmap-hashtable" title="Permanent link">&para;</a></h3>
 <p>HashMap 和 Hashtable 都实现了 Map 接口。 </p>
 <ol>
 <li><u>HashMap 可以接受为 null 的 key 和 value，key 为 null 的键值对放在下标为 0 的头结点的链表中</u>，而Hashtable 则不行。 </li>
@@ -1120,17 +1120,17 @@ int size;
 <li>Hashtable 很多方法是同步方法，在单线程环境下它比 HashMap 要慢。 </li>
 <li>哈希值的使用不同，<u>Hashtable 直接使用</u><strong><u>对象的 hashCode</u></strong><u>，而 HashMap 重新计算 hash 值</u>。 </li>
 </ol>
-<h3 id="linkedhashmap">LinkedHashMap 底层原理？</h3>
+<h3 id="linkedhashmap">LinkedHashMap 底层原理？<a class="headerlink" href="#linkedhashmap" title="Permanent link">&para;</a></h3>
 <ul>
 <li>HashMap 是无序的，迭代 HashMap 所得到元素的顺序并不是它们最初放到 HashMap 的顺序，即不能保持它们的插入顺序。 </li>
 <li>LinkedHashMap 继承于 HashMap，是 HashMap 和 LinkedList 的融合体，具备两者的特性。LinkedHashMap <u>每次 put 操作都会将 entry 插入到</u><strong><u>双向链表</u></strong><u>的</u><strong><u>尾部</u></strong><u>。 </u></li>
 </ul>
-<h3 id="treemap"><u>讲一下TreeMap？</u></h3>
+<h3 id="treemap"><u>讲一下TreeMap？</u><a class="headerlink" href="#treemap" title="Permanent link">&para;</a></h3>
 <p><u>TreeMap 是一个</u><strong>能比较元素大小</strong><u>的 Map 集合，会对传入的 key 进行了大小排序。可以使用元素的自然顺序，也可以使用集合中自定义的比较器来进行排序。</u></p>
-<pre><code class="language-java">public class TreeMap&lt;K,V&gt; 
-    extends AbstractMap&lt;K,V&gt; 
-    implements NavigableMap&lt;K,V&gt;, Cloneable, java.io.Serializable { }
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TreeMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">implements</span><span class="w"> </span><span class="n">NavigableMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Cloneable</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">Serializable</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
 <p><u>TreeMap 的继承结构： </u></p>
 <p><img alt="1664086970626-d5ad175b-fcbd-4509-aadb-2ed9833c9584.png" src="../img/lqJFVFHTybgK9Pim/1664086970626-d5ad175b-fcbd-4509-aadb-2ed9833c9584-599525.png" /></p>
 <p>**TreeMap 的特点： **</p>
@@ -1138,7 +1138,7 @@ int size;
 <li><u>TreeMap 是有序的 key-value 集合，通过</u><strong>红黑树</strong><u>实现，</u><u>根据键的</u><strong><u>自然顺序</u></strong><u>进行排序或根据提供的 </u><strong><u>Comparator </u></strong><u>进行排序。 </u></li>
 <li><u>TreeMap 继承了 </u><strong><u>AbstractMap</u></strong><u>，实现了 </u><strong><u>NavigableMap </u></strong><u>接口，支持一系列的</u><strong><u>导航方法</u></strong><u>，给定具体搜索目标，可以返回</u><strong><u>最接近的匹配项</u></strong><u>。如</u><code>&lt;u&gt;floorEntry()&lt;/u&gt;</code><u>、</u><code>&lt;u&gt;ceilingEntry()&lt;/u&gt;</code><u>分别返回小于等于、大于等于给定键关联的 Map.Entry 对象，不存在则返回 null。lowerKey()、floorKey、ceilingKey、higherKey() 只返回关联的key。</u></li>
 </ol>
-<h3 id="hashmap_4"><u>HashMap 为什么不是线程安全的（最好画图说明多线程环境下不安全）? </u></h3>
+<h3 id="hashmap_4"><u>HashMap 为什么不是线程安全的（最好画图说明多线程环境下不安全）? </u><a class="headerlink" href="#hashmap_4" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><u>基于 jdk1.8</u>
 </p>
@@ -1151,17 +1151,17 @@ int size;
 <p><u>如果上述插入是插入到链表上，如两个线程都在遍历到最后一个节点，都要在最后添加一个数据，那么后面添加数据的线程就会把前面添加的数据给覆盖住。</u></p>
 <p><img alt="1664130237359-7357d041-c414-422a-9046-364053406208.png" src="../img/lqJFVFHTybgK9Pim/1664130237359-7357d041-c414-422a-9046-364053406208-981752.png" /><u> </u></p>
 <p><u>在</u><strong><u>扩容</u></strong><u>的时候也可能会导致数据不一致</u><u>，因为扩容是从一个数组拷贝到另外一个数组。</u></p>
-<h3 id="hashmap_5"><u>HashMap 的扩容过程</u></h3>
+<h3 id="hashmap_5"><u>HashMap 的扩容过程</u><a class="headerlink" href="#hashmap_5" title="Permanent link">&para;</a></h3>
 <p><u>当向容器添加元素的时候，会</u><strong>判断当前容器的元素个数</strong><u>，如果</u><strong>大于等于阈值</strong><u>---即</u><strong><u>当前数组的长度</u></strong><u>乘以</u><strong><u>加载因子</u></strong><u>的值</u><u>的时候，就要自动扩容。 </u></p>
 <p><u>扩容( resize )就是重新计算容量，向 HashMap 对象里不停的添加元素，而 HashMap 对象内部的数组无法装载更多的元素时，对象就需要扩大数组的长度，以便能装入更多的元素。当然 </u><u>Java 里的数组是无法自动扩容的</u><u>，方法是使用一个新的数组代替已有的容量小的数组，就像我们用一个小桶装水，如果想装更多的水，就得换大水桶。</u></p>
-<pre><code class="language-java">HashMap hashMap=new HashMap(cap);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">HashMap</span><span class="w"> </span><span class="n">hashMap</span><span class="o">=</span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="p">(</span><span class="n">cap</span><span class="p">);</span>
+</code></pre></div>
 <p><u>cap </u><u>=3</u><u>， </u><u>HashMap </u><u>的容量为</u><u>4</u><u>； </u></p>
 <p><u>cap =4， HashMap 的容量为4； </u></p>
 <p><u>cap </u><u>=5</u><u>， </u><u>HashMap </u><u>的容量为</u><u>8</u><u>； </u></p>
 <p><u>cap </u><u>=9</u><u>， </u><u>HashMap </u><u>的容量为</u><u>16</u><u>； </u></p>
 <p><u>如果 cap 是 2 的 n 次方，则容量为 cap ，否则为大于 cap 的最小 2 的 n 次方的数。 </u></p>
-<h3 id="hashmap-17-18-18"><u>HashMap 1.7 与 1.8 的 区别？说明 1.8 做了哪些优化？如何优化的？ </u></h3>
+<h3 id="hashmap-17-18-18"><u>HashMap 1.7 与 1.8 的 区别？说明 1.8 做了哪些优化？如何优化的？ </u><a class="headerlink" href="#hashmap-17-18-18" title="Permanent link">&para;</a></h3>
 <p><u>HashMap结构图（jdk1.8）</u></p>
 <p><img alt="1664130404255-68a35d61-8133-40e7-b599-fcbaf5ab4d26.png" src="../img/lqJFVFHTybgK9Pim/1664130404255-68a35d61-8133-40e7-b599-fcbaf5ab4d26-769061.png" /></p>
 <p><u>这就是 JDK7 与 JDK8 中 HashMap 实现的最大区别。 </u></p>
@@ -1186,12 +1186,12 @@ int size;
 </ul>
 <p><u>听起来挺不错，但是真正想要利用 JDK1.8 的好处，有一个限制：</u><u>key 的对象，必须正确的实现了 </u><strong><u>Compare 接口</u></strong><u>。</u></p>
 <p><u>如果没有实现 Compare 接口，或者实现得不正确（比方说所有 Compare 方法都返回 0），那 JDK1.8 的 HashMap 其实还是</u><strong><u>慢于 JDK1.7</u></strong><u> 的。</u></p>
-<pre><code class="language-java">// String 实现了 Compare 接口
-public final class String
-    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence {
-        //...
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// String 实现了 Compare 接口</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">String</span>
+<span class="w">    </span><span class="kd">implements</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">Serializable</span><span class="p">,</span><span class="w"> </span><span class="n">Comparable</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">CharSequence</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>_简单的测试数据如下： _</p>
 <p>_向 __HashMap __中 __put/get 1w __条 __hashcode __相同的对象 _</p>
 <p>_JDK1.7: put 0.26s __， __get 0.55s _</p>
@@ -1202,7 +1202,7 @@ public final class String
 <p><u>HashMap比较一个元素是先比较hash值，后用equals比较内容</u>
 </p>
 </blockquote>
-<h3 id="hashmap-hashtable_1">HashMap 和 Hashtable 的区别</h3>
+<h3 id="hashmap-hashtable_1">HashMap 和 Hashtable 的区别<a class="headerlink" href="#hashmap-hashtable_1" title="Permanent link">&para;</a></h3>
 <p>相同点:</p>
 <ul>
 <li>HashMap 和 Hashtable 都实现了 Map、Cloneable（可克隆）、Serializable（可序列化）这三个接口</li>
@@ -1231,9 +1231,9 @@ public final class String
 <p><a href="https://blog.csdn.net/qq_42848910/article/details/107779037">HashMap和Hashtable的区别(绝对经典)_棉花糖one.的博客-CSDN博客_hashmap和hashtable的区别</a>
 </p>
 </blockquote>
-<h3 id="jdk7-jdk8-hashmap"><font style="color:#E8323C;">JDK7 与 JDK8 中HashMap的实现</font></h3>
+<h3 id="jdk7-jdk8-hashmap"><font style="color:#E8323C;">JDK7 与 JDK8 中HashMap的实现</font><a class="headerlink" href="#jdk7-jdk8-hashmap" title="Permanent link">&para;</a></h3>
 <p>JDK8 在 JDK7 的基础上引入了<strong>红黑树-b</strong>，因为链表过长，会导致效率很低，将原来链表数组的每一个链表分成<strong>奇偶两个子链表</strong>分别挂在新链表数组的散列位置，这样就减少了每个链表的长度，增加查找效率</p>
-<h3 id="hashmap_6">HashMap 的底层源码</h3>
+<h3 id="hashmap_6">HashMap 的底层源码<a class="headerlink" href="#hashmap_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>在 JDK1.6，JDK1.7 中，HashMap 采用<strong>位桶+链表</strong>实现，即使用<strong>链表</strong>处理冲突，同一 hash 值的链表都存储在一个链表里。但是当位于一个桶中的元素较多，即 hash 值相等的元素较多时，通过 key 值依次查找的效率较低。</li>
 <li>而 JDK1.8 中，HashMap 采用<strong>位桶+链表+红黑树</strong>实现，当链表长度<strong>超过阈值（8）</strong>时，将链表转换为<strong>红黑树</strong>，这样大大减少了查找时间。</li>
@@ -1251,17 +1251,17 @@ public final class String
 <p><a href="https://blog.csdn.net/tuke_tuke/article/details/51588156#">Java中HashMap底层实现原理(JDK1.8)源码分析_tuke_tuke的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="hashmap_7">为什么 HashMap 是线程不安全的？</h3>
+<h3 id="hashmap_7">为什么 HashMap 是线程不安全的？<a class="headerlink" href="#hashmap_7" title="Permanent link">&para;</a></h3>
 <p>在某一时刻同时操作 HashMap 并执行 put 操作，而有<u>大于 2 个 key 的 hash 值相同</u>，如图中 A1、A2，这个时候需要解决碰撞冲突，而解决冲突的办法上面已经说过，对于链表的结构在这里不再赘述，暂且不讨论是从链表头部插入还是从尾部初入，这个时候<strong>两个线程如果恰好都取到了对应位置的头结点L1</strong>，而最终的结果可想而知，A1、A2两个数据中势必会有一个会丢失。</p>
 <p><img alt="1667878562175-96d434e5-cf81-4c64-8e25-b389ce709203.png" src="../img/lqJFVFHTybgK9Pim/1667878562175-96d434e5-cf81-4c64-8e25-b389ce709203-994131.png" /></p>
 <p>当多个线程同时检测到总数量超过<strong>门限值</strong>的时候就会<u>同时调用 </u><strong><u>resize </u></strong><u>操作</u>，各自生成新的数组并 rehash 后赋给该 map 底层的数组 table，结果最终只有最后一个线程生成的新数组被赋给 table 变量，其他线程的均会丢失。而且，当某些线程已经完成赋值而其他线程刚开始的时候，就会用已经被赋值的table作为原始数组，这样也会有问题。</p>
-<h3 id="hashmap_8">多并发情况下 HashMap 是否还会产生死循环</h3>
+<h3 id="hashmap_8">多并发情况下 HashMap 是否还会产生死循环<a class="headerlink" href="#hashmap_8" title="Permanent link">&para;</a></h3>
 <p>不会，<strong><u>jdk1.8 </u></strong><u>版本以后已经没有这个问题</u>了，没有 transfer 这个函数了，也就没有了 do while 可能造成的死循环，对原有造成死锁的关键原因点——<u>新 table 复制在</u><strong><u>头端添加</u></strong><u>元素</u>，改进为<u>依次在</u><strong><u>末端添加</u></strong><u>新的元素</u></p>
 <blockquote>
 <p><a href="https://blog.csdn.net/u010412719/article/details/52049347">《Java困惑》：多并发情况下HashMap是否还会产生死循环_HelloWorld_EE的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="treemaphashmaplindedhashmap">TreeMap、HashMap、LindedHashMap 的区别</h3>
+<h3 id="treemaphashmaplindedhashmap">TreeMap、HashMap、LindedHashMap 的区别<a class="headerlink" href="#treemaphashmaplindedhashmap" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>LinkedHashMap </strong>可以保证 HashMap 集合有序，<u>存入的顺序和取出的顺序一致</u>。</li>
 <li><strong>TreeMap </strong>实现 SortMap 接口，能够把它保存的记录根据键排序，<u>默认是按键值的升序排序</u>，也可以指定排序的比较器。当用 Iterator 遍历TreeMap时，得到的记录是排过序的。</li>
@@ -1270,7 +1270,7 @@ HashMap 最多只允许一条记录的键为 null；<br />
 允许多条记录的值为 null；<br />
 HashMap 不支持线程的同步。</li>
 </ul>
-<h3 id="hashmap-hashtable_2">HashMap 和 Hashtable 的区别</h3>
+<h3 id="hashmap-hashtable_2">HashMap 和 Hashtable 的区别<a class="headerlink" href="#hashmap-hashtable_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li>HashMap<u> 去掉了 Hashtable 的 </u><code>&lt;u&gt;contains()&lt;/u&gt;</code><u>方法</u>，但是，<u>加上了 </u><code>&lt;u&gt;containsValue()&lt;/u&gt;</code><u> 和 </u><code>&lt;u&gt;containsKey()&lt;/u&gt;</code><u> 方法</u>。</li>
 <li>Hashtable 同步的，而 <u>HashMap 是非同步的</u>，效率上比 Hashtable 要高。</li>
@@ -1286,14 +1286,14 @@ HashMap 不支持线程的同步。</li>
 <p><a href="http://blog.csdn.net/qq_22118507/article/details/51576319">java 常用集合list与Set、Map区别及适用场景总结_安卓之夜的博客-CSDN博客_list map set区别</a>
 </p>
 </blockquote>
-<h3 id="hashset-hashmap">HashSet 和 HashMap 区别</h3>
+<h3 id="hashset-hashmap">HashSet 和 HashMap 区别<a class="headerlink" href="#hashset-hashmap" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set 是<strong>线性结构</strong>，Set 中的<strong>值不能重复</strong>。<br />
 HashSet 是 Set 的 hash 实现；HashSet 中值不能重复；HashSet 是用 HashMap 的 key 来实现的。</li>
 <li>Map 是<strong>键值对映射</strong>，可以空键空值。<br />
 HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key 的 hash 值比较</strong>和 <strong>equals() 方法比较</strong>来确定，<u>value值是则是</u><strong><u>链表结构</u></strong>。</li>
 </ul>
-<h3 id="hashmap-hashtable_3">HashMap 和 Hashtable 的不同点</h3>
+<h3 id="hashmap-hashtable_3">HashMap 和 Hashtable 的不同点<a class="headerlink" href="#hashmap-hashtable_3" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>继承和实现方式不同</strong><ol>
 <li>HashMap 继承于 AbstractMap，实现了 Map、Cloneable、java.io.Serializable 接口。</li>
@@ -1336,9 +1336,9 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 </ol>
 </li>
 </ol>
-<h3 id="hashmap_9">HashMap 的原理，内部数据结构？</h3>
+<h3 id="hashmap_9">HashMap 的原理，内部数据结构？<a class="headerlink" href="#hashmap_9" title="Permanent link">&para;</a></h3>
 <p>底层使用<strong>哈希表（数组 + 链表）</strong>，当链表过长（<strong>大于8</strong>）会将链表转成<strong>红黑树</strong>以实现 <strong>O(logn) 时间复杂度</strong>内查找</p>
-<h3 id="hashmap-put_1">讲一下 HashMap 中 put 方法过程？</h3>
+<h3 id="hashmap-put_1">讲一下 HashMap 中 put 方法过程？<a class="headerlink" href="#hashmap-put_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>对 Key 求 Hash 值，然后再计算下标。<a href="#u181df424">🔗</a></li>
 <li>如果没有碰撞，直接放入桶中，</li>
@@ -1347,7 +1347,7 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <li>如果节点已经存在就替换旧值</li>
 <li>如果桶满了（容量 * 加载因子），就需要 resize。<a href="#z2dT5">🔗</a></li>
 </ol>
-<h3 id="hashmap-hash-hash">HashMap 中 Hash 函数怎么实现的？ 还有哪些 Hash 的实现方式？</h3>
+<h3 id="hashmap-hash-hash">HashMap 中 Hash 函数怎么实现的？ 还有哪些 Hash 的实现方式？<a class="headerlink" href="#hashmap-hash-hash" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>高 16bit 不变</strong>，<strong>低 16bit 和高 16bit</strong> 做了一个<strong>异或</strong><br />
 <code>(n - 1) &amp; hash</code> --&gt; 得到下标</li>
@@ -1365,16 +1365,16 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <p><a href="https://blog.csdn.net/u011428562/article/details/84748410">EffectiveJava之HashCode学习笔记</a>
 </p>
 </blockquote>
-<h3 id="hashmap_10">HashMap 怎样解决冲突，讲一下扩容过程</h3>
+<h3 id="hashmap_10">HashMap 怎样解决冲突，讲一下扩容过程<a class="headerlink" href="#hashmap_10" title="Permanent link">&para;</a></h3>
 <p>将新节点加到链表后，如果容量查过阈值（<strong><u>当前数组的长度</u></strong><u>乘以</u><strong><u>加载因子</u></strong>），容量扩充为原来的<strong>两倍</strong>，然后对每个节点<strong>重新计算哈希值</strong>。</p>
-<h3 id="hashmaphash">抛开 HashMap，hash 冲突有那些解决办法？</h3>
+<h3 id="hashmaphash">抛开 HashMap，hash 冲突有那些解决办法？<a class="headerlink" href="#hashmaphash" title="Permanent link">&para;</a></h3>
 <ul>
 <li>开放定址</li>
 <li>链地址法</li>
 </ul>
-<h3 id="hashmap-entry-on">针对 HashMap 中某个 Entry 链太长，查找的时间复杂度可能达到 O(n)，怎么优化？</h3>
+<h3 id="hashmap-entry-on">针对 HashMap 中某个 Entry 链太长，查找的时间复杂度可能达到 O(n)，怎么优化？<a class="headerlink" href="#hashmap-entry-on" title="Permanent link">&para;</a></h3>
 <p>将链表转为<strong>红黑树</strong>， JDK1.8 已经实现了。</p>
-<h3 id="hashmap_11">对 HashMap 的了解</h3>
+<h3 id="hashmap_11">对 HashMap 的了解<a class="headerlink" href="#hashmap_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>数组 + 红黑树 + 链表</strong>方式存储</li>
 <li>默认容量： <strong>16</strong>（2^n 为宜,若定义的初始容量不是 2^n，容量会定义为大于该初始容量的最小 2^n） <br />
@@ -1390,7 +1390,7 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 </li>
 <li>线程不安全</li>
 </ul>
-<h3 id="hashmap-hashtable_4">HashMap 和 Hashtable 区别</h3>
+<h3 id="hashmap-hashtable_4">HashMap 和 Hashtable 区别<a class="headerlink" href="#hashmap-hashtable_4" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>默认容量</strong>不同，HashMap：16，Hashtable：11。</li>
 <li>索引计算方式不同。</li>
@@ -1398,16 +1398,16 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <li>扩容机制不同，HashMap：2^n，Hashtable：2^n + 1，所以新元素的位置不同。</li>
 <li>线程安全性不同，HashMap 线程不安全， Hashtable 线程安全。</li>
 </ol>
-<h3 id="treemap-treeset">TreeMap 和 TreeSet 区别和实现原理</h3>
+<h3 id="treemap-treeset">TreeMap 和 TreeSet 区别和实现原理<a class="headerlink" href="#treemap-treeset" title="Permanent link">&para;</a></h3>
 <ul>
 <li>TreeSet 底层是 TreeMap，TreeMap 是基于<strong>数组+红黑树+链表</strong>来实现的。</li>
 <li>TreeSet 是单值集合，TreeMap 是键值对集合</li>
 </ul>
-<h3 id="hashmap_12">HashMap 如何实现的？</h3>
+<h3 id="hashmap_12">HashMap 如何实现的？<a class="headerlink" href="#hashmap_12" title="Permanent link">&para;</a></h3>
 <p>jdk1.7 哈希表由<strong>数组+链表</strong>组成的；</p>
 <p>jdk1.8 哈希表是由<strong>数组+链表+红黑树</strong>组成的；</p>
 <p>解决Hash冲突的方法：<strong>拉链法</strong>，我们可以理解为“链表的数组”</p>
-<h3 id="hashmap-hashtable-hashtable">HashMap 和 Hashtable 区别，Hashtable 线程安全吗？</h3>
+<h3 id="hashmap-hashtable-hashtable">HashMap 和 Hashtable 区别，Hashtable 线程安全吗？<a class="headerlink" href="#hashmap-hashtable-hashtable" title="Permanent link">&para;</a></h3>
 <p>HashMap 是 Hashtable 的轻量级实现（非线程安全的实现），他们都完成了Map接口。</p>
 <p>主要区别：</p>
 <ul>
@@ -1418,7 +1418,7 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <li>最大的不同是，Hashtable 的方法是 synchronize 的，而 HashMap 不是，在多个线程访问 Hashtable 时，不需要自己为它的方法实现同步，而 HashMap 就必须为之提供外同步。 </li>
 <li>Hashtable 和 HashMap 采用的 hash/reHash 算法都大概一样，所以性能不会有很大的差。</li>
 </ul>
-<h3 id="treemaptreemap">在什么情景下应用过 TreeMap？TreeMap 内部怎么实现的？</h3>
+<h3 id="treemaptreemap">在什么情景下应用过 TreeMap？TreeMap 内部怎么实现的？<a class="headerlink" href="#treemaptreemap" title="Permanent link">&para;</a></h3>
 <ul>
 <li>TreeMap 是一个有序的 key-value 集合。</li>
 <li>TreeMap 继承于 AbstractMap，所以它是一个 Map，即一个 key-value 集合。</li>
@@ -1431,19 +1431,19 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <li>TreeMap是<strong>非同步</strong>的。 </li>
 <li>它的 iterator 方法返回的迭代器是 fail-fast 的。</li>
 </ul>
-<h3 id="hashmap-key-key">HashMap 中是否任何对象都可以作为 key？用户自定义对象作为 key 有没有什么要求？</h3>
+<h3 id="hashmap-key-key">HashMap 中是否任何对象都可以作为 key？用户自定义对象作为 key 有没有什么要求？<a class="headerlink" href="#hashmap-key-key" title="Permanent link">&para;</a></h3>
 <p>是，用户自定义的类实例对象作为 key，需要重写 hashCode() 和 equals()，最好为不可变类，否则会重新计算 hash。</p>
-<h3 id="java-map-key">一个 Java 对象作为 Map 的 Key 时需要满足的前提条件是什么？</h3>
+<h3 id="java-map-key">一个 Java 对象作为 Map 的 Key 时需要满足的前提条件是什么？<a class="headerlink" href="#java-map-key" title="Permanent link">&para;</a></h3>
 <p>需要重载 equals() 及 hashCode() 方法。</p>
-<h3 id="key-hashmap">如果集合中 key 值是自己定义的类，HashMap 该怎么处理？</h3>
+<h3 id="key-hashmap">如果集合中 key 值是自己定义的类，HashMap 该怎么处理？<a class="headerlink" href="#key-hashmap" title="Permanent link">&para;</a></h3>
 <p>使用 HashMap，如果 key 是自定义的类，就必须重写 hashcode() 和 equals()。</p>
-<h3 id="linkedhashmap_1">LinkedHashMap 的应用</h3>
+<h3 id="linkedhashmap_1">LinkedHashMap 的应用<a class="headerlink" href="#linkedhashmap_1" title="Permanent link">&para;</a></h3>
 <p>基于 LinkedHashMap 的访问顺序的特点，<u>可构造一个</u><strong><u> LRU（Least Recently Used，最近最少使用） 简单缓存</u></strong>。 </p>
 <p>也有一些开源的缓存产品如 <strong>ehcache</strong> 的<strong>淘汰策略（ LRU ）</strong>就是在 LinkedHashMap 上扩展的。</p>
-<h3 id="jdk17-jdk18-hashmap">jdk1.7 到 jdk1.8 HashMap 发生了什么变化?</h3>
+<h3 id="jdk17-jdk18-hashmap">jdk1.7 到 jdk1.8 HashMap 发生了什么变化?<a class="headerlink" href="#jdk17-jdk18-hashmap" title="Permanent link">&para;</a></h3>
 <p>1.8 之后 HashMap 的数据结构发生了变化，从之前的单纯的<strong>数组 + 链表</strong>结构 变成 <strong>数组 + 链表 + 红黑树</strong>。也就是说在 JVM 存储 HashMap 的 <strong>K-V</strong> 时仅仅通过 key 来决定每一个 entry 的存储槽位（<strong>Node[] 中的 index</strong>）。并且 Value 以链表的形式挂在到对应槽位上（1.8 以后如果 value 长度大于 8 则转为红黑树）。 </p>
 <p>但是 HashMap 1.7 跟 1.8 中都没有任何同步操作，容易出现并发问题，甚至出现死循环，导致系统不可用。解决方案是 jdk 的 ConcurrentHashMap，位于 java.util.concurrent 下，专门解决并发问题。 </p>
-<h3 id="hashmap-hash">HashMap 如何解决 Hash 冲突</h3>
+<h3 id="hashmap-hash">HashMap 如何解决 Hash 冲突<a class="headerlink" href="#hashmap-hash" title="Permanent link">&para;</a></h3>
 <p>通过引入<strong>单向链表</strong>来解决 Hash 冲突。当出现 Hash 冲突时，<u>比较新老 key 值是否相等</u>，如果相等，新值覆盖旧值。如果不相等，新值会<u>存入新的 Node 结点，指向老节点，形成链式结构，即链表</u>。 </p>
 <p>当 Hash 冲突发生频繁的时候，会导致链表长度过长，以致检索效率低，所以 JDK1.8 之后引入了<strong>红黑树</strong>，当链表长度<strong>大于 8</strong> 时，链表会转换成红黑书，以此提高查询性能。 </p>
 <blockquote>
@@ -1464,7 +1464,7 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <p><a href="https://blog.csdn.net/weixin_37607613/article/details/126685650">HashMap-链表与红黑树转换触发条件_Just-Today的博客-CSDN博客_hashmap链表转红黑树的条件</a>
 </p>
 </blockquote>
-<h3 id="hashmap_13">HashMap 的底层原理（包括底层数据结构，怎么扩容的）</h3>
+<h3 id="hashmap_13">HashMap 的底层原理（包括底层数据结构，怎么扩容的）<a class="headerlink" href="#hashmap_13" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>基于 jdk1.7
 </p>
@@ -1473,18 +1473,18 @@ HashMap 是 Map 接口的 hash 实现；key 的唯一性是通过 <strong>key �
 <li>数据结构中有<strong>数组</strong>和<strong>链表</strong>来实现对数据的存储，综合两者的特性，做出了⼀种<strong>寻址容易</strong>，<strong>插⼊删除也容易</strong>的数据结构——哈希表。哈希表（(Hash table）既满⾜了数据的查找⽅便，同时不占⽤太多的内容空间，使⽤也⼗分⽅便。 </li>
 <li>HashMap 底层是采⽤<strong>数组</strong>来维护的 <strong>Map.Entry 静态内部实现类</strong></li>
 </ol>
-<pre><code class="language-java">/**
-* The table, resized as necessary. Length MUST Always be a power of two.
-*/
-transient Entry[] table;
-static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-    final K key;
-    V value;
-    Entry&lt;K,V&gt; next;
-    final int hash;
-    ……
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* The table, resized as necessary. Length MUST Always be a power of two.</span>
+<span class="cm">*/</span>
+<span class="kd">transient</span><span class="w"> </span><span class="n">Entry</span><span class="o">[]</span><span class="w"> </span><span class="n">table</span><span class="p">;</span>
+<span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">;</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+<span class="w">    </span><span class="err">……</span>
+<span class="p">}</span>
+</code></pre></div>
 <ol>
 <li>HashMap 添加元素：<br />
 首先会调用 key1 所在类的 hashCode() 方法计算 key1 的哈希值，然后通过某种算法计算出 key1 在 Entry 数组中的存放位置。<ol>
@@ -1501,33 +1501,33 @@ static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
 <p><a href="https://blog.csdn.net/qq_55991094/article/details/119326281">HashMap添加元素的过程（重点详解）_Gin_9420的博客-CSDN博客_hashmap添加数据的过程</a>
 </p>
 </blockquote>
-<h3 id="linkedhashmap_2">LinkedHashMap 排序原理</h3>
-<pre><code class="language-java">public LinkedHashMap() {
-    // 调⽤HashMap的构造⽅方法，其实就是初始化Entry[] table
-    super();
-    // 这里是指是否基于访问排序，默认为false
-    accessOrder = false;
-}
-</code></pre>
+<h3 id="linkedhashmap_2">LinkedHashMap 排序原理<a class="headerlink" href="#linkedhashmap_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="nf">LinkedHashMap</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 调⽤HashMap的构造⽅方法，其实就是初始化Entry[] table</span>
+<span class="w">    </span><span class="kd">super</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 这里是指是否基于访问排序，默认为false</span>
+<span class="w">    </span><span class="n">accessOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ol>
 <li>LinkedHashMap 存储数据是有序的，⽽且分为两种：<strong>插⼊顺序</strong>和<strong>访问顺序</strong>，默认为插入顺序。</li>
 <li>LinkedHashMap 有⾃己的静态内部类 Entry，它继承了 <strong>HashMap.Entry</strong>，定义如下:</li>
 </ol>
-<pre><code class="language-java">/**
-* LinkedHashMap entry.
-*/
-private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; {
-    // These fields comprise the doubly linked list used for iteration.
-    Entry&lt;K,V&gt; before, after;
-    Entry(int hash, K key, V value, HashMap.Entry&lt;K,V&gt; next) {
-        super(hash, key, value, next);
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* LinkedHashMap entry.</span>
+<span class="cm">*/</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HashMap</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// These fields comprise the doubly linked list used for iteration.</span>
+<span class="w">    </span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">before</span><span class="p">,</span><span class="w"> </span><span class="n">after</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Entry</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">HashMap</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ol>
 <li>所以 LinkedHashMap 构造函数，主要就是调⽤ HashMap 的构造函数初始化了⼀个 <code>Entry[] table</code>，然后调⽤⾃身的 init 初始化了⼀个<strong>只有头结点的双向链表</strong>。</li>
 </ol>
-<h3 id="treemap_1">谈谈数据结构，比如 TreeMap</h3>
+<h3 id="treemap_1">谈谈数据结构，比如 TreeMap<a class="headerlink" href="#treemap_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li><font style="color:rgb(51, 51, 51);">TreeMap 底层结构为</font><strong><font style="color:rgb(51, 51, 51);">红黑树</font></strong></li>
 <li><font style="color:rgb(51, 51, 51);">红黑树的 Node 排序是根据 Key 进行比较</font></li>
@@ -1538,7 +1538,7 @@ private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; {
 <p><a href="https://my.oschina.net/u/566591/blog/1548176">JDK容器学习之TreeMap (一) : 底层数据结构</a>
 </p>
 </blockquote>
-<h3 id="hashmapput">说一下你对HashMap的理解？put操作的流程大概是怎样的呢？</h3>
+<h3 id="hashmapput">说一下你对HashMap的理解？put操作的流程大概是怎样的呢？<a class="headerlink" href="#hashmapput" title="Permanent link">&para;</a></h3>
 <p><a href="https://www.processon.com/embed/63637d220791295cf8e3e4ee">processon</a></p>
 <p>HashMap 的数据结构在 jdk1.8 之前是<strong>数组</strong>+<strong>链表</strong>，为了解决数据量过大、链表过长是查询效率会降低的问题变成了<strong>数组+链表+红黑树</strong>的结构，利用的是<strong>红黑树自平衡</strong>的特点。</p>
 <p>链表的平均查找时间复杂度是 <strong>O(n)</strong>，红黑树是 <strong>O(log(n))</strong>。</p>
@@ -1555,9 +1555,9 @@ private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; {
 <p><a href="https://blog.csdn.net/u012369373/article/details/124114730">浅析HashMap的put()方法执行流程_尚振伟的博客-CSDN博客_hashmap的put流程</a>
 </p>
 </blockquote>
-<h3 id="key">自定义类型可以作为Key么？</h3>
+<h3 id="key">自定义类型可以作为Key么？<a class="headerlink" href="#key" title="Permanent link">&para;</a></h3>
 <p>可以，需要覆盖Object类的<code>equals()</code>方法和<code>hashCode()</code>方法</p>
-<h3 id="hashmap_14">集合框架 HashMap 的扩容机制</h3>
+<h3 id="hashmap_14">集合框架 HashMap 的扩容机制<a class="headerlink" href="#hashmap_14" title="Permanent link">&para;</a></h3>
 <ol>
 <li>当添加某个元素后，数组的总的<strong>添加元素数</strong>大于<strong>数组长度 * 0.75</strong>（默认,也可自己设定），数组长度扩容为<strong>两倍</strong>。<br />
 比如，开始创建HashMap集合后，数组长度为16，临界值为16 * 0.75 = 12，当加入元素后元素个数超过12，数组长度扩容为 32，临界值变为 24</li>
@@ -1570,7 +1570,7 @@ private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; {
 <p><a href="https://blog.csdn.net/zhuzhianing/article/details/123962898">关于HashMap扩容机制_祝枝繁的博客-CSDN博客_hashmap的扩容机制</a>
 </p>
 </blockquote>
-<h3 id="hashmaptreemap">HashMap和TreeMap的区别</h3>
+<h3 id="hashmaptreemap">HashMap和TreeMap的区别<a class="headerlink" href="#hashmaptreemap" title="Permanent link">&para;</a></h3>
 <p>不同点：</p>
 <ol>
 <li><font style="color:rgb(61, 70, 77);">HashMap是通过</font><strong><font style="color:rgb(61, 70, 77);">hash code</font></strong><font style="color:rgb(61, 70, 77);">对其内容进行快速查找的；HashMap中的元素是没有顺序的；<br />
@@ -1591,7 +1591,7 @@ private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; {
 <p><a href="https://www.php.cn/java/base/463503.html">java中treemap和hashmap的区别是什么？-Java基础-PHP中文网</a>
 </p>
 </blockquote>
-<h3 id="hashmap-hashtable_5">HashMap 和 Hashtable 有什么区别？</h3>
+<h3 id="hashmap-hashtable_5">HashMap 和 Hashtable 有什么区别？<a class="headerlink" href="#hashmap-hashtable_5" title="Permanent link">&para;</a></h3>
 <ol>
 <li>HashMap是非线程安全的，HashTable是线程安全的。</li>
 <li>HashMap的键和值都允许有null值存在，而HashTable则不行。</li>
@@ -1608,7 +1608,7 @@ private static class Entry&lt;K,V&gt; extends HashMap.Entry&lt;K,V&gt; {
 <p><a href="https://blog.csdn.net/m0_51740882/article/details/125100219">HashMap和Hashtable有什么区别？_天幕顽主的博客-CSDN博客_hashmap和hashtable有什么区别</a>
 </p>
 </blockquote>
-<h3 id="hashmaphash_1">HashMap之Hash碰撞</h3>
+<h3 id="hashmaphash_1">HashMap之Hash碰撞<a class="headerlink" href="#hashmaphash_1" title="Permanent link">&para;</a></h3>
 <p>碰撞的意思是计算得到的Hash值相同，需要放到同一个bucket中。<br />
 Hashmap里面的bucket出现了<strong>单链表</strong>的形式，散列表要解决的一个问题就是散列值的冲突问题，通常是两种方法：<strong>链表法</strong>和<strong>开放地址法</strong>。</p>
 <ul>
@@ -1617,13 +1617,13 @@ Hashmap里面的bucket出现了<strong>单链表</strong>的形式，散列表�
 </ul>
 <p><strong>链表法</strong></p>
 <p>HashMap采用的<strong>链表法</strong>的方式，链表是单向链表。形成单链表的核心代码如下：</p>
-<pre><code class="language-java">void addEntry(int hash, K key, V value, int bucketIndex) {
-Entry&lt;K,V&gt; e = table[bucketIndex];
-    table[bucketIndex] = new Entry&lt;K,V&gt;(hash, key, value, e);
-    if (size++ &gt;= threshold)
-        resize(2 * table.length);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">addEntry</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bucketIndex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="o">[</span><span class="n">bucketIndex</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="n">table</span><span class="o">[</span><span class="n">bucketIndex</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="o">++</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">threshold</span><span class="p">)</span>
+<span class="w">        </span><span class="n">resize</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">table</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>上面方法的代码很简单，但其中包含了一个设计：<br />
 系统总是将<strong>新添加的 Entry 对象</strong>放入<strong> table 数组</strong>的 <strong>bucket Index 索引</strong>处——如果 bucketIndex 索引处已经有了一个 Entry 对象，那么，新添加的 Entry 对象指向原有的 Entry 对象(产生一个 Entry 链)。如果 bucketIndex 索引处没有 Entry 对象，也就是上面程序代码的 e 变量是 null，也就是新放入的 Entry 对象指向 null，也就是没有产生 Entry 链。</p>
 <p>如果两个 Entry的 key的 hashCode() 返回值相同，那它们的存储位置相同。如果这两个 Entry的 key通过equals比较返回 true，新添加 Entry的 value将覆盖集合中原有 Entry的 value，但key不会覆盖。如果这两个 Entry的 key通过equals比较返回 false，新添加的 Entry将与集合中原有 Entry形成 Entry链，而且<u>新添加的 Entry位于 Entry链的</u><strong><u>头部</u></strong>。</p>
@@ -1656,13 +1656,13 @@ Java 8对此进行了优化！它是一个log的曲线，因此它的性能要�
 <p><a href="https://www.jianshu.com/p/379680144004">HashMap之Hash碰撞</a>
 </p>
 </blockquote>
-<h3 id="_1">拉链法导致的链表过深问题为什么不用二叉查找树代替而选择红黑树？为什么不一直使用红黑树？</h3>
+<h3 id="_1">拉链法导致的链表过深问题为什么不用二叉查找树代替而选择红黑树？为什么不一直使用红黑树？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>之所以选择红黑树是为了解决<strong>二叉查找树的缺陷</strong>，二叉查找树<u>在特殊情况下会变成一条线性结构</u>（这就跟原来使用链表结构一样了，造成很深的问题），遍历查找会非常慢。而红黑树在插入新数据后可能需要通过左旋，右旋、变色这些操作来保持平衡，<u>引入红黑树就是为了查找数据快，解决链表查询深度的问题</u>。我们知道红黑树属于平衡二叉树，但是为了保持“平衡”是需要付出代价的，但是该代价所损耗的资源要比遍历线性链表要少。所以，当长度大于8的时候，会使用红黑树，链表长度低于6，就把红黑树转回链表，因为根本不需要引入红黑树，引入反而会慢。</p>
-<h3 id="hashmap_15">如何提升HashMap插入性能？</h3>
+<h3 id="hashmap_15">如何提升HashMap插入性能？<a class="headerlink" href="#hashmap_15" title="Permanent link">&para;</a></h3>
 <p>前面产生冲突的那些KEY对应的记录只是简单的追加到一个链表后面，这些记录只能通过遍历来进行查找。但是超过这个阈值后HashMap开始将列表升级成一个红黑树，使用哈希值作为树的分支变量，如果两个哈希值不等，但指向同一个桶的话，较大的那个会插入到右子树里。如果哈希值相等，HashMap希望key值最好是实现了Comparable接口的，这样它可以按照顺序来进行插入。这对HashMap的key来说并不是必须的，不过如果实现了当然最好。<br />
 如果没有实现Comparable接口，在出现严重的哈希碰撞的时候，你就并别指望能获得性能提升了。这个性能提升有什么用处？<br />
 比方说，如果恶意的程序知道我们用的是哈希算法，它可能会发送大量的请求，导致产生严重的哈希碰撞。然后不停的访问这些key就能显著的影响服务器的性能，这样就形成了一次拒绝服务攻击（DoS）。JDK 8中从O(n)到O(logn)的飞跃，可以有效地防止类似的攻击，同时也让HashMap性能的可预测性稍微增强了一些。</p>
-<h3 id="hashmaphashtablehashmapkeyhashtable">HashMap和Hashtable的区别？HashMap中的key可以是任何对象或数据类型吗？Hashtable是线程安全的么？</h3>
+<h3 id="hashmaphashtablehashmapkeyhashtable">HashMap和Hashtable的区别？HashMap中的key可以是任何对象或数据类型吗？Hashtable是线程安全的么？<a class="headerlink" href="#hashmaphashtablehashmapkeyhashtable" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>HashMap和Hashtable的区别</strong><ul>
 <li>Hashtable的方法是同步的，HashMap未经同步，所以在多线程场合要手动同步HashMap这个区别就像Vector和 ArrayList一样。</li>
@@ -1677,55 +1677,55 @@ Java 8对此进行了优化！它是一个log的曲线，因此它的性能要�
 </li>
 </ul>
 <p><strong>• HashMap中的key可以是任何对象或数据类型吗？</strong></p>
-<pre><code>- 可以为null，但不能是可变对象，如果是可变对象的话，对象中的属性改变，则对象HashCode也进行相应的改变，导致下次无法查找到已存在Map中的数据。
+<div class="highlight"><pre><span></span><code>- 可以为null，但不能是可变对象，如果是可变对象的话，对象中的属性改变，则对象HashCode也进行相应的改变，导致下次无法查找到已存在Map中的数据。
 - 如果可变对象在HashMap中被用作键，那就要小心在改变对象状态的时候，不要改变它的哈希值了。我们只需要保证成员变量的改变能保证该对象的哈希值不变即可。
-</code></pre>
+</code></pre></div>
 <p><strong>• Hashtable是线程安全的么？</strong></p>
 <p>Hashtable是线程安全的，其实现是在对应的方法上添加了synchronized关键字进行修饰，由于在执行此方法的时候需要获得对象锁，则执行起来比较慢。所以现在如果为了保证线程安全的话，使用CurrentHasxhMap。</p>
-<h3 id="java-hashmap-hashtable">Java 中 HashMap 和 Hashtable 的区别（乐视、⼩⽶）</h3>
+<h3 id="java-hashmap-hashtable">Java 中 HashMap 和 Hashtable 的区别（乐视、⼩⽶）<a class="headerlink" href="#java-hashmap-hashtable" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><a href="https://www.cnblogs.com/lchzls/p/6714335.html">JAVA中HashMap和Hashtable区别 - 知我者，足以 - 博客园</a> </p>
 <p><a href="http://blog.csdn.net/u012050154/article/details/50905364">Java中Map接口HashMap与HashTable的区别及HashMap深入理解</a>
 </p>
 </blockquote>
-<h3 id="arraymap-vs-hashmap">ArrayMap VS HashMap</h3>
+<h3 id="arraymap-vs-hashmap">ArrayMap VS HashMap<a class="headerlink" href="#arraymap-vs-hashmap" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><a href="http://blog.csdn.net/vansbelove/article/details/52422087">ArrayMap和HashMap区别_醉离歌醉yang的博客-CSDN博客_arraymap hash冲突</a>
 </p>
 </blockquote>
-<h3 id="map_1">用过哪些Map类，都有什么区别？</h3>
+<h3 id="map_1">用过哪些Map类，都有什么区别？<a class="headerlink" href="#map_1" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><a href="https://blog.csdn.net/lcr_happy/article/details/95238710">常见的Map类和它们的区别（Java）_lcr_happy的博客-CSDN博客_map类</a>
 </p>
 </blockquote>
-<h3 id="hashmap_16">HashMap是线程安全的吗？</h3>
+<h3 id="hashmap_16">HashMap是线程安全的吗？<a class="headerlink" href="#hashmap_16" title="Permanent link">&para;</a></h3>
 <p>不是</p>
-<h3 id="maphash-code">并发下使用的Map是什么？他们内部原理分别是什么？比如存储方式，hash code，扩容，默认容量等</h3>
-<h4 id="1-concurrenthashmap">1. ConcurrentHashMap 特性</h4>
+<h3 id="maphash-code">并发下使用的Map是什么？他们内部原理分别是什么？比如存储方式，hash code，扩容，默认容量等<a class="headerlink" href="#maphash-code" title="Permanent link">&para;</a></h3>
+<h4 id="1-concurrenthashmap">1. ConcurrentHashMap 特性<a class="headerlink" href="#1-concurrenthashmap" title="Permanent link">&para;</a></h4>
 <p>ConcurrentHashMap 是线程安全的 HashMap ，用于替代 HashTable</p>
-<pre><code class="language-java">public interface ConcurrentMap&lt;K, V&gt; extends Map&lt;K, V&gt; {}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ConcurrentMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{}</span>
 
-public class ConcurrentHashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;
-    implements ConcurrentMap&lt;K,V&gt;, Serializable {}
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConcurrentHashMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="kd">implements</span><span class="w"> </span><span class="n">ConcurrentMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Serializable</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
 <p>ConcurrentHashMap实现了ConcurrentMap接口，而ConcurrentMap接口又继承了Map接口。</p>
 <p>ConcurrentHashMap 没有实现对 Map 加锁以提供独占访问。因此无法通过在客户端加锁的方式来创建新的原子操作。但是，一些常见的复合操作，如：“若没有则添加”、“若相等则移除”、“若相等则替换”，都已经实现为原子操作，并且是围绕 ConcurrentMap 的扩展接口而实现。</p>
-<pre><code class="language-java">public interface ConcurrentMap&lt;K, V&gt; extends Map&lt;K, V&gt; {
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">ConcurrentMap</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
 
-    // 仅当 K 没有相应的映射值才插入
-    V putIfAbsent(K key, V value);
+<span class="w">    </span><span class="c1">// 仅当 K 没有相应的映射值才插入</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="nf">putIfAbsent</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
 
-    // 仅当 K 被映射到 V 时才移除
-    boolean remove(Object key, Object value);
+<span class="w">    </span><span class="c1">// 仅当 K 被映射到 V 时才移除</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">remove</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
 
-    // 仅当 K 被映射到 oldValue 时才替换为 newValue
-    boolean replace(K key, V oldValue, V newValue);
+<span class="w">    </span><span class="c1">// 仅当 K 被映射到 oldValue 时才替换为 newValue</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">replace</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">oldValue</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">newValue</span><span class="p">);</span>
 
-    // 仅当 K 被映射到某个值时才替换为 newValue
-    V replace(K key, V value);
-}
-</code></pre>
-<h4 id="2-concurrenthashmap">2. ConcurrentHashMap实现原理</h4>
+<span class="w">    </span><span class="c1">// 仅当 K 被映射到某个值时才替换为 newValue</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="nf">replace</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="2-concurrenthashmap">2. ConcurrentHashMap实现原理<a class="headerlink" href="#2-concurrenthashmap" title="Permanent link">&para;</a></h4>
 <p><strong>2.1 Java 1.7的实现</strong></p>
 <ul>
 <li>数据结构：数组＋单链表</li>
@@ -1750,7 +1750,7 @@ public class ConcurrentHashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;
 <p><a href="https://blog.csdn.net/weixin_43207025/article/details/114855495">Java并发Map之ConcurrentHashMap_学而不思则忘的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="map_2">有没有有顺序的 Map 实现类？如果有，他们是怎么保证有序的？</h3>
+<h3 id="map_2">有没有有顺序的 Map 实现类？如果有，他们是怎么保证有序的？<a class="headerlink" href="#map_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Hashmap 和 Hashtable 都不是有序的。</li>
 <li>TreeMap 和 LinkedHashmap 都是有序的。<br />
@@ -1762,16 +1762,16 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p><a href="https://www.hicxy.com/2427.html">（Java集合面试题）有没有有顺序的Map实现类，如果有，他们是怎么保证有序的</a>
 </p>
 </blockquote>
-<h3 id="hashmap_17">HashMap怎么扩容？怎么处理数据冲突？怎么高效率的实现数据迁移？</h3>
+<h3 id="hashmap_17">HashMap怎么扩容？怎么处理数据冲突？怎么高效率的实现数据迁移？<a class="headerlink" href="#hashmap_17" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>HashMap怎么扩容？</strong></li>
 </ul>
 <p><a href="https://player.bilibili.com/player.html?aid=814591858">bilibili</a></p>
-<pre><code>- 默认容量大小16，默认负载因子0.75。
-- &lt;font style="color:rgb(77, 77, 77);"&gt;当集合存储容量达到某个阈值的时候，集合就会进行动态扩容。&lt;/font&gt;
-- &lt;font style="color:rgb(77, 77, 77);"&gt;临界值计算公式：threadshold = loadFactory * capacity。&lt;/font&gt;
+<div class="highlight"><pre><span></span><code>- 默认容量大小16，默认负载因子0.75。
+- &lt;font style=&quot;color:rgb(77, 77, 77);&quot;&gt;当集合存储容量达到某个阈值的时候，集合就会进行动态扩容。&lt;/font&gt;
+- &lt;font style=&quot;color:rgb(77, 77, 77);&quot;&gt;临界值计算公式：threadshold = loadFactory * capacity。&lt;/font&gt;
 - 负载因子表示Hash表中的元素填充程度。
-</code></pre>
+</code></pre></div>
 <p>负载因子的值越大，也就意味着触发扩容的元素个数就越多。虽然，它的整体空间利用率会比较高，但是Hash冲突的概率也会增加。<br />
 那么，反之，负载因子的值越小，那么触发扩容元素的个数也就越少，也就意味着Hash冲突的概率也会减少。但是，对于内存空间的浪费自然就比较多了，而且还会增加扩容的频率。
     - <font style="color:rgb(77, 77, 77);">当负载因子为0.75的时候，链表长度达到8的可能性几乎为0，也就是说，比较好的做到了空间成本和时间成本的平衡。</font>
@@ -1794,7 +1794,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p><a href="https://blog.csdn.net/m0_56688298/article/details/117655697">Hashmap的扩容机制及扩容后元素迁移-resize()</a>
 </p>
 </blockquote>
-<h3 id="hashmaphashcode">HashMap的hashcode的作用</h3>
+<h3 id="hashmaphashcode">HashMap的hashcode的作用<a class="headerlink" href="#hashmaphashcode" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p>hashcode定义</p>
 <p>（1）hashcode的存在主要是用于<strong>查找的快捷性</strong>，如Hashtable，HashMap等，HashCode是用来在散列存储结构中确定对象的存储地址的；</p>
@@ -1817,7 +1817,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p><a href="https://blog.csdn.net/baidu_31657889/article/details/52298367">HashCode的作用原理和实例解析_xiaoming3526的博客-CSDN博客_hashcode的作用原理</a>
 </p>
 </blockquote>
-<h3 id="3hashmap">3分钟轻松理解单线程下的HashMap工作原理</h3>
+<h3 id="3hashmap">3分钟轻松理解单线程下的HashMap工作原理<a class="headerlink" href="#3hashmap" title="Permanent link">&para;</a></h3>
 <p>HashMap 主要是用来处理键值对数据。随着 JDK 版本的更新，JDK1.8 对 HashMap 对底层也做了一些优化。今天我带大家一起来结合源码，深入浅出 HashMap 工作原理。 l</p>
 <p>HashMap 是基于哈希表对 Map 接口的实现类，它的特点是访问数据的速度快，并不是按顺序来遍历。HashMap 提供所有可选的映射操作，但不能保证映射顺序不变，并且允许使用空值和空键。HashMap 也并不是线程安全的，当存在多个线程同时写入时，可能会导致数据不一致的情况。</p>
 <p>1、HashMap中的关键属性</p>
@@ -1854,7 +1854,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p><img alt="1671087802818-35231b97-ddea-4bd9-b5a5-6a8e73d32ecb.png" src="../img/lqJFVFHTybgK9Pim/1671087802818-35231b97-ddea-4bd9-b5a5-6a8e73d32ecb-112046.png" /></p>
 <p>HashMap 的工作原理，你搞懂了吗？</p>
 <p>我是被编程耽误的文艺 Tom ，如果大家还有其他疑问，请在评论区留言。如果本次面试对你有帮助，请动动手指一键三连分享给更多的人。关注我，面试不再难！</p>
-<h3 id="hashmap_18">为什么HashMap会产生死循环？</h3>
+<h3 id="hashmap_18">为什么HashMap会产生死循环？<a class="headerlink" href="#hashmap_18" title="Permanent link">&para;</a></h3>
 <p>HashMap 死循环是一个比较常见、也是比较经典的面试题，在大厂的面试中也经常被问到。HashMap 的死循环问题只在 JDK1.7 版本中会出现，主要是 HashMap 自身的工作机制，再加上并发操作，从而导致出现死循环。JDK1.8 以后，官方彻底解决了这个问题。</p>
 <p>1、数据插入原理</p>
 <p>在分析原因之前，我先带大家了解一下 JDK1.7 中HashMap 插入数据的原理，来看动画演示：</p>
@@ -1887,22 +1887,22 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p>4、总结</p>
 <p>HashMap 死循环只发生在 JDK1.7 版本中，主要原因是JDK1.7 中的 HashMap，在头插法 加 链表 加 多线程并发 加 扩容这几个情形累加到一起就会形成死循环。多线程环境下建议采用 ConcurrentHashMap 替代。在 JDK1.8 中，HashMap 改成了尾插法，解决了链表死循环的问题。</p>
 <p>以上就是关于 HashMap 死循环原因的分析，听懂的小伙伴，关注点个赞，下次不迷路。</p>
-<h3 id="94hashmap">94.HashMap什么时候扩容，如何扩容？</h3>
+<h3 id="94hashmap">94.HashMap什么时候扩容，如何扩容？<a class="headerlink" href="#94hashmap" title="Permanent link">&para;</a></h3>
 <p>一位2 年工作经验的小伙伴面试时被问到，说，HashMap 什么时候扩容，为什么要扩容？这个问题本身不是很难，但是这位小伙伴对底层实现原理没有太多关注，所以，被这个问题难住了。</p>
 <p>下面我给大家分析一下这个问题的底层逻辑。</p>
-<h4 id="1">1 数据存储容器</h4>
+<h4 id="1">1 数据存储容器<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <p>在任何编程语言中，我们经常需要在内存中去临时存放一段数据，我们可以使用官方封装好的一些集合框架。</p>
 <p><img alt="1671120555642-9805ad90-1fbf-4d9b-b5bb-88099c92be3f.png" src="../img/lqJFVFHTybgK9Pim/1671120555642-9805ad90-1fbf-4d9b-b5bb-88099c92be3f-715250.png" /></p>
 <p>比如说用 List、HashMap、Set 等等作为临时数据存储的容器。</p>
 <p>当我们创建一个集合对象的时候，实际上就是在内存里面一次性申请了一块内存空间。而这个内存空间的大小是在创建集合对象的时候去指定的。</p>
 <p><img alt="1671120561555-c2fb11c4-2ca4-4005-be32-fb180b6d893d.png" src="../img/lqJFVFHTybgK9Pim/1671120561555-c2fb11c4-2ca4-4005-be32-fb180b6d893d-476550.png" /></p>
 <p>比如 HashMap 的默认大小是 16。</p>
-<h4 id="2">2 动态扩容</h4>
+<h4 id="2">2 动态扩容<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <p>在实际开发过程中，我们需要去存储的数据量往往是大于存储容器的默认大小的。所以，出现容量默认大小不能满足需求时，就需要扩容。而这个扩容的动作是由集合自动完成的，每种集合的扩容规则都有差异。但总的扩容原则是，当集合存储容量达到某个阈值的时候，集合就会进行动态扩容，而更好地满足更多数据存储的需求。</p>
 <p><img alt="1671120580962-44ad7a7f-16d9-482a-88cb-a63c548eef25.png" src="../img/lqJFVFHTybgK9Pim/1671120580962-44ad7a7f-16d9-482a-88cb-a63c548eef25-425930.png" /></p>
 <p>而 HashMap 中，用来存储数据的容器，本质上是一个数组结构。基本的扩容逻辑就是新建一个更长的数据，然后把原来数组里面的数据 Copy 到新的数组里面就可以了。</p>
 <p>那 HashMap 是在什么触发扩容呢？它的扩容原理是什么呢？</p>
-<h4 id="3">3 扩容原理</h4>
+<h4 id="3">3 扩容原理<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <p>当 HashMap 里面的元素个数超过临界值的时候会自动触发扩容。这个临界值的计算公式如图所示：</p>
 <p><img alt="1671120625103-67f35da8-4795-4455-93b7-09480f14e9c0.png" src="../img/lqJFVFHTybgK9Pim/1671120625103-67f35da8-4795-4455-93b7-09480f14e9c0-950065.png" /></p>
 <p>它等于负载因子乘以容量大小，负载因子的默认值是 0.75，而容量大小默认是16,。也就是说，第 1 次扩容的动作会在元素个数达到 12 的时候触发，扩容的大小是原来的2 倍。HashMap 的最大容量是Integer.MAX_VALUE 也就是2 的31 次方减1。</p>
@@ -1910,7 +1910,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p>由于动态扩容机制的存在，所以我们在实际应用的时候，最好在集合初始化的时候明确去指定集合的大小，从而避免频繁扩容带来性能上的消耗。</p>
 <p>假设，我们向 HashMap 中插入 1024 个元素，如果按照默认容量大小是 16的情况下，随着元素的不断增加，会造成至少 7 次扩容。而这 7 次扩容过程中，需要重新去创建新的 Hash 表，并且进行数据的迁移，对性能的影响是非常大的。</p>
 <p>那为什么负载因子是 0.75，而不是其他的值呢？</p>
-<h4 id="3_1">3 负载因子</h4>
+<h4 id="3_1">3 负载因子<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
 <p><img alt="1671120658593-cc3f8b9e-f91d-4d14-af31-87076026cf54.png" src="../img/lqJFVFHTybgK9Pim/1671120658593-cc3f8b9e-f91d-4d14-af31-87076026cf54-564388.png" /></p>
 <p>负载因子表示 Hash 表中的元素填充程度。负载因子的值越大，也就意味着触发扩容的元素个数就越多。虽然，它的整体空间利用率会比较高，但是 Hash冲突的概率也会增加。那么，反之，负载因子的值越小，那么触发扩容元素的个数也就越少，也就意味着 Hash 冲突的概率也会减少。但是，对于内存空间的浪费自然就比较多了，而且还会增加扩容的频率。</p>
 <p>因此，扩容因子的值的设置，本质上就是一个冲突的概率以及空间利用率之间的一个平衡。关于 0.75 这个值的来源，和统计学里面的泊松分布有关系。</p>
@@ -1919,7 +1919,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p><img alt="1671120687607-6f584ab2-b449-4572-816e-7be9ee285dce.png" src="../img/lqJFVFHTybgK9Pim/1671120687607-6f584ab2-b449-4572-816e-7be9ee285dce-383045.png" /></p>
 <p>当负载因子为 0.75 的时候，链表长度达到 8 的可能性几乎为0，也就是说，比较好的做到了空间成本和时间成本的平衡。</p>
 <p>好了，以上就是我对HashMap 扩容的理解。</p>
-<h4 id="2_1">2、总结</h4>
+<h4 id="2_1">2、总结<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
 <p>最后，我把HashMap 和TreeMap的更多详细区别，都整理在这张表中了，需要的小伙伴可以在我的个人主页中获取。</p>
 <table>
 <thead>
@@ -1985,9 +1985,9 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p><img alt="1671124945647-91a4f3a5-0287-438c-9368-b352edda195d.png" src="../img/lqJFVFHTybgK9Pim/1671124945647-91a4f3a5-0287-438c-9368-b352edda195d-149302.png" /></p>
 <p><img alt="1671124950035-8508342e-6309-4edf-9875-0846f3664a21.png" src="../img/lqJFVFHTybgK9Pim/1671124950035-8508342e-6309-4edf-9875-0846f3664a21-882602.png" /></p>
 <p>好了，以上就是我对HashMap 和TreeMap 的理解。</p>
-<h3 id="110hashmaptreemap">110.HashMap和TreeMap的区别</h3>
+<h3 id="110hashmaptreemap">110.HashMap和TreeMap的区别<a class="headerlink" href="#110hashmaptreemap" title="Permanent link">&para;</a></h3>
 <p>前几天，有一位粉丝在直播间问了我这样一个问题，说HashMap和TreeMap有什么区别。今天，我给大家分享一下我的理解。</p>
-<h4 id="1_1">1、两者区别</h4>
+<h4 id="1_1">1、两者区别<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
 <p>我们知道不管是HashMap还是TreeMap，都是通过对象来对对象进行索引的Map集合。我们把用来索引的对象叫做Key，而索引对应的对象叫做Value。这就是我们平时说的键值对。它们的类关系如图所示：</p>
 <p><img alt="1671124329266-a022a5ca-0168-4e33-8164-d7e3110541e6.png" src="../img/lqJFVFHTybgK9Pim/1671124329266-a022a5ca-0168-4e33-8164-d7e3110541e6-516540.png" /></p>
 <p>关于HashMap 和TreeMap的区别，我从以下4个方面来分析：</p>
@@ -2012,7 +2012,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 <p>TreeMap适用于按自然顺序或自定义顺序遍历键的场景。</p>
 <p>HashMap适用于在Map中插入、删除和定位元素。</p>
 <p>日常开发建议多使用HashMap，只有在需要排序的时候才使用TreeMap。</p>
-<h3 id="hashtable">对 Hashtable 的了解</h3>
+<h3 id="hashtable">对 Hashtable 的了解<a class="headerlink" href="#hashtable" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>数组 + 链表</strong>方式存储</li>
 <li>默认容量：<strong>11 </strong>(质数 为宜)</li>
@@ -2025,7 +2025,7 @@ TreeMap 默认是 key 升序，LinkedHashmap默认是数据插入顺序。</li>
 </li>
 <li>对修改 Hashtable 内部共享数据的方法添加了 synchronized，保证线程安全。</li>
 </ul>
-<h3 id="hashtablesizereturn-count">Hashtable的size()方法中明明只有一条语句“return count”，为什么还要做同步？</h3>
+<h3 id="hashtablesizereturn-count">Hashtable的size()方法中明明只有一条语句“return count”，为什么还要做同步？<a class="headerlink" href="#hashtablesizereturn-count" title="Permanent link">&para;</a></h3>
 <p>同一时间只能有一条线程执行固定类的同步方法，但是对于类的非同步方法，可以多条线程同时访问。所以，这样就有问题了，可能线程A在执行Hashtable的put方法添加数据，线程B则可以正常调用size()方法读取Hashtable中当前元素的个数，那读取到的值可能不是最新的，可能线程A添加了完了数据，但是没有对size++，线程B就已经读取size了，那么对于线程B来说读取到的size一定是不准确的。</p>
 <p><strong>而给size()方法加了同步之后，意味着线程B调用size()方法只有在线程A调用put方法完毕之后才可以调用，这样就保证了线程安全性。</strong></p>
 <p><strong>Put和读取多线程导致的问题。</strong></p>

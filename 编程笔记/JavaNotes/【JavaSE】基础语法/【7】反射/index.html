@@ -251,8 +251,8 @@
 
 
 
-<h1 id="7">【7】 反射</h1>
-<h1 id="_1">概念</h1>
+<h1 id="7">【7】 反射<a class="headerlink" href="#7" title="Permanent link">&para;</a></h1>
+<h1 id="_1">概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>反射就是把 Java 类中的各个成分映射成一个个的 Java 对象。</p>
 <p>即在运行状态中，对于任意一个类，都能够知道这个类所有的属性和方法，对于任意一个对象，都能调用它的任意一个方法和属性。</p>
 <p>这种动态获取信息及动态调用对象方法的功能叫 Java 的反射机制。</p>
@@ -270,90 +270,90 @@
 2. 加载完类之后，在堆中就产生了一个 Class 类型的对象（一个类只有一个 Class 对象），这个对象包含了类的<strong>完整结构信息</strong>。通过这个对象得到类的结构。这个对象就像一面镜子，透过这个镜子看到类的结构，所以。形象的称之为：反射。</p>
 <p>----- 韩顺平</p>
 <p>:::</p>
-<h1 id="_2">类加载机制</h1>
+<h1 id="_2">类加载机制<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><img alt="画板" src="../img/yyLd6miBedJs0Ri_/1712932157036-30dc24c6-e3be-4810-bc53-31ee57e30278-826373.jpeg" /></p>
 <p>了解一下类的加载机制，一个类是如何被加载和使用的，有助于理解反射机制的实现：</p>
 <p>在 Java 程序启动时，JVM 会将一部分类（class 文件）先加载（并不是所有的类都会在一开始加载），通过ClassLoader 将类加载，在加载过程中，会将类的信息提取出来（存放在元空间中，JDK 1.8 之前存放在永久代），同时也会生成一个 Class 对象存放在内存（堆内存），注意此 Class 对象只会存在一个，与加载的类唯一对应！</p>
 <p><strong>思考：</strong>既然说和与加载的类唯一对应，那如果我们手动创建一个与 JDK 包名一样，同时类名也保持一致，那么JVM 会加载这个类吗？</p>
-<pre><code class="language-java">package java.lang;
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">java.lang</span><span class="p">;</span>
 
-public class String {    //JDK提供的String类也是
-    public static void main(String[] args) {
-        System.out.println(&quot;我姓s，我叫syt&quot;);
-    }
-}
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">String</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">//JDK提供的String类也是</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;我姓s，我叫syt&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>我们发现，会出现以下报错：</p>
-<pre><code class="language-java">错误: 在类 java.lang.String 中找不到 main 方法, 请将 main 方法定义为:
-   public static void main(String[] args)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nl">错误</span><span class="p">:</span><span class="w"> </span><span class="n">在类</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="w"> </span><span class="n">中找不到</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">方法</span><span class="p">,</span><span class="w"> </span><span class="n">请将</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">方法定义为</span><span class="p">:</span>
+<span class="w">   </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
 <p>但是我们明明在自己写的 String 类中定义了 main 方法啊，为什么会找不到此方法呢？实际上这是 ClassLoader的双亲委派机制在保护 Java 程序的正常运行：</p>
 <p><img alt="1672648667710-ae7a5a80-7106-4f9e-8d61-e9ecb61b9e55.png" src="../img/yyLd6miBedJs0Ri_/1672648667710-ae7a5a80-7106-4f9e-8d61-e9ecb61b9e55-998994.png" /></p>
 <p>实际上我们的类最开始是由 BootstarpClassLoader 进行加载，BootstarpClassLoader 用于加载 JDK 提供的类，而我们自己编写的类实际上是 AppClassLoader，只有 BootstarpClassLoader 都没有加载的类，才会让AppClassLoader 来加载，因此我们自己编写的同名包同名类不会被加载，而实际要去启动的是真正的 String 类，也就自然找不到 main 方法了！</p>
-<pre><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        System.out.println(Main.class.getClassLoader());   //查看当前类的类加载器
-        System.out.println(Main.class.getClassLoader().getParent());  //父加载器
-        System.out.println(Main.class.getClassLoader().getParent().getParent());  //爷爷加载器
-        System.out.println(String.class.getClassLoader());   //String类的加载器
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Main</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">());</span><span class="w">   </span><span class="c1">//查看当前类的类加载器</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Main</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">().</span><span class="na">getParent</span><span class="p">());</span><span class="w">  </span><span class="c1">//父加载器</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">Main</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">().</span><span class="na">getParent</span><span class="p">().</span><span class="na">getParent</span><span class="p">());</span><span class="w">  </span><span class="c1">//爷爷加载器</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">());</span><span class="w">   </span><span class="c1">//String类的加载器</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>由于 BootstarpClassLoader 是 C++ 编写的，我们在 Java 中是获取不到的。</p>
 <p><img alt="1711724185433-9942c9a7-c9fb-4ca2-8062-98589aae95eb.png" src="../img/yyLd6miBedJs0Ri_/1711724185433-9942c9a7-c9fb-4ca2-8062-98589aae95eb-349913.png" /></p>
-<h1 id="_3">反射的使用</h1>
+<h1 id="_3">反射的使用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
 <p>在 <code>Java</code> 中，<code>Class</code> 类与 <code>java.lang.reflect</code> 类库一起对反射技术进行了全力的支持。</p>
 <p>在反射包中，我们常用的类主要有 <code>Constructor</code> 类，表示的是 <code>Class</code> 对象所表示的类的构造方法，利用它可以在运行时动态创建对象，<code>Field</code> 表示 <code>Class</code>对象所表示的类的成员变量，通过它可以在运行时动态修改成员变量的属性值(包含 <code>private</code>)、<code>Method</code> 表示 <code>Class</code>对象所表示的类的成员方法，通过它可以动态调用对象的方法(包含 <code>private</code>)。</p>
 <ul>
 <li><code>Class</code> 类对象的获取：</li>
 </ul>
-<pre><code class="language-java">@Test
-public void classTest() throws Exception {
-    // 获取 Class 对象的三种方式
-    logger.info(&quot;根据类名:  \t&quot; + User.class);
-    logger.info(&quot;根据对象:  \t&quot; + new User().getClass());
-    logger.info(&quot;根据全限定类名:\t&quot; + Class.forName(&quot;com.test.User&quot;));
-    // 常用的方法
-    logger.info(&quot;获取全限定类名:\t&quot; + userClass.getName());
-    logger.info(&quot;获取类名:\t&quot; + userClass.getSimpleName());
-    logger.info(&quot;实例化:\t&quot; + userClass.newInstance());
-}
-</code></pre>
-<h1 id="_4">反射的优缺点</h1>
-<h2 id="_5">优点</h2>
+<div class="highlight"><pre><span></span><code><span class="nd">@Test</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">classTest</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 获取 Class 对象的三种方式</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;根据类名:  \t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">User</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;根据对象:  \t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">User</span><span class="p">().</span><span class="na">getClass</span><span class="p">());</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;根据全限定类名:\t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;com.test.User&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">// 常用的方法</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;获取全限定类名:\t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">userClass</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;获取类名:\t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">userClass</span><span class="p">.</span><span class="na">getSimpleName</span><span class="p">());</span>
+<span class="w">    </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;实例化:\t&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">userClass</span><span class="p">.</span><span class="na">newInstance</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_4">反射的优缺点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<h2 id="_5">优点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>可以动态的创建和使用对象（框架底层核心），使用灵活，没有反射机制，框架技术就失去底层支撑。</p>
-<h2 id="_6">缺点</h2>
+<h2 id="_6">缺点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>反射是解释执行，对速度有影响。</p>
-<pre><code class="language-java">public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        m1();
-        m2();
-    }
-    // 传统方法
-    public static void m1(){
-        Cat cat = new Cat();
-        long start = System.currentTimeMillis();
-        for (int i = 0; i &lt; 90000000; i++) {
-            orderProcessMediaVO.hi();
-        }
-        long end = System.currentTimeMillis();
-        System.out.println(&quot;m1 传统方法耗时：&quot; + (end - start) + &quot;ms&quot;);
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ClassNotFoundException</span><span class="p">,</span><span class="w"> </span><span class="n">InvocationTargetException</span><span class="p">,</span><span class="w"> </span><span class="n">InstantiationException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchMethodException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">m1</span><span class="p">();</span>
+<span class="w">        </span><span class="n">m2</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 传统方法</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">m1</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">Cat</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Cat</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">90000000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">orderProcessMediaVO</span><span class="p">.</span><span class="na">hi</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;m1 传统方法耗时：&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;ms&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
 
-    public static void m2() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        Class&lt;?&gt; cls = Class.forName(&quot;com.xxx.cat&quot;);
-        Object o = cls.newInstance();
-        Method hi = cls.getMethod(&quot;hi&quot;);
-        long start = System.currentTimeMillis();
-        for (int i = 0; i &lt; 90000000; i++) {
-            hi.invoke(o); //反射调用
-        }
-        long end = System.currentTimeMillis();
-        System.out.println(&quot; m2 传统方法耗时：&quot; + (end - start) + &quot;ms&quot;);
-    }
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">m2</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ClassNotFoundException</span><span class="p">,</span><span class="w"> </span><span class="n">InstantiationException</span><span class="p">,</span><span class="w"> </span><span class="n">IllegalAccessException</span><span class="p">,</span><span class="w"> </span><span class="n">NoSuchMethodException</span><span class="p">,</span><span class="w"> </span><span class="n">InvocationTargetException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">cls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;com.xxx.cat&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cls</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Method</span><span class="w"> </span><span class="n">hi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cls</span><span class="p">.</span><span class="na">getMethod</span><span class="p">(</span><span class="s">&quot;hi&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">90000000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">hi</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">o</span><span class="p">);</span><span class="w"> </span><span class="c1">//反射调用</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot; m2 传统方法耗时：&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;ms&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><img alt="1713171249553-cf2e9679-afc8-495d-afac-31eb416cc2fd.png" src="../img/yyLd6miBedJs0Ri_/1713171249553-cf2e9679-afc8-495d-afac-31eb416cc2fd-911732.png" /></p>
-<h2 id="_7">反射调用优化</h2>
+<h2 id="_7">反射调用优化<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Method和Field、Constructor对象都有setAccessible()方法；</li>
 <li>setAccessible作用是启动和禁用访问安全检查的开关；</li>

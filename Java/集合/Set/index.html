@@ -304,63 +304,62 @@
 
 
 
-<h1 id="set">Set</h1>
-<h3 id="hashset">HashSet 底层原理？</h3>
+<h1 id="set">Set<a class="headerlink" href="#set" title="Permanent link">&para;</a></h1>
+<h3 id="hashset">HashSet 底层原理？<a class="headerlink" href="#hashset" title="Permanent link">&para;</a></h3>
 <p>HashSet <strong>基于 HashMap 实现</strong>。放入 HashSet 中的元素实际上由 HashMap 的 key 来保存，而 HashMap 的 value 则存储了一个静态的 Object 对象：PRESENT。</p>
-<pre><code class="language-java">public class HashSet&lt;E&gt; extends AbstractSet&lt;E&gt; 
-        implements Set&lt;E&gt;, Cloneable, java.io.Serializable {
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HashSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="kd">implements</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Cloneable</span><span class="p">,</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">io</span><span class="p">.</span><span class="na">Serializable</span><span class="w"> </span><span class="p">{</span>
 
-    static final long serialVersionUID = -5024744406713321676L;
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">serialVersionUID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">5024744406713321676L</span><span class="p">;</span>
 
-    private transient HashMap&lt;E,Object&gt; map; //基于HashMap实现
-    // ...
-}
-</code></pre>
-<h3 id="hashsetlinkedhashset-treeset">HashSet、LinkedHashSet 和 TreeSet 的区别？</h3>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">E</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">;</span><span class="w"> </span><span class="c1">//基于HashMap实现</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="hashsetlinkedhashset-treeset">HashSet、LinkedHashSet 和 TreeSet 的区别？<a class="headerlink" href="#hashsetlinkedhashset-treeset" title="Permanent link">&para;</a></h3>
 <p>HashSet 直接实现了 Set 接口，LinkedHashSet 继承了 HashSet，TreeSet实现了 SortedSet 接口</p>
 <ul>
 <li>HashSet 是 Set 接口的主要实现类 ， HashSet 的底层是 HashMap ，线程不安全的，可以存储 null 值； </li>
 <li><u>LinkedHashSet 是</u><strong><u> HashSet 的子类</u></strong>，能够按照<strong>添加的顺序</strong>遍历； </li>
 <li><u>TreeSet 底层使用</u><strong><u>红黑树</u></strong>，能够按照<strong>添加元素的顺序</strong>进行遍历，排序的方式<strong>可以自定义</strong>。 </li>
 </ul>
-<h3 id="hashset_1">HashSet 是如何保证不重复的</h3>
+<h3 id="hashset_1">HashSet 是如何保证不重复的<a class="headerlink" href="#hashset_1" title="Permanent link">&para;</a></h3>
 <p>向 HashSet 中 add 元素时，判断元素是否存在的依据，不仅要<strong>比较hash值</strong>，同时还要<strong>结合 equles 方法比较</strong>。 </p>
 <p>HashSet 中的 add 方法会使用 HashMap 的 put 方法。以下是 HashSet 部分源码：</p>
-<pre><code class="language-java">private static final Object PRESENT = new Object(); 
-private transient HashMap&lt;E,Object&gt; map; 
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">PRESENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="p">();</span><span class="w"> </span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">E</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">;</span><span class="w"> </span>
 
-public HashSet() { 
-    map = new HashMap&lt;&gt;(); 
-}
+<span class="kd">public</span><span class="w"> </span><span class="nf">HashSet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w"> </span>
+<span class="p">}</span>
 
-public boolean add(E e) { 
-    return map.put(e, PRESENT)==null; 
-}
-
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">PRESENT</span><span class="p">)</span><span class="o">==</span><span class="kc">null</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 <p>HashMap 的 key 是唯一的，由上面的代码可以看出 HashSet 添加进去的值就是作为 HashMap 的 key。所以不会重复。</p>
 <p><u>所以，HashMap 比较key是否相等是</u><strong><u>先比较 hashcode 再使用 equals 方法比较</u></strong>。</p>
-<h3 id="javahashset">Java中的HashSet内部是如何工作的？</h3>
+<h3 id="javahashset">Java中的HashSet内部是如何工作的？<a class="headerlink" href="#javahashset" title="Permanent link">&para;</a></h3>
 <p>HashSet 的内部采用 HashMap来实现。由于 Map 需要 key 和 value，所以HashSet中所有 key 的都有一个默认 value。</p>
 <p>类似于HashMap，HashSet 不允许重复的 key，只允许有一个null key，意思就是 HashSet 中只允许存储一个 null 对象。</p>
 <blockquote>
 <p><a href="https://blog.csdn.net/W_317/article/details/122223742">java中的HashSet内部是如何工作的_杭州小哥哥的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="hashset_2">HashSet 是如何保证不重复的</h3>
+<h3 id="hashset_2">HashSet 是如何保证不重复的<a class="headerlink" href="#hashset_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>向 HashSet 中 add() 元素时，判断元素是否存在的依据，不仅要<strong>比较hash值</strong>，同时还要<strong>结合 equles() 方法</strong>比较。 </li>
 <li>HashSet 中的 add() 方法会使用 HashMap 的 add() 方法。以下是 HashSet 部分源码： </li>
 </ul>
-<pre><code class="language-java">private static final Object PRESENT = new Object();
-private transient HashMap&lt;E,Object&gt; map;
-public HashSet() {
-    map = new HashMap&lt;&gt;();
-}
-public boolean add(E e) {
-    return map.put(e, PRESENT)==null;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">PRESENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Object</span><span class="p">();</span>
+<span class="kd">private</span><span class="w"> </span><span class="kd">transient</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">E</span><span class="p">,</span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="nf">HashSet</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">E</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">PRESENT</span><span class="p">)</span><span class="o">==</span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>HashMap 的 key 是唯一的，由上面的代码可以看出 HashSet 添加进去的值就是作为 HashMap 的key。所以不会重复。HashMap 比较 key 是否相等是先比较 hashcode 再调用 equals() 方法。  </p>
 <blockquote>
 <p>更新: 2023-07-14 01:26:59<br />

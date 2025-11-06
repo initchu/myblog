@@ -251,161 +251,158 @@
 
 
 
-<h1 id="_1">树的实现</h1>
+<h1 id="_1">树的实现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>将数组切片转化为二叉树结构体:</p>
-<pre><code class="language-go">
-package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-   &quot;fmt&quot;
-)
-//定义二叉树结构体
-type binaryTree struct {
-   value int
-  leftNode *binaryTree
-  rightNode *binaryTree
-}
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">   </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
+<span class="c1">//定义二叉树结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">binaryTree</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">  </span><span class="nx">leftNode</span><span class="w"> </span><span class="o">*</span><span class="nx">binaryTree</span>
+<span class="w">  </span><span class="nx">rightNode</span><span class="w"> </span><span class="o">*</span><span class="nx">binaryTree</span>
+<span class="p">}</span>
 
-func main(){
-   //0代表节点为空
-  num := []int{1,2,3,4,5,0,6}
-  //将数组切片转化为二叉树结构体
-  tree := createBinaryTree(0,num)
-   //二叉树数据
-  var front []int
-  front = frontForeach(*tree,front)
-   fmt.Println(front)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">   </span><span class="c1">//0代表节点为空</span>
+<span class="w">  </span><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+<span class="w">  </span><span class="c1">//将数组切片转化为二叉树结构体</span>
+<span class="w">  </span><span class="nx">tree</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createBinaryTree</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">num</span><span class="p">)</span>
+<span class="w">   </span><span class="c1">//二叉树数据</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">front</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span>
+<span class="w">  </span><span class="nx">front</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">frontForeach</span><span class="p">(</span><span class="o">*</span><span class="nx">tree</span><span class="p">,</span><span class="nx">front</span><span class="p">)</span>
+<span class="w">   </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">front</span><span class="p">)</span>
+<span class="p">}</span>
 
-//创建二叉树
-func createBinaryTree(i int,nums []int) *binaryTree {
-   tree := &amp;binaryTree{nums[i], nil, nil}
-   //左节点的数组下标为1,3,5...2*i+1
-  if i&lt;len(nums) &amp;&amp; 2*i+1 &lt; len(nums) {
-      tree.leftNode = createBinaryTree(2*i+1, nums)
-   }
-   //右节点的数组下标为2,4,6...2*i+2
-  if i&lt;len(nums) &amp;&amp; 2*i+2 &lt; len(nums) {
-      tree.rightNode = createBinaryTree(2*i+2, nums)
-   }
-   return tree
-}
+<span class="c1">//创建二叉树</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">createBinaryTree</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="nx">nums</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">binaryTree</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nx">tree</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">binaryTree</span><span class="p">{</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">}</span>
+<span class="w">   </span><span class="c1">//左节点的数组下标为1,3,5...2*i+1</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">tree</span><span class="p">.</span><span class="nx">leftNode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">createBinaryTree</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nx">nums</span><span class="p">)</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="c1">//右节点的数组下标为2,4,6...2*i+2</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">tree</span><span class="p">.</span><span class="nx">rightNode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">createBinaryTree</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nx">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">nums</span><span class="p">)</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">tree</span>
+<span class="p">}</span>
 
-//前序遍历
-func frontForeach(tree binaryTree,num []int) []int{
-   //先遍历根节点
-  if tree.value != 0 {
-      num = append(num,tree.value)
-   }
-   var leftNum,rightNum []int
-  //若存在左节点，遍历左节点树
-  if tree.leftNode != nil {
-      leftNum = frontForeach(*tree.leftNode,leftNum)
-      for _,value := range leftNum{
-         num = append(num,value)
-      }
-   }
-   //若存在右节点，遍历右节点树
-  if tree.rightNode != nil {
-      rightNum = frontForeach(*tree.rightNode,rightNum)
-      for _,value := range rightNum{
-         num = append(num,value)
-      }
-   }
+<span class="c1">//前序遍历</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">frontForeach</span><span class="p">(</span><span class="nx">tree</span><span class="w"> </span><span class="nx">binaryTree</span><span class="p">,</span><span class="nx">num</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">   </span><span class="c1">//先遍历根节点</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="nx">tree</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="nx">leftNum</span><span class="p">,</span><span class="nx">rightNum</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span>
+<span class="w">  </span><span class="c1">//若存在左节点，遍历左节点树</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">leftNode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">leftNum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">frontForeach</span><span class="p">(</span><span class="o">*</span><span class="nx">tree</span><span class="p">.</span><span class="nx">leftNode</span><span class="p">,</span><span class="nx">leftNum</span><span class="p">)</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">leftNum</span><span class="p">{</span>
+<span class="w">         </span><span class="nx">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w">   </span><span class="c1">//若存在右节点，遍历右节点树</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">rightNode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">rightNum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">frontForeach</span><span class="p">(</span><span class="o">*</span><span class="nx">tree</span><span class="p">.</span><span class="nx">rightNode</span><span class="p">,</span><span class="nx">rightNum</span><span class="p">)</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">rightNum</span><span class="p">{</span>
+<span class="w">         </span><span class="nx">num</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">num</span><span class="p">,</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
 
-   return num
-}
-</code></pre>
-<h1 id="_2">树的定义</h1>
-<pre><code class="language-go">package tree
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">num</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_2">树的定义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">tree</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-type Node struct{
-    Value int
-    Left, Right *Node
-}
-func (node *Node) SetValue(value int){
-    if node == nil{
-        fmt.Println(&quot;Setting value to nil node. Ignore.&quot;)
-        return
-    }
-    node.Value = value
-}
-func (node Node) Print(){ //定义方法 print()是给node来接收的
-    //fmt.Print(node.value)
-    fmt.Print(node.Value,&quot; &quot;)
-}
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Node</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Value</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Left</span><span class="p">,</span><span class="w"> </span><span class="nx">Right</span><span class="w"> </span><span class="o">*</span><span class="nx">Node</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">node</span><span class="w"> </span><span class="o">*</span><span class="nx">Node</span><span class="p">)</span><span class="w"> </span><span class="nx">SetValue</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Setting value to nil node. Ignore.&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">node</span><span class="p">.</span><span class="nx">Value</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">value</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">node</span><span class="w"> </span><span class="nx">Node</span><span class="p">)</span><span class="w"> </span><span class="nx">Print</span><span class="p">(){</span><span class="w"> </span><span class="c1">//定义方法 print()是给node来接收的</span>
+<span class="w">    </span><span class="c1">//fmt.Print(node.value)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">Value</span><span class="p">,</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在 main中初始化树的操作：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;go_module/tree&quot;
-)
-type myTreeNode struct {
-    *tree.Node // Embedding 内嵌 语法糖可以直接让后面的节点省略一些代码
-}
-func main() {
-    var root tree.Node
-    fmt.Println(root)
-    root = tree.Node{Value: 3}
-    root.Left = &amp;tree.Node{}
-    nodes := []tree.Node{
-        {Value: 3},
-        {},
-        {6,nil,&amp;root},
-    }
-    fmt.Println(nodes)
-    root.Print()//方法，传值
-    var pRoot *tree.Node
-    pRoot.SetValue(200)
-    pRoot = &amp;root
-    pRoot.SetValue(300)
-    pRoot.Print()
-    root.Traverse()
-    //值接收者是go特有的
-}
-</code></pre>
-<h1 id="_3">树的遍历</h1>
-<pre><code class="language-go">func (myNode *myTreeNode) postOrder(){
-    if myNode == nil || myNode.Node == nil{
-        return
-    }
-    left := myTreeNode{myNode.Left}
-    left.postOrder()
-    right := myTreeNode{myNode.Right}
-    right.postOrder()
-    myNode.Print()
-}
-
-</code></pre>
-<pre><code class="language-go">
-func levelOrder(root *TreeNode) [][]int {
-    ret := [][]int{}
-    if root == nil {
-        return ret
-    }
-    q := []*TreeNode{root}
-    for i := 0; len(q) &gt; 0; i++ {
-        ret = append(ret, []int{})
-        p := []*TreeNode{}
-        for j := 0; j &lt; len(q); j++ {
-            node := q[j]
-            ret[i] = append(ret[i], node.Val)
-            if node.Left != nil {
-                p = append(p, node.Left)
-            }
-            if node.Right != nil {
-                p = append(p, node.Right)
-            }
-        }
-        q = p
-    }
-    return ret
-}
-</code></pre>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;go_module/tree&quot;</span>
+<span class="p">)</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">myTreeNode</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">*</span><span class="nx">tree</span><span class="p">.</span><span class="nx">Node</span><span class="w"> </span><span class="c1">// Embedding 内嵌 语法糖可以直接让后面的节点省略一些代码</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">Node</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">root</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tree</span><span class="p">.</span><span class="nx">Node</span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">root</span><span class="p">.</span><span class="nx">Left</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">tree</span><span class="p">.</span><span class="nx">Node</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">nodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">tree</span><span class="p">.</span><span class="nx">Node</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">Value</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{},</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="kc">nil</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">root</span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">nodes</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">root</span><span class="p">.</span><span class="nx">Print</span><span class="p">()</span><span class="c1">//方法，传值</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">pRoot</span><span class="w"> </span><span class="o">*</span><span class="nx">tree</span><span class="p">.</span><span class="nx">Node</span>
+<span class="w">    </span><span class="nx">pRoot</span><span class="p">.</span><span class="nx">SetValue</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">pRoot</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">root</span>
+<span class="w">    </span><span class="nx">pRoot</span><span class="p">.</span><span class="nx">SetValue</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">pRoot</span><span class="p">.</span><span class="nx">Print</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">root</span><span class="p">.</span><span class="nx">Traverse</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">//值接收者是go特有的</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_3">树的遍历<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">myNode</span><span class="w"> </span><span class="o">*</span><span class="nx">myTreeNode</span><span class="p">)</span><span class="w"> </span><span class="nx">postOrder</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">myNode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">myNode</span><span class="p">.</span><span class="nx">Node</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">left</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">myTreeNode</span><span class="p">{</span><span class="nx">myNode</span><span class="p">.</span><span class="nx">Left</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">left</span><span class="p">.</span><span class="nx">postOrder</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">right</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">myTreeNode</span><span class="p">{</span><span class="nx">myNode</span><span class="p">.</span><span class="nx">Right</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">right</span><span class="p">.</span><span class="nx">postOrder</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">myNode</span><span class="p">.</span><span class="nx">Print</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">levelOrder</span><span class="p">(</span><span class="nx">root</span><span class="w"> </span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">)</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ret</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ret</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">q</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">{</span><span class="nx">root</span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">q</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ret</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">ret</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{})</span>
+<span class="w">        </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">TreeNode</span><span class="p">{}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">q</span><span class="p">);</span><span class="w"> </span><span class="nx">j</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">node</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">q</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span>
+<span class="w">            </span><span class="nx">ret</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">ret</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Val</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Left</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span><span class="w"> </span><span class="nx">node</span><span class="p">.</span><span class="nx">Right</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">q</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">p</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ret</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-12-01 14:01:53<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/pdy8i1">https://www.yuque.com/xiaoshan_wgo/codingnotes/pdy8i1</a></p>

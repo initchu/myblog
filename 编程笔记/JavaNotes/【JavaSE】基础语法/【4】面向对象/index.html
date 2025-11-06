@@ -251,7 +251,7 @@
 
 
 
-<h1 id="4">【4】 面向对象</h1>
+<h1 id="4">【4】 面向对象<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
 <p>:::info
 <font style="color:rgb(51, 51, 51);">洗衣服举例</font></p>
 <p><strong><font style="color:rgb(51, 51, 51);">面向过程：</font></strong></p>
@@ -327,205 +327,202 @@
 </tr>
 </tbody>
 </table>
-<h1 id="_1"><font style="color:rgb(51, 51, 51);">定义类</font></h1>
+<h1 id="_1"><font style="color:rgb(51, 51, 51);">定义类</font><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>定义一个人类：</p>
-<pre><code class="language-java">class Person{
-    public String name;
-    public int age;
-}
-
-</code></pre>
-<h1 id="_2">创建实例</h1>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_2">创建实例<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(51, 51, 51);">定义了 class，只是定义了对象模版，而要根据对象模版创建出真正的对象实例，</font><strong><font style="color:rgb(51, 51, 51);">必须用 new 操作符</font></strong><font style="color:rgb(51, 51, 51);">。</font></p>
 <p><font style="color:rgb(51, 51, 51);">new 操作符可以创建一个实例，然后，我们需要定义一个引用类型的变量来指向这个实例：</font></p>
 <p><code>Person ming = new Person();</code></p>
 <p><font style="color:rgb(51, 51, 51);">上述代码创建了一个 Person 类型的实例，并通过变量 </font><font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);">ming </font><font style="color:rgb(51, 51, 51);">指向它。</font></p>
 <p><font style="color:rgb(51, 51, 51);">注意区分</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;Person ming&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">是定义</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;Person&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">类型的变量</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;ming&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">，而</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;new Person()&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">是创建</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;Person&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">实例。</font></p>
 <p><font style="color:rgb(51, 51, 51);">有了指向这个实例的变量，我们就可以通过这个变量来操作实例。访问实例变量可以用</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;变量.字段&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">，例如：</font></p>
-<pre><code class="language-java">ming.name = &quot;Xiao Ming&quot;; // 对字段 name 赋值 
-ming.age = 12; // 对字段 age 赋值
-System.out.println(ming.name); // 访问字段 name
-Person hong = new Person(); 
-hong.name = &quot;Xiao Hong&quot;; 
-hong.age = 15; 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">ming</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 对字段 name 赋值 </span>
+<span class="n">ming</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="c1">// 对字段 age 赋值</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ming</span><span class="p">.</span><span class="na">name</span><span class="p">);</span><span class="w"> </span><span class="c1">// 访问字段 name</span>
+<span class="n">Person</span><span class="w"> </span><span class="n">hong</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w"> </span>
+<span class="n">hong</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Xiao Hong&quot;</span><span class="p">;</span><span class="w"> </span>
+<span class="n">hong</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span><span class="w"> </span>
+</code></pre></div>
 <p>注意：一个Java源文件可以包含多个类的定义，但<strong>只能定义一个 public 类</strong>，且public类名必须与文件名一致。如果要定义多个 public 类，必须拆到多个 Java 源文件中。</p>
-<h1 id="_3"><font style="color:rgb(51, 51, 51);">方法</font></h1>
+<h1 id="_3"><font style="color:rgb(51, 51, 51);">方法</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
 <p>如果我们想要直接操作类里面的属性，那可能会造成一些不好的后果，就破坏了类的封装性。</p>
 <p>所以我们可以使用一些方法来对属性进更改。</p>
-<pre><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        Person ming = new Person();
-        ming.setName(&quot;Xiao Ming&quot;); // 设置name
-        ming.setAge(12); // 设置age
-        System.out.println(ming.getName() + &quot;, &quot; + ming.getAge());
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">ming</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ming</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 设置name</span>
+<span class="w">        </span><span class="n">ming</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"> </span><span class="c1">// 设置age</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ming</span><span class="p">.</span><span class="na">getName</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ming</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-class Person {
-    private String name;
-    private int age;
+<span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
-    public String getName() {
-        return this.name;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public void setName(String name) {
-        this.name = name;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public int getAge() {
-        return this.age;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAge</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public void setAge(int age) {
-        if (age &lt; 0 || age &gt; 100) {
-            throw new IllegalArgumentException(&quot;invalid age value&quot;);
-        }
-        this.age = age;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;invalid age value&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在类的里面定义一些方法，可以有效的对属性数值的更改进行一个范围设置，比如年龄是0-100的范围。</p>
 <p>外部代码就可以通过调用方法来进行间接修改字段。</p>
 <p>除了这种被外部可以调用的<code>public</code>的方法也可以替换成为<code>private</code>关键字，将其定义为私有方法，是得外部没办法调用它，但是内部的方法可以进行调用。</p>
-<pre><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        Person ming = new Person();
-        ming.setBirth(2008);
-        System.out.println(ming.getAge());
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">ming</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ming</span><span class="p">.</span><span class="na">setBirth</span><span class="p">(</span><span class="mi">2008</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">ming</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-class Person {
-    private String name;
-    private int birth;
+<span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">birth</span><span class="p">;</span>
 
-    public void setBirth(int birth) {
-        this.birth = birth;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setBirth</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">birth</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">birth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">birth</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public int getAge() {
-        return calcAge(2019); // 调用private方法
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAge</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">calcAge</span><span class="p">(</span><span class="mi">2019</span><span class="p">);</span><span class="w"> </span><span class="c1">// 调用private方法</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // private方法:
-    private int calcAge(int currentYear) {
-        return currentYear - this.birth;
-    }
-}
-
-</code></pre>
+<span class="w">    </span><span class="c1">// private方法:</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">calcAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">currentYear</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">currentYear</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">birth</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><code>public int getAge</code>是公开方法，他调用了 私有方法 <code>calAge</code>。</p>
-<h2 id="this">this 关键字</h2>
+<h2 id="this">this 关键字<a class="headerlink" href="#this" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(51, 51, 51);">在方法内部，可以看到上面使用了一个隐含的变量</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;this&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">，它始终指向当前实例。因此，通过</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;this.属性&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">就可以访问当前实例的字段。</font></p>
 <p><font style="color:rgb(51, 51, 51);">如果没有命名冲突，可以省略</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;this&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">，</font></p>
-<pre><code class="language-java">class Person{
-    private String name;
-    public String getName(){
-        return name;
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>但是，如果有局部变量和字段重名，那么就是局部变量优先级更高，就必须加上<code>this</code>。</p>
-<pre><code class="language-java">class Person{
-    private String name;
-    public void setName(String name){
-        this.name = name;
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>局部变量 name， 也就是 setName 里面的 name 的优先级更高，去了区别两个变量，就应该在里面加上<code>this</code>。</p>
-<h2 id="_4">方法参数</h2>
-<pre><code class="language-java">class Person {
-    ...
-    public void setNameAndAge(String name, int age) {
-        ...
-    }
-}
-</code></pre>
+<h2 id="_4">方法参数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setNameAndAge</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>第一个参数是 String，第二个参数是 int。</p>
-<h2 id="_5">可变参数</h2>
+<h2 id="_5">可变参数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>可变参数用<code>类型...</code>定义，相当于数组类型。</p>
-<pre><code class="language-java">class Group {
-    private String[] names;
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Group</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">names</span><span class="p">;</span>
 
-    public void setNames(String... names) {
-        this.names = names;
-    }
-}
-</code></pre>
-<pre><code class="language-java">Group g = new Group();
-g.setNames(&quot;Xiao Ming&quot;, &quot;Xiao Hong&quot;, &quot;Xiao Jun&quot;); // 传入3个String
-g.setNames(&quot;Xiao Ming&quot;, &quot;Xiao Hong&quot;); // 传入2个String
-g.setNames(&quot;Xiao Ming&quot;); // 传入1个String
-g.setNames(); // 传入0个String
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setNames</span><span class="p">(</span><span class="n">String</span><span class="p">...</span><span class="w"> </span><span class="n">names</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Group</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Group</span><span class="p">();</span>
+<span class="n">g</span><span class="p">.</span><span class="na">setNames</span><span class="p">(</span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Xiao Hong&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Xiao Jun&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 传入3个String</span>
+<span class="n">g</span><span class="p">.</span><span class="na">setNames</span><span class="p">(</span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Xiao Hong&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 传入2个String</span>
+<span class="n">g</span><span class="p">.</span><span class="na">setNames</span><span class="p">(</span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 传入1个String</span>
+<span class="n">g</span><span class="p">.</span><span class="na">setNames</span><span class="p">();</span><span class="w"> </span><span class="c1">// 传入0个String</span>
+</code></pre></div>
 <p>也可以这么写</p>
-<pre><code class="language-java">class Group {
-    private String[] names;
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Group</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">names</span><span class="p">;</span>
 
-    public void setNames(String[] names) {
-        this.names = names;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setNames</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">names</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">但是，调用方需要自己先构造</font><font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);">String[]</font><font style="color:rgb(51, 51, 51);">，比较麻烦。例如：</font></p>
-<pre><code class="language-java">Group g = new Group();
-g.setNames(new String[] {&quot;Xiao Ming&quot;, &quot;Xiao Hong&quot;, &quot;Xiao Jun&quot;}); // 传入1个String[]
-</code></pre>
-<h2 id="_6">构造方法（构造器）</h2>
+<div class="highlight"><pre><span></span><code><span class="n">Group</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Group</span><span class="p">();</span>
+<span class="n">g</span><span class="p">.</span><span class="na">setNames</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Xiao Hong&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Xiao Jun&quot;</span><span class="p">});</span><span class="w"> </span><span class="c1">// 传入1个String[]</span>
+</code></pre></div>
+<h2 id="_6">构造方法（构造器）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>创建实例的时候，需要<strong>初始化实例</strong>的对象，就可以使用构造方法。</p>
 <p>简而言之，就是构造方法要在实例的时候一次性传入参数的内容。</p>
 <p>而不是后面在调用方法的时候，在进行参数的传入。</p>
 <p>比如说，下面的代码：</p>
-<pre><code class="language-java">public class Main {
-    public static void main(String[] args) {
-        Person p = new Person(&quot;Xiao Ming&quot;, 15);
-        System.out.println(p.getName());
-        System.out.println(p.getAge());
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">(</span><span class="s">&quot;Xiao Ming&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="na">getAge</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-class Person {
-    private String name;
-    private int age;
+<span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    } //构造方法，名称同类名
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">//构造方法，名称同类名</span>
 
-    public String getName() {
-        return this.name;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public int getAge() {
-        return this.age;
-    }
-}
-
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAge</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这里我们可以说构造方法人类。（<strong>构造方法的名称就是类名</strong>。）<font style="color:rgb(51, 51, 51);">构造方法的参数没有限制，在方法内部，也可以编写任意语句。但是，和普通方法相比，构造方法</font><strong><font style="color:rgb(51, 51, 51);">没有返回值</font></strong><font style="color:rgb(51, 51, 51);">（也没有</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;void&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">），调用构造方法，必须用</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;new&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">操作符。</font></p>
 <p><font style="color:rgb(51, 51, 51);">所有 class 都有构造方法，但是在第一个例子中，没有写构造方法，这是因为编译器可以自动生成一个默认的构造方法。如下所示：</font></p>
-<pre><code class="language-java">class Person{
-    public Person{
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">主要注意的是，如果自定义了一个构造方法，那么编译器就不会再自动创建构造方法了。</font></p>
 <p><font style="color:rgb(51, 51, 51);">如果想要既带参数的构造方法，也可以定义不带参数的构造方法，那么可以把两个构造方法均定义出来。</font></p>
 <p><font style="color:rgb(51, 51, 51);">如果既对字段进行初始化，又在构造方法中对字段进行初始化，那会发生什么？</font></p>
-<pre><code class="language-java">class Person {
-    private String name = &quot;Unamed&quot;;
-    private int age = 10;
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Unamed&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 
-    public Person(String name, int age) {
-        this.name = name;
-        this.age = age;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">当我们创建对象的时候，</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;new Person("Xiao Ming", 12)&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">得到的对象实例，字段的初始值是啥？</font></p>
 <p><font style="color:rgb(51, 51, 51);">在 Java 中，创建对象实例的时候，按照如下顺序进行初始化：</font></p>
 <ol>
@@ -533,332 +530,319 @@ class Person {
 <li><font style="color:rgb(51, 51, 51);">执行构造方法的代码进行初始化。</font></li>
 </ol>
 <p><font style="color:rgb(51, 51, 51);">因此，构造方法的代码由于后运行，所以，</font><code>&lt;font style="color:rgb(51, 51, 51);background-color:rgb(250, 250, 250);"&gt;new Person("Xiao Ming", 12)&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">的字段值最终由构造方法的代码确定。</font></p>
-<h2 id="overload"><font style="color:rgb(51, 51, 51);">方法重载 Overload</font></h2>
+<h2 id="overload"><font style="color:rgb(51, 51, 51);">方法重载 Overload</font><a class="headerlink" href="#overload" title="Permanent link">&para;</a></h2>
 <p>🤖 如果一个类中，两个方法功能差不多，但是<strong>传入的参数不一样</strong>，那么我们可以将它做成同名的方法，例如在一个类中，可以定义多个<code>hello()</code>方法。<font style="color:rgb(22, 18, 9);">（补充：形式参数就是定义方法需要的参数，实际参数就传入的参数）方法的返回类型，可以相同，也可以不同，但是仅返回类型不同，是不允许的！）</font></p>
-<pre><code class="language-java">class Hello {
-    public void hello() {
-        System.out.println(&quot;Hello, world!&quot;);
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Hello</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public void hello(String name) {
-        System.out.println(&quot;Hello, &quot; + name + &quot;!&quot;);
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public void hello(String name, int age) {
-        if (age &lt; 18) {
-            System.out.println(&quot;Hi, &quot; + name + &quot;!&quot;);
-        } else {
-            System.out.println(&quot;Hello, &quot; + name + &quot;!&quot;);
-        }
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">hello</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">18</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hi, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这样做的目的是，方便调用。</p>
-<h1 id="_7">面向对象三大特征</h1>
-<h2 id="encapsulation">封装 Encapsulation</h2>
+<h1 id="_7">面向对象三大特征<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h1>
+<h2 id="encapsulation">封装 Encapsulation<a class="headerlink" href="#encapsulation" title="Permanent link">&para;</a></h2>
 <p>封装就是把抽象出来的数据（属性）和对数据的操作（方法）封装在一起，数据被保护在内部，程序的其他部分只有通过被授权的操作（方法），才能对数据操作。</p>
 <p>封装的实现步骤：</p>
 <ol>
 <li>将属性进行私有化</li>
 <li>提供一个公共的 set 方法，用于对属性判断并赋值</li>
 </ol>
-<pre><code class="language-java">public void setXXX(类型 参数名){
-    属性 = 参数名；
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setXXX</span><span class="p">(</span><span class="n">类型</span><span class="w"> </span><span class="n">参数名</span><span class="p">){</span>
+<span class="w">    </span><span class="n">属性</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">参数名</span><span class="err">；</span>
+<span class="p">}</span>
+</code></pre></div>
 <ol>
 <li>提供一个公共的 get 方法，用于获取属性的值</li>
 </ol>
-<pre><code class="language-java">public XXX getXXX(){
-    return xx;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">XXX</span><span class="w"> </span><span class="nf">getXXX</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xx</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">封装思想其实就是把实现细节给隐藏了，外部只需知道这个方法是什么作用，而无需关心实现。</font></p>
 <p><font style="color:rgb(22, 18, 9);">封装就是通过访问权限控制来实现的。</font></p>
-<h2 id="_8">继承</h2>
+<h2 id="_8">继承<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>继承可以实现代码的复用性，不需要写一些重复的代码，比如说想要定义一个学生类，显而易见，学生也是人类，可以说学生是人类的子类，这样学生类就可以继承人类的一些特性，比如会有名字和年龄等的特性。</p>
 <p>Java 用 extends 来实现继承。在 { } 里面可以定义添加上新的字段和方法。 </p>
 <p>只需要写额外的的字段和方法。</p>
-<pre><code class="language-java">class Person {
-    private String name;
-    private int age;
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
-    public String getName() {...}
-    public void setName(String name) {...}
-    public int getAge() {...}
-    public void setAge(int age) {...}
-}
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{...}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAge</span><span class="p">()</span><span class="w"> </span><span class="p">{...}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{...}</span>
+<span class="p">}</span>
 
-class Student extends Person {
-    // 不要重复name和age字段/方法,
-    // 只需要定义新增score字段/方法:
-    private int score;
+<span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 不要重复name和age字段/方法,</span>
+<span class="w">    </span><span class="c1">// 只需要定义新增score字段/方法:</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
 
-    public int getScore() { … }
-    public void setScore(int score) { … }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getScore</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setScore</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">…</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这里 Person 就是超类，父类和基类。</p>
 <p>Student 就是子类，扩展类。</p>
 <p><font style="color:rgb(51, 51, 51);">继承有个特点，就是子类无法访问父类的</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;private&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">字段或者</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;private&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">方法。例如，</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;Student&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">类就无法访问</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;Person&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">类的</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;name&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">和</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;age&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">字段。这使得继承的作用被削弱了。为了让子类可以访问父类的字段，我们需要把</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;private&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">改为</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;protected&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">。用</font><code>&lt;font style="color:rgb(51, 51, 51);"&gt;protected&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">修饰的字段可以被子类访问。</font></p>
-<pre><code class="language-java">class Person {
-    protected String name; //修改为 protected
-    protected int age;
-}
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">//修改为 protected</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="p">}</span>
 
-class Student extends Person {
-    public String hello() {
-        return &quot;Hello, &quot; + name; // OK!
-    }
-}
-</code></pre>
+<span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">hello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span><span class="c1">// OK!</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>super 的用法</strong></p>
 <p>super 代表父类的引用。用于访问父类的方法和属性。</p>
-<h2 id="_9">多态</h2>
+<h2 id="_9">多态<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>如果相同的方法，相同的传参，相同的返回值，不同的处理流程，那么就不叫做继承，叫做<strong>覆写（重写）</strong>。这种特性也叫做多态。<font style="color:rgb(22, 18, 9);">上面学习了方法的重载，方法的重写和重载是不一样的，重载是原有的方法逻辑不变的情况下，支持更多参数的实现，而重写是直接覆盖原有方法！</font></p>
-<pre><code class="language-java">//父类中的study
-public void study(){
-    System.out.println(&quot;学习&quot;);
-}
+<div class="highlight"><pre><span></span><code><span class="c1">//父类中的study</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;学习&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
-//子类中的study
-@Override  //声明这个方法是重写的，但是可以不要，我们现阶段不接触
-public void study(){
-    System.out.println(&quot;给你看点好康的&quot;);
-}
-
-</code></pre>
+<span class="c1">//子类中的study</span>
+<span class="nd">@Override</span><span class="w">  </span><span class="c1">//声明这个方法是重写的，但是可以不要，我们现阶段不接触</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;给你看点好康的&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">再次定义同样的方法后，父类的方法就被覆盖！子类还可以给父类方法提升访问权限！</font></p>
-<pre><code class="language-java">public static void main(String[] args) {
-     SportsStudent student = new SportsStudent(&quot;lbw&quot;, 20);
-     student.study();   //输出子类定义的内容
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">SportsStudent</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SportsStudent</span><span class="p">(</span><span class="s">&quot;lbw&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">     </span><span class="n">student</span><span class="p">.</span><span class="na">study</span><span class="p">();</span><span class="w">   </span><span class="c1">//输出子类定义的内容</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">思考：静态方法能被重写吗？</font></p>
 <p><font style="color:rgb(22, 18, 9);">当我们在重写方法时，不仅想使用我们自己的逻辑，同时还希望执行父类的逻辑（也就是调用父类的方法）怎么办呢？</font></p>
-<pre><code class="language-java">public void study(){
-    super.study();
-    System.out.println(&quot;给你看点好康的&quot;);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">super</span><span class="p">.</span><span class="na">study</span><span class="p">();</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;给你看点好康的&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">同理，如果想访问父类的成员变量，也可以使用super关键字来访问，注意，子类可以具有和父类相同的成员变量！而在方法中访问的默认是 形参列表中 &gt; 当前类的成员变量 &gt; 父类成员变量</font></p>
-<pre><code class="language-java">public void setTest(int test){
-    test = 1;
-    this.test = 1;
-    super.test = 1;
-}
-</code></pre>
-<h1 id="_10">抽象类</h1>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setTest</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">test</span><span class="p">){</span>
+<span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">super</span><span class="p">.</span><span class="na">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_10">抽象类<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(22, 18, 9);">类本身就是一种抽象，而抽象类，把类还要抽象，也就是说，抽象类可以只保留特征，而不保留具体呈现形态，比如方法可以定义好，但是我可以不去实现它，而是交由子类来进行实现！</font></p>
-<pre><code class="language-java">public abstract class Student {    
-    //抽象类       
-    public abstract void test();  //抽象方法 
-} 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
+<span class="w">    </span><span class="c1">//抽象类       </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">();</span><span class="w">  </span><span class="c1">//抽象方法 </span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">通过使用 </font>abstract 关键字来表明一个类是一个抽象类，抽象类可以使用 abstract 关键字来表明一个方法为抽象方法，也可以定义普通方法，抽象方法不需要编写具体实现（无方法体）但是必须由子类实现（除非子类也是一个抽象类）！</p>
 <p><font style="color:rgb(22, 18, 9);">抽象类由于不是具体的类定义，因此无法直接通过new关键字来创建对象！</font></p>
-<pre><code class="language-java">Student s = new Student(){    //只能直接创建带实现的匿名内部类！
-  public void test(){
+<div class="highlight"><pre><span></span><code><span class="n">Student</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">(){</span><span class="w">    </span><span class="c1">//只能直接创建带实现的匿名内部类！</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(){</span>
 
-  }
-}
-</code></pre>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">因此，抽象类一般只用作继承使用！抽象类使得继承关系之间更加明确：</font></p>
-<pre><code class="language-java">public void study(){   //现在只能由子类编写，父类没有定义，更加明确了多态的定义！同一个方法多种实现！
-    System.out.println(&quot;给你看点好康的&quot;);
-}
-</code></pre>
-<h1 id="_11">接口</h1>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span><span class="w">   </span><span class="c1">//现在只能由子类编写，父类没有定义，更加明确了多态的定义！同一个方法多种实现！</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;给你看点好康的&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_11">接口<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(22, 18, 9);">接口甚至比抽象类还抽象，他只代表某个确切的功能！也就是只包含方法的定义，甚至都不是一个类！接口包含了一些列方法的具体定义，类可以实现这个接口，表示类支持接口代表的功能（类似于一个插件，只能作为一个附属功能加在主体上，同时具体实现还需要由主体来实现。）</font></p>
-<pre><code class="language-java">public interface Eat {
-    void eat(); 
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Eat</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 <p>通过使用 interface 关键字来表明是一个接口（注意，这里 class 关键字被替换为了 interface）接口只能包含public 权限的抽象方法！（Java8 以后可以有默认实现）我们可以通过声明 default 关键字来给抽象方法一个默认实现：</p>
-<pre><code class="language-java">public interface Eat {
-    default void eat(){
-        //do something...
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Eat</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">        </span><span class="c1">//do something...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">接口中定义的变量，默认为public static final。</font></p>
-<pre><code class="language-java">public interface Eat {
-    int a = 1;
-    void eat();
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">Eat</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">一个类可以实现很多个接口，但是不能理解为多继承！（实际上实现接口是附加功能，和继承的概念有一定出入，顶多说是多继承的一种替代方案）一个类可以附加很多个功能！</font></p>
-<pre><code class="language-java">public class SportsStudent extends Student implements Eat, ...{
-    @Override
-    public void eat() {
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SportsStudent</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">Eat</span><span class="p">,</span><span class="w"> </span><span class="p">...{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-    }
-}
-
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>类通过<code>implements</code>关键字来声明实现的接口！每个接口之间用逗号隔开！</p>
 <p>实现接口的类也能通过<code>instanceof</code>关键字判断，也支持向上和向下转型！</p>
-<h1 id="_12">内部类</h1>
+<h1 id="_12">内部类<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(22, 18, 9);">类中可以存在一个类！</font></p>
-<h2 id="_13">成员内部类</h2>
+<h2 id="_13">成员内部类<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(22, 18, 9);">我们的类中可以在嵌套一个类：</font></p>
-<pre><code class="language-java">public class Test {
-    class Inner{   //类中定义的一个内部类
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Inner</span><span class="p">{</span><span class="w">   </span><span class="c1">//类中定义的一个内部类</span>
 
-    }
-}
-
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">成员内部类和成员变量和成员方法一样，都是属于对象的，也就是说，必须存在外部对象，才能创建内部类的对象！</font></p>
-<pre><code class="language-java">public static void main(String[] args) {
-    Test test = new Test();
-    Test.Inner inner = test.new Inner();   //写法有那么一丝怪异，但是没毛病！
-}
-
-</code></pre>
-<h2 id="_14">静态内部类</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Test</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Test</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Test</span><span class="p">.</span><span class="na">Inner</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="na">new</span><span class="w"> </span><span class="nf">Inner</span><span class="p">();</span><span class="w">   </span><span class="c1">//写法有那么一丝怪异，但是没毛病！</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_14">静态内部类<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p>静态内部类其实就和类中的静态变量和静态方法一样，是属于类拥有的，我们可以直接通过<code>类名.</code>去访问:</p>
-<pre><code class="language-java">public class Test {
-    static class Inner{
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Inner</span><span class="p">{</span>
 
-    }
-}
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-public static void main(String[] args) {
-    Test.Inner inner = new Test.Inner();   //不用再创建外部类对象了！
-}
-
-</code></pre>
-<h2 id="_15">局部内部类</h2>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Test</span><span class="p">.</span><span class="na">Inner</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Test</span><span class="p">.</span><span class="na">Inner</span><span class="p">();</span><span class="w">   </span><span class="c1">//不用再创建外部类对象了！</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_15">局部内部类<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <p>和局部变量一样。</p>
-<pre><code class="language-java">public class Test {
-    public void test(){
-        class Inner{
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">test</span><span class="p">(){</span>
+<span class="w">        </span><span class="kd">class</span> <span class="nc">Inner</span><span class="p">{</span>
 
-        }
+<span class="w">        </span><span class="p">}</span>
 
-        Inner inner = new Inner();
-    }
-}
-
-</code></pre>
-<h2 id="_16">匿名内部类</h2>
+<span class="w">        </span><span class="n">Inner</span><span class="w"> </span><span class="n">inner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Inner</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_16">匿名内部类<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(22, 18, 9);">匿名内部类才是我们的重点，也是实现 lambda 表达式的原理！匿名内部类其实就是在 new 的时候，直接对接口或是抽象类的实现：</font></p>
-<pre><code class="language-java">public static void main(String[] args) {
-        Eat eat = new Eat() {
-            @Override
-            public void eat() {
-                //DO something...
-            }
-        };
-    }
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Eat</span><span class="w"> </span><span class="n">eat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Eat</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//DO something...</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><strong><font style="color:rgb(22, 18, 9);">lambda 表达式</font></strong></p>
 <p>读作 λ 表达式，它其实就是我们接口匿名实现的简化，比如说：</p>
-<pre><code class="language-java">public static void main(String[] args) {
-        Eat eat = new Eat() {
-            @Override
-            public void eat() {
-                //DO something...
-            }
-        };
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Eat</span><span class="w"> </span><span class="n">eat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Eat</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nd">@Override</span>
+<span class="w">            </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//DO something...</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
 
-public static void main(String[] args) {
-        Eat eat = () -&gt; {};   //等价于上述内容
-    }
-
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Eat</span><span class="w"> </span><span class="n">eat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{};</span><span class="w">   </span><span class="c1">//等价于上述内容</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">lambda 表达式（匿名内部类）只能访问外部的 final 类型或是隐式 final 类型的局部变量！</font></p>
-<h1 id="_17"><font style="color:rgb(22, 18, 9);">枚举类</font></h1>
+<h1 id="_17"><font style="color:rgb(22, 18, 9);">枚举类</font><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h1>
 <p>假设现在我们想给小明添加一个状态（跑步、学习、睡觉），外部可以实时获取小明的状态：</p>
-<pre><code class="language-java">public class Student {
-    private final String name;
-    private final int age;
-    private String status;
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
 
-    //...
+<span class="w">    </span><span class="c1">//...</span>
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setStatus</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public String getStatus() {
-        return status;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>但是这样会出现一个问题，如果我们仅仅是存储字符串，似乎外部可以不按照我们规则，传入一些其他的字符串。这显然是不够严谨的！</p>
 <p>有没有一种办法，能够更好地去实现这样的状态标记呢？我们希望开发者拿到使用的就是我们定义好的状态，我们可以使用枚举类！</p>
-<pre><code class="language-java">public enum Status {
-    RUNNING, STUDY, SLEEP    //直接写每个状态的名字即可，分号可以不打，但是推荐打上
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">RUNNING</span><span class="p">,</span><span class="w"> </span><span class="n">STUDY</span><span class="p">,</span><span class="w"> </span><span class="n">SLEEP</span><span class="w">    </span><span class="c1">//直接写每个状态的名字即可，分号可以不打，但是推荐打上</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>使用枚举类也非常方便，我们只需要直接访问即可。</p>
-<pre><code class="language-java">public class Student {
-    private final String name;
-    private final int age;
-    private Status status;
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
 
-        //...
+<span class="w">        </span><span class="c1">//...</span>
 
-    public void setStatus(Status status) {   //不再是String，而是我们指定的枚举类型
-        this.status = status;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setStatus</span><span class="p">(</span><span class="n">Status</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">//不再是String，而是我们指定的枚举类型</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public Status getStatus() {
-        return status;
-    }
-}
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="nf">getStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-public static void main(String[] args) {
-    Student student = new Student(&quot;小明&quot;, 18);
-    student.setStatus(Status.RUNNING);
-    System.out.println(student.getStatus());
-}
-
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Student</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="s">&quot;小明&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span>
+<span class="w">    </span><span class="n">student</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="na">getStatus</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>枚举类型使用起来就非常方便了，其实枚举类型的本质就是一个普通的类，但是它继承自 Enum 类，我们定义的每一个状态其实就是一个 public static final 的 Status 类型成员变量！</p>
-<pre><code class="language-java">// Compiled from &quot;Status.java&quot;
-public final class com.test.Status extends java.lang.Enum&lt;com.test.Status&gt; {
-  public static final com.test.Status RUNNING;
-  public static final com.test.Status STUDY;
-  public static final com.test.Status SLEEP;
-  public static com.test.Status[] values();
-  public static com.test.Status valueOf(java.lang.String);
-  static {};
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compiled from &quot;Status.java&quot;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">Enum</span><span class="o">&lt;</span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="n">RUNNING</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="n">STUDY</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="n">SLEEP</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="o">[]</span><span class="w"> </span><span class="nf">values</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">test</span><span class="p">.</span><span class="na">Status</span><span class="w"> </span><span class="nf">valueOf</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">String</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">static</span><span class="w"> </span><span class="p">{};</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>既然枚举类型是普通的类，那么我们也可以给枚举类型添加独有的成员方法</p>
-<pre><code class="language-java">public enum Status {
-    RUNNING(&quot;睡觉&quot;), STUDY(&quot;学习&quot;), SLEEP(&quot;睡觉&quot;);   //无参构造方法被覆盖，创建枚举需要添加参数（本质就是调用的构造方法！）
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">Status</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">RUNNING</span><span class="p">(</span><span class="s">&quot;睡觉&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">STUDY</span><span class="p">(</span><span class="s">&quot;学习&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">SLEEP</span><span class="p">(</span><span class="s">&quot;睡觉&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">//无参构造方法被覆盖，创建枚举需要添加参数（本质就是调用的构造方法！）</span>
 
-    private final String name;    //枚举的成员变量
-    Status(String name){    //覆盖原有构造方法（默认private，只能内部使用！）
-        this.name = name;
-    }
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">    </span><span class="c1">//枚举的成员变量</span>
+<span class="w">    </span><span class="n">Status</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">){</span><span class="w">    </span><span class="c1">//覆盖原有构造方法（默认private，只能内部使用！）</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public String getName() {   //获取封装的成员变量
-        return name;
-    }
-}
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">   </span><span class="c1">//获取封装的成员变量</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-public static void main(String[] args) {
-    Student student = new Student(&quot;小明&quot;, 18);
-    student.setStatus(Status.RUNNING);
-    System.out.println(student.getStatus().getName());
-}
-
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Student</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">(</span><span class="s">&quot;小明&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">);</span>
+<span class="w">    </span><span class="n">student</span><span class="p">.</span><span class="na">setStatus</span><span class="p">(</span><span class="n">Status</span><span class="p">.</span><span class="na">RUNNING</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="na">getStatus</span><span class="p">().</span><span class="na">getName</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>枚举类还自带一些继承下来的实用方法</p>
-<pre><code class="language-java">Status.valueOf(&quot;&quot;)   //将名称相同的字符串转换为枚举
-Status.values()   //快速获取所有的枚举
-</code></pre>
-<h1 id="_18">包装类</h1>
+<div class="highlight"><pre><span></span><code><span class="n">Status</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">//将名称相同的字符串转换为枚举</span>
+<span class="n">Status</span><span class="p">.</span><span class="na">values</span><span class="p">()</span><span class="w">   </span><span class="c1">//快速获取所有的枚举</span>
+</code></pre></div>
+<h1 id="_18">包装类<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h1>
 <p>Java并不是纯面向对象的语言，虽然Java语言是一个面向对象的语言，但是Java中的基本数据类型却不是面向对象的。在学习泛型和集合之前，基本类型的包装类是一定要讲解的内容！</p>
 <p>我们的基本类型，如果想通过对象的形式去使用他们，Java提供的基本类型包装类，使得Java能够更好的体现面向对象的思想，同时也使得基本类型能够支持对象操作！</p>
 <p><strong>基本类型包装类：</strong></p>
@@ -909,19 +893,19 @@ Status.values()   //快速获取所有的枚举
 </tbody>
 </table>
 <p>包装类实际上就行将我们的基本数据类型，封装成一个类（运用了封装的思想）</p>
-<pre><code class="language-java">private final int value;   //Integer内部其实本质还是存了一个基本类型的数据，但是我们不能直接操作
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">   </span><span class="c1">//Integer内部其实本质还是存了一个基本类型的数据，但是我们不能直接操作</span>
 
-public Integer(int value) {
-    this.value = value;
-}
-</code></pre>
+<span class="kd">public</span><span class="w"> </span><span class="nf">Integer</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(22, 18, 9);">现在我们操作的就是 Integer 对象而不是一个 int 基本类型了！</font></p>
-<pre><code class="language-java">public static void main(String[] args) {
-     Integer i = 1;   //包装类型可以直接接收对应类型的数据，并变为一个对象！
-     System.out.println(i + i);    //包装类型可以直接被当做一个基本类型进行操作！
-}
-</code></pre>
-<h2 id="_19">手动装箱和拆箱</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">   </span><span class="c1">//包装类型可以直接接收对应类型的数据，并变为一个对象！</span>
+<span class="w">     </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w">    </span><span class="c1">//包装类型可以直接被当做一个基本类型进行操作！</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_19">手动装箱和拆箱<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <p>那么为什么包装类型能直接使用一个具体值来赋值呢？其实依靠的是自动装箱和拆箱机制。</p>
 <p>包装类和基本数据的转换。</p>
 <p>在jdk5之前，手动装箱和拆箱方式：</p>

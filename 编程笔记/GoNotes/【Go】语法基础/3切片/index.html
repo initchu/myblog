@@ -277,97 +277,96 @@
 
 
 
-<h1 id="3">3 切片</h1>
-<h3 id="_1">注意要点：</h3>
+<h1 id="3">3 切片<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
+<h3 id="_1">注意要点：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>The slice is a reference to the array, so the slice is the reference type, obeying the mechanism of reference transmission.</li>
 <li>The use of sections is similar to the array, including traversal, accessing section elements, and seeking section length len (slice).</li>
 <li>The length of the slice can vary, and the slice can change dynamically.</li>
 <li>Basic syntax for the slice definition: </li>
 </ol>
-<pre><code class="language-go">//as: var slice name [] type 
-var a [] int
-</code></pre>
-<h3 id="_2">实例练习</h3>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="c1">//as: var slice name [] type </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="kt">int</span>
+</code></pre></div>
+<h3 id="_2">实例练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func updateSlice(s []int){
-    s[0] = 100
-}
-func main() {
-    arr := [...] int{0,1,2,3,4,5,6,7}
-    fmt.Println(&quot;arr[2:6] =&quot;,arr[2:6])
-    s1 := arr[2:]
-    fmt.Println(&quot;arr[:6] =&quot;,arr[:6])
-    s2 := arr[:]
-    fmt.Println(&quot;arr[2:] =&quot;,arr[2:])
-    fmt.Println(&quot;arr[:] =&quot;,arr[:])
-    updateSlice(s1)
-    updateSlice(s2)
-    fmt.Println(s1)
-    fmt.Println(s2)
+<span class="kd">func</span><span class="w"> </span><span class="nx">updateSlice</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="w"> </span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;arr[2:6] =&quot;</span><span class="p">,</span><span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+<span class="w">    </span><span class="nx">s1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;arr[:6] =&quot;</span><span class="p">,</span><span class="nx">arr</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>
+<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[:]</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;arr[2:] =&quot;</span><span class="p">,</span><span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;arr[:] =&quot;</span><span class="p">,</span><span class="nx">arr</span><span class="p">[:])</span>
+<span class="w">    </span><span class="nx">updateSlice</span><span class="p">(</span><span class="nx">s1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">updateSlice</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span>
 
-    fmt.Println(&quot;Extending slice&quot;)
-    arr[0],arr[2] = 0, 2
-    s1 = arr[2:6]
-    s2 = s1[3:5]
-    //slice有三个变量ptr.cap,len
-    //slice可以向后扩展，不可以向前扩展
-    //s[i]不可以超越len(s)，向后不能超过capacity
-    s3 := append(s2,10)
-    s4 := append(s3,11)
-    s5 := append(s3,12)
-    fmt.Println(&quot;s3,s4,s5 = &quot;,s3,s4,s5)
-    fmt.Println(&quot;arr = &quot;,arr)
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Extending slice&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">s1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">s1</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="c1">//slice有三个变量ptr.cap,len</span>
+<span class="w">    </span><span class="c1">//slice可以向后扩展，不可以向前扩展</span>
+<span class="w">    </span><span class="c1">//s[i]不可以超越len(s)，向后不能超过capacity</span>
+<span class="w">    </span><span class="nx">s3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">s4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s3</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">s5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s3</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;s3,s4,s5 = &quot;</span><span class="p">,</span><span class="nx">s3</span><span class="p">,</span><span class="nx">s4</span><span class="p">,</span><span class="nx">s5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;arr = &quot;</span><span class="p">,</span><span class="nx">arr</span><span class="p">)</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <p>append( )</p>
 <p>copy( )</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
-//查看len 和 capacity
-func printSlice(s []int){
-    fmt.Printf(&quot;%v, len=%d, cap=%d\n&quot;,s, len(s), cap(s))
-}
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
+<span class="c1">//查看len 和 capacity</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v, len=%d, cap=%d\n&quot;</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span>
+<span class="p">}</span>
 
-func main() {
-    var s []int //Zero value for slice is nil
-    for i := 0 ; i &lt; 100; i++{
-        printSlice(s)
-        s = append(s,2 * i +1)
-    }
-    fmt.Println(s)
-    s1 := []int{2,4,6,8}
-    printSlice(s1)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="c1">//Zero value for slice is nil</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">s1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s1</span><span class="p">)</span>
 
-    s2 := make([]int,16) //建立长度为16的slice
-    s3 := make([]int,10,32)//len = 10,cap = 32
-    printSlice(s2)
-    printSlice(s3)
-    fmt.Println(&quot;Copying slice&quot;)
-    copy(s2,s1)
-    printSlice(s2)
-    //用切片的[x：y]来删除数组的元素
-    fmt.Println(&quot;Deleting elements from slice&quot;)
-    s2 = append(s2[:3], s2[4:]...)//删除第四个数字8
-    printSlice(s2)
+<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="c1">//建立长度为16的slice</span>
+<span class="w">    </span><span class="nx">s3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">32</span><span class="p">)</span><span class="c1">//len = 10,cap = 32</span>
+<span class="w">    </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Copying slice&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">s2</span><span class="p">,</span><span class="nx">s1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//用切片的[x：y]来删除数组的元素</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Deleting elements from slice&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s2</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="nx">s2</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span><span class="c1">//删除第四个数字8</span>
+<span class="w">    </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span>
 
-    fmt.Println(&quot;Popping from front&quot;)
-    front := s2[0]
-    s2 = s2[1:]
-    fmt.Println(&quot;Popping from back&quot;)
-    tail := s2[len(s2)-1]
-    s2 = s2[:len(s2) - 1]
-    fmt.Println(front)
-    fmt.Println(tail)
-    printSlice(s2)
-}
-
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Popping from front&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">front</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">s2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Popping from back&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">tail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">s2</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">s2</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">front</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">tail</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">printSlice</span><span class="p">(</span><span class="nx">s2</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-11-07 17:06:22<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/zcm1yh">https://www.yuque.com/xiaoshan_wgo/codingnotes/zcm1yh</a></p>

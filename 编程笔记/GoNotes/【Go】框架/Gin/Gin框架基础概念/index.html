@@ -286,88 +286,88 @@
 
 
 
-<h1 id="gin">Gin 框架基础概念</h1>
-<h2 id="_1">安装</h2>
-<pre><code class="language-go">go get -u github.com/gin-gonic/gin
-</code></pre>
-<h2 id="_2">介绍</h2>
+<h1 id="gin">Gin 框架基础概念<a class="headerlink" href="#gin" title="Permanent link">&para;</a></h1>
+<h2 id="_1">安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="k">go</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="o">-</span><span class="nx">u</span><span class="w"> </span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">gin</span><span class="o">-</span><span class="nx">gonic</span><span class="o">/</span><span class="nx">gin</span>
+</code></pre></div>
+<h2 id="_2">介绍<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><code>Gin</code><font style="color:rgb(68, 68, 68);">是一个用 Go 语言编写的 web 框架。</font></p>
-<h2 id="_3"><font style="color:rgb(68, 68, 68);">基本使用</font></h2>
-<pre><code class="language-go">package main
+<h2 id="_3"><font style="color:rgb(68, 68, 68);">基本使用</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 创建一个默认的路由引擎
-    r := gin.Default()
-    // GET：请求方式；/hello：请求的路径
-    // 当客户端以GET方法请求/hello路径时，会执行后面的匿名函数
-    r.GET(&quot;/hello&quot;, func(c *gin.Context) {
-        // c.JSON：返回JSON格式的数据
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;Hello world!&quot;,
-        })
-    })
-    // 启动HTTP服务，默认在0.0.0.0:8080启动服务
-    r.Run()
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建一个默认的路由引擎</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// GET：请求方式；/hello：请求的路径</span>
+<span class="w">    </span><span class="c1">// 当客户端以GET方法请求/hello路径时，会执行后面的匿名函数</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// c.JSON：返回JSON格式的数据</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello world!&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">// 启动HTTP服务，默认在0.0.0.0:8080启动服务</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>HTTP 编程 相对来说繁琐很多：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;encoding/json&quot;
-    &quot;log&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;encoding/json&quot;</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-type IndexData struct {
-    Title string `json:&quot;title&quot;`
-    Desc string `json:&quot;desc&quot;`
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">IndexData</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Title</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;title&quot;`</span>
+<span class="w">    </span><span class="nx">Desc</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;desc&quot;`</span>
+<span class="p">}</span>
 
-func index(w http.ResponseWriter,r *http.Request)  {
-    w.Header().Set(&quot;Content-Type&quot;,&quot;application/json&quot;)
-    var indexData IndexData
-    indexData.Title = &quot;go_HTTP&quot;
-    indexData.Desc = &quot;Go 的 HTTP 案例&quot;
-    jsonStr,_ := json.Marshal(indexData)
-    w.Write(jsonStr)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">index</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="s">&quot;application/json&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">indexData</span><span class="w"> </span><span class="nx">IndexData</span>
+<span class="w">    </span><span class="nx">indexData</span><span class="p">.</span><span class="nx">Title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;go_HTTP&quot;</span>
+<span class="w">    </span><span class="nx">indexData</span><span class="p">.</span><span class="nx">Desc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Go 的 HTTP 案例&quot;</span>
+<span class="w">    </span><span class="nx">jsonStr</span><span class="p">,</span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">indexData</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Write</span><span class="p">(</span><span class="nx">jsonStr</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main()  {
-    //程序入口，一个项目 只能有一个入口
-    //web程序，http协议 ip port
-    server := http.Server{
-        Addr: &quot;127.0.0.1:8080&quot;,
-    }
-    http.HandleFunc(&quot;/&quot;,index)
-    if err := server.ListenAndServe();err != nil{
-        log.Println(err)
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//程序入口，一个项目 只能有一个入口</span>
+<span class="w">    </span><span class="c1">//web程序，http协议 ip port</span>
+<span class="w">    </span><span class="nx">server</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;127.0.0.1:8080&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="nx">index</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">server</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">();</span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Gin 框架中使用<code>LoadHTMLGlob()</code>或者<code>LoadHTMLFiles()</code>方法进行HTML模板渲染。</p>
-<pre><code class="language-go">func main() {
-    r := gin.Default()
-    r.LoadHTMLGlob(&quot;templates/**/*&quot;)
-    //r.LoadHTMLFiles(&quot;templates/posts/index.html&quot;, &quot;templates/users/index.html&quot;)
-    r.GET(&quot;/posts/index&quot;, func(c *gin.Context) {
-        c.HTML(http.StatusOK, &quot;posts/index.html&quot;, gin.H{
-            &quot;title&quot;: &quot;posts/index&quot;,
-        })
-    })
-    r.GET(&quot;users/index&quot;, func(c *gin.Context) {
-        c.HTML(http.StatusOK, &quot;users/index.html&quot;, gin.H{
-            &quot;title&quot;: &quot;users/index&quot;,
-        })
-    })
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">LoadHTMLGlob</span><span class="p">(</span><span class="s">&quot;templates/**/*&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//r.LoadHTMLFiles(&quot;templates/posts/index.html&quot;, &quot;templates/users/index.html&quot;)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/posts/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">HTML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;posts/index.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;posts/index&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;users/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">HTML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;users/index.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;users/index&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run(&quot;:8080&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-04-14 11:08:27<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/dt6n63">https://www.yuque.com/xiaoshan_wgo/codingnotes/dt6n63</a></p>

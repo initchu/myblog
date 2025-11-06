@@ -251,90 +251,90 @@
 
 
 
-<h1 id="gin">Gin 中间件</h1>
+<h1 id="gin">Gin 中间件<a class="headerlink" href="#gin" title="Permanent link">&para;</a></h1>
 <p>定义一个中间件 m1:来统计处理请求处理函数的耗时：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-//handlerFunc
-func indexHandler(c *gin.Context){
-    fmt.Println(&quot;index&quot;)
-    c.JSON(http.StatusOK,gin.H{
-        &quot;method&quot;:&quot;index&quot;,
-    })
-}
+<span class="c1">//handlerFunc</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">indexHandler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;index&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
 
-// 定义一个中间件m1:来统计处理请求处理函数的耗时
-func m1(c *gin.Context){
-    fmt.Println(&quot;m1 in ..&quot;)
-    start := time.Now()
-    c.Next() //调用后续的处理函数，indexHandler, indexHandler 执行完了，之后继续会执行下一条语句
-    //c.Abort() //阻止调用后续的处理函数
-    cost := time.Since(start)
-    fmt.Printf(&quot;cost:%v\n&quot;,cost)
-    fmt.Println(&quot;m1 out ...&quot;)
-}
+<span class="c1">// 定义一个中间件m1:来统计处理请求处理函数的耗时</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">m1</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;m1 in ..&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">start</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span><span class="w"> </span><span class="c1">//调用后续的处理函数，indexHandler, indexHandler 执行完了，之后继续会执行下一条语句</span>
+<span class="w">    </span><span class="c1">//c.Abort() //阻止调用后续的处理函数</span>
+<span class="w">    </span><span class="nx">cost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Since</span><span class="p">(</span><span class="nx">start</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;cost:%v\n&quot;</span><span class="p">,</span><span class="nx">cost</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;m1 out ...&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    r := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    r.GET(&quot;/index&quot;,m1, indexHandler) //可以传多个,先来后到
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="nx">m1</span><span class="p">,</span><span class="w"> </span><span class="nx">indexHandler</span><span class="p">)</span><span class="w"> </span><span class="c1">//可以传多个,先来后到</span>
 
-    r.Run()
-}
-</code></pre>
-<pre><code class="language-go">package main
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-//handlerFunc
-func indexHandler(c *gin.Context){
-    fmt.Println(&quot;index&quot;)
-    c.JSON(http.StatusOK,gin.H{
-        &quot;method&quot;:&quot;index&quot;,
-    })
-}
+<span class="c1">//handlerFunc</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">indexHandler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;index&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;index&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
 
-// 定义一个中间件m1:来统计处理请求处理函数的耗时
-func m1(c *gin.Context){
-    fmt.Println(&quot;m1 in ..&quot;)
-    start := time.Now()
-    c.Next() //调用后续的处理函数，indexHandler, indexHandler 执行完了，之后继续会执行下一条语句
-    //c.Abort() //阻止调用后续的处理函数
-    cost := time.Since(start)
-    fmt.Printf(&quot;cost:%v\n&quot;,cost)
-    fmt.Println(&quot;m1 out ...&quot;)
-}
+<span class="c1">// 定义一个中间件m1:来统计处理请求处理函数的耗时</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">m1</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;m1 in ..&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">start</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span><span class="w"> </span><span class="c1">//调用后续的处理函数，indexHandler, indexHandler 执行完了，之后继续会执行下一条语句</span>
+<span class="w">    </span><span class="c1">//c.Abort() //阻止调用后续的处理函数</span>
+<span class="w">    </span><span class="nx">cost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Since</span><span class="p">(</span><span class="nx">start</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;cost:%v\n&quot;</span><span class="p">,</span><span class="nx">cost</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;m1 out ...&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    r := gin.Default()
-    r.Use(m1) //全局注册中间件函数 m1, 每次访问一个新的路由都会执行一次这个
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">m1</span><span class="p">)</span><span class="w"> </span><span class="c1">//全局注册中间件函数 m1, 每次访问一个新的路由都会执行一次这个</span>
 
-    r.GET(&quot;/index&quot;,m1, indexHandler) //可以传多个,先来后到
-    r.GET(&quot;/shop&quot;,m1, func(c *gin.Context) {
-        c.JSON(http.StatusOK,gin.H{
-            &quot;msg&quot;:&quot;shop&quot;,
-        })
-    })
-    r.GET(&quot;/user&quot;, func(c *gin.Context) {
-        c.JSON(http.StatusOK,gin.H{
-            &quot;msg&quot;:&quot;user&quot;,
-        })
-    })
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="nx">m1</span><span class="p">,</span><span class="w"> </span><span class="nx">indexHandler</span><span class="p">)</span><span class="w"> </span><span class="c1">//可以传多个,先来后到</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/shop&quot;</span><span class="p">,</span><span class="nx">m1</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;msg&quot;</span><span class="p">:</span><span class="s">&quot;shop&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;msg&quot;</span><span class="p">:</span><span class="s">&quot;user&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>比如，可以写控制非登录用户不能访问某路由页面的逻辑代码。</p>
 <p><img alt="1651313296639-554047e5-62b5-48a4-a291-1fdb0b8d8ebb.png" src="../img/WNtSr10tzE11vV_v/1651313296639-554047e5-62b5-48a4-a291-1fdb0b8d8ebb-998397.png" /></p>
 <p>其他使用要点：</p>

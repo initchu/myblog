@@ -286,99 +286,99 @@
 
 
 
-<h1 id="_1">队列的实现</h1>
-<h2 id="_2">数组模拟队列的思想</h2>
+<h1 id="_1">队列的实现<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">数组模拟队列的思想<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>队列本身是有序列表，如果使用数组的结构来存储队列的数据，则队列数组的声明如下：</p>
-<pre><code class="language-go">type Queue struct{
-    maxSize int 
-    array [3]int
-    front int
-    rear int
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Queue</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">maxSize</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">array</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">front</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">rear</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>其中的<code>MaxSize</code>是该队列的最大容量。因为队列的输出、输入是分别从前后端来进行处理的，因此需要两个变量<code>front</code>及<code>rear</code>分别记录队列前后端的下标，<code>front</code>会随着数组的输出而发生改变，而<code>rear</code>则是随着数据的输入而改变。</p>
 <p>当我们将数据存入队列时，将函数定义为<code>addqueue</code>，入队一般有两个步骤：</p>
 <p>（1）将尾指针后移：<code>rear+1</code>，当<code>front == rear</code>时候，意味着队列为空；</p>
 <p>（2）若尾指针<code>rear</code>小于等于队列的最大下标<code>MaxSize-1</code>，则将数据存入<code>rear</code>所指向的数组元素中，否则无法存入数据，当<code>rear== MaxSize-1</code>意味着队列满。</p>
-<h2 id="_3">非环形队列</h2>
-<pre><code class="language-go">package main
+<h2 id="_3">非环形队列<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;errors&quot;
-    &quot;fmt&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;errors&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
 
-// Queue 含头节点
-type Queue struct {
-    maxSize int
-    array [5]int //模拟队列的数组
-    front int //队尾
-    rear int //队首
-}
+<span class="c1">// Queue 含头节点</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Queue</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">maxSize</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">array</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="w"> </span><span class="c1">//模拟队列的数组</span>
+<span class="w">    </span><span class="nx">front</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">//队尾</span>
+<span class="w">    </span><span class="nx">rear</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">//队首</span>
+<span class="p">}</span>
 
-// AddQueue 添加数据到队列
-func (this *Queue) AddQueue(val int)(err error){
-    //判断队列是否满
-    if this.rear == this.maxSize - 1{
-        return errors.New(&quot;queue full&quot;)
-    }
-    this.rear ++ //rear后移
-    this.array[this.rear] = val
-    return
-}
+<span class="c1">// AddQueue 添加数据到队列</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Queue</span><span class="p">)</span><span class="w"> </span><span class="nx">AddQueue</span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">)(</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">//判断队列是否满</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">rear</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">maxSize</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;queue full&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">rear</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="c1">//rear后移</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="nx">this</span><span class="p">.</span><span class="nx">rear</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">val</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
 
-//出队列
+<span class="c1">//出队列</span>
 
-func(this *Queue)  GetQueue() (val int ,err error){
-    //判断是否为空
-    if this.rear == this.front{
-        return -1,errors.New(&quot;queue empty&quot;)
-    }
-    this.front ++
-    val = this.array[this.front]
-    return val,errors.New(&quot;无错误&quot;)
+<span class="kd">func</span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Queue</span><span class="p">)</span><span class="w">  </span><span class="nx">GetQueue</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">//判断是否为空</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">rear</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">front</span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;queue empty&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">front</span><span class="w"> </span><span class="o">++</span>
+<span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="nx">this</span><span class="p">.</span><span class="nx">front</span><span class="p">]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">val</span><span class="p">,</span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;无错误&quot;</span><span class="p">)</span>
 
-} 
+<span class="p">}</span><span class="w"> </span>
 
-// ShowQueue 显示队列,找到队首，然后遍历到队尾
-func (this *Queue) ShowQueue(){
-    fmt.Println(&quot;队列当前的元素是&quot;)
-    for i := this.front + 1 ; i &lt;= this.rear;i++{
-        fmt.Printf(&quot;array[%d] = %d\t&quot;,i,this.array[i])
-    }//不包含头节点
-    fmt.Println()
-}
+<span class="c1">// ShowQueue 显示队列,找到队首，然后遍历到队尾</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">Queue</span><span class="p">)</span><span class="w"> </span><span class="nx">ShowQueue</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;队列当前的元素是&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">front</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">rear</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;array[%d] = %d\t&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="nx">this</span><span class="p">.</span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span><span class="c1">//不包含头节点</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">()</span>
+<span class="p">}</span>
 
-func main() {
-    queue := &amp; Queue{
-        maxSize: 5,
-        front: -1,
-        rear:-1,
-    }
-    var key string
-    var val int
-    for{
-        fmt.Println(&quot;1.输入add表示添加数列到队列&quot;)
-        fmt.Println(&quot;2.输入get表示从队列获取数据&quot;)
-        fmt.Println(&quot;3.输入show表示显示队列&quot;)
-        fmt.Println(&quot;4.输入exit表示退出队列&quot;)
-        fmt.Scanln(&amp;key)
-        switch key {
-        case &quot;add&quot;:
-            fmt.Println(&quot;输入你要输入的队列：&quot;)
-            fmt.Scanln(&amp;val)
-            err := queue.AddQueue(val)
-            if err != nil{
-            //
-            }
-        }
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">queue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">Queue</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">maxSize</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">front</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">rear</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;1.输入add表示添加数列到队列&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;2.输入get表示从队列获取数据&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;3.输入show表示显示队列&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;4.输入exit表示退出队列&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Scanln</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">key</span><span class="p">)</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;add&quot;</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;输入你要输入的队列：&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Scanln</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">val</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">queue</span><span class="p">.</span><span class="nx">AddQueue</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="c1">//</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>测试代码省略了：</p>
 <p>编码思路：给队列定义一个结构体，然后给这个结构体添加CRUD的方法，在主函数测试过程中，实例化一个结构体变量，然后调用方法。</p>
 <p>添加一个元素，删除一个元素，这个头指针后移，当头指针和尾指针相等的时候，队列即使是空的，也不能进行添加了，因为队列的头指针已经移动到了这个数组最后的位置，不能再往里面加了，为了解决这个问题，环形队列出现了。</p>
-<h2 id="_4">环形队列</h2>
+<h2 id="_4">环形队列<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>循环队列的一个好处是我们可以利用这个队列之前用过的空间。</p>
 <p>在一个普通队列里，一旦一个队列满了，我们就不能插入下一个元素，即使在队列前面仍有空间。但是使用循环队列，我们能使用这些空间去存储新的值。</p>
 <p>每次 <code>rear</code> 队首的指针到队列的最后一位的时候，这个指针加一取模就变成了头指针。</p>

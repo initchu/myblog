@@ -251,32 +251,31 @@
 
 
 
-<h1 id="iii">反转字符串中的单词Ⅲ</h1>
+<h1 id="iii">反转字符串中的单词Ⅲ<a class="headerlink" href="#iii" title="Permanent link">&para;</a></h1>
 <p><a href="https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/">https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/</a></p>
 <p>给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。</p>
 <p>示例：</p>
 <p>输入："Let's take LeetCode contest"</p>
 <p>输出："s'teL ekat edoCteeL tsetnoc"</p>
-<pre><code class="language-go">func reverseWords(s string) string {
-    length := len(s)
-    ret := []byte{}
-    for i := 0; i &lt; length; {
-        start := i
-        for i &lt; length &amp;&amp; s[i] != ' ' {
-            i++
-        }
-        for p := start; p &lt; i; p++ {
-            ret = append(ret, s[start + i - 1 - p])
-        }
-        for i &lt; length &amp;&amp; s[i] == ' ' {
-            i++
-            ret = append(ret, ' ')
-        }
-    }
-    return string(ret)
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">reverseWords</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ret</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">start</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">length</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">i</span><span class="o">++</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">start</span><span class="p">;</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">i</span><span class="p">;</span><span class="w"> </span><span class="nx">p</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">ret</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">ret</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">p</span><span class="p">])</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">length</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">i</span><span class="o">++</span>
+<span class="w">            </span><span class="nx">ret</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">ret</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">ret</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>思路：</p>
 <p>开辟一个新字符串。然后从头到尾遍历原字符串，直到找到空格为止。</p>
 <p>此时找到了一个单词，并能得到单词的起止位置。</p>

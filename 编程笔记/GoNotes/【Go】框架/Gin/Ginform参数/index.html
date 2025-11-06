@@ -251,99 +251,99 @@
 
 
 
-<h1 id="gin-form">Gin form 参数</h1>
+<h1 id="gin-form">Gin form 参数<a class="headerlink" href="#gin-form" title="Permanent link">&para;</a></h1>
 <ol>
 <li>浏览器输入 URL 发送<code>GET</code>请求给 web 服务器，同时加载 html 文件</li>
 <li>接收用户的 input ，使用 <code>POST</code> 响应接收返还回来的 Form 表单</li>
 </ol>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
-//获取 form 表单提交的参数
-func main() {
-    r := gin.Default()
-    r.LoadHTMLFiles(&quot;./login.html&quot;)
-    r.GET(&quot;/login&quot;,func(c *gin.Context){
-        c.HTML(http.StatusOK,&quot;login.html&quot;,nil)
-    })
-    // 处理 login 的 post请求
-    //一次请求对应一个响应
-    r.POST(&quot;/login&quot;,func(c *gin.Context){
-        username := c.PostForm(&quot;username&quot;)
-        password := c.PostForm(&quot;password&quot;)
-        c.JSON(http.StatusOK,gin.H{
-            &quot;Name&quot;:username,
-            &quot;password&quot;:password,
-            &quot;success&quot;:&quot;登陆成功！&quot;,
-        })
-    })
-    r.Run()
-}
-</code></pre>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+<span class="c1">//获取 form 表单提交的参数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">LoadHTMLFiles</span><span class="p">(</span><span class="s">&quot;./login.html&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">HTML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">// 处理 login 的 post请求</span>
+<span class="w">    </span><span class="c1">//一次请求对应一个响应</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">        </span><span class="nx">username</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">PostForm</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">password</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">PostForm</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;Name&quot;</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;password&quot;</span><span class="p">:</span><span class="nx">password</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;success&quot;</span><span class="p">:</span><span class="s">&quot;登陆成功！&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>HTML 文件中，username 和 password 在 form 标签中被 input，"登录"的类型是 submit , submit 到 action = "/login" 路径下，submit 的方式是 post 请求。</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;login&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;form action=&quot;/login&quot; method=&quot;post&quot; novalidate autocomplete=&quot;off&quot;&gt;
-    &lt;div&gt;
-        &lt;label for=&quot;username&quot;&gt;username:&lt;/label&gt;
-        &lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot;&gt;
-    &lt;/div&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>login<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/login&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;post&quot;</span> <span class="na">novalidate</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">&quot;off&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="p">&gt;</span>username:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;username&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;username&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-    &lt;div&gt;
-        &lt;label for=&quot;password&quot;&gt;password:&lt;/label&gt;
-        &lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot;&gt;
-    &lt;/div&gt;
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="p">&gt;</span>password:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;password&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
-    &lt;input  type=&quot;submit&quot; value=&quot;登录&quot;&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+    <span class="p">&lt;</span><span class="nt">input</span>  <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;登录&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
 <p><img alt="输入表单信息" src="../img/hMQKxRdpBS5YRS7q/1651051942641-1209db48-ee3b-40cf-ae0b-31e3aeac4e4f-450259.png" /></p>
 <p><img alt="点击登陆后" src="../img/hMQKxRdpBS5YRS7q/1651051958781-4d6054c5-30f3-4ab6-a3c2-a280b72247ee-863317.png" /></p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
-//获取 form 表单提交的参数
-func main() {
-    r := gin.Default()
-    r.LoadHTMLFiles(&quot;./login.html&quot;)
-    r.GET(&quot;/login&quot;,func(c *gin.Context){
-        c.HTML(http.StatusOK,&quot;login.html&quot;,nil)
-    })
-    // 处理 login 的 post请求
-    //一次请求对应一个响应
-    r.POST(&quot;/login&quot;,func(c *gin.Context){
-        //username := c.PostForm(&quot;username&quot;)
-        //password := c.PostForm(&quot;password&quot;)
-        //username := c.DefaultPostForm(&quot;username&quot;,&quot;everyone&quot;)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+<span class="c1">//获取 form 表单提交的参数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">LoadHTMLFiles</span><span class="p">(</span><span class="s">&quot;./login.html&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">HTML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="s">&quot;login.html&quot;</span><span class="p">,</span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">// 处理 login 的 post请求</span>
+<span class="w">    </span><span class="c1">//一次请求对应一个响应</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">){</span>
+<span class="w">        </span><span class="c1">//username := c.PostForm(&quot;username&quot;)</span>
+<span class="w">        </span><span class="c1">//password := c.PostForm(&quot;password&quot;)</span>
+<span class="w">        </span><span class="c1">//username := c.DefaultPostForm(&quot;username&quot;,&quot;everyone&quot;)</span>
 
-        username, ok := c.GetPostForm(&quot;username&quot;)
-        if !ok{
-            username = &quot;everyone&quot;
-        }
-        password := c.DefaultPostForm(&quot;password&quot;,&quot;***&quot;)
-        c.JSON(http.StatusOK,gin.H{
-            &quot;Name&quot;:username,
-            &quot;password&quot;:password,
-            &quot;success&quot;:&quot;登陆成功！&quot;,
-        })
-    })
+<span class="w">        </span><span class="nx">username</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetPostForm</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">username</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;everyone&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">password</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultPostForm</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">,</span><span class="s">&quot;***&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;Name&quot;</span><span class="p">:</span><span class="nx">username</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;password&quot;</span><span class="p">:</span><span class="nx">password</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;success&quot;</span><span class="p">:</span><span class="s">&quot;登陆成功！&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>❗</strong><strong>注: 一个请求对应一个方法。</strong></p>
 <blockquote>
 <p>更新: 2022-04-27 18:37:44<br />

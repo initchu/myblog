@@ -517,15 +517,15 @@
 
 
 
-<h1 id="_1">反射/动态代理</h1>
-<h3 id="java"><font style="color:#CF1322;">java反射的作用与原理</font></h3>
+<h1 id="_1">反射/动态代理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h3 id="java"><font style="color:#CF1322;">java反射的作用与原理</font><a class="headerlink" href="#java" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(51,51,51);">J</font>AVA反射机制是在<strong>运行状态</strong>中，对于任意一个类，都能够知道这个<strong>类的所有属性和方法</strong>。对于任意一个对象，都能够调用它的任意一个方法和属性。这种<strong>动态获取的信息</strong>以及<strong>动态调用对象的方法的功能</strong>称为java语言的<strong><font style="color:#389E0D;">反射机制</font></strong>。</p>
 <p>在JAVA中，只有给定<strong>类的名字</strong>，就可以通过反射机制来获取<strong>类的所有信息</strong>，可以<strong>动态地创建对象和编译</strong>。JAVA语言编译之后会生成一个.class文件，反射就是通过<strong>字节码文件</strong>找到某一个类，以及类中的方法和属性等。</p>
 <blockquote>
 <p><a href="https://blog.csdn.net/sinat_38259539/article/details/71799078">Java基础之—反射（非常重要）_敬业小码哥的博客-CSDN博客_java反射</a>
 </p>
 </blockquote>
-<h3 id="_2"><font style="color:#E8323C;">反射</font></h3>
+<h3 id="_2"><font style="color:#E8323C;">反射</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ul>
 <li>反射就是<u>把java类中的成员映射成一个个的Java对象</u></li>
 <li>可以<strong>获取类的相关信息</strong>，可以<strong>进行设置</strong>，可以<strong>代理</strong></li>
@@ -535,83 +535,83 @@
 <li><font style="color:rgb(0,0,0);">JDBC 的 classForName()也是反射</font></li>
 <li><font style="color:rgb(0,0,0);">hibernate的 find(Class clazz) 也是反射</font></li>
 </ul>
-<h3 id="java_1"><font style="color:#CF1322;">谈谈的 Java 反射的理解</font></h3>
+<h3 id="java_1"><font style="color:#CF1322;">谈谈的 Java 反射的理解</font><a class="headerlink" href="#java_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>通过反射，我们可以<strong><u>获取类的运行时内部结构</u></strong>。</li>
 </ul>
-<h3 id="_3"><font style="color:#CF1322;">怎么通过反射访问某各类的私有属性？</font></h3>
+<h3 id="_3"><font style="color:#CF1322;">怎么通过反射访问某各类的私有属性？</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>反射 API 中有个方法 <code>getDeclaredFields()</code></li>
 </ul>
-<h3 id="_4">反射是否可以调用私有方法？</h3>
+<h3 id="_4">反射是否可以调用私有方法？<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>可以，需要设置调用Method对象的<code>setAccessible(true)</code>方法。</p>
-<h3 id="_5">反射<font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">在框架中的运用</font></h3>
+<h3 id="_5">反射<font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">在框架中的运用</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>JDK动态代理；</li>
 <li>Spring xml装配bean；</li>
 <li>JDBC加载驱动Class.forName("com.mysql.jdbc.Driver");</li>
 </ul>
-<h3 id="java_2"><font style="color:rgb(51,51,51);">Java实现反射的三种方法</font></h3>
+<h3 id="java_2"><font style="color:rgb(51,51,51);">Java实现反射的三种方法</font><a class="headerlink" href="#java_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li><font style="color:rgb(51,51,51);">通过</font><strong><font style="color:rgb(51,51,51);">new对象</font></strong><font style="color:rgb(51,51,51);">实现反射机制 </font></li>
 <li><font style="color:rgb(51,51,51);">通过</font><strong><font style="color:rgb(51,51,51);">路径</font></strong><font style="color:rgb(51,51,51);">实现反射机制 </font></li>
 <li><font style="color:rgb(51,51,51);">通过</font><strong><font style="color:rgb(51,51,51);">类名</font></strong><font style="color:rgb(51,51,51);">实现反射机制</font></li>
 </ol>
-<pre><code class="language-java">public class Student {
-    private int id;
-    String name;
-    protected boolean sex;
-    public float score;
-}
-</code></pre>
-<pre><code class="language-java">public class Get {
-    //获取反射机制三种方式
-    public static void main(String[] args) throws ClassNotFoundException {
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">score</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Get</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//获取反射机制三种方式</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ClassNotFoundException</span><span class="w"> </span><span class="p">{</span>
 
-        //方式一(通过建立对象)
-        Student stu = new Student();
-        Class classobj1 = stu.getClass();
-        System.out.println(classobj1.getName());
+<span class="w">        </span><span class="c1">//方式一(通过建立对象)</span>
+<span class="w">        </span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Class</span><span class="w"> </span><span class="n">classobj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stu</span><span class="p">.</span><span class="na">getClass</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classobj1</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 
-        //方式二（所在通过路径-相对路径）
-        Class classobj2 = Class.forName(&quot;fanshe.Student&quot;);
-        System.out.println(classobj2.getName());
+<span class="w">        </span><span class="c1">//方式二（所在通过路径-相对路径）</span>
+<span class="w">        </span><span class="n">Class</span><span class="w"> </span><span class="n">classobj2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;fanshe.Student&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classobj2</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
 
-        //方式三（通过类名）
-        Class classobj3 = Student.class;
-        System.out.println(classobj3.getName());
-    }
-}
-</code></pre>
-<h3 id="java_3">Java反射机制</h3>
+<span class="w">        </span><span class="c1">//方式三（通过类名）</span>
+<span class="w">        </span><span class="n">Class</span><span class="w"> </span><span class="n">classobj3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Student</span><span class="p">.</span><span class="na">class</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classobj3</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="java_3">Java反射机制<a class="headerlink" href="#java_3" title="Permanent link">&para;</a></h3>
 <p>Java 反射机制是在<strong>运行状态</strong>中，对于任意一个类，都能够获得这个类的<strong>所有属性和方法</strong>，对于任意一个对象都能够调用它的任意一个属性和方法。<u>这种在运行时动态的获取信息以及动态调用对象的方法的功能称为 Java 的</u><strong><u>反射机制</u></strong><u>。</u></p>
 <p><strong>Class 类</strong>与<strong> java.lang.reflect 类库</strong>一起对反射的概念进行了支持，该类库包含了<strong>Field</strong>、<strong>Method</strong>和<strong>Constructor</strong> 类 (每个类<u>都实现了 Member 接口</u>)。这些类型的对象时由 JVM 在<strong>运行时</strong>创建的，用以表示未知类里对应的成员。</p>
 <p>这样你就可以使用 Constructor 创建新的对象，用 get() 和 set() 方法读取和修改与 Field 对象关联的字段，用<code>invoke()</code>方法调用与 Method 对象关联的方法。另外，还可以调用 <code>getFields()</code>、<code>getMethods()</code> 和 <code>getConstructors()</code>等很便利的方法，以返回表示字段，方法，以及构造器的对象的数组。这样匿名对象的信息就能在运行时被完全确定下来，而在编译时不需要知道任何事情。</p>
-<pre><code class="language-java">import java.lang.reflect.Constructor;
-public class ReflectTest {
-    public static void main(String[] args) throws Exception {
-        Class clazz = null;
-        clazz = Class.forName(&quot;com.jas.reflect.Fruit&quot;);
-        Constructor&lt;Fruit&gt; constructor1 = clazz.getConstructor();
-        Constructor&lt;Fruit&gt; constructor2 = clazz.getConstructor(String.class);
-        Fruit fruit1 = constructor1.newInstance();
-        Fruit fruit2 = constructor2.newInstance(&quot;Apple&quot;);
-    }
-}
-class Fruit{
-    public Fruit(){
-        System.out.println(&quot;无参构造器 Run...........&quot;);
-    }
-    public Fruit(String type){
-        System.out.println(&quot;有参构造器 Run...........&quot; + type);
-    }
-}
-</code></pre>
-<pre><code class="language-plain">运行结果： 
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.reflect.Constructor</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReflectTest</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Class</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;com.jas.reflect.Fruit&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Constructor</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">constructor1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getConstructor</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Constructor</span><span class="o">&lt;</span><span class="n">Fruit</span><span class="o">&gt;</span><span class="w"> </span><span class="n">constructor2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getConstructor</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Fruit</span><span class="w"> </span><span class="n">fruit1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor1</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Fruit</span><span class="w"> </span><span class="n">fruit2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor2</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="s">&quot;Apple&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nc">Fruit</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Fruit</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;无参构造器 Run...........&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Fruit</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">type</span><span class="p">){</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;有参构造器 Run...........&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">type</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>运行结果： 
 无参构造器 Run……….. 
 有参构造器 Run………..Apple
-</code></pre>
-<h3 id="classforname-classloader">反射中 Class.forName 和 ClassLoader 区别</h3>
+</code></pre></div>
+<h3 id="classforname-classloader">反射中 Class.forName 和 ClassLoader 区别<a class="headerlink" href="#classforname-classloader" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>Class.forName()</code>除了<u>将类的.class文件加载到jvm中</u>之外，还<u>会对类进行解释，执行类中的static块</u>。<br />
 而<code>ClassLoader</code>只干一件事情，就是<u>将.class文件加载到jvm中</u>，<strong>不会执行static中的内容</strong>，<u>只有在newInstance才会去执行static块。</u></li>
@@ -622,36 +622,36 @@ class Fruit{
 <p><a href="https://blog.csdn.net/zhangdx001/article/details/106946544">ClassLoader和Class.forname的区别_加班狗的微博的博客-CSDN博客_class.forname和classloader区别</a>
 </p>
 </blockquote>
-<h3 id="java_4"><font style="color:rgb(0,0,0);">说说你对 Java 反射的理解 </font></h3>
+<h3 id="java_4"><font style="color:rgb(0,0,0);">说说你对 Java 反射的理解 </font><a class="headerlink" href="#java_4" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(0,0,0);">在运行状态中，对任意一个类，都能知道这个类的所有属性和方法，对任意一个对象，都能调用它的任意一个方法和属性。这种能动态获取信息及动态调用对象方法的功能称为 java 语言的反射机制。 </font></p>
 <p><font style="color:rgb(0,0,0);">反射的作用：开发过程中，经常会遇到某个类的某个成员变量、方法或属性是私有的，或只对系统应用开放，这里就可以利用 java 的反射机制通过反射来获取所需的私有成员或是方法。</font></p>
 <p><font style="color:rgb(0,0,0);">1) </font><font style="color:rgb(0,0,0);">获取类的 </font><font style="color:rgb(0,0,0);">Class </font><font style="color:rgb(0,0,0);">对象实例 </font></p>
-<pre><code class="language-java">Class clz = Class.forName(&quot;com.zhenai.api.Apple&quot;); 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Class</span><span class="w"> </span><span class="n">clz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&quot;com.zhenai.api.Apple&quot;</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(0,0,0);">2) 根据 Class 对象实例获取 Constructor 对象 </font></p>
-<pre><code class="language-java">Constructor appConstructor = clz.getConstructor(); 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Constructor</span><span class="w"> </span><span class="n">appConstructor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clz</span><span class="p">.</span><span class="na">getConstructor</span><span class="p">();</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(0,0,0);">3) 使用 Constructor 对象的 newInstance 方法获取反射类对象 </font></p>
-<pre><code class="language-java">Object appleObj = appConstructor.newInstance(); 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Object</span><span class="w"> </span><span class="n">appleObj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">appConstructor</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(0,0,0);">4) </font><font style="color:rgb(0,0,0);">获取方法的 </font><font style="color:rgb(0,0,0);">Method </font><font style="color:rgb(0,0,0);">对象 </font></p>
-<pre><code class="language-java">Method setPriceMethod = clz.getMethod(&quot;setPrice&quot;, int.class);
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Method</span><span class="w"> </span><span class="n">setPriceMethod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clz</span><span class="p">.</span><span class="na">getMethod</span><span class="p">(</span><span class="s">&quot;setPrice&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
 <p>5) <font style="color:rgb(0,0,0);">利用 invoke 方法调用方法</font></p>
-<pre><code class="language-java">setPriceMethod.invoke(appleObj, 14); 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">setPriceMethod</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">appleObj</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
 <p><font style="color:rgb(0,0,0);">6) 通过 </font><strong><font style="color:rgb(0,0,0);">getFields() </font></strong><font style="color:rgb(0,0,0);">可以获取 Class 类的属性，但</font><u><font style="color:rgb(0,0,0);">无法获取私有属性</font></u><font style="color:rgb(0,0,0);">，而 </font><strong><font style="color:rgb(0,0,0);">getDeclaredFields()</font></strong><font style="color:rgb(0,0,0);">可以获取到包括</font><u><font style="color:rgb(0,0,0);">私有属性在内的所有属性</font></u><font style="color:rgb(0,0,0);">。</font><u><font style="color:rgb(0,0,0);">带有 Declared 修饰的方法可以反射到私有的方法，没有 Declared 修饰的只能用来反射公有的方法</font></u><font style="color:rgb(0,0,0);">，其他如 Annotation、Field、Constructor 也是如此。</font></p>
-<h3 id="_6">什么是反射？</h3>
+<h3 id="_6">什么是反射？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p><strong><font style="color:rgb(51,51,51);">动态获取的信息</font></strong><font style="color:rgb(51,51,51);">以及</font><strong><font style="color:rgb(51,51,51);">动态调用对象的方法</font></strong><font style="color:rgb(51,51,51);">的功能称为Java语言的反射机制。</font></p>
 <p><font style="color:rgb(51,51,51);">在运行状态中，对于任意一个类，能够知道这个类的所有属性和方法。对于任意一个对象，能够调用它</font><font style="color:rgb(51,51,51);">的任意一个方法和属性。</font></p>
-<h3 id="_7">反射有哪些应用场景呢？</h3>
+<h3 id="_7">反射有哪些应用场景呢？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ol>
 <li><font style="color:rgb(51,51,51);">JDBC连接数据库时使用</font><font style="color:rgb(245,0,88);">Class.forName() </font><font style="color:rgb(51,51,51);">通过反射加载数据库的驱动程序</font></li>
 <li><font style="color:rgb(51,51,51);">Eclispe、IDEA等开发工具利用反射动态解析对象的类型与结构，动态提示对象的属性和方法</font></li>
 <li><font style="color:rgb(51,51,51);">Web服务器中利用反射调用了Sevlet的 </font><font style="color:rgb(245,0,88);">service </font><font style="color:rgb(51,51,51);">方法</font></li>
 <li><strong><font style="color:rgb(51,51,51);">JDK动态代理</font></strong><font style="color:rgb(51,51,51);">底层依赖反射实现</font></li>
 </ol>
-<h3 id="_8">描述动态代理的几种实现方式，分别说出相应的优缺点</h3>
+<h3 id="_8">描述动态代理的几种实现方式，分别说出相应的优缺点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong><font style="color:rgb(18, 18, 18);">动态代理实现的集中实现方式</font></strong><ul>
 <li><font style="color:rgb(18, 18, 18);">JDK原生动态代理</font></li>
@@ -687,20 +687,20 @@ class Fruit{
 </li>
 </ol>
 <p><img alt="1664601151300-cd11edd8-5761-4799-87f9-6bac64661e5a.png" src="../img/dctqUZ-2JRhSjfTU/1664601151300-cd11edd8-5761-4799-87f9-6bac64661e5a-819609.png" /></p>
-<pre><code>2. &lt;font style="color:rgb(18, 18, 18);"&gt;被代理类实现接口&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>2. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;被代理类实现接口&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601153212-4f49834a-f887-4550-bd85-19fd9c256374.png" src="../img/dctqUZ-2JRhSjfTU/1664601153212-4f49834a-f887-4550-bd85-19fd9c256374-034521.png" /></p>
-<pre><code>3. &lt;font style="color:rgb(18, 18, 18);"&gt;被代理类&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>3. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;被代理类&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601153267-36d61428-32cb-4738-a90e-d3a8e354a734.png" src="../img/dctqUZ-2JRhSjfTU/1664601153267-36d61428-32cb-4738-a90e-d3a8e354a734-438521.png" /></p>
-<pre><code>4. &lt;font style="color:rgb(18, 18, 18);"&gt;JDK动态代理实现类&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>4. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;JDK动态代理实现类&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601153514-ddefdad9-0c86-460e-a2bd-56006f2c453f.png" src="../img/dctqUZ-2JRhSjfTU/1664601153514-ddefdad9-0c86-460e-a2bd-56006f2c453f-600108.png" /></p>
-<pre><code>5. &lt;font style="color:rgb(18, 18, 18);"&gt;测试类&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>5. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;测试类&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601153424-6b5058d1-afbd-4608-ba35-709feef693e5.png" src="../img/dctqUZ-2JRhSjfTU/1664601153424-6b5058d1-afbd-4608-ba35-709feef693e5-010536.png" /></p>
-<pre><code>6. &lt;font style="color:rgb(18, 18, 18);"&gt;测试结果&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>6. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;测试结果&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601153456-0a1a5e73-1d48-4c47-887b-62f4cda02c95.png" src="../img/dctqUZ-2JRhSjfTU/1664601153456-0a1a5e73-1d48-4c47-887b-62f4cda02c95-534385.png" /></p>
 <ol>
 <li><font style="color:rgb(18, 18, 18);">总结：两个个要素</font><ol>
@@ -727,18 +727,18 @@ class Fruit{
 </li>
 </ol>
 <p><img alt="1664601153718-96c6a615-0088-4188-b455-5540725b9830.png" src="../img/dctqUZ-2JRhSjfTU/1664601153718-96c6a615-0088-4188-b455-5540725b9830-338267.png" /></p>
-<pre><code>2. &lt;font style="color:rgb(18, 18, 18);"&gt;被代理类&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>2. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;被代理类&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601154430-ec3c9b4d-e5d4-455f-adc0-c1de9a6dce3a.png" src="../img/dctqUZ-2JRhSjfTU/1664601154430-ec3c9b4d-e5d4-455f-adc0-c1de9a6dce3a-137016.png" /></p>
-<pre><code>3. &lt;font style="color:rgb(18, 18, 18);"&gt;CGLB动态代理实现类&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>3. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;CGLB动态代理实现类&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601155245-37667fbe-bed9-44f1-8a47-783829567800.png" src="../img/dctqUZ-2JRhSjfTU/1664601155245-37667fbe-bed9-44f1-8a47-783829567800-655222.png" /></p>
-<pre><code>4. &lt;font style="color:rgb(18, 18, 18);"&gt;测试类
-</code></pre>
+<div class="highlight"><pre><span></span><code>4. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;测试类
+</code></pre></div>
 <p></font></p>
 <p><img alt="1664601155208-5e11bfc1-0915-4b4c-82de-f940fe836360.png" src="../img/dctqUZ-2JRhSjfTU/1664601155208-5e11bfc1-0915-4b4c-82de-f940fe836360-145489.png" /></p>
-<pre><code>5. &lt;font style="color:rgb(18, 18, 18);"&gt;测试结果&lt;/font&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>5. &lt;font style=&quot;color:rgb(18, 18, 18);&quot;&gt;测试结果&lt;/font&gt;
+</code></pre></div>
 <p><img alt="1664601154643-247a36ba-f2b3-4346-82cb-57ff318d1fe5.png" src="../img/dctqUZ-2JRhSjfTU/1664601154643-247a36ba-f2b3-4346-82cb-57ff318d1fe5-495879.png" /></p>
 <ol>
 <li><font style="color:rgb(18, 18, 18);">总结：</font><ol>
@@ -754,7 +754,7 @@ class Fruit{
 <p><a href="https://blog.csdn.net/jingyoushui/article/details/104299347">动态代理的几种实现方式及优缺点_静幽水1的博客-CSDN博客_动态代理的方式</a>
 </p>
 </blockquote>
-<h3 id="_9"><font style="color:rgb(0,0,0);">静态代理和动态代理的区别，什么场景使用？ </font></h3>
+<h3 id="_9"><font style="color:rgb(0,0,0);">静态代理和动态代理的区别，什么场景使用？ </font><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(0,0,0);">代理是一种常用的设计模式，目的是：</font><u><font style="color:rgb(0,0,0);">为其他对象提供一个代理以控制对某个对象的访问，将两个类的关系解耦</font></u><font style="color:rgb(0,0,0);">。</font><u><font style="color:rgb(0,0,0);">代理类和委托类都要实现相同的接口</font></u><font style="color:rgb(0,0,0);">，因为代理真正调用的是</font><strong><font style="color:rgb(0,0,0);">委托类的方法</font></strong><font style="color:rgb(0,0,0);">。 </font></p>
 <ul>
 <li><strong><font style="color:rgb(0,0,0);">区别</font></strong><font style="color:rgb(0,0,0);">： </font></li>
@@ -773,7 +773,7 @@ class Fruit{
 <li><font style="color:rgb(0,0,0);">Retrofit 中直接调用接口的方法；</font></li>
 <li><font style="color:rgb(0,0,0);">Spring 的 AOP 机制。</font></li>
 </ol>
-<h3 id="cglib">为什么CGlib方式可以对未实现接口的类实现代理。</h3>
+<h3 id="cglib">为什么CGlib方式可以对未实现接口的类实现代理。<a class="headerlink" href="#cglib" title="Permanent link">&para;</a></h3>
 <p>JDK实现动态代理需要<strong>实现类</strong><u>通过</u><strong><u>接口</u></strong><u>定义业务方法</u>，对于没有接口的类，如何实现动态代理呢，这就需要CGLib了。</p>
 <p>CGLib采用了非常底层的<strong>字节码技术</strong>，其原理是<u>通过字节码技术为一个类创建</u><strong><u>子类</u></strong>，并<u>在</u><strong><u>子类</u></strong><u>中采用方法拦截的技术拦截</u><strong><u>所有父类方法</u></strong><u>的调用</u>，顺势织入横切逻辑。</p>
 <p>JDK动态代理与CGLib动态代理均是实现Spring AOP的基础。</p>
@@ -784,7 +784,7 @@ class Fruit{
 <p><a href="https://www.cnblogs.com/chenliangcl/p/7239709.html">CGLib方式对接口实现代理 - 仗剑走天涯| - 博客园</a>
 </p>
 </blockquote>
-<h3 id="_10">怎么利用反射获取类中的对象？</h3>
+<h3 id="_10">怎么利用反射获取类中的对象？<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>方式一：如果我们有一个实例变量，可以通过该实例变量提供的getClass()方法获取：</p>
@@ -804,9 +804,9 @@ class Fruit{
 <p><a href="https://blog.csdn.net/weixin_45210565/article/details/116283226">【反射】反射获取类对象的三种方式_鱼与宇的博客-CSDN博客_反射获取对象的三种方式</a>
 </p>
 </blockquote>
-<h3 id="_11"><font style="color:#CF1322;">动态代理的原理 </font></h3>
+<h3 id="_11"><font style="color:#CF1322;">动态代理的原理 </font><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>动态代理基于<strong>反射</strong>实现，调用者通过<strong>代理对象</strong>来访问方法的时候，代理对象可以做相应的处理，然后通过反射调用被代理对象的方法。</p>
-<h3 id="jdkcglib"><font style="color:#CF1322;">JDK动态代理与CGlib动态代理区别</font></h3>
+<h3 id="jdkcglib"><font style="color:#CF1322;">JDK动态代理与CGlib动态代理区别</font><a class="headerlink" href="#jdkcglib" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>JDK动态代理<br />
 </strong>利用反射机制生成一个实现代理接口的匿名类，在调用具体方法前调用InvokeHandler来处理。</li>
@@ -824,14 +824,14 @@ class Fruit{
 <p><a href="https://blog.csdn.net/Hellowenpan/article/details/123482681">JDK动态代理原理解析_wen-pan的博客-CSDN博客_jdk动态代理实现原理</a>
 </p>
 </blockquote>
-<h3 id="cglib_1">动态代理与cglib实现的区别</h3>
+<h3 id="cglib_1">动态代理与cglib实现的区别<a class="headerlink" href="#cglib_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>JDK动态代理只能对实现了接口的类生成代理，而不能针对类.</li>
 <li>CGLIB是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法因为是继承，所以该类或方法最好不要声明成 final。</li>
 <li>JDK代理是不需要以来第三方的库，只要JDK环境就可以进行代理</li>
 <li>CGLib 必须依赖于CGLib的类库，但是它需要类来实现任何接口代理的是指定的类生成一个子类，覆盖其中的方法，是一种继承。</li>
 </ul>
-<h3 id="_12">动态代理是如何实现的？</h3>
+<h3 id="_12">动态代理是如何实现的？<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>常用实现方式是反射</p>
 <p>是一种行为方式，而反射或ASM只是它的一种实现手段而已</p>
 <ul>
@@ -845,7 +845,7 @@ class Fruit{
 <p><a href="https://www.bilibili.com/video/BV12b4y1B7h2/?zw&amp;vd_source=1ff9a2c4f611f17f5b87eab05ff01a5e">9动态代理是如何实现的？JDK Proxy 和 CGLib 有什么区别？_哔哩哔哩_bilibili</a>
 </p>
 </blockquote>
-<h3 id="jdkproxycglib">JDKProxy和CGLib有什么区别？</h3>
+<h3 id="jdkproxycglib">JDKProxy和CGLib有什么区别？<a class="headerlink" href="#jdkproxycglib" title="Permanent link">&para;</a></h3>
 <ul>
 <li>JDKProxy是Java语言自带的功能，无需通过加载第三方类实现</li>
 <li>Java对JDKProxy提供了稳定的支持，并且会持续的升级和更新JDKProxy</li>
@@ -861,7 +861,7 @@ class Fruit{
 <li>CGLib是第三方提供的工具，基于ASM实现的，性能比较高</li>
 <li>CGLib无需通过接口来实现，它是通过实现子类的方式来完成调用的</li>
 </ul>
-<h3 id="lombok">Lombok是通过反射实现的吗？</h3>
+<h3 id="lombok">Lombok是通过反射实现的吗？<a class="headerlink" href="#lombok" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Lombok的实现和反射没有任何关系</li>
 <li>反射是程序在运行期的一种自省（introspect）能力</li>
@@ -875,7 +875,7 @@ class Fruit{
 <a href="https://blog.csdn.net/qq_43437874/article/details/117292238">二、Lombok实现原理_云烟成雨TD的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="_13">动态代理的使用场景有哪些？</h3>
+<h3 id="_13">动态代理的使用场景有哪些？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Retrofit 中直接调用接口的方法；</li>
 <li>Spring 的 AOP 机制。</li>
@@ -884,7 +884,7 @@ class Fruit{
 <p>Retrofit：<font style="color:rgb(51, 51, 51);">A type-safe HTTP client for Android and the JVM. </font>
 </p>
 </blockquote>
-<h3 id="spring">Spring中的动态代理是通过什么方式实现的？</h3>
+<h3 id="spring">Spring中的动态代理是通过什么方式实现的？<a class="headerlink" href="#spring" title="Permanent link">&para;</a></h3>
 <ul>
 <li>JDK Proxy</li>
 <li>CGLib</li>
@@ -893,10 +893,10 @@ class Fruit{
 <p><a href="https://blog.csdn.net/qq_40205337/article/details/111410861">Spring学习(五)：动态代理的两种实现方式（全网最容易懂）_P@ssW0rd的博客-CSDN博客</a>
 </p>
 </blockquote>
-<h3 id="32">32.什么是代理，为什么要用动态代理？</h3>
+<h3 id="32">32.什么是代理，为什么要用动态代理？<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>一说到代理，大家可能都会联想到 JDK Proxy、Cglib、AOP等等，这些都算是动态代理。另外，我花了 1 个多星期把往期的面试题解析配套文档准备好了，想获取的小伙伴可以在我的煮叶简介中找到。</p>
 <p>为什么我们需要动态代理呢？ 在解答这个问题之前，先跟大家聊清楚什么是静态代理。</p>
-<h4 id="1">1、从静态代理到动态代理</h4>
+<h4 id="1">1、从静态代理到动态代理<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <p>静态代理呢是代理模式的一种实现形态。代理模式的官方原文是这样的:</p>
 <p><img alt="1671095724706-3d19f35b-f69d-4944-acfe-f2fcec14af0e.png" src="../img/dctqUZ-2JRhSjfTU/1671095724706-3d19f35b-f69d-4944-acfe-f2fcec14af0e-357044.png" /></p>
 <p>大致意思是，为其他对象提供一种代理项或占位符，以控制对这个对象的访问。什么意思呢？ 代理模式最核心的思想是创建一个代理对象作为在客户端和目标对象之间中介。</p>
@@ -909,7 +909,7 @@ class Fruit{
 <p>那为什么需要动态代理呢？ 我总结为以下两个原因：</p>
 <p>1、可以减少代理对象的个数，降低程序复杂度。</p>
 <p>2、易于复杂业务的动态扩展。</p>
-<h4 id="2">2、动态代理实现原理</h4>
+<h4 id="2">2、动态代理实现原理<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <p>那在 Java 中动态代理的实现原理是怎样的呢？ 以</p>
 <p>JDK Proxy 为例，我归纳为以下 5 个步骤：</p>
 <p>第 1 步： 拿到目标对象的引用，并且通过反射获取目标对象的所有接口</p>
@@ -919,7 +919,7 @@ class Fruit{
 <p>第 5 步： 加载并执行新生成的代理对象。</p>
 <p><img alt="1671095839719-418c2aee-09b4-4fb1-9d15-49332918b966.png" src="../img/dctqUZ-2JRhSjfTU/1671095839719-418c2aee-09b4-4fb1-9d15-49332918b966-768898.png" /></p>
 <p>目前，主流动态代理API 有两种，分别是JDK Proxy和 CGLib，CGLib 的实现原理我就不详细赘述了，如果想详细了解的小伙伴可以在评论区回复 666 ，我可以单独再拍一期视频详细介绍。好了，最后，还是给大家介绍一下 CBLib 和 JDK Proxy的区别。</p>
-<h4 id="3jdk-proxy-cblib">3、JDK Proxy 和 CBLib对比</h4>
+<h4 id="3jdk-proxy-cblib">3、JDK Proxy 和 CBLib对比<a class="headerlink" href="#3jdk-proxy-cblib" title="Permanent link">&para;</a></h4>
 <p>关于 JDK Proxy 和 CBLib 的区别我归纳为以下 3 点：</p>
 <p>第 1 点： JDK Proxy 是实现目标对象的接口，而 GGLib 是继承目标对象</p>
 <p>第 2 点： JDK Proxy 和 CGLib 都是在运行期生成字节码。</p>

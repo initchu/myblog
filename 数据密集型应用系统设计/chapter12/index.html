@@ -940,12 +940,12 @@
 之前的章节在讨论现状；
 本章讨论未来。
 我们的目标是，发现如何设计出比现有应用更好的应用 —— 健壮，正确，可演化，且最终对人类有益。</p>
-<h2 id="_1">数据集成</h2>
+<h2 id="_1">数据集成<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ol>
 <li>每个工具都有适用场景</li>
 <li>在复杂的应用中，数据的用法通常花样百出。不太可能存在适用于<strong>所有</strong>不同数据应用场景的软件，因此您不可避免地需要拼凑几个不同的软件来以提供应用所需的功能。</li>
 </ol>
-<h3 id="_2">组合使用衍生数据的工具</h3>
+<h3 id="_2">组合使用衍生数据的工具<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>随着数据不同表示形式的增加，集成问题变得越来越困难。</p>
 <ul>
 <li>除了数据库和搜索索引之外，也许你需要在分析系统（数据仓库，或批处理和流处理系统）中维护数据副本；</li>
@@ -954,7 +954,7 @@
 <li>或者基于数据变更发送通知。</li>
 </ul>
 <p>某人认为鸡肋而毫无意义的功能可能是别人的核心需求。当你拉高视角，并考虑跨越整个组织范围的数据流时，数据集成的需求往往就会变得明显起来。</p>
-<h4 id="_3">理解数据流</h4>
+<h4 id="_3">理解数据流<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <p>当需要在多个存储系统中维护相同数据的副本以满足不同的访问模式时，你要对输入和输出了如指掌：</p>
 <ul>
 <li>哪些数据先写入，哪些数据表示衍生自哪些来源？</li>
@@ -966,7 +966,7 @@
 <li>允许应用程序直接写入搜索索引和数据库引入了如<strong>图11-4</strong>所示的问题。</li>
 <li>基于事件日志来更新衍生数据的系统，通常可以做到<strong>确定性</strong>与<strong>幂等性</strong>（请参阅<strong>幂等性</strong>”），使得从故障中恢复相当容易。</li>
 </ul>
-<h4 id="_4">衍生数据与分布式事务</h4>
+<h4 id="_4">衍生数据与分布式事务<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <p>与分布式事务相比，使用衍生数据系统的方法如何？</p>
 <ul>
 <li>在抽象层面，它们通过不同的方式达到类似的目标。</li>
@@ -974,7 +974,7 @@
 <li>分布式事务使用原子提交来确保变更只生效一次，而基于日志的系统通常基于<strong>确定性重试</strong>和<strong>幂等性</strong>。</li>
 <li>最大的不同之处在于事务系统通常提供<strong>线性一致性</strong>，这包含着有用的保证，例如<strong>读己之写</strong>。另一方面，衍生数据系统通常是异步更新的，因此它们默认不会提供相同的时序保证。</li>
 </ul>
-<h4 id="_5">全序的限制</h4>
+<h4 id="_5">全序的限制<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>对于足够小的系统，构建一个完全有序的事件日志是完全可行的（如单主数据库）。但是大系统会出现麻烦：</p>
 <ul>
 <li>在大多数情况下，构建完全有序的日志，需要所有事件汇集于决定顺序的<strong>单个领导者节点</strong>。</li>
@@ -991,21 +991,21 @@
 <li>在形式上，决定事件的全局顺序称为<strong>全序广播</strong>，相当于<strong>共识。</strong></li>
 <li>大多数共识算法都是针对单个节点的吞吐量足以处理整个事件流的情况而设计的，并且这些算法不提供多个节点共享事件排序工作的机制。设计可以伸缩至单个节点的吞吐量之上，且在地理位置分散的环境中仍然工作良好的的共识算法仍然是一个开放的研究问题。</li>
 </ul>
-<h4 id="_6">排序事件以捕获因果关系</h4>
+<h4 id="_6">排序事件以捕获因果关系<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <ul>
 <li>在事件之间不存在因果关系的情况下，全序的缺乏并不是一个大问题，因为并发事件可以任意排序。</li>
 <li>但是能够有效地捕获<strong>因果依赖</strong>关系，并且保持正确的衍生状态，仍是个难题。（文中举了先解除好友关系，然后发送信息的例子）</li>
 </ul>
-<h3 id="_7">批处理与流处理</h3>
+<h3 id="_7">批处理与流处理<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>数据集成的目标是，确保数据最终能在所有正确的地方表现出正确的形式。
 这样做需要消费输入，转换，连接，过滤，聚合，训练模型，评估，以及最终写出适当的输出。
 批处理和流处理是实现这一目标的工具。</p>
-<h4 id="_8">维护衍生状态</h4>
+<h4 id="_8">维护衍生状态<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <ul>
 <li>批处理有着很强的函数式风格（即使其代码不是用函数式语言编写的）；</li>
 <li>为了提高速度，可以使用写入数据和更新索引可以使用异步；出现问题时，再报错。</li>
 </ul>
-<h4 id="_9">应用演化后重新处理数据</h4>
+<h4 id="_9">应用演化后重新处理数据<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
 <p>如何迁移系统？</p>
 <ul>
 <li>衍生视图允许<strong>渐进演化（gradual evolution）</strong>。</li>
@@ -1014,7 +1014,7 @@
 <li>然后可以开始将少量用户转移到新视图，以测试其性能并发现任何错误，而大多数用户仍然会被路由到旧视图。</li>
 <li>你可以逐渐地增加访问新视图的用户比例，最终可以删除旧视图。</li>
 </ul>
-<h4 id="lambda">Lambda架构</h4>
+<h4 id="lambda">Lambda架构<a class="headerlink" href="#lambda" title="Permanent link">&para;</a></h4>
 <p>什么是 Lambda 架构？</p>
 <ul>
 <li>融合了批处理和流处理。</li>
@@ -1029,7 +1029,7 @@
 <li>批流两个独立的输出，合并可能会困难。</li>
 <li>批处理开销巨大。</li>
 </ul>
-<h4 id="_10">统一批处理和流处理</h4>
+<h4 id="_10">统一批处理和流处理<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
 <p>最近的工作使得 Lambda 架构摒弃缺点。
 在一个系统中统一批处理和流处理需要以下功能，这些功能也正在越来越广泛地被提供：</p>
 <ul>
@@ -1037,10 +1037,10 @@
 <li>对于流处理器来说，恰好一次语义 —— 即确保输出与未发生故障的输出相同，即使事实上发生故障。与批处理一样，这需要丢弃任何失败任务的部分输出。</li>
 <li>按事件时间进行窗口化的工具，而不是按处理时间进行窗口化，因为处理历史事件时，处理时间毫无意义。例如，Apache Beam提供了用于表达这种计算的API，可以在Apache Flink或Google Cloud Dataflow使用。</li>
 </ul>
-<h2 id="_11">分拆数据库</h2>
+<h2 id="_11">分拆数据库<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p>Unix发展出的管道和文件只是字节序列，而数据库则发展出了SQL和事务。
 这两种哲学的矛盾，希望能各取其美。</p>
-<h3 id="_12">组合使用数据存储技术</h3>
+<h3 id="_12">组合使用数据存储技术<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>在本书的过程中，我们讨论了<strong>数据库</strong>提供的各种功能及其工作原理，其中包括：</p>
 <ul>
 <li><strong>次级索引，使您可以根据字段的值有效地搜索记录</strong></li>
@@ -1048,12 +1048,12 @@
 <li><strong>复制日志，保持其他节点上数据的副本最新</strong></li>
 <li><strong>全文搜索索引，允许在文本中进行关键字搜索，也内置于某些关系数据库</strong></li>
 </ul>
-<h4 id="_13">创建索引</h4>
+<h4 id="_13">创建索引<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
 <ul>
 <li>无论何时运行CREATE INDEX，数据库都会重新处理现有数据集（如“<strong>应用演化后重新处理数据</strong>”中所述），并将该索引作为新视图导出到现有数据上。</li>
 <li>现有数据可能是状态的快照，而不是所有发生变化的日志，但两者密切相关（请参阅“<strong>状态、流和不变性</strong>”）。</li>
 </ul>
-<h4 id="_14">一切的元数据库</h4>
+<h4 id="_14">一切的元数据库<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
 <p>各种数据库产品发展在未来将会把我们带到哪里？如果我们从没有适合所有访问模式的单一数据模型或存储格式的前提出发，我推测有两种途径可以将不同的存储和处理工具组合成一个有凝聚力的系统：
 <strong>联合数据库：统一读取</strong></p>
 <ul>
@@ -1068,7 +1068,7 @@
 <li>当我们构建多个存储系统时，我们同样需要确保所有数据变更都会在所有正确的位置结束，即使在出现故障时也是如此。</li>
 <li>想要更容易地将存储系统可靠地插接在一起（例如，通过变更数据捕获和事件日志），就像将数据库的索引维护功能以可以跨不同技术同步写入的方式分开。</li>
 </ul>
-<h4 id="_15">开展分拆工作</h4>
+<h4 id="_15">开展分拆工作<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
 <p>怎么写入到几个存储系统中？</p>
 <ul>
 <li>传统的同步写入方法需要跨异构存储系统的分布式事务，我认为这是错误的解决方案</li>
@@ -1079,20 +1079,20 @@
 <li>在系统级别，异步事件流使整个系统在个别组件的中断或性能下降时更加稳健。</li>
 <li>在人力方面，分拆数据系统允许不同的团队独立开发，改进和维护不同的软件组件和服务。</li>
 </ol>
-<h4 id="vs">分拆系统vs集成系统</h4>
+<h4 id="vs">分拆系统vs集成系统<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h4>
 <p>什么时候拆分系统，什么时候集成系统？</p>
 <ul>
 <li>分拆的目标不是要针对个别数据库与特定工作负载的性能进行竞争；我们的目标是允许您结合多个不同的数据库，以便在比单个软件可能实现的更广泛的工作负载范围内实现更好的性能。</li>
 <li>因此，如果有一项技术可以满足您的所有需求，那么最好使用该产品，而不是试图用更低层级的组件重新实现它。只有当没有单一软件满足您的所有需求时，才会出现拆分和联合的优势。</li>
 </ul>
-<h4 id="_16">少了什么？</h4>
+<h4 id="_16">少了什么？<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
 <p>用于组成数据系统的工具正在变得越来越好，但我认为还缺少一个主要的东西：<strong>我们还没有与Unix shell类似的分拆数据库等价物</strong>（即，一种声明式的、简单的、用于组装存储和处理系统的高级语言）。</p>
 <ul>
 <li>如果我们可以简单地声明mysql | elasticsearch，类似于Unix管道，成为CREATE INDEX的分拆等价，那就爽了！</li>
 </ul>
-<h3 id="_17">围绕数据流设计应用</h3>
+<h3 id="_17">围绕数据流设计应用<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>即使是<strong>电子表格</strong>也在数据流编程能力上甩开大多数主流编程语言几条街：某一个单元格可以使用公式对其他列求和。</p>
-<h4 id="_18">应用代码作为衍生函数</h4>
+<h4 id="_18">应用代码作为衍生函数<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
 <p>当一个数据集衍生自另一个数据集时，它会经历某种转换函数。如：</p>
 <ul>
 <li>次级索引是由一种直白的转换函数生成的衍生数据集：对某列或者字段的值排序建索引。</li>
@@ -1101,14 +1101,14 @@
 <li>缓存通常包含将以用户界面（UI）显示的形式的数据聚合。</li>
 </ul>
 <p>但是，当创建衍生数据集的函数不是像创建二级索引那样的标准函数时，<strong>需要自定义代码</strong>来处理特定于应用的东西，数据库就做不好了！！</p>
-<h4 id="_19">应用代码和状态的分离</h4>
+<h4 id="_19">应用代码和状态的分离<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
 <p>为什么要让计算和存储分离？</p>
 <ul>
 <li>让系统的某些部分<strong>专门用于持久数据存储</strong>并让<strong>其他部分专门运行应用程序代码</strong>是有意义的。这两者可以在保持独立的同时互动。</li>
 <li>比如大多数Web应用程序都是作为无状态服务部署的，数据库存储数据。</li>
 <li>这样可以独立扩缩容，互不影响。</li>
 </ul>
-<h4 id="_20">数据流：应用代码与状态变化的交互</h4>
+<h4 id="_20">数据流：应用代码与状态变化的交互<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
 <p>应用代码和状态怎么联系？</p>
 <ul>
 <li>从数据流的角度思考应用程序，意味着重新协调应用代码和状态管理之间的关系。</li>
@@ -1123,7 +1123,7 @@
 <li>稳定的消息排序和容错消息处理是相当严格的要求，但与分布式事务相比，它们开销更小，运行更稳定。</li>
 <li>现代流处理组件可以提供这些排序和可靠性保证，并允许应用代码以流算子的形式运行。</li>
 </ul>
-<h4 id="_21">流处理器和服务</h4>
+<h4 id="_21">流处理器和服务<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
 <p>服务的优点？</p>
 <ul>
 <li>当今流行的应用开发风格涉及将功能分解为一组通过同步网络请求（如REST API）进行通信的<strong>服务（service）</strong></li>
@@ -1140,7 +1140,7 @@
 <li>如：把远程服务器的变更同步到本地</li>
 <li>订阅变更流，而不是在需要时查询当前状态，是一个非常有希望的方向</li>
 </ul>
-<h3 id="_22">观察衍生数据状态</h3>
+<h3 id="_22">观察衍生数据状态<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
 <p>什么是写路径？</p>
 <ul>
 <li>上一节讨论的数据流系统提供了创建衍生数据集（例如搜索索引、物化视图和预测模型）并使其保持更新的过程。</li>
@@ -1156,7 +1156,7 @@
 <ul>
 <li>如果你熟悉函数式编程语言，则可能会注意到写路径类似于立即求值，读路径类似于惰性求值。</li>
 </ul>
-<h4 id="_23">物化视图和缓存</h4>
+<h4 id="_23">物化视图和缓存<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
 <p>如何加速查询？</p>
 <ul>
 <li>选择一：构建索引。读路径在索引中搜索关键字。</li>
@@ -1167,7 +1167,7 @@
 <ul>
 <li>缓存，索引和物化视图的作用很简单：它们改变了读路径与写路径之间的边界。通过预先计算结果，从而允许我们在写路径上做更多的工作，以节省读路径上的工作量。</li>
 </ul>
-<h4 id="_24">有状态、可离线的客户端</h4>
+<h4 id="_24">有状态、可离线的客户端<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
 <p>为什么客户端有状态？</p>
 <ul>
 <li>以前的 web 时代，采用客户端/服务器模型 —— 客户端大多是无状态的，而服务器拥有数据的权威 —— 已经普遍到我们几乎忘掉了还有其他任何模型的存在。</li>
@@ -1180,7 +1180,7 @@
 <li>优点：不用网络，速度快</li>
 <li>我们可以将设备上的状态视为<strong>服务器状态的缓存</strong>，屏幕上的像素是客户端应用中模型对象的物化视图；模型对象是远程数据中心的本地状态副本。</li>
 </ul>
-<h4 id="_25">将状态变更推送给客户端</h4>
+<h4 id="_25">将状态变更推送给客户端<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
 <p>怎么做到服务器推送给客户端？</p>
 <ul>
 <li>以前的网页中，如果页面不刷新重新请求，就不知道服务器的更新。</li>
@@ -1193,7 +1193,7 @@
 <li>有些设备会离线，但是基于日志的消息代理的消费者能在失败或断开连接后重连，并确保它不会错过掉线期间任何到达的消息。</li>
 <li>每个设备都是一个小事件流的小小订阅者。</li>
 </ul>
-<h4 id="_26">端到端的事件流</h4>
+<h4 id="_26">端到端的事件流<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
 <p>编程语言支持了端到端的写路径：</p>
 <ul>
 <li>最近用于开发有状态的客户端与用户界面的工具，例如如Elm语言和Facebook的React，Flux和Redux工具链，已经通过订阅表示用户输入或服务器响应的事件流来管理客户端的内部状态，其结构与事件溯源相似。</li>
@@ -1205,7 +1205,7 @@
 <li>老系统的改动成本大</li>
 <li>新系统可以考虑！</li>
 </ul>
-<h4 id="_27">读也是事件</h4>
+<h4 id="_27">读也是事件<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
 <p>为什么说读也是事件？</p>
 <ul>
 <li>当写入和读取都被表示为事件，并且被路由到同一个流算子以便处理时，我们实际上是在<strong>读取查询流和数据库之间执行流表连接</strong>。</li>
@@ -1213,7 +1213,7 @@
 <li>记录读取事件的日志可能对于追踪整个系统中的因果关系与数据来源也有好处：<strong>它可以让你重现出当用户做出特定决策之前看见了什么。</strong></li>
 <li>将读取事件写入持久存储可以更好地跟踪因果关系（请参阅“<a href="#%E6%8E%92%E5%BA%8F%E4%BA%8B%E4%BB%B6%E4%BB%A5%E6%8D%95%E8%8E%B7%E5%9B%A0%E6%9E%9C%E5%85%B3%E7%B3%BB">排序事件以捕获因果关系</a>”），但会产生额外的存储与I/O成本。如果需要的话，那么是值得的。</li>
 </ul>
-<h4 id="_28">多分区数据处理</h4>
+<h4 id="_28">多分区数据处理<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
 <p>为什么要有多分区数据处理？</p>
 <ul>
 <li>对于只涉及单个分区的查询，通过流来发送查询与收集响应可能是杀鸡用牛刀了。</li>
@@ -1225,16 +1225,16 @@
 <li>信用卡反欺诈，需要读取多个数据库的分区；</li>
 <li>MPP 数据库内部也有多分区连接功能，但是比流处理器更简单。</li>
 </ul>
-<h2 id="_29">将事情做正确</h2>
+<h2 id="_29">将事情做正确<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h2>
 <p>为什么需要正确？</p>
 <ul>
 <li>只读数据的无状态服务，出问题可以重启；</li>
 <li>数据库这样的有状态系统，出问题后只能永远的持续下去，因此需要仔细的思考。</li>
 <li>使用事务保证正确</li>
 </ul>
-<h3 id="_30">数据库的端到端原则</h3>
+<h3 id="_30">数据库的端到端原则<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
 <p>虽然数据库有较强的可靠安全属性，但是并不能保证数据没有损失或损坏：还要考虑应用代码。</p>
-<h4 id="_31">正好执行一次操作</h4>
+<h4 id="_31">正好执行一次操作<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h4>
 <p>举一个可能发生数据损坏的例子：</p>
 <ul>
 <li>我们见到了<strong>恰好一次</strong>（或<strong>等效一次</strong>）语义的概念。</li>
@@ -1246,51 +1246,51 @@
 <li>最有效的方法之一是使操作<strong>幂等（idempotent），</strong>即确保它无论是执行一次还是执行多次都具有相同的效果。</li>
 <li>实现幂等需要一些额外的努力。</li>
 </ul>
-<h4 id="_32">抑制重复</h4>
+<h4 id="_32">抑制重复<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
 <p>怎么抑制重复？</p>
 <ul>
 <li>除了流处理，还有很多地方需要抑制重复：如 TCP 重传中的序列号。</li>
 <li>我们即使能抑制数据库的重复事务，但是仍要担心网络重传。</li>
 </ul>
-<p>下面的例子，如果客户端没收到转账成功的响应，那么可能再次提交，导致转了 22$。</p>
-<pre><code class="language-sql">BEGIN TRANSACTION;
-    UPDATE accounts SET balance = balance + 11.00 WHERE account_id = 1234;
-    UPDATE accounts SET balance = balance - 11.00 WHERE account_id = 4321;
-COMMIT;
-</code></pre>
-<h4 id="_33">操作标识符</h4>
+<p>下面的例子，如果客户端没收到转账成功的响应，那么可能再次提交，导致转了 22$。
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="p">;</span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">11</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4321</span><span class="p">;</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div></p>
+<h4 id="_33">操作标识符<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
 <p>不能依赖网络实现幂等，需要考虑<strong>端到端（end-to-end）</strong> 的请求流。</p>
 <ul>
 <li>比如，你可以为操作生成一个唯一的标识符（例如UUID），每次操作的时候带上。</li>
 <li>服务端如果发现两次同样的标识符，那么就不操作。</li>
 </ul>
-<p>在数据库上可以对此标识符进行唯一的标记，防止重复插入：</p>
-<pre><code class="language-sql">ALTER TABLE requests ADD UNIQUE (request_id);
+<p>在数据库上可以对此标识符进行唯一的标记，防止重复插入：
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">requests</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">request_id</span><span class="p">);</span>
 
-BEGIN TRANSACTION;
-    INSERT INTO requests
-        (request_id, from_account, to_account, amount) 
-        VALUES('0286FDB8-D7E1-423F-B40B-792B3608036C', 4321, 1234, 11.00);
-    UPDATE accounts SET balance = balance + 11.00 WHERE account_id = 1234;
-    UPDATE accounts SET balance = balance - 11.00 WHERE account_id = 4321;
-COMMIT;
-</code></pre>
-<h4 id="_34">端到端原则</h4>
+<span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">requests</span>
+<span class="w">        </span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span><span class="w"> </span><span class="n">from_account</span><span class="p">,</span><span class="w"> </span><span class="n">to_account</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;0286FDB8-D7E1-423F-B40B-792B3608036C&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4321</span><span class="p">,</span><span class="w"> </span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">.</span><span class="mi">00</span><span class="p">);</span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">11</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="p">;</span>
+<span class="w">    </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">accounts</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">11</span><span class="p">.</span><span class="mi">00</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">account_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4321</span><span class="p">;</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div></p>
+<h4 id="_34">端到端原则<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
 <p>抑制重复事务的这种情况只是一个更普遍的原则的一个例子，这个原则被称为<strong>端到端原则（end-to-end argument）：</strong></p>
 <ul>
 <li>只有在通信系统两端应用的知识与帮助下，所讨论的功能才能完全地正确地实现。因而将这种被质疑的功能作为通信系统本身的功能是不可能的。 （有时，通信系统可以提供这种功能的不完备版本，可能有助于提高性能。）</li>
 </ul>
 <p>只有端到端的安全，才能抑制重复事务。
 我们只需要记住，低级别的可靠性功能本身并不足以确保端到端的正确性。</p>
-<h4 id="_35">在数据系统中应用端到端思考</h4>
+<h4 id="_35">在数据系统中应用端到端思考<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h4>
 <ul>
 <li>事务是很好的抽象，也有用，但是还不够端到端的安全。</li>
 <li>事务代价高昂，当涉及异构存储技术时尤为甚。</li>
 <li>我们拒绝使用分布式事务是因为它开销太大，结果我们最后不得不在应用代码中重新实现容错机制。</li>
 </ul>
-<h3 id="_36">强制约束</h3>
+<h3 id="_36">强制约束<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
 <p>在端到端去重之外，我们来关注其他的约数。特别关注一下<strong>唯一性约束。</strong></p>
-<h4 id="_37">唯一性约束需要达成共识</h4>
+<h4 id="_37">唯一性约束需要达成共识<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
 <p>怎么实现？</p>
 <ul>
 <li>在分布式环境中，强制执行唯一性约束需要<strong>共识</strong>：如果存在多个具有相同值的并发请求，则系统需要决定冲突操作中的哪一个被接受，并拒绝其他违背约束的操作。</li>
@@ -1298,14 +1298,14 @@ COMMIT;
 <li>唯一性检查可以通过对唯一性字段分区做横向伸缩，如通过哈希分区。</li>
 <li>但异步多主复制排除在外，因为可能会发生不同主库同时接受冲突写操作的情况，因而这些值不再是唯一的。此时同步协调是无法避免的。</li>
 </ul>
-<h4 id="_38">基于日志消息传递中的唯一性</h4>
+<h4 id="_38">基于日志消息传递中的唯一性<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h4>
 <p>怎么使用日志消息传递中实现唯一性？</p>
 <ul>
 <li>日志确保所有消费者以相同的顺序看见消息 —— 这种保证在形式上被称为<strong>全序广播（total order boardcast）</strong> 并且等价于共识。</li>
 <li>类似于分拆数据库的方法。</li>
 <li>流处理器在单个线程上依次消费单个日志<strong>分区</strong>中的所有消息。因此，如果日志是按需要确保唯一的值做的分区，则流处理器可以无歧义地、确定性地决定几个冲突操作中的哪一个先到达。</li>
 </ul>
-<h4 id="_39">多分区请求处理</h4>
+<h4 id="_39">多分区请求处理<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h4>
 <p>当涉及多个分区时，确保操作以原子方式执行且同时满足约束就变得很有趣了。</p>
 <p>如果一个操作需要三个分区：一个包含请求ID，一个包含收款人账户，另一个包含付款人账户，咋办？</p>
 <ul>
@@ -1320,7 +1320,7 @@ COMMIT;
 <li>后续处理器消费借记/贷记指令流，按照请求ID除重，并将变更应用至账户余额。</li>
 </ol>
 <p>因为有确定的 ID 的存在，那么失败重启可以从断点恢复，如果重复提交可以用 ID 去重。</p>
-<h3 id="_40">及时性与完整性</h3>
+<h3 id="_40">及时性与完整性<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
 <p>一致性要同步吗？</p>
 <ul>
 <li>事务的一个便利属性是，它们通常是线性一致的：写入者等待写入完成；</li>
@@ -1340,7 +1340,7 @@ COMMIT;
 <li>口号形式：违反及时性，“最终一致性”；违反完整性，“永无一致性”。</li>
 <li>我断言在大多数应用中，完整性比及时性重要得多。违反及时性可能令人困惑与讨厌，但违反完整性的结果可能是灾难性的。</li>
 </ul>
-<h4 id="_41">数据流系统的正确性</h4>
+<h4 id="_41">数据流系统的正确性<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h4>
 <p>数据库、流系统的正确性？</p>
 <ul>
 <li>ACID事务通常既提供及时性（例如线性一致性）也提供完整性保证（例如原子提交）。因此如果你从ACID事务的角度来看待应用的正确性，那么及时性与完整性的区别是无关紧要的。</li>
@@ -1359,12 +1359,12 @@ COMMIT;
 <li>将客户端生成的请求ID传递通过所有的处理层次，从而允许端到端的除重，带来幂等性。</li>
 <li>使消息不可变，并允许衍生数据能随时被重新处理，这使从错误中恢复更加容易（请参阅“<a href="ch11.md#%E4%B8%8D%E5%8F%AF%E5%8F%98%E4%BA%8B%E4%BB%B6%E7%9A%84%E4%BC%98%E7%82%B9">不可变事件的优点</a>”）</li>
 </ul>
-<h4 id="_42">宽松地解释约束</h4>
+<h4 id="_42">宽松地解释约束<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h4>
 <p>在执行唯一性约束时，许多真实世界的应用实际上可以摆脱这种形式，接受弱得多的唯一性：</p>
 <ul>
 <li>给客户道歉，补偿，给折扣</li>
 </ul>
-<h4 id="_43">无协调数据系统</h4>
+<h4 id="_43">无协调数据系统<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h4>
 <p>两个现象：</p>
 <ol>
 <li>数据流系统可以维持衍生数据的完整性保证，而无需原子提交、线性一致性或者同步的跨分区协调。</li>
@@ -1385,36 +1385,36 @@ COMMIT;
 <li>它们减少了由于不一致而必须做出的道歉数量，但也可能会降低系统的性能和可用性，从而可能增加由于宕机中断而需要做出的道歉数量。</li>
 <li>自己平衡点。</li>
 </ul>
-<h3 id="_44">信任但验证</h3>
+<h3 id="_44">信任但验证<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
 <p>我们所有关于正确性，完整性和容错的讨论都基于一些假设，假设某些事情可能会出错，但其他事情不会。我们将这些假设称为我们的<strong>系统模型（system model）</strong>。
 这些假设相当合理，但是错误是个概率问题。</p>
-<h4 id="bug">维护完整性，尽管软件有Bug</h4>
+<h4 id="bug">维护完整性，尽管软件有Bug<a class="headerlink" href="#bug" title="Permanent link">&para;</a></h4>
 <p>软件有存在Bug的风险，Mysql 也可能有 bug。
 ACID 也可能有 bug。
 错误使用数据库，也可能导致数据出问题。</p>
-<h4 id="_45">不要盲目信任承诺</h4>
+<h4 id="_45">不要盲目信任承诺<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h4>
 <p>数据有概率损坏，检查数据完整性称为<strong>审计（auditing）</strong>
 定期审计数据和备份。</p>
-<h4 id="_46">验证的文化</h4>
+<h4 id="_46">验证的文化<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h4>
 <ul>
 <li>我希望未来能看到更多的<strong>自我验证（self-validating）</strong> 或<strong>自我审计（self-auditing）</strong> 系统，不断检查自己的完整性，而不是依赖盲目的信任。</li>
 <li>我担心ACID数据库的文化导致我们在盲目信任技术（如事务机制）的基础上开发应用，而忽视了这种过程中的任何可审计性。由于我们所信任的技术在大多数情况下工作得很好，通常会认为审计机制并不值得投资。</li>
 <li>在NoSQL的旗帜下，更弱的一致性保证成为常态，更不成熟的存储技术越来越被广泛使用。</li>
 <li>如果没有审计，越来越危险。</li>
 </ul>
-<h4 id="_47">为可审计性而设计</h4>
+<h4 id="_47">为可审计性而设计<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h4>
 <ul>
 <li>事务操作发生后，很难说清楚意味着什么。</li>
 <li>相比之下，基于事件的系统可以提供更好的可审计性。</li>
 <li>显式处理数据流可以使数据的<strong>来龙去脉（provenance）</strong> 更加清晰，从而使完整性检查更具可行性。</li>
 <li>具有确定性且定义良好的数据流，也使调试与跟踪系统的执行变得容易，以便确定它<strong>为什么</strong>做了某些事情</li>
 </ul>
-<h4 id="_48">端到端原则重现</h4>
+<h4 id="_48">端到端原则重现<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h4>
 <ul>
 <li>检查数据系统的完整性，最好是以端到端的方式进行</li>
 <li>持续的端到端完整性检查可以不断提高你对系统正确性的信心，从而使你能更快地进步</li>
 </ul>
-<h4 id="_49">用于可审计数据系统的工具</h4>
+<h4 id="_49">用于可审计数据系统的工具<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h4>
 <ul>
 <li>目前，将可审计性作为顶层关注点的数据系统并不多。</li>
 <li>使用密码学工具来证明系统的完整性是十分有趣的，现在有些加密货币、区块链技术出现在这个领域。</li>
@@ -1422,76 +1422,76 @@ ACID 也可能有 bug。
 <li>除了炒作的沸沸扬扬的加密货币之外，<strong>证书透明性（certificate transparency）</strong> 也是一种依赖Merkle树的安全技术，用来检查TLS/SSL证书的有效性。</li>
 <li>这是值得关注的有趣领域。</li>
 </ul>
-<h2 id="_50">做正确的事情</h2>
+<h2 id="_50">做正确的事情<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h2>
 <ul>
 <li>每个系统都服务于一个目的；我们，建立这些系统的工程师，有责任去仔细考虑这些后果，并有意识地决定，我们希望生活在怎样的世界中。</li>
 <li>许多数据集都是关于人的：他们的行为，他们的兴趣，他们的身份。对待这些数据，我们必须怀着人性与尊重。用户也是人类，人类的尊严是至关重要的。</li>
 <li>技术本身并无好坏之分 —— 关键在于它被如何使用，以及它如何影响人们。</li>
 <li>软件工程师仅仅专注于技术而忽视其后果是不够的：道德责任也是我们的责任。对道德推理很困难，但它太重要了，我们无法忽视。</li>
 </ul>
-<h3 id="_51">预测性分析</h3>
+<h3 id="_51">预测性分析<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h3>
 <ul>
 <li>预测性分析是“大数据”炒作的主要内容之一。</li>
 <li>如果算法决策把某个人判定为有风险的人，那么就会带来很大风险。</li>
 <li>无罪推定。</li>
 </ul>
-<h4 id="_52">偏见与歧视</h4>
+<h4 id="_52">偏见与歧视<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h4>
 <p>预测性分析系统只是基于过去进行推断；</p>
 <ul>
 <li>如果过去是歧视性的，它们就会将这种歧视归纳为规律。</li>
 <li>如果我们希望未来比过去更好，那么就需要道德想象力，而这是只有人类才能提供的东西。</li>
 <li>数据与模型应该是我们的工具，而不是我们的主人。</li>
 </ul>
-<h4 id="_53">责任与问责</h4>
+<h4 id="_53">责任与问责<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h4>
 <ul>
 <li>自动决策引发了关于责任与问责的问题：算法犯错误，谁来负责？比如自动驾驶。</li>
 <li>很多数据本质上是统计性的，这意味着即使概率分布在总体上是正确的，对于个例也可能是错误的。</li>
 <li>盲目相信数据决策至高无上，这不仅仅是一种妄想，而是有切实危险的。</li>
 <li>我们还需要想清楚，如何避免数据被用于害人，如何认识数据的积极潜力。</li>
 </ul>
-<h4 id="_54">反馈循环</h4>
+<h4 id="_54">反馈循环<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h4>
 <p>推荐算法，使人进入信息茧房、回音室；
 反馈算法，导致恶性循环，增大贫富差距。</p>
-<h3 id="_55">隐私和追踪</h3>
+<h3 id="_55">隐私和追踪<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h3>
 <ul>
 <li>当系统只存储用户明确输入的数据时，是因为用户希望系统以特定方式存储和处理这些数据，<strong>系统是在为用户提供服务</strong>：用户就是客户。</li>
 <li>但是如广告这样的商业模式，通过隐私和追踪获利。</li>
 <li>相当于<strong>监视（surveilance）</strong></li>
 </ul>
-<h4 id="_56">监视</h4>
+<h4 id="_56">监视<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h4>
 <p>并不是所有的数据收集都称得上监视，但检视这一点有助于理解我们与数据收集者之间的关系。</p>
-<h4 id="_57">同意与选择的自由</h4>
+<h4 id="_57">同意与选择的自由<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h4>
 <ul>
 <li>而且从用户身上挖掘数据是一个单向过程，而不是真正的互惠关系，也不是公平的价值交换。</li>
 <li>因为一个服务会跟踪用户而拒绝使用它，这只是少数人才拥有的权力，他们有足够的时间与知识来了解隐私政策，并承受得起代价：错过社会参与，以及使用服务可能带来的专业机会。</li>
 <li>对于那些处境不太好的人而言，并没有真正意义上的选择：监控是不可避免的。</li>
 </ul>
-<h4 id="_58">隐私与数据使用</h4>
+<h4 id="_58">隐私与数据使用<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>隐私权是一项决定权</strong>：在从保密到透明的光谱上，隐私使得每个人都能决定自己想要在什么地方位于光谱上的哪个位置。这是一个人自由与自主的重要方面。</li>
 <li>决定向谁透露什么并不是由个体按照自己的喜好决定的，而是由<strong>公司</strong>，以利润最大化为目标来行使隐私权的。</li>
 <li>这种从个体到公司的大规模隐私权转移在历史上是史无前例的。</li>
 </ul>
-<h4 id="_59">数据资产与权力</h4>
+<h4 id="_59">数据资产与权力<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h4>
 <ul>
 <li>因为数据很有价值，所以很多人都想要它。</li>
 <li>当然，公司也想要它 —— 这就是为什么它们一开始就收集数据的原因。</li>
 <li>但政府也想获得它：通过秘密交易、胁迫、法律强制或者只是窃取。</li>
 <li>俗话说，“知识就是力量”。更进一步，“在避免自己被审视的同时审视他人，是权力最重要的形式之一”</li>
 </ul>
-<h4 id="_60">回顾工业革命</h4>
+<h4 id="_60">回顾工业革命<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h4>
 <ul>
 <li>就像工业革命有着黑暗面需要应对一样，我们转向信息时代的过程中，也有需要应对与解决的重大问题。</li>
 <li>我相信数据的收集与使用就是其中一个问题。</li>
 </ul>
-<h4 id="_61">立法与自律</h4>
+<h4 id="_61">立法与自律<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h4>
 <ul>
 <li>那些收集了大量有关人的数据的公司反对监管，认为这是创新的负担与阻碍。</li>
 <li>我们应该允许每个人保留自己的隐私 —— 即，对自己数据的控制 —— 而不是通过监视来窃取这种控制权。</li>
 <li>我们究竟能做到哪一步，是一个开放的问题。</li>
 <li>总的来说，文化与态度的改变是必要的。</li>
 </ul>
-<h2 id="_62">本章小结</h2>
+<h2 id="_62">本章小结<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h2>
 <p>没有单种工具能高效服务所有可能的用例，因此应用必须组合使用几种不同的软件才能实现其目标。</p>
 <ul>
 <li>我们讨论了如何使用批处理与事件流来解决这一<strong>数据集成（data integration）</strong> 问题，以便让数据变更在不同系统之间流动。</li>

@@ -251,22 +251,22 @@
 
 
 
-<h1 id="hashmap">HashMap 源码</h1>
-<pre><code class="language-java">put(&quot;aaa&quot;,444);
-</code></pre>
-<pre><code class="language-java">public V put(K key, V value) {
-    return putVal(hash(key), key, value, false, true);
-}
-</code></pre>
-<h1 id="_1">扰动函数</h1>
-<pre><code class="language-java">static final int hash(Object key) {
-    int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
-}
-</code></pre>
+<h1 id="hashmap">HashMap 源码<a class="headerlink" href="#hashmap" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="n">put</span><span class="p">(</span><span class="s">&quot;aaa&quot;</span><span class="p">,</span><span class="mi">444</span><span class="p">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">putVal</span><span class="p">(</span><span class="n">hash</span><span class="p">(</span><span class="n">key</span><span class="p">),</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_1">扰动函数<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">hash</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">hashCode</span><span class="p">())</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在HashMap存放元素时候有上面这样一段代码来处理哈希值，这是 java 8 的散列值扰动函数，用于优化散列效果。</p>
 <p>目的是：数据分配均匀，也就是散列的效果更好，减少了hash的碰撞，让数据存放和获取的效率更佳。</p>
-<h1 id="_2">负载因子</h1>
+<h1 id="_2">负载因子<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><strong>负载因子是做什么的？</strong></p>
 <p>负载因子，可以理解成一辆车可承重重量超过某个阈值时，把货放到新的车上。</p>
 <p>那么在HashMap中，<strong><u>负载因子决定了数据量多少了以后进行扩容</u></strong>。</p>
@@ -274,103 +274,103 @@
 <p>所以可能即使你数据比数组容量大时也是不一定能正正好好的把数组占满的，而是在某些小标位置出现了大量的碰撞，只能在同一个位置用链表存放，那么这样就失去了Map数组的性能。</p>
 <p>所以，要选择一个合理的大小下进行扩容，<strong><u>默认值0.75就是说当阈值容量占了3/4时赶紧扩容，减少Hash碰撞</u></strong>。</p>
 <p>同时0.75是一个默认构造值，在创建HashMap也可以调整，比如你希望用更多的空间换取时间，可以把负载因子调的更小一些，减少碰撞。</p>
-<h1 id="_3">添加元素</h1>
+<h1 id="_3">添加元素<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
 <p>添加元素的时候考虑有三种情况：</p>
 <ol>
 <li>数组位置为null</li>
 <li>数组位置不为null，键不重复，挂在下面形成链表或者红黑树</li>
 <li>数组位置不为null，键重复，元素覆盖</li>
 </ol>
-<pre><code class="language-java">// 1. 哈希值
-// 2. 键
-// 3. 值
-// 4. 如果键重复了是否保留，
-//  true：老元素的值保留，不会覆盖
-//  false：表示老元素的值不保留，会进行覆盖
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,boolean evict) {
-    // 定义一个局部变量，记录哈希表的数组的地址值（之前有个堆里面的，不用那个是因为写方法里面会更快）
-    Node&lt;K,V&gt;[] tab; 
-    // 临时的第三方变量，用来记录键值对对对象的地址值
-    Node&lt;K,V&gt; p; 
-    // 数组长度和索引
-    int n, i; 
-    // 1. 如果当前是第一次添加数据，底层创建一个默认长度为16，加载因子为0.75的数组
-    // 2. 如果不是第一次添加数据，会看数组中的元素是否达到了扩容的条件
-    // 如果没有达到扩容条件，底层不会做任何操作
-    // 如果达到了，底层会把数据扩容为原来的两倍，并把数据全部转移到新的哈希表中
-    if ((tab = table) == null || (n = tab.length) == 0){
-        tab = resize();
-        // 把当前数组的长度复制给 n
-        n = (tab).length;
-    }
-    // 拿这数组长度的跟键的哈希值进行计算，计算出当前键值对对象，在数组中应存入的位置
-    i = (n-1) &amp; hash; // index
-    // 获取数组中对应元素的数据
-    p = tab[i];
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. 哈希值</span>
+<span class="c1">// 2. 键</span>
+<span class="c1">// 3. 值</span>
+<span class="c1">// 4. 如果键重复了是否保留，</span>
+<span class="c1">//  true：老元素的值保留，不会覆盖</span>
+<span class="c1">//  false：表示老元素的值不保留，会进行覆盖</span>
+<span class="kd">final</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="nf">putVal</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">onlyIfAbsent</span><span class="p">,</span><span class="kt">boolean</span><span class="w"> </span><span class="n">evict</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 定义一个局部变量，记录哈希表的数组的地址值（之前有个堆里面的，不用那个是因为写方法里面会更快）</span>
+<span class="w">    </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;[]</span><span class="w"> </span><span class="n">tab</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 临时的第三方变量，用来记录键值对对对象的地址值</span>
+<span class="w">    </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 数组长度和索引</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">// 1. 如果当前是第一次添加数据，底层创建一个默认长度为16，加载因子为0.75的数组</span>
+<span class="w">    </span><span class="c1">// 2. 如果不是第一次添加数据，会看数组中的元素是否达到了扩容的条件</span>
+<span class="w">    </span><span class="c1">// 如果没有达到扩容条件，底层不会做任何操作</span>
+<span class="w">    </span><span class="c1">// 如果达到了，底层会把数据扩容为原来的两倍，并把数据全部转移到新的哈希表中</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">tab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tab</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">        </span><span class="n">tab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resize</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// 把当前数组的长度复制给 n</span>
+<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tab</span><span class="p">).</span><span class="na">length</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 拿这数组长度的跟键的哈希值进行计算，计算出当前键值对对象，在数组中应存入的位置</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span><span class="w"> </span><span class="c1">// index</span>
+<span class="w">    </span><span class="c1">// 获取数组中对应元素的数据</span>
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
 
-    if ((p == null){
-        // 创建一个键值对对象，直接放到数组当中
-        tab[i] = newNode(hash, key, value, null);
-    } else {
-        // 键不重复，挂在下面形成链表或者红黑树
-        Node&lt;K,V&gt; e; K k;
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">){</span>
+<span class="w">        </span><span class="c1">// 创建一个键值对对象，直接放到数组当中</span>
+<span class="w">        </span><span class="n">tab</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newNode</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 键不重复，挂在下面形成链表或者红黑树</span>
+<span class="w">        </span><span class="n">Node</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
 
-        // 数组中的哈希值和要添加的元素值进行比较,键不一样返回 false
-        boolean b1 = p.hash == hash;
+<span class="w">        </span><span class="c1">// 数组中的哈希值和要添加的元素值进行比较,键不一样返回 false</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">hash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
 
-        if (b1 &amp;&amp;((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
-            e = p; 
-        else if (p instanceof TreeNode)
-            // 从数组中取出来的键值对是不是是不是红黑树的节点
-            // 如果是，则调用 putTreeVal 按照红黑树的规则添加
-            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
-        else {
-            // 如果从数组中后取出来的键值对不是红黑树中的节点
-            // 表示挂在链表下
-            for (int binCount = 0; ; ++binCount) { 
-                if ((e = p.next) == null) {
-                    // 创建新节点挂在链表下面
-                    p.next = newNode(hash, key, value, null);
-                    // 判断长度是否超过8
-                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                        // treeifyBin 会判断数组的长度是否大于等于64，
-                        // 大于则转化成红黑树
-                        treeifyBin(tab, hash);
-                    break;
-                }
-                // 如果哈希值一样，就会调用equals放啊比较内部的属性值是否相同
-                if (e.hash == hash &amp;&amp;((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
-                    break;
-                p = e;
-            }
-        }
-        // 键重复，元素覆盖 
-        if (e != null) { // existing mapping for key
-            V oldValue = e.value;
-            // onlyIfAbsent: 如果键重复了是否保留，
-            //  true：老元素的值保留，不会覆盖
-            //  false：表示老元素的值不保留，会进行覆盖
-            if (!onlyIfAbsent || oldValue == null){
-                // 仅修改键值对里面的值，键值对还是原来的
-                e.value = value;
-            }
-            afterNodeAccess(e);
-            return oldValue;
-        }
-    }
-    // 用于判断并发修改异常判断的值
-    ++modCount;
-    // size 先自增
-    // threshold：记录的是 数组的长度 * 0.75，哈希表的扩容时机 16 * 0.75 = 12
-    if (++size &gt; threshold){
-        resize();
-    }
-    // 这是个linkHashMap有关的，在hashMap中忽略这段逻辑
-    afterNodeInsertion(evict);
-    // 没有覆盖任何元素，返回null
-    return null;
-}
-</code></pre>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="p">((</span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">key</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">k</span><span class="p">))))</span>
+<span class="w">            </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">TreeNode</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">// 从数组中取出来的键值对是不是是不是红黑树的节点</span>
+<span class="w">            </span><span class="c1">// 如果是，则调用 putTreeVal 按照红黑树的规则添加</span>
+<span class="w">            </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="n">TreeNode</span><span class="o">&lt;</span><span class="n">K</span><span class="p">,</span><span class="n">V</span><span class="o">&gt;</span><span class="p">)</span><span class="n">p</span><span class="p">).</span><span class="na">putTreeVal</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="n">tab</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 如果从数组中后取出来的键值对不是红黑树中的节点</span>
+<span class="w">            </span><span class="c1">// 表示挂在链表下</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">binCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">binCount</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="na">next</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// 创建新节点挂在链表下面</span>
+<span class="w">                    </span><span class="n">p</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newNode</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">);</span>
+<span class="w">                    </span><span class="c1">// 判断长度是否超过8</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">binCount</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">TREEIFY_THRESHOLD</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// -1 for 1st</span>
+<span class="w">                        </span><span class="c1">// treeifyBin 会判断数组的长度是否大于等于64，</span>
+<span class="w">                        </span><span class="c1">// 大于则转化成红黑树</span>
+<span class="w">                        </span><span class="n">treeifyBin</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">);</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="c1">// 如果哈希值一样，就会调用equals放啊比较内部的属性值是否相同</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="na">hash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="p">((</span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">key</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">k</span><span class="p">))))</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 键重复，元素覆盖 </span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// existing mapping for key</span>
+<span class="w">            </span><span class="n">V</span><span class="w"> </span><span class="n">oldValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="na">value</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// onlyIfAbsent: 如果键重复了是否保留，</span>
+<span class="w">            </span><span class="c1">//  true：老元素的值保留，不会覆盖</span>
+<span class="w">            </span><span class="c1">//  false：表示老元素的值不保留，会进行覆盖</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">onlyIfAbsent</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">oldValue</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">){</span>
+<span class="w">                </span><span class="c1">// 仅修改键值对里面的值，键值对还是原来的</span>
+<span class="w">                </span><span class="n">e</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">afterNodeAccess</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">oldValue</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 用于判断并发修改异常判断的值</span>
+<span class="w">    </span><span class="o">++</span><span class="n">modCount</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// size 先自增</span>
+<span class="w">    </span><span class="c1">// threshold：记录的是 数组的长度 * 0.75，哈希表的扩容时机 16 * 0.75 = 12</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="n">size</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">threshold</span><span class="p">){</span>
+<span class="w">        </span><span class="n">resize</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 这是个linkHashMap有关的，在hashMap中忽略这段逻辑</span>
+<span class="w">    </span><span class="n">afterNodeInsertion</span><span class="p">(</span><span class="n">evict</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// 没有覆盖任何元素，返回null</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2024-05-21 09:45:34<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/nrivza3r37ieur6x">https://www.yuque.com/xiaoshan_wgo/codingnotes/nrivza3r37ieur6x</a></p>

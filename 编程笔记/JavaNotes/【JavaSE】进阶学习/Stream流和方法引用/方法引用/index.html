@@ -251,19 +251,19 @@
 
 
 
-<h1 id="_1">方法引用</h1>
-<h1 id="_2">方法引用</h1>
+<h1 id="_1">方法引用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="_2">方法引用<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <ul>
 <li>把已经有的方法拿过来用，当做函数式接口中抽象方法的方法体</li>
 <li>例子：假设有如下的方法</li>
 </ul>
-<pre><code class="language-java">Arrays.sort(arr, new Comparator&lt;Integer&gt;(){
-    @Override
-    public int compare(Integer o1, Integer o2){
-        return o2 - o1;
-    }
-});
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comparator</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(){</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">compare</span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">o1</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">o2</span><span class="p">){</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">o2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">o1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
 <ol>
 <li>引用处必须是函数式接口。</li>
 <li></li>

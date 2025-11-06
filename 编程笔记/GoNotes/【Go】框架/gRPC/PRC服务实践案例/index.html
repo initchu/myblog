@@ -251,140 +251,138 @@
 
 
 
-<h1 id="prc">PRC 服务实践案例</h1>
-<h1 id="_1"><font style="color:rgb(51, 51, 51);"> 中间件</font></h1>
+<h1 id="prc">PRC 服务实践案例<a class="headerlink" href="#prc" title="Permanent link">&para;</a></h1>
+<h1 id="_1"><font style="color:rgb(51, 51, 51);"> 中间件</font><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>生成 proto 文件</p>
-<pre><code class="language-go">// 这个就是protobuf的中间文件
+<div class="highlight"><pre><span></span><code><span class="c1">// 这个就是protobuf的中间文件</span>
 
-// 指定的当前proto语法的版本，有2和3
-syntax = &quot;proto3&quot;;
-option go_package=&quot;../service&quot;;
+<span class="c1">// 指定的当前proto语法的版本，有2和3</span>
+<span class="nx">syntax</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;proto3&quot;</span><span class="p">;</span>
+<span class="nx">option</span><span class="w"> </span><span class="nx">go_package</span><span class="p">=</span><span class="s">&quot;../service&quot;</span><span class="p">;</span>
 
-// 指定等会文件生成出来的package
-package service;
+<span class="c1">// 指定等会文件生成出来的package</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">service</span><span class="p">;</span>
 
-// 定义request model
-message ProductRequest{
-    int32 prod_id = 1; // 1代表顺序
-}
+<span class="c1">// 定义request model</span>
+<span class="nx">message</span><span class="w"> </span><span class="nx">ProductRequest</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int32</span><span class="w"> </span><span class="nx">prod_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1代表顺序</span>
+<span class="p">}</span>
 
-// 定义response model
-message ProductResponse{
-    int32 prod_stock = 1; // 1代表顺序
-}
+<span class="c1">// 定义response model</span>
+<span class="nx">message</span><span class="w"> </span><span class="nx">ProductResponse</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int32</span><span class="w"> </span><span class="nx">prod_stock</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1代表顺序</span>
+<span class="p">}</span>
 
-// 定义服务主体
-service ProdService{
-    // 定义方法
-    rpc GetProductStock(ProductRequest) returns(ProductResponse);
-}
-</code></pre>
+<span class="c1">// 定义服务主体</span>
+<span class="nx">service</span><span class="w"> </span><span class="nx">ProdService</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 定义方法</span>
+<span class="w">    </span><span class="nx">rpc</span><span class="w"> </span><span class="nx">GetProductStock</span><span class="p">(</span><span class="nx">ProductRequest</span><span class="p">)</span><span class="w"> </span><span class="nx">returns</span><span class="p">(</span><span class="nx">ProductResponse</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>生成：</p>
-<pre><code class="language-go">protoc --go_out=./service --go-grpc_out=./service pbfile\product.proto
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">protoc</span><span class="w"> </span><span class="o">--</span><span class="nx">go_out</span><span class="p">=.</span><span class="o">/</span><span class="nx">service</span><span class="w"> </span><span class="o">--</span><span class="k">go</span><span class="o">-</span><span class="nx">grpc_out</span><span class="p">=.</span><span class="o">/</span><span class="nx">service</span><span class="w"> </span><span class="nx">pbfile</span><span class="err">\</span><span class="nx">product</span><span class="p">.</span><span class="nx">proto</span>
+</code></pre></div>
 <p><font style="color:rgb(51, 51, 51);">生成出两份文件：</font></p>
 <p><img alt="1657076659358-03accde4-8fa3-49c2-beb5-e88680c0d46b.png" src="../img/_UIvCNrZ-ifF4xPY/1657076659358-03accde4-8fa3-49c2-beb5-e88680c0d46b-297092.png" /></p>
-<h1 id="_2"><font style="color:rgb(51, 51, 51);">服务端</font></h1>
-<pre><code class="language-go">import &quot;google.golang.org/grpc&quot;
+<h1 id="_2"><font style="color:rgb(51, 51, 51);">服务端</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;google.golang.org/grpc&quot;</span>
 
-func main()  {
-    server := grpc.NewServer()
-    service.RegisterProdServiceServer(server,service.ProductService)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">server</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">service</span><span class="p">.</span><span class="nx">RegisterProdServiceServer</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductService</span><span class="p">)</span>
 
-    listener, err := net.Listen(&quot;tcp&quot;, &quot;:8002&quot;)
-    if err != nil {
-        log.Fatal(&quot;服务监听端口失败&quot;, err)
-    }
-    _ = server.Serve(listener)
-}
-</code></pre>
-<h2 id="_3">启动</h2>
+<span class="w">    </span><span class="nx">listener</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:8002&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;服务监听端口失败&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">server</span><span class="p">.</span><span class="nx">Serve</span><span class="p">(</span><span class="nx">listener</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_3">启动<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><code>server := grpc.NewServer()</code>：NewServer 创建一个未注册服务且尚未开始接受请求的 gRPC 服务器。</p>
-<h2 id="_4">注册服务</h2>
+<h2 id="_4">注册服务<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><code>service.RegisterProdServiceServer(server,service.ProductService)</code>注册服务，传入两个参数。</p>
-<pre><code class="language-go">func RegisterProdServiceServer(s grpc.ServiceRegistrar, srv ProdServiceServer) {
-    s.RegisterService(&amp;ProdService_ServiceDesc, srv)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">RegisterProdServiceServer</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">ServiceRegistrar</span><span class="p">,</span><span class="w"> </span><span class="nx">srv</span><span class="w"> </span><span class="nx">ProdServiceServer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">RegisterService</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ProdService_ServiceDesc</span><span class="p">,</span><span class="w"> </span><span class="nx">srv</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>两个参数：</p>
 <p>① <code>s grpc.ServiceRegistrar</code>：这里就传入之前未注册服务的 gRPC 服务器。grpc.ServiceRegistrar 是一个接口类型。ServiceRegistrar 包装了一个支持服务注册的方法。它使用户能够将 grpc.Server 以外的具体类型传递给 IDL 生成的代码导出的服务注册方法。</p>
-<pre><code class="language-go">type ServiceRegistrar interface {
-    RegisterService(desc *ServiceDesc, impl interface{})
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ServiceRegistrar</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">RegisterService</span><span class="p">(</span><span class="nx">desc</span><span class="w"> </span><span class="o">*</span><span class="nx">ServiceDesc</span><span class="p">,</span><span class="w"> </span><span class="nx">impl</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>RegisterService 将服务及其实现注册到实现此接口的具体类型。一旦服务器开始服务，它可能不会被调用。desc 描述了服务及其方法和处理程序。 impl 是传递给方法处理程序的服务实现。</p>
 <p>② <code>srv ProdServiceServer</code>: srv 是一个接口类型。ProdServiceServer 是 ProdService 服务的服务器 API。所有实现都必须嵌入 UnimplementedProdServiceServer 以实现前向兼容性。</p>
-<pre><code class="language-go">type ProdServiceServer interface {
-    // 定义方法
-    GetProductStock(context.Context, *ProductRequest) (*ProductResponse, error)
-    mustEmbedUnimplementedProdServiceServer()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">ProdServiceServer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 定义方法</span>
+<span class="w">    </span><span class="nx">GetProductStock</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">ProductRequest</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">ProductResponse</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mustEmbedUnimplementedProdServiceServer</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>我们在 service 包中定义该接口的方法，来实现我们的业务逻辑：</p>
-<pre><code class="language-go">package service
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">service</span>
 
-import &quot;context&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;context&quot;</span>
 
-var ProductService = &amp;productService{}
+<span class="kd">var</span><span class="w"> </span><span class="nx">ProductService</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">productService</span><span class="p">{}</span>
 
-type productService struct {
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">productService</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-func (p *productService) mustEmbedUnimplementedProdServiceServer() {
-    //TODO implement me
-    panic(&quot;implement me&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">productService</span><span class="p">)</span><span class="w"> </span><span class="nx">mustEmbedUnimplementedProdServiceServer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//TODO implement me</span>
+<span class="w">    </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;implement me&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func (p *productService) GetProductStock(context context.Context, request *ProductRequest) (*ProductResponse, error) {
-    //实现具体的业务逻辑
-    //例如，查询当前的库存数
-    stock := p.GetStockByID(request.GetProdId())
-    return &amp;ProductResponse{ProdStock: stock}, nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">productService</span><span class="p">)</span><span class="w"> </span><span class="nx">GetProductStock</span><span class="p">(</span><span class="nx">context</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="o">*</span><span class="nx">ProductRequest</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">ProductResponse</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//实现具体的业务逻辑</span>
+<span class="w">    </span><span class="c1">//例如，查询当前的库存数</span>
+<span class="w">    </span><span class="nx">stock</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">GetStockByID</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">GetProdId</span><span class="p">())</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ProductResponse</span><span class="p">{</span><span class="nx">ProdStock</span><span class="p">:</span><span class="w"> </span><span class="nx">stock</span><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func (p *productService) GetStockByID(id int32) int32 {
-    //写一个假数据
-    return 100
-}
-
-</code></pre>
-<h1 id="_5"><font style="color:rgb(51, 51, 51);">客户端</font></h1>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">productService</span><span class="p">)</span><span class="w"> </span><span class="nx">GetStockByID</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">int32</span><span class="p">)</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//写一个假数据</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">100</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_5"><font style="color:rgb(51, 51, 51);">客户端</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(51, 51, 51);">新建 client 目录，把上述生成的 product.pb.go copy 过来。</font></p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;context&quot;
-    &quot;fmt&quot;
-    &quot;google.golang.org/grpc&quot;
-    &quot;google.golang.org/grpc/credentials/insecure&quot;
-    &quot;grpc_demo/service&quot;
-    &quot;log&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;context&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;google.golang.org/grpc&quot;</span>
+<span class="w">    </span><span class="s">&quot;google.golang.org/grpc/credentials/insecure&quot;</span>
+<span class="w">    </span><span class="s">&quot;grpc_demo/service&quot;</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 1. 新建连接，端口是服务端开放的8002端口
-    // 没有证书会报错
-    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(insecure.NewCredentials()))
-    if err != nil {
-        log.Fatal(err)
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 1. 新建连接，端口是服务端开放的8002端口</span>
+<span class="w">    </span><span class="c1">// 没有证书会报错</span>
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="s">&quot;:8002&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">WithTransportCredentials</span><span class="p">(</span><span class="nx">insecure</span><span class="p">.</span><span class="nx">NewCredentials</span><span class="p">()))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 退出时关闭链接
-    defer conn.Close()
+<span class="w">    </span><span class="c1">// 退出时关闭链接</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-    // 2. 调用Product.pb.go中的NewProdServiceClient方法
-    productServiceClient := service.NewProdServiceClient(conn)
+<span class="w">    </span><span class="c1">// 2. 调用Product.pb.go中的NewProdServiceClient方法</span>
+<span class="w">    </span><span class="nx">productServiceClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">service</span><span class="p">.</span><span class="nx">NewProdServiceClient</span><span class="p">(</span><span class="nx">conn</span><span class="p">)</span>
 
-    // 3. 直接像调用本地方法一样调用GetProductStock方法
-    resp, err := productServiceClient.GetProductStock(context.Background(), &amp;service.ProductRequest{ProdId: 233})
-    if err != nil {
-        log.Fatal(&quot;调用gRPC方法错误: &quot;, err)
-    }
+<span class="w">    </span><span class="c1">// 3. 直接像调用本地方法一样调用GetProductStock方法</span>
+<span class="w">    </span><span class="nx">resp</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">productServiceClient</span><span class="p">.</span><span class="nx">GetProductStock</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductRequest</span><span class="p">{</span><span class="nx">ProdId</span><span class="p">:</span><span class="w"> </span><span class="mi">233</span><span class="p">})</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;调用gRPC方法错误: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fmt.Println(&quot;调用gRPC方法成功，ProdStock = &quot;, resp.ProdStock)
-}
-
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;调用gRPC方法成功，ProdStock = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">ProdStock</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-07-06 17:48:52<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/nxr4v6">https://www.yuque.com/xiaoshan_wgo/codingnotes/nxr4v6</a></p>

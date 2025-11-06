@@ -277,69 +277,69 @@
 
 
 
-<h1 id="8-go">8 Go 的结构体和方法</h1>
-<h2 id="_1">结构体的定义</h2>
+<h1 id="8-go">8 Go 的结构体和方法<a class="headerlink" href="#8-go" title="Permanent link">&para;</a></h1>
+<h2 id="_1">结构体的定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(0, 0, 0);">如下定义一个结构体类型：</font></p>
-<pre><code class="language-go">type Body struct {
-    name string
-    age  int
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Body</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>定义结构体变量：</p>
-<pre><code class="language-go">var body Body
-body.name = &quot;coding3min&quot;
-body.age = 12
-fmt.Println(body)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">body</span><span class="w"> </span><span class="nx">Body</span>
+<span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;coding3min&quot;</span>
+<span class="nx">body</span><span class="p">.</span><span class="nx">age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">12</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+</code></pre></div>
 <p>树：树的一个结点有三个信息，左孩子指针，value，右孩子指针</p>
-<pre><code class="language-go">package main
-import &quot;fmt&quot;
-type treeNode struct{
-    value int
-    left,right *treeNode
-}
-func main(){
-    var root treeNode //定义一个根结点
-    root = treeNode{value:3} //根结点的值
-    root.left = &amp;treeNode{}  //根结点的左子树
-    root.right = treeNode{5,nil,nil} //根结点的右子树的值是5，并且没有左右孩子
-    //这里永远是.下去，对比于C的-&gt;。
-    root.right.left = new(treeNode) //根结点的
-    //在切片里面存了tree的结点。
-    nodes := []treeNode{
-        {value: 3},//存了一共没有左右孩子的树
-        {},//存了一个空树
-        {6,nil,&amp;root} //值为6，没有左孩子，有孩子是上面的那个根结点。
-    }
-    fmt.Println(nodes)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">treeNode</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">left</span><span class="p">,</span><span class="nx">right</span><span class="w"> </span><span class="o">*</span><span class="nx">treeNode</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="nx">treeNode</span><span class="w"> </span><span class="c1">//定义一个根结点</span>
+<span class="w">    </span><span class="nx">root</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">treeNode</span><span class="p">{</span><span class="nx">value</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span><span class="w"> </span><span class="c1">//根结点的值</span>
+<span class="w">    </span><span class="nx">root</span><span class="p">.</span><span class="nx">left</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">treeNode</span><span class="p">{}</span><span class="w">  </span><span class="c1">//根结点的左子树</span>
+<span class="w">    </span><span class="nx">root</span><span class="p">.</span><span class="nx">right</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">treeNode</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="kc">nil</span><span class="p">,</span><span class="kc">nil</span><span class="p">}</span><span class="w"> </span><span class="c1">//根结点的右子树的值是5，并且没有左右孩子</span>
+<span class="w">    </span><span class="c1">//这里永远是.下去，对比于C的-&gt;。</span>
+<span class="w">    </span><span class="nx">root</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">left</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">treeNode</span><span class="p">)</span><span class="w"> </span><span class="c1">//根结点的</span>
+<span class="w">    </span><span class="c1">//在切片里面存了tree的结点。</span>
+<span class="w">    </span><span class="nx">nodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">treeNode</span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="nx">value</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span><span class="c1">//存了一共没有左右孩子的树</span>
+<span class="w">        </span><span class="p">{},</span><span class="c1">//存了一个空树</span>
+<span class="w">        </span><span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="kc">nil</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">root</span><span class="p">}</span><span class="w"> </span><span class="c1">//值为6，没有左孩子，有孩子是上面的那个根结点。</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">nodes</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>结构体数组：</p>
-<pre><code class="language-go">bodys := []Body{
-    Body{&quot;jack&quot;, 12}, Body{&quot;lynn&quot;, 18},
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">bodys</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">Body</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Body</span><span class="p">{</span><span class="s">&quot;jack&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">},</span><span class="w"> </span><span class="nx">Body</span><span class="p">{</span><span class="s">&quot;lynn&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(0, 0, 0);">声明时赋值</font></p>
-<pre><code class="language-go">body2 := Body{
-    &quot;tom&quot;, 13,
-}
-</code></pre>
-<h2 id="go"><font style="color:rgb(0, 0, 0);">Go中的类和方法</font></h2>
+<div class="highlight"><pre><span></span><code><span class="nx">body2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Body</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;tom&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="go"><font style="color:rgb(0, 0, 0);">Go中的类和方法</font><a class="headerlink" href="#go" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(0, 0, 0);">Go</font><font style="color:rgb(0, 0, 0);"> 用一种特殊的方式，把结构体本身看作一个类，这个结构体里面可以定义一些方法。</font></p>
-<pre><code class="language-go">type people struct {
-    name string
-}
-func (p people) toString() {
-    fmt.Println(p.name)
-    fmt.Printf(&quot;p的地址 %p \n&quot;, &amp;p)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">people</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">people</span><span class="p">)</span><span class="w"> </span><span class="nx">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;p的地址 %p \n&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">p</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><code>toString()</code>为方法。</p>
 <p><font style="background-color:#FADB14;">; </font><font style="background-color:#FADB14;">👾</font><font style="background-color:#FADB14;">注意：区别一下方法和函数。</font></p>
 <p>调用方式不一样。</p>
-<pre><code class="language-plain">函数的调用方式：函数名（实参列表）
+<div class="highlight"><pre><span></span><code>函数的调用方式：函数名（实参列表）
 方法的调用方式：变量.方法名字（实参列表）
-</code></pre>
+</code></pre></div>
 <p>方法是包含了接收者的函数，方法在func关键字后是<strong>接收者</strong>而不是函数名，接收者可以是自己定义的一个类型，这个类型可以是struct，interface，甚至我们可以重定义基本数据类型。</p>
 <p>但对于普通函数，接收者为值类型时候，直接传递的只能是值类型。</p>
 <blockquote>

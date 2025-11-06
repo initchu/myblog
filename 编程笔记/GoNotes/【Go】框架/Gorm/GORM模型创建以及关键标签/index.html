@@ -251,82 +251,82 @@
 
 
 
-<h1 id="gorm">GORM 模型创建以及关键标签</h1>
+<h1 id="gorm">GORM 模型创建以及关键标签<a class="headerlink" href="#gorm" title="Permanent link">&para;</a></h1>
 <p>连接数据库之后，就需要创建模型。</p>
 <p>模型是具备基本 Go 类型，指针/别名或实现 Scanner 和 Value 接口的自定义类型的常规结构。</p>
 <p>通俗来讲，就是一个结构体，携带 gorm 规定的标签或者实现了 gorm 的接口。</p>
 <p>模型有什么用？</p>
 <p>是 gorm 进行各种操作的基础，一个书写良好的模型会让你对数据库的操作事半功倍。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;gorm.io/driver/mysql&quot;
-    &quot;gorm.io/gorm&quot;
-    &quot;gorm.io/gorm/schema&quot;
-    &quot;strings&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;gorm.io/driver/mysql&quot;</span>
+<span class="w">    </span><span class="s">&quot;gorm.io/gorm&quot;</span>
+<span class="w">    </span><span class="s">&quot;gorm.io/gorm/schema&quot;</span>
+<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="p">)</span>
 
-var GLOBAL_DB *gorm.DB
+<span class="kd">var</span><span class="w"> </span><span class="nx">GLOBAL_DB</span><span class="w"> </span><span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
 
-func main() {
-    dsn := &quot;root:root123@tcp(127.0.0.1:13306)/gorm_class?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&quot;
-    db, err := gorm.Open(mysql.New(mysql.Config{
-        DSN:dsn,
-        DefaultStringSize: 171,
-    }), &amp;gorm.Config{
-        SkipDefaultTransaction: false,
-        NamingStrategy: schema.NamingStrategy{
-            TablePrefix: &quot;gva_&quot;,   // 表名前缀, table for `User` would be `t_users`
-            SingularTable: true, // 使用单数表名，use singular table name, table for `User` would be `user` with this option enabled
-            NoLowerCase: true, // skip the snake_casing of names
-            NameReplacer: strings.NewReplacer(&quot;CID&quot;, &quot;Cid&quot;), // use name replacer to change struct/field name before convert it to db name
-        },
-        DisableForeignKeyConstraintWhenMigrating: true, //逻辑外键 （代码里面自动外键，外键关系，增加数据量处理速度）
-    })
-    sqlDB,_:= db.DB()
-    sqlDB.SetMaxIdleconns(10） //连接池中最大的空府连按数
-    sqlDB.SetMaxopenconns(100) //连接中最多容纳的链接数量
-    sqlDB.SetconnMaxLifetime(time.Hour） //连接中链接的最大可复用时问
-    GLOBAL_DB = db
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">dsn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;root:root123@tcp(127.0.0.1:13306)/gorm_class?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&quot;</span>
+<span class="w">    </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">mysql</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">DSN</span><span class="p">:</span><span class="nx">dsn</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">DefaultStringSize</span><span class="p">:</span><span class="w"> </span><span class="mi">171</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}),</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">SkipDefaultTransaction</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">NamingStrategy</span><span class="p">:</span><span class="w"> </span><span class="nx">schema</span><span class="p">.</span><span class="nx">NamingStrategy</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">TablePrefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gva_&quot;</span><span class="p">,</span><span class="w">   </span><span class="c1">// 表名前缀, table for `User` would be `t_users`</span>
+<span class="w">            </span><span class="nx">SingularTable</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// 使用单数表名，use singular table name, table for `User` would be `user` with this option enabled</span>
+<span class="w">            </span><span class="nx">NoLowerCase</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// skip the snake_casing of names</span>
+<span class="w">            </span><span class="nx">NameReplacer</span><span class="p">:</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">NewReplacer</span><span class="p">(</span><span class="s">&quot;CID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Cid&quot;</span><span class="p">),</span><span class="w"> </span><span class="c1">// use name replacer to change struct/field name before convert it to db name</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">DisableForeignKeyConstraintWhenMigrating</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="c1">//逻辑外键 （代码里面自动外键，外键关系，增加数据量处理速度）</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">sqlDB</span><span class="p">,</span><span class="nx">_</span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">DB</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">sqlDB</span><span class="p">.</span><span class="nx">SetMaxIdleconns</span><span class="p">(</span><span class="mi">10</span><span class="err">）</span><span class="w"> </span><span class="c1">//连接池中最大的空府连按数</span>
+<span class="w">    </span><span class="nx">sqlDB</span><span class="p">.</span><span class="nx">SetMaxopenconns</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="c1">//连接中最多容纳的链接数量</span>
+<span class="w">    </span><span class="nx">sqlDB</span><span class="p">.</span><span class="nx">SetconnMaxLifetime</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Hour</span><span class="err">）</span><span class="w"> </span><span class="c1">//连接中链接的最大可复用时问</span>
+<span class="w">    </span><span class="nx">GLOBAL_DB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">db</span>
 
-    sqlDB
-}
-</code></pre>
-<pre><code class="language-go">package main
-type TestUser struct{
-    ID uint
-    Name string
-    Email *string
-    Age uint8
-    Birthday *time.Time
-    MemberNumber sql.NullString
-    CreatedAt time.Time
-    UpdateAt time.Time
-}
+<span class="w">    </span><span class="nx">sqlDB</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">TestUser</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w"> </span><span class="kt">uint</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">uint8</span>
+<span class="w">    </span><span class="nx">Birthday</span><span class="w"> </span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+<span class="w">    </span><span class="nx">MemberNumber</span><span class="w"> </span><span class="nx">sql</span><span class="p">.</span><span class="nx">NullString</span>
+<span class="w">    </span><span class="nx">CreatedAt</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+<span class="w">    </span><span class="nx">UpdateAt</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+<span class="p">}</span>
 
-func TestUserCreate(){
-    GLOBAL_DB.AutoMigrate(&amp;TestUser{})
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestUserCreate</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">GLOBAL_DB</span><span class="p">.</span><span class="nx">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">TestUser</span><span class="p">{})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><img alt="生成了对应的数据库表" src="../img/4xMvewhiOezMq3QW/1676964614119-0aa81477-9287-4146-9838-747974006ddf-414309.png" /></p>
 <p>这个<code>CreatedAt time.Time``UpdateAt time.Time</code> <code>ID uint</code>是可以提出来的。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-type TestUser struct{
-    gorm.Model //嵌入结构体 替代了 创建时间 更新时间 删除时间 ID
-    Name string
-    Email *string
-    Age uint8
-    Birthday *time.Time
-    MemberNumber sql.NullString
+<span class="kd">type</span><span class="w"> </span><span class="nx">TestUser</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Model</span><span class="w"> </span><span class="c1">//嵌入结构体 替代了 创建时间 更新时间 删除时间 ID</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">uint8</span>
+<span class="w">    </span><span class="nx">Birthday</span><span class="w"> </span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+<span class="w">    </span><span class="nx">MemberNumber</span><span class="w"> </span><span class="nx">sql</span><span class="p">.</span><span class="nx">NullString</span>
 
-}
+<span class="p">}</span>
 
-func TestUserCreate(){
-    GLOBAL_DB.AutoMigrate(&amp;TestUser{})
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestUserCreate</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">GLOBAL_DB</span><span class="p">.</span><span class="nx">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">TestUser</span><span class="p">{})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>可以自定义嵌套标签。</p>
 <p><img alt="Model 嵌入" src="../img/4xMvewhiOezMq3QW/1676965251612-eda1b327-cb5a-4675-ad19-1723729125c2-688001.png" /></p>
 <p><img alt="默认值" src="../img/4xMvewhiOezMq3QW/1676965351155-f65ea703-b344-421d-86de-90e891cd8a1e-757794.png" /></p>

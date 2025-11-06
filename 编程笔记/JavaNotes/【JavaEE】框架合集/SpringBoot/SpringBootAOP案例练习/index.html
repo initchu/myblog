@@ -251,193 +251,186 @@
 
 
 
-<h1 id="spring-boot-aop">Spring Boot AOP 案例练习</h1>
-<h1 id="_1"><font style="color:rgb(28, 31, 33);">概述</font></h1>
+<h1 id="spring-boot-aop">Spring Boot AOP 案例练习<a class="headerlink" href="#spring-boot-aop" title="Permanent link">&para;</a></h1>
+<h1 id="_1"><font style="color:rgb(28, 31, 33);">概述</font><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(73, 73, 73);">Spring 最重要的两个功能，就是依赖注入（DI）和面向切面编程 （AOP）。</font></p>
 <p><font style="color:rgb(73, 73, 73);">AOP 为我们提供了处理问题的全局化视角，使用得当可以极大提高编程效率。</font></p>
 <p><font style="color:rgb(73, 73, 73);">Spring Boot 中使用 AOP 与 Spring 中使用 AOP 几乎没有什么区别，只是建议尽量使用 Java 配置代替 XML 配置。</font></p>
-<h1 id="_2"><font style="color:rgb(28, 31, 33);">构建项目</font></h1>
+<h1 id="_2"><font style="color:rgb(28, 31, 33);">构建项目</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(73, 73, 73);">首先，需要构建一个 Spring Boot 项目并引入 AOP 依赖。</font></p>
-<h2 id="spring-initializr"><font style="color:rgb(28, 31, 33);">使用 Spring Initializr 创建项目</font></h2>
+<h2 id="spring-initializr"><font style="color:rgb(28, 31, 33);">使用 Spring Initializr 创建项目</font><a class="headerlink" href="#spring-initializr" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(28, 31, 33);">引入项目依赖</font></p>
 <p><font style="color:rgb(73, 73, 73);">我们引入 Web 项目依赖与 AOP 依赖。</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">&lt;!-- Web项目依赖 --&gt;
-    &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-    &lt;!-- AOP --&gt;
-    &lt;dependency&gt;
-    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-
-</code></pre>
-<h2 id="_3"><font style="color:rgb(28, 31, 33);">新建控制层、服务层、数据访问层</font></h2>
+<div class="highlight"><pre><span></span><code><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Web项目依赖</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">web</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;!--</span><span class="w"> </span><span class="n">AOP</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">dependency</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">groupId</span><span class="o">&gt;</span><span class="n">org</span><span class="p">.</span><span class="na">springframework</span><span class="p">.</span><span class="na">boot</span><span class="o">&lt;/</span><span class="n">groupId</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">artifactId</span><span class="o">&gt;</span><span class="n">spring</span><span class="o">-</span><span class="n">boot</span><span class="o">-</span><span class="n">starter</span><span class="o">-</span><span class="n">aop</span><span class="o">&lt;/</span><span class="n">artifactId</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">dependency</span><span class="o">&gt;</span>
+</code></pre></div>
+<h2 id="_3"><font style="color:rgb(28, 31, 33);">新建控制层、服务层、数据访问层</font><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(73, 73, 73);">为了便于后续的演示，我们依次新建控制类、服务类、数据访问类，并将其放入对应的包中，项目结构如下：</font></p>
 <p><img alt="1671526148604-ef862575-5540-41ce-ac76-61aace066ebc.png" src="../img/Fyr2iJDC9Ajthlo0/1671526148604-ef862575-5540-41ce-ac76-61aace066ebc-123628.png" /></p>
 <p><font style="color:rgb(28, 31, 33);">项目结构</font></p>
 <p><font style="color:rgb(73, 73, 73);">各个类代码如下，注意此处仅仅是为了演示 AOP 的使用，并未真实访问数据库，而是直接返回了测试数据。</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">/**
-* 商品控制器类
-*/
-@RestController
-    public class GoodsController {
-        @Autowired
-        private GoodsService goodsService;
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 商品控制器类</span>
+<span class="cm">*/</span>
+<span class="nd">@RestController</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GoodsController</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Autowired</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">GoodsService</span><span class="w"> </span><span class="n">goodsService</span><span class="p">;</span>
 
-        /**
-* 获取商品列表
-*/
-        @GetMapping(&quot;/goods&quot;)
-        public List getList() {
-            return goodsService.getList();
-        }
-    }
-
-</code></pre>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">* 获取商品列表</span>
+<span class="cm">*/</span>
+<span class="w">        </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/goods&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="nf">getList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">goodsService</span><span class="p">.</span><span class="na">getList</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">/**
-* 商品服务类
-*/
-@Service
-    public class GoodsService {
-        @Autowired
-        private GoodsDao goodsDao;
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 商品服务类</span>
+<span class="cm">*/</span>
+<span class="nd">@Service</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GoodsService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nd">@Autowired</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">GoodsDao</span><span class="w"> </span><span class="n">goodsDao</span><span class="p">;</span>
 
-        /**
-* 获取商品信息列表
-*/
-        public List getList() {
-            return goodsDao.getList();
-        }
-    }
-
-</code></pre>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">* 获取商品信息列表</span>
+<span class="cm">*/</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="nf">getList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">goodsDao</span><span class="p">.</span><span class="na">getList</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">/**
-* 商品数据库访问类
-*/
-@Repository // 标注数据访问类
-    public class GoodsDao {
-        /**
-* 查询商品列表
-*/
-        public List getList() {
-            return new ArrayList();
-        }
-    }
-
-</code></pre>
-<h1 id="aop"><font style="color:rgb(28, 31, 33);">使用 AOP 记录日志</font></h1>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 商品数据库访问类</span>
+<span class="cm">*/</span>
+<span class="nd">@Repository</span><span class="w"> </span><span class="c1">// 标注数据访问类</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GoodsDao</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">* 查询商品列表</span>
+<span class="cm">*/</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="nf">getList</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h1 id="aop"><font style="color:rgb(28, 31, 33);">使用 AOP 记录日志</font><a class="headerlink" href="#aop" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(73, 73, 73);">如果要记录对控制器接口的访问日志，可以定义一个切面，切入点即为控制器中的接口方法，然后通过前置通知来打印日志。</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">/**
-* 日志切面
-*/
-@Component
-    @Aspect // 标注为切面
-    public class LogAspect {
-        private Logger logger = LoggerFactory.getLogger(this.getClass());
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 日志切面</span>
+<span class="cm">*/</span>
+<span class="nd">@Component</span>
+<span class="w">    </span><span class="nd">@Aspect</span><span class="w"> </span><span class="c1">// 标注为切面</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LogAspect</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">());</span>
 
-        // 切入点表达式，表示切入点为控制器包中的所有方法
-        @Pointcut(&quot;within(com.imooc.springbootaop.controller..*)&quot;)
-        public void LogAspect() {
-        }
+<span class="w">        </span><span class="c1">// 切入点表达式，表示切入点为控制器包中的所有方法</span>
+<span class="w">        </span><span class="nd">@Pointcut</span><span class="p">(</span><span class="s">&quot;within(com.imooc.springbootaop.controller..*)&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">LogAspect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 切入点之前执行
-        @Before(&quot;LogAspect()&quot;)
-        public void doBefore(JoinPoint joinPoint) {
-            logger.info(&quot;访问时间：{}--访问接口:{}&quot;, new Date(), joinPoint.getSignature());
-        }
-    }
-
-</code></pre>
+<span class="w">        </span><span class="c1">// 切入点之前执行</span>
+<span class="w">        </span><span class="nd">@Before</span><span class="p">(</span><span class="s">&quot;LogAspect()&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doBefore</span><span class="p">(</span><span class="n">JoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;访问时间：{}--访问接口:{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">(),</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(73, 73, 73);">启动项目后，访问控制器中的方法之前会先执行 doBefore 方法。控制台打印如下：</font></p>
-<pre><code class="language-java">2020-05-25 22:14:12.317  INFO 9992 --- [nio-8080-exec-2] com.imooc.springbootaop.LogAspect        : 
-    访问时间：Mon May 25 22:14:12 CST 2020--访问接口:List com.imooc.springbootaop.controller.GoodsController.getList()
-</code></pre>
-<h1 id="aop_1"><font style="color:rgb(28, 31, 33);">使用 AOP 监控性能</font></h1>
+<div class="highlight"><pre><span></span><code><span class="mi">2020</span><span class="o">-</span><span class="mo">05</span><span class="o">-</span><span class="mi">25</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mf">12.317</span><span class="w">  </span><span class="n">INFO</span><span class="w"> </span><span class="mi">9992</span><span class="w"> </span><span class="o">---</span><span class="w"> </span><span class="o">[</span><span class="n">nio</span><span class="o">-</span><span class="mi">8080</span><span class="o">-</span><span class="n">exec</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">imooc</span><span class="p">.</span><span class="na">springbootaop</span><span class="p">.</span><span class="na">LogAspect</span><span class="w">        </span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="n">访问时间</span><span class="err">：</span><span class="n">Mon</span><span class="w"> </span><span class="n">May</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mi">12</span><span class="w"> </span><span class="n">CST</span><span class="w"> </span><span class="mi">2020</span><span class="o">--</span><span class="n">访问接口</span><span class="p">:</span><span class="n">List</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="na">imooc</span><span class="p">.</span><span class="na">springbootaop</span><span class="p">.</span><span class="na">controller</span><span class="p">.</span><span class="na">GoodsController</span><span class="p">.</span><span class="na">getList</span><span class="p">()</span>
+</code></pre></div>
+<h1 id="aop_1"><font style="color:rgb(28, 31, 33);">使用 AOP 监控性能</font><a class="headerlink" href="#aop_1" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(73, 73, 73);">在研发项目的性能测试阶段，或者项目部署后，我们会希望查看服务层方法执行的时间。以便精准的了解项目中哪些服务方法执行速度慢，后续可以针对性的进行性能优化。</font></p>
 <p><font style="color:rgb(73, 73, 73);">此时我们就可以使用 AOP 的环绕通知，监控服务方法的执行时间。</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">/**
-* 服务层方法切面
-*/
-@Component
-    @Aspect // 标注为切面
-    public class ServiceAspect {
-        private Logger logger = LoggerFactory.getLogger(this.getClass());
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 服务层方法切面</span>
+<span class="cm">*/</span>
+<span class="nd">@Component</span>
+<span class="w">    </span><span class="nd">@Aspect</span><span class="w"> </span><span class="c1">// 标注为切面</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ServiceAspect</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">());</span>
 
-        // 切入点表达式，表示切入点为服务层包中的所有方法
-        @Pointcut(&quot;within(com.imooc.springbootaop.service..*)&quot;)
-        public void ServiceAspect() {
-        }
+<span class="w">        </span><span class="c1">// 切入点表达式，表示切入点为服务层包中的所有方法</span>
+<span class="w">        </span><span class="nd">@Pointcut</span><span class="p">(</span><span class="s">&quot;within(com.imooc.springbootaop.service..*)&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ServiceAspect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
 
-        @Around(&quot;ServiceAspect()&quot;) // 环绕通知
-        public Object deAround(ProceedingJoinPoint joinPoint) throws Throwable {
-            long startTime = System.currentTimeMillis();// 记录开始时间
-            Object result = joinPoint.proceed();
-            logger.info(&quot;服务层方法:{}--执行时间:{}毫秒&quot;, joinPoint.getSignature(), System.currentTimeMillis() - startTime);
-            return result;
-        }
-    }
-
-</code></pre>
+<span class="w">        </span><span class="nd">@Around</span><span class="p">(</span><span class="s">&quot;ServiceAspect()&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 环绕通知</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">deAround</span><span class="p">(</span><span class="n">ProceedingJoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">startTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span><span class="c1">// 记录开始时间</span>
+<span class="w">            </span><span class="n">Object</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">proceed</span><span class="p">();</span>
+<span class="w">            </span><span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;服务层方法:{}--执行时间:{}毫秒&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">getSignature</span><span class="p">(),</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">startTime</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(73, 73, 73);">当服务层方法被调用时，控制台输入日志如下：</font></p>
-<pre><code class="language-plain">2020-05-25 22:25:56.830  INFO 4800 --- [nio-8080-exec-1] com.imooc.springbootaop.ServiceAspect    : 
+<div class="highlight"><pre><span></span><code>2020-05-25 22:25:56.830  INFO 4800 --- [nio-8080-exec-1] com.imooc.springbootaop.ServiceAspect    : 
 服务层方法:List com.imooc.springbootaop.service.GoodsService.getList()--执行时间:3毫秒
-</code></pre>
+</code></pre></div>
 <p><strong><font style="color:rgb(73, 73, 73);">Tips</font></strong><font style="color:rgb(73, 73, 73);">：正常情况下，用户查看页面或进行更新操作时，耗时超过 1.5 秒，就会感觉到明显的迟滞感。由于前后端交互也需要耗时，按正态分布的话，大部分交互耗时在 0.4秒 左右。所以在我参与的项目中，会对耗时超过 1.1 秒的服务层方法进行跟踪分析，通过优化 SQL 语句、优化算法、添加缓存等方式缩短方法执行时间。上面的数值均为我个人的经验参考值，还要视乎具体的服务器、网络、应用场景来确定合理的监控临界值。</font></p>
-<h1 id="aop_2"><font style="color:rgb(28, 31, 33);">使用 AOP 统一后端返回值格式</font></h1>
+<h1 id="aop_2"><font style="color:rgb(28, 31, 33);">使用 AOP 统一后端返回值格式</font><a class="headerlink" href="#aop_2" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(73, 73, 73);">前后端分离的项目结构中，前端通过 Ajax 请求后端接口，此时最好使用统一的返回值格式供前端处理。此处就可以借助 AOP 来实现正常情况、异常情况返回值的格式统一。</font></p>
-<h2 id="_4"><font style="color:rgb(28, 31, 33);">定义返回值类</font></h2>
+<h2 id="_4"><font style="color:rgb(28, 31, 33);">定义返回值类</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(73, 73, 73);">首先定义返回值类，它属于业务逻辑对象 （Bussiness Object），所以此处命名为 ResultBo ，代码如下：</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">public class ResultBo&lt;T&gt; {
-    /**
-* 错误码 0表示没有错误(异常) 其他数字代表具体错误码
-*/
-    private int code;
-    /**
-* 后端返回消息
-*/
-    private String msg;
-    /**
-* 后端返回的数据
-*/
-    private T data;
-    /**
-* 无参数构造函数
-*/
-    public ResultBo() {
-        this.code = 0;
-        this.msg = &quot;操作成功&quot;;
-    }
-    /**
-* 带数据data构造函数
-*/
-    public ResultBo(T data) {
-        this();
-        this.data = data;
-    }
-    /**
-* 存在异常的构造函数
-*/
-    public ResultBo(Exception ex) {
-        this.code = 99999;// 其他未定义异常
-        this.msg = ex.getMessage();
-    }
-    // 省略 get set
-}
-
-</code></pre>
-<h2 id="_5"><font style="color:rgb(28, 31, 33);">修改控制层返回值类型</font></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResultBo</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">* 错误码 0表示没有错误(异常) 其他数字代表具体错误码</span>
+<span class="cm">*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">code</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">* 后端返回消息</span>
+<span class="cm">*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">msg</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">* 后端返回的数据</span>
+<span class="cm">*/</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">* 无参数构造函数</span>
+<span class="cm">*/</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ResultBo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;操作成功&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">* 带数据data构造函数</span>
+<span class="cm">*/</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ResultBo</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">* 存在异常的构造函数</span>
+<span class="cm">*/</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ResultBo</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">99999</span><span class="p">;</span><span class="c1">// 其他未定义异常</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">msg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="na">getMessage</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 省略 get set</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_5"><font style="color:rgb(28, 31, 33);">修改控制层返回值类型</font><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(73, 73, 73);">对所有的控制层方法进行修改，保证返回值均通过 ResultBo 包装，另外我们再定义一个方法，模拟抛出异常的控制层方法。</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-plain">    /**
+<div class="highlight"><pre><span></span><code>    /**
      * 获取商品列表
      */
     @GetMapping(&quot;/goods&quot;)
@@ -452,45 +445,41 @@
         int a = 1 / 0;
         return new ResultBo(goodsService.getList());
     }
-
-</code></pre>
-<h2 id="_6"><font style="color:rgb(28, 31, 33);">定义切面处理异常返回值</font></h2>
+</code></pre></div>
+<h2 id="_6"><font style="color:rgb(28, 31, 33);">定义切面处理异常返回值</font><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(73, 73, 73);">正常控制层方法都返回 ResultBo 类型对象，然后我们需要定义切面，处理控制层抛出的异常。当发生异常时，同样返回 ResultBo 类型的对象，并且对象中包含异常信息。</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-java">/**
-* 返回值切面
-*/
-@Component
-    @Aspect
-    public class ResultAspect {
-        // 切入点表达式，表示切入点为返回类型ResultBo的所有方法
-        @Pointcut(&quot;execution(public com.imooc.springbootaop.ResultBo *(..))&quot;)
-        public void ResultAspect() {
-        }
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">* 返回值切面</span>
+<span class="cm">*/</span>
+<span class="nd">@Component</span>
+<span class="w">    </span><span class="nd">@Aspect</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResultAspect</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 切入点表达式，表示切入点为返回类型ResultBo的所有方法</span>
+<span class="w">        </span><span class="nd">@Pointcut</span><span class="p">(</span><span class="s">&quot;execution(public com.imooc.springbootaop.ResultBo *(..))&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">ResultAspect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 环绕通知
-        @Around(&quot;ResultAspect()&quot;)
-        public Object deAround(ProceedingJoinPoint joinPoint) throws Throwable {
-            try {
-                return joinPoint.proceed();// 返回正常结果
-            } catch (Exception ex) {
-                return new ResultBo&lt;&gt;(ex);// 被切入的方法执行异常时，返回ResultBo
-            }
-        }
-    }
-
-</code></pre>
-<h2 id="_7"><font style="color:rgb(28, 31, 33);">测试</font></h2>
+<span class="w">        </span><span class="c1">// 环绕通知</span>
+<span class="w">        </span><span class="nd">@Around</span><span class="p">(</span><span class="s">&quot;ResultAspect()&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="nf">deAround</span><span class="p">(</span><span class="n">ProceedingJoinPoint</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Throwable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">joinPoint</span><span class="p">.</span><span class="na">proceed</span><span class="p">();</span><span class="c1">// 返回正常结果</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResultBo</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span><span class="c1">// 被切入的方法执行异常时，返回ResultBo</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<h2 id="_7"><font style="color:rgb(28, 31, 33);">测试</font><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(73, 73, 73);">启动项目，访问</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(76, 118, 201);">http://127.0.0.1:8080/goods</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(73, 73, 73);">返回数据如下：</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-plain">{&quot;code&quot;:0,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:[]}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code>{&quot;code&quot;:0,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:[]}
+</code></pre></div>
 <p><font style="color:rgb(73, 73, 73);">然后访问</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(76, 118, 201);">http://127.0.0.1:8080/test</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(73, 73, 73);">，返回数据如下：</font></p>
 <p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
-<pre><code class="language-shell">{&quot;code&quot;:99999,&quot;msg&quot;:&quot;/ by zero&quot;,&quot;data&quot;:null}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">{</span><span class="s2">&quot;code&quot;</span>:99999,<span class="s2">&quot;msg&quot;</span>:<span class="s2">&quot;/ by zero&quot;</span>,<span class="s2">&quot;data&quot;</span>:null<span class="o">}</span>
+</code></pre></div>
 <p><font style="color:rgb(73, 73, 73);">前端可以根据返回值的 code， 来判断后端是否正常响应。如果 code 为 0 ，则进行正常业务逻辑操作；如果 code 非 0 ，则可以弹窗显示 msg 提示信息。</font></p>
 <blockquote>
 <p>更新: 2022-12-20 16:56:34<br />

@@ -286,139 +286,139 @@
 
 
 
-<h1 id="13-channel-select">13 Channel-select 解决阻塞</h1>
-<h2 id="channel">Channel 可以声明为只读/写</h2>
+<h1 id="13-channel-select">13 Channel-select 解决阻塞<a class="headerlink" href="#13-channel-select" title="Permanent link">&para;</a></h1>
+<h2 id="channel">Channel 可以声明为只读/写<a class="headerlink" href="#channel" title="Permanent link">&para;</a></h2>
 <p>管道的默认：既可读又可写。</p>
 <p>但在有些方法里面，需要让 Channel 只能读或者只能写。</p>
-<pre><code class="language-go">package main
-func main(){
-    var chan1 chan&lt;- int //只能写
-    chan1 = make(chan int, 3)
-    chan1 &lt;- 20
-    fmt.Println(&quot;chan1 = &quot;, chan1)
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">chan1</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">//只能写</span>
+<span class="w">    </span><span class="nx">chan1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">chan1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;chan1 = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">chan1</span><span class="p">)</span>
 
-    var chan2 &lt;- chan int
-    num2 : &lt;- chan2
-    fmt.Println(&quot;num2&quot;, num2)
-}
-</code></pre>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">chan2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">num2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">chan2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;num2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">num2</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在函数中使用：</p>
-<pre><code class="language-go">func main(){
-    var ch chan int
-    ch = make(chan int, 10)
-    exitChan := make(chan struct{}, 2)
-    go send(ch, exitChan)
-    go recv(ch, exitChan)
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">exitChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{},</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="nx">ch</span><span class="p">,</span><span class="w"> </span><span class="nx">exitChan</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">recv</span><span class="p">(</span><span class="nx">ch</span><span class="p">,</span><span class="w"> </span><span class="nx">exitChan</span><span class="p">)</span>
 
-    var total = 0
-    for _ = rfange exitChan{
-        total++
-        if total == 2 {
-            break
-        }
-    }
-    fmt.Println(&quot;over...&quot;)
-}
-// send 传参 ch 定义为只能写操作
-func send(ch chan&lt;- int, exitChan chan struct{}){
-    for i:= 0; i &lt; 10; i++{
-        ch &lt;- i
-    }
-    close(ch)
-    var a struct{}
-    exitChan &lt;- a
-}
-// revc 传参 ch 定义为只能读操作
-func recv(ch &lt;-chan int, exitChan chan struct{}){
-    for {
-        v, ok := &lt;-ch
-        if !ok{
-            break
-        }
-        fmt.Println(v)
-    }
-    var a struct{}
-    exitChan &lt;- a
-}
-</code></pre>
-<h2 id="select">使用select解决阻塞问题</h2>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">rfange</span><span class="w"> </span><span class="nx">exitChan</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">total</span><span class="o">++</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;over...&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// send 传参 ch 定义为只能写操作</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">exitChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">exitChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">a</span>
+<span class="p">}</span>
+<span class="c1">// revc 传参 ch 定义为只能读操作</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">recv</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">exitChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">exitChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">a</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="select">使用select解决阻塞问题<a class="headerlink" href="#select" title="Permanent link">&para;</a></h2>
 <p>传统的方法在遍历管道的时候，如果不关闭就会导致阻塞 <code>deadlock</code>，但是在实际的开发中，我们不好确定什么时候关闭管道，使用<code>select</code>方式来解决。</p>
-<pre><code class="language-go">func main(){
-    intChan := make(chan int, 10)
-    for i := 0; i&lt; 10; i++{
-        intChan&lt;- i
-    }
-    stringChan := make(chan string, 5)
-    for i := 0; i &lt; 5; i++ {
-        stringChan &lt;- &quot;hello&quot; + fmt.Sprintf(&quot;%d&quot;, i)
-    }
-    //label:
-    for{
-        select { 
-            case v: = &lt;-intChan :
-                fmt.Printf(&quot;从intChan读取数据%d\n&quot;, v)
-            case v: = &lt;-stringChan :
-                fmt.Printf(&quot;从intChan读取数据%s\n&quot;, v)
-            default :
-                fmt.Printf(&quot;取不到&quot;, v)
-            //后面可以加入取不到后的业务逻辑
-                return //退出主函数，也可以用label退出 
-            //  break label
-        }
-    }
-}
-</code></pre>
-<h2 id="panic">解决协程中出现的panic</h2>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">intChan</span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">stringChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stringChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//label:</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">v</span><span class="p">:</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span><span class="w"> </span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;从intChan读取数据%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">v</span><span class="p">:</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">stringChan</span><span class="w"> </span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;从intChan读取数据%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="w">            </span><span class="k">default</span><span class="w"> </span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;取不到&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">//后面可以加入取不到后的业务逻辑</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="c1">//退出主函数，也可以用label退出 </span>
+<span class="w">            </span><span class="c1">//  break label</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="panic">解决协程中出现的panic<a class="headerlink" href="#panic" title="Permanent link">&para;</a></h2>
 <p>如果运行一个协程，但是这个协程出现了<code>&lt;font style="color:#E8323C;"&gt;panic&lt;/font&gt;</code>，如果我们没有捕获这个<code>&lt;font style="color:#E8323C;"&gt;panic&lt;/font&gt;</code>，就会造成整个程序的崩溃，这时候我们可以在goroutine中使用<code>&lt;font style="color:#1890FF;"&gt;recover&lt;/font&gt;</code>来捕获<code>&lt;font style="color:#F5222D;"&gt;panic&lt;/font&gt;</code>来进行处理，这样即使这个协程发生了问题，但是线程还是不受到影响。</p>
 <p>来看一下使用场景，定义两个协程，其中一个协程<font style="color:#F5222D;">不小心写错了</font>，于是整个主程序就崩溃了，另外一个协程就因为这一个错误无法执行。看如下代码：</p>
-<pre><code class="language-go">// sayHello 定义一个简单且正确的协程
-func sayHello(){
-    for i := 0; i &lt; 10; i++{
-        time.Sleep(time.Second)
-        fmt.Println(&quot;hello world&quot;)
-    }
-}
-func test(){
-    var myMap map[int]string //没有make就赋值了，报panic
-    myMap[0] = &quot;golang&quot;
-}
-func main(){
-    go sayHello()
-    go test()
-    for i := 0; i &lt; 10; i++{
-        fmt.Println(&quot;main() ok = &quot;, i)
-        time.Sleep(time.Second)
-    }
-}   
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// sayHello 定义一个简单且正确的协程</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">sayHello</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">myMap</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="w"> </span><span class="c1">//没有make就赋值了，报panic</span>
+<span class="w">    </span><span class="nx">myMap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;golang&quot;</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">sayHello</span><span class="p">()</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">test</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main() ok = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
 <p>运行结果：</p>
 <p><img alt="1645599585546-b47c3e0e-21ed-4fc2-8679-acc96e512866.png" src="../img/Zw6y6FO2d2mp5ist/1645599585546-b47c3e0e-21ed-4fc2-8679-acc96e512866-460138.png" /></p>
 <p><img alt="1645599697920-76ab6170-539e-43f6-9131-1ff3fcd11bed.png" src="../img/Zw6y6FO2d2mp5ist/1645599697920-76ab6170-539e-43f6-9131-1ff3fcd11bed-345587.png" /></p>
-<pre><code class="language-go">// sayHello 定义一个简单且正确的协程
-func sayHello(){
-    for i := 0; i &lt; 10; i++{
-        time.Sleep(time.Second)
-        fmt.Println(&quot;hello world&quot;)
-    }
-}
-func test(){
-    defer func(){
-        if err := recover(); err != nil{
-            fmt.Println(&quot;test() 发生错误&quot;, err)
-        }
-    }()
-    var myMap map[int]string //没有make就赋值了，报panic
-    myMap[0] = &quot;golang&quot;
-}
-func main(){
-    go sayHello()
-    go test()
-    for i := 0; i &lt; 10; i++{
-        fmt.Println(&quot;main() ok = &quot;, i)
-        time.Sleep(time.Second)
-    }
-}   
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// sayHello 定义一个简单且正确的协程</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">sayHello</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;test() 发生错误&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">myMap</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="w"> </span><span class="c1">//没有make就赋值了，报panic</span>
+<span class="w">    </span><span class="nx">myMap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;golang&quot;</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">sayHello</span><span class="p">()</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">test</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main() ok = &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">   </span>
+</code></pre></div>
 <p>👾 注意：如果运行时候出现<code>&lt;font style="color:#F5222D;"&gt;createProcess error=5，拒绝访问&lt;/font&gt;</code><font style="color:rgb(77, 77, 77);">的错误，记得关掉360等安全软件！</font></p>
 <p><font style="color:rgb(77, 77, 77);">运行结果：</font></p>
 <p><img alt="1645600800698-506ae96d-5111-42aa-9f91-51a9e046ecf0.png" src="../img/Zw6y6FO2d2mp5ist/1645600800698-506ae96d-5111-42aa-9f91-51a9e046ecf0-425536.png" /></p>

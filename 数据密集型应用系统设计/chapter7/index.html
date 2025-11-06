@@ -805,13 +805,13 @@
 <li>首先需要确切理解事务可以提供的安全保障，以及它们的代价。</li>
 <li>尽管乍看事务似乎很简单，但实际上有许多微妙但重要的细节在起作用。</li>
 </ul>
-<h2 id="_1">事务的棘手概念</h2>
+<h2 id="_1">事务的棘手概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>几乎所有的关系型数据库和一些非关系数据库都支持<strong>事务</strong>。</li>
 <li>2000 年以后，非关系（NoSQL）数据库开始普及。很多新一代数据库放弃了或者弱化了事务。</li>
 <li>事务是一种权衡。</li>
 </ul>
-<h3 id="acid">ACID的含义</h3>
+<h3 id="acid">ACID的含义<a class="headerlink" href="#acid" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>原子性（Atomicity）</strong></li>
 <li><strong>一致性（Consistency）</strong></li>
@@ -819,7 +819,7 @@
 <li><strong>持久性（Durability）</strong></li>
 </ul>
 <p>不同数据库的ACID实现并不相同。</p>
-<h4 id="_2">原子性</h4>
+<h4 id="_2">原子性<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
 <p>原子是指不能分解成小部分的东西。</p>
 <p>多线程编程</p>
 <ul>
@@ -842,7 +842,7 @@
 <li>如果没有原子性，在多处更改进行到一半时发生错误，很难知道哪些更改已经生效，哪些没有生效。该应用程序可以再试一次，但冒着进行两次相同变更的风险，可能会导致数据重复或错误的数据。</li>
 <li>原子性简化了这个问题：如果事务被<strong>中止（abort）</strong>，应用程序可以确定它没有改变任何东西，所以可以安全地重试。</li>
 </ul>
-<h4 id="_3">一致性</h4>
+<h4 id="_3">一致性<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>ACID一致性的概念是，<strong>对数据的一组特定约束必须始终成立</strong>。即<strong>不变量（invariants）</strong>。</li>
 <li>例如在会计系统中，所有账户整体上必须借贷相抵。</li>
@@ -854,7 +854,7 @@
 <li>这并不是数据库可以保证的事情：如果你写入违反不变量的脏数据，数据库也无法阻止你。—— 数据库只管存储。</li>
 <li>原子性，隔离性和持久性是数据库的属性，而一致性（在ACID意义上）是应用程序的属性。应用可能依赖数据库的原子性和隔离属性来实现一致性，但这并不仅取决于数据库。因此，字母C不属于ACID。</li>
 </ul>
-<h4 id="_4">隔离性</h4>
+<h4 id="_4">隔离性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li>多个客户端同时访问相同的数据库记录，可能会遇到并发问题。</li>
 <li>ACID意义上的隔离性意味着，<strong>同时执行的事务是相互隔离的</strong>：它们不能相互冒犯。</li>
@@ -864,7 +864,7 @@
 <p><strong>图 7-1 两个客户之间的竞争状态同时递增计数器</strong>
 <img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1635133207000-58c191b8-87e3-49e5-8f61-317c316ea935.png" />
 然而实践中很少会使用可串行的隔离，因为它有性能损失。</p>
-<h4 id="_5">持久性</h4>
+<h4 id="_5">持久性<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>持久性</strong> 是一个承诺，即一旦事务成功完成，即使发生硬件故障或数据库崩溃，写入的任何数据也不会丢失。</li>
 </ul>
@@ -882,7 +882,7 @@
 <li>为了提供持久性保证，数据库必须等到这些写入或复制完成后，才能报告事务成功提交。</li>
 <li>完美的持久性是不存在的：万一所有硬盘和备份同时被销毁。</li>
 </ul>
-<h3 id="_6">单对象和多对象操作</h3>
+<h3 id="_6">单对象和多对象操作<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>客户端在同一事务中执行多次写入时，数据库应该做的事：
 <em><strong>原子性</strong></em></p>
 <ul>
@@ -898,12 +898,14 @@
 <p>通常需要<strong>多对象事务（multi-object transaction）</strong> 来保持多个数据对象的同步。</p>
 <p>一个邮件应用的例子：</p>
 <ul>
-<li>执行以下查询来显示用户未读邮件数量：</li>
-</ul>
-<pre><code class="language-sql">SELECT COUNT（*）FROM emails WHERE recipient_id = 2 AND unread_flag = true
-</code></pre>
-<ul>
-<li>如果邮件太多，觉得查询太慢，于是用了单独的字段存储未读邮件的数量。现在每当一个新消息写入时，必须也增长未读计数器，每当一个消息被标记为已读时，也必须减少未读计数器。</li>
+<li>
+<p>执行以下查询来显示用户未读邮件数量：
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="err">（</span><span class="o">*</span><span class="err">）</span><span class="k">FROM</span><span class="w"> </span><span class="n">emails</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">recipient_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">unread_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>如果邮件太多，觉得查询太慢，于是用了单独的字段存储未读邮件的数量。现在每当一个新消息写入时，必须也增长未读计数器，每当一个消息被标记为已读时，也必须减少未读计数器。</p>
+</li>
 <li>异常情况：</li>
 <li>邮件列表里显示有未读消息，但计数器显示为零未读消息，因为计数器增长还没有发生</li>
 <li>图 7-2 <img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1635134558609-91c15b88-848b-4a61-8c6f-abe513d0f1e6.png" /></li>
@@ -916,7 +918,7 @@
 <li>在关系型数据库中，通常基于客户端与数据库服务器的TCP连接：在任何特定连接上，BEGIN TRANSACTION 和 COMMIT 语句之间的所有内容，被认为是同一事务的一部分（不完美）。</li>
 <li>许多非关系数据库，并没有将这些操作组合在一起的方法。所以可能让数据库处于部分更新的状态。</li>
 </ul>
-<h4 id="_7">单对象写入</h4>
+<h4 id="_7">单对象写入<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <ul>
 <li>当单个对象发生改变时，原子性和隔离性也是适用的。</li>
 <li>存储引擎一个几乎普遍的目标是：对单节点上的单个对象（例如键值对）上提供原子性和隔离性。</li>
@@ -937,7 +939,7 @@
 <li>上面两种对但对象操作有用，但不是通常意义上的事务。</li>
 <li>事务通常被理解为，<strong>将多个对象上的多个操作合并为一个执行单元的机制</strong>。</li>
 </ul>
-<h4 id="_8">多对象事务的必要性</h4>
+<h4 id="_8">多对象事务的必要性<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p>为什么许多分布式数据存储已经放弃了多对象事务？</p>
 <ul>
 <li>多对象事务很难跨分区实现；</li>
@@ -952,7 +954,7 @@
 <li>在具有二级索引的数据库中（除了纯粹的键值存储以外几乎都有），每次更改值时都需要更新索引。</li>
 </ul>
 <p><strong>没有原子性，错误处理就要复杂得多，缺乏隔离性，就会导致并发问题</strong>。</p>
-<h4 id="_9">处理错误和中止</h4>
+<h4 id="_9">处理错误和中止<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
 <ul>
 <li>事务的一个关键特性是，如果发生错误，它可以中止并安全地重试。</li>
 <li>ACID数据库基于这样的哲学：如果数据库有违反其原子性，隔离性或持久性的危险，则宁愿完全放弃事务，而不是留下半成品。</li>
@@ -966,7 +968,7 @@
 <li>如果事务在数据库之外也有副作用，即使事务被中止，也可能发生这些副作用。比如更新操作后附带发送电子邮件。（如果想让多个不同的系统同时提交或者放弃，需要两阶段提交。）</li>
 <li>如果客户端在重试过程中也失败了，并且没有其他人负责重试，那么数据就会丢失。</li>
 </ul>
-<h2 id="_10">弱隔离级别</h2>
+<h2 id="_10">弱隔离级别<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>并发问题发生的条件：</p>
 <ul>
 <li>如果两个事务不触及相同的数据，那么可以安全的并行执行。</li>
@@ -994,13 +996,13 @@
 <li>比起盲目地依赖工具，我们应该对存在的并发问题的种类，以及如何防止这些问题有深入的理解。</li>
 <li>然后就可以使用我们所掌握的工具来构建可靠和正确的应用程序。</li>
 </ul>
-<h3 id="_11">读已提交</h3>
+<h3 id="_11">读已提交<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>最基本的事务隔离级别是<strong>读已提交（Read Committed）</strong>，它提供了两个保证：</p>
 <ol>
 <li>从数据库读时，只能看到已提交的数据（没有<strong>脏读（dirty reads）</strong>）。</li>
 <li>写入数据库时，只会覆盖已经写入的数据（没有<strong>脏写（dirty writes）</strong>）。</li>
 </ol>
-<h4 id="_12">没有脏读</h4>
+<h4 id="_12">没有脏读<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
 <p>什么是<strong>脏读？</strong></p>
 <ul>
 <li>设想一个事务已经将部分数据写入数据库，但事务还没有提交或中止。另一个事务可以看到未提交的数据吗？如果是的话，那就叫做<strong>脏读（dirty reads）。</strong></li>
@@ -1013,7 +1015,7 @@
 <li>如果事务需要更新多个对象，脏读取意味着另一个事务可能会只看到一部分更新。比如上文中电子邮件的未读数目的例子。</li>
 <li>如果事务中止，则所有写入操作都需要回滚。脏读导致其他事务看到稍后需要回滚的数据。</li>
 </ul>
-<h4 id="_13">没有脏写</h4>
+<h4 id="_13">没有脏写<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
 <p>什么是脏写？</p>
 <ul>
 <li>两个事务同时更新数据库的相同对象，通常是后面的写入覆盖前面的。但如果先前的写入是尚未提交事务的一部分，后面的写入会覆盖一个尚未提交的值？如果是，这被称作<strong>脏写（dirty write）</strong>。</li>
@@ -1027,7 +1029,7 @@
 <li><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1635224733944-9dd6ebe8-3dd2-4388-9168-316e941b4de6.png" /></li>
 <li>但是，读已提交不能防止本章第一个图中的两个计数器增量之间的竞争状态。第二次写入在第一个事务提交后，所以它不是一个脏写。但结果仍然不正确。后文中“防止更新丢失”中将探讨如何使这种计数器安全递增。</li>
 </ul>
-<h4 id="_14">实现读已提交</h4>
+<h4 id="_14">实现读已提交<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>读已提交</strong>是一个非常流行的隔离级别。这是Oracle 11g，PostgreSQL，SQL Server 2012，MemSQL和其他许多数据库的默认设置</li>
 </ul>
@@ -1057,7 +1059,7 @@
 <li>当事务正在进行时，任何其他读取对象的事务都会拿到旧值。 </li>
 <li>只有当新值提交后，事务才会切换到读取新值。</li>
 </ul>
-<h3 id="_15">快照隔离和可重复读</h3>
+<h3 id="_15">快照隔离和可重复读<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>读已提交隔离级别的表现：</p>
 <ul>
 <li>它允许<strong>中止</strong>（原子性的要求）；</li>
@@ -1096,7 +1098,7 @@
 <li>如果查询的数据在查询执行的同时发生变化，则很难理解查询的含义。有快照理解起来就容易了。</li>
 <li>快照隔离是一个流行的功能：PostgreSQL，使用InnoDB引擎的MySQL，Oracle，SQL Server等都支持</li>
 </ul>
-<h4 id="_16">实现快照隔离</h4>
+<h4 id="_16">实现快照隔离<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
 <p>思路</p>
 <ul>
 <li>与读取提交的隔离类似，快照隔离的实现通常使用<strong>写锁</strong>来防止脏写。</li>
@@ -1129,7 +1131,7 @@
 <li>在稍后的时间，当确定没有事务可以再访问已删除的数据时，数据库中的垃圾收集过程会将所有带有删除标记的行移除，并释放其空间。</li>
 <li>UPDATE 操作在内部翻译为 DELETE 和 INSERT 。</li>
 </ul>
-<h4 id="_17">观察一致性快照的可见性规则</h4>
+<h4 id="_17">观察一致性快照的可见性规则<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
 <p>对于一个事务 ID，哪些对象时可见的？</p>
 <ul>
 <li>当一个事务从数据库中读取时，事务ID用于决定它可以看见哪些对象，看不见哪些对象。通过仔细定义可见性规则，数据库可以向应用程序呈现一致的数据库快照。</li>
@@ -1148,7 +1150,7 @@
 <li>长时间运行的事务可能会长时间使用快照，并继续读取（从其他事务的角度来看）早已被覆盖或删除的值。</li>
 <li>由于从来不原地更新值，而是每次值改变时创建一个新的版本，数据库可以在提供一致快照的同时只产生很小的额外开销。</li>
 </ul>
-<h4 id="_18">索引和快照隔离</h4>
+<h4 id="_18">索引和快照隔离<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
 <p>索引如何在多版本数据库中工作？</p>
 <ul>
 <li>一种选择是使索引简单地指向对象的所有版本，并且需要索引查询来过滤掉当前事务不可见的任何对象版本。</li>
@@ -1160,7 +1162,7 @@
 <li>在CouchDB，Datomic和LMDB中使用另一种方法。虽然它们也使用B树，但它们使用的是一种<strong>仅追加/写时拷贝（append-only/copy-on-write）</strong> 的变体，它们在更新时不覆盖树的页面，而为每个修改页面创建一份副本。从父页面直到树根都会级联更新，以指向它们子页面的新版本。任何不受写入影响的页面都不需要被复制，并且保持不变。</li>
 <li>使用仅追加的B树，<strong>每个写入事务（或一批事务）都会创建一颗新的B树</strong>。当创建时，从该特定树根生长的树就是数据库的一个一致性快照。没必要根据事务ID过滤掉对象，因为后续写入不能修改现有的B树；它们只能创建新的树根。但这种方法也需要一个负责压缩和垃圾收集的后台进程。</li>
 </ul>
-<h4 id="_19">可重复读与命名混淆</h4>
+<h4 id="_19">可重复读与命名混淆<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
 <ul>
 <li>快照隔离是一个有用的隔离级别，特别对于只读事务而言。</li>
 <li>但是，许多数据库实现了它，却用不同的名字来称呼。</li>
@@ -1169,7 +1171,7 @@
 <li>这种命名混淆的原因是SQL标准没有<strong>快照隔离</strong>的概念，因为标准是基于System R 1975年定义的隔离级别，那时候<strong>快照隔离</strong>尚未发明。相反，它定义了<strong>可重复读</strong>，表面上看起来与快照隔离很相似。 </li>
 <li>后续虽然有可重复度的正式定义，但是结果现在命名混乱了。</li>
 </ul>
-<h3 id="_20">防止丢失更新</h3>
+<h3 id="_20">防止丢失更新<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <ul>
 <li>上文讨论了<strong>读已提交</strong>和<strong>快照隔离</strong>级别，主要保证了<strong>只读事务在并发写入时</strong>可以看到什么，另外一个重要的事务并发场景是脏写。</li>
 <li>并发事务还有<strong>丢失更新（lost update）</strong> 问题，如<a href="img/fig7-1.png">图7-1</a>所示。</li>
@@ -1180,15 +1182,15 @@
 <li>如果两个事务同时执行，则其中一个的修改可能会丢失，因为第二个写入的内容并没有包括第一个事务的修改（有时会说后面写入<strong>狠揍（clobber）</strong> 了前面的写入）。</li>
 </ul>
 <p>下面是解决方案。</p>
-<h4 id="_21">原子写</h4>
+<h4 id="_21">原子写<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
 <ul>
 <li>很多数据库提供了原子更新操作，从而消除在应用程序代码中执行读取-修改-写入序列的需要。</li>
 <li>这通常是最好的解决方案。</li>
 </ul>
-<p>举例，下面的指令在大多数关系数据库中是并发安全的：</p>
-<pre><code class="language-sql">UPDATE counters SET value = value + 1 WHERE key = 'foo';
-</code></pre>
-<p>原子写的实现方法</p>
+<p>举例，下面的指令在大多数关系数据库中是并发安全的：
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">counters</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</code></pre></div>
+原子写的实现方法</p>
 <ul>
 <li>原子操作通常通过在读取对象时，获取其上的<strong>排它锁</strong>来实现。</li>
 <li>使得更新完成之前，没有其他事务可以读取它。</li>
@@ -1200,7 +1202,7 @@
 <li>ORM框架很容易意外地执行不安全的读取-修改-写入序列，<strong>而不是使用数据库提供的原子操作。</strong></li>
 <li>经常产出很难测出来的微妙 bug</li>
 </ul>
-<h4 id="_22">显式锁定</h4>
+<h4 id="_22">显式锁定<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
 <ul>
 <li>如果数据库不支持内置原子操作，另一种防止更新丢失的方法是有应用程序显式地锁定将要更新的对象。</li>
 <li>然后应用程序可以执行读取-修改-写入序列，如果任何其他事务尝试同时读取同一个对象，则强制等待，直到第一个<strong>读取-修改-写入序列</strong>完成。</li>
@@ -1211,21 +1213,21 @@
 <li>一个原子操作可能是不够的，因为应用程序还需要确保玩家的移动符合游戏规则</li>
 <li>可以使用锁来防止两名玩家同时移动相同的棋子</li>
 </ul>
-<p><strong>例7-1 显式锁定行以防止丢失更新</strong></p>
-<pre><code class="language-sql">BEGIN TRANSACTION;
-SELECT * FROM figures
-    WHERE name = 'robot' AND game_id = 222
-FOR UPDATE;
+<p><strong>例7-1 显式锁定行以防止丢失更新</strong>
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">figures</span>
+<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;robot&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">game_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">222</span>
+<span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 
--- 检查玩家的操作是否有效，然后更新先前SELECT返回棋子的位置。
-UPDATE figures SET position = 'c4' WHERE id = 1234;
-COMMIT;
-</code></pre>
+<span class="c1">-- 检查玩家的操作是否有效，然后更新先前SELECT返回棋子的位置。</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">figures</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="k">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;c4&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="p">;</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div></p>
 <ul>
 <li><strong>FOR UPDATE 子句告诉数据库应该对该查询返回的所有行加锁。</strong></li>
 </ul>
 <p>这是有效的，但要做对，你需要仔细考虑应用逻辑。忘记在代码某处加锁很容易引入竞争条件。</p>
-<h4 id="_23">自动检测丢失的更新</h4>
+<h4 id="_23">自动检测丢失的更新<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
 <ul>
 <li>原子操作和锁是通过强制<strong>读取-修改-写入序列</strong>按<strong>顺序发生</strong>，来防止丢失更新的方法。</li>
 <li>还可以允许并发执行，如果事务管理器检测到丢失更新，则<strong>中止事务并强制它们重试</strong>其<strong>读取-修改-写入序列</strong>。</li>
@@ -1237,7 +1239,7 @@ COMMIT;
 <li>但是，MySQL/InnoDB的可重复读并不会检测<strong>丢失更新</strong>。导致有人认为 MySQL 不提供快照隔离。</li>
 <li>数据库自动检查！应用代码不需要任何操作就能使用丢失更新检测。很棒！</li>
 </ul>
-<h4 id="cas">比较并设置（CAS）</h4>
+<h4 id="cas">比较并设置（CAS）<a class="headerlink" href="#cas" title="Permanent link">&para;</a></h4>
 <ul>
 <li>有些不提供事务的数据库中，提供了一种原子操作：<strong>比较并设置（CAS, Compare And Set）</strong></li>
 <li>此操作的目的是为了避免丢失更新：</li>
@@ -1246,16 +1248,16 @@ COMMIT;
 </ul>
 <p>举例：
 为了防止两个用户同时更新同一个wiki页面，可以尝试类似这样的方式，只有当页面从上次读取之后没有发生变化时，才会发生更新：</p>
-<pre><code class="language-sql">-- 根据数据库的实现情况，这可能安全也可能不安全
-UPDATE wiki_pages SET content = '新内容'
-  WHERE id = 1234 AND content = '旧内容';
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 根据数据库的实现情况，这可能安全也可能不安全</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">wiki_pages</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;新内容&#39;</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;旧内容&#39;</span><span class="p">;</span>
+</code></pre></div>
 <p>注意</p>
 <ul>
 <li>如果更新失败，需要应用层重试。</li>
 <li>如果数据库的 <code>WHERE</code>子句从旧快照中读取，则此语句可能无法防止丢失更新，因为即使发生了另一个并发写入，WHERE条件也可能为真。在依赖数据库的CAS操作前要检查其安全运行条件。</li>
 </ul>
-<h4 id="_24">冲突解决和复制</h4>
+<h4 id="_24">冲突解决和复制<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
 <ul>
 <li>在复制数据库中，防止丢失的更新需要考虑另一个维度：由于在多个节点上存在数据副本，并且在不同节点上的数据可能被并发地修改，因此需要采取一些额外的步骤来防止丢失更新。</li>
 </ul>
@@ -1278,7 +1280,7 @@ UPDATE wiki_pages SET content = '新内容'
 <li>最后写入胜利（LWW）的冲突解决方法很容易丢失更新。</li>
 <li>不幸的是，LWW是许多复制数据库中的默认方案。</li>
 </ul>
-<h3 id="_25">写入偏斜与幻读</h3>
+<h3 id="_25">写入偏斜与幻读<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
 <ul>
 <li>前面讨论的脏写和丢失更新，都是不同事务并发地尝试写入<strong>相同的对象</strong>时，会出现这两种竞争条件。</li>
 <li>除此之外，还有其他场景的并发问题，比如<strong>修改不同的对象</strong>。</li>
@@ -1296,7 +1298,7 @@ UPDATE wiki_pages SET content = '新内容'
 </ul>
 </li>
 </ul>
-<h4 id="_26">写偏差的特征</h4>
+<h4 id="_26">写偏差的特征<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h4>
 <ul>
 <li>这种异常称为<strong>写偏差</strong>。它既不是<strong>脏写</strong>，也不是<strong>丢失更新</strong>，因为这两个事务正在更新两个不同的对象（Alice和Bob各自的待命记录）。</li>
 </ul>
@@ -1313,44 +1315,48 @@ UPDATE wiki_pages SET content = '新内容'
 </ul>
 <p>解决办法：</p>
 <ul>
-<li>如果无法使用可串行化的隔离级别，则此情况下的<strong>次优选项可能是显式锁定事务所依赖的行。</strong></li>
-</ul>
-<pre><code class="language-sql">BEGIN TRANSACTION;
-SELECT * FROM doctors
-  WHERE on_call = TRUE 
-  AND shift_id = 1234 FOR UPDATE;
+<li>
+<p>如果无法使用可串行化的隔离级别，则此情况下的<strong>次优选项可能是显式锁定事务所依赖的行。</strong>
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">doctors</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">on_call</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">shift_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
 
-UPDATE doctors
-  SET on_call = FALSE
-  WHERE name = 'Alice' 
-  AND shift_id = 1234;
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">doctors</span>
+<span class="w">  </span><span class="k">SET</span><span class="w"> </span><span class="n">on_call</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">FALSE</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Alice&#39;</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">shift_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1234</span><span class="p">;</span>
 
-COMMIT;
-</code></pre>
-<ul>
-<li>和以前一样，FOR UPDATE告诉数据库锁定返回的所有行以用于更新。</li>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>和以前一样，FOR UPDATE告诉数据库锁定返回的所有行以用于更新。</p>
+</li>
 </ul>
-<h4 id="_27">写偏差的更多例子</h4>
+<h4 id="_27">写偏差的更多例子<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
 <p><em><strong>会议室预订系统</strong></em></p>
 <ul>
 <li>防止会议室被同一个会议室多次预定，需要检查时间是否有重叠。</li>
-<li>快照级别隔离不安全的 SQL：</li>
-</ul>
-<pre><code class="language-sql">BEGIN TRANSACTION;
+<li>
+<p>快照级别隔离不安全的 SQL：
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
 
--- 检查所有现存的与12:00~13:00重叠的预定
-SELECT COUNT(*) FROM bookings
-WHERE room_id = 123 AND 
-    end_time &gt; '2015-01-01 12:00' AND start_time &lt; '2015-01-01 13:00';
+<span class="c1">-- 检查所有现存的与12:00~13:00重叠的预定</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">bookings</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">room_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span>
+<span class="w">    </span><span class="n">end_time</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="s1">&#39;2015-01-01 12:00&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">start_time</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;2015-01-01 13:00&#39;</span><span class="p">;</span>
 
--- 如果之前的查询返回0
-INSERT INTO bookings(room_id, start_time, end_time, user_id)
-  VALUES (123, '2015-01-01 12:00', '2015-01-01 13:00', 666);
+<span class="c1">-- 如果之前的查询返回0</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">bookings</span><span class="p">(</span><span class="n">room_id</span><span class="p">,</span><span class="w"> </span><span class="n">start_time</span><span class="p">,</span><span class="w"> </span><span class="n">end_time</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">)</span>
+<span class="w">  </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">123</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 12:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2015-01-01 13:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">666</span><span class="p">);</span>
 
-COMMIT;
-</code></pre>
-<ul>
-<li>快照隔离并不能防止另一个用户同时插入冲突的会议。为了确保不会遇到调度冲突，你又需要可串行化的隔离级别了。</li>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>快照隔离并不能防止另一个用户同时插入冲突的会议。为了确保不会遇到调度冲突，你又需要可串行化的隔离级别了。</p>
+</li>
 </ul>
 <p><em><strong>多人游戏</strong></em></p>
 <ul>
@@ -1370,7 +1376,7 @@ COMMIT;
 <li>可以通过在用户的帐户中插入一个试探性的消费项目来实现这一点。</li>
 <li>有了写入偏差，可能会发生两个支出项目同时插入，一起导致余额变为负值。但这两个事务各自都不超额。</li>
 </ul>
-<h4 id="_28">导致写入偏差的幻读</h4>
+<h4 id="_28">导致写入偏差的幻读<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h4>
 <p>上述所有例子遵循类似的模式：</p>
 <ul>
 <li>一个SELECT查询找出符合条件的行，并检查是否符合一些要求。</li>
@@ -1388,7 +1394,7 @@ COMMIT;
 <li>一个事务中的写入改变另一个事务的搜索查询的结果，被称为<strong>幻读</strong>。</li>
 <li>快照隔离避免了只读查询中幻读，但是在像我们讨论的例子那样的读写事务中，幻读会导致特别棘手的写入偏差情况。</li>
 </ul>
-<h4 id="_29">物化冲突</h4>
+<h4 id="_29">物化冲突<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
 <ul>
 <li>如果幻读的问题是没有对象可以加锁，也许可以人为地在数据库中引入一个锁对象？</li>
 <li>例如，在会议室预订的场景中，可以想象创建一个关于时间槽和房间的表。</li>
@@ -1401,7 +1407,7 @@ COMMIT;
 <li>出于这些原因，如果没有其他办法可以实现，物化冲突应被视为最后的手段。</li>
 </ul>
 <p>在大多数情况下。<strong>可串行化（Serializable）</strong> 的隔离级别是更可取的。</p>
-<h2 id="_30">可串行化</h2>
+<h2 id="_30">可串行化<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h2>
 <p><strong>读已提交</strong>和<strong>快照隔离</strong>级别会阻止某些竞争条件，但并非对所有情况都有效。我们遇到了一些特别棘手的例子，<strong>写入偏差</strong>和<strong>幻读</strong>。面临的挑战：</p>
 <ul>
 <li>隔离级别难以理解，并且在不同的数据库中实现的不一致</li>
@@ -1424,7 +1430,7 @@ COMMIT;
 <li><strong>两阶段锁定（2PL, two-phase locking）</strong>，几十年来唯一可行的选择</li>
 <li>乐观并发控制技术，例如<strong>可串行化快照隔离（serializable snapshot isolation）</strong></li>
 </ul>
-<h3 id="_31">真的串行执行</h3>
+<h3 id="_31">真的串行执行<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
 <ul>
 <li>避免并发问题的最简单方法就是完全不要并发：在单个线程上按顺序一次只执行一个事务。</li>
 <li>但数据库设计人员在2007年左右才决定，单线程循环执行事务是可行的。</li>
@@ -1442,7 +1448,7 @@ COMMIT;
 <li>但是其吞吐量仅限于单个CPU核的吞吐量。</li>
 <li>为了充分利用单一线程，需要与传统形式的事务不同的结构。</li>
 </ul>
-<h4 id="_32">在存储过程中封装事务</h4>
+<h4 id="_32">在存储过程中封装事务<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h4>
 <ul>
 <li>不能把人类做出决定和回应的多个流程操作封装成一个事务（比如搜路线、选机票、付款），因为人类太慢。</li>
 <li><strong>交互式的事务中，为了提高吞吐量，必须允许数据库并发处理</strong>。</li>
@@ -1450,7 +1456,7 @@ COMMIT;
 <li>下图表示 交互式事务和存储过程之间的区别（使用图7-8的示例事务）</li>
 <li><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1635738731596-8923d4a2-057e-4b80-8322-b9946c900871.png" /></li>
 </ul>
-<h4 id="_33">存储过程的优点和缺点</h4>
+<h4 id="_33">存储过程的优点和缺点<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
 <p>存储过程名声不好的原因：</p>
 <ul>
 <li>每个数据库厂商都有自己的存储过程语言，而不是通用语言如 Java。</li>
@@ -1466,7 +1472,7 @@ COMMIT;
 <li><strong>存储过程与内存存储</strong>，使得在单个线程上执行所有事务变得可行。由于不需要等待I/O，且避免了并发控制机制的开销，它们可以在单个线程上实现相当好的吞吐量。</li>
 <li>VoltDB还使用存储过程进行复制</li>
 </ul>
-<h4 id="_34">分区</h4>
+<h4 id="_34">分区<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h4>
 <ul>
 <li>顺序执行导致写入吞吐比较高的应用，单线程事务处理器可能成为一个严重的瓶颈。</li>
 </ul>
@@ -1481,7 +1487,7 @@ COMMIT;
 <li>跨分区事务比单分区事务慢得多！</li>
 <li>事务能否分区取决于应用数据的结构：kv 存储容易分区，但是多个二级索引的数据不方便分区。</li>
 </ul>
-<h4 id="_35">串行执行小结</h4>
+<h4 id="_35">串行执行小结<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h4>
 <p>特定情况下，真的串行执行事务，已经成为一种实现可串行化隔离等级的可行办法。
 使用条件：</p>
 <ul>
@@ -1490,7 +1496,7 @@ COMMIT;
 <li>写入吞吐量必须低到能在单个CPU核上处理，否则需要分区，但最好没有跨分区事务。</li>
 <li>跨分区事务也可以支持，但是占比必须小。</li>
 </ul>
-<h3 id="_36">两阶段锁定</h3>
+<h3 id="_36">两阶段锁定<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
 <ul>
 <li>大约30年来，在数据库中只有一种广泛使用的串行化算法：<strong>两阶段锁定（2PL，two-phase locking）</strong></li>
 <li>之前我们看到锁通常用于防止脏写；</li>
@@ -1507,7 +1513,7 @@ COMMIT;
 <li><strong>在2PL中，写入不仅会阻塞其他写入，也会阻塞读</strong>，反之亦然。快照隔离使得<strong>读不阻塞写，写也不阻塞读</strong>，这是2PL和快照隔离之间的关键区别。</li>
 <li>另一方面，因为2PL提供了可串行化的性质，它可以防止早先讨论的所有竞争条件，包括丢失更新和写入偏差。</li>
 </ul>
-<h4 id="_37">实现两阶段锁</h4>
+<h4 id="_37">实现两阶段锁<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h4>
 <p>使用场景</p>
 <ul>
 <li>2PL用于MySQL（InnoDB）和SQL Server中的可串行化隔离级别，以及DB2中的可重复读隔离级别</li>
@@ -1529,7 +1535,7 @@ COMMIT;
 <li>数据库会自动检测事务之间的死锁，并中止其中一个，以便另一个继续执行。</li>
 <li>被中止的事务需要由应用程序重试。</li>
 </ul>
-<h4 id="_38">两阶段锁定的性能</h4>
+<h4 id="_38">两阶段锁定的性能<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h4>
 <ul>
 <li>两阶段锁定的巨大缺点：性能问题</li>
 <li>两阶段锁定下的事务吞吐量与查询响应时间要比弱隔离级别下要差得多。</li>
@@ -1549,20 +1555,20 @@ COMMIT;
 <li>基于2PL实现的可串行化隔离级别中，死锁会出现的频繁的多（取决于事务的访问模式）。</li>
 <li>死锁发生时，需要把事务中止并被重试。这导致额外的性能问题。</li>
 </ul>
-<h4 id="_39">谓词锁</h4>
+<h4 id="_39">谓词锁<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h4>
 <ul>
 <li>具有可串行化隔离级别的数据库必须防止<strong>幻读</strong>。</li>
 <li>如何防止会议室重复预定（即如果一个事务在某个时间窗口内搜索了一个房间的现有预定，则另一个事务不能同时插入或者更新同一个时间窗口内、同一房间的另一个约定）</li>
 </ul>
 <p>实现方式</p>
 <ul>
-<li>我们需要一个<strong>谓词锁（predicate lock）</strong>。它类似于前面描述的共享/排它锁，但不属于特定的对象（例如，表中的一行），<strong>它属于所有符合某些搜索条件的对象，如：</strong></li>
+<li>我们需要一个<strong>谓词锁（predicate lock）</strong>。它类似于前面描述的共享/排它锁，但不属于特定的对象（例如，表中的一行），<strong>它属于所有符合某些搜索条件的对象，如：</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">bookings</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">room_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="w"> </span><span class="k">AND</span>
+<span class="w">      </span><span class="n">end_time</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="s1">&#39;2018-01-01 12:00&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span>
+<span class="w">      </span><span class="n">start_time</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="s1">&#39;2018-01-01 13:00&#39;</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
-<pre><code class="language-sql">SELECT * FROM bookings
-WHERE room_id = 123 AND
-      end_time &gt; '2018-01-01 12:00' AND 
-      start_time &lt; '2018-01-01 13:00';
-</code></pre>
 <p>谓词锁限制访问的方式：</p>
 <ul>
 <li>如果事务A想要读取匹配某些条件的对象，就像在这个 SELECT 查询中那样，它必须获取查询条件上的<strong>共享谓词锁（shared-mode predicate lock）</strong>。如果另一个事务B持有任何满足这一查询条件对象的排它锁，那么A必须等到B释放它的锁之后才允许进行查询。</li>
@@ -1573,7 +1579,7 @@ WHERE room_id = 123 AND
 <li>谓词锁甚至适用于数据库中尚不存在，但将来可能会添加的对象（幻象）。</li>
 <li>如果两阶段锁定包含谓词锁，则数据库将阻止所有形式的写入偏差和其他竞争条件，因此其隔离实现了可串行化。</li>
 </ul>
-<h4 id="_40">索引范围锁</h4>
+<h4 id="_40">索引范围锁<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h4>
 <ul>
 <li>谓词锁性能不佳：<strong>如果活跃事务持有很多锁，检查匹配的锁会非常耗时。</strong></li>
 <li>大多数使用2PL的数据库实际上实现了<strong>索引范围锁</strong>（也称为<strong>间隙锁（next-key locking）</strong>），这是一个简化的近似版谓词锁。</li>
@@ -1593,7 +1599,7 @@ WHERE room_id = 123 AND
 <li>退化到整个表上的共享锁</li>
 <li>对性能不利，但是比较安全。</li>
 </ul>
-<h3 id="_41">可串行化快照隔离</h3>
+<h3 id="_41">可串行化快照隔离<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
 <p>本章讨论了关于数据库的并发控制的黯淡画面：</p>
 <ul>
 <li>一方面，我们实现了性能不好（2PL）或者伸缩性不好（串行执行）的可串行化隔离级别。</li>
@@ -1609,7 +1615,7 @@ WHERE room_id = 123 AND
 <li>SSI是相当新的：它在2008年首次被提出。</li>
 <li>既用于单节点数据库（PostgreSQL9.1 以后的可串行化隔离级别）和分布式数据库（FoundationDB使用类似的算法）。</li>
 </ul>
-<h4 id="_42">悲观与乐观的并发控制</h4>
+<h4 id="_42">悲观与乐观的并发控制<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h4>
 <ul>
 <li>两阶段锁是一种所谓的<strong>悲观并发控制机制（pessimistic）</strong> ：它是基于这样的原则：如果有事情可能出错（如另一个事务所持有的锁所表示的），最好等到情况安全后再做任何事情。</li>
 <li><strong>串行化快照隔离</strong>是一种<strong>乐观（optimistic）</strong> 的并发控制技术。</li>
@@ -1626,7 +1632,7 @@ WHERE room_id = 123 AND
 <li>SSI基于快照隔离——也就是说，事务中的所有读取都是来自数据库的一致性快照。</li>
 <li>在快照隔离的基础上，SSI添加了一种算法来检测写入之间的串行化冲突，并确定要中止哪些事务</li>
 </ul>
-<h4 id="_43">基于过时前提的决策</h4>
+<h4 id="_43">基于过时前提的决策<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h4>
 <ul>
 <li>前文讨论的快照隔离中的写入偏差，是由于事务基于一个<strong>前提（premise）</strong> 采取行动，之后当事务要提交时，原始数据可能已经改变——前提可能不再成立。</li>
 <li>更好的办法是由数据库进行判断，而不是应用程序来判断。</li>
@@ -1634,7 +1640,7 @@ WHERE room_id = 123 AND
 <li>检测对旧MVCC对象版本的读取（读之前存在未提交的写入）</li>
 <li>检测影响先前读取的写入（读之后发生写入）</li>
 </ul>
-<h4 id="mvcc">检测旧MVCC读取</h4>
+<h4 id="mvcc">检测旧MVCC读取<a class="headerlink" href="#mvcc" title="Permanent link">&para;</a></h4>
 <p>快照隔离出现写入偏差的原因：</p>
 <ul>
 <li>快照隔离通常是通过多版本并发控制（MVCC；见图7-10）来实现的。当一个事务从MVCC数据库中的一致快照读时，它将忽略取快照时尚未提交的任何其他事务所做的写入。</li>
@@ -1649,7 +1655,7 @@ WHERE room_id = 123 AND
 <ul>
 <li>如果事务43 是只读事务，则不需要中止，因为没有写入偏差的风险。</li>
 </ul>
-<h4 id="_44">检测影响之前读取的写入</h4>
+<h4 id="_44">检测影响之前读取的写入<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h4>
 <p>第二种情况要考虑的是另一个事务在读取数据之后修改数据。</p>
 <ul>
 <li><strong>图7-11 在可串行化快照隔离中，检测一个事务何时修改另一个事务的读取。</strong></li>
@@ -1662,7 +1668,7 @@ WHERE room_id = 123 AND
 <li>当事务写入数据库时，它必须在索引中查找最近曾读取受影响数据的其他事务。这个过程类似于在受影响的键范围上获取写锁，但锁并不会阻塞事务指导其他读事务完成，而是像警戒线一样只是简单通知其他事务：你们读过的数据可能不是最新的啦。</li>
 <li>当事务 43 想要提交时，发现来自事务42 的冲突写入已经被提交，所以事务43 必须中止。</li>
 </ul>
-<h4 id="_45">可串行化快照隔离的性能</h4>
+<h4 id="_45">可串行化快照隔离的性能<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h4>
 <p>与两阶段锁定相比，可串行化快照隔离的优点：</p>
 <ul>
 <li>一个事务不需要阻塞等待另一个事务所持有的锁。就像在快照隔离下一样，写不会阻塞读，反之亦然。</li>
@@ -1678,7 +1684,7 @@ WHERE room_id = 123 AND
 <li>中止率显著影响SSI的整体表现。例如，长时间读取和写入数据的事务很可能会发生冲突并中止，因此<strong>SSI要求同时读写的事务尽量短</strong>（只读的长事务可能没问题）。</li>
 <li>SSI可能比两阶段锁定或串行执行更能容忍慢事务。</li>
 </ul>
-<h2 id="_46">本章小结</h2>
+<h2 id="_46">本章小结<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h2>
 <p>事务的好处？</p>
 <ul>
 <li>事务是一个抽象层，允许应用程序假装某些并发问题和某些类型的硬件和软件故障不存在。各式各样的错误被简化为一种简单情况：<strong>事务中止（transaction abort）</strong>，而应用需要的仅仅是重试。</li>

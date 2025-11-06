@@ -277,27 +277,26 @@
 
 
 
-<h1 id="7">7 命令行参数</h1>
-<h2 id="os"><code>OS</code>包</h2>
+<h1 id="7">7 命令行参数<a class="headerlink" href="#7" title="Permanent link">&para;</a></h1>
+<h2 id="os"><code>OS</code>包<a class="headerlink" href="#os" title="Permanent link">&para;</a></h2>
 <p><img alt="1637412676200-a620a13d-3fa8-4d41-ac3d-cd65dbfeb518.png" src="../img/WqV_rn-ZWPifjkG2/1637412676200-a620a13d-3fa8-4d41-ac3d-cd65dbfeb518-697762.png" /></p>
-<h2 id="_1">案例练习</h2>
-<pre><code class="language-go">package main
+<h2 id="_1">案例练习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;os&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
 
-func main() {
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-    fmt.Println(&quot;命令行的参数有&quot;,len(os.Args))
-    //遍历os.Args切片，就可以得到所有的命令行输入参数值
-    for i,v := range os.Args{
-        fmt.Printf(&quot;args[%v]=%v&quot;,i,v)
-    }
-}
-
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;命令行的参数有&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">))</span>
+<span class="w">    </span><span class="c1">//遍历os.Args切片，就可以得到所有的命令行输入参数值</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;args[%v]=%v&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>结果显示</p>
 <p><img alt="1637413184005-99d9a1e0-c902-4124-89e7-b50e238f57a4.png" src="../img/WqV_rn-ZWPifjkG2/1637413184005-99d9a1e0-c902-4124-89e7-b50e238f57a4-289511.png" /></p>
 <blockquote>

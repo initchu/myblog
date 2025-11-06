@@ -251,117 +251,117 @@
 
 
 
-<h1 id="gin-getpostdeleteput">Gin 的 GET/POST/DELETE/PUT 请求</h1>
+<h1 id="gin-getpostdeleteput">Gin 的 GET/POST/DELETE/PUT 请求<a class="headerlink" href="#gin-getpostdeleteput" title="Permanent link">&para;</a></h1>
 <ul>
 <li><code>&lt;font style="color:rgb(68, 68, 68);background-color:rgb(248, 248, 248);"&gt;GET&lt;/font&gt;</code><font style="color:rgb(68, 68, 68);">用来获取资源</font></li>
 <li><code>&lt;font style="color:rgb(68, 68, 68);background-color:rgb(248, 248, 248);"&gt;POST&lt;/font&gt;</code><font style="color:rgb(68, 68, 68);">用来新建资源</font></li>
 <li><code>&lt;font style="color:rgb(68, 68, 68);background-color:rgb(248, 248, 248);"&gt;PUT&lt;/font&gt;</code><font style="color:rgb(68, 68, 68);">用来更新资源</font></li>
 <li><code>&lt;font style="color:rgb(68, 68, 68);background-color:rgb(248, 248, 248);"&gt;DELETE&lt;/font&gt;</code><font style="color:rgb(68, 68, 68);">用来删除资源</font></li>
 </ul>
-<pre><code class="language-go">func main() {
-    // Disable Console Color
-    // gin.DisableConsoleColor()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Disable Console Color</span>
+<span class="w">    </span><span class="c1">// gin.DisableConsoleColor()</span>
 
-    // 使用默认中间件创建一个gin路由器
-    // logger and recovery (crash-free) 中间件
-    router := gin.Default()
+<span class="w">    </span><span class="c1">// 使用默认中间件创建一个gin路由器</span>
+<span class="w">    </span><span class="c1">// logger and recovery (crash-free) 中间件</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    router.GET(&quot;/someGet&quot;, getting)
-    router.POST(&quot;/somePost&quot;, posting)
-    router.PUT(&quot;/somePut&quot;, putting)
-    router.DELETE(&quot;/someDelete&quot;, deleting)
-    router.PATCH(&quot;/somePatch&quot;, patching)
-    router.HEAD(&quot;/someHead&quot;, head)
-    router.OPTIONS(&quot;/someOptions&quot;, options)
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/someGet&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">getting</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/somePost&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">posting</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/somePut&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">putting</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/someDelete&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deleting</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">PATCH</span><span class="p">(</span><span class="s">&quot;/somePatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">patching</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">HEAD</span><span class="p">(</span><span class="s">&quot;/someHead&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">head</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">OPTIONS</span><span class="p">(</span><span class="s">&quot;/someOptions&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">)</span>
 
-    // 默认启动的是 8080端口，也可以自己定义启动端口
-    router.Run()
-    // router.Run(&quot;:3000&quot;) for a hard coded port
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 默认启动的是 8080端口，也可以自己定义启动端口</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// router.Run(&quot;:3000&quot;) for a hard coded port</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>如下运行一个简单的 json 传给客户端。</p>
 <p>不同的 r 方法返回不同的内容。</p>
 <p>Gin 采用四种方法是一种 <font style="color:rgb(68, 68, 68);">RESTful</font> API 规范。</p>
-<pre><code class="language-go">func main() {
-    r := gin.Default()
-    r.GET(&quot;/book&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;GET&quot;,
-        })
-    })
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.POST(&quot;/book&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;POST&quot;,
-        })
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.PUT(&quot;/book&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;PUT&quot;,
-        })
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.DELETE(&quot;/book&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;DELETE&quot;,
-        })
-    })
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>默认端口：8080。</p>
 <p>结果如下：</p>
 <p><img alt="1650886097898-2a180660-90d9-42d4-a150-0ef360c7c4ed.png" src="../img/BsxCsNrE1Unb5LmB/1650886097898-2a180660-90d9-42d4-a150-0ef360c7c4ed-427040.png" /></p>
 <p>如图所示，可以发现，直接在浏览器地址栏输入某个地址，会发送<code>GET</code>请求。为了确定其他类型的请求，采用 postman 进行发送。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-)
-func main() {
-    r := gin.Default()
-    r.GET(&quot;/book/:id&quot;, func(c *gin.Context) {
-        id := c.Param(&quot;id&quot;)
-        user := c.DefaultQuery(&quot;user&quot;,&quot;syt&quot;) // 不传送 Arusi 的时候 默认为 Arusi
-        pwd := c.Query(&quot;pwd&quot;)
-        c.JSON(200, gin.H{
-            &quot;id&quot;: id,
-            &quot;user&quot;:user,
-            &quot;pwd&quot;:pwd,
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/book/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">id</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">user</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultQuery</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="s">&quot;syt&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 不传送 Arusi 的时候 默认为 Arusi</span>
+<span class="w">        </span><span class="nx">pwd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="s">&quot;pwd&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;user&quot;</span><span class="p">:</span><span class="nx">user</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;pwd&quot;</span><span class="p">:</span><span class="nx">pwd</span><span class="p">,</span>
 
-        })
-    })
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.POST(&quot;/book&quot;, func(c *gin.Context) { //Post 不显示 uri 的内容
-        user := c.DefaultQuery(&quot;user&quot;,&quot;Arusi&quot;)
-        pwd := c.PostForm(&quot;pwd&quot;)
-        c.JSON(200, gin.H{
-            &quot;user&quot;:user,
-            &quot;pwd&quot;:pwd,
-        })
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">//Post 不显示 uri 的内容</span>
+<span class="w">        </span><span class="nx">user</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultQuery</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="s">&quot;Arusi&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">pwd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">PostForm</span><span class="p">(</span><span class="s">&quot;pwd&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;user&quot;</span><span class="p">:</span><span class="nx">user</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;pwd&quot;</span><span class="p">:</span><span class="nx">pwd</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.PUT(&quot;/book&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;PUT&quot;,
-        })
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.DELETE(&quot;/book&quot;, func(c *gin.Context) {
-        id := c.Param(&quot;id&quot;)
-        user := c.DefaultQuery(&quot;user&quot;,&quot;syt&quot;) // 不传送 Arusi 的时候 默认为 Arusi
-        pwd := c.Query(&quot;pwd&quot;)
-        c.JSON(200, gin.H{
-            &quot;id&quot;: id,
-            &quot;user&quot;:user,
-            &quot;pwd&quot;:pwd,
-        })
-    })
-    //默认8080,也可以自己定义端口
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/book&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">id</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">user</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultQuery</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span><span class="s">&quot;syt&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 不传送 Arusi 的时候 默认为 Arusi</span>
+<span class="w">        </span><span class="nx">pwd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="s">&quot;pwd&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;user&quot;</span><span class="p">:</span><span class="nx">user</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;pwd&quot;</span><span class="p">:</span><span class="nx">pwd</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//默认8080,也可以自己定义端口</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><code>GET</code> 在Postmanz 中显示结果如下：</p>
 <p><img alt="1650885386323-4f9c358a-d8d2-4ff5-a8cd-2e12ae397bf6.gif" src="../img/BsxCsNrE1Unb5LmB/1650885386323-4f9c358a-d8d2-4ff5-a8cd-2e12ae397bf6-341328.gif" /></p>
 <p>URL 的地址发生了变化。</p>

@@ -346,123 +346,123 @@
 
 
 
-<h1 id="12-channel">12 Channel 管道机制</h1>
-<h2 id="_1">需求场景</h2>
+<h1 id="12-channel">12 Channel 管道机制<a class="headerlink" href="#12-channel" title="Permanent link">&para;</a></h1>
+<h2 id="_1">需求场景<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>假设有这样一个场景，想要将协程和主线程计算后产生的数据存放到全局的Map中。</p>
 <p>例如，编写一个函数来计算各个数的阶乘，并放入到map中，启动了多个协程进行计算机，统计的结果放入到map中。</p>
-<pre><code class="language-go">package main
-var (
-    myMap = make(map[int]int, 10)
-)
-//test 计算n!
-func test(n int){
-    res := 1
-    for i := 1; i &lt; n; i++{
-        res *= i
-    }
-    myMap[n] = res
-}
-func main(){
-    //开启多个协程
-    for i := 1;i &lt;= 200; i++{
-        go test(i)
-    }
-    time.Sleep(time.Second* 10)
-    for i,v := range myMap{
-        fmt.Printf(&quot;map[%d]=%d\n&quot;,i,v)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">myMap</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="c1">//test 计算n!</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">myMap</span><span class="p">[</span><span class="nx">n</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//开启多个协程</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">myMap</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;map[%d]=%d\n&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>运行结果，存入之后是混乱的。</p>
 <p>值得考虑的是，需要保证不同的协程之间避免出现资源的争夺问题。</p>
 <p>有两种办法可以解决，第一种是使用全局互斥锁来解决，第二种办法是使用管道机制。</p>
-<h2 id="mutex">全局互斥锁Mutex解决资源竞争问题</h2>
-<pre><code class="language-go">package main
-var (
-    myMap = make(map[int]int, 10)
-    //声明一共全局的互斥锁lock
-    //sync是包，全拼&quot;synchornized&quot;是同步的意思
-    //Mutex是互斥的意思
-    lock sync.Mutex
-)
-//test 计算n!
-func test(n int){
-    res := 1
-    for i := 1; i &lt; n; i++{
-        res *= i
-    }
+<h2 id="mutex">全局互斥锁Mutex解决资源竞争问题<a class="headerlink" href="#mutex" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">myMap</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//声明一共全局的互斥锁lock</span>
+<span class="w">    </span><span class="c1">//sync是包，全拼&quot;synchornized&quot;是同步的意思</span>
+<span class="w">    </span><span class="c1">//Mutex是互斥的意思</span>
+<span class="w">    </span><span class="nx">lock</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+<span class="p">)</span>
+<span class="c1">//test 计算n!</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">n</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
 
-    //加锁
-    lock.Lock()
-    myMap[n] = res
-    //存入之后解锁
-    lock.Unlock()
-}
-func main(){
-    //开启多个协程
-    for i := 1;i &lt;= 200; i++{
-        go test(i)
-    }
-    time.Sleep(time.Second* 10)
-    lock.Lock()
-    for i,v := range myMap{
-        fmt.Printf(&quot;map[%d]=%d\n&quot;,i,v)
-    }
-    lock.Unlock()
-}
-</code></pre>
+<span class="w">    </span><span class="c1">//加锁</span>
+<span class="w">    </span><span class="nx">lock</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">myMap</span><span class="p">[</span><span class="nx">n</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">res</span>
+<span class="w">    </span><span class="c1">//存入之后解锁</span>
+<span class="w">    </span><span class="nx">lock</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//开启多个协程</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">lock</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">myMap</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;map[%d]=%d\n&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">lock</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>为什么在第28行也要加一个互斥锁？</p>
 <p>按理说十秒钟之后上面的协程都应该执行完毕了，后面的打印就不会出现资源竞争的问题了。在实际的运行中，还是可能在打印部分出现资源竞争问题，因为虽然我们从程序设计上可以知道10秒就可以执行完所有的协程，但是主线程并不知道，因此底层仍可能出现资源争夺，这里加入互斥锁就可以解决这个问题。😅</p>
-<h2 id="channel">Channel管道机制解决资源争夺问题</h2>
+<h2 id="channel">Channel管道机制解决资源争夺问题<a class="headerlink" href="#channel" title="Permanent link">&para;</a></h2>
 <p>前面使用全局互斥锁来解决goroutine的通信并不完美，这是因为：</p>
 <ul>
 <li>主线程在等待所有goroutine全部完成的时间很难确定</li>
 <li>如果主线程休眠时间长了，会加长等待时间，如果等待时间短了，可能还有goroutine处于工作状态，这时也会随主线程的退出而销毁</li>
 <li>通过全局互斥锁来实现通讯，也没有利用多个协程同时对全局变量进行读写操作</li>
 </ul>
-<h3 id="channel_1">Channel的基本介绍</h3>
+<h3 id="channel_1">Channel的基本介绍<a class="headerlink" href="#channel_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>channel本质是一个数据结构-队列</li>
 <li>数据是先进先出的</li>
 <li>管道可以保证线程安全，多个协程访问的时候，不需要加锁，channel本身就是线程安全的</li>
 <li>channel是由类型的，一个string的channel只能存放string类型的数据</li>
 </ul>
-<h3 id="_2">管道的定义</h3>
-<pre><code class="language-go">var intChan chan int
-var mapChan chan map[int]string
-var perChan chan Person
-var perChan2 chan *Person
-</code></pre>
+<h3 id="_2">管道的定义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">intChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">mapChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">perChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="nx">Person</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">perChan2</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="o">*</span><span class="nx">Person</span>
+</code></pre></div>
 <p>管道是引用类型</p>
 <p><code>channel</code>必须初始化才能写入数据，即<code>make</code>后才能使用。</p>
 <p>管道是由类型的，<code>intChan</code>只能写入整数<code>int</code></p>
-<h3 id="_3">管道的使用</h3>
-<pre><code class="language-go">package main
-func main(){
-    //1.创建一共可以存放3个int类型的管道
-    var intChan chan int
-    intChan = make(chan int, 3)
-    //2.查看intChan是什么
-    fmt.Printf(&quot;intChan的值 = %v,intChan本身的地址 = %p\n&quot;,intChan,&amp;intChan) //值就是一个地址
-    //3.向管道写入数据
-    intChan &lt;- 10
-    num := 211
-    intChan &lt;-num
-    intChan &lt;- 50 
-    //给管道写入数据的时候，不能超过其容量
-    fmt.Printf(&quot;channel len = %v cap = %v \n&quot;,len(intChan),cap(intChan))//3，3
-    //3.从管道中读取数据
-    var num2 int
-    num2 = &lt;-intChan //管道的数据推给了num2,先进先出
-    fmt.Println(&quot;num2 = &quot;,num2)
-    fmt.Printf(&quot;channel len = %v cap = %v \n&quot;,len(intChan),cap(intChan)) //2,3
-    //6.在没有使用协程的情况下，如果我们的管道数据已经全部取出，再取就会报告deadkock死锁,阻塞
-    num3 := &lt;-intChan //211
-    num4 := &lt;-intChan //50
-    num5 := &lt;-intChan //deadlock
-    fmt.Println(&quot;num3 =&quot;,num3 ,&quot;num4 = &quot;,num4, &quot;num5 = &quot;,num5)
-}
-</code></pre>
+<h3 id="_3">管道的使用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//1.创建一共可以存放3个int类型的管道</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">intChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//2.查看intChan是什么</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;intChan的值 = %v,intChan本身的地址 = %p\n&quot;</span><span class="p">,</span><span class="nx">intChan</span><span class="p">,</span><span class="o">&amp;</span><span class="nx">intChan</span><span class="p">)</span><span class="w"> </span><span class="c1">//值就是一个地址</span>
+<span class="w">    </span><span class="c1">//3.向管道写入数据</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">211</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">num</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">//给管道写入数据的时候，不能超过其容量</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;channel len = %v cap = %v \n&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">intChan</span><span class="p">),</span><span class="nb">cap</span><span class="p">(</span><span class="nx">intChan</span><span class="p">))</span><span class="c1">//3，3</span>
+<span class="w">    </span><span class="c1">//3.从管道中读取数据</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">num2</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">num2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span><span class="w"> </span><span class="c1">//管道的数据推给了num2,先进先出</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;num2 = &quot;</span><span class="p">,</span><span class="nx">num2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;channel len = %v cap = %v \n&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="nx">intChan</span><span class="p">),</span><span class="nb">cap</span><span class="p">(</span><span class="nx">intChan</span><span class="p">))</span><span class="w"> </span><span class="c1">//2,3</span>
+<span class="w">    </span><span class="c1">//6.在没有使用协程的情况下，如果我们的管道数据已经全部取出，再取就会报告deadkock死锁,阻塞</span>
+<span class="w">    </span><span class="nx">num3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span><span class="w"> </span><span class="c1">//211</span>
+<span class="w">    </span><span class="nx">num4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span><span class="w"> </span><span class="c1">//50</span>
+<span class="w">    </span><span class="nx">num5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span><span class="w"> </span><span class="c1">//deadlock</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;num3 =&quot;</span><span class="p">,</span><span class="nx">num3</span><span class="w"> </span><span class="p">,</span><span class="s">&quot;num4 = &quot;</span><span class="p">,</span><span class="nx">num4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;num5 = &quot;</span><span class="p">,</span><span class="nx">num5</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>总结：</p>
 <ul>
 <li>channel中只能存放<strong>指定</strong>的数据类型</li>
@@ -472,64 +472,64 @@ func main(){
 </ul>
 <p>管道的使用注意事项：</p>
 <p><strong>只能存放指定的数据类型之空接口！</strong></p>
-<pre><code class="language-go">package main
-type Cat struct{
-    Name string
-    Age int
-}
-func main(){
-    //定义一个存放任意数据类型的管道，3个数据
-    a11Chan := make(chan interface{},3)
-    a11Chan &lt;- 10
-    a11Chan &lt;-&quot;tom jack&quot;
-    cat = Cat{&quot;小花猫&quot;, 4}
-    a11Chan &lt;- cat
-    //我们希望获取到管道中的第三个元素，则先将前两个推出
-    &lt;-a11Chan
-    &lt;-a11Chan
-    newCat := &lt;-allChan
-    fmt.Printf(&quot;newCat type = %T&quot;,newCat) //
-    //转一下类型断言 
-    //a := newCat.(cat)
-    fmt.Printf(&quot;newCat.Name= %v&quot;,newCat.Name)//如果没有类型断言是报错的，管道存放的是空接口，里面是没有字段和方法的
-}
-</code></pre>
-<h3 id="_4">管道的关闭</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//定义一个存放任意数据类型的管道，3个数据</span>
+<span class="w">    </span><span class="nx">a11Chan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kd">interface</span><span class="p">{},</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">a11Chan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="nx">a11Chan</span><span class="w"> </span><span class="o">&lt;-</span><span class="s">&quot;tom jack&quot;</span>
+<span class="w">    </span><span class="nx">cat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{</span><span class="s">&quot;小花猫&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">a11Chan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">cat</span>
+<span class="w">    </span><span class="c1">//我们希望获取到管道中的第三个元素，则先将前两个推出</span>
+<span class="w">    </span><span class="o">&lt;-</span><span class="nx">a11Chan</span>
+<span class="w">    </span><span class="o">&lt;-</span><span class="nx">a11Chan</span>
+<span class="w">    </span><span class="nx">newCat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">allChan</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;newCat type = %T&quot;</span><span class="p">,</span><span class="nx">newCat</span><span class="p">)</span><span class="w"> </span><span class="c1">//</span>
+<span class="w">    </span><span class="c1">//转一下类型断言 </span>
+<span class="w">    </span><span class="c1">//a := newCat.(cat)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;newCat.Name= %v&quot;</span><span class="p">,</span><span class="nx">newCat</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span><span class="c1">//如果没有类型断言是报错的，管道存放的是空接口，里面是没有字段和方法的</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="_4">管道的关闭<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>使用内置函数close可以关闭channel，当channel关闭后，就不能再向channel写入数据了，但是仍然可以从该channel读取数据。</p>
-<pre><code class="language-go">package main
-func main(){
-    intChan := make(chan int, 3)
-    intChan&lt;- 100
-    intChan&lt;- 200
-    close(intChan)//关闭channel
-    fmt.Println(&quot;运行成功&quot;)
-    //读取数据
-    n1 := &lt;-intChan
-    fmt.Println(&quot;n1=&quot;,n1)
-}
-</code></pre>
-<h3 id="_5">管道的遍历</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">200</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">intChan</span><span class="p">)</span><span class="c1">//关闭channel</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;运行成功&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//读取数据</span>
+<span class="w">    </span><span class="nx">n1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;n1=&quot;</span><span class="p">,</span><span class="nx">n1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="_5">管道的遍历<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>channel不能使用普通的遍历循环。</p>
 <p>channel支持<code>for - range</code>的方式进行遍历：</p>
 <ul>
 <li>在遍历的时候，如果channel没有关闭，则会出现<code>deadlock</code>的错误</li>
 <li>在遍历的时候，如果channel已经关闭，则会正常遍历数据，遍历完之后，就会退出遍历 </li>
 </ul>
-<pre><code class="language-go">package main
-func main(){
-    intChan := make(chan int, 100)
-    for i:= 0; i&lt;100; i++{
-        intChan&lt;- i*2
-    } 
-    //Close(intChan)
-    //如果管道没有关闭，则在读取结束后，出现死锁的错误
-    for v:= range intChan{
-        fmt.Println(&quot;v=&quot;, v)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="p">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">intChan</span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span><span class="o">*</span><span class="mi">2</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="w">    </span><span class="c1">//Close(intChan)</span>
+<span class="w">    </span><span class="c1">//如果管道没有关闭，则在读取结束后，出现死锁的错误</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">v</span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">intChan</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;v=&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意❌：遍历管道的时候不能使用普通的<code>for</code>循环：<code>&lt;font style="color:#E8323C;"&gt;for i := 0; i &lt; len(intChan); i++{}&lt;/font&gt;</code></p>
-<h2 id="goroutinechannel">goroutine和channel结合</h2>
+<h2 id="goroutinechannel">goroutine和channel结合<a class="headerlink" href="#goroutinechannel" title="Permanent link">&para;</a></h2>
 <p>在一个管道中，我们需要实现以下要求：</p>
 <ul>
 <li>开启一个writeData协程，向管道intChan中写入50个整数。</li>
@@ -538,43 +538,42 @@ func main(){
 </ul>
 <p>设计思路是：</p>
 <p>开启两个<strong>协程（读和写）</strong>同时执行，同时使用两个<strong>管道</strong>，其中一个管道<code>intChan</code>用来存放数据，当<strong>读协程</strong>执行读完，向另一个管道<code>exitChan</code>中写入一个<code>true</code>，并关闭第二个管道。设置第二个管道的原因是，当开启协程之后，主线程仍旧往下执行，设置一个持续读取的循环，直到读取到了<code>eixtChan</code>里面的<code>true</code>，就证明了这两个协程执行完毕，也就是保证了“主线程需要等待writeData和readData协程都完成工作才能退出”这一个条件。</p>
-<pre><code class="language-go"> package main
-//writeData 写数据
-func writeData(intChane chan int){
-    for i := 1; i &lt;= 50; i++{
-        //放入数据
-        intChan &lt;- i
-        fmt.Println(&quot;writeData&quot;,i)
-    }
-    close(intChan)//关闭
-}
-// readData 读数据
-func readData(intChan chan int, exitChan chan bool){
-    for{
-        v, ok := &lt;-intChan
-        if !ok{
-            break
-        }
-        fmt.Printf(&quot;readData = %v\n&quot;,v)
-    }
-    exitChan&lt;- true
-    close(exitChan)//读完数据关闭管道
-}
-func main(){
-    //创建两个管道
-    intChan := make(chan int, 50)
-    exitChan := make(chan bool, 1)
-    go writeData(intChan)
-    go readData(intChan, exitChan)
-    for{ //防止主线程退出，一直读exitChan管道,读到了就退出 
-        _,ok := &lt;-exitChan
-        if !ok{
-            break
-        }
-    }
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="c1">//writeData 写数据</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">writeData</span><span class="p">(</span><span class="nx">intChane</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//放入数据</span>
+<span class="w">        </span><span class="nx">intChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;writeData&quot;</span><span class="p">,</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">intChan</span><span class="p">)</span><span class="c1">//关闭</span>
+<span class="p">}</span>
+<span class="c1">// readData 读数据</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">readData</span><span class="p">(</span><span class="nx">intChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">exitChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">bool</span><span class="p">){</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChan</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;readData = %v\n&quot;</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">exitChan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">exitChan</span><span class="p">)</span><span class="c1">//读完数据关闭管道</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">//创建两个管道</span>
+<span class="w">    </span><span class="nx">intChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">exitChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">writeData</span><span class="p">(</span><span class="nx">intChan</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">readData</span><span class="p">(</span><span class="nx">intChan</span><span class="p">,</span><span class="w"> </span><span class="nx">exitChan</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="p">{</span><span class="w"> </span><span class="c1">//防止主线程退出，一直读exitChan管道,读到了就退出 </span>
+<span class="w">        </span><span class="nx">_</span><span class="p">,</span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">exitChan</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>❗</strong><strong> 注意：如果编译器发现只向管道写入数据，而没有读取，则会出现</strong><code>**deadlock**</code><strong>，原因发生了阻塞，</strong><code>**intChan**</code><strong>容量是10，而代码writeData会写入50个数据，因此会阻塞在writeData的</strong><code>**ch &lt;- i**</code><strong> 。</strong></p>
 <blockquote>
 <p>更新: 2022-02-21 13:46:51<br />

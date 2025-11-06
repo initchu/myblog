@@ -251,404 +251,401 @@
 
 
 
-<h1 id="0-qt">0 QT 基本介绍</h1>
+<h1 id="0-qt">0 QT 基本介绍<a class="headerlink" href="#0-qt" title="Permanent link">&para;</a></h1>
 <p><strong>Qt 是一个跨平台的 C++ 图形用户界面应用程序框架。</strong>它为应用程序开发老提供建立艺术级图形界面所需的所有功能。它是完全面向对象的，很容易扩展，并且允许真正的组件编程。</p>
 <p>QT是面向对象的框架。</p>
 <p>QT SDK 软件开发包</p>
 <p>QT 4.6之后 安装的 QT  SDK 既把 QT 安装好了，也把相关的环境安装好了。</p>
 <p>在QT下载里面，x86-mingw530-....exe 后面的时间日期是编译器版本。 </p>
 <p>编译流程：</p>
-<pre><code class="language-cpp">#include&lt;QApplication&gt;
-#include&lt;QLabel&gt;
-#include&lt;QLineEdit&gt;
-#include&lt;QPushButton&gt;
-#include&lt;QHBoxLayout&gt; //水平布局
-#include&lt;QVBoxLayout&gt;//垂直布局
-#include&lt;QWidget&gt; //窗口
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;QApplication&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;QLabel&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;QLineEdit&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;QPushButton&gt;</span>
+<span class="cp">#include</span><span class="cpf">&lt;QHBoxLayout&gt;</span><span class="c1"> //水平布局</span>
+<span class="cp">#include</span><span class="cpf">&lt;QVBoxLayout&gt;</span><span class="c1">//垂直布局</span>
+<span class="cp">#include</span><span class="cpf">&lt;QWidget&gt;</span><span class="c1"> //窗口</span>
 
-int main(int argc, char *argv[])
-{
-    //打开一个窗口
-    QApplication app(argc,argv);
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//打开一个窗口</span>
+<span class="w">    </span><span class="n">QApplication</span><span class="w"> </span><span class="n">app</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">);</span>
 
-    //提示信息控件
-    QLabel *infoLabel = new QLabel;
-    QLabel *openLabel = new QLabel;
-    //编辑控件
-    QLineEdit *cmdLineEdit = new QLineEdit;
-    //按钮控件
-    QPushButton *commitButton = new QPushButton;
-    QPushButton *cancelButton = new QPushButton;
-    QPushButton *browseButton = new QPushButton;
-
-
-    infoLabel-&gt;setText(&quot;intput cmd:&quot;);
-    openLabel-&gt;setText(&quot;open&quot;);
-    commitButton-&gt;setText(&quot;commit&quot;);
-    cancelButton-&gt;setText(&quot;cancel&quot;);
-    browseButton-&gt;setText(&quot;browse&quot;);
-
-    QHBoxLayout *cmdLayout = new QHBoxLayout;
-    cmdLayout-&gt;addWidget(openLabel);
-    cmdLayout-&gt;addWidget(cmdLineEdit);
-
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
-    buttonLayout-&gt;addWidget(commitButton);
-    buttonLayout-&gt;addWidget(cancelButton);
-    buttonLayout-&gt;addWidget(browseButton);
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout-&gt;addWidget(infoLabel);
-    mainLayout-&gt;addLayout(cmdLayout);
-    mainLayout-&gt;addLayout(buttonLayout);
-
-    QWidget w;
-    w.setLayout(mainLayout);
-    w.show();
+<span class="w">    </span><span class="c1">//提示信息控件</span>
+<span class="w">    </span><span class="n">QLabel</span><span class="w"> </span><span class="o">*</span><span class="n">infoLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QLabel</span><span class="p">;</span>
+<span class="w">    </span><span class="n">QLabel</span><span class="w"> </span><span class="o">*</span><span class="n">openLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QLabel</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//编辑控件</span>
+<span class="w">    </span><span class="n">QLineEdit</span><span class="w"> </span><span class="o">*</span><span class="n">cmdLineEdit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QLineEdit</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//按钮控件</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="n">commitButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">;</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="n">cancelButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">;</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="n">browseButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">;</span>
 
 
-    //app.exec 程序永远执行
-    return app.exec();
-}
-</code></pre>
+<span class="w">    </span><span class="n">infoLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;intput cmd:&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">openLabel</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;open&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">commitButton</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;commit&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cancelButton</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;cancel&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">browseButton</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;browse&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">QHBoxLayout</span><span class="w"> </span><span class="o">*</span><span class="n">cmdLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QHBoxLayout</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cmdLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">openLabel</span><span class="p">);</span>
+<span class="w">    </span><span class="n">cmdLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">cmdLineEdit</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">QHBoxLayout</span><span class="w"> </span><span class="o">*</span><span class="n">buttonLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QHBoxLayout</span><span class="p">;</span>
+<span class="w">    </span><span class="n">buttonLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">commitButton</span><span class="p">);</span>
+<span class="w">    </span><span class="n">buttonLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">cancelButton</span><span class="p">);</span>
+<span class="w">    </span><span class="n">buttonLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">browseButton</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">QVBoxLayout</span><span class="w"> </span><span class="o">*</span><span class="n">mainLayout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QVBoxLayout</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addWidget</span><span class="p">(</span><span class="n">infoLabel</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">cmdLayout</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mainLayout</span><span class="o">-&gt;</span><span class="n">addLayout</span><span class="p">(</span><span class="n">buttonLayout</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">QWidget</span><span class="w"> </span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="n">w</span><span class="p">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">mainLayout</span><span class="p">);</span>
+<span class="w">    </span><span class="n">w</span><span class="p">.</span><span class="n">show</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="c1">//app.exec 程序永远执行</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">app</span><span class="p">.</span><span class="n">exec</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">（1）编写源文件</font></strong></p>
 <p><strong><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">（2）qmake –project</font></strong></p>
 <p><strong><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">（3）修改*.pro</font></strong></p>
 <p><strong><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">（4）qmake  *.pro</font></strong></p>
 <p><strong><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">（5）mingw32-make</font></strong></p>
-<h1 id="pro"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">pro文件解释</font></h1>
-<pre><code class="language-cpp">//QT包含的模块
-QT       += core gui
-//大于4版本以上 包含 wigdet 模块
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+<h1 id="pro"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">pro文件解释</font><a class="headerlink" href="#pro" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="c1">//QT包含的模块</span>
+<span class="n">QT</span><span class="w">       </span><span class="o">+=</span><span class="w"> </span><span class="n">core</span><span class="w"> </span><span class="n">gui</span>
+<span class="c1">//大于4版本以上 包含 wigdet 模块</span>
+<span class="n">greaterThan</span><span class="p">(</span><span class="n">QT_MAJOR_VERSION</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">QT</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">widgets</span>
 
-//目标：生成的 .exe 程序名称
-TARGET = FirstQT
-//模板：应用程序模板 Application
-TEMPLATE = app
+<span class="c1">//目标：生成的 .exe 程序名称</span>
+<span class="n">TARGET</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FirstQT</span>
+<span class="c1">//模板：应用程序模板 Application</span>
+<span class="n">TEMPLATE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">app</span>
 
-DEFINES += QT_DEPRECATED_WARNINGS
+<span class="n">DEFINES</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">QT_DEPRECATED_WARNINGS</span>
 
-CONFIG += c++11
+<span class="n">CONFIG</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="o">++</span><span class="mi">11</span>
 
-//源文件，自动生成
-SOURCES += \
-        main.cpp \
-        mywidget.cpp
+<span class="c1">//源文件，自动生成</span>
+<span class="n">SOURCES</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>\
+<span class="w">        </span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span><span class="w"> </span>\
+<span class="w">        </span><span class="n">mywidget</span><span class="p">.</span><span class="n">cpp</span>
 
-//头文件
-HEADERS += \
-        mywidget.h
+<span class="c1">//头文件</span>
+<span class="n">HEADERS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>\
+<span class="w">        </span><span class="n">mywidget</span><span class="p">.</span><span class="n">h</span>
 
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+<span class="cp"># Default rules for deployment.</span>
+<span class="nl">qnx</span><span class="p">:</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">$$</span><span class="p">{</span><span class="n">TARGET</span><span class="p">}</span><span class="o">/</span><span class="n">bin</span>
+<span class="nl">else</span><span class="p">:</span><span class="w"> </span><span class="n">unix</span><span class="o">:!</span><span class="n">android</span><span class="o">:</span><span class="w"> </span><span class="n">target</span><span class="p">.</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">$$</span><span class="p">{</span><span class="n">TARGET</span><span class="p">}</span><span class="o">/</span><span class="n">bin</span>
+<span class="o">!</span><span class="n">isEmpty</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">path</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">INSTALLS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">target</span>
+</code></pre></div>
+<h1 id="_1">头文件解释<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="cp">#ifndef MYWIDGET_H</span>
+<span class="cp">#define MYWIDGET_H</span>
 
-</code></pre>
-<h1 id="_1">头文件解释</h1>
-<pre><code class="language-cpp">#ifndef MYWIDGET_H
-#define MYWIDGET_H
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QWidget&gt;</span><span class="c1"> //包含头文件 QWidget 窗口类</span>
 
-#include &lt;QWidget&gt; //包含头文件 QWidget 窗口类
+<span class="k">class</span><span class="w"> </span><span class="nc">myWidget</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">QWidget</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Q_OBJECT</span><span class="w">  </span><span class="c1">//Q_QBJECT 宏，允许类中使用信号和槽的机制</span>
 
-class myWidget : public QWidget
-{
-    Q_OBJECT  //Q_QBJECT 宏，允许类中使用信号和槽的机制
+<span class="k">public</span><span class="o">:</span>
+<span class="w">    </span><span class="n">myWidget</span><span class="p">(</span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"> </span><span class="c1">//构造函数</span>
+<span class="w">    </span><span class="o">~</span><span class="n">myWidget</span><span class="p">();</span><span class="w">  </span><span class="c1">//析构</span>
+<span class="p">};</span>
 
-public:
-    myWidget(QWidget *parent = 0); //构造函数
-    ~myWidget();  //析构
-};
+<span class="cp">#endif </span><span class="c1">// MYWIDGET_H</span>
+</code></pre></div>
+<h1 id="cpp"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">Cpp文件</font><a class="headerlink" href="#cpp" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mywidget.h&quot;</span>
 
-#endif // MYWIDGET_H
+<span class="c1">// 命名规范</span>
+<span class="c1">// 类名 首字母大写，单词和单词之间 首字母大写</span>
+<span class="c1">// 函数名 变量名称 首字母小写 ，单词和单词之间首字母大写</span>
 
-</code></pre>
-<h1 id="cpp"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">Cpp文件</font></h1>
-<pre><code class="language-cpp">#include &quot;mywidget.h&quot;
+<span class="n">myWidget</span><span class="o">::</span><span class="n">myWidget</span><span class="p">(</span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
 
-// 命名规范
-// 类名 首字母大写，单词和单词之间 首字母大写
-// 函数名 变量名称 首字母小写 ，单词和单词之间首字母大写
+<span class="n">myWidget</span><span class="o">::~</span><span class="n">myWidget</span><span class="p">()</span>
+<span class="p">{</span>
 
-myWidget::myWidget(QWidget *parent)
-    : QWidget(parent)
-{
-}
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="api"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">按钮控件常用API</font><a class="headerlink" href="#api" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mywidget.h&quot;</span>
+<span class="cp">#include</span><span class="cpf">&lt;QPushButton&gt;</span><span class="c1"> //按钮控件的头文件</span>
+<span class="n">myWidget</span><span class="o">::</span><span class="n">myWidget</span><span class="p">(</span><span class="n">QWidget</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="p">)</span>
+<span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">//创建一个按钮</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//btn-&gt;show();//show以顶层的方式弹出窗口控件</span>
+<span class="w">    </span><span class="c1">//让 btn 对象依赖在 myWidget 窗口中</span>
+<span class="w">    </span><span class="n">btn</span><span class="o">-&gt;</span><span class="n">setParent</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 
-myWidget::~myWidget()
-{
+<span class="w">    </span><span class="c1">//显示文本</span>
+<span class="w">    </span><span class="n">btn</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">setText</span><span class="p">(</span><span class="s">&quot;第一个按钮&quot;</span><span class="p">);</span>
 
-}
+<span class="w">    </span><span class="c1">//创建第二个按钮</span>
+<span class="w">    </span><span class="n">QPushButton</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">btn2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QPushButton</span><span class="p">(</span><span class="s">&quot;第二个按钮&quot;</span><span class="p">,</span><span class="k">this</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//移动 btn2</span>
+<span class="w">    </span><span class="n">btn2</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//重置窗口的大小</span>
+<span class="w">    </span><span class="n">resize</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">400</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//设置窗口的标题</span>
+<span class="w">    </span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s">&quot;第一个窗口&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">//设置固定的窗口大小</span>
+<span class="w">    </span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span><span class="mi">400</span><span class="p">);</span>
+<span class="p">}</span>
 
-</code></pre>
-<h1 id="api"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">按钮控件常用API</font></h1>
-<pre><code class="language-cpp">#include &quot;mywidget.h&quot;
-#include&lt;QPushButton&gt; //按钮控件的头文件
-myWidget::myWidget(QWidget *parent)
-    : QWidget(parent)
-{
-    //创建一个按钮
-    QPushButton * btn = new QPushButton;
-    //btn-&gt;show();//show以顶层的方式弹出窗口控件
-    //让 btn 对象依赖在 myWidget 窗口中
-    btn-&gt;setParent(this);
+<span class="n">myWidget</span><span class="o">::~</span><span class="n">myWidget</span><span class="p">()</span>
+<span class="p">{</span>
 
-    //显示文本
-    btn -&gt; setText(&quot;第一个按钮&quot;);
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_2"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">对象模型（对象树）</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;DragSphereHandler.h&quot;</span>
+<span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;useNode&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;IViewer.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;MeshQuery.h&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+<span class="c1">//#include &lt;DebugView.h&gt;</span>
+<span class="c1">//#include &lt;MathUtils.h&gt;</span>
 
-    //创建第二个按钮
-    QPushButton * btn2 = new QPushButton(&quot;第二个按钮&quot;,this);
-    //移动 btn2
-    btn2-&gt;move(100,100);
-    //重置窗口的大小
-    resize(600,400);
-    //设置窗口的标题
-    setWindowTitle(&quot;第一个窗口&quot;);
-    //设置固定的窗口大小
-    setFixedSize(600,400);
-}
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
 
-myWidget::~myWidget()
-{
+<span class="k">const</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Color4f</span><span class="w"> </span><span class="n">gDefaultColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Color4f</span><span class="p">(</span><span class="mf">0.7968f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7152f</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4072f</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">);</span><span class="w">  </span><span class="c1">// 默认颜色</span>
 
-}
-</code></pre>
-<h1 id="_2"><font style="color:rgb(51, 51, 51);background-color:rgb(254, 254, 254);">对象模型（对象树）</font></h1>
-<pre><code class="language-cpp">#include &quot;DragSphereHandler.h&quot;
-#include&lt;iostream&gt;
-#include &lt;useNode&gt;
-#include &lt;IViewer.h&gt;
-#include &lt;MeshQuery.h&gt;
-using namespace std;
-//#include &lt;DebugView.h&gt;
-//#include &lt;MathUtils.h&gt;
-
-#include &lt;vector&gt;
-
-const static Color4f gDefaultColor = Color4f(0.7968f, 0.7152f, 0.4072f, 1.0f);  // 默认颜色
-
-//初始化了mesh、render和node_三个成员变量,为小球的产生和拖动做准备，分别负责存储网格数据、渲染视图和节点数据。
-DragSphereHandler::DragSphereHandler(SmartMesh mesh,IViewer* render):render_(render)
-{
-    mesh_ = mesh;   
-    node_.reset(new Node);
-    node_-&gt;SetName(&quot;DragSphereHandlerNode&quot;);
-}
+<span class="c1">//初始化了mesh、render和node_三个成员变量,为小球的产生和拖动做准备，分别负责存储网格数据、渲染视图和节点数据。</span>
+<span class="n">DragSphereHandler</span><span class="o">::</span><span class="n">DragSphereHandler</span><span class="p">(</span><span class="n">SmartMesh</span><span class="w"> </span><span class="n">mesh</span><span class="p">,</span><span class="n">IViewer</span><span class="o">*</span><span class="w"> </span><span class="n">render</span><span class="p">)</span><span class="o">:</span><span class="n">render_</span><span class="p">(</span><span class="n">render</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">mesh_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="p">;</span><span class="w">   </span>
+<span class="w">    </span><span class="n">node_</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Node</span><span class="p">);</span>
+<span class="w">    </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;DragSphereHandlerNode&quot;</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-DragSphereHandler::~DragSphereHandler(void)
-{
-}
+<span class="n">DragSphereHandler</span><span class="o">::~</span><span class="n">DragSphereHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
 
 
-//在 DragSphereHandler 结束时,进行必要的清理工作,释放占用的资源,避免内存泄漏。
-//释放了 node_、sphere_ 和 pickDrawable_ ,并设置实例无效
-/*virtual*/ void DragSphereHandler::end(IViewer *viewer)
-{
-    if(viewer)
-    {
-        if(node_)
-        {
-            node_-&gt;clearAll();
-            render_-&gt;getDocument()-&gt;rootNode()-&gt;removeChild(node_);
-        }
-        spheres.clear();
-        pickDrawable_.reset();
-        setValid(false);    
-    }   
-}
+<span class="c1">//在 DragSphereHandler 结束时,进行必要的清理工作,释放占用的资源,避免内存泄漏。</span>
+<span class="c1">//释放了 node_、sphere_ 和 pickDrawable_ ,并设置实例无效</span>
+<span class="cm">/*virtual*/</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">DragSphereHandler</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">IViewer</span><span class="w"> </span><span class="o">*</span><span class="n">viewer</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">node_</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">clearAll</span><span class="p">();</span>
+<span class="w">            </span><span class="n">render_</span><span class="o">-&gt;</span><span class="n">getDocument</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">rootNode</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">removeChild</span><span class="p">(</span><span class="n">node_</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">spheres</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+<span class="w">        </span><span class="n">pickDrawable_</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+<span class="w">        </span><span class="n">setValid</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span><span class="w">    </span>
+<span class="w">    </span><span class="p">}</span><span class="w">   </span>
+<span class="p">}</span>
 
-//入参：pos位置和半径radius。创建一个小球mesh,并把小球mesh移动到pos位置,最后返回创建的小球mesh。
-SmartMesh DragSphereHandler::createSphere(Vec3f&amp; pos,float radius /*= 1.f*/)
-{
-    shared_ptr&lt;ObjectFilter&gt; objectFilter(new ObjectFilter(ObjectFilter::OT_SPHERE));
-    objectFilter-&gt;addPara(&quot;radius&quot;,radius);
-    objectFilter-&gt;addPara(&quot;subdiv&quot;,1);
-    shared_ptr&lt;Mesh&gt; mesh = objectFilter-&gt;createObject();
+<span class="c1">//入参：pos位置和半径radius。创建一个小球mesh,并把小球mesh移动到pos位置,最后返回创建的小球mesh。</span>
+<span class="n">SmartMesh</span><span class="w"> </span><span class="n">DragSphereHandler</span><span class="o">::</span><span class="n">createSphere</span><span class="p">(</span><span class="n">Vec3f</span><span class="o">&amp;</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="kt">float</span><span class="w"> </span><span class="n">radius</span><span class="w"> </span><span class="cm">/*= 1.f*/</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ObjectFilter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">objectFilter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ObjectFilter</span><span class="p">(</span><span class="n">ObjectFilter</span><span class="o">::</span><span class="n">OT_SPHERE</span><span class="p">));</span>
+<span class="w">    </span><span class="n">objectFilter</span><span class="o">-&gt;</span><span class="n">addPara</span><span class="p">(</span><span class="s">&quot;radius&quot;</span><span class="p">,</span><span class="n">radius</span><span class="p">);</span>
+<span class="w">    </span><span class="n">objectFilter</span><span class="o">-&gt;</span><span class="n">addPara</span><span class="p">(</span><span class="s">&quot;subdiv&quot;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Mesh</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mesh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectFilter</span><span class="o">-&gt;</span><span class="n">createObject</span><span class="p">();</span>
 
-    mesh-&gt;SetName(&quot;sphere&quot;);
+<span class="w">    </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">SetName</span><span class="p">(</span><span class="s">&quot;sphere&quot;</span><span class="p">);</span>
 
-    // 设定mesh到pos
-    Vec3f center = mesh-&gt;getMeshCenter();
-    Matrixf mat;
-    mat.SetTranslate(pos - center);
-    processTrans(mesh, mat);
-    mesh-&gt;setColor(gDefaultColor);
-    mesh-&gt;notifyModified();
-    mesh-&gt;dirtyMesh();
-    return mesh;
-}
-//processTrans方法通过顶点坐标变换,实现了 mesh 的姿态变换
-void DragSphereHandler::processTrans(shared_ptr&lt;Mesh&gt; mesh, const Matrixf&amp; matTrans)
-{
-    int vertSize = mesh-&gt;vert.size();
-    for(int i=0; i&lt;vertSize; ++i)
-    {
-        TVertex* pVertex = mesh-&gt;getVertex(i);
-        if(!pVertex)
-            continue;
-        pVertex-&gt;P() = matTrans * pVertex-&gt;P();
-    }
-    mesh-&gt;notifyModified();
-    mesh-&gt;dirtyMesh();
-}
+<span class="w">    </span><span class="c1">// 设定mesh到pos</span>
+<span class="w">    </span><span class="n">Vec3f</span><span class="w"> </span><span class="n">center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">getMeshCenter</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Matrixf</span><span class="w"> </span><span class="n">mat</span><span class="p">;</span>
+<span class="w">    </span><span class="n">mat</span><span class="p">.</span><span class="n">SetTranslate</span><span class="p">(</span><span class="n">pos</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">center</span><span class="p">);</span>
+<span class="w">    </span><span class="n">processTrans</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="n">mat</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">setColor</span><span class="p">(</span><span class="n">gDefaultColor</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">notifyModified</span><span class="p">();</span>
+<span class="w">    </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">dirtyMesh</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mesh</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">//processTrans方法通过顶点坐标变换,实现了 mesh 的姿态变换</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">DragSphereHandler</span><span class="o">::</span><span class="n">processTrans</span><span class="p">(</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">Mesh</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mesh</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Matrixf</span><span class="o">&amp;</span><span class="w"> </span><span class="n">matTrans</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">vertSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">vert</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">vertSize</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">TVertex</span><span class="o">*</span><span class="w"> </span><span class="n">pVertex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">getVertex</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">pVertex</span><span class="p">)</span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pVertex</span><span class="o">-&gt;</span><span class="n">P</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">matTrans</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pVertex</span><span class="o">-&gt;</span><span class="n">P</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">notifyModified</span><span class="p">();</span>
+<span class="w">    </span><span class="n">mesh</span><span class="o">-&gt;</span><span class="n">dirtyMesh</span><span class="p">();</span>
+<span class="p">}</span>
 
 
 
-bool DragSphereHandler::handle(QEvent *event, IViewer *viewer)
-{
-    if(!viewer)
-    {
-        return false;
-    }
+<span class="kt">bool</span><span class="w"> </span><span class="n">DragSphereHandler</span><span class="o">::</span><span class="n">handle</span><span class="p">(</span><span class="n">QEvent</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="n">IViewer</span><span class="w"> </span><span class="o">*</span><span class="n">viewer</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">viewer</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    switch(event-&gt;type())
-    {
-        case IEventHandler::PUSH:
-        {
-            QMouseEvent *e = TEvent::asMouseEvent(event);
-            if(!e || e-&gt;button() != Qt::LeftButton)
-                return false;
+<span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">type</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">IEventHandler</span><span class="o">::</span><span class="no">PUSH</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">QMouseEvent</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEvent</span><span class="o">::</span><span class="n">asMouseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">e</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">button</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Qt</span><span class="o">::</span><span class="n">LeftButton</span><span class="p">)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
 
-            Intersections intss;
-            // 做射线，进行求交判断
-            if(!viewer-&gt;computeIntersections(e-&gt;x(), e-&gt;y(), intss))
-            {
-                return false;
-            }
-            for(Intersections::iterator it = intss.begin();
-                it != intss.end();
-                ++it)
-            {
-                // 光标在非Mesh区域
-                if(!it-&gt;drawable)
-                {
-                    pickDrawable_.reset();
-                    return false;
-                }
+<span class="w">            </span><span class="n">Intersections</span><span class="w"> </span><span class="n">intss</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// 做射线，进行求交判断</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">viewer</span><span class="o">-&gt;</span><span class="n">computeIntersections</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">(),</span><span class="w"> </span><span class="n">intss</span><span class="p">))</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="n">Intersections</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intss</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="w">                </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">intss</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+<span class="w">                </span><span class="o">++</span><span class="n">it</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 光标在非Mesh区域</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">it</span><span class="o">-&gt;</span><span class="n">drawable</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">pickDrawable_</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
 
-                // 光标不在选中的小球中
-                if(std::find(spheres.begin(), spheres.end(), it-&gt;drawable-&gt;asMesh()) == spheres.end())
-                {
-                    qDebug(&quot;new small ball gene!&quot;);
-                    int i;
-                    //创建小球
-                    Vec3 hitPos = it-&gt;getWorldIntersectPoint(); // 定义hitPos
-                    //为每个小球自动设置&quot;Sphere0&quot;、&quot;Sphere1&quot;这样的数字名字, 方便小球的标识和管理
-                    std::string sphereName = &quot;Sphere&quot; + std::to_string(spheres.size());
-                    SmartMesh tempSphere = createSphere(hitPos);
-                    tempSphere-&gt;setName(sphereName.c_str());
-                    node_-&gt;addDrawable(tempSphere, true);
-                    render_-&gt;addChild(node_);
-                    spheres.push_back(tempSphere);//存入容器
-                    pickDrawable_ = spheres.back();
-                    break;
-                }
-                else
-                {
-                    pickDrawable_ = it-&gt;drawable-&gt;asMesh();
-                    qDebug(&quot;pointer address:%x&quot;, pickDrawable_.get());
-                    break;
-                }
-            }
-            break;
-        }
-        //MOVE,代码直接删除旧小球并创建新小球来&quot;更新&quot;位置
-        case IEventHandler::MOVE:
-        {
-            QMouseEvent *e = TEvent::asMouseEvent(event);
-            if(!e)
-            {
-                return false;
-            }
+<span class="w">                </span><span class="c1">// 光标不在选中的小球中</span>
+<span class="w">                </span><span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">spheres</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">drawable</span><span class="o">-&gt;</span><span class="n">asMesh</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">qDebug</span><span class="p">(</span><span class="s">&quot;new small ball gene!&quot;</span><span class="p">);</span>
+<span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">                    </span><span class="c1">//创建小球</span>
+<span class="w">                    </span><span class="n">Vec3</span><span class="w"> </span><span class="n">hitPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">getWorldIntersectPoint</span><span class="p">();</span><span class="w"> </span><span class="c1">// 定义hitPos</span>
+<span class="w">                    </span><span class="c1">//为每个小球自动设置&quot;Sphere0&quot;、&quot;Sphere1&quot;这样的数字名字, 方便小球的标识和管理</span>
+<span class="w">                    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">sphereName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sphere&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">spheres</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+<span class="w">                    </span><span class="n">SmartMesh</span><span class="w"> </span><span class="n">tempSphere</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createSphere</span><span class="p">(</span><span class="n">hitPos</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">tempSphere</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="n">sphereName</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+<span class="w">                    </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">addDrawable</span><span class="p">(</span><span class="n">tempSphere</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">render_</span><span class="o">-&gt;</span><span class="n">addChild</span><span class="p">(</span><span class="n">node_</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">spheres</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">tempSphere</span><span class="p">);</span><span class="c1">//存入容器</span>
+<span class="w">                    </span><span class="n">pickDrawable_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">pickDrawable_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="o">-&gt;</span><span class="n">drawable</span><span class="o">-&gt;</span><span class="n">asMesh</span><span class="p">();</span>
+<span class="w">                    </span><span class="n">qDebug</span><span class="p">(</span><span class="s">&quot;pointer address:%x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pickDrawable_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="w">                    </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">//MOVE,代码直接删除旧小球并创建新小球来&quot;更新&quot;位置</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">IEventHandler</span><span class="o">::</span><span class="no">MOVE</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">QMouseEvent</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEvent</span><span class="o">::</span><span class="n">asMouseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">e</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 
-            // 非左键按下返回
-            if(e-&gt;buttons() != IEventHandler::LEFT_MOUSE_BUTTON)
-            {
-                break;
-            }
-            if(!pickDrawable_)
-            {
-                break;
-            }
-            Intersections intss;
-            viewer-&gt;computeIntersections(e-&gt;x(), e-&gt;y(), intss);
-            for(auto it = spheres.begin(); it != spheres.end(); ++it)
-            {
-                if((*it)-&gt;Name() == pickDrawable_-&gt;Name() &amp;&amp; (*it)-&gt;Name() != &quot;&quot;)// 如果当前选中的小球，如果当前小球名字不为空，那就是小球被选中了
-                {
-                    (*it)-&gt;setColor(Color4f(1.0f, 0, 0, 1.0f));  // 把要移动的小球设置为红色
-                    Vec3 hitPoint;
-                    QString sphereName = (*it)-&gt;Name();
-                    for(Intersections::iterator iter = intss.begin();
-                        iter != intss.end();
-                        ++iter)
-                    {
-                        if(iter-&gt;drawable-&gt;asMesh() == mesh_)
-                        {
-                            hitPoint = iter-&gt;getWorldIntersectPoint();
-                            node_-&gt;removeDrawable(*it);
-                            SmartMesh newSphere = createSphere(hitPoint);
-                            newSphere-&gt;SetName(sphereName);
-                            newSphere-&gt;setColor(Color4f(1.0f, 0, 0, 1.0f));
-                            node_-&gt;addDrawable(newSphere, true);
-                            *it = newSphere;
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
+<span class="w">            </span><span class="c1">// 非左键按下返回</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">buttons</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">IEventHandler</span><span class="o">::</span><span class="n">LEFT_MOUSE_BUTTON</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">pickDrawable_</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">Intersections</span><span class="w"> </span><span class="n">intss</span><span class="p">;</span>
+<span class="w">            </span><span class="n">viewer</span><span class="o">-&gt;</span><span class="n">computeIntersections</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">(),</span><span class="w"> </span><span class="n">e</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">(),</span><span class="w"> </span><span class="n">intss</span><span class="p">);</span>
+<span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">it</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pickDrawable_</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="c1">// 如果当前选中的小球，如果当前小球名字不为空，那就是小球被选中了</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">setColor</span><span class="p">(</span><span class="n">Color4f</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span><span class="w">  </span><span class="c1">// 把要移动的小球设置为红色</span>
+<span class="w">                    </span><span class="n">Vec3</span><span class="w"> </span><span class="n">hitPoint</span><span class="p">;</span>
+<span class="w">                    </span><span class="n">QString</span><span class="w"> </span><span class="n">sphereName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">();</span>
+<span class="w">                    </span><span class="k">for</span><span class="p">(</span><span class="n">Intersections</span><span class="o">::</span><span class="n">iterator</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intss</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+<span class="w">                        </span><span class="n">iter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">intss</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+<span class="w">                        </span><span class="o">++</span><span class="n">iter</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="k">if</span><span class="p">(</span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">drawable</span><span class="o">-&gt;</span><span class="n">asMesh</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">mesh_</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">{</span>
+<span class="w">                            </span><span class="n">hitPoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iter</span><span class="o">-&gt;</span><span class="n">getWorldIntersectPoint</span><span class="p">();</span>
+<span class="w">                            </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">removeDrawable</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
+<span class="w">                            </span><span class="n">SmartMesh</span><span class="w"> </span><span class="n">newSphere</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createSphere</span><span class="p">(</span><span class="n">hitPoint</span><span class="p">);</span>
+<span class="w">                            </span><span class="n">newSphere</span><span class="o">-&gt;</span><span class="n">SetName</span><span class="p">(</span><span class="n">sphereName</span><span class="p">);</span>
+<span class="w">                            </span><span class="n">newSphere</span><span class="o">-&gt;</span><span class="n">setColor</span><span class="p">(</span><span class="n">Color4f</span><span class="p">(</span><span class="mf">1.0f</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+<span class="w">                            </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">addDrawable</span><span class="p">(</span><span class="n">newSphere</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="w">                            </span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newSphere</span><span class="p">;</span>
+<span class="w">                            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
 
-    }
-        case IEventHandler::RELEASE:
-        {
-            QMouseEvent *e = TEvent::asMouseEvent(event);
+<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">IEventHandler</span><span class="o">::</span><span class="no">RELEASE</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">QMouseEvent</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEvent</span><span class="o">::</span><span class="n">asMouseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
 
-            // 如果有小球被选中
-            if(pickDrawable_)
-            {
-                // 遍历所有小球找到要移动的小球
-                for(auto sphere : spheres)
-                {
-                    if(sphere-&gt;Name() == pickDrawable_-&gt;Name() &amp;&amp; sphere-&gt;Name() != &quot;&quot;)
-                    {
-                        // 将球体颜色改为默认色
-                        sphere-&gt;setColor(gDefaultColor);
-                        break;
-                    }
-                }
-            }
-            break;
-        }
+<span class="w">            </span><span class="c1">// 如果有小球被选中</span>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">pickDrawable_</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 遍历所有小球找到要移动的小球</span>
+<span class="w">                </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">sphere</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">spheres</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">if</span><span class="p">(</span><span class="n">sphere</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pickDrawable_</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">sphere</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="c1">// 将球体颜色改为默认色</span>
+<span class="w">                        </span><span class="n">sphere</span><span class="o">-&gt;</span><span class="n">setColor</span><span class="p">(</span><span class="n">gDefaultColor</span><span class="p">);</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
 
-        case IEventHandler::KEYDOWN:
-        {
-            QKeyEvent *e = TEvent::asKeyEvent(event);
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="no">IEventHandler</span><span class="o">::</span><span class="no">KEYDOWN</span><span class="p">:</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="n">QKeyEvent</span><span class="w"> </span><span class="o">*</span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEvent</span><span class="o">::</span><span class="n">asKeyEvent</span><span class="p">(</span><span class="n">event</span><span class="p">);</span>
 
-            if(e-&gt;key() == Qt::Key_Delete &amp;&amp; pickDrawable_)
-            {
-                //遍历小球
-                for(auto it = spheres.begin(); it != spheres.end(); ++it)
-                {
-                    if((*it) == pickDrawable_)
-                    {
-                        node_-&gt;removeDrawable(*it);
-                        spheres.erase(it);
-                        pickDrawable_.reset(); // 这里删除后再清空pickDrawable_
-                        break;
-                    }
-                }
-            }
-            break;
-        }
-    }
-        viewer-&gt;render();
-        return true;
-}
-</code></pre>
+<span class="w">            </span><span class="k">if</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">key</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Qt</span><span class="o">::</span><span class="n">Key_Delete</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">pickDrawable_</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//遍历小球</span>
+<span class="w">                </span><span class="k">for</span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">spheres</span><span class="p">.</span><span class="n">end</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">it</span><span class="p">)</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">if</span><span class="p">((</span><span class="o">*</span><span class="n">it</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pickDrawable_</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">node_</span><span class="o">-&gt;</span><span class="n">removeDrawable</span><span class="p">(</span><span class="o">*</span><span class="n">it</span><span class="p">);</span>
+<span class="w">                        </span><span class="n">spheres</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
+<span class="w">                        </span><span class="n">pickDrawable_</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span><span class="w"> </span><span class="c1">// 这里删除后再清空pickDrawable_</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="n">viewer</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2025-03-05 11:56:14<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/lpr9ggn2br8unudv">https://www.yuque.com/xiaoshan_wgo/codingnotes/lpr9ggn2br8unudv</a></p>

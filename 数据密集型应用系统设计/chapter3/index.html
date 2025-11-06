@@ -612,46 +612,46 @@
 <p><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1631500939112-60129ead-12e1-498a-ac5b-4fad1deb5f4b.png" />
 本章介绍了传统关系型数据库与“NoSQL”数据库的<strong>存储引擎</strong>。
 我们会研究两大类存储引擎：<strong>日志结构（log-structured）</strong> 的存储引擎，以及<strong>面向页面（page-oriented）</strong> 的存储引擎（例如B树)。</p>
-<h2 id="_1">驱动数据库的数据结构</h2>
-<p>世界上最简单的数据库可以用两个Bash函数实现：</p>
-<pre><code class="language-shell">#!/bin/bash
-db_set () {
-    echo &quot;$1,$2&quot; &gt;&gt; database
-}
+<h2 id="_1">驱动数据库的数据结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>世界上最简单的数据库可以用两个Bash函数实现：
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+db_set<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">,</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>database
+<span class="o">}</span>
 
-db_get () {
-    grep &quot;^$1,&quot; database | sed -e &quot;s/^$1,//&quot; | tail -n 1
-}
-</code></pre>
+db_get<span class="w"> </span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>grep<span class="w"> </span><span class="s2">&quot;^</span><span class="nv">$1</span><span class="s2">,&quot;</span><span class="w"> </span>database<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;s/^</span><span class="nv">$1</span><span class="s2">,//&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span>
+<span class="o">}</span>
+</code></pre></div></p>
 <p>这两个函数实现了键值存储的功能。</p>
 <ul>
 <li>执行 db_set key value ，会将 <strong>键（key）</strong>和<strong>值（value）</strong> 存储在数据库中。键和值（几乎）可以是你喜欢的任何东西，例如，值可以是JSON文档。</li>
 <li>调用 db_get key ，查找与该键关联的最新值并将其返回。</li>
 </ul>
-<p>麻雀虽小，五脏俱全：</p>
-<pre><code class="language-shell">$ db_set 123456 '{&quot;name&quot;:&quot;London&quot;,&quot;attractions&quot;:[&quot;Big Ben&quot;,&quot;London Eye&quot;]}' $ 
+<p>麻雀虽小，五脏俱全：
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>db_set<span class="w"> </span><span class="m">123456</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;London&quot;,&quot;attractions&quot;:[&quot;Big Ben&quot;,&quot;London Eye&quot;]}&#39;</span><span class="w"> </span>$<span class="w"> </span>
 
-$ db_set 42 '{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Golden Gate Bridge&quot;]}'
+$<span class="w"> </span>db_set<span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Golden Gate Bridge&quot;]}&#39;</span>
 
-$ db_get 42
-{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Golden Gate Bridge&quot;]}
-</code></pre>
+$<span class="w"> </span>db_get<span class="w"> </span><span class="m">42</span>
+<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;San Francisco&quot;</span>,<span class="s2">&quot;attractions&quot;</span>:<span class="o">[</span><span class="s2">&quot;Golden Gate Bridge&quot;</span><span class="o">]}</span>
+</code></pre></div></p>
 <p>底层的存储格式非常简单：</p>
 <ul>
 <li>一个文本文件，每行包含一条逗号分隔的键值对（忽略转义问题的话，大致与CSV文件类似）。</li>
 <li>每次对 db_set 的调用都会向文件末尾<strong>追加记录</strong>，所以更新键的时候旧版本的值不会被覆盖。</li>
 <li>查找最新值的时候，需要找到文件中键最后一次出现的位置（因此 db_get 中使用了 tail -n 1 。)</li>
 </ul>
-<pre><code class="language-shell">$ db_set 42 '{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Exploratorium&quot;]}' 
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>db_set<span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Exploratorium&quot;]}&#39;</span><span class="w"> </span>
 
-$ db_get 42
-{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Exploratorium&quot;]}
+$<span class="w"> </span>db_get<span class="w"> </span><span class="m">42</span>
+<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;San Francisco&quot;</span>,<span class="s2">&quot;attractions&quot;</span>:<span class="o">[</span><span class="s2">&quot;Exploratorium&quot;</span><span class="o">]}</span>
 
-$ cat database
-123456,{&quot;name&quot;:&quot;London&quot;,&quot;attractions&quot;:[&quot;Big Ben&quot;,&quot;London Eye&quot;]}
-42,{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Golden Gate Bridge&quot;]}
-42,{&quot;name&quot;:&quot;San Francisco&quot;,&quot;attractions&quot;:[&quot;Exploratorium&quot;]}
-</code></pre>
+$<span class="w"> </span>cat<span class="w"> </span>database
+<span class="m">123456</span>,<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;London&quot;</span>,<span class="s2">&quot;attractions&quot;</span>:<span class="o">[</span><span class="s2">&quot;Big Ben&quot;</span>,<span class="s2">&quot;London Eye&quot;</span><span class="o">]}</span>
+<span class="m">42</span>,<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;San Francisco&quot;</span>,<span class="s2">&quot;attractions&quot;</span>:<span class="o">[</span><span class="s2">&quot;Golden Gate Bridge&quot;</span><span class="o">]}</span>
+<span class="m">42</span>,<span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="s2">&quot;San Francisco&quot;</span>,<span class="s2">&quot;attractions&quot;</span>:<span class="o">[</span><span class="s2">&quot;Exploratorium&quot;</span><span class="o">]}</span>
+</code></pre></div>
 <ul>
 <li>db_set 函数对于极其简单的场景其实有非常好的性能，因为在文件尾部追加写入通常是非常高效的。</li>
 <li>与db_set做的事情类似，许多数据库在内部使用了<strong>日志（log）</strong>，也就是一个 <strong>仅追加（append-only）</strong> 的数据文件。</li>
@@ -659,7 +659,7 @@ $ cat database
 <li>每次你想查找一个键时，db_get 必须从头到尾扫描整个数据库文件来查找键的出现。</li>
 <li>用算法的语言来说，查找的开销是 O(n) ：如果数据库记录数量 n 翻了一倍，查找时间也要翻一倍。</li>
 </ul>
-<h3 id="_2">索引</h3>
+<h3 id="_2">索引<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>为了高效查找数据库中特定键的值，我们需要一个数据结构：<strong>索引（index）</strong>。</p>
 <ul>
 <li>索引背后的大致思想是，保存一些额外的元数据作为路标，帮助你找到想要的数据。</li>
@@ -669,7 +669,7 @@ $ cat database
 <li>任何类型的索引通常都会减慢写入速度，因为每次写入数据时都需要更新索引。</li>
 <li>这是存储系统中一个重要的权衡：精心选择的索引加快了读查询的速度，但是每个索引都会拖慢写入速度。</li>
 </ul>
-<h3 id="_3">哈希索引</h3>
+<h3 id="_3">哈希索引<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>键值存储与在大多数编程语言中可以找到的<strong>字典（dictionary）</strong>类型非常相似，通常字典都是用<strong>散列映射（hash map）</strong>（或<strong>哈希表（hash table）</strong>）实现的。</li>
 </ul>
@@ -725,7 +725,7 @@ $ cat database
 <li>散列表必须能放进内存：当有很多键的时候，Hash 冲突，占用内存。</li>
 <li>范围查询效率不高：不支持查一个取值区间内的所有键。</li>
 </ul>
-<h3 id="sstableslsm">SSTables和LSM树</h3>
+<h3 id="sstableslsm">SSTables和LSM树<a class="headerlink" href="#sstableslsm" title="Permanent link">&para;</a></h3>
 <p>在之前的存储中，每个日志结构存储段都是一系列键值对。这些对按照它们写入的顺序出现，而不是键值对的顺序。
 我们做一个简单的改变：我们要求键值对的序列按键排序。把这个格式称为<strong>排序字符串表（Sorted String Table）</strong>，简称 <strong>SSTable</strong>。同时，要求每个键只在每个合并的段文件中出现一次（压缩过程已经保证）。</p>
 <p>SSTable 与散列索引日志段相比，有几个很大的优势：</p>
@@ -737,7 +737,7 @@ $ cat database
 </li>
 <li>为了在文件中找到一个特定的键，你<strong>不再需要保存内存中所有键</strong>的索引。因为是有序的，可以先查找出键所处的范围，然后就找到这个键所在的偏移量的区间。比如可以从 handbag 和 handsome 的偏移量找到 handiwork 的区间。<img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1632452977336-ac436b5b-56b7-488e-823e-ee9a0fb6c595.png" /></li>
 </ol>
-<h4 id="sstables">构建和维护SSTables</h4>
+<h4 id="sstables">构建和维护SSTables<a class="headerlink" href="#sstables" title="Permanent link">&para;</a></h4>
 <p>如何让数据首先被按键排序呢？</p>
 <ul>
 <li>在内存中排序简单的多，比如红黑树、AVL 树；</li>
@@ -755,9 +755,9 @@ $ cat database
 <li>该日志不是按排序顺序，但这并不重要，因为它的唯一目的是在崩溃后恢复内存表。</li>
 <li>每当内存表写出到SSTable时，相应的日志都可以被丢弃。</li>
 </ul>
-<h4 id="sstableslsm_1">用SSTables制作LSM树</h4>
+<h4 id="sstableslsm_1">用SSTables制作LSM树<a class="headerlink" href="#sstableslsm_1" title="Permanent link">&para;</a></h4>
 <p>LSM 树：在 LevelDB 和 RocksDB 使用。</p>
-<h4 id="_4">性能优化</h4>
+<h4 id="_4">性能优化<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <ol>
 <li>当查找数据库中不存在的键时，LSM树算法可能会很慢：您必须检查内存表，然后将这些段一直回到最老的（可能必须从磁盘读取每一个），然后才能确定键不存在。</li>
 <li>解决办法：布隆过滤器。</li>
@@ -767,7 +767,7 @@ $ cat database
 <li>HBase 使用大小分层；</li>
 <li>Cassandra 同时支持。</li>
 </ol>
-<h3 id="b">B树</h3>
+<h3 id="b">B树<a class="headerlink" href="#b" title="Permanent link">&para;</a></h3>
 <p>像SSTables一样，B树保持按键排序的键值对，这允许高效的键值查找和范围查询。
 不同：</p>
 <ul>
@@ -803,7 +803,7 @@ $ cat database
 <li>该算法确保树保持平衡：具有 n 个键的B树总是具有 $O(log n)$ 的深度。</li>
 <li>大多数数据库可以放入一个三到四层的 B 树，所以你不需要遵追踪多页面引用来找到你正在查找的页面。 （分支因子为 500 的 4KB 页面的四级树可以存储多达 256TB 。）</li>
 </ul>
-<h4 id="b_1">让B树更可靠</h4>
+<h4 id="b_1">让B树更可靠<a class="headerlink" href="#b_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>B 树的基本<strong>底层写操作是用新数据覆盖磁盘上的页面</strong>。</li>
 <li>假定覆盖不改变页面的位置；</li>
@@ -826,7 +826,7 @@ $ cat database
 <li>通过使用<strong>锁存器（latches）</strong>（轻量级锁）保护树的数据结构来完成</li>
 <li>而 LSM 比较简单：在后台完成所有的合并，不干扰查询；通过「原子交换」把旧的分段变为新的分段。</li>
 </ul>
-<h4 id="b_2">B树优化</h4>
+<h4 id="b_2">B树优化<a class="headerlink" href="#b_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>LMDB 数据库中使用「写时复制方案 」，而不是不是覆盖页面并维护 WAL 进行崩溃恢复。</li>
 <li>修改的页面被写入到不同的位置，并且树中的父页面的新版本被创建，指向新的位置。</li>
@@ -842,10 +842,10 @@ $ cat database
 <li>例如，每个叶子页面可以在左边和右边具有对其兄弟页面的引用，这允许不跳回父页面就能顺序扫描。</li>
 <li>B树的变体如分形树借用一些日志结构的思想来减少磁盘寻道（而且它们与分形无关）。</li>
 </ul>
-<h3 id="blsm">比较B树和LSM树</h3>
+<h3 id="blsm">比较B树和LSM树<a class="headerlink" href="#blsm" title="Permanent link">&para;</a></h3>
 <p>通常LSM树的写入速度更快，而B树的读取速度更快。
  LSM树上的读取通常比较慢，因为它们必须在压缩的不同阶段检查几个不同的数据结构和SSTables。</p>
-<h4 id="lsm">LSM树的优点</h4>
+<h4 id="lsm">LSM树的优点<a class="headerlink" href="#lsm" title="Permanent link">&para;</a></h4>
 <ul>
 <li>B树索引必须至少两次写入每一段数据：一次写入预先写入日志，一次写入树页面本身（也许再次分页）</li>
 <li>即使在该页面中只有几个字节发生了变化，也需要一次编写整个页面的开销。</li>
@@ -869,7 +869,7 @@ $ cat database
 <li>B树存储引擎会由于分割而留下一些未使用的磁盘空间</li>
 <li>由于LSM树不是面向页面的，并且定期重写SSTables以去除碎片，所以它们具有较低的存储开销，特别是当使用平坦压缩时</li>
 </ul>
-<h4 id="lsm_1">LSM树的缺点</h4>
+<h4 id="lsm_1">LSM树的缺点<a class="headerlink" href="#lsm_1" title="Permanent link">&para;</a></h4>
 <p>日志结构存储的缺点是压缩过程有时会干扰正在进行的读写操作。
 B树的行为则相对更具可预测性。</p>
 <p>高写入吞吐量：</p>
@@ -888,7 +888,7 @@ B树的行为则相对更具可预测性。</p>
 <li>有利于事务语义。</li>
 <li>在许多关系数据库中，事务隔离是通过在键范围上使用锁来实现的，在B树索引中，这些锁可以直接连接到树</li>
 </ul>
-<h3 id="_5">其他索引结构</h3>
+<h3 id="_5">其他索引结构<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>前面讨论的是关键值索引，它们就像关系模型中的<strong>主键（primary key）</strong> 索引。主键唯一标识关系表中的一行、一个文档、一个顶点。</p>
 <p>二级索引</p>
 <ul>
@@ -898,7 +898,7 @@ B树的行为则相对更具可预测性。</p>
 <li>通过向每个索引添加行标识符来使每个关键字唯一</li>
 <li>无论哪种方式，B树和日志结构索引都可以用作辅助索引。</li>
 </ul>
-<h4 id="_6">将值存储在索引中</h4>
+<h4 id="_6">将值存储在索引中<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>索引中的关键字是查询搜索的内容，它属于两种之一：</p>
 <ul>
 <li>实际行（文档，顶点）</li>
@@ -924,7 +924,7 @@ B树的行为则相对更具可预测性。</p>
 <li>允许通过单独使用索引来回答一些查询。</li>
 <li>加快了读取速度，但是增加了额外的存储空间，增加了写入开销，还要事务保证。</li>
 </ul>
-<h4 id="_7">多列索引</h4>
+<h4 id="_7">多列索引<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>上面讨论的都是一个 key 对应一个 value，如果需要同时根据一个表中的多个列（或文档中的多个字段）进行查询，则不行。</p>
 <ul>
 <li><strong>连接索引（concatenated index）</strong></li>
@@ -935,7 +935,7 @@ B树的行为则相对更具可预测性。</p>
 <li>普遍做法是用特殊化的空间索引，比如<strong> R 树（TODO）</strong>。</li>
 <li>多维索引除了地理位置，还可以用于其他很多地方：电子网站、天气数据。</li>
 </ul>
-<h4 id="_8">全文搜索和模糊索引</h4>
+<h4 id="_8">全文搜索和模糊索引<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p>上文讨论的索引都是查询确切的值或者确定范围的值，如果搜索类似的键，需要用模糊查询。</p>
 <p>全文搜索引擎</p>
 <ul>
@@ -950,7 +950,7 @@ B树的行为则相对更具可预测性。</p>
 <li>但在 Lucene 中，内存中的索引是键中字符的有限状态自动机，类似于trie。</li>
 <li>这个自动机可以转换成 Levenshtein 自动机，它支持在给定的编辑距离内有效地搜索单词。</li>
 </ul>
-<h4 id="_9">在内存中存储一切</h4>
+<h4 id="_9">在内存中存储一切<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
 <p>对于磁盘和SSD，如果要在读取和写入时获得良好性能，则需要仔细地布置磁盘上的数据。
 磁盘优点：耐用，成本低。
 内存变得便宜，促进了内存数据库发展。</p>
@@ -988,7 +988,7 @@ B树的行为则相对更具可预测性。</p>
 <li>这与操作系统对虚拟内存和交换文件的操作类似，但数据库可以比操作系统更有效地管理内存，因为它可以按单个记录的粒度工作，而不是整个内存页面。</li>
 <li>尽管如此，这种方法仍然需要<strong>索引能完全放入内存中</strong>。</li>
 </ul>
-<h2 id="_10">事务处理还是分析？</h2>
+<h2 id="_10">事务处理还是分析？<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>事务处理</p>
 <ul>
 <li>早起的业务处理，典型的数据库写入与一笔商业交易（transaction）相对应，以后<strong>交易/事务（transaction）</strong> 仍留了下来。</li>
@@ -1039,7 +1039,7 @@ B树的行为则相对更具可预测性。</p>
 </tbody>
 </table>
 <p>起初，相同的数据库用于事务处理和分析查询，SQL 可以支持 OLTP 和 OLAP。现在有趋势在用数据仓库。</p>
-<h3 id="_11">数据仓库</h3>
+<h3 id="_11">数据仓库<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li>OLTP 系统对业务运作很重要，因而通常会要求 <strong>高可用</strong> 与 <strong>低延迟</strong>，不愿意做影响事务性能的分析查询。</li>
 <li>数据仓库是一个独立的数据库，分析人员可以查询他们想要的内容而不影响OLTP操作</li>
@@ -1050,14 +1050,14 @@ B树的行为则相对更具可预测性。</p>
 <ul>
 <li>使用单独的数据仓库，而不是直接查询OLTP系统进行分析的一大优势是数据仓库可针对分析访问模式进行优化。上文的索引不适合数据仓库，需要单独的存储引擎。</li>
 </ul>
-<h4 id="oltp">OLTP数据库和数据仓库之间的分歧</h4>
+<h4 id="oltp">OLTP数据库和数据仓库之间的分歧<a class="headerlink" href="#oltp" title="Permanent link">&para;</a></h4>
 <ul>
 <li>数据仓库的数据模型通常是关系型的，因为SQL通常很适合分析查询。</li>
 <li>表面上，一个数据仓库和一个关系OLTP数据库看起来很相似，因为它们都有一个SQL查询接口。</li>
 <li>实际上，内部完全不同，因为对不同的查询模式进行了优化。</li>
 <li>一般的数据库都把重点放在支持事务处理或分析工作负载上，而不是两者都支持。</li>
 </ul>
-<h3 id="_12">星型和雪花型：分析的模式</h3>
+<h3 id="_12">星型和雪花型：分析的模式<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>事务处理领域中，使用了大量不同的数据模型。</li>
 <li>分析型业务中，数据模型的多样性则少得多。许多数据仓库都以相当公式化的方式使用，被称为星型模式（也称为维度建模）。</li>
@@ -1075,7 +1075,7 @@ B树的行为则相对更具可预测性。</p>
 <li>“雪花模式”：维度表进一步拆分成子维度表。</li>
 <li>“星型模式”比较简单，是首选。</li>
 </ul>
-<h2 id="_13">列存储</h2>
+<h2 id="_13">列存储<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>
 <li>事实表的高效存储和查询是问题。</li>
 <li>维度表比较小，不讨论。</li>
@@ -1087,7 +1087,7 @@ B树的行为则相对更具可预测性。</p>
 <li>面向列的存储布局依赖于每个列文件包含相同顺序的行。</li>
 </ul>
 <p><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1632716431953-edc86f6a-2e58-48ff-80f9-2cf238193c08.png" /></p>
-<h3 id="_14">列压缩</h3>
+<h3 id="_14">列压缩<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>除了仅从磁盘加载查询所需的列以外，我们还可以通过压缩数据来进一步降低对磁盘吞吐量的需求。</li>
 <li>面向列的存储通常很适合压缩。</li>
@@ -1099,8 +1099,8 @@ B树的行为则相对更具可预测性。</p>
 <li>位图可以另外进行游程编码，这可以使列的编码非常紧凑。</li>
 <li>位图索引可以很方便的做各种查询：ADN/OR</li>
 </ul>
-<h4 id="_15"></h4>
-<h4 id="_16">内存带宽和向量处理</h4>
+<h4 id="_15"><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<h4 id="_16">内存带宽和向量处理<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
 <ul>
 <li>需要扫描数百万行的数据仓库查询来说，瓶颈：</li>
 <li>是从磁盘获取数据到内存的带宽。</li>
@@ -1109,7 +1109,7 @@ B树的行为则相对更具可预测性。</p>
 <li>可以将大量压缩的列数据放在CPU的L1缓存中，然后在紧密的循环中循环（即没有函数调用）</li>
 <li>更有利于 CPU 的计算。</li>
 </ul>
-<h3 id="_17">列存储中的排序顺序</h3>
+<h3 id="_17">列存储中的排序顺序<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <ul>
 <li>在列存储中，存储行的顺序并不一定很重要。</li>
 <li>按插入顺序存储它们是最简单的，因为插入一个新行只需要追加到每个列文件。</li>
@@ -1121,20 +1121,20 @@ B树的行为则相对更具可预测性。</p>
 <li>速度快：这样数据库的管理员可以根据他们对<strong>常用查询</strong>的了解来选择表格应该被排序的列。</li>
 <li>压缩列：第一个排序键的压缩效果最强。</li>
 </ul>
-<h4 id="_18"></h4>
-<h4 id="_19">几个不同的排序顺序</h4>
+<h4 id="_18"><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<h4 id="_19">几个不同的排序顺序<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
 <ul>
 <li>不同的查询受益于不同的排序顺序，而无论如何，数据需要复制到多台机器，</li>
 <li>在一个面向列的存储中有多个排序顺序有点类似于在一个面向行的存储中有多个二级索引。</li>
 </ul>
-<h3 id="_20">写入列存储</h3>
+<h3 id="_20">写入列存储<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <p>列存储的优点：大部分只用查询；压缩和排序都有助于更快地读取这些查询。
 缺点：写入困难。插入必须始终更新所有列。</p>
 <p>解决方案：LSM树。</p>
 <ul>
 <li>现在内存中存储，添加到一个已排序的结构中，然后准备写入磁盘。</li>
 </ul>
-<h3 id="_21">聚合：数据立方体和物化视图</h3>
+<h3 id="_21">聚合：数据立方体和物化视图<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <p>并不是每个数据仓库都必定是一个列存储。列存储在迅速普及。</p>
 <p>物化汇总</p>
 <ul>
@@ -1145,7 +1145,7 @@ B树的行为则相对更具可预测性。</p>
 <ul>
 <li>物化数据立方体的优点是某些查询变得非常快，因为它们已经被有效地预先计算了。</li>
 </ul>
-<h2 id="_22">本章小结</h2>
+<h2 id="_22">本章小结<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
 <p>优化 <strong>事务处理（OLTP）</strong> 或 <strong>在线分析（OLAP）</strong> 。这些用例的访问模式之间有很大的区别：</p>
 <ul>
 <li>OLTP系统通常面向用户，这意味着系统可能会收到大量的请求。为了处理负载，应用程序通常只访问每个查询中的少部分记录。应用程序使用某种键来请求记录，存储引擎使用索引来查找所请求的键的数据。磁盘寻道时间往往是这里的瓶颈。</li>

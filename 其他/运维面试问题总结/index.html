@@ -1375,12 +1375,12 @@
 
 
 
-<h1 id="it">IT运维面试问题总结</h1>
-<h2 id="_1">一、集群相关基础组件</h2>
-<h3 id="etcd">（一）ETCD</h3>
-<h4 id="1">1. 概念</h4>
+<h1 id="it">IT运维面试问题总结<a class="headerlink" href="#it" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一、集群相关基础组件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="etcd">（一）ETCD<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h3>
+<h4 id="1">1. 概念<a class="headerlink" href="#1" title="Permanent link">&para;</a></h4>
 <p>etcd 是 CoreOS 团队发起的开源项目，是一个管理配置信息和服务发现（service discovery）的项目，目标是构建高可用的分布式键值（key-value）数据库，基于 Go 语言实现。</p>
-<h4 id="2">2. 特点</h4>
+<h4 id="2">2. 特点<a class="headerlink" href="#2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>简单</strong>：支持 REST 风格的 HTTP+JSON API。</p>
@@ -1395,7 +1395,7 @@
 <p><strong>可靠</strong>：支持分布式结构，基于 Raft 一致性算法（通过选举主节点实现分布式系统一致性）。</p>
 </li>
 </ul>
-<h4 id="3">3. 适应场景</h4>
+<h4 id="3">3. 适应场景<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>服务发现（Service Discovery）</strong>：解决分布式集群中进程/服务的查找与连接问题，本质是通过名字查找监听 UDP/TCP 端口的进程并建立连接。</p>
@@ -1416,10 +1416,10 @@
 <p><strong>集群监控与 Leader 竞选</strong>：实现简单且实时性强。</p>
 </li>
 </ul>
-<h3 id="haproxy">（二）HAProxy</h3>
-<h4 id="1_1">1. 概念</h4>
+<h3 id="haproxy">（二）HAProxy<a class="headerlink" href="#haproxy" title="Permanent link">&para;</a></h3>
+<h4 id="1_1">1. 概念<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h4>
 <p>HAProxy 是提供高可用性、负载均衡及基于 TCP 和 HTTP 应用代理的免费、快速、可靠解决方案，适用于并发量大（1w+）且需会话保持或七层处理的 Web 站点，可安全整合至现有架构并保护 Web 服务器不暴露到网络。</p>
-<h4 id="2_1">2. 主要特性</h4>
+<h4 id="2_1">2. 主要特性<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p>可靠性和稳定性优异，可与硬件级 F5 负载均衡设备媲美。</p>
@@ -1458,7 +1458,7 @@
 <p>日志分析：自带日志分析器。</p>
 </li>
 </ul>
-<h4 id="3_1">3. 常见负载均衡策略</h4>
+<h4 id="3_1">3. 常见负载均衡策略<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -1497,10 +1497,10 @@
 </tr>
 </tbody>
 </table>
-<h3 id="heartbeat">（三）Heartbeat</h3>
-<h4 id="1_2">1. 概念</h4>
+<h3 id="heartbeat">（三）Heartbeat<a class="headerlink" href="#heartbeat" title="Permanent link">&para;</a></h3>
+<h4 id="1_2">1. 概念<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h4>
 <p>Heartbeat 是 Linux-HA 项目的组件，提供心跳检测、资源接管、集群服务监测、失效切换等功能，核心功能为<strong>心跳监测</strong>和<strong>资源接管</strong>。</p>
-<h4 id="2_2">2. 核心机制</h4>
+<h4 id="2_2">2. 核心机制<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p>心跳监测：通过网络链路或串口进行，支持冗余链路，节点间相互发送报文告知自身状态；若指定时间内未收到对方报文，判定对方失效。</p>
@@ -1509,10 +1509,10 @@
 <p>资源接管：当检测到节点失效时，启动资源接管模块，接管失效节点上的资源或服务。</p>
 </li>
 </ul>
-<h3 id="keepalived">（四）Keepalived</h3>
-<h4 id="1_3">1. 概念</h4>
+<h3 id="keepalived">（四）Keepalived<a class="headerlink" href="#keepalived" title="Permanent link">&para;</a></h3>
+<h4 id="1_3">1. 概念<a class="headerlink" href="#1_3" title="Permanent link">&para;</a></h4>
 <p>Keepalived 是基于 VRRP 协议的 LVS 服务高可用方案，解决静态路由单点故障问题。</p>
-<h4 id="2_3">2. 工作原理</h4>
+<h4 id="2_3">2. 工作原理<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p>集群角色：包含主服务器（MASTER）和备份服务器（BACKUP），对外表现为一个虚拟 IP（VIP）。</p>
@@ -1521,7 +1521,7 @@
 <p>心跳机制：主服务器定期发送 VRRP 通告信息给备份服务器；若备份服务器收不到 VRRP 消息（主服务器异常），则接管虚拟 IP，继续提供服务，保证高可用。</p>
 </li>
 </ul>
-<h4 id="3_2">3. 主要模块及作用</h4>
+<h4 id="3_2">3. 主要模块及作用<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -1544,7 +1544,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="4">4. 健康检查机制（保证高可用）</h4>
+<h4 id="4">4. 健康检查机制（保证高可用）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h4>
 <p>Keepalived 工作在 TCP/IP 模型的网络层（3 层）、传输层（4 层）和应用层（7 层），通过多维度健康检查剔除故障节点：</p>
 <ul>
 <li>
@@ -1557,10 +1557,10 @@
 <p><strong>应用层</strong>：支持 FTP、telnet、smtp、dns 等高层协议，用户可自定义监测逻辑，若监测结果与正常预期不符，剔除对应节点。</p>
 </li>
 </ul>
-<h3 id="lvs">（五）LVS</h3>
-<h4 id="1_4">1. 概念</h4>
+<h3 id="lvs">（五）LVS<a class="headerlink" href="#lvs" title="Permanent link">&para;</a></h3>
+<h4 id="1_4">1. 概念<a class="headerlink" href="#1_4" title="Permanent link">&para;</a></h4>
 <p>LVS（Linux Virtual Server，Linux 虚拟服务器）是虚拟服务器集群系统，可在 Unix/Linux 平台实现负载均衡集群功能。</p>
-<h4 id="2_4">2. 主要作用</h4>
+<h4 id="2_4">2. 主要作用<a class="headerlink" href="#2_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p>负载分担：将大规模并发访问/数据流量分担到多台节点设备，减少用户响应时间，提升体验。</p>
@@ -1572,7 +1572,7 @@
 <p>高可用保障：实现 7*24 小时服务，单个/多个节点宕机不影响业务，集群负载均衡接收所有服务请求。</p>
 </li>
 </ul>
-<h4 id="3_3">3. 工作模式及工作过程</h4>
+<h4 id="3_3">3. 工作模式及工作过程<a class="headerlink" href="#3_3" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -1603,7 +1603,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="4_1">4. 常见调度算法（均衡策略）</h4>
+<h4 id="4_1">4. 常见调度算法（均衡策略）<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h4>
 <p>LVS 调度算法分<strong>固定调度算法</strong>和<strong>动态调度算法</strong>两类：</p>
 <ul>
 <li>
@@ -1641,8 +1641,8 @@
 </ul>
 </li>
 </ul>
-<h2 id="_2">二、负载均衡核心对比</h2>
-<h3 id="_3">（一）四层与七层负载均衡的区别</h3>
+<h2 id="_2">二、负载均衡核心对比<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">（一）四层与七层负载均衡的区别<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1674,10 +1674,10 @@
 </tr>
 </tbody>
 </table>
-<h3 id="lvsnginxhaproxy">（二）LVS、Nginx、HAProxy 的异同</h3>
-<h4 id="1_5">1. 相同点</h4>
+<h3 id="lvsnginxhaproxy">（二）LVS、Nginx、HAProxy 的异同<a class="headerlink" href="#lvsnginxhaproxy" title="Permanent link">&para;</a></h3>
+<h4 id="1_5">1. 相同点<a class="headerlink" href="#1_5" title="Permanent link">&para;</a></h4>
 <p>三者均为<strong>软件负载均衡产品</strong>，用于实现请求分发和服务高可用。</p>
-<h4 id="2_5">2. 不同点</h4>
+<h4 id="2_5">2. 不同点<a class="headerlink" href="#2_5" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -1726,10 +1726,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_4">三、代理服务器</h2>
-<h3 id="1_6">1. 概念</h3>
+<h2 id="_4">三、代理服务器<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1_6">1. 概念<a class="headerlink" href="#1_6" title="Permanent link">&para;</a></h3>
 <p>代理服务器是位于客户端与原始（资源）服务器之间的服务器，客户端通过向代理服务器发送请求（指定目标原始服务器），由代理服务器转交请求并将获取的内容返回给客户端。</p>
-<h3 id="2_6">2. 主要作用</h3>
+<h3 id="2_6">2. 主要作用<a class="headerlink" href="#2_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>资源获取</strong>：代替客户端从原始服务器获取资源。</p>
@@ -1744,8 +1744,8 @@
 <p><strong>隐藏真实地址</strong>：代理服务器代替客户端请求，隐藏客户端真实 IP 等信息。</p>
 </li>
 </ul>
-<h2 id="_5">四、高可用与分布式理论</h2>
-<h3 id="rto-rpo">（一）高可用集群的衡量维度（RTO &amp; RPO）</h3>
+<h2 id="_5">四、高可用与分布式理论<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="rto-rpo">（一）高可用集群的衡量维度（RTO &amp; RPO）<a class="headerlink" href="#rto-rpo" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1771,8 +1771,8 @@
 </tbody>
 </table>
 <p><strong>核心</strong>：最佳恢复状态为 RTO=RPO=0，几乎无法实现，需根据业务需求平衡。</p>
-<h3 id="cap">（二）CAP 理论</h3>
-<h4 id="1_7">1. 核心定义</h4>
+<h3 id="cap">（二）CAP 理论<a class="headerlink" href="#cap" title="Permanent link">&para;</a></h3>
+<h4 id="1_7">1. 核心定义<a class="headerlink" href="#1_7" title="Permanent link">&para;</a></h4>
 <p>CAP 理论指出分布式系统需满足三个条件，最多同时较好满足两个：</p>
 <ul>
 <li>
@@ -1785,9 +1785,9 @@
 <p><strong>Partition tolerance（分区容错性）</strong>：系统中任意信息丢失或节点失败不影响系统继续运行。</p>
 </li>
 </ul>
-<h4 id="2_7">2. 核心结论</h4>
+<h4 id="2_7">2. 核心结论<a class="headerlink" href="#2_7" title="Permanent link">&para;</a></h4>
 <p>分布式系统无法同时满足一致性、可用性、分区容错性，需根据场景取舍（如分布式数据库优先一致性，Web 服务优先可用性）。</p>
-<h3 id="acid">（三）ACID 理论</h3>
+<h3 id="acid">（三）ACID 理论<a class="headerlink" href="#acid" title="Permanent link">&para;</a></h3>
 <p>ACID 是数据库事务的四个特性，保证事务的可靠性：</p>
 <ul>
 <li>
@@ -1803,8 +1803,8 @@
 <p><strong>持久性（Durable）</strong>：事务成功提交后，变更永久保存（记录到 redo 日志），即使系统故障也不丢失。</p>
 </li>
 </ul>
-<h2 id="kubernetesk8s">五、Kubernetes（K8s）</h2>
-<h3 id="_6">（一）基础概念</h3>
+<h2 id="kubernetesk8s">五、Kubernetes（K8s）<a class="headerlink" href="#kubernetesk8s" title="Permanent link">&para;</a></h2>
+<h3 id="_6">（一）基础概念<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -1855,8 +1855,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_7">（二）核心组件及作用</h3>
-<h4 id="1-master">1. Master 控制组件</h4>
+<h3 id="_7">（二）核心组件及作用<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="1-master">1. Master 控制组件<a class="headerlink" href="#1-master" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -1923,7 +1923,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="2-node">2. Node 组件</h4>
+<h4 id="2-node">2. Node 组件<a class="headerlink" href="#2-node" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>kubelet</strong>：运行在每个 Node 上的代理服务，处理 Master 下发的任务，管理 Pod 及容器；注册节点信息，定期汇报节点资源使用情况，通过 cAdvisor 监控容器和节点资源。</p>
@@ -1935,8 +1935,8 @@
 <p><strong>Docker Engine</strong>：容器运行时，负责容器的创建、启动、停止等生命周期管理。</p>
 </li>
 </ul>
-<h3 id="_8">（三）关键工具与部署方式</h3>
-<h4 id="1_8">1. 核心工具</h4>
+<h3 id="_8">（三）关键工具与部署方式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h4 id="1_8">1. 核心工具<a class="headerlink" href="#1_8" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -1959,7 +1959,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="2_8">2. 常见部署方式</h4>
+<h4 id="2_8">2. 常见部署方式<a class="headerlink" href="#2_8" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>kubeadm</strong>：官方推荐方式，简化集群部署流程，支持快速初始化 Master 和 Node。</p>
@@ -1971,8 +1971,8 @@
 <p><strong>Minikube</strong>：本地单节点部署，适合开发测试。</p>
 </li>
 </ul>
-<h3 id="pod">（四）Pod 核心机制</h3>
-<h4 id="1-pod">1. Pod 状态</h4>
+<h3 id="pod">（四）Pod 核心机制<a class="headerlink" href="#pod" title="Permanent link">&para;</a></h3>
+<h4 id="1-pod">1. Pod 状态<a class="headerlink" href="#1-pod" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -2003,7 +2003,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="2-pod">2. 创建 Pod 的主要流程</h4>
+<h4 id="2-pod">2. 创建 Pod 的主要流程<a class="headerlink" href="#2-pod" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
 <p>客户端提交 Pod 配置（如 YAML 文件）到 kube-apiserver。</p>
@@ -2021,7 +2021,7 @@
 <p>kubelet 根据配置运行 Pod，运行成功后将状态返回给 scheduler，scheduler 存储状态到 Etcd。</p>
 </li>
 </ol>
-<h4 id="3-restartpolicy">3. 重启策略（RestartPolicy）</h4>
+<h4 id="3-restartpolicy">3. 重启策略（RestartPolicy）<a class="headerlink" href="#3-restartpolicy" title="Permanent link">&para;</a></h4>
 <p>Pod 重启策略应用于所有容器，由 kubelet 在 Node 上执行，默认值为 <strong>Always</strong>：</p>
 <table>
 <thead>
@@ -2057,7 +2057,7 @@
 <p>kubelet（静态 Pod）：Pod 失效时重启，不进行健康检查（无论策略如何）。</p>
 </li>
 </ul>
-<h4 id="4_2">4. 健康检查方式（探针）</h4>
+<h4 id="4_2">4. 健康检查方式（探针）<a class="headerlink" href="#4_2" title="Permanent link">&para;</a></h4>
 <p>K8s 通过三类探针检查 Pod 健康状态：</p>
 <table>
 <thead>
@@ -2085,7 +2085,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="5-livenessprobe">5. LivenessProbe 探针的常见方式</h4>
+<h4 id="5-livenessprobe">5. LivenessProbe 探针的常见方式<a class="headerlink" href="#5-livenessprobe" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>ExecAction</strong>：在容器内执行命令，返回码为 0 则健康。</p>
@@ -2097,7 +2097,7 @@
 <p><strong>HTTPGetAction</strong>：通过容器 IP、端口和路径调用 HTTP GET 方法，响应状态码 200-399 则健康。</p>
 </li>
 </ul>
-<h4 id="6">6. 常见调度方式</h4>
+<h4 id="6">6. 常见调度方式<a class="headerlink" href="#6" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -2128,8 +2128,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="deployment-daemonset">（五）Deployment 与 DaemonSet</h3>
-<h4 id="1-deployment">1. Deployment 升级过程</h4>
+<h3 id="deployment-daemonset">（五）Deployment 与 DaemonSet<a class="headerlink" href="#deployment-daemonset" title="Permanent link">&para;</a></h3>
+<h4 id="1-deployment">1. Deployment 升级过程<a class="headerlink" href="#1-deployment" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
 <p>初始创建 Deployment 时，系统创建一个 ReplicaSet（RS），并创建指定数量的 Pod 副本。</p>
@@ -2144,7 +2144,7 @@
 <p>最终新 RS 运行指定数量的新版本 Pod，旧 RS 副本数缩减为 0。</p>
 </li>
 </ol>
-<h4 id="2-deployment">2. Deployment 升级策略</h4>
+<h4 id="2-deployment">2. Deployment 升级策略<a class="headerlink" href="#2-deployment" title="Permanent link">&para;</a></h4>
 <p>通过 <code>spec.strategy</code> 指定，默认值为 <strong>RollingUpdate</strong>：</p>
 <table>
 <thead>
@@ -2164,7 +2164,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="3-daemonset">3. DaemonSet 特性</h4>
+<h4 id="3-daemonset">3. DaemonSet 特性<a class="headerlink" href="#3-daemonset" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>部署规则</strong>：在每个 K8s 集群 Node 上运行一个 Pod，每个 Node 仅运行一个，不支持定义 <code>replicas</code>（副本数由 Node 数量决定）。</p>
@@ -2181,8 +2181,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="service">（六）Service 与网络</h3>
-<h4 id="1-service">1. Service 类型</h4>
+<h3 id="service">（六）Service 与网络<a class="headerlink" href="#service" title="Permanent link">&para;</a></h3>
+<h4 id="1-service">1. Service 类型<a class="headerlink" href="#1-service" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -2209,7 +2209,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="2-service">2. Service 分发策略</h4>
+<h4 id="2-service">2. Service 分发策略<a class="headerlink" href="#2-service" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>RoundRobin（轮询）</strong>：默认策略，依次转发请求到后端 Pod。</p>
@@ -2218,7 +2218,7 @@
 <p><strong>SessionAffinity（会话保持）</strong>：基于客户端 IP，第一次转发到某个 Pod 后，后续同一客户端请求均转发到该 Pod。</p>
 </li>
 </ul>
-<h4 id="3-headless-service">3. Headless Service</h4>
+<h4 id="3-headless-service">3. Headless Service<a class="headerlink" href="#3-headless-service" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>作用</strong>：不提供默认负载均衡，不为 Service 设置 ClusterIP；仅通过 Label Selector 返回后端 Pod 列表，由客户端自行处理负载均衡。</p>
@@ -2227,7 +2227,7 @@
 <p><strong>适用场景</strong>：需手动指定负载均衡器、应用需知道同组服务其他实例（如分布式数据库集群）。</p>
 </li>
 </ul>
-<h4 id="4_3">4. 外部访问集群内服务的方式</h4>
+<h4 id="4_3">4. 外部访问集群内服务的方式<a class="headerlink" href="#4_3" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>Pod 端口映射（hostPort）</strong>：将 Pod 端口映射到宿主机，外部通过“宿主机 IP:hostPort”访问。</p>
@@ -2242,7 +2242,7 @@
 <p><strong>Ingress</strong>：通过 Ingress 资源和 Ingress Controller，实现 HTTP 层路由（如基于域名、URL 路径转发到不同 Service）。</p>
 </li>
 </ul>
-<h4 id="5-ingress">5. Ingress</h4>
+<h4 id="5-ingress">5. Ingress<a class="headerlink" href="#5-ingress" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>概念</strong>：Ingress 是 K8s 资源对象，用于将不同 URL 请求转发到后端不同 Service，实现 HTTP 层业务路由；需结合 Ingress Controller（如 Nginx Ingress Controller）实现负载均衡。</p>
@@ -2251,8 +2251,8 @@
 <p><strong>工作流程</strong>：Ingress Controller 监听 Ingress 规则和 Service/Endpoint 变化，生成反向代理配置（如 Nginx 配置），直接将客户端请求转发到后端 Pod（跳过 kube-proxy），流程为“Ingress Controller + Ingress 规则 → Services → Pods”。</p>
 </li>
 </ul>
-<h3 id="_9">（七）存储与持久化</h3>
-<h4 id="1_9">1. 数据持久化方式</h4>
+<h3 id="_9">（七）存储与持久化<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h4 id="1_9">1. 数据持久化方式<a class="headerlink" href="#1_9" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -2283,7 +2283,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="2-pv-pvc">2. PV 与 PVC</h4>
+<h4 id="2-pv-pvc">2. PV 与 PVC<a class="headerlink" href="#2-pv-pvc" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>PV（Persistent Volume）</strong>：集群级存储资源，由管理员创建，描述底层存储特性（如容量、访问模式）。</p>
@@ -2292,7 +2292,7 @@
 <p><strong>PVC（Persistent Volume Claim）</strong>：用户对存储资源的“申请”，指定所需存储容量、访问模式等，系统自动匹配 PV 并绑定。</p>
 </li>
 </ul>
-<h4 id="3-pv">3. PV 生命周期阶段</h4>
+<h4 id="3-pv">3. PV 生命周期阶段<a class="headerlink" href="#3-pv" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -2319,7 +2319,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="4_4">4. 存储供应模式</h4>
+<h4 id="4_4">4. 存储供应模式<a class="headerlink" href="#4_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>静态模式（Static）</strong>：管理员手工创建多个 PV，定义底层存储特性；用户创建 PVC 后，系统匹配 PV 绑定。</p>
@@ -2328,7 +2328,7 @@
 <p><strong>动态模式（Dynamic）</strong>：管理员通过 StorageClass 描述后端存储类型；用户创建 PVC 时指定 StorageClass，系统自动创建 PV 并绑定。</p>
 </li>
 </ul>
-<h4 id="5-csi-container-storage-interface">5. CSI 模型（Container Storage Interface）</h4>
+<h4 id="5-csi-container-storage-interface">5. CSI 模型（Container Storage Interface）<a class="headerlink" href="#5-csi-container-storage-interface" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>概念</strong>：K8s 容器存储接口标准，存储提供方基于标准接口实现插件，解耦存储插件与 K8s 核心代码，部署独立。</p>
@@ -2345,8 +2345,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="_10">（八）自动扩容与监控</h3>
-<h4 id="1-hpahorizontal-pod-autoscaler">1. HPA（Horizontal Pod Autoscaler）自动扩容机制</h4>
+<h3 id="_10">（八）自动扩容与监控<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h4 id="1-hpahorizontal-pod-autoscaler">1. HPA（Horizontal Pod Autoscaler）自动扩容机制<a class="headerlink" href="#1-hpahorizontal-pod-autoscaler" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>原理</strong>：</p>
@@ -2366,7 +2366,7 @@
 <p><strong>支持指标</strong>：核心指标（CPU、内存）、自定义指标（如请求 QPS，需 Prometheus 等组件）。</p>
 </li>
 </ul>
-<h4 id="2-metric-service">2. Metric Service</h4>
+<h4 id="2-metric-service">2. Metric Service<a class="headerlink" href="#2-metric-service" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>核心指标（Core Metrics）</strong>：Node、Pod 的 CPU 和内存使用指标，K8s 1.10+ 默认通过 Metrics Server 采集。</p>
@@ -2375,7 +2375,7 @@
 <p><strong>自定义指标（Custom Metrics）</strong>：如请求量、响应时间等，由 Prometheus、Grafana 等组件实现。</p>
 </li>
 </ul>
-<h4 id="3-efk">3. EFK 日志统一管理</h4>
+<h4 id="3-efk">3. EFK 日志统一管理<a class="headerlink" href="#3-efk" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>组件构成</strong>：</p>
@@ -2395,8 +2395,8 @@
 <p><strong>工作流程</strong>：Fluentd 收集日志 → 发送到 Elasticsearch 存储 → Kibana 展示日志。</p>
 </li>
 </ul>
-<h3 id="_11">（九）安全机制</h3>
-<h4 id="1_10">1. 安全控制维度</h4>
+<h3 id="_11">（九）安全机制<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="1_10">1. 安全控制维度<a class="headerlink" href="#1_10" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>基础设施隔离</strong>：保证容器与宿主机的隔离（如命名空间、资源限制）。</p>
@@ -2425,7 +2425,7 @@
 <p><strong>准入机制（AdmissionControl）</strong>：API 请求经过认证授权后，执行准入操作（如资源限制检查、ServiceAccount 自动配置），最后操作目标对象。</p>
 </li>
 </ul>
-<h4 id="2-admissioncontrol">2. 准入控制（AdmissionControl）</h4>
+<h4 id="2-admissioncontrol">2. 准入控制（AdmissionControl）<a class="headerlink" href="#2-admissioncontrol" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>执行顺序</strong>：认证 → 授权 → 准入控制 → 操作对象。</p>
@@ -2451,7 +2451,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="3-rbac">3. RBAC（基于角色的访问控制）</h4>
+<h4 id="3-rbac">3. RBAC（基于角色的访问控制）<a class="headerlink" href="#3-rbac" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>概念</strong>：通过角色（Role）定义权限，将角色绑定到用户/用户组（RoleBinding），实现权限管理。</p>
@@ -2471,7 +2471,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="4-secret">4. Secret</h4>
+<h4 id="4-secret">4. Secret<a class="headerlink" href="#4-secret" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>作用</strong>：保管私密数据（密码、OAuth Tokens、SSH Keys 等），比明文存储更安全，便于分发。</p>
@@ -2491,7 +2491,7 @@
 </ol>
 </li>
 </ul>
-<h4 id="5-podsecuritypolicy">5. PodSecurityPolicy</h4>
+<h4 id="5-podsecuritypolicy">5. PodSecurityPolicy<a class="headerlink" href="#5-podsecuritypolicy" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>概念</strong>：精细控制 Pod 对资源的使用方式和安全策略；开启后，默认禁止创建 Pod，需创建 PodSecurityPolicy 和 RBAC 授权策略才能创建 Pod。</p>
@@ -2517,8 +2517,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="_12">（十）网络模型与组件</h3>
-<h4 id="1-k8s">1. K8s 网络模型</h4>
+<h3 id="_12">（十）网络模型与组件<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<h4 id="1-k8s">1. K8s 网络模型<a class="headerlink" href="#1-k8s" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>核心原则</strong>：每个 Pod 拥有独立 IP，所有 Pod 处于扁平网络空间，可直接通过 IP 通信（无论是否在同一 Node）。</p>
@@ -2530,7 +2530,7 @@
 <p><strong>IP 分配</strong>：IP 以 Pod 为单位分配，Pod 内所有容器共享该 IP。</p>
 </li>
 </ul>
-<h4 id="2-cni-container-network-interface">2. CNI 模型（Container Network Interface）</h4>
+<h4 id="2-cni-container-network-interface">2. CNI 模型（Container Network Interface）<a class="headerlink" href="#2-cni-container-network-interface" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>概念</strong>：容器网络插件化标准，定义容器网络操作规范，通过插件实现网络配置。</p>
@@ -2558,7 +2558,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="3-network-policy">3. 网络策略（Network Policy）</h4>
+<h4 id="3-network-policy">3. 网络策略（Network Policy）<a class="headerlink" href="#3-network-policy" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>作用</strong>：实现 Pod 间网络访问的细粒度隔离，定义允许/禁止访问的客户端 Pod 列表。</p>
@@ -2567,7 +2567,7 @@
 <p><strong>工作原理</strong>：Policy Controller 监听 Network Policy 定义，通过 Node 上的 Agent（结合 CNI 插件）设置网络访问规则。</p>
 </li>
 </ul>
-<h4 id="4-flannel">4. Flannel</h4>
+<h4 id="4-flannel">4. Flannel<a class="headerlink" href="#4-flannel" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>作用</strong>：K8s 底层网络实现方案，解决两个核心问题：</p>
@@ -2581,7 +2581,7 @@
 </ol>
 </li>
 </ul>
-<h4 id="5-calico">5. Calico</h4>
+<h4 id="5-calico">5. Calico<a class="headerlink" href="#5-calico" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>实现原理</strong>：基于 BGP 协议的纯三层网络方案，与 K8s、OpenStack 等集成良好：</p>
@@ -2598,8 +2598,8 @@
 </ol>
 </li>
 </ul>
-<h3 id="_13">（十一）其他核心操作</h3>
-<h4 id="1-worker">1. Worker 节点加入集群的过程</h4>
+<h3 id="_13">（十一）其他核心操作<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h4 id="1-worker">1. Worker 节点加入集群的过程<a class="headerlink" href="#1-worker" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
 <p>在新 Worker 节点安装 Docker、kubelet、kube-proxy。</p>
@@ -2614,7 +2614,7 @@
 <p>Master 接受注册后，将新节点纳入集群调度范围。</p>
 </li>
 </ol>
-<h4 id="2_9">2. 优雅的节点关机维护</h4>
+<h4 id="2_9">2. 优雅的节点关机维护<a class="headerlink" href="#2_9" title="Permanent link">&para;</a></h4>
 <ol>
 <li>
 <p>使用 <code>kubectl drain &lt;node-name&gt;</code> 驱逐节点上的所有 Pod（确保 Pod 调度到其他节点，服务不中断）。</p>
@@ -2626,7 +2626,7 @@
 <p>维护完成后，使用 <code>kubectl uncordon &lt;node-name&gt;</code> 解除节点封锁，允许 Pod 重新调度到该节点。</p>
 </li>
 </ol>
-<h4 id="3_4">3. 集群联邦</h4>
+<h4 id="3_4">3. 集群联邦<a class="headerlink" href="#3_4" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>概念</strong>：将多个 K8s 集群作为一个整体管理，支持跨数据中心/云平台的集群统一控制。</p>
@@ -2635,14 +2635,14 @@
 <p><strong>作用</strong>：实现多集群资源调度、服务发现、配置共享，提升系统可用性和扩展性。</p>
 </li>
 </ul>
-<h3 id="helm">（十二）Helm</h3>
-<h4 id="1_11">1. 概念</h4>
+<h3 id="helm">（十二）Helm<a class="headerlink" href="#helm" title="Permanent link">&para;</a></h3>
+<h4 id="1_11">1. 概念<a class="headerlink" href="#1_11" title="Permanent link">&para;</a></h4>
 <p>Helm 是 K8s 的软件包管理工具，类似 Ubuntu 的 apt、CentOS 的 yum，用于打包、分发、安装和管理 K8s 应用资源。</p>
-<h4 id="2_10">2. 核心术语</h4>
+<h4 id="2_10">2. 核心术语<a class="headerlink" href="#2_10" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Chart</strong>：Helm 包，包含应用的所有 K8s 资源配置（YAML 文件），通常压缩为 <code>name-version.tgz</code> 格式。</li>
 </ul>
-<h4 id="3_5">3. 优势</h4>
+<h4 id="3_5">3. 优势<a class="headerlink" href="#3_5" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>统一管理</strong>：集中管理应用的分散 K8s 资源（Pod、Service、Deployment 等），支持配置更新。</p>
@@ -2665,8 +2665,8 @@
 </ul>
 </li>
 </ul>
-<h3 id="k8s">（十三）K8s 优缺点</h3>
-<h4 id="1_12">1. 优势</h4>
+<h3 id="k8s">（十三）K8s 优缺点<a class="headerlink" href="#k8s" title="Permanent link">&para;</a></h3>
+<h4 id="1_12">1. 优势<a class="headerlink" href="#1_12" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>容器编排</strong>：自动化部署、调度、伸缩容器。</p>
@@ -2693,7 +2693,7 @@
 <p><strong>自动化</strong>：自动部署、重启、复制、伸缩。</p>
 </li>
 </ul>
-<h4 id="2_11">2. 缺点</h4>
+<h4 id="2_11">2. 缺点<a class="headerlink" href="#2_11" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>安装配置复杂</strong>：尤其是生产环境的高可用部署。</p>
@@ -2711,10 +2711,10 @@
 <p><strong>过度设计</strong>：简单应用无需 K8s，反而增加复杂度。</p>
 </li>
 </ul>
-<h2 id="openshift">六、OpenShift</h2>
-<h3 id="1_13">1. 概念</h3>
+<h2 id="openshift">六、OpenShift<a class="headerlink" href="#openshift" title="Permanent link">&para;</a></h2>
+<h3 id="1_13">1. 概念<a class="headerlink" href="#1_13" title="Permanent link">&para;</a></h3>
 <p>OpenShift 是基于 Red Hat Enterprise Linux、Docker 和 K8s 的容器应用平台，为企业级应用提供安全、可伸缩的多租户操作系统，集成应用运行时和库，最小化配置和管理开销。</p>
-<h3 id="2_12">2. 主要特性</h3>
+<h3 id="2_12">2. 主要特性<a class="headerlink" href="#2_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>自助服务平台</strong>：开发人员通过 Source-to-Image（S2I）从模板或代码仓库创建应用；管理员可定义资源配额。</p>
@@ -2759,7 +2759,7 @@
 <p><strong>DevOps 集成</strong>：支持微服务架构，易与 CI/CD 工具集成。</p>
 </li>
 </ul>
-<h3 id="3-projects">3. Projects</h3>
+<h3 id="3-projects">3. Projects<a class="headerlink" href="#3-projects" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>概念</strong>：对 K8s 资源进行分组，实现多租户隔离；可分配资源配额（限制 Pod、Volume、Service 数量）。</p>
@@ -2768,7 +2768,7 @@
 <p><strong>作用</strong>：允许用户组独立组织和管理资源，用户需授权才能访问项目；用户创建项目后自动获得访问权限。</p>
 </li>
 </ul>
-<h3 id="4_5">4. 高可用实现</h3>
+<h3 id="4_5">4. 高可用实现<a class="headerlink" href="#4_5" title="Permanent link">&para;</a></h3>
 <p>OpenShift 高可用分两方面：</p>
 <ul>
 <li>
@@ -2778,7 +2778,7 @@
 <p><strong>应用 HA（Pods）</strong>：K8s 自动调度 Pod 副本，Pod 失效时重建；节点失效时，调度 Pod 到其他节点；应用需自行维护状态（如 HTTP 会话复制、数据库复制）。</p>
 </li>
 </ul>
-<h3 id="5-sdn">5. SDN 网络实现</h3>
+<h3 id="5-sdn">5. SDN 网络实现<a class="headerlink" href="#5-sdn" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>默认 Docker 网络局限</strong>：仅主机内容器可通信，跨主机容器无法通信。</p>
@@ -2804,8 +2804,8 @@
 <p><strong>集群网络限制</strong>：Master 节点无法通过集群网络访问容器（除非 Master 同时为 Node 节点）。</p>
 </li>
 </ul>
-<h3 id="6_1">6. 角色与身份验证</h3>
-<h4 id="1_14">1. 角色</h4>
+<h3 id="6_1">6. 角色与身份验证<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h3>
+<h4 id="1_14">1. 角色<a class="headerlink" href="#1_14" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>集群级角色</strong>：控制整个集群资源的访问权限。</p>
@@ -2817,7 +2817,7 @@
 <p><strong>关联方式</strong>：用户/用户组可关联多个角色，获取对应权限。</p>
 </li>
 </ul>
-<h4 id="2_13">2. 支持的身份验证类型</h4>
+<h4 id="2_13">2. 支持的身份验证类型<a class="headerlink" href="#2_13" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>Basic Authentication (Remote)</strong>：用户输入用户名/密码，OpenShift 向远程标识提供者验证。</p>
@@ -2835,10 +2835,10 @@
 <p><strong>GitHub Authentication</strong>：基于 OAuth 集成 GitHub，用户使用 GitHub 凭证登录，可限制访问特定 GitHub 组织。</p>
 </li>
 </ul>
-<h2 id="_14">七、中间件</h2>
-<h3 id="1_15">1. 概念</h3>
+<h2 id="_14">七、中间件<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h3 id="1_15">1. 概念<a class="headerlink" href="#1_15" title="Permanent link">&para;</a></h3>
 <p>中间件是独立的系统软件或服务程序，位于客户机/服务器操作系统之间，连接两个独立应用程序或系统，实现不同技术间的资源共享和信息交换。</p>
-<h3 id="2_14">2. 核心作用</h3>
+<h3 id="2_14">2. 核心作用<a class="headerlink" href="#2_14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>解耦</strong>：降低应用程序间的耦合度，使应用专注于核心业务逻辑。</p>

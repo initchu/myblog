@@ -481,115 +481,115 @@
 
 
 
-<h1 id="_1">关键字</h1>
-<h2 id="_2">参考</h2>
+<h1 id="_1">关键字<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">参考<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><a href="https://www.yuque.com/joyo/interview/aimqk9zz52iregro">volatile</a></p>
-<h2 id="finalfinallyfinalize">final、finally、finalize 的区别?</h2>
+<h2 id="finalfinallyfinalize">final、finally、finalize 的区别?<a class="headerlink" href="#finalfinallyfinalize" title="Permanent link">&para;</a></h2>
 <ul>
 <li>final：修饰符（关键字）有三种用法：如果一个类被声明为final，意味着它不能再派生出新的子类，即不能被继承，因此它和abstract是反义词。将变量声明为final，可以保证它们在使用中不被改变，被声明为final 的变量必须在声明时给定初值，而在以后的引用中只能读取不可修改。被声明为final 的方法也同样只能使用，不能在子类中被重写。</li>
 <li>finally：通常放在try…catch的后面构造总是执行代码块，这就意味着程序无论正常执行还是发生异常，这里的代码只要JVM不关闭都能执行，可以将释放外部资源的代码写在finally块中。</li>
 <li>finalize：Object类中定义的方法，Java中允许使用finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在销毁对象时调用的，通过重写finalize() 方法可以整理系统资源或者执行其他清理工作。</li>
 </ul>
-<h2 id="java-final">Java 中的final关键字有哪些用法？</h2>
+<h2 id="java-final">Java 中的final关键字有哪些用法？<a class="headerlink" href="#java-final" title="Permanent link">&para;</a></h2>
 <p>(1)修饰类：表示该类不能被继承；</p>
 <p>(2)修饰方法：表示方法不能被重写；</p>
 <p>(3)修饰变量：表示变量只能一次赋值以后值不能被修改（常量）。</p>
-<h2 id="finalfinallyfinalize_1"><font style="color:#CF1322;">final，finally，finalize 的区别 </font></h2>
+<h2 id="finalfinallyfinalize_1"><font style="color:#CF1322;">final，finally，finalize 的区别 </font><a class="headerlink" href="#finalfinallyfinalize_1" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(51,51,51);">final：变量、类、方法的修饰符，被 final 修饰的类不能被继承，变量或方法被 final 修饰则不能被修改和重写。 </font></p>
 <p><font style="color:rgb(51,51,51);">finally：异常处理时提供 finally 块来执行清除操作，不管有没有异常抛出，此处代码都会被执行。如果 try 语句块中包含 return 语句，finally 语句块是在 return 之后运行； </font></p>
 <p><font style="color:rgb(51,51,51);">finalize：Object 类中定义的方法，若子类覆盖了 finalize()方法，在在垃圾收集器将对象从内存中清除前，会执行该方法，确定对象是否会被回收。 </font></p>
-<h2 id="transient">transient关键字的作用？</h2>
+<h2 id="transient">transient关键字的作用？<a class="headerlink" href="#transient" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(51,51,51);">Java</font><font style="color:rgb(51,51,51);">语言的关键字，变量修饰符，如果用</font><font style="color:rgb(51,51,51);">transient</font><font style="color:rgb(51,51,51);">声明一个实例变量，当对象存储时，它的值不需要维</font><font style="color:rgb(51,51,51);">持。</font></p>
 <p><font style="color:rgb(51,51,51);">也就是说被transient修饰的成员变量，在序列化的时候其值会被忽略，在被反序列化后， transient 变量的值被设为初始值， 如 int 型的是 0，对象型的是 null。</font></p>
-<h2 id="final-finally-finalize">final, finally, finalize 的区别</h2>
+<h2 id="final-finally-finalize">final, finally, finalize 的区别<a class="headerlink" href="#final-finally-finalize" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(51,51,51);">final </font><font style="color:rgb(51,51,51);">用于修饰属性、方法和类</font><font style="color:rgb(51,51,51);">, </font><font style="color:rgb(51,51,51);">分别表示属性不能被重新赋值，方法不可被覆盖，类不可被继承。</font></p>
 <p><font style="color:rgb(51,51,51);">finally 是异常处理语句结构的一部分，一般以</font><font style="color:rgb(245,0,88);">try-catch-finally </font><font style="color:rgb(51,51,51);">出现，</font><font style="color:rgb(245,0,88);">finally </font><font style="color:rgb(51,51,51);">代码块表示总是被执行。</font></p>
 <p><font style="color:rgb(51,51,51);">finalize  是Object类的一个方法，该方法一般由垃圾回收器来调用，当我们调用</font><font style="color:rgb(245,0,88);">System.gc() </font><font style="color:rgb(51,51,51);">方法的时候，由垃圾回收器调用</font><font style="color:rgb(245,0,88);">finalize() </font><font style="color:rgb(51,51,51);">方法，回收垃圾，JVM并不保证此方法总被调用。</font></p>
-<h2 id="final">final关键字的作用？</h2>
+<h2 id="final">final关键字的作用？<a class="headerlink" href="#final" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);"> </font><font style="color:rgb(51,51,51);">修饰的类不能被继承</font><font style="color:rgb(51,51,51);">。</font></p>
 <p><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);"> </font><font style="color:rgb(51,51,51);">修饰的方法不能被重写</font><font style="color:rgb(51,51,51);">。</font></p>
 <p><font style="color:rgb(51,51,51);">final  修饰的变量叫常量，常量必须初始化，初始化之后值就不能被修改。</font></p>
-<h2 id="_3">常见的关键字有哪些？</h2>
+<h2 id="_3">常见的关键字有哪些？<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><font style="color:rgb(51,51,51);">static</font></strong></li>
 </ul>
 <p><font style="color:rgb(51,51,51);">static</font><font style="color:rgb(51,51,51);">可以用来修饰类的成员方法、类的成员变量</font><font style="color:rgb(51,51,51);">。</font></p>
 <p><font style="color:rgb(51,51,51);">static</font><font style="color:rgb(51,51,51);">变量也称作</font><strong><font style="color:rgb(51,51,51);">静态变量</font></strong><font style="color:rgb(51,51,51);">，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中</font><font style="color:rgb(51,51,51);">只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。</font></p>
 <p><font style="color:rgb(51,51,51);">以下例子，age为非静态变量，则p1打印结果是：</font><font style="color:rgb(245,0,88);">Name:zhangsan, Age:10 </font><font style="color:rgb(51,51,51);">；若age使用static修饰，则p1打印结果是：</font><font style="color:rgb(245,0,88);">Name:zhangsan, Age:12 </font><font style="color:rgb(51,51,51);">，因为static变量在内存只有一个副本。</font></p>
-<pre><code class="language-java">public class Person { 
-    String name;
-    int age;
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
-    public String toString() {
-        return &quot;Name:&quot; + name + &quot;, Age:&quot; + age;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Name:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, Age:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public static void main(String[] args) {
-        Person p1 = new Person();
-        p1.name = &quot;zhangsan&quot;; p1.age = 10;
-        Person p2 = new Person(); p2.name = &quot;lisi&quot;;
-        p2.age = 12; 
-        System.out.println(p1);
-        System.out.println(p2);
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span>
+<span class="w">        </span><span class="n">p1</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;zhangsan&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">p1</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Person</span><span class="p">();</span><span class="w"> </span><span class="n">p2</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;lisi&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">p2</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    /**Output
-     *Name:zhangsan, Age:10
-     *Name:lisi, Age:12
-     *///~
-}
-</code></pre>
+<span class="w">    </span><span class="cm">/**Output</span>
+<span class="cm">     *Name:zhangsan, Age:10</span>
+<span class="cm">     *Name:lisi, Age:12</span>
+<span class="cm">     */</span><span class="c1">//~</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(51,51,51);">static方法一般称作</font><strong><font style="color:rgb(51,51,51);">静态方法</font></strong><font style="color:rgb(51,51,51);">。静态方法不依赖于任何对象就可以进行访问，通过类名即可调用静态方法。</font></p>
-<pre><code class="language-java">public class Utils {
-    public static void print(String s) { 
-        System.out.println(&quot;hello world: &quot; + s);
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Utils</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;hello world: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public static void main(String[] args) {
-        Utils.print(&quot;程序员大彬&quot;);
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Utils</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;程序员大彬&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong><font style="color:rgb(51,51,51);">静态代码块</font></strong><font style="color:rgb(51,51,51);">只会在类加载的时候执行一次。以下例子，startDate和endDate在类加载的时候进行赋值。</font></p>
-<pre><code class="language-java">class Person {
-    private Date birthDate;
-    private static Date startDate, endDate; 
-    static{
-        startDate = Date.valueOf(&quot;2008&quot;); 
-        endDate = Date.valueOf(&quot;2021&quot;);
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="n">birthDate</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Date</span><span class="w"> </span><span class="n">startDate</span><span class="p">,</span><span class="w"> </span><span class="n">endDate</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">static</span><span class="p">{</span>
+<span class="w">        </span><span class="n">startDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;2008&quot;</span><span class="p">);</span><span class="w"> </span>
+<span class="w">        </span><span class="n">endDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Date</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="s">&quot;2021&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    public Person(Date birthDate) { 
-        this.birthDate = birthDate;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">Date</span><span class="w"> </span><span class="n">birthDate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">birthDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">birthDate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong><font style="color:rgb(51,51,51);">静态内部类</font></strong></p>
 <p><strong><font style="color:rgb(51,51,51);">在静态方法里</font></strong><font style="color:rgb(51,51,51);">，使用⾮静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。⽽静态内部类不需要。</font></p>
-<pre><code class="language-java">public class OuterClass { 
-    class InnerClass {
-    }
-    static class StaticInnerClass {
-    }
-    public static void main(String[] args) {
-        //  在静态方法里，不能直接使用OuterClass.this去创建InnerClass的实例
-        //  需要先创建OuterClass的实例o，然后通过o创建InnerClass的实例
-        // InnerClass innerClass = new InnerClass(); 
-        OuterClass outerClass = new OuterClass(); 
-        InnerClass innerClass = outerClass.new InnerClass();
-        StaticInnerClass staticInnerClass = new StaticInnerClass();
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OuterClass</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">InnerClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StaticInnerClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//  在静态方法里，不能直接使用OuterClass.this去创建InnerClass的实例</span>
+<span class="w">        </span><span class="c1">//  需要先创建OuterClass的实例o，然后通过o创建InnerClass的实例</span>
+<span class="w">        </span><span class="c1">// InnerClass innerClass = new InnerClass(); </span>
+<span class="w">        </span><span class="n">OuterClass</span><span class="w"> </span><span class="n">outerClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OuterClass</span><span class="p">();</span><span class="w"> </span>
+<span class="w">        </span><span class="n">InnerClass</span><span class="w"> </span><span class="n">innerClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outerClass</span><span class="p">.</span><span class="na">new</span><span class="w"> </span><span class="nf">InnerClass</span><span class="p">();</span>
+<span class="w">        </span><span class="n">StaticInnerClass</span><span class="w"> </span><span class="n">staticInnerClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StaticInnerClass</span><span class="p">();</span>
 
 
-        outerClass.test();
-    }
+<span class="w">        </span><span class="n">outerClass</span><span class="p">.</span><span class="na">test</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
 
-    public void nonStaticMethod() {
-        InnerClass innerClass = new InnerClass(); 
-        System.out.println(&quot;nonStaticMethod...&quot;);
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">nonStaticMethod</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">InnerClass</span><span class="w"> </span><span class="n">innerClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">InnerClass</span><span class="p">();</span><span class="w"> </span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;nonStaticMethod...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong><font style="color:rgb(51,51,51);">final</font></strong></li>
 </ul>
@@ -601,76 +601,76 @@
 </ul>
 <p><font style="color:rgb(245,0,88);">this.</font><font style="color:rgb(245,0,88);">属性名称</font><font style="color:rgb(245,0,88);"> </font><font style="color:rgb(51,51,51);">指访问类中的成员变量，可以用来区分成员变量和局部变量。如下代码所示</font><font style="color:rgb(51,51,51);">，</font></p>
 <p><font style="color:rgb(245,0,88);">this.name </font><font style="color:rgb(51,51,51);">访问类Person当前实例的变量。</font></p>
-<pre><code class="language-java">/**
- * @description:
- *@author: 程序员大彬
- *@time: 2021-08-17 00:29
- */
-public class Person { 
-    String name;
-    int age;
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm"> * @description:</span>
+<span class="cm"> *@author: 程序员大彬</span>
+<span class="cm"> *@time: 2021-08-17 00:29</span>
+<span class="cm"> */</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
-    public Person(String name, int age) { 
-        this.name = name;
-        this.age = age;
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(245,0,88);">this.方法名称 </font><font style="color:rgb(51,51,51);">用来访问本类的方法。以下代码中，</font><font style="color:rgb(245,0,88);">this.born() </font><font style="color:rgb(51,51,51);">调用类 Person 的当前实例的方法。</font></p>
-<pre><code class="language-java">/**
-*@description:
-*@author: 程序员大彬
-*@time: 2021-08-17 00:29
-*/
-public class Person {
-    String name;
-    int age;
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">*@description:</span>
+<span class="cm">*@author: 程序员大彬</span>
+<span class="cm">*@time: 2021-08-17 00:29</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
 
 
-    public Person(String name, int age) { 
-        this.born();
-        this.name = name; 
-        this.age = age;
-    }
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">born</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
 
-    void born() {
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">born</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><strong><font style="color:rgb(51,51,51);">super</font></strong></li>
 </ul>
 <p><font style="color:rgb(51,51,51);">super  关键字用于在子类中访问父类的变量和方法。</font></p>
-<pre><code class="language-java">class A {
-    protected String name = &quot;大彬&quot;;
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;大彬&quot;</span><span class="p">;</span>
 
 
-    public void getName() {
-        System.out.println(&quot;父类:&quot; + name);
-    }
-}
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;父类:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
 
-public class B extends A {
-    @Override
-    public void getName() { 
-        System.out.println(super.name); super.getName();
-    }
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">B</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="kd">super</span><span class="p">.</span><span class="na">name</span><span class="p">);</span><span class="w"> </span><span class="kd">super</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
 
-    public static void main(String[] args) {
-        B b = new B();
-        b.getName();
-    }
-    /**
-     *大彬
-     *父类:大彬
-     */
-}
-</code></pre>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">B</span><span class="p">();</span>
+<span class="w">        </span><span class="n">b</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     *大彬</span>
+<span class="cm">     *父类:大彬</span>
+<span class="cm">     */</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><font style="color:rgb(51,51,51);">在子类B中，我们重写了父类的</font><font style="color:rgb(245,0,88);">getName() </font><font style="color:rgb(51,51,51);">方法，如果在重写的</font><font style="color:rgb(245,0,88);">getName() </font><font style="color:rgb(51,51,51);">方法中我们要调用父类的相同方法，必须要通过super关键字显式指出。</font></p>
-<h2 id="java">Java 关键字</h2>
+<h2 id="java">Java 关键字<a class="headerlink" href="#java" title="Permanent link">&para;</a></h2>
 <p>Java的关键字有哪些？</p>
 <p>1、48个关键字：abstract、assert、boolean、break、byte、case、catch、char、class、continue、default、do、double、else、enum、extends、final、finally、float、for、if、implements、import、int、interface、instanceof、long、native、new、package、private、protected、public、return、short、static、strictfp、super、switch、synchronized、this、throw、throws、transient、try、void、volatile、while。</p>
 <p>2、2个保留字（现在没用以后可能用到作为关键字）：goto、const。</p>
@@ -679,23 +679,23 @@ public class B extends A {
 <p><a href="https://blog.csdn.net/weixin_46822367/article/details/120953556">Java关键字（48个关键字、2个保留字、3个特殊直接量）_爱打羽球的码猿的博客-CSDN博客_java关键字</a>
 </p>
 </blockquote>
-<h2 id="static">static 关键字的使用</h2>
+<h2 id="static">static 关键字的使用<a class="headerlink" href="#static" title="Permanent link">&para;</a></h2>
 <p>1）类成员，直接使用类名.成员 调用。</p>
 <p>2）静态方法只能访问静态成员。</p>
 <p>3）静态方法不能使用this、super 关键字。</p>
 <p>4）静态方法不能被非静态方法重写或重载。</p>
-<h2 id="final_1">final 关键字</h2>
+<h2 id="final_1">final 关键字<a class="headerlink" href="#final_1" title="Permanent link">&para;</a></h2>
 <p>1） 被final 修饰的变量为常量不能改变。</p>
 <p>2） 被final 修饰的方法不可以重写。</p>
 <p>3） 被final 修饰的类不能被继承。 </p>
-<h2 id="abstract">abstract 关键字</h2>
+<h2 id="abstract">abstract 关键字<a class="headerlink" href="#abstract" title="Permanent link">&para;</a></h2>
 <p>1） 被abstract 修饰的类不能实例化。</p>
 <p>2） 被abstract 修饰的方法只能在子类中实现。</p>
-<h2 id="native">native 关键字</h2>
+<h2 id="native">native 关键字<a class="headerlink" href="#native" title="Permanent link">&para;</a></h2>
 <p>非 Java 语言的编写，例如 JNI 技术。</p>
-<h2 id="synchronized">synchronized 关键字</h2>
+<h2 id="synchronized">synchronized 关键字<a class="headerlink" href="#synchronized" title="Permanent link">&para;</a></h2>
 <p>多线程的同步访问控制。</p>
-<h2 id="final_2"><font style="color:rgb(49,49,49);">final的用途</font></h2>
+<h2 id="final_2"><font style="color:rgb(49,49,49);">final的用途</font><a class="headerlink" href="#final_2" title="Permanent link">&para;</a></h2>
 <ol>
 <li>final 修饰类时，这个类不能被继承了</li>
 <li>final 修饰方法，此方法就不能被重写。 eg：object类中的getClas 方法</li>
@@ -710,7 +710,7 @@ public class B extends A {
 <p><a href="https://blog.csdn.net/weixin_45933454/article/details/112985755">final的作用_阿离83的博客-CSDN博客_final的作用</a>
 </p>
 </blockquote>
-<h2 id="staticfinal"><font style="color:rgb(36,41,46);">static和final的区别和用途</font></h2>
+<h2 id="staticfinal"><font style="color:rgb(36,41,46);">static和final的区别和用途</font><a class="headerlink" href="#staticfinal" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Static<ul>
 <li>修饰变量：静态变量随着类加载时被完成初始化，内存中只有一个，且JVM也只会为它分配一次内存，所有类共享静态变量。</li>
@@ -731,22 +731,22 @@ public class B extends A {
 </ul>
 </li>
 </ul>
-<h2 id="final_3"><font style="color:rgb(36,41,46);">关于 final 关键字的一些总结</font></h2>
+<h2 id="final_3"><font style="color:rgb(36,41,46);">关于 final 关键字的一些总结</font><a class="headerlink" href="#final_3" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(36,41,46);">final 关键字主要用在三个地方：变量、方法、类。</font></p>
 <p><font style="color:rgb(36,41,46);">1. 对于一个final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。</font></p>
 <p><font style="color:rgb(36,41,46);">2.</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">当用</font><font style="color:rgb(36,41,46);">final</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">修饰一个类时，表明这个类不能被继承。</font><font style="color:rgb(36,41,46);">final</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">类中的所有成员</font><font style="color:rgb(36,41,46);">方法都会被隐式地指定为</font><font style="color:rgb(36,41,46);">final </font><font style="color:rgb(36,41,46);">方法。</font></p>
 <p><font style="color:rgb(36,41,46);">3.</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">使用</font><font style="color:rgb(36,41,46);">final</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">方法的原因有两个。</font></p>
 <p><font style="color:rgb(36,41,46);">第一个原因是把方法锁定，以防任何继承类修改它的含义；</font></p>
 <p><font style="color:rgb(36,41,46);">第二个原因是效率。在早期的Java 实现版本中，会将final 方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java 版本已经不需要使用final 方法进行这些优化了）。类中所有的private 方法都隐式地指定为final。</font></p>
-<h2 id="_4"><font style="color:rgb(36,41,46);">创建一个对象用什么运算符?对象实体与对象引用有何不同?</font></h2>
+<h2 id="_4"><font style="color:rgb(36,41,46);">创建一个对象用什么运算符?对象实体与对象引用有何不同?</font><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(36,41,46);">new 运算符，new 创建对象实例（对象实例在堆内存中），对象引用指向对象实例（对象引用存放在栈内存中）。一个对象引用可以指向0 个或1 个对象（一根绳子可以不系气球，也可以系一个气球）;一个对象可以有n 个引用指向它（可以用n 条绳子系住一个气球）。</font></p>
-<h2 id="finalfinallyfinalize_2">final、finally、finalize的区别</h2>
+<h2 id="finalfinallyfinalize_2">final、finally、finalize的区别<a class="headerlink" href="#finalfinallyfinalize_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>final可以修饰类、变量、方法，修饰类表示该类不能被继承、修饰方法表示该方法不能被重写、修饰变量表示该变量是一个常量不能被重新赋值。</li>
 <li>finally一般作用在try-catch代码块中，在处理异常的时候，通常我们将一定要执行的代码方法finally代码块中，表示不管是否出现异常，该代码块都会执行，一般用来存放一些关闭资源的代码。</li>
 <li>finalize是一个方法，属于Object类的一个方法，而Object类是所有类的父类，该方法一般由垃圾回收器来调用，当我们调用System.gc() 方法的时候，由垃圾回收器调用finalize()，回收垃圾，一个对象是否可回收的最后判断。</li>
 </ul>
-<h3 id="final-finally-finalize_1"><font style="color:#E8323C;">final、 finally、 finalize 的区别</font></h3>
+<h3 id="final-finally-finalize_1"><font style="color:#E8323C;">final、 finally、 finalize 的区别</font><a class="headerlink" href="#final-finally-finalize_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>final</li>
 </ol>
@@ -768,9 +768,9 @@ public class B extends A {
 <p>特点：</p>
 <p>（1）对象可以在被GC时自我拯救</p>
 <p>（2）这种自救的机会只有一次，因为一个对象的finalize()方法最多只会被系统自动调用一次</p>
-<h3 id="java-goto"><font style="color:#CF1322;">Java 有没有 goto ?</font></h3>
+<h3 id="java-goto"><font style="color:#CF1322;">Java 有没有 goto ?</font><a class="headerlink" href="#java-goto" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(79,79,79);">goto 是Java中的保留字，在目前版本的Java中没有使用。（根据James Gosling（Java之父）编写的《The Java Programming Language》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语言的程序员都知道，在系统类库中使用过的有特殊意义的单词或单词的组合都被视为保留字）</font></p>
-<h3 id="publicprivateprotected">访问修饰符public，private，protected，以及不写（默认）时的区别？</h3>
+<h3 id="publicprivateprotected">访问修饰符public，private，protected，以及不写（默认）时的区别？<a class="headerlink" href="#publicprivateprotected" title="Permanent link">&para;</a></h3>
 <p>区别如下：</p>
 <table>
 <thead>
@@ -813,7 +813,7 @@ public class B extends A {
 </tr>
 </tbody>
 </table>
-<h3 id="_5">访问修饰符限制</h3>
+<h3 id="_5">访问修饰符限制<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -855,7 +855,7 @@ public class B extends A {
 </tr>
 </tbody>
 </table>
-<h3 id="oopublicprivateprotecteddefault">请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用</h3>
+<h3 id="oopublicprivateprotecteddefault">请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用<a class="headerlink" href="#oopublicprivateprotecteddefault" title="Permanent link">&para;</a></h3>
 <blockquote>
 <p><a href="https://www.jb51.net/article/114223.htm">浅谈java中OO的概念和设计原则(必看)_java_脚本之家</a></p>
 <p><a href="http://java.atguigu.com/news/2936.html">访问修饰符 public、private、protected、default 在应用设计中的作用-尚硅谷java培训</a>

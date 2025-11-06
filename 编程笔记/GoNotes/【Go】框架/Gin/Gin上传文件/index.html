@@ -251,63 +251,63 @@
 
 
 
-<h1 id="gin">Gin 上传文件</h1>
+<h1 id="gin">Gin 上传文件<a class="headerlink" href="#gin" title="Permanent link">&para;</a></h1>
 <ol>
 <li>加载html文件</li>
 <li>浏览器发送POST请求给客户端，请求读取文件 ，<code>f,err := c.FormFile()</code></li>
 <li>错误处理，如果正确的话。读取的文件保存至本地 <code>c.SaveUploadedFile(f,dst)</code></li>
 </ol>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.Default()
-    r.LoadHTMLFiles(&quot;./index.html&quot;)
-    r.GET(&quot;/index&quot;, func(c *gin.Context) {
-        c.HTML(http.StatusOK,&quot;index.html&quot;,nil)
-    })
-    r.POST(&quot;/upload&quot;, func(c *gin.Context) {
-        // 从请求中读取文件
-        f,err := c.FormFile(&quot;f1&quot; ) // 从请求中获取携带的参数一样
-        if err != nil{
-            c.JSON(http.StatusBadRequest,gin.H{
-                &quot;message error&quot;:err.Error(),
-            })
-        }else{
-            // 将读取到的文件保存在本地（服务器本地）
-            dst := fmt.Sprintf(&quot;./%s&quot;,f.Filename)
-            c.SaveUploadedFile(f,dst)
-            c.JSON(http.StatusOK,gin.H{
-                &quot;status&quot;:&quot;OK&quot;,
-            })
-        }
-    })
-    r.Run()
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">LoadHTMLFiles</span><span class="p">(</span><span class="s">&quot;./index.html&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">HTML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="s">&quot;index.html&quot;</span><span class="p">,</span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/upload&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 从请求中读取文件</span>
+<span class="w">        </span><span class="nx">f</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">FormFile</span><span class="p">(</span><span class="s">&quot;f1&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1">// 从请求中获取携带的参数一样</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;message error&quot;</span><span class="p">:</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 将读取到的文件保存在本地（服务器本地）</span>
+<span class="w">            </span><span class="nx">dst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;./%s&quot;</span><span class="p">,</span><span class="nx">f</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">SaveUploadedFile</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span><span class="nx">dst</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="s">&quot;OK&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>index.html 文件代码</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
 
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;form action= &quot;/upload&quot; method = &quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span> <span class="s">&quot;/upload&quot;</span> <span class="na">method </span><span class="o">=</span> <span class="s">&quot;post&quot;</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&quot;multipart/form-data&quot;</span><span class="p">&gt;</span>
 
-      &lt;input type=&quot;file&quot; name=&quot;f1&quot;&gt;
-      &lt;input type = &quot;submit&quot; value =&quot;上传&quot;&gt;
-    &lt;/form&gt;
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;file&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;f1&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type </span><span class="o">=</span> <span class="s">&quot;submit&quot;</span> <span class="na">value </span><span class="o">=</span><span class="s">&quot;上传&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
 <p>上述实例代码种<code>dst := fmt.Sprintf("./%s",f.Filename)</code> 为保存的相对路径地址。传给<code>c.SaveUploadedFile(f,dst)</code>以保存到本地。</p>
 <p>在浏览器里面选择上传的文件，如《模拟笔试1.png》，点击上传，结果显示：</p>
 <p><img alt="保存到了相对路径下" src="../img/30IE-k6VmVQBzJ2b/1651289487660-c49c8fe5-2ce0-4432-b178-bdd8b82e9013-188143.png" /></p>

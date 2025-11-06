@@ -251,37 +251,37 @@
 
 
 
-<h1 id="gin-json">Gin 的 JSON</h1>
+<h1 id="gin-json">Gin 的 JSON<a class="headerlink" href="#gin-json" title="Permanent link">&para;</a></h1>
 <p>Gin 的 Json 渲染，有两种方法。</p>
 <ol>
 <li>自己拼接 Json，使用 <code>gin.H{}</code>，该类型是 map 。</li>
 <li>传一个结构体进去</li>
 </ol>
-<pre><code class="language-go">func main() {
-    r := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    // gin.H is a shortcut for map[string]interface{}
-    r.GET(&quot;/someJSON&quot;, func(c *gin.Context) {
-        c.JSON(http.StatusOK, gin.H{&quot;message&quot;: &quot;hey&quot;, &quot;status&quot;: http.StatusOK})
-    })
+<span class="w">    </span><span class="c1">// gin.H is a shortcut for map[string]interface{}</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/someJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.GET(&quot;/moreJSON&quot;, func(c *gin.Context) {
-        // You also can use a struct
-        var msg struct {
-            Name    string `json:&quot;user&quot;`
-            Message string
-            Number  int
-        }
-        msg.Name = &quot;Lena&quot;
-        msg.Message = &quot;hey&quot;
-        msg.Number = 123
-        // Note that msg.Name becomes &quot;user&quot; in the JSON
-        // Will output  :   {&quot;user&quot;: &quot;Lena&quot;, &quot;Message&quot;: &quot;hey&quot;, &quot;Number&quot;: 123}
-        c.JSON(http.StatusOK, msg)
-    })
-    r.run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/moreJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// You also can use a struct</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">msg</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;user&quot;`</span>
+<span class="w">            </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">            </span><span class="nx">Number</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">msg</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Lena&quot;</span>
+<span class="w">        </span><span class="nx">msg</span><span class="p">.</span><span class="nx">Message</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;hey&quot;</span>
+<span class="w">        </span><span class="nx">msg</span><span class="p">.</span><span class="nx">Number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">123</span>
+<span class="w">        </span><span class="c1">// Note that msg.Name becomes &quot;user&quot; in the JSON</span>
+<span class="w">        </span><span class="c1">// Will output  :   {&quot;user&quot;: &quot;Lena&quot;, &quot;Message&quot;: &quot;hey&quot;, &quot;Number&quot;: 123}</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">msg</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>:::danger
 <strong>注: 结构体字段需要大写，不大写是访问不到的。</strong></p>
 <p>:::</p>

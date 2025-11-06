@@ -292,11 +292,11 @@
 
 
 
-<h1 id="_1">深浅拷贝</h1>
+<h1 id="_1">深浅拷贝<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><font style="color:rgb(0, 0, 0);">问法：go 深拷贝发生在什么情况下？/ 什么是深拷贝，浅拷贝？/ 切片的深拷贝是怎么做的？</font></p>
 <p><font style="color:rgb(0, 0, 0);">题目来源：映客，腾讯，北京合链</font></p>
-<h2 id="_2"><font style="color:rgb(0, 0, 0);">题目解析</font></h2>
-<h3 id="_3">深拷贝，浅拷贝概念</h3>
+<h2 id="_2"><font style="color:rgb(0, 0, 0);">题目解析</font><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">深拷贝，浅拷贝概念<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
 <li>深拷贝（Deep Copy）：</li>
 </ol>
@@ -311,29 +311,29 @@
 <li>引用类型的数据，默认全部都是浅拷贝：Slice，Map</li>
 </ul>
 <p>对于引用类型，想实现深拷贝，不能直接 := ，而是要先开辟地址空间（new） ，再进行赋值。</p>
-<h3 id="_4">怎么进行（切片的）深拷贝？</h3>
+<h3 id="_4">怎么进行（切片的）深拷贝？<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><font style="color:rgb(77, 77, 77);">可以使用 copy() 函数来进行深拷贝，copy 不会进行扩容，当要复制的 slice 比原 slice 要大的时候，只会移除多余的。</font></p>
-<pre><code class="language-go">func main() {
-    slice1 := []int{1, 2, 3, 4, 5}
-    slice2 := []int{6, 7, 8}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">slice1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">slice2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">}</span>
 
-    copy(slice2, slice1) // 复制slice1的前3个元素到slice2中
-    fmt.Println(slice1, slice2)
-    copy(slice1, slice2) // 复制slice2的3个元素到slice1的前3个位置
-    fmt.Println(slice1, slice2)
-}
-</code></pre>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">slice2</span><span class="p">,</span><span class="w"> </span><span class="nx">slice1</span><span class="p">)</span><span class="w"> </span><span class="c1">// 复制slice1的前3个元素到slice2中</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice1</span><span class="p">,</span><span class="w"> </span><span class="nx">slice2</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">slice1</span><span class="p">,</span><span class="w"> </span><span class="nx">slice2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 复制slice2的3个元素到slice1的前3个位置</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice1</span><span class="p">,</span><span class="w"> </span><span class="nx">slice2</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>使用 append() 函数来进行深拷贝，append 会进行扩容（这里涉及到的就是 <a href="https://www.yuque.com/xiaoshan_wgo/gonotes/gguirt">Slice 的扩容机制</a> ）。</p>
-<pre><code class="language-go">func main() {
-    a := []int{1, 2, 3}
-    b := make([]int, 0)
-    b = append(b, a[:]...)
-    fmt.Println(a, b)
-    a[1] = 1000
-    fmt.Println(a, b)
-    fmt.Printf(&quot;%p,%p&quot;, a, b)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">[:]</span><span class="o">...</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1000</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%p,%p&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p><font style="color:rgb(36, 41, 46);">Go 中切片扩容的策略：</font></p>
 <ul>

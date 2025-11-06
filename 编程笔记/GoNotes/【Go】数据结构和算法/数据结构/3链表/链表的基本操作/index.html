@@ -251,95 +251,94 @@
 
 
 
-<h1 id="_1">链表的基本操作</h1>
-<pre><code class="language-go">package MylinkedLists
+<h1 id="_1">链表的基本操作<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">MylinkedLists</span>
 
-//链表结点
-type ListNode struct {
-    Val  int
-    Next *ListNode
-}
+<span class="c1">//链表结点</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ListNode</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Val</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Next</span><span class="w"> </span><span class="o">*</span><span class="nx">ListNode</span>
+<span class="p">}</span>
 
-//头结点
-type MyLinkedList struct {
-    size int
-    head *ListNode
-}
+<span class="c1">//头结点</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MyLinkedList</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">size</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">head</span><span class="w"> </span><span class="o">*</span><span class="nx">ListNode</span>
+<span class="p">}</span>
 
-/** Initialize your data structure here. */
-func Constructor() MyLinkedList {
-    return MyLinkedList{
-        0,
-        &amp;ListNode{},
-    }
-}
+<span class="cm">/** Initialize your data structure here. */</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Constructor</span><span class="p">()</span><span class="w"> </span><span class="nx">MyLinkedList</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">MyLinkedList</span><span class="p">{</span>
+<span class="w">        </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
-func (this *MyLinkedList) Get(index int) int {
-    if index &lt; 0 || index &gt;= this.size {
-        return -1
-    }
+<span class="cm">/** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">MyLinkedList</span><span class="p">)</span><span class="w"> </span><span class="nx">Get</span><span class="p">(</span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">size</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="p">}</span>
 
-    prev := this.head
-    for i := 0; i &lt; index; i++ {
-        prev = prev.Next
-    }
-    return prev.Next.Val
-}
+<span class="w">    </span><span class="nx">prev</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">head</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">index</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">prev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span>
+<span class="p">}</span>
 
-/** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
-func (this *MyLinkedList) AddAtHead(val int) {
-    this.AddAtIndex(0, val)
-}
+<span class="cm">/** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">MyLinkedList</span><span class="p">)</span><span class="w"> </span><span class="nx">AddAtHead</span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">AddAtIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="p">}</span>
 
-/** Append a node of value val to the last element of the linked list. */
-func (this *MyLinkedList) AddAtTail(val int) {
-    this.AddAtIndex(this.size, val)
-}
+<span class="cm">/** Append a node of value val to the last element of the linked list. */</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">MyLinkedList</span><span class="p">)</span><span class="w"> </span><span class="nx">AddAtTail</span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">AddAtIndex</span><span class="p">(</span><span class="nx">this</span><span class="p">.</span><span class="nx">size</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="p">}</span>
 
-/** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
-func (this *MyLinkedList) AddAtIndex(index int, val int) {
-    if index &lt; 0 || index &gt; this.size {
-        return
-    }
+<span class="cm">/** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">MyLinkedList</span><span class="p">)</span><span class="w"> </span><span class="nx">AddAtIndex</span><span class="p">(</span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">size</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    prev := this.head
-    for i := 0; i &lt; index; i++ {
-        prev = prev.Next
-    }
-    node := &amp;ListNode{Val: val}
-    node.Next = prev.Next
-    prev.Next = node
+<span class="w">    </span><span class="nx">prev</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">head</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">index</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">prev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">node</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="nx">Val</span><span class="p">:</span><span class="w"> </span><span class="nx">val</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">node</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">    </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">node</span>
 
-    this.size++
-}
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
+<span class="p">}</span>
 
-/** Delete the index-th node in the linked list, if the index is valid. */
-func (this *MyLinkedList) DeleteAtIndex(index int) {
-    if index &lt; 0 || index &gt;= this.size {
-        return
-    }
+<span class="cm">/** Delete the index-th node in the linked list, if the index is valid. */</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">this</span><span class="w"> </span><span class="o">*</span><span class="nx">MyLinkedList</span><span class="p">)</span><span class="w"> </span><span class="nx">DeleteAtIndex</span><span class="p">(</span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">size</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    prev := this.head
-    for i := 0; i &lt; index; i++ {
-        prev = prev.Next
-    }
-    prev.Next = prev.Next.Next
+<span class="w">    </span><span class="nx">prev</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">this</span><span class="p">.</span><span class="nx">head</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">index</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">prev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prev</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
 
-    this.size--
-}
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
+<span class="p">}</span>
 
-/**
- * Your MyLinkedList object will be instantiated and called as such:
- * obj := Constructor();
- * param_1 := obj.Get(index);
- * obj.AddAtHead(val);
- * obj.AddAtTail(val);
- * obj.AddAtIndex(index,val);
- * obj.DeleteAtIndex(index);
- */
-
-</code></pre>
+<span class="cm">/**</span>
+<span class="cm"> * Your MyLinkedList object will be instantiated and called as such:</span>
+<span class="cm"> * obj := Constructor();</span>
+<span class="cm"> * param_1 := obj.Get(index);</span>
+<span class="cm"> * obj.AddAtHead(val);</span>
+<span class="cm"> * obj.AddAtTail(val);</span>
+<span class="cm"> * obj.AddAtIndex(index,val);</span>
+<span class="cm"> * obj.DeleteAtIndex(index);</span>
+<span class="cm"> */</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-01-15 17:47:33<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/gs6l22">https://www.yuque.com/xiaoshan_wgo/codingnotes/gs6l22</a></p>

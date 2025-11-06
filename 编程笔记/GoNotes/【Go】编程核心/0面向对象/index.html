@@ -295,107 +295,107 @@
 
 
 
-<h1 id="0">0 面向对象</h1>
-<h2 id="_1">抽象思想</h2>
+<h1 id="0">0 面向对象<a class="headerlink" href="#0" title="Permanent link">&para;</a></h1>
+<h2 id="_1">抽象思想<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><strong>抽象</strong>始终贯穿在编程里面，是一种编程思想，即把一类事务的共有属性（字段）和行为（方法）提取出来，形成一个物理模型（模板），这种研究问题的方法被称为<strong>抽象（</strong><strong><font style="color:rgb(51, 51, 51);">Abstraction）</font></strong>。<font style="color:rgb(51, 51, 51);">一个类就是这样一种</font><a href="https://baike.baidu.com/item/%E6%8A%BD%E8%B1%A1/9021815#viewPageContent">抽象</a><font style="color:rgb(51, 51, 51);">，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</font></p>
 <p><a href="https://www.yuque.com/xiaoshan_wgo/fpuzg3/pywlu9">Go语言基础：结构体和方法</a></p>
 <p>Go中没有类的概念，是结构体的概念。</p>
 <p>结构体定义实例：</p>
-<pre><code class="language-go">package model
-type UserInfo struct{
-    Name string
-    Age int
-    Height float32
-    Eduschool string
-    Hobby []string
-    MoreInfo map[string] interface{}
-}
-</code></pre>
-<pre><code class="language-go">package main
-Alice := model.UserInfo{
-    Name: &quot;Alice&quot;,
-    Age := 18,
-    Height: 160,
-    Eduschool:&quot;华中师范大学&quot;,
-    Hobby: []string{&quot;coding&quot;,&quot;dancing&quot;},
-    MoreInfo: nil,
-}
-fmt.Println(Alice.Name,Alice.Age)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">model</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserInfo</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Height</span><span class="w"> </span><span class="kt">float32</span>
+<span class="w">    </span><span class="nx">Eduschool</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Hobby</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">MoreInfo</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="nx">Alice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">UserInfo</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Height</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Eduschool</span><span class="p">:</span><span class="s">&quot;华中师范大学&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Hobby</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;coding&quot;</span><span class="p">,</span><span class="s">&quot;dancing&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="nx">MoreInfo</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">Alice</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="nx">Alice</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+</code></pre></div>
 <p>注： model包的使用，其中定义了UserInfo结构体。</p>
-<h2 id="-">封装 - 方法和工厂模式</h2>
+<h2 id="-">封装 - 方法和工厂模式<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
 <p>封装就是把抽象出的<strong>字段和对字段的操作</strong>封装在一起，数据被保护在内部，程序的其他包只有通过被授权的操作（方法），才能对字段进行操作。目的是，不对外暴露公开的接口，增强安全，简化编程。</p>
 <p>Go语言中可以使用<a href="https://www.yuque.com/xiaoshan_wgo/fpuzg3/smo4ix">工厂模式</a>来生成对象，或者说Go语言用工厂模式来实现封装：</p>
-<pre><code class="language-go">//对上面的那个结构体进行封装，使用下面的这个方法就是被授权的操作，这样就实现了对字段的保护。
-func NewUserInfo(name string, age int, height float32, eduSchool string, hobby []string,moreInfo map[string]interface{}) *userInfo{
-    return &amp;userInfo{
-        Name: name,
-        Age := age,
-        Height: height,
-        Eduschool: eduSchool,
-        Hobby: hobby,
-        MoreInfo: moreInfo,
+<div class="highlight"><pre><span></span><code><span class="c1">//对上面的那个结构体进行封装，使用下面的这个方法就是被授权的操作，这样就实现了对字段的保护。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewUserInfo</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="w"> </span><span class="kt">float32</span><span class="p">,</span><span class="w"> </span><span class="nx">eduSchool</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">hobby</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">,</span><span class="nx">moreInfo</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="o">*</span><span class="nx">userInfo</span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">userInfo</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">age</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Height</span><span class="p">:</span><span class="w"> </span><span class="nx">height</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Eduschool</span><span class="p">:</span><span class="w"> </span><span class="nx">eduSchool</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Hobby</span><span class="p">:</span><span class="w"> </span><span class="nx">hobby</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">MoreInfo</span><span class="p">:</span><span class="w"> </span><span class="nx">moreInfo</span><span class="p">,</span>
 
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这样外部可以直接调用<code>NewUserInfo</code>而可以不需要调用<code>UserInfo</code>，使用工厂模式的时候将首字母大写的<code>UserInfo</code>修改为<code>userInfo</code>，在Go语言中，首字母大写为公开类/结构体/方法。使用工厂模式/继承的办法，就可以实现安全和简化编程。</p>
-<h2 id="-_1">继承 - 匿名结构体</h2>
+<h2 id="-_1">继承 - 匿名结构体<a class="headerlink" href="#-_1" title="Permanent link">&para;</a></h2>
 <p>继承解决了代码复用的问题。</p>
 <p>子类继承父类，自动拥有父类的属性和方法。</p>
 <p>重写，父类引用指向子类对象。</p>
 <p>在Golang中，继承的实现方法是使用<strong>匿名结构体</strong>，这个结构体可以直接访问匿名结构体的字段和方法，从而实现继承特性。</p>
 <p>基本语法如下：</p>
-<pre><code class="language-go">type Goods struct{
-    Name string
-    Price int
-}
-type Book struct{
-    Goods //这个就是匿名结构体
-    Write string
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Goods</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Price</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Book</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Goods</span><span class="w"> </span><span class="c1">//这个就是匿名结构体</span>
+<span class="w">    </span><span class="nx">Write</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>具体的案例使用</p>
-<pre><code class="language-go">package main
-type Student struct{
-    Name string
-    Age int
-    Score int
-}
-func (stu *Student) ShowInfo{
-    fmt.Println(stu.Name,stu.Age,stu.Score)
-}
-func (stu *Student) SetScore(score int){
-    stu.Score = score //把设置的参数赋值给对象的字段
-}
-type Pupil struct{
-    Student //嵌入匿名结构体
-}
-func(p *Pupil)testing(){
-    fmt.Println(&quot;Pupil is testing&quot;)
-}
-type Graduate struct{
-    Student //嵌入匿名结构体
-}
-func(p *Graduate)testing(){
-    fmt.Println(&quot;Graduate is testing&quot;)
-}
-func main(){
-    pupil := &amp;Pupil{}
-    pupil.Student.Name = &quot;Tom~&quot;
-    pupil.Student.Age = 8
-    pupil.testing()
-    pupil.Student.SetSocre(70)//pupil继承了Student的方法SetScore
-    pupil.Student.ShowInfo()
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Score</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">stu</span><span class="w"> </span><span class="o">*</span><span class="nx">Student</span><span class="p">)</span><span class="w"> </span><span class="nx">ShowInfo</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">stu</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="nx">stu</span><span class="p">.</span><span class="nx">Age</span><span class="p">,</span><span class="nx">stu</span><span class="p">.</span><span class="nx">Score</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">stu</span><span class="w"> </span><span class="o">*</span><span class="nx">Student</span><span class="p">)</span><span class="w"> </span><span class="nx">SetScore</span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">stu</span><span class="p">.</span><span class="nx">Score</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="c1">//把设置的参数赋值给对象的字段</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Pupil</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Student</span><span class="w"> </span><span class="c1">//嵌入匿名结构体</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Pupil</span><span class="p">)</span><span class="nx">testing</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Pupil is testing&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Graduate</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Student</span><span class="w"> </span><span class="c1">//嵌入匿名结构体</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Graduate</span><span class="p">)</span><span class="nx">testing</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Graduate is testing&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">pupil</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Pupil</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">pupil</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Tom~&quot;</span>
+<span class="w">    </span><span class="nx">pupil</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">    </span><span class="nx">pupil</span><span class="p">.</span><span class="nx">testing</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">pupil</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">SetSocre</span><span class="p">(</span><span class="mi">70</span><span class="p">)</span><span class="c1">//pupil继承了Student的方法SetScore</span>
+<span class="w">    </span><span class="nx">pupil</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">ShowInfo</span><span class="p">()</span>
 
-    graduate := &amp;Graduate{}
-    graduate.Student.Name = &quot;Bob~&quot;
-    graduate.Student.Age = 28
-    graduate.testing()
-    graduate.Student.SetSocre(80)//pupil继承了Student的方法SetScore
-    graduate.Student.ShowInfo()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">graduate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Graduate</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">graduate</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Bob~&quot;</span>
+<span class="w">    </span><span class="nx">graduate</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">28</span>
+<span class="w">    </span><span class="nx">graduate</span><span class="p">.</span><span class="nx">testing</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">graduate</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">SetSocre</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span><span class="c1">//pupil继承了Student的方法SetScore</span>
+<span class="w">    </span><span class="nx">graduate</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">ShowInfo</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项:</p>
 <p>（1）结构体可以使用嵌套结构体所有字段和方法，不论首字母的大小写都可以使用。</p>
 <p>（2）匿名结构体字段访问是可以简化的，如上述的代码<code>graduate.Student.Age</code>可以直接写成<code>graduate.Age</code>。</p>
@@ -403,23 +403,23 @@ func main(){
 <p>（4）结构体嵌入<strong>两个或多个</strong>匿名结构体（匿名结构体之间不同名），如果两个匿名结构体有相同的字段和方法，则<strong>必须指名</strong>匿名结构体的名字，否则编译报错。</p>
 <p>（5）如果struct嵌套了一个有名结构体，这种模式就是<strong>组合</strong>，如果是组合关系，那么在访问组合的结构体的字段和方法的时候，就必须带上结构体名字。</p>
 <p>（6）嵌套匿名结构体后，也可以在创建结构体变量（实例）时，直接指定各个匿名结构体字段的值。例如：</p>
-<pre><code class="language-go">package main
-type Student struct{
-    Name string
-    Age int
-    Score int
-}
-type Pupil struct{
-    *Student //嵌入匿名结构体
-}
-pupil := Pupil{&amp;Student{Name: &quot;Toms&quot;,
-                       Age : 8,
-                       Score: 90
-                      },
-              }
-fmt.Println(&quot;pupil&quot;,*Pupil.Student) //不加*，那么输出的就是地址，而不是值，如果有多个匿名函数取地址了，那么需要在后面再加一个*Puppil.xxxxx。
-</code></pre>
-<h2 id="-_2">多态 - 接口</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Score</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Pupil</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="o">*</span><span class="nx">Student</span><span class="w"> </span><span class="c1">//嵌入匿名结构体</span>
+<span class="p">}</span>
+<span class="nx">pupil</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Pupil</span><span class="p">{</span><span class="o">&amp;</span><span class="nx">Student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Toms&quot;</span><span class="p">,</span>
+<span class="w">                       </span><span class="nx">Age</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">                       </span><span class="nx">Score</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span>
+<span class="w">                      </span><span class="p">},</span>
+<span class="w">              </span><span class="p">}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;pupil&quot;</span><span class="p">,</span><span class="o">*</span><span class="nx">Pupil</span><span class="p">.</span><span class="nx">Student</span><span class="p">)</span><span class="w"> </span><span class="c1">//不加*，那么输出的就是地址，而不是值，如果有多个匿名函数取地址了，那么需要在后面再加一个*Puppil.xxxxx。</span>
+</code></pre></div>
+<h2 id="-_2">多态 - 接口<a class="headerlink" href="#-_2" title="Permanent link">&para;</a></h2>
 <p>多态就是，多种形态，Go中，通过接口来实现。</p>
 <p><a href="https://www.yuque.com/xiaoshan_wgo/gonotes/kybspv">1 接口</a></p>
 <p>在Go语言中，多态特征是通过接口实现的，<strong>可以按照统一的接口来调用不同的实现，这时接口的变量就呈现不同的形态</strong>。我们在实现接口方法过程中，<strong>括号里面的变量</strong>会根据传入的参数来判断到底要实现的是哪个实例的方法，这样就可以实现一个方法多个实例使用（多态）。</p>
@@ -434,37 +434,37 @@ fmt.Println(&quot;pupil&quot;,*Pupil.Student) //不加*，那么输出的就是�
 </ul>
 </li>
 </ul>
-<pre><code class="language-go">package main
-type Usber interface{ //接口和它的两个没有实现的方法
-    Start()
-    Stop()
-}
-type Phone struct{
-}
-type Camera struct{
-}
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Usber</span><span class="w"> </span><span class="kd">interface</span><span class="p">{</span><span class="w"> </span><span class="c1">//接口和它的两个没有实现的方法</span>
+<span class="w">    </span><span class="nx">Start</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">Stop</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Phone</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Camera</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="p">}</span>
 
-func (p Phone) Start(){ //程序员1写的方法
-    fmt.Println(&quot;手机开始工作。。&quot;)
-}
-func (p Phone) Stop(){//程序员2写的方法
-    fmt.Println(&quot;手机停止工作。。&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Phone</span><span class="p">)</span><span class="w"> </span><span class="nx">Start</span><span class="p">(){</span><span class="w"> </span><span class="c1">//程序员1写的方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;手机开始工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Phone</span><span class="p">)</span><span class="w"> </span><span class="nx">Stop</span><span class="p">(){</span><span class="c1">//程序员2写的方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;手机停止工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func (c Camera) Start(){
-    fmt.Println(&quot;相机开始工作。。&quot;)
-}
-func (c Camera) Stop(){
-    fmt.Println(&quot;相机停止工作。。&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Camera</span><span class="p">)</span><span class="w"> </span><span class="nx">Start</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;相机开始工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Camera</span><span class="p">)</span><span class="w"> </span><span class="nx">Stop</span><span class="p">(){</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;相机停止工作。。&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main(){
-    var usbArr [3]Usb //多态数组
-    usbArr[0] = Phone{&quot;vivo&quot;}
-    usbArr[1] = Phone{&quot;小米&quot;}
-    usbArr[2] = Camera{&quot;尼康&quot;}
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">usbArr</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="nx">Usb</span><span class="w"> </span><span class="c1">//多态数组</span>
+<span class="w">    </span><span class="nx">usbArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Phone</span><span class="p">{</span><span class="s">&quot;vivo&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">usbArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Phone</span><span class="p">{</span><span class="s">&quot;小米&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">usbArr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Camera</span><span class="p">{</span><span class="s">&quot;尼康&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-10-21 09:11:01<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/mume7m">https://www.yuque.com/xiaoshan_wgo/codingnotes/mume7m</a></p>

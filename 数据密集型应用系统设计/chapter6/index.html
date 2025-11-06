@@ -474,7 +474,7 @@
 <li>分区再平衡</li>
 <li>数据库如何路由到正确的分区</li>
 </ul>
-<h2 id="_1">分区与复制</h2>
+<h2 id="_1">分区与复制<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>分区通常与复制结合使用，使得每个分区的副本存储在多个节点上。</li>
 <li>即使每条记录属于同一个分区，但是这个分区仍有多个不同的节点，提高容错。</li>
@@ -482,7 +482,7 @@
 <li>每个节点可能是某些分区的领导者，同时是其他分区的追随者。</li>
 </ul>
 <p><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1634613965833-5b147f85-6260-4483-ab61-76916fdc7369.png" /></p>
-<h2 id="_2">键值数据的分区</h2>
+<h2 id="_2">键值数据的分区<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>分区目标是将数据和查询负载均匀分布在各个节点上。</li>
 <li>如果每个节点公平分享数据和负载，那么理论上10个节点应该能够处理10倍的数据量和10倍的单个节点的读写吞吐量（暂时忽略复制）。</li>
@@ -497,7 +497,7 @@
 <li>缺点：</li>
 <li>读特定的值时，不知道在哪个节点上，必须并行查所有的节点。</li>
 </ul>
-<h3 id="_3">根据键的范围分区</h3>
+<h3 id="_3">根据键的范围分区<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>一种分区的方法是为每个分区指定一块连续的键范围（从最小值到最大值），类似纸质的百科全书。</li>
 <li><img alt="image.png" src="https://picture-bed-1251805293.file.myqcloud.com/1634614402944-1042d5f2-e693-4726-b552-50defb88f7e7.png" /></li>
@@ -517,7 +517,7 @@
 <li>Key Range分区的缺点是某些特定的访问模式会导致热点。</li>
 <li>可一个修改主键：比如传感器名称+时间，避免数据打到同一分区。</li>
 </ul>
-<h3 id="_4">根据键的散列分区</h3>
+<h3 id="_4">根据键的散列分区<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>很多分布式数据存储使用散列函数来分区。</li>
 <li>一个好的散列函数可以将偏斜的数据均匀分布。</li>
@@ -539,7 +539,7 @@
 <li>组合索引方法为一对多关系提供了一个优雅的数据模型。</li>
 <li>社交网络的一条更新主键被选择为 (user_id, update_timestamp)，那么可以有效地检索特定用户在某个时间间隔内按时间戳排序的所有更新。</li>
 </ul>
-<h3 id="_5">负载偏斜与热点消除</h3>
+<h3 id="_5">负载偏斜与热点消除<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>哈希分区可以帮助减少热点。但是，它不能完全避免它们：在极端情况下，所有的读写操作都是针对同一个键的，所有的请求都会被路由到同一个分区。</li>
 <li>比如社交网络的大 V 的评论区。</li>
@@ -552,7 +552,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="_6">分区与次级索引</h2>
+<h2 id="_6">分区与次级索引<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li>之前讨论的都是键值数据模型。</li>
 <li>次级索引使情况变复杂：</li>
@@ -567,7 +567,7 @@
 <li>次级索引的问题是它们不能整齐地映射到分区。</li>
 <li>有两种用二级索引对数据库进行分区的方法：<strong>基于文档的分区（document-based）</strong> 和<strong>基于关键词（term-based）的分区</strong>。</li>
 </ul>
-<h3 id="_7">基于文档的二级索引进行分区</h3>
+<h3 id="_7">基于文档的二级索引进行分区<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
 <li>假如一个销售二手车的网站， 每个列表都有一个唯一的ID——称之为文档ID——并且用文档ID对数据库进行分区</li>
 <li>用户搜索汽车，允许他们通过颜色和厂商过滤，所以需要一个在颜色和厂商上的次级索引（文档数据库中这些是<strong>字段（field）</strong>，关系数据库中这些是<strong>列（column）</strong> ）。</li>
@@ -591,7 +591,7 @@
 <li>即使并行查询分区，分散/聚集也容易导致尾部延迟放大。</li>
 </ul>
 <p>然而被广泛使用：MongoDB，Riak ，Cassandra ，Elasticsearch ，SolrCloud 和VoltDB 【19】都使用文档分区二级索引。</p>
-<h3 id="term">基于关键词(Term)的二级索引进行分区</h3>
+<h3 id="term">基于关键词(Term)的二级索引进行分区<a class="headerlink" href="#term" title="Permanent link">&para;</a></h3>
 <ul>
 <li>可以构建一个覆盖所有分区数据的<strong>全局索引</strong>，而不是给每个分区创建自己的次级索引（本地索引）。</li>
 <li>但是，我们不能只把这个索引存储在一个节点上，因为它可能会成为瓶颈，违背了分区的目的。</li>
@@ -615,7 +615,7 @@
 <li>需要跨分区的分布式事务，并不是所有数据库都支持。</li>
 <li>在实践中，对全局二级索引的更新通常是<strong>异步</strong>的。</li>
 </ul>
-<h2 id="_8">分区再平衡</h2>
+<h2 id="_8">分区再平衡<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>随着时间的推移，数据库会有各种变化：</p>
 <ul>
 <li>查询吞吐量增加，所以您想要添加更多的CPU来处理负载。</li>
@@ -629,8 +629,8 @@
 <li>再平衡发生时，数据库应该继续接受读取和写入。</li>
 <li>节点之间只移动必须的数据，以便快速再平衡，并减少网络和磁盘I/O负载。</li>
 </ul>
-<h3 id="_9">再平衡策略</h3>
-<h4 id="hash-mod-n">反面教材：hash mod N</h4>
+<h3 id="_9">再平衡策略<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h4 id="hash-mod-n">反面教材：hash mod N<a class="headerlink" href="#hash-mod-n" title="Permanent link">&para;</a></h4>
 <ul>
 <li>前面已经讲了，最好将可能的散列分成不同的范围，给每个范围分配一个分区。</li>
 <li>取模 mod 运算可以给每个键分配一个节点</li>
@@ -639,7 +639,7 @@
 <ul>
 <li>当节点数目变化时，使得再平衡过于昂贵。</li>
 </ul>
-<h4 id="_10">固定数量的分区</h4>
+<h4 id="_10">固定数量的分区<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
 <ul>
 <li>简单的解决方案：创建比节点更多的分区，并为每个节点分配多个分区。</li>
 <li>仍然是取模，但是新增节点之后，总节点数变成了 5 个，只需要把取模 = 4 的部分放到 node 4。</li>
@@ -665,7 +665,7 @@
 <ul>
 <li>当数据集的总大小难以预估，选择正确的分区数很难。</li>
 </ul>
-<h4 id="_11">动态分区</h4>
+<h4 id="_11">动态分区<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h4>
 <p>采用关键字区间分区的数据库，如果边界设置有问题，可能导致数据倾斜到一个分区中。</p>
 <ul>
 <li>按键的范围进行分区的数据库（如HBase和RethinkDB）会动态创建分区。</li>
@@ -695,7 +695,7 @@
 <ul>
 <li>动态分区不仅适用于数据的范围分区，而且也适用于散列分区。</li>
 </ul>
-<h4 id="_12">按节点比例分区</h4>
+<h4 id="_12">按节点比例分区<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
 <ul>
 <li>动态分区和固定数量的分区，分区数量都与节点数量无关。</li>
 <li>Cassandra和Ketama使用的第三种方法是使分区数与节点数成正比：每个节点有固定数量的分区。</li>
@@ -708,7 +708,7 @@
 <li>随机化可能会产生不公平的分割，但是平均在更大数量的分区上时，新节点最终从现有节点获得公平的负载份额。 </li>
 <li>随机选择分区边界要求使用基于散列的分区（可以从散列函数产生的数字范围中挑选边界）。实际上，这种方法最符合一致性哈希的原始定义。</li>
 </ul>
-<h3 id="_13">运维：手动还是自动再平衡</h3>
+<h3 id="_13">运维：手动还是自动再平衡<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>重要问题：自动还是手动进行？</p>
 <ul>
 <li>完全自动重新平衡和完全手动之间有一个过渡阶段：自动生成建议的分区分配，需要管理员提交才能生效。</li>
@@ -720,7 +720,7 @@
 <li>如果没有做好，这个过程可能会使网络或节点负载过重，降低其他请求的性能。</li>
 <li>如果全自动重新平衡遇到了自动故障检测：系统判断一个节点过载，然后重新自动平衡，导致情况更糟。</li>
 </ul>
-<h2 id="_14">请求路由</h2>
+<h2 id="_14">请求路由<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <p><strong>服务发现(service discovery)</strong></p>
 <ul>
 <li>确定客户发出请求时，知道要连接哪个节点进行读取</li>
@@ -760,14 +760,14 @@
 <li>Couchbase，简化了设计</li>
 <li>它配置了一个名为moxi的路由层，它会从集群节点了解路由变化</li>
 </ol>
-<h3 id="_15">执行并行查询</h3>
+<h3 id="_15">执行并行查询<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
 <li>目前，我们只关注读取或写入单个键的非常简单的查询（加上基于文档分区的二级索引场景下的分散/聚集查询）。也是大多数 NoSQL 分布式数据存储所支持的访问层级。</li>
 <li>通常用于分析的<strong>大规模并行处理（MPP, Massively parallel processing）</strong> 关系型数据库产品在其支持的查询类型方面要复杂得多。</li>
 <li>把多个连接，过滤，分组和聚合操作分解成多个执行阶段和分区，分布式并行执行。</li>
 <li>见第十章。</li>
 </ul>
-<h2 id="_16">本章小结</h2>
+<h2 id="_16">本章小结<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ul>
 <li>数据量非常大的时候，在单台机器上存储和处理不再可行，而分区则十分必要。</li>
 <li>分区的目标是在多台机器上均匀分布数据和查询负载，避免出现热点（负载不成比例的节点）。</li>

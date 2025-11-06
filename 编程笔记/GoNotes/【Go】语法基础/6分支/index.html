@@ -277,47 +277,46 @@
 
 
 
-<h1 id="6">6 分支</h1>
-<h3 id="_1">与其它语言区分</h3>
+<h1 id="6">6 分支<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<h3 id="_1">与其它语言区分<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>switch 不需要 break ;</p>
 <p>Golang 可以将 if 判断的变量在 if 里面进行定义（见案例23行）</p>
-<h3 id="_2">案例练习</h3>
-<pre><code class="language-go">package main
+<h3 id="_2">案例练习<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;io/ioutil&quot;
-)
-func grade(score int) string{
-    g := &quot;&quot;
-    switch {
-    case score &lt; 60:
-        g = &quot;F&quot;
-    case score &lt; 80:
-        g = &quot;C&quot;
-    case score &lt; 90:
-        g = &quot;B&quot;
-    case score &lt;= 100:
-        g = &quot;A&quot;
-    }
-    return g
-}
-func main() {
-    const filename = &quot;abc,txt&quot;
-    if contents,err := ioutil.ReadFile(filename);err != nil{
-        fmt.Println(err)
-    }else{
-        fmt.Printf(&quot;%s\n&quot;,contents)
-    }
-    //switch不需要break,除非使用fallthrough
-    fmt.Println(
-    grade(0),
-    grade(59),
-    grade(101),
-    )
-}
-
-</code></pre>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io/ioutil&quot;</span>
+<span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">grade</span><span class="p">(</span><span class="nx">score</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">g</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">60</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">g</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;F&quot;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">80</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">g</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;C&quot;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">90</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">g</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;B&quot;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">g</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;A&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">g</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;abc,txt&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">contents</span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s\n&quot;</span><span class="p">,</span><span class="nx">contents</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//switch不需要break,除非使用fallthrough</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">grade</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">grade</span><span class="p">(</span><span class="mi">59</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">grade</span><span class="p">(</span><span class="mi">101</span><span class="p">),</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-05-02 09:51:12<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/oe59sz">https://www.yuque.com/xiaoshan_wgo/codingnotes/oe59sz</a></p>

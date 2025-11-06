@@ -277,98 +277,98 @@
 
 
 
-<h1 id="gin">Gin 路由/路由组</h1>
-<h2 id="_1">路由</h2>
+<h1 id="gin">Gin 路由/路由组<a class="headerlink" href="#gin" title="Permanent link">&para;</a></h1>
+<h2 id="_1">路由<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>单个路由的定义方法：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    //访问 /index 的 GET 请求会走这一条处理逻辑
-    //路由
-    //r.HEAD()
-    r.GET(&quot;/index&quot;, func(c *gin.Context) {
-        c.JSON(http.StatusOK,gin.H{
-            &quot;method&quot;:&quot;GET&quot;,
-        })
-    })
-    //创建
-    r.POST(&quot;/index&quot;, func(c *gin.Context) {
-        c.JSON(http.StatusOK,gin.H{
-            &quot;method&quot;:&quot;POST&quot;,
-        })
-    })
-    //更新
-    r.PUT(&quot;/index&quot;, func(c *gin.Context) {
-        c.JSON(http.StatusOK,gin.H{
-            &quot;method&quot;:&quot;PUT&quot;,
-        })
-    })
-    //删除
-    r.DELETE(&quot;/index&quot;, func(c *gin.Context) {
-        c.JSON(http.StatusOK,gin.H{
-            &quot;method&quot;:&quot;Delete&quot;,
-        })
-    })
-    //Any:请求方法大集合/大杂烩
-    r.Any(&quot;/user&quot;, func(c *gin.Context) {
-        switch c.Request.Method {
-            case http.MethodGet:
-            c.JSON(http.StatusOK,gin.H{&quot;method&quot;:&quot;GET&quot;})
-            case http.MethodPost:
-            c.JSON(http.StatusOK,gin.H{&quot;method&quot;:&quot;POST&quot;})
-        }
-    })
-    //没有定义路由的地址
-    r.NoRoute(func(c *gin.Context) {
-        c.JSON(http.StatusNotFound,gin.H{&quot;msg&quot;:&quot;404NotFound&quot;})
-    })
-    r.Run()
-}
-</code></pre>
-<h2 id="_2">路由组</h2>
+<span class="w">    </span><span class="c1">//访问 /index 的 GET 请求会走这一条处理逻辑</span>
+<span class="w">    </span><span class="c1">//路由</span>
+<span class="w">    </span><span class="c1">//r.HEAD()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;GET&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//创建</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;POST&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//更新</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//删除</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;Delete&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//Any:请求方法大集合/大杂烩</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Method</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">MethodGet</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;GET&quot;</span><span class="p">})</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">MethodPost</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="s">&quot;POST&quot;</span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="c1">//没有定义路由的地址</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">NoRoute</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;msg&quot;</span><span class="p">:</span><span class="s">&quot;404NotFound&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">路由组<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>想把多个路由的公共前缀提取出来，创建一个路由组的方法：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.Default()
-    userGroup := r.Group(&quot;/user&quot;)
-    {
-        userGroup.GET(&quot;/index&quot;, func(c *gin.Context) {...})
-        userGroup.GET(&quot;/login&quot;, func(c *gin.Context) {...})
-        userGroup.POST(&quot;/login&quot;, func(c *gin.Context) {...})
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">userGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
 
-    }
-    shopGroup := r.Group(&quot;/shop&quot;)
-    {
-        shopGroup.GET(&quot;/index&quot;, func(c *gin.Context) {...})
-        shopGroup.GET(&quot;/cart&quot;, func(c *gin.Context) {...})
-        shopGroup.POST(&quot;/checkout&quot;, func(c *gin.Context) {...})
-    }
-    r.Run()
-}
-</code></pre>
-<pre><code class="language-go">shopGroup := r.Group(&quot;/shop&quot;)
-    {
-        shopGroup.GET(&quot;/index&quot;, func(c *gin.Context) {...})
-        shopGroup.GET(&quot;/cart&quot;, func(c *gin.Context) {...})
-        shopGroup.POST(&quot;/checkout&quot;, func(c *gin.Context) {...})
-        // 嵌套路由组
-        xx := shopGroup.Group(&quot;xx&quot;)
-        xx.GET(&quot;/oo&quot;, func(c *gin.Context) {...})
-    }
-</code></pre>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">shopGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/shop&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/cart&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/checkout&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">shopGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/shop&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/index&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/cart&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/checkout&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">        </span><span class="c1">// 嵌套路由组</span>
+<span class="w">        </span><span class="nx">xx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">shopGroup</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;xx&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">xx</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/oo&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-04-30 14:40:42<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/ytzg4o">https://www.yuque.com/xiaoshan_wgo/codingnotes/ytzg4o</a></p>

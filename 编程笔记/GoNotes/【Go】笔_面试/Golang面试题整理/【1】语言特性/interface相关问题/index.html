@@ -251,37 +251,37 @@
 
 
 
-<h1 id="interface">interface 相关问题</h1>
-<h1 id="interface_1">interface 的底层数据结构是什么？</h1>
+<h1 id="interface">interface 相关问题<a class="headerlink" href="#interface" title="Permanent link">&para;</a></h1>
+<h1 id="interface_1">interface 的底层数据结构是什么？<a class="headerlink" href="#interface_1" title="Permanent link">&para;</a></h1>
 <p>Go 语言根据接口类型是否包含一组方法将接口类型分成了两类：</p>
 <ul>
 <li>使用 <code>runtime.iface</code> 结构体表示包含方法的接口</li>
 <li>使用 <code>runtime.eface</code> 结构体表示不包含任何方法的 <code>interface{}</code> 类型；</li>
 </ul>
-<h2 id="_1">空接口定义</h2>
+<h2 id="_1">空接口定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><code>runtime.eface</code> 结构体在 Go 语言中的定义是这样的：</p>
-<pre><code class="language-go">type eface struct { // 16 字节
-    _type *_type
-    data  unsafe.Pointer
-}
-//runtime/type.go
-type _type struct {
-    size       uintptr
-    ptrdata    uintptr // size of memory prefix holding all pointers
-    hash       uint32
-    tflag      tflag
-    align      uint8
-    fieldalign uint8
-    kind       uint8
-    alg        *typeAlg
-    // gcdata stores the GC type data for the garbage collector.
-    // If the KindGCProg bit is set in kind, gcdata is a GC program.
-    // Otherwise it is a ptrmask bitmap. See mbitmap.go for details.
-    gcdata    *byte
-    str       nameOff
-    ptrToThis typeOff
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">eface</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 16 字节</span>
+<span class="w">    </span><span class="nx">_type</span><span class="w"> </span><span class="o">*</span><span class="nx">_type</span>
+<span class="w">    </span><span class="nx">data</span><span class="w">  </span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+<span class="p">}</span>
+<span class="c1">//runtime/type.go</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">_type</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">size</span><span class="w">       </span><span class="kt">uintptr</span>
+<span class="w">    </span><span class="nx">ptrdata</span><span class="w">    </span><span class="kt">uintptr</span><span class="w"> </span><span class="c1">// size of memory prefix holding all pointers</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w">       </span><span class="kt">uint32</span>
+<span class="w">    </span><span class="nx">tflag</span><span class="w">      </span><span class="nx">tflag</span>
+<span class="w">    </span><span class="nx">align</span><span class="w">      </span><span class="kt">uint8</span>
+<span class="w">    </span><span class="nx">fieldalign</span><span class="w"> </span><span class="kt">uint8</span>
+<span class="w">    </span><span class="nx">kind</span><span class="w">       </span><span class="kt">uint8</span>
+<span class="w">    </span><span class="nx">alg</span><span class="w">        </span><span class="o">*</span><span class="nx">typeAlg</span>
+<span class="w">    </span><span class="c1">// gcdata stores the GC type data for the garbage collector.</span>
+<span class="w">    </span><span class="c1">// If the KindGCProg bit is set in kind, gcdata is a GC program.</span>
+<span class="w">    </span><span class="c1">// Otherwise it is a ptrmask bitmap. See mbitmap.go for details.</span>
+<span class="w">    </span><span class="nx">gcdata</span><span class="w">    </span><span class="o">*</span><span class="kt">byte</span>
+<span class="w">    </span><span class="nx">str</span><span class="w">       </span><span class="nx">nameOff</span>
+<span class="w">    </span><span class="nx">ptrToThis</span><span class="w"> </span><span class="nx">typeOff</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>由于 <code>interface{}</code> 类型不包含任何方法，所以它的结构也相对来说比较简单，只包含指向底层数据和类型的两个指针。从上述结构我们也能推断出： Go 语言的任意类型都可以转换成 <code>interface{}</code>。我们都知道，runtime._type 是 Go 语言类型的运行时表示。下面是运行时包中的结构体，其中包含了很多类型的元信息，例如：类型的大小、哈希、对其以及种类等。</p>
 <ul>
 <li><code>size</code> 字段存储了类型占用的内存空间，为内存空间的分配提供信息；</li>
@@ -289,23 +289,23 @@ type _type struct {
 <li><code>equal</code> 字段用于判断当前类型的多个对象是否相等，该字段是为了减少 Go 语言二进制包大小从 <code>typeAlg</code> 结构体中迁移过来的；</li>
 </ul>
 <p>我们只需要对 <code>runtime._type</code> 结构体中的字段有一个大体的概念，不需要详细理解所有字段的作用和意义。 <code>runtime._type</code> 是 Go 语言类型的运行时表示。下面是运行时包中的结构体，其中包含了很多类型的元信息，例如：类型的大小、哈希、对齐以及种类等。</p>
-<h2 id="_2">非空接口定义</h2>
+<h2 id="_2">非空接口定义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>另一个用于表示接口的结构体是 <code>runtime.iface</code>，这个结构体中有指向原始数据的指针 <code>data</code>，不过更重要的是 <code>runtime.itab</code> 类型的 <code>tab</code> 字段。</p>
-<pre><code class="language-go">type iface struct { // 16 字节
-    tab  *itab
-    data unsafe.Pointer
-}
-type itab struct {
-    inter  *interfacetype
-    _type  *_type
-    link   *itab
-    hash   uint32 // copy of _type.hash. Used for type switches.
-    bad    bool   // type does not implement interface
-    inhash bool   // has this itab been added to hash?
-    unused [2]byte
-    fun    [1]uintptr // variable sized
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">iface</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 16 字节</span>
+<span class="w">    </span><span class="nx">tab</span><span class="w">  </span><span class="o">*</span><span class="nx">itab</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+<span class="p">}</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">itab</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">inter</span><span class="w">  </span><span class="o">*</span><span class="nx">interfacetype</span>
+<span class="w">    </span><span class="nx">_type</span><span class="w">  </span><span class="o">*</span><span class="nx">_type</span>
+<span class="w">    </span><span class="nx">link</span><span class="w">   </span><span class="o">*</span><span class="nx">itab</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w">   </span><span class="kt">uint32</span><span class="w"> </span><span class="c1">// copy of _type.hash. Used for type switches.</span>
+<span class="w">    </span><span class="nx">bad</span><span class="w">    </span><span class="kt">bool</span><span class="w">   </span><span class="c1">// type does not implement interface</span>
+<span class="w">    </span><span class="nx">inhash</span><span class="w"> </span><span class="kt">bool</span><span class="w">   </span><span class="c1">// has this itab been added to hash?</span>
+<span class="w">    </span><span class="nx">unused</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="kt">byte</span>
+<span class="w">    </span><span class="nx">fun</span><span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="kt">uintptr</span><span class="w"> </span><span class="c1">// variable sized</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>其中，iface 结构体中有指向原始数据的指针 data，不过更重要的是 runtime.itab 类型的 tab 字段。</p>
 <p><code>runtime.itab</code> 结构体是接口类型的核心组成部分，每一个 <code>runtime.itab</code> 都占 32 字节，我们可以将其看成接口类型和具体类型的组合，它们分别用 <code>inter</code> 和 <code>_type</code> 两个字段表示：</p>
 <p>除了 <code>inter</code> 和 <code>_type</code> 两个用于表示类型的字段之外，上述结构体中的另外两个字段也有自己的作用：</p>

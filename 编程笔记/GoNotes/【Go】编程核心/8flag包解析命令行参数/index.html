@@ -286,49 +286,48 @@
 
 
 
-<h1 id="8-flag">8 flag 包解析命令行参数</h1>
-<h2 id="flag">flag包分析</h2>
+<h1 id="8-flag">8 flag 包解析命令行参数<a class="headerlink" href="#8-flag" title="Permanent link">&para;</a></h1>
+<h2 id="flag">flag包分析<a class="headerlink" href="#flag" title="Permanent link">&para;</a></h2>
 <p>6的方式式比较原生的方式，对解析参数不是特别的方便，特别是带有指定参数形式的命令行。</p>
 <p>比如：<code>cmd&gt;main.exe -f c:/aa.txt -p 200 -u root</code></p>
 <p>这样的形式命令行，go设计者给我们提供了flag包，可以方便的解析命令行参数，而且参数顺序可以随意。</p>
 <p><img alt="1637413601403-380ce668-0df9-4000-9151-02a678365ba1.png" src="../img/q8hFiU0xYb3StBVr/1637413601403-380ce668-0df9-4000-9151-02a678365ba1-981027.png" /></p>
 <p><img alt="1637413660222-b4a4d62d-babd-41e8-93dd-1e22f8c389f2.png" src="../img/q8hFiU0xYb3StBVr/1637413660222-b4a4d62d-babd-41e8-93dd-1e22f8c389f2-824385.png" /></p>
 <p>红色方框内的比较常用：</p>
-<pre><code class="language-go">func IntVar(p *int, name string, value int, usage string)
-</code></pre>
-<pre><code class="language-go">func StringVar(p *string, name string, value string, usage string)
-</code></pre>
-<h2 id="_1">案例练习</h2>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">IntVar</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">usage</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">StringVar</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">usage</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="_1">案例练习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;flag&quot;
-    &quot;fmt&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;flag&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    //定义几个变量，用于接收命令行的参数值
-    var user string
-    var pwd string
-    var host string
-    var port int
-    //&amp;user即使接受用户命令行中输入的-u后面的参数值
-    //“u”,就是-u 指定参数
-    //“”，默认值
-    //“用户名，默认为空” 说明
-    flag.StringVar(&amp;user,&quot;u&quot;,&quot;&quot;,&quot;用户名，默认为空&quot; )
-    flag.StringVar(&amp;pwd,&quot;pwd&quot;,&quot;&quot;,&quot;密码，默认为空&quot;)
-    flag.StringVar(&amp;host,&quot;h&quot;,&quot;localhost&quot;,&quot;主机名，默认为localhost&quot;)
-    flag.IntVar(&amp;port,&quot;port&quot;,3306,&quot;端口号，默认为3306&quot;)
-    //这里有个非常重要的操作，转换，必须调用该方法
-    flag.Parse()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//定义几个变量，用于接收命令行的参数值</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">pwd</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="c1">//&amp;user即使接受用户命令行中输入的-u后面的参数值</span>
+<span class="w">    </span><span class="c1">//“u”,就是-u 指定参数</span>
+<span class="w">    </span><span class="c1">//“”，默认值</span>
+<span class="w">    </span><span class="c1">//“用户名，默认为空” 说明</span>
+<span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">user</span><span class="p">,</span><span class="s">&quot;u&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;用户名，默认为空&quot;</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">pwd</span><span class="p">,</span><span class="s">&quot;pwd&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;密码，默认为空&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">host</span><span class="p">,</span><span class="s">&quot;h&quot;</span><span class="p">,</span><span class="s">&quot;localhost&quot;</span><span class="p">,</span><span class="s">&quot;主机名，默认为localhost&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">IntVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">port</span><span class="p">,</span><span class="s">&quot;port&quot;</span><span class="p">,</span><span class="mi">3306</span><span class="p">,</span><span class="s">&quot;端口号，默认为3306&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">//这里有个非常重要的操作，转换，必须调用该方法</span>
+<span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
 
-    fmt.Printf(&quot;user=%v pwd=%v host=%v port=%v,&quot; ,
-        user, pwd, host, port)
-}
-
-</code></pre>
-<h2 id="_2">参考文章</h2>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;user=%v pwd=%v host=%v port=%v,&quot;</span><span class="w"> </span><span class="p">,</span>
+<span class="w">        </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">pwd</span><span class="p">,</span><span class="w"> </span><span class="nx">host</span><span class="p">,</span><span class="w"> </span><span class="nx">port</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_2">参考文章<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><a href="https://www.cnblogs.com/fzxiaomange/p/golang-command-parse.html">https://www.cnblogs.com/fzxiaomange/p/golang-command-parse.html</a></p>
 <blockquote>
 <p>更新: 2021-11-20 21:22:39<br />

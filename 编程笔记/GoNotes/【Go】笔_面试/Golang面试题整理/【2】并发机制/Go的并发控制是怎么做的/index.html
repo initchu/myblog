@@ -251,8 +251,8 @@
 
 
 
-<h1 id="go">Go 的并发控制是怎么做的</h1>
-<h1 id="golang">讲一讲 Golang 的并发控制</h1>
+<h1 id="go">Go 的并发控制是怎么做的<a class="headerlink" href="#go" title="Permanent link">&para;</a></h1>
+<h1 id="golang">讲一讲 Golang 的并发控制<a class="headerlink" href="#golang" title="Permanent link">&para;</a></h1>
 <p>开发 go 程序的时候，时常需要使用 goroutine 并发处理任务，有时候这些 goroutine 是相互独立的，需要保证并发的数据安全性，也有的时候，goroutine 之间要进行同步与通信，主 goroutine 需要控制它所属的子goroutine。前者并发数据安全依赖锁机制和原子操作，包括互斥锁 <code>sync.Mutex</code>，读写锁 <code>sync.RWMutex</code>，原子操作<code>sync/atomic</code>等，后者涉及到并发行为控制，并发行为控制有三种常见的方式，分别是 <code>WaitGroup</code>，<code>Channel</code>，<code>Context</code>。</p>
 <p>:::info
 1. <strong><font style="color:rgb(51, 51, 51);">数据安全性控制（data race）</font></strong>
@@ -264,47 +264,46 @@
 + <font style="color:rgb(51, 51, 51);">channel（可以用有缓冲队列控制 gorutine 的数量，可以用 channel+select 实现 gorutine 间的消息通知）</font>
 + <font style="color:rgb(51, 51, 51);">Context（web 场景中，树状的调用结构下，各 gotutine 间消息同步（退出、超时等），父 context 通知所有子context）</font></p>
 <p>:::</p>
-<h2 id="waitgroup">WaitGroup</h2>
+<h2 id="waitgroup">WaitGroup<a class="headerlink" href="#waitgroup" title="Permanent link">&para;</a></h2>
 <p>WaitGroup 位于 Sync 包中，</p>
-<pre><code class="language-go">func (wg *WaitGroup) Add(delta int)
-func (wg *WaitGroup) Done()
-func (wg *WaitGroup) Wait()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Add</span><span class="p">(</span><span class="nx">delta</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Done</span><span class="p">()</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Wait</span><span class="p">()</span>
+</code></pre></div>
 <p><code>Add</code>方法，用来设置 WaitGroup 的计数值；</p>
 <p><code>Done</code>方法，用来将 WaitGroup 的计数值减 1，其实就是调用<code>Add(-1)</code>;</p>
 <p><code>Wait</code>方法，调用这个方法的 goroutine 会一直阻塞，直到 WaitGroup 的计数值变为 0。</p>
-<pre><code class="language-go">func main() {
-  var wg sync.WaitGroup
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">wg</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
 
-  wg.Add(2) //添加需要完成的工作量2
+<span class="w">  </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">//添加需要完成的工作量2</span>
 
-  go func() {
-    wg.Done() //完成工作量1
-    fmt.Println(&quot;goroutine 1 完成工作！&quot;)
-  }()
+<span class="w">  </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span><span class="w"> </span><span class="c1">//完成工作量1</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;goroutine 1 完成工作！&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}()</span>
 
-  go func() {
-    wg.Done() //完成工作量1
-    fmt.Println(&quot;goroutine 2 完成工作！&quot;)
-  }()
+<span class="w">  </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span><span class="w"> </span><span class="c1">//完成工作量1</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;goroutine 2 完成工作！&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}()</span>
 
-  wg.Wait() //等待工作量2均完成
-  fmt.Println(&quot;所有的goroutine均已完成工作！&quot;)
-}
+<span class="w">  </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span><span class="w"> </span><span class="c1">//等待工作量2均完成</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;所有的goroutine均已完成工作！&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-输出:
-//goroutine 2 完成工作！
-//goroutine 1 完成工作！
-//所有的goroutine均已完成工作！
-
-</code></pre>
+<span class="nx">输出</span><span class="p">:</span>
+<span class="c1">//goroutine 2 完成工作！</span>
+<span class="c1">//goroutine 1 完成工作！</span>
+<span class="c1">//所有的goroutine均已完成工作！</span>
+</code></pre></div>
 <p><font style="color:rgb(52, 50, 50);">WaitGroup这种并发控制方式尤其适用于：某任务需要多 goroutine 协同工作，每个 goroutine 只能做该任务的一部分，只有全部的 goroutine 都完成，任务才算是完成。因此，WaitGroup同名字的含义一样，是一种等待的方式。在使用 WaitGroup 的时候，需要注意以下几点：</font></p>
 <p><font style="color:rgb(52, 50, 50);">不重用 WaitGroup 。虽然 WaitGroup 可以在计数值恢复到零值的时候被重用，但如果在 WaitGroup 的计数器还没有恢复到零值的时候被重用，会导致</font><code>&lt;font style="color:rgb(52, 50, 50);"&gt;panic&lt;/font&gt;</code><font style="color:rgb(52, 50, 50);">。所以不如新建一个 WaitGroup 也不会有很大的资源开销。</font></p>
 <p><font style="color:rgb(52, 50, 50);">保证所有的 Add 方法调用都在 Wait 之前。</font></p>
 <p><font style="color:rgb(52, 50, 50);">不传递负数给 Add 方法，只通过 Done 来给计数值减 1。</font></p>
 <p><font style="color:rgb(52, 50, 50);">不做多余的 Done 方法调用，保证 Add 的技术值和 Done 方法调用的数量是一样的。</font></p>
 <p><font style="color:rgb(52, 50, 50);">不遗漏 Done 方法的调用，否则回导致 Wait hang 住无法返回。</font></p>
-<h2 id="channel">Channel</h2>
+<h2 id="channel">Channel<a class="headerlink" href="#channel" title="Permanent link">&para;</a></h2>
 <p><font style="color:rgb(62, 62, 62);">Channel，可以理解为管道，它的主要功能点是：</font></p>
 <ul>
 <li>队列存储数据</li>
@@ -315,9 +314,9 @@ func (wg *WaitGroup) Wait()
 <font style="color:rgb(52, 50, 50);">面试过程中，也可以讲一讲 CSP：</font></p>
 <p>Channel 是 go CSP 模型的关键，Go 语言实现了 CSP 的部分理论，goroutine 对应 CSP 中并发执行的实体，channel 就对应着 CSP 模型 中的 channel。CSP 描述这样一种并发模型：多个 Process 使用一个 Channel 进行通信, 这个 Channel 连结的 Process 通常是匿名的，消息传递通常是同步的（有别于 Actor Model）。</p>
 <p>:::</p>
-<h2 id="context">Context</h2>
+<h2 id="context">Context<a class="headerlink" href="#context" title="Permanent link">&para;</a></h2>
 <p>Context 通常被译作上下文，它是一个比较抽象的概念。在讨论链式调用技术时也经常会提到上下文。一般理解为程序单元的一个运行状态、现场、快照，而翻译中上下又很好地诠释了其本质，上下则是存在上下层的传递，上会把内容传递给下。在 Go 语言中，程序单元也就指的是 Goroutine。每个 Goroutine 在执行之前，都要先知道程序当前的执行状态，通常将这些执行状态封装在一个 Context 变量中，传递给要执行的 Goroutine 中。上下文则几乎已经成为传递与请求同生存周期变量的标准方法。在网络编程下，当接收到一个网络请求 Request，在处理这个 Request 的 goroutine 中，可能需要在当前 goroutine 继续开启多个新的 Goroutine 来获取数据与逻辑处理（例如访问数据库、RPC 服务等），即一个请求 Request，会需要多个 Goroutine 中处理。而这些Goroutine 可能需要共享 Request 的一些信息；同时当 Request 被取消或者超时的时候，所有从这个 Request 创建的所有 Goroutine 也应该被结束。</p>
-<h1 id="_1"></h1>
+<h1 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>更新: 2022-11-14 00:50:07<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/gfkkwo">https://www.yuque.com/xiaoshan_wgo/codingnotes/gfkkwo</a></p>

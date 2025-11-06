@@ -358,7 +358,7 @@
 
 
 
-<h1 id="java-8">Java 8</h1>
+<h1 id="java-8">Java 8<a class="headerlink" href="#java-8" title="Permanent link">&para;</a></h1>
 <p>参考链接</p>
 <blockquote>
 <p><a href="https://blog.csdn.net/qq_37891300/article/details/82817900">Java 8 新特性 及 常见 面试题_牵梦u的博客-CSDN博客_jdk8新特性面试题</a></p>
@@ -366,7 +366,7 @@
 <p><a href="https://www.cnblogs.com/jobbible/archive/2019/02/14/10374405.html">JAVA面试题（8） - 程序员Logger - 博客园</a>
 </p>
 </blockquote>
-<h3 id="java-8_1">Java 8 新特性简介</h3>
+<h3 id="java-8_1">Java 8 新特性简介<a class="headerlink" href="#java-8_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>代码更少（增加了新语法：Lambda 表达式）</li>
 <li>强大的 Stream API（集合数据的操作）</li>
@@ -376,16 +376,16 @@
 <li>集合的底层 源码实现</li>
 <li>新日期时间的 api</li>
 </ol>
-<h3 id="_1">什么是函数式编程？</h3>
+<h3 id="_1">什么是函数式编程？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>函数式编程就是一种抽象程度很高的<strong>编程范式</strong>，纯粹的函数式编程语言编写的函数<strong>没有变量</strong>。因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出。因此，这种函数是有副作用的。 函数式编程的一个特点就是，<u>允许把函数本身作为参数传入另一个函数，还允许返回一个函数</u>！ 函数式编程最早是数学家阿隆佐·邱奇研究的一套<strong>函数变换逻辑</strong>，又称Lambda Calculus（λ-Calculus），所以也经常把函数式编程称为Lambda计算。</p>
 <blockquote>
 <p><a href="https://blog.csdn.net/a1472750149/article/details/122471795">一文弄懂Java8函数式编程深入浅出_Java云海.的博客-CSDN博客_深入浅出java</a>
 </p>
 </blockquote>
-<h3 id="java-8_2">Java 8中的可选项是什么？</h3>
+<h3 id="java-8_2">Java 8中的可选项是什么？<a class="headerlink" href="#java-8_2" title="Permanent link">&para;</a></h3>
 <p>Java 8引入了一个新的容器类<code>java.util.Optional</code>。如果某个值可用，它将包装这个值。如果该值不可用，则应返回空的可选项。因此，它代表空值、缺失值。</p>
 <p>这个类有各种实用方法，如<code>isPresent()</code>，它可以帮助用户避免使用空值检查。由于不直接返回值，而是返回包装器对象，所以用户可以避免空指针异常。</p>
-<h3 id="java-8_3">解释Java 8中间操作与终端操作？</h3>
+<h3 id="java-8_3">解释Java 8中间操作与终端操作？<a class="headerlink" href="#java-8_3" title="Permanent link">&para;</a></h3>
 <p>流操作可以分为两部分：</p>
 <ul>
 <li><strong>中间操作</strong></li>
@@ -395,30 +395,30 @@
 <li><strong>终端操作</strong></li>
 </ul>
 <p>产生<strong>非流</strong>，结果如：<strong>原始值</strong>，<strong>集合</strong>或根本<strong>没有值</strong>。</p>
-<h3 id="lambda">什么是Lambda表达式？</h3>
+<h3 id="lambda">什么是Lambda表达式？<a class="headerlink" href="#lambda" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Lambda Expression可以定义为允许用户<u>将方法作为参数传递</u>的<strong>匿名函数</strong>。这<u>有助于删除大量的样板代码</u>。Lambda函数<u>没有访问修饰符（私有，公共或受保护），没有返回类型声明和没有名称</u>。</li>
 <li>Lambda表达式允许用户将“函数”传递给代码。所以，与以前需要一整套的接口/抽象类相比，我们可以更容易地编写代码。例如，假设我们的代码具有一些复杂的循环/条件逻辑或工作流程。使用lambda表达式，在那些有难度的地方，可以得到很好的解决。</li>
 </ul>
-<h3 id="lambda_1">Lambda函数的优点</h3>
+<h3 id="lambda_1">Lambda函数的优点<a class="headerlink" href="#lambda_1" title="Permanent link">&para;</a></h3>
 <p>直到Java 8列表和集合通常由客户端代码从集合中获取迭代器来处理，然后使用它迭代其元素并依次处理每个元素。如果要并行处理不同的元素，那么客户代码而不是集合的责任就是组织它。 通过Java 8，可以更轻松地在多个线程上分发集合的处理。 集合现在可以在内部组织自己的迭代，将并行化的责任从客户端代码转移到库代码中。</p>
 <p><strong>更少的代码行</strong>。如上所述，用户必须仅以声明方式声明要执行的操作。 </p>
-<pre><code class="language-java">n -&gt; System.out.println(&quot;Hello World&quot;+ n); 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="p">);</span><span class="w"> </span>
+</code></pre></div>
 <p>所以用户必须键入减少的代码量。</p>
 <p>使用Java 8 Lambda表达式可以实现<strong>更高的效率</strong>。通过使用具有多核的CPU，用户可以通过使用lambda并行处理集合来利用多核CPU。</p>
-<h3 id="java8metaspacepermgen-space">什么是Java8中的MetaSpace？它与PermGen Space有何不同？</h3>
+<h3 id="java8metaspacepermgen-space">什么是Java8中的MetaSpace？它与PermGen Space有何不同？<a class="headerlink" href="#java8metaspacepermgen-space" title="Permanent link">&para;</a></h3>
 <p>使用JDK8时，<strong>permGen</strong>空间已被删除。那么现在将元数据信息存储在哪里？</p>
 <p>此元数据现在存储在<strong>本机内存</strong>中，称为“<strong>MetaSpace</strong>”。该内存不是连续的Java堆内存，它允许通过垃圾收集、自动调整、<strong>元数据并发解除分配</strong>来改进PermGen空间。</p>
-<h3 id="lambdalambda">Lambda表达式的参数列表与Lambda箭头运算符有何不同？</h3>
+<h3 id="lambdalambda">Lambda表达式的参数列表与Lambda箭头运算符有何不同？<a class="headerlink" href="#lambdalambda" title="Permanent link">&para;</a></h3>
 <p>Lambda表达式可以一次携带零个，一个或甚至多个参数。另一方面，Lambda箭头运算符使用图标“-&gt;”将这些参数从列表和主体中分离出来。</p>
-<h3 id="java-8_4"><font style="color:#CF1322;">java 8 流式使⽤</font></h3>
-<pre><code class="language-java">List&lt;Integer&gt; evens = nums.stream().filter(num -&gt; num % 2 == 0).collect(Collectors.toList());
-// 1、stream()操作将集合转换成一个流，
-// 2、filter()执行我们自定义的筛选处理，这里是通过lambda表达式筛选出所有偶数，
-// 3、最后我们通过collect()对结果进行封装处理，并通过Collectors.toList()指定其封装成为一个List集合返回。
-</code></pre>
-<h3 id="java17181910"><font style="color:#CF1322;background-color:rgb(255,255,255);">Java1.7与1.8、1.9、10 新特性</font></h3>
+<h3 id="java-8_4"><font style="color:#CF1322;">java 8 流式使⽤</font><a class="headerlink" href="#java-8_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">evens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">filter</span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="na">collect</span><span class="p">(</span><span class="n">Collectors</span><span class="p">.</span><span class="na">toList</span><span class="p">());</span>
+<span class="c1">// 1、stream()操作将集合转换成一个流，</span>
+<span class="c1">// 2、filter()执行我们自定义的筛选处理，这里是通过lambda表达式筛选出所有偶数，</span>
+<span class="c1">// 3、最后我们通过collect()对结果进行封装处理，并通过Collectors.toList()指定其封装成为一个List集合返回。</span>
+</code></pre></div>
+<h3 id="java17181910"><font style="color:#CF1322;background-color:rgb(255,255,255);">Java1.7与1.8、1.9、10 新特性</font><a class="headerlink" href="#java17181910" title="Permanent link">&para;</a></h3>
 <ul>
 <li>1.7</li>
 <li><strong>switch中可以使用字串</strong>了</li>
@@ -452,7 +452,7 @@
 <li>HTTP 2.0客户端</li>
 <li>Kulla计划: Java的REPL实现</li>
 </ul>
-<h3 id="java8">Java8的新特性有哪些？</h3>
+<h3 id="java8">Java8的新特性有哪些？<a class="headerlink" href="#java8" title="Permanent link">&para;</a></h3>
 <ul>
 <li><font style="color:rgb(51,51,51);">Lambda  表达式：Lambda允许把函数作为一个方法的参数</font></li>
 <li><font style="color:rgb(51,51,51);">Stream API ：新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中默认方法：默认方法就是一个在接口里面有了一个实现的方法。</font></li>

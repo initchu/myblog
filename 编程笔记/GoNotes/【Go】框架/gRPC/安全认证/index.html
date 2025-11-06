@@ -251,7 +251,7 @@
 
 
 
-<h1 id="_1">安全认证</h1>
+<h1 id="_1">安全认证<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>客户端和服务端之间调用，我们可以通过加入证书的方式，实现调用的安全性
 </p>
@@ -263,7 +263,7 @@
 <li>完整性(message integrity)，通过 MAC 校验机制，一旦被篡改，通信双方会立刻发现；</li>
 <li>认证(mutual authentication)，双方认证,双方都可以配备证书，防止身份被冒充；</li>
 </ul>
-<h1 id="_2">生成自签证书</h1>
+<h1 id="_2">生成自签证书<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <blockquote>
 <p>生产环境可以购买证书或者使用一些平台发放的免费证书
 </p>
@@ -273,19 +273,19 @@
 Win 网站下载：<a href="http://slproweb.com/products/Win32OpenSSL.html">http://slproweb.com/products/Win32OpenSSL.html</a></li>
 <li>生成<strong>私钥</strong>文件 </li>
 </ul>
-<pre><code class="language-shell">## 需要输入密码123456
-openssl genrsa -des3 -out ca.key 2048
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## 需要输入密码123456</span>
+openssl<span class="w"> </span>genrsa<span class="w"> </span>-des3<span class="w"> </span>-out<span class="w"> </span>ca.key<span class="w"> </span><span class="m">2048</span>
+</code></pre></div>
 <ul>
 <li>创建<strong>证书（公钥）</strong>请求 </li>
 </ul>
-<pre><code class="language-shell">openssl req -new -key ca.key -out ca.csr
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>req<span class="w"> </span>-new<span class="w"> </span>-key<span class="w"> </span>ca.key<span class="w"> </span>-out<span class="w"> </span>ca.csr
+</code></pre></div>
 <ul>
 <li>生成 ca.crt </li>
 </ul>
-<pre><code class="language-shell">openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-in<span class="w"> </span>ca.csr<span class="w"> </span>-signkey<span class="w"> </span>ca.key<span class="w"> </span>-out<span class="w"> </span>ca.crt
+</code></pre></div>
 <p>从之前下载的路径中（有时候在 C 盘）找到 openssl.cnf 文件，移到目录该下：</p>
 <p><img alt="1657159651602-a8ff049d-c65d-4b07-810b-88cb650815a0.png" src="../img/ixSS2WTNv-aJsufz/1657159651602-a8ff049d-c65d-4b07-810b-88cb650815a0-768598.png" /></p>
 <ol>
@@ -303,29 +303,29 @@ openssl genrsa -des3 -out ca.key 2048
 <ol>
 <li>添加新的标签 [ alt_names ] , 和标签字段 </li>
 </ol>
-<pre><code class="language-properties">[ alt_names ]
+<div class="highlight"><pre><span></span><code><span class="na">[</span><span class="w"> </span><span class="s">alt_names ]</span>
 
-DNS.1 = *.mszlu.com
-</code></pre>
+<span class="na">DNS.1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">*.mszlu.com</span>
+</code></pre></div>
 <p><img alt="1657160157603-d7aab76c-3909-4e7c-bca5-a598174852ef.png" src="../img/ixSS2WTNv-aJsufz/1657160157603-d7aab76c-3909-4e7c-bca5-a598174852ef-202686.png" /></p>
 <ol>
 <li>生成证书私钥server.key </li>
 </ol>
-<pre><code class="language-shell">openssl genpkey -algorithm RSA -out server.key
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>genpkey<span class="w"> </span>-algorithm<span class="w"> </span>RSA<span class="w"> </span>-out<span class="w"> </span>server.key
+</code></pre></div>
 <p><img alt="1657160286601-304032d8-37e1-41ff-953b-7c0086c55b11.png" src="../img/ixSS2WTNv-aJsufz/1657160286601-304032d8-37e1-41ff-953b-7c0086c55b11-341761.png" /></p>
 <ol>
 <li>通过私钥server.key生成证书请求文件server.csr</li>
 </ol>
 <p>openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt -days 365</p>
-<pre><code class="language-shell">openssl req -new -nodes -key server.key -out server.csr -days 3650 -config ./openssl.cnf -extensions v3_req
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>req<span class="w"> </span>-new<span class="w"> </span>-nodes<span class="w"> </span>-key<span class="w"> </span>server.key<span class="w"> </span>-out<span class="w"> </span>server.csr<span class="w"> </span>-days<span class="w"> </span><span class="m">3650</span><span class="w"> </span>-config<span class="w"> </span>./openssl.cnf<span class="w"> </span>-extensions<span class="w"> </span>v3_req
+</code></pre></div>
 <ol>
 <li>生成SAN证书 </li>
 </ol>
 <p>openssl x509 -req -days <font style="color:rgb(209, 154, 102);">365</font> -<font style="color:rgb(198, 120, 221);">in</font> server.csr -<font style="color:rgb(198, 120, 221);">out</font> server.pem \   -CA ca.crt -<font style="color:rgb(230, 192, 123);">CAkey</font> ca.key -<font style="color:rgb(230, 192, 123);">CAcreateserial</font> \ -extfile ./openssl.cnf -extensions v3_req</p>
-<pre><code class="language-shell">openssl x509 -req -days 365 -in server.csr -out server.pem -CA ca.crt -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-in<span class="w"> </span>server.csr<span class="w"> </span>-out<span class="w"> </span>server.pem<span class="w"> </span>-CA<span class="w"> </span>ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>ca.key<span class="w"> </span>-CAcreateserial<span class="w"> </span>-extfile<span class="w"> </span>./openssl.cnf<span class="w"> </span>-extensions<span class="w"> </span>v3_req
+</code></pre></div>
 <p><strong>key：</strong> 服务器上的私钥文件，用于对发送给客户端数据的加密，以及对从客户端接收到数据的解密。</p>
 <ul>
 <li><strong>csr：</strong> 证书签名请求文件，用于提交给证书颁发机构（CA）对证书签名。</li>
@@ -335,261 +335,256 @@ DNS.1 = *.mszlu.com
 <p>什么是 SAN？</p>
 <p>SAN（Subject Alternative Name）是 SSL 标准 x509 中定义的一个扩展。使用了 SAN 字段的 SSL 证书，可以扩展此证书支持的域名，使得一个证书可以支持多个不同域名的解析。</p>
 <p>参考链接：<a href="https://www.csdn.net/tags/MtTaAgxsNjI4NjI4LWJsb2cO0O0O.html">https://www.csdn.net/tags/MtTaAgxsNjI4NjI4LWJsb2cO0O0O.html</a></p>
-<h1 id="_3">服务端应用证书</h1>
+<h1 id="_3">服务端应用证书<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
 <p>将<code>server.key</code>和<code>server.pem</code> copy到程序中</p>
-<pre><code class="language-go">
-func main()  {
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
 
-    //添加证书
-    file, err2 := credentials.NewServerTLSFromFile(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)
-    if err2 != nil {
-        log.Fatal(&quot;证书生成错误&quot;,err2)
-    }
-    rpcServer := grpc.NewServer(grpc.Creds(file))
+<span class="w">    </span><span class="c1">//添加证书</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">credentials</span><span class="p">.</span><span class="nx">NewServerTLSFromFile</span><span class="p">(</span><span class="s">&quot;keys/mszlu.pem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keys/mszlu.key&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;证书生成错误&quot;</span><span class="p">,</span><span class="nx">err2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">rpcServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">(</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">Creds</span><span class="p">(</span><span class="nx">file</span><span class="p">))</span>
 
-    service.RegisterProdServiceServer(rpcServer,service.ProductService)
+<span class="w">    </span><span class="nx">service</span><span class="p">.</span><span class="nx">RegisterProdServiceServer</span><span class="p">(</span><span class="nx">rpcServer</span><span class="p">,</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductService</span><span class="p">)</span>
 
-    listener ,err := net.Listen(&quot;tcp&quot;,&quot;:8002&quot;)
-    if err != nil {
-        log.Fatal(&quot;启动监听出错&quot;,err)
-    }
-    err = rpcServer.Serve(listener)
-    if err != nil {
-        log.Fatal(&quot;启动服务出错&quot;,err)
-    }
-    fmt.Println(&quot;启动grpc服务端成功&quot;)
-}
-</code></pre>
-<h1 id="_4">客户端认证</h1>
+<span class="w">    </span><span class="nx">listener</span><span class="w"> </span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="s">&quot;:8002&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;启动监听出错&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">rpcServer</span><span class="p">.</span><span class="nx">Serve</span><span class="p">(</span><span class="nx">listener</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;启动服务出错&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;启动grpc服务端成功&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="_4">客户端认证<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
 <p>公钥 copy 到客户端</p>
-<pre><code class="language-go">
-func main()  {
-    file, err2 := credentials.NewClientTLSFromFile(&quot;client/keys/mszlu.pem&quot;, &quot;*.mszlu.com&quot;)
-    if err2 != nil {
-        log.Fatal(&quot;证书错误&quot;,err2)
-    }
-    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(file))
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">credentials</span><span class="p">.</span><span class="nx">NewClientTLSFromFile</span><span class="p">(</span><span class="s">&quot;client/keys/mszlu.pem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;*.mszlu.com&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;证书错误&quot;</span><span class="p">,</span><span class="nx">err2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="s">&quot;:8002&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">WithTransportCredentials</span><span class="p">(</span><span class="nx">file</span><span class="p">))</span>
 
-    if err != nil {
-        log.Fatal(&quot;服务端出错，连接不上&quot;,err)
-    }
-    defer conn.Close()
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;服务端出错，连接不上&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-    prodClient := service.NewProdServiceClient(conn)
+<span class="w">    </span><span class="nx">prodClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">service</span><span class="p">.</span><span class="nx">NewProdServiceClient</span><span class="p">(</span><span class="nx">conn</span><span class="p">)</span>
 
-    request := &amp;service.ProductRequest{
-        ProdId: 123,
-    }
-    stockResponse, err := prodClient.GetProductStock(context.Background(), request)
-    if err != nil {
-        log.Fatal(&quot;查询库存出错&quot;,err)
-    }
-    fmt.Println(&quot;查询成功&quot;,stockResponse.ProdStock)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">request</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductRequest</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ProdId</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">stockResponse</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">prodClient</span><span class="p">.</span><span class="nx">GetProductStock</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">request</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;查询库存出错&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;查询成功&quot;</span><span class="p">,</span><span class="nx">stockResponse</span><span class="p">.</span><span class="nx">ProdStock</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>上述认证方式为单向认证：</p>
 <p>中间人攻击</p>
-<h1 id="_5">双向认证</h1>
+<h1 id="_5">双向认证<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h1>
 <p>上面的server.pem和server.key 是服务端的 公钥和私钥。</p>
 <p>如果双向认证，客户端也需要生成对应的公钥和私钥。</p>
 <p>私钥：</p>
-<pre><code class="language-shell">openssl genpkey -algorithm RSA -out client.key
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>genpkey<span class="w"> </span>-algorithm<span class="w"> </span>RSA<span class="w"> </span>-out<span class="w"> </span>client.key
+</code></pre></div>
 <p>证书:</p>
-<pre><code class="language-shell">openssl req -new -nodes -key client.key -out client.csr -days 3650 -config ./openssl.cnf -extensions v3_req
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>req<span class="w"> </span>-new<span class="w"> </span>-nodes<span class="w"> </span>-key<span class="w"> </span>client.key<span class="w"> </span>-out<span class="w"> </span>client.csr<span class="w"> </span>-days<span class="w"> </span><span class="m">3650</span><span class="w"> </span>-config<span class="w"> </span>./openssl.cnf<span class="w"> </span>-extensions<span class="w"> </span>v3_req
+</code></pre></div>
 <p>SAN证书：</p>
-<pre><code class="language-shell">openssl x509 -req -days 365 -in client.csr -out client.pem -CA ca.crt -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
-</code></pre>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-in<span class="w"> </span>client.csr<span class="w"> </span>-out<span class="w"> </span>client.pem<span class="w"> </span>-CA<span class="w"> </span>ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>ca.key<span class="w"> </span>-CAcreateserial<span class="w"> </span>-extfile<span class="w"> </span>./openssl.cnf<span class="w"> </span>-extensions<span class="w"> </span>v3_req
+</code></pre></div>
 <p>服务端：</p>
-<pre><code class="language-go">
-func main()  {
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
 
-    //添加证书
-    //file, err2 := credentials.NewServerTLSFromFile(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)
-    //if err2 != nil {
-    //  log.Fatal(&quot;证书生成错误&quot;,err2)
-    //}
-    // 证书认证-双向认证
-    // 从证书相关文件中读取和解析信息，得到证书公钥、密钥对
-    cert, err := tls.LoadX509KeyPair(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)
-    if err != nil {
-        log.Fatal(&quot;证书读取错误&quot;,err)
-    }
-    // 创建一个新的、空的 CertPool
-    certPool := x509.NewCertPool()
-    ca, err := ioutil.ReadFile(&quot;keys/ca.crt&quot;)
-    if err != nil {
-        log.Fatal(&quot;ca证书读取错误&quot;,err)
-    }
-    // 尝试解析所传入的 PEM 编码的证书。如果解析成功会将其加到 CertPool 中，便于后面的使用
-    certPool.AppendCertsFromPEM(ca)
-    // 构建基于 TLS 的 TransportCredentials 选项
-    creds := credentials.NewTLS(&amp;tls.Config{
-        // 设置证书链，允许包含一个或多个
-        Certificates: []tls.Certificate{cert},
-        // 要求必须校验客户端的证书。可以根据实际情况选用以下参数
-        ClientAuth: tls.RequireAndVerifyClientCert,
-        // 设置根证书的集合，校验方式使用 ClientAuth 中设定的模式
-        ClientCAs: certPool,
-    })
+<span class="w">    </span><span class="c1">//添加证书</span>
+<span class="w">    </span><span class="c1">//file, err2 := credentials.NewServerTLSFromFile(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)</span>
+<span class="w">    </span><span class="c1">//if err2 != nil {</span>
+<span class="w">    </span><span class="c1">//  log.Fatal(&quot;证书生成错误&quot;,err2)</span>
+<span class="w">    </span><span class="c1">//}</span>
+<span class="w">    </span><span class="c1">// 证书认证-双向认证</span>
+<span class="w">    </span><span class="c1">// 从证书相关文件中读取和解析信息，得到证书公钥、密钥对</span>
+<span class="w">    </span><span class="nx">cert</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tls</span><span class="p">.</span><span class="nx">LoadX509KeyPair</span><span class="p">(</span><span class="s">&quot;keys/mszlu.pem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;keys/mszlu.key&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;证书读取错误&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 创建一个新的、空的 CertPool</span>
+<span class="w">    </span><span class="nx">certPool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x509</span><span class="p">.</span><span class="nx">NewCertPool</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">ca</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;keys/ca.crt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;ca证书读取错误&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 尝试解析所传入的 PEM 编码的证书。如果解析成功会将其加到 CertPool 中，便于后面的使用</span>
+<span class="w">    </span><span class="nx">certPool</span><span class="p">.</span><span class="nx">AppendCertsFromPEM</span><span class="p">(</span><span class="nx">ca</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 构建基于 TLS 的 TransportCredentials 选项</span>
+<span class="w">    </span><span class="nx">creds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">credentials</span><span class="p">.</span><span class="nx">NewTLS</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 设置证书链，允许包含一个或多个</span>
+<span class="w">        </span><span class="nx">Certificates</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Certificate</span><span class="p">{</span><span class="nx">cert</span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// 要求必须校验客户端的证书。可以根据实际情况选用以下参数</span>
+<span class="w">        </span><span class="nx">ClientAuth</span><span class="p">:</span><span class="w"> </span><span class="nx">tls</span><span class="p">.</span><span class="nx">RequireAndVerifyClientCert</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// 设置根证书的集合，校验方式使用 ClientAuth 中设定的模式</span>
+<span class="w">        </span><span class="nx">ClientCAs</span><span class="p">:</span><span class="w"> </span><span class="nx">certPool</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
 
-    rpcServer := grpc.NewServer(grpc.Creds(creds))
+<span class="w">    </span><span class="nx">rpcServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">(</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">Creds</span><span class="p">(</span><span class="nx">creds</span><span class="p">))</span>
 
-    service.RegisterProdServiceServer(rpcServer,service.ProductService)
+<span class="w">    </span><span class="nx">service</span><span class="p">.</span><span class="nx">RegisterProdServiceServer</span><span class="p">(</span><span class="nx">rpcServer</span><span class="p">,</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductService</span><span class="p">)</span>
 
-    listener ,err := net.Listen(&quot;tcp&quot;,&quot;:8002&quot;)
-    if err != nil {
-        log.Fatal(&quot;启动监听出错&quot;,err)
-    }
-    err = rpcServer.Serve(listener)
-    if err != nil {
-        log.Fatal(&quot;启动服务出错&quot;,err)
-    }
-    fmt.Println(&quot;启动grpc服务端成功&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">listener</span><span class="w"> </span><span class="p">,</span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="s">&quot;:8002&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;启动监听出错&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">rpcServer</span><span class="p">.</span><span class="nx">Serve</span><span class="p">(</span><span class="nx">listener</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;启动服务出错&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;启动grpc服务端成功&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>客户端：</p>
-<pre><code class="language-go">
-func main()  {
-    //file, err2 := credentials.NewClientTLSFromFile(&quot;client/keys/mszlu.pem&quot;, &quot;*.mszlu.com&quot;)
-    //if err2 != nil {
-    //  log.Fatal(&quot;证书错误&quot;,err2)
-    //}
-    // 证书认证-双向认证
-    // 从证书相关文件中读取和解析信息，得到证书公钥、密钥对
-    cert, _ := tls.LoadX509KeyPair(&quot;client/keys/test.pem&quot;, &quot;client/keys/test.key&quot;)
-    // 创建一个新的、空的 CertPool
-    certPool := x509.NewCertPool()
-    ca, _ := ioutil.ReadFile(&quot;client/keys/ca.crt&quot;)
-    // 尝试解析所传入的 PEM 编码的证书。如果解析成功会将其加到 CertPool 中，便于后面的使用
-    certPool.AppendCertsFromPEM(ca)
-    // 构建基于 TLS 的 TransportCredentials 选项
-    creds := credentials.NewTLS(&amp;tls.Config{
-        // 设置证书链，允许包含一个或多个
-        Certificates: []tls.Certificate{cert},
-        // 要求必须校验客户端的证书。可以根据实际情况选用以下参数
-        ServerName: &quot;*.mszlu.com&quot;,
-        RootCAs:    certPool,
-    })
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//file, err2 := credentials.NewClientTLSFromFile(&quot;client/keys/mszlu.pem&quot;, &quot;*.mszlu.com&quot;)</span>
+<span class="w">    </span><span class="c1">//if err2 != nil {</span>
+<span class="w">    </span><span class="c1">//  log.Fatal(&quot;证书错误&quot;,err2)</span>
+<span class="w">    </span><span class="c1">//}</span>
+<span class="w">    </span><span class="c1">// 证书认证-双向认证</span>
+<span class="w">    </span><span class="c1">// 从证书相关文件中读取和解析信息，得到证书公钥、密钥对</span>
+<span class="w">    </span><span class="nx">cert</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">tls</span><span class="p">.</span><span class="nx">LoadX509KeyPair</span><span class="p">(</span><span class="s">&quot;client/keys/test.pem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client/keys/test.key&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 创建一个新的、空的 CertPool</span>
+<span class="w">    </span><span class="nx">certPool</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x509</span><span class="p">.</span><span class="nx">NewCertPool</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">ca</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;client/keys/ca.crt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 尝试解析所传入的 PEM 编码的证书。如果解析成功会将其加到 CertPool 中，便于后面的使用</span>
+<span class="w">    </span><span class="nx">certPool</span><span class="p">.</span><span class="nx">AppendCertsFromPEM</span><span class="p">(</span><span class="nx">ca</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 构建基于 TLS 的 TransportCredentials 选项</span>
+<span class="w">    </span><span class="nx">creds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">credentials</span><span class="p">.</span><span class="nx">NewTLS</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 设置证书链，允许包含一个或多个</span>
+<span class="w">        </span><span class="nx">Certificates</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Certificate</span><span class="p">{</span><span class="nx">cert</span><span class="p">},</span>
+<span class="w">        </span><span class="c1">// 要求必须校验客户端的证书。可以根据实际情况选用以下参数</span>
+<span class="w">        </span><span class="nx">ServerName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*.mszlu.com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">RootCAs</span><span class="p">:</span><span class="w">    </span><span class="nx">certPool</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
 
-    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(creds))
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="s">&quot;:8002&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">WithTransportCredentials</span><span class="p">(</span><span class="nx">creds</span><span class="p">))</span>
 
-    if err != nil {
-        log.Fatal(&quot;服务端出错，连接不上&quot;,err)
-    }
-    defer conn.Close()
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;服务端出错，连接不上&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">conn</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-    prodClient := service.NewProdServiceClient(conn)
+<span class="w">    </span><span class="nx">prodClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">service</span><span class="p">.</span><span class="nx">NewProdServiceClient</span><span class="p">(</span><span class="nx">conn</span><span class="p">)</span>
 
-    request := &amp;service.ProductRequest{
-        ProdId: 123,
-    }
-    stockResponse, err := prodClient.GetProductStock(context.Background(), request)
-    if err != nil {
-        log.Fatal(&quot;查询库存出错&quot;,err)
-    }
-    fmt.Println(&quot;查询成功&quot;,stockResponse.ProdStock)
-}
-</code></pre>
-<h1 id="token">Token认证</h1>
-<h2 id="_6">服务端添加用户名密码的校验</h2>
-<pre><code class="language-go">
-func main()  {
-    var authInterceptor grpc.UnaryServerInterceptor
-    authInterceptor = func(
-        ctx context.Context,
-        req interface{},
-        info *grpc.UnaryServerInfo,
-        handler grpc.UnaryHandler,
-    ) (resp interface{}, err error) {
-        //拦截普通方法请求，验证 Token
-        err = Auth(ctx)
-        if err != nil {
-            return
-        }
-        // 继续处理请求
-        return handler(ctx, req)
-    }
-    server := grpc.NewServer(grpc.UnaryInterceptor(authInterceptor))
-    service.RegisterProdServiceServer(server,service.ProductService)
+<span class="w">    </span><span class="nx">request</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductRequest</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ProdId</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">stockResponse</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">prodClient</span><span class="p">.</span><span class="nx">GetProductStock</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">request</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;查询库存出错&quot;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;查询成功&quot;</span><span class="p">,</span><span class="nx">stockResponse</span><span class="p">.</span><span class="nx">ProdStock</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="token">Token认证<a class="headerlink" href="#token" title="Permanent link">&para;</a></h1>
+<h2 id="_6">服务端添加用户名密码的校验<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">authInterceptor</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">UnaryServerInterceptor</span>
+<span class="w">    </span><span class="nx">authInterceptor</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span>
+<span class="w">        </span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">req</span><span class="w"> </span><span class="kd">interface</span><span class="p">{},</span>
+<span class="w">        </span><span class="nx">info</span><span class="w"> </span><span class="o">*</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">UnaryServerInfo</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">handler</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">UnaryHandler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">resp</span><span class="w"> </span><span class="kd">interface</span><span class="p">{},</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">//拦截普通方法请求，验证 Token</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Auth</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 继续处理请求</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">server</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">NewServer</span><span class="p">(</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">UnaryInterceptor</span><span class="p">(</span><span class="nx">authInterceptor</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">service</span><span class="p">.</span><span class="nx">RegisterProdServiceServer</span><span class="p">(</span><span class="nx">server</span><span class="p">,</span><span class="nx">service</span><span class="p">.</span><span class="nx">ProductService</span><span class="p">)</span>
 
-    listener, err := net.Listen(&quot;tcp&quot;, &quot;:8002&quot;)
-    if err != nil {
-        log.Fatal(&quot;服务监听端口失败&quot;, err)
-    }
-    err = server.Serve(listener)
-    if err != nil {
-        log.Fatal(&quot;服务、启动失败&quot;, err)
-    }
-    fmt.Println(&quot;启动成功&quot;)
-}
+<span class="w">    </span><span class="nx">listener</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">net</span><span class="p">.</span><span class="nx">Listen</span><span class="p">(</span><span class="s">&quot;tcp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;:8002&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;服务监听端口失败&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">server</span><span class="p">.</span><span class="nx">Serve</span><span class="p">(</span><span class="nx">listener</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;服务、启动失败&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;启动成功&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
 
-func Auth(ctx context.Context) error {
-    md, ok := metadata.FromIncomingContext(ctx)
-    if !ok {
-        return fmt.Errorf(&quot;missing credentials&quot;)
-    }
-    var user string
-    var password string
+<span class="kd">func</span><span class="w"> </span><span class="nx">Auth</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">md</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">metadata</span><span class="p">.</span><span class="nx">FromIncomingContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;missing credentials&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span>
 
-    if val, ok := md[&quot;user&quot;]; ok {
-        user = val[0]
-    }
-    if val, ok := md[&quot;password&quot;]; ok {
-        password = val[0]
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">md</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">val</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">md</span><span class="p">[</span><span class="s">&quot;password&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">password</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
 
-    if user != &quot;admin&quot; || password != &quot;admin&quot; {
-        return status.Errorf(codes.Unauthenticated, &quot;token不合法&quot;)
-    }
-    return nil
-}
-</code></pre>
-<h2 id="_7">客户端实现</h2>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">status</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="nx">codes</span><span class="p">.</span><span class="nx">Unauthenticated</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;token不合法&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="_7">客户端实现<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>客户端需要实现 <code>PerRPCCredentials</code> 接口。</p>
-<pre><code class="language-go">type PerRPCCredentials interface {
-    // GetRequestMetadata gets the current request metadata, refreshing
-    // tokens if required. This should be called by the transport layer on
-    // each request, and the data should be populated in headers or other
-    // context. If a status code is returned, it will be used as the status
-    // for the RPC. uri is the URI of the entry point for the request.
-    // When supported by the underlying implementation, ctx can be used for
-    // timeout and cancellation. Additionally, RequestInfo data will be
-    // available via ctx to this call.
-    // TODO(zhaoq): Define the set of the qualified keys instead of leaving
-    // it as an arbitrary string.
-    GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error)
-    // RequireTransportSecurity indicates whether the credentials requires
-    // transport security.
-    RequireTransportSecurity() bool
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">PerRPCCredentials</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// GetRequestMetadata gets the current request metadata, refreshing</span>
+<span class="w">    </span><span class="c1">// tokens if required. This should be called by the transport layer on</span>
+<span class="w">    </span><span class="c1">// each request, and the data should be populated in headers or other</span>
+<span class="w">    </span><span class="c1">// context. If a status code is returned, it will be used as the status</span>
+<span class="w">    </span><span class="c1">// for the RPC. uri is the URI of the entry point for the request.</span>
+<span class="w">    </span><span class="c1">// When supported by the underlying implementation, ctx can be used for</span>
+<span class="w">    </span><span class="c1">// timeout and cancellation. Additionally, RequestInfo data will be</span>
+<span class="w">    </span><span class="c1">// available via ctx to this call.</span>
+<span class="w">    </span><span class="c1">// TODO(zhaoq): Define the set of the qualified keys instead of leaving</span>
+<span class="w">    </span><span class="c1">// it as an arbitrary string.</span>
+<span class="w">    </span><span class="nx">GetRequestMetadata</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">uri</span><span class="w"> </span><span class="o">...</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// RequireTransportSecurity indicates whether the credentials requires</span>
+<span class="w">    </span><span class="c1">// transport security.</span>
+<span class="w">    </span><span class="nx">RequireTransportSecurity</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><code>GetRequestMetadata</code> 方法返回认证需要的必要信息，<code>RequireTransportSecurity</code> 方法表示是否启用安全链接，在生产环境中，一般都是启用的，但为了测试方便，暂时这里不启用了。</p>
 <p>实现接口：</p>
-<pre><code class="language-go">type Authentication struct {
-    User     string
-    Password string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Authentication</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">User</span><span class="w">     </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (a *Authentication) GetRequestMetadata(context.Context, ...string) (
-    map[string]string, error,
-) {
-    return map[string]string{&quot;user&quot;: a.User, &quot;password&quot;: a.Password}, nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="nx">Authentication</span><span class="p">)</span><span class="w"> </span><span class="nx">GetRequestMetadata</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="o">...</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">,</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">a</span><span class="p">.</span><span class="nx">Password</span><span class="p">},</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func (a *Authentication) RequireTransportSecurity() bool {
-    return false
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="nx">Authentication</span><span class="p">)</span><span class="w"> </span><span class="nx">RequireTransportSecurity</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>应用：</p>
-<pre><code class="language-go">user := &amp;auth.Authentication{
-        User: &quot;admin&quot;,
-        Password: &quot;admin&quot;,
-    }
-    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(insecure.NewCredentials()),grpc.WithPerRPCCredentials(user))
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">user</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">auth</span><span class="p">.</span><span class="nx">Authentication</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">User</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">conn</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="s">&quot;:8002&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">grpc</span><span class="p">.</span><span class="nx">WithTransportCredentials</span><span class="p">(</span><span class="nx">insecure</span><span class="p">.</span><span class="nx">NewCredentials</span><span class="p">()),</span><span class="nx">grpc</span><span class="p">.</span><span class="nx">WithPerRPCCredentials</span><span class="p">(</span><span class="nx">user</span><span class="p">))</span>
+</code></pre></div>
 <blockquote>
 <p>更新: 2022-07-07 16:52:48<br />
 原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/yolhce">https://www.yuque.com/xiaoshan_wgo/codingnotes/yolhce</a></p>

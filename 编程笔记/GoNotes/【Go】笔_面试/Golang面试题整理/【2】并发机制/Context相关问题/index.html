@@ -251,8 +251,8 @@
 
 
 
-<h1 id="context">Context 相关问题</h1>
-<h1 id="goroutine-goroutine"><font style="color:rgb(0, 0, 0);">父 goroutine 退出，如何使得子 goroutine 也退出？</font></h1>
+<h1 id="context">Context 相关问题<a class="headerlink" href="#context" title="Permanent link">&para;</a></h1>
+<h1 id="goroutine-goroutine"><font style="color:rgb(0, 0, 0);">父 goroutine 退出，如何使得子 goroutine 也退出？</font><a class="headerlink" href="#goroutine-goroutine" title="Permanent link">&para;</a></h1>
 <p>父子协程的退出分为两种情况：</p>
 <ul>
 <li>当父协程是 main 协程时，父协程退出，父协程下的所有子协程也会跟着退出；</li>
@@ -260,17 +260,17 @@
 </ul>
 <p>这时候就需要使子协程退出，<code>context</code> 就登场了：</p>
 <p><code>&lt;font style="color:rgb(77, 77, 77);"&gt;context&lt;/font&gt;</code><font style="color:rgb(77, 77, 77);">主要用于父子任务之间的同步取消信号，本质上是一种协程调度的方式。</font></p>
-<pre><code class="language-go">type Context interface {
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Context</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
 
-    Deadline() (deadline time.Time, ok bool)
+<span class="w">    </span><span class="nx">Deadline</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">deadline</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span>
 
-    Done() &lt;-chan struct{}
+<span class="w">    </span><span class="nx">Done</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-    Err() error
+<span class="w">    </span><span class="nx">Err</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
 
-    Value(key interface{}) interface{}
-}
-</code></pre>
+<span class="w">    </span><span class="nx">Value</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>context.Context 是 Go 语言在 1.7 版本中引入标准库的接口，该接口定义了四个需要实现的方法，其中包括：</p>
 <ol>
 <li>Deadline — 返回 context.Context 被取消的时间，也就是完成工作的截止日期；</li>
