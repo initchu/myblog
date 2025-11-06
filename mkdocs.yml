@@ -1,0 +1,23 @@
+site_name: 褚成志的技术博客
+site_url: http://blog.chucz.asia
+site_author: 褚成志
+
+theme:
+  name: material
+  language: zh
+  palette:
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+nav:
+  - 首页: index.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
