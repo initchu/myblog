@@ -1,0 +1,756 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/Java/%E9%9B%86%E5%90%88/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>集合 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              集合
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见的集合有哪些？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-set-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      List 、Set 和 Map 的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      哪些集合类是线程安全的？哪些不安全？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapsetlistqueuestack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Map、Set、List、Queue、Stack 的特点与用法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collection-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection 包结构，与 Collections 的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#list-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      List 和 Map 区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      用过哪些集合类？能分别说下他们的应用场景吗？🔗
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      列举几个 Java Collection 类库中的常用类，试简述其类结构、对应算法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listsetmapcollection" class="md-nav__link">
+    <span class="md-ellipsis">
+      List、Set、Map是否都继承自Collection接口？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      简介常用集合类，以及对应算法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#listmapset" class="md-nav__link">
+    <span class="md-ellipsis">
+      List、Map、Set的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java容器类之间的区别（乐视、美团）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      列举常见集合框架类型
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arrayssort-collectionssort" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arrays.sort 和 Collections.sort 实现原理 和区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparable-comparator" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparable 接口和 Comparator 接口实现比较
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iterator" class="md-nav__link">
+    <span class="md-ellipsis">
+      迭代器 Iterator 是什么？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#iterator-listiterator" class="md-nav__link">
+    <span class="md-ellipsis">
+      * Iterator 和 ListIterator 有什么区别？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么使用迭代器？
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">集合</h1>
+<p><strong>参考</strong></p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/yangming1996/p/7997468.html">揭秘 HashMap 实现原理（Java 8） - Single_Yam - 博客园</a></p>
+<p><a href="https://coolshell.cn/articles/9606.html">疫苗：Java HashMap的死循环 | 酷 壳 - CoolShell</a></p>
+<p><a href="https://blog.csdn.net/qq_33709582/article/details/113337405">真正搞懂hashCode和hash算法_负债程序猿的博客-CSDN博客_hashcode和hash值</a></p>
+<p><a href="https://www.yuque.com/joyo/java/xunipx">Java集合类及其数据结构归纳</a>
+</p>
+</blockquote>
+<h3 id="_2">常见的集合有哪些？</h3>
+<p>Java集合类主要由两个接口 <strong>Collection </strong>和 <strong>Map </strong>派生出来的，Collection 有三个子接口：List、Set、Queue。</p>
+<p>Java集合框架图如下：</p>
+<p><strong>Collection：</strong></p>
+<p><img alt="144dee3d3d7cf073f9a84a909db374ae.svg" src="img/Ry4XJlCYWjcou1zQ/144dee3d3d7cf073f9a84a909db374ae-736379.svg" /></p>
+<hr />
+<p><strong>Map：</strong></p>
+<p><img alt="5bcaddbadf05b8bae53153b6c899d699.svg" src="img/Ry4XJlCYWjcou1zQ/5bcaddbadf05b8bae53153b6c899d699-984541.svg" /></p>
+<ul>
+<li>List 代表了有序可重复集合，可直接根据元素的索引来访问；</li>
+<li>Set 代表无序不可重复集合，只能根据元素本身来访问；</li>
+<li>Queue 是队列集合;</li>
+<li>Map 代表的是存储 key-value 对的集合，可根据元素的 key 来访问 value。</li>
+</ul>
+<p>集合体系中常用的实现类有 ArrayList、LinkedList、HashSet、TreeSet、HashMap、TreeMap 等实现类。</p>
+<h3 id="list-set-map">List 、Set 和 Map 的区别</h3>
+<ul>
+<li>List  以索引来存取元素，有序的，元素是<strong>允许重复</strong>的，可以插入多个 null；</li>
+<li>Set 不能存放重复元素，无序的，只允许一个 null；</li>
+<li>Map 保存键值对映射；</li>
+<li>List 底层实现有<strong>数组</strong>、<strong>链表</strong>两种方式；</li>
+<li>Set、Map 容器有基于<strong>哈希</strong>存储和<strong>红黑树</strong>两种方式实现；</li>
+<li>Set 基于 Map 实现，Set 里的元素值就是 Map的键。</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_43868322/article/details/115920238">Set，Map的底层实现_雄关漫道_的博客-CSDN博客_set底层是map</a>
+</p>
+</blockquote>
+<h3 id="_3">哪些集合类是线程安全的？哪些不安全？</h3>
+<p>线性安全的集合类： </p>
+<ul>
+<li>Vector：比ArrayList多了同步机制。 </li>
+<li>Hashtable。 </li>
+<li>ConcurrentHashMap：是一种高效并且线程安全的集合。 </li>
+<li>Stack：栈，也是线程安全的，继承于Vector。 </li>
+</ul>
+<p>线性不安全的集合类： </p>
+<ul>
+<li>HashMap </li>
+<li>ArrayList </li>
+<li>LinkedList </li>
+<li>HashSet </li>
+<li>TreeSet </li>
+<li>TreeMap</li>
+</ul>
+<h3 id="mapsetlistqueuestack">Map、Set、List、Queue、Stack 的特点与用法</h3>
+<ul>
+<li><strong>Map<br />
+</strong>键值对集合，k-v 键值对存储。Hashtable 和 HashMap 是 Map 的实现类   <ul>
+<li><strong>Hashtable</strong> 是线程安全的，不能存储 null 值   </li>
+<li><strong>HashMap</strong> 不是线程安全的，可以存储 null 值  </li>
+<li><strong>TreeMap </strong>可以保证顺序，HashMap 不保证顺序，即为无序的。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>TreeMap 实现了 SortedMap，SortedMap 继承了 Map
+</p>
+</blockquote>
+<ul>
+<li><strong>Set</strong><br />
+集合，无序，不重复</li>
+</ul>
+<blockquote>
+<p>LinkedHashSet 是有序的
+</p>
+</blockquote>
+<ul>
+<li><strong>List</strong><br />
+数组集合，ArrayList ， Vector ， LinkedList 是 List 的实现类<ul>
+<li><strong>ArrayList</strong> 是线程不安全的， Vector 是线程安全的，这两个类底层都是由<strong>数组</strong>实现的</li>
+<li><strong>LinkedList</strong> 是线程不安全的，底层是由<strong>链表</strong>实现的   </li>
+</ul>
+</li>
+<li><strong>Queue</strong><br />
+队列，提供了几个基本方法，add(E e)、offer(E e)、poll()、peek() 等。已知实现类有 <strong>LinkedList</strong>、<strong>PriorityQueue </strong>等。</li>
+</ul>
+<blockquote>
+<ol>
+<li>add<br />
+如果可以在不违反容量限制的情况下，立即将指定元素插入此队列，成功时返回true，如果当前没有可用空间，则引发IllegalStateException。</li>
+<li>offer<br />
+如果可以在不违反容量限制的情况下，立即将指定元素插入此队列。</li>
+<li>poll<br />
+检索并删除此队列的头，如果此队列为空，则返回null。</li>
+<li>peek<br />
+检索但不删除此队列的头，如果此队列为空，则返回null。
+</li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>Stack</strong><br />
+栈，继承自 Vector，实现一个<strong>后进先出</strong>的栈。提供了几个基本方法，push(E item)、pop()、peak()、empty()、search(Object o) 等。</li>
+</ul>
+<blockquote>
+<ol>
+<li>push<br />
+将一个项目<strong>推到</strong>这个堆栈的<strong>顶部</strong>。这与以下效果完全相同:<br />
+addElement(item)</li>
+<li>pop()<br />
+<strong>删除</strong>此堆栈<strong>顶部</strong>的对象，并将该对象作为此函数的值返回。</li>
+<li>peek()<br />
+<strong>查看</strong>此堆栈<strong>顶部</strong>的对象，而不将其从堆栈中删除。</li>
+<li>empty()<br />
+测试此堆栈是否为空。</li>
+<li>search(Object o)<br />
+返回对象在此堆栈上的基于 1 的位置。如果对象 o 在此堆栈中作为项目出现，则此方法返回到发生的堆栈顶部最接近堆栈顶部的距离；堆栈上最上面的项目被认为在距离 1 处。equal 方法用于将 o 与该堆栈中的项目进行比较。
+</li>
+</ol>
+</blockquote>
+<h3 id="collection-collections">Collection 包结构，与 Collections 的区别</h3>
+<p>Collection 是个 java.util 下的<strong>接口</strong>，它是各种集合结构的父接口。</p>
+<p>Collections 是个 java.util 下的<strong>工具类</strong>，它包含有各种有关集合操作的静态方法。</p>
+<h3 id="list-map">List 和 Map 区别</h3>
+<p>List 是对象集合，允许对象重复。</p>
+<p>Map 是键值对的集合，不允许 key 重复，可以有一个null值作为key。</p>
+<h3 id="_4">用过哪些集合类？能分别说下他们的应用场景吗？<a href="#WJJWZ">🔗</a></h3>
+<ul>
+<li>Collection<ul>
+<li>List<ul>
+<li>ArrayLIst：单线程、读多写少</li>
+<li>LinkedList：单线程、读少写多</li>
+</ul>
+</li>
+<li>Set<ul>
+<li>HashSet：单线程、去重</li>
+<li>TreeSet：单线程、去重、顺序读写</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Map<ul>
+<li>HashMap：单线程</li>
+<li>TreeMap：单线程、顺序读写</li>
+<li>Hashtable：线程安全</li>
+<li>CurrentHashMap：高并发读写</li>
+</ul>
+</li>
+</ul>
+<h3 id="java-collection">列举几个 Java Collection 类库中的常用类，试简述其类结构、对应算法</h3>
+<ul>
+<li>ArrayList：数组；基于下标</li>
+<li>LinkedList：链表；<font style="color:rgb(51, 51, 51);">插入数据有三种方式：头部插入，尾部插入，中间插入</font></li>
+<li>HashSet：基于 HashMap 的 key 实现；Hash 算法</li>
+<li>TreeSet：基于 <font style="color:rgb(77, 77, 77);">TreeMap 实现；</font>红黑树</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_40180411/article/details/81414585">列举几个Java中Collection类库中的常用类（集合相关一）_一生所Ai的博客-CSDN博客</a></p>
+<p><a href="https://www.cnblogs.com/flydean/p/algorithm-linked-list.html">看动画学算法之:linkedList - flydean - 博客园</a></p>
+<p><a href="https://blog.csdn.net/ch98000/article/details/126605554">TreeSet详解_一头狒狒的博客-CSDN博客_treeset</a>
+</p>
+</blockquote>
+<h3 id="listsetmapcollection">List、Set、Map是否都继承自Collection接口？</h3>
+<p>List 和 Set 继承自 Collection 接口；</p>
+<p>Map 接口是一组成对的<strong>键－值</strong>对象，Map 中不能有重复的 key，拥有自己的内部排列机制。</p>
+<h3 id="_5">简介常用集合类，以及对应算法</h3>
+<ul>
+<li>ArrayList 数组</li>
+<li>LinkedList 链表</li>
+<li>HashMap 和 Hashtable 散列表</li>
+</ul>
+<h3 id="listmapset">List、Map、Set的区别</h3>
+<ol>
+<li>List、Set都是继承自Collection接口，Map则不是</li>
+<li>List特点：元素有放入顺序，元素可重复；<br />
+Set特点：元素无放入顺序，元素不可重复，重复元素会覆盖掉。<br />
+注意：元素虽然无放入顺序，但是元素在set中的位置是有该元素的HashCode决定的，其位置其实是固定的，加入Set 的Object必须定义equals()方法 ，另外list支持for循环，也就是通过下标来遍历，也可以用迭代器，但是set只能用迭代，因为他无序，无法用下标来取得想要的值。</li>
+<li>Set和List对比： <br />
+Set：检索元素效率低下，删除和插入效率高，插入和删除不会引起元素位置改变。<br />
+List：和数组类似，List可以动态增长，查找元素效率高，插入删除元素效率低，因为会引起其他元素位置改变。 </li>
+<li>Map适合储存键值对的数据</li>
+<li>线程安全集合类与非线程安全集合类：<br />
+LinkedList、ArrayList、HashSet是非线程安全的，Vector是线程安全的；<br />
+HashMap是非线程安全的，HashTable是线程安全的；<br />
+StringBuilder是非线程安全的，StringBuffer是线程安全的。</li>
+</ol>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_56473495/article/details/125482057">List、Set、Map有什么异同_Mr’刘的博客-CSDN博客_list、set、map的区别</a>
+</p>
+</blockquote>
+<h3 id="java">Java容器类之间的区别（乐视、美团）</h3>
+<blockquote>
+<p><a href="https://www.cnblogs.com/sunliming/archive/2011/04/05/2005957.html">Java容器集合类的区别用法 - sunliming - 博客园</a>
+</p>
+</blockquote>
+<h3 id="_6">列举常见集合框架类型</h3>
+<ol>
+<li>List、Set、Map。由这三个接口实现出ArrayList、LinkedList、HashSet、 TreeSet、HashMap、TreeMap 等常用集合框架。<br />
+List 类型可按某种特定顺序维护元素；<br />
+ArrayList 允许快速随机访问，但如果添加或删除位于中间的元素时效率很低；<br />
+LikedList 提供最佳循序访问及快速的中间位置添加删除元素，并有 addFirst、addLast、getFirst、 getLast、removeFirst、 removeLast 方法。</li>
+<li>Vector 属于重量级组件不推荐使用。</li>
+<li>Map 类型维护键/值对，Hashtable 与HashMap 相近但效率略低于 HashMap、高于TreeMap，TreeMap 优点是可以排序。</li>
+<li>Set 类型可装入唯一值，HashSet 效率高于 TreeSet 但 TreeSet 可以维护内部元素的排序状态。</li>
+</ol>
+<h3 id="arrayssort-collectionssort">Arrays.sort 和 Collections.sort 实现原理 和区别</h3>
+<p>首先说下Collection和Collections区别。</p>
+<p>java.util.Collection 是一个<strong>集合接口</strong>。它提供了对集合对象进行基本操作的通用接口方法。</p>
+<p>java.util.Collections 是针对集合类的一个<strong>帮助类</strong>，他提供一系列静态方法实现对各种集合的<strong>搜索</strong>、<strong>排序</strong>、<strong>线程安全</strong>等操作。 然后还有<strong>混排（Shuffling）</strong>、<strong>反转（Reverse）</strong>、<strong>替换所有的元素（fill）</strong>、<strong>拷贝（copy）</strong>、<strong>返回Collections中最小元素（min）</strong>、<strong>返回Collections中最大元素（max</strong>）、<strong>返回指定源列表中最后一次出现指定目标列表的起始位置（ lastIndexOfSubList ）</strong>、<strong>返回指定源列表中第一次出现指定目标列表的起始位置（ IndexOfSubList ）</strong>、<strong>根据指定的距离循环移动指定列表中的元素（Rotate）</strong>;</p>
+<p>事实上<u>Collections.sort方法底层就是调用的Array.sort方法</u>。</p>
+<pre><code class="language-java">public static void sort(Object[] a) {
+    if (LegacyMergeSort.userRequested)
+        legacyMergeSort(a);
+    else
+        ComparableTimSort.sort(a, 0, a.length, null, 0, 0);
+}
+
+//void java.util.ComparableTimSort.sort()
+static void sort(Object[] a, int lo, int hi, Object[] work, int workBase, int workLen) {
+    assert a != null &amp;&amp; lo &gt;= 0 &amp;&amp; lo &lt;= hi &amp;&amp; hi &lt;= a.length;
+    int nRemaining = hi - lo;
+    if (nRemaining &lt; 2)
+        return; // Arrays of size 0 and 1 are always sorted
+    // If array is small, do a &quot;mini-TimSort&quot; with no merges
+    if (nRemaining &lt; MIN_MERGE) {
+        int initRunLen = countRunAndMakeAscending(a, lo, hi);
+        binarySort(a, lo, hi, lo + initRunLen);
+        return;
+    }
+}
+</code></pre>
+<ul>
+<li>legacyMergeSort (a)：归并排序 ；</li>
+<li>ComparableTimSort.sort() ： Timsort 排序，Timsort 排序是结合了<strong>合并排序（merge sort）</strong>和<strong>插入排序（insertion sort）</strong>而得出的排序算法。</li>
+</ul>
+<blockquote>
+<p>Timsort的核心过程</p>
+<p>TimSort 算法为了减少对升序部分的回溯和对降序部分的性能倒退，将输入按其升序和降序特点进行了分</p>
+<p>区。排序的输入的单位不是一个个单独的数字，而是一个个的块-分区。其中每一个分区叫一个run。针对这些 run 序列，每次拿一个 run 出来按规则进行合并。每次合并会将两个 run合并成一个 run。合并的结果保存到栈中。合并直到消耗掉所有的 run，这时将栈上剩余的 run合并到只剩一个 run 为止。这时这个仅剩的run 便是排好序的结果。
+</p>
+</blockquote>
+<p>综上述过程，Timsort算法的过程包括</p>
+<p>（1）如何数组长度小于某个值，直接用<strong>二分插入排序算法</strong></p>
+<p>（2）找到各个run，并入栈</p>
+<p>（3）按规则合并run</p>
+<h3 id="comparable-comparator">Comparable 接口和 Comparator 接口实现比较</h3>
+<ul>
+<li>Comparable 是直接在"被比较"的<strong>类内部</strong>来实现的，<u>被比较的类需要实现Comparable接口</u>的compareTo方法。</li>
+<li>Comparator则是在被比较的<strong>类外部</strong>实现的，<u>被比较的类</u><strong><u>作为参数</u></strong>需要在实现了Comparator接口的compare方法中比较。</li>
+</ul>
+<h3 id="iterator">迭代器 Iterator 是什么？</h3>
+<p>Iterator 模式用同一种逻辑来遍历集合。它可以<u>把访问逻辑从不同类型的集合类中抽象出来</u>，不需要了解集合内部实现便可以遍历集合元素，统一使用 Iterator 提供的接口去遍历。它的特点是<strong>更加安全</strong>，因为它可以保证，<u>在当前遍历的集合元素被更改的时候，就会抛出 ConcurrentModificationException 异常</u>。</p>
+<pre><code class="language-java">public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; { 
+    Iterator&lt;E&gt; iterator();
+}
+</code></pre>
+<p>主要有三个方法：<code>hasNext()</code>、<code>next()</code>和<code>remove()</code>。 </p>
+<h3 id="iterator-listiterator">* Iterator 和 ListIterator 有什么区别？</h3>
+<ul>
+<li>ListIterator 是 Iterator 的<strong>增强版</strong>。 </li>
+<li>ListIterator 遍历<strong>可以是逆向的</strong>，因为有<code>previous()</code>和<code>hasPrevious()</code>方法，而 Iterator 不可以。 </li>
+<li>ListIterator 有<code>add()</code>方法，<strong>可以向 List 添加对象</strong>，而 Iterator 却不能。 </li>
+<li>ListIterator <strong>可以定位当前的索引位置</strong>，因为有<code>nextIndex()</code>和<code>previousIndex()</code>方法，而 Iterator 不可以。 </li>
+<li>ListIterator <strong>可以实现对象的修改</strong>，<code>set()</code>方法可以实现。<u>Iierator 仅能遍历，不能修改。</u></li>
+<li>ListIterator <strong>只能用于遍历 List 及其子类</strong>，Iterator 可用来遍历所有集合。 </li>
+</ul>
+<blockquote>
+<p>Iierator 可以边遍历边删除对象，不能修改对象，但是可以修改对象属性。</p>
+<p><a href="https://www.cnblogs.com/wangxiaopei/p/8551239.html">java迭代器（Iterator）的理解</a>
+</p>
+</blockquote>
+<h3 id="_7">为什么使用迭代器？</h3>
+<p>迭代器<strong>适用性强</strong>，因为如果用<u>for循环遍历，</u><strong><u>需要事先知道集合的数据结构</u></strong>，而且当换了一种集合的话代码不可重用要修改，不符合开闭原则，而Iterator是用同一种逻辑来遍历集合。</p>
+<p>其次使用Iterator<u>可以在不了解集合内部数据结构的情况下直接遍历</u>，这样可以使得集合内部的的数据不暴露。</p>
+<blockquote>
+<p>更新: 2023-12-01 22:50:25<br />
+原文: <a href="https://www.yuque.com/joyo/interview/dulli8">https://www.yuque.com/joyo/interview/dulli8</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

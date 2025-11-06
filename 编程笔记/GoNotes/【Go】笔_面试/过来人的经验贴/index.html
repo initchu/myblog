@@ -1,0 +1,534 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%AC%94_%E9%9D%A2%E8%AF%95/%E8%BF%87%E6%9D%A5%E4%BA%BA%E7%9A%84%E7%BB%8F%E9%AA%8C%E8%B4%B4/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>📖 过来人的经验贴 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📖 过来人的经验贴
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-22-" class="md-nav__link">
+    <span class="md-ellipsis">
+      经验1 方学长22届 - 公务员
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sivan-ccnu-" class="md-nav__link">
+    <span class="md-ellipsis">
+      经验2 Sivan CCNU计算机系 - 腾讯后端
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-cto" class="md-nav__link">
+    <span class="md-ellipsis">
+      经验3 萌一 - 蚂蚁集团CTO线金融核心算法部门
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      简历与公司相关
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      迷悟 - 面试指点
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      码神之路 - 面试指点
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      线上面试邀约
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      话术
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      项目如何描述
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">📖 过来人的经验贴</h1>
+<h2 id="1-22-">经验1 方学长22届 - 公务员</h2>
+<p><img alt="1636974408276-feae0f6f-3ebf-48b8-b871-f877cc430831.png" src="../img/zinf2Lm456NFZcJF/1636974408276-feae0f6f-3ebf-48b8-b871-f877cc430831-939086.png" /></p>
+<h2 id="2-sivan-ccnu-">经验2 Sivan CCNU计算机系  - 腾讯后端</h2>
+<p><img alt="1636973729251-f641efe9-69a8-4cad-aebb-2a63b41d25c7.png" src="../img/zinf2Lm456NFZcJF/1636973729251-f641efe9-69a8-4cad-aebb-2a63b41d25c7-550722.png" /></p>
+<p><img alt="1636973759324-70d215e0-b7de-4ab6-bddc-c331c27983dc.png" src="../img/zinf2Lm456NFZcJF/1636973759324-70d215e0-b7de-4ab6-bddc-c331c27983dc-637766.png" /></p>
+<p><img alt="1636973767249-2bd69e6c-66c4-4fe1-b712-3f341625eaf9.png" src="../img/zinf2Lm456NFZcJF/1636973767249-2bd69e6c-66c4-4fe1-b712-3f341625eaf9-269229.png" /><img alt="1636973775983-08317452-5b7b-4d33-a9e3-ee138e883570.png" src="../img/zinf2Lm456NFZcJF/1636973775983-08317452-5b7b-4d33-a9e3-ee138e883570-598498.png" /></p>
+<p><img alt="1636973789649-f1b1ef24-baeb-468f-aed7-88501649304b.png" src="../img/zinf2Lm456NFZcJF/1636973789649-f1b1ef24-baeb-468f-aed7-88501649304b-051234.png" /></p>
+<p><img alt="1636973802156-c40d9f37-6db9-41f1-8bf1-2d0426c38920.png" src="../img/zinf2Lm456NFZcJF/1636973802156-c40d9f37-6db9-41f1-8bf1-2d0426c38920-712831.png" /></p>
+<ol>
+<li>自我介绍(☆提前准备好自我介绍，1-2分钟左右，背诵好，不要给自己埋坑)</li>
+<li>追着自我介绍的点问 / 挑简历上的点问 / 说一下最有挑战的项目 (有时候一上来就让你写几道算法题压压惊，这种一般是压力面，看下你在高压下的表现)<br />
+如果是前面一到两面：着重于基础，因此会从你的技能介绍或者项目中发掘一些基础知识来问<br />
+后面的面试：着重于项目在实践中会面临问题的发掘(大多是中间件，分布式或者架构相关) 和解决问题的能力</li>
+<li>写算法题<br />
+一般一场面试1个小时，看一下自己还剩余多少时间，尽可能在剩余时间之内提交<br />
+有时候算法题目的业务背景比较复杂，因此不确定的时候一定要问面试官<br />
+确定了思路之后要和面试官解释，避免思路错误写代码浪费太长时间</li>
+<li>你还有什么要问我的么？<br />
+最直接：您对我这场面试的表现怎么评价？(间接：您觉得我在您面试过的应届生中表现怎样)<br />
+您最看重应届生的哪方面能力呢？<br />
+部门的技术栈是怎样的呢？/ 部门主要负责哪一块业务呢？</li>
+</ol>
+<p><img alt="1636973836865-a29c22b2-eb15-46ca-b18a-2b948efada5b.png" src="../img/zinf2Lm456NFZcJF/1636973836865-a29c22b2-eb15-46ca-b18a-2b948efada5b-935738.png" /></p>
+<p><img alt="1636973858920-bc694756-8b76-4a05-a0c2-1a5636c4eca8.png" src="../img/zinf2Lm456NFZcJF/1636973858920-bc694756-8b76-4a05-a0c2-1a5636c4eca8-938814.png" /></p>
+<p><a href="https://github.com/AobingJava/JavaFamily">自己看的所有面经都整理到了如下的两个链接中，欢迎大家</a><a href="https://github.com/AobingJava/JavaFamily">pr</a><a href="https://github.com/AobingJava/JavaFamily">，一起贡献一份完整的八股文</a></p>
+<p><a href="https://github.com/AobingJava/JavaFamily">http://www.sivan.tech/AlgoBook/</a><font style="color:white;">              </font><a href="https://github.com/AobingJava/JavaFamily">-&gt;</a><font style="color:white;">   </font><a href="https://github.com/AobingJava/JavaFamily">https://github.com/sivanWu0222/AlgoBook</a></p>
+<p><a href="https://github.com/AobingJava/JavaFamily">http://www.sivan.tech/BasicCompu/#/</a><font style="color:white;">      </font><a href="https://github.com/AobingJava/JavaFamily">-&gt;</a><font style="color:white;">   </font><a href="https://github.com/AobingJava/JavaFamily">https://github.com/sivanWu0222/BasicCompu</a></p>
+<p><img alt="1636973928506-27c47618-8004-44e3-a8a0-6652c18469b6.png" src="../img/zinf2Lm456NFZcJF/1636973928506-27c47618-8004-44e3-a8a0-6652c18469b6-453301.png" /></p>
+<p><img alt="1636973986732-65c1e134-7014-4c96-aa0e-e388bf000d02.png" src="../img/zinf2Lm456NFZcJF/1636973986732-65c1e134-7014-4c96-aa0e-e388bf000d02-621337.png" /></p>
+<p><strong><font style="color:#E8323C;">捷径:</font></strong><font style="color:#E8323C;"><br />
+</font><font style="color:#E8323C;">刷好算法<br />
+</font><font style="color:#E8323C;">多看&amp;认真看面经<br />
+</font><font style="color:#E8323C;">背好八股文<br />
+</font><font style="color:#E8323C;">写好简历<br />
+</font><font style="color:#E8323C;">做好自我介绍<br />
+</font><font style="color:#E8323C;">放松心态，轻松应付面试<br />
+</font><font style="color:#E8323C;">以上目前还是适用的，如果岗位比较卷的建议提前准备</font></p>
+<p><a href="https://github.com/AobingJava/JavaFamily">复习知识汇总：</a></p>
+<p>•<a href="https://github.com/AobingJava/JavaFamily">https://github.com/AobingJava/JavaFamily</a></p>
+<p>•<a href="https://github.com/yangshun/tech-interview-handbook">https://github.com/yangshun/tech-interview-handbook</a></p>
+<p>•<a href="https://github.com/Snailclimb/JavaGuide">https://github.com/</a><a href="https://github.com/Snailclimb/JavaGuide">Snailclimb/JavaGuide</a></p>
+<p>•<a href="https://github.com/frank-lam/fullstack-tutorial">https://github.com/frank-lam/fullstack-tutorial</a></p>
+<p>•<a href="https://github.com/CyC2018/CS-Notes">https://github.com/CyC2018/CS-Notes</a></p>
+<p>算法方面：</p>
+<p>•<a href="https://github.com/halfrost/LeetCode-Go">https://github.com/halfrost/LeetCode-Go</a></p>
+<p>•<a href="https://github.com/labuladong/fucking-algorithm">https://github.com/labuladong/fucking-algorithm</a></p>
+<p>•<a href="https://github.com/afatcoder/LeetcodeTop">https://github.com/afatcoder/LeetcodeTop</a></p>
+<p>•<a href="https://github.com/yuanguangxin/LeetCode">https://github.com/yuanguangxin/LeetCode</a></p>
+<p>•Algorithm：多刷高频题 +<a href="https://github.com/labuladong/fucking-algorithm">https://github.com/labuladong/fucking-algorithm</a></p>
+<p>各方向八股文：</p>
+<p>•话术+八股文：<a href="https://github.com/flycash/interview-baguwen">https://github.com/flycash/interview-baguwen</a></p>
+<p>•前端零基础学习：<a href="https://learn.freecodecamp.one/">https://learn.freecodecamp.one/</a>+<a href="https://www.freecodecamp.org/">https://www.freecodecamp.org/</a></p>
+<p>•<a href="https://github.com/acm-clan/algorithm-stone">https://github.com/acm-clan/algorithm-stone</a></p>
+<p>•<a href="https://github.com/sladesha/Reflection_Summary">https://github.com/sladesha/Reflection_Summary</a></p>
+<p>•<a href="https://github.com/guanguans/design-patterns-for-humans-cn">https://</a><a href="https://github.com/guanguans/design-patterns-for-humans-cn">github.com/guanguans/design-patterns-for-humans-cn</a></p>
+<p>•前端面试库：<a href="https://github.com/hzfe/awesome-interview">https://</a><a href="https://github.com/hzfe/awesome-interview">github.com/hzfe/awesome-interview</a></p>
+<p>•Resume：<a href="https://github.com/resumejob/awesome-resume">https://github.com/resumejob/awesome-resume</a></p>
+<p>•<a href="https://www.bilibili.com/video/BV1E7411q7rU?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1E7411q7rU?spm_id_from=333.999.0.0</a></p>
+<p>•<a href="https://www.bilibili.com/video/BV1C7411j74Z?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1C7411j74Z?spm_id_from=333.999.0.0</a></p>
+<p>•<a href="https://blog.cugxuan.cn/2021/01/06/Campus/guide-capmus-v2/">https://blog.cugxuan.cn/2021/01/06/Campus/guide-capmus-v2/</a></p>
+<p>•各行业独角兽：<a href="https://mp.weixin.qq.com/s/fqHzgbFdJAHjWchNnhRoYA">https://mp.weixin.qq.com/s/fqHzgbFdJAHjWchNnhRoYA</a></p>
+<p>•955 公司列表：<a href="https://github.com/formulahendry/955.WLB">https://github.com/formulahendry/955.WLB</a></p>
+<p>•微软面试流程：<a href="https://zhuanlan.zhihu.com/p/403207317">https://zhuanlan.zhihu.com/p/403207317</a></p>
+<p>•<a href="https://mp.weixin.qq.com/s/zRbalzF8lM5USJ99hiLpnQ">https://mp.weixin.qq.com/s/zRbalzF8lM5USJ99hiLpnQ</a></p>
+<p><img alt="1636973355667-d34b6cc9-2871-4586-9363-492d785e3bd0.jpeg" src="../img/zinf2Lm456NFZcJF/1636973355667-d34b6cc9-2871-4586-9363-492d785e3bd0-379058.jpeg" /></p>
+<p><img alt="1636973371844-a876de27-620a-4e24-a183-e4d0203fd0ed.jpeg" src="../img/zinf2Lm456NFZcJF/1636973371844-a876de27-620a-4e24-a183-e4d0203fd0ed-811755.jpeg" /></p>
+<h2 id="3-cto">经验3  萌一 - 蚂蚁集团CTO线金融核心算法部门</h2>
+<p><img alt="1643040236583-16c93080-cd4b-4144-93af-e4335b623ef5.png" src="../img/zinf2Lm456NFZcJF/1643040236583-16c93080-cd4b-4144-93af-e4335b623ef5-738273.png" /></p>
+<p>面试时候要录音回放复盘</p>
+<p>刷面经查缺补漏</p>
+<p><img alt="1643040271974-94b18e41-d3b9-4a0f-ae91-9d27b45299b9.png" src="../img/zinf2Lm456NFZcJF/1643040271974-94b18e41-d3b9-4a0f-ae91-9d27b45299b9-980262.png" /></p>
+<p>最好简历上不要有不会的盲点</p>
+<p>你有三个问题待解决：</p>
+<ol>
+<li>是算法熟练度不够。那些常见高频面试题还是要很熟的，最好简单题都能百分百的手写对；</li>
+<li>面试紧张。有两个方式解决，第一个是多面，找一些小公司多面面，足够自信就不紧张了，第二个办法是对方想象成和你一起探讨技术的朋友，你们只是在一起探讨探讨技术，这样可以从心理上解决面试紧张的问题； </li>
+<li>存在知识盲区，常见八股文的面试题要很熟才行，起码要知道 mysql redis Kafka 和一些分布式理论等。</li>
+<li>其他方面：每一次面试最好都录音，面试完都复盘，总有表达不好的地方，争取改掉，下次面试不要再犯，而且对于面试中不会的及时查漏补缺，多面几次就是面霸了。</li>
+</ol>
+<h2 id="_2">简历与公司相关</h2>
+<p>好的简历是什么样的?</p>
+<p>一句话，向面试官展示你的技术。</p>
+<p>如何展示呢？</p>
+<p>比如说技术能力，你写熟悉MySQL，就不如写熟悉MySQL的索引，SQL优化，innodb数据结构等更让面试官能清晰的感受到你的能力。</p>
+<p>熟悉Redis，可以换为熟悉Redis的八种数据类型，持久化原理，哨兵模式，集群模式。</p>
+<p>你看，这样写面试官一看这个简历，就会觉得非常满意，第一印象就会变好，他能明确的感受到你的技能水平。</p>
+<p>那么项目经验如何写?</p>
+<p>当然项目的基本介绍，功能还是要有，但是项目其中的技术亮点，技术难点你需要给面试官展示出来，比如说用队列解决了什么问题，用线程池解决了什么问题，项目的量级（qps，tps等），数据库读写分离，分库分表如何做的。</p>
+<p>因为面试官其实不一定懂你的项目，他其实也不是特别关心（除非招行业技术人才），他关心的是项目中用到的技术，架构，量级，遇到问题如何解决的，业务方案，思考问题的能力。</p>
+<p>这些也是你应该向面试官展示的。</p>
+<p>当然如果有开源项目或者参与了开源项目，博客等软实力也可以写上去，作为加分项。</p>
+<p>最后，简历第一页，一定要展示面试官感兴趣的内容，不要让性别，学校，照片等占用大量的篇幅（这些可能是人事关心的，但是决定是否面试是技术面试官决定的）。</p>
+<hr />
+<p>问什么样的问题？和公司业务、简历是否有描述、面试官个人倾向有关系，<br />
+比如一个做加密的公司，肯定会问https；简历上写熟练使用linux命令，大概率会问linux常用命令，怎么排查问题等；面试官从简历中找不到可以问的，就会问自己熟悉的方向。</p>
+<p>所以给大家2点建议：</p>
+<ol>
+<li>
+<p>写简历的时候，专业技能写得根据具体一些，一方面可以引导面试官提问，另外一方面因为是自己熟悉的部分，也不会太吃亏。具体简历怎么写参考群公告学习资料中的简历示例 </p>
+</li>
+<li>
+<p>不管面试的时候问不问，围绕go的知识体系（基础知识 + go领域知识 + 工具技能），基本的问题还是要掌握的。 </p>
+</li>
+</ol>
+<hr />
+<p>岗位的“人才画像”，进而根据“画像”设计岗位JD，招揽人才。</p>
+<p>人才画像怎么来呢？</p>
+<p>首先，从公司战略规划和业务流，推导出所要招聘的岗位。</p>
+<p>根据该岗位要完成的工作和结果产出，设计出绩效考核的标准。（想拿到什么结果，就考核什么）。</p>
+<p>用考核标准，来框定岗位需要的能力和技能。</p>
+<p>根据能力、技能和价值观的需求，就得出该岗位的人才画像。</p>
+<p>同样，作为候选人求职时，就要侧重看到对方核心的考察点在哪几个板块，考核标准是否清晰，以及这些板块在公司战略和业务流中扮演的角色和分量有多重，后面的规划发展如何。</p>
+<h2 id="-">迷悟 - 面试指点</h2>
+<p>Go是如何实现锁的？</p>
+<p>HTTPs没有讲明白，</p>
+<p>Docker和K8S不够了解。</p>
+<h2 id="-_1">码神之路 - 面试指点</h2>
+<p><img alt="1646901784227-f4be9140-c676-4527-90dd-be4b390b0cb9.png" src="../img/zinf2Lm456NFZcJF/1646901784227-f4be9140-c676-4527-90dd-be4b390b0cb9-579347.png" /></p>
+<h2 id="_3">线上面试邀约</h2>
+<p>是这样的，学校处于封校状态，没有确定实习和特殊情况导师是不允许批假外出的，所以考虑疫情情况，这次面试能否改成线上面试呢。</p>
+<h2 id="_4">话术</h2>
+<p>:::success
+首先，我想和各位强调：你在和面试官交流时需要注意，不要只说一个答案就不再说话了；也不要猜测答案去看面试官的面部反应。务必在交流的过程中把你的思路说出来，即使答案出现了偏差，面试官也会适当地提醒你需要注意什么地方。</p>
+<p>其次，当你在和别人交流时，一定要清晰、明确地把你的想法阐述/表达出来。有些同学知道正确答案，但叙述的时候不清晰、解释不清楚，听者领悟不到你的意思，那真的太可惜了，另外这样的沟通会让双方都感到不顺畅。可以和团队里的小伙伴们来个互问互答，或是模拟一场面试，锻炼能力，这些都是能帮助大家提高沟通技巧的小Tips。</p>
+<p>:::</p>
+<h2 id="_5">项目如何描述</h2>
+<ul>
+<li>项目大体介绍：可以吹这个项目牛的地方，比如我做的这个博客，可以登录注册，可以评论，可以点赞……</li>
+<li>描述自己负责的事情：我做了点赞体系/搜索体系/ES的搭建（用于引导面试官询问。）</li>
+<li>描述用到的的技术：我用了redis分布式集群，分库分表……（引导面试官询问。）</li>
+</ul>
+<blockquote>
+<p>更新: 2022-08-31 13:25:32<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/vlqfox">https://www.yuque.com/xiaoshan_wgo/codingnotes/vlqfox</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

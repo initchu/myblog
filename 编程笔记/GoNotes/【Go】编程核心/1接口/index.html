@@ -1,0 +1,819 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83/1%E6%8E%A5%E5%8F%A3/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>1 接口 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1 接口
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.接口的概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 接口和继承的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-duck-typing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Duck Typing的概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 接口的定义和实现
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 接口的值类型
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 接口的组合
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">1 接口</h1>
+<h2 id="1_1">1.接口的概念</h2>
+<p><font style="color:rgb(0, 0, 0);">场景：有一个项目经理要管理三个程序员开发一个软件，为了控制和管理软件，项目经理可以定义一些接口，然后由程序员具体进行实现。</font></p>
+<p><font style="color:rgb(0, 0, 0);">接口是一组仅包含</font><font style="color:#D46B08;">方法名、参数、返回值</font><font style="color:rgb(0, 0, 0);">的未具体实现的</font><font style="color:#D46B08;">方法</font><font style="color:rgb(0, 0, 0);">的集合。</font></p>
+<p><strong><font style="color:rgb(0, 0, 0);">一个简单的例子：</font></strong></p>
+<pre><code class="language-go">package main
+type Usber interface{ //接口和它的两个没有实现的方法
+    Start()
+    Stop()
+}
+type Phone struct{
+}
+
+func (p Phone) Start(){ //程序员1写的方法
+    fmt.Println(&quot;手机开始工作。。&quot;)
+}
+func (p Phone) Stop(){//程序员2写的方法
+    fmt.Println(&quot;手机停止工作。。&quot;)
+}
+
+type Computer struct{
+} 
+//定义个电脑类
+
+func (c Computer) Working(usb Usber){ //电脑的方法是调用接口
+    usb.Start()
+    usb.Stop()
+}
+func main(){
+    computer := Computer{} //电脑
+    phone := Phone{} //手机
+    computer.Working(phone) //电脑和手机工作
+}
+</code></pre>
+<p><strong>第二个例子：</strong></p>
+<pre><code class="language-go">   type MyInterface interface{
+       Print() //接口里面未被实现的方法
+   }
+
+   func TestFunc(x MyInterface) {} //x是这个接口类型
+   type MyStruct struct {} //MyStruct 是个结构体-&gt;类
+   func (me MyStruct) Print() {} //给类绑定Print方法，也就是和接口里面的方法连接上
+
+   func main() {
+       var me MyStruct  //实例化对象
+       TestFunc(me) //me这个对象传入TestFunc,me就变成了接口类型可以调用Print
+   }
+
+</code></pre>
+<p><font style="color:rgb(0, 0, 0);">接口定义如下：</font></p>
+<pre><code class="language-go">type interfaceName interface { 
+    // 方法列表 
+    GetName() string
+}
+</code></pre>
+<p><font style="color:rgb(0, 0, 0);">接口的命名喜欢使用er结尾。</font></p>
+<p><strong><font style="color:rgb(0, 0, 0);">第三个例子：</font></strong></p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;go_module/infra&quot;
+)
+
+func getRetriever() retriever{ //方法
+    return infra.Retriever{} 
+}
+
+//Something that can &quot;Get&quot;，接口
+type retriever interface { 
+    Get(string) string //get方法名 （string）参数 string返回值
+}
+
+func main() {
+    var r retriever = getRetriever()  
+    //r的类型是retriever这个接口，
+    //这个接口类型可以继承上面的getRetriever方法。
+    fmt.Printf(&quot;%s\n&quot;,r.Get(&quot;https://www.baidu.com&quot;))
+    //main解析字符串，并且输出字符
+}
+
+</code></pre>
+<p>定义方法的包，方法名字为Get，返回字符串，空结构体Retriever可以作为方法的接收者。</p>
+<pre><code class="language-go">package infra
+
+import (
+    &quot;io/ioutil&quot;
+    &quot;net/http&quot;
+)
+
+type Retriever struct {
+
+}
+func (Retriever) Get(url string) string{
+    resp, err := http.Get(url)
+    if err != nil{
+        panic(err)
+    }
+    defer resp.Body.Close()
+    bytes, _ := ioutil.ReadAll(resp.Body)
+    return string(bytes)
+}
+</code></pre>
+<p>当我们新定义一个testing对该代码进行测试的时候，就可以实现类似继承和多态的功能。</p>
+<p><strong>第四个例子：使用接口来排序结构体切片。</strong></p>
+<p>可以看到sort包中，接口里面有三个方法需要去实现。</p>
+<p><img alt="1644931771993-4124d256-e5c9-4315-8798-d08c40bed65b.gif" src="../img/wpZa7PfTDSKtSNol/1644931771993-4124d256-e5c9-4315-8798-d08c40bed65b-147769.gif" /></p>
+<p><img alt="1644932039713-f969c306-3927-42ec-b093-62be1bc017b5.png" src="../img/wpZa7PfTDSKtSNol/1644932039713-f969c306-3927-42ec-b093-62be1bc017b5-922414.png" /></p>
+<p>对切片进行排序的一般方法：</p>
+<pre><code class="language-go">package main
+func main(){
+    //对切片进行排序
+    var intSlice = []int{0,-1,10,7,90}
+    sort.Ints(intSlicce)
+}
+</code></pre>
+<p>对结构体（对象）进行排序：</p>
+<pre><code class="language-go">package main
+type Person struct{
+    Name string
+    Age int
+}
+//声明一个切片里面存放多个Person结构体
+type PersonSlice []Person
+
+//实现接口的三个方法
+//Len 长度
+func (ps PersonSlice) Len() int{
+    return len(ps)
+}
+//Less 升序还是降序
+func (ps PersonSlice) Less(i, j int) bool{
+    return ps[i].Age &lt; ps[j].Age //年龄大的为真,升序排序
+    //return ps[i].Name &lt; ps[j].Name 
+}
+func (ps PersonSlice) Swap(i, j int){
+    ps[i], ps[j] := ps[j], ps[i]
+}
+func main(){
+    var persons PersonSlice
+    for i := 0; i&lt;10 ;i++{
+        person := Person{
+            Name : fmt.Sprintf(&quot;Person_&quot;,rand.Intn(100))随机生成1个名字
+            Age : rand.Intn(100) //随机生成1个年龄
+        }
+        persons = append(persons,person)//添加到切片里面
+    }
+    sort.Sort(persons) 
+    for _ , v  := range persons{
+        fmt.Println(v)
+    }
+}
+</code></pre>
+<h2 id="2">2 接口和继承的区别</h2>
+<p>继承是子类继承父类的一些属性和方法，接口可以在子类的上面添加“翅膀”，并且不破坏继承关系。</p>
+<p>可以认为，<strong>实现接口是对继承机制的补充。</strong></p>
+<pre><code class="language-go">type Monkey struct{
+    Name string
+}
+type BirdFly interface{ //飞翔接口
+    Flying()
+}
+
+func (this *Monkey) climbing{
+    fmt.Println(this.Name,&quot;爬树&quot;)
+}
+type LittleMonkey struct{
+    Monkey//小猴子继承猴子的属性和方法
+}
+func (this *LittleMonkey) Flying(){ //小猴子可以飞翔
+    fmt.Println(this.Name,&quot;飞翔&quot;)
+}
+func main(){
+    monkey := LittleMonkey{
+        Monkey{
+            Name: &quot;Wukong&quot;,
+        },
+    }
+    monkey.climbing()
+    monkey.Flying()
+}
+</code></pre>
+<p><strong>总结:</strong></p>
+<ul>
+<li>继承的价值在于：解决代码的复用性和可维护性。</li>
+<li>接口的价值在于：设计，设计好各种规范和方法，让其它自定义类型去实现这些方法。</li>
+<li>接口比继承更加灵活，继承是满足<code>is-a</code>的关系，而接口只需要满足<code>like-a</code>的关系。</li>
+<li>接口可以在一定程度上实现代码解耦。</li>
+</ul>
+<h2 id="3-duck-typing">3 Duck Typing的概念</h2>
+<p>像鸭子走路，像鸭子叫（长得像鸭子），那么就是鸭子。</p>
+<p>"duck typing" 描述事物的外部行为而非内部结构。</p>
+<p>go属于结构化类型系统，类似于duck typing</p>
+<p>Python中的duck typing:</p>
+<pre><code class="language-python">def download(retriever):
+    return retriever.get(&quot;www.baidu.com&quot;)
+</code></pre>
+<p>retriever是一个duck typing，</p>
+<p>通常需要注释来说明接口。</p>
+<p>C++中的duck typing：</p>
+<pre><code class="language-cpp">template &lt;class R&gt;
+string download(const R&amp; retriever){
+    return retriever.get(&quot;www.baidu.com&quot;)
+</code></pre>
+<p>一般用模板来实现，缺点是编译时才知道传入的retriever有没有get（打代码的时候不知道），仍需要注释来说明接口。</p>
+<p>java中的类似代码：</p>
+<pre><code class="language-java">&lt;R extends Retriever&gt;
+String download(R r){
+    return r.get(&quot;www.baidu.com&quot;)
+}
+</code></pre>
+<p>传入的参数必须实现Reriever接口，java没有duck typing。</p>
+<p>go语言的duck typing:</p>
+<p>同时需要Readable,Appendable,这个数据可以读可以写，该怎么办？</p>
+<p>同时具有python，C++的duck typing的灵活性</p>
+<p>又具有java的类型检查。</p>
+<h2 id="4">4 接口的定义和实现</h2>
+<p><img alt="1636965298914-4b0e7f4a-86fa-4025-8756-7fc4a7c578ea.png" src="../img/wpZa7PfTDSKtSNol/1636965298914-4b0e7f4a-86fa-4025-8756-7fc4a7c578ea-525128.png" /></p>
+<p>接口由<font style="color:#D46B08;">使用者</font>定义</p>
+<p>实例练习：</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;go_module/retriever/mock&quot;
+    &quot;go_module/retriever/mock/real&quot;
+)
+
+type Retriever interface {
+    Get(url string) string
+}
+func download(r Retriever) string{
+    return r.Get(&quot;https://www.imooc.com&quot;)
+}
+func main() {
+    var r Retriever
+    r = mock.Retriever{Content: &quot;this is a fake mooc&quot;}
+    r = real.Retriever{}
+    fmt.Println(download(r))
+}
+</code></pre>
+<pre><code class="language-go">package real
+
+import (
+    &quot;net/http&quot;
+    &quot;net/http/httputil&quot;
+    &quot;time&quot;
+)
+
+type Retriever struct {
+    UserAgent string
+    TimeOut time.Duration
+}
+
+func (r Retriever) Get(url string) string {
+    resp, err := http.Get(url)
+    if err != nil{
+        panic(err)
+    }
+    result, err := httputil.DumpResponse(
+        resp,true)
+    resp.Body.Close()
+    if err != nil{
+        panic(err)
+    }
+    return string(result)
+}
+
+
+</code></pre>
+<pre><code class="language-go">package mock
+
+type Retriever struct {
+    Content string
+}
+
+func (r Retriever) Get(url string) string {
+    return r.Content
+}
+
+</code></pre>
+<p>接口的实现是隐式的，只要是实现里面的方法就可以了。</p>
+<h2 id="5">5 接口的值类型</h2>
+<p>注：接口一般不会用到指针</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;go_module/retriever/mock&quot;
+    &quot;go_module/retriever/mock/real&quot;
+    &quot;time&quot;
+)
+
+type Retriever interface {
+    Get(url string) string
+}
+func download(r Retriever) string{
+    return r.Get(&quot;https://www.baidu.com&quot;)
+}
+func main() {
+    var r Retriever
+    r = mock.Retriever{Content: &quot;this is a fake url stage &quot;}
+    inspect(r)
+
+    r = real.Retriever{
+        UserAgent: &quot;Mozilla/5.0&quot;,
+        TimeOut: time.Minute,
+    }
+    inspect(r)
+    //realRetriever := r.(mock.Retriever)
+    //fmt.Println(realRetriever.Content)
+    if mockRetriever,ok := r.(mock.Retriever); ok{
+        fmt.Println(mockRetriever.Content)
+    }else{
+        fmt.Println(&quot;not a mock retriever&quot;)
+    }
+    fmt.Println(download(r))
+}
+func inspect(r Retriever){
+    switch v := r.(type) {
+    case mock.Retriever:
+        fmt.Println(&quot;Contents:&quot;,v.Content)
+    case *real.Retriever:
+        fmt.Println(&quot;UserAgent:&quot;,v.UserAgent)
+    }
+}
+</code></pre>
+<p><img alt="1636968008455-bec7e45e-61b3-49d8-8856-99d1125cab1f.png" src="../img/wpZa7PfTDSKtSNol/1636968008455-bec7e45e-61b3-49d8-8856-99d1125cab1f-552421.png" /></p>
+<ul>
+<li>接口变量自带指针</li>
+<li>接口变量同样采用值传递，几乎不需要使用接口的指针</li>
+<li>指针接收者实现只能以指针方法使用，值接收者都可以</li>
+</ul>
+<p><strong>查看接口变量</strong></p>
+<p>Type Assertion</p>
+<p>Type Switch</p>
+<p>interface{} 可以表示任何类型，比如可以把 int 改成interface{}，这样切片内可以存储任何类型的值了。</p>
+<h2 id="6">6 接口的组合</h2>
+<p>例如：一个文件又能读又能写，组合两个接口。</p>
+<p>实例练习：</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;go_module/retriever/mock&quot;
+    &quot;go_module/retriever/mock/real&quot;
+    &quot;time&quot;
+)
+
+type Retriever interface {
+    Get(url string) string
+}
+
+type Poster interface {
+    Post(url string,
+        form map[string]string) string
+}
+const url = &quot;https://www.baidu.com&quot;
+func download(r Retriever) string{
+    return r.Get(&quot;https://www.imooc.com&quot;)
+}
+
+func post(poster Poster){
+    poster.Post(&quot;https://www.baidu.com&quot;,
+        map[string]string{
+        &quot;name&quot; :&quot;mouse&quot;,
+        &quot;course&quot;:&quot;golang&quot;,
+    })
+}
+type RetrieverPoster interface {
+    Retriever
+    Poster
+}
+//接口的组合
+func session(s RetrieverPoster) string{
+    s.Post(url,map[string]string{
+        &quot;contents&quot;: &quot;another faked stage&quot;,
+    })
+    return s.Get(url)
+}
+
+func main() {
+    var r Retriever
+    retriever := mock.Retriever{Content: &quot;this is a fake mooc&quot;}
+    r = &amp;retriever
+    inspect(r)
+
+    r = real.Retriever{
+        UserAgent: &quot;Mozilla/5.0&quot;,
+        TimeOut: time.Minute,
+    }
+    inspect(r)
+    //realRetriever := r.(mock.Retriever)
+    //fmt.Println(realRetriever.Content)
+    if mockRetriever, ok := r.(*mock.Retriever); ok{
+        fmt.Println(mockRetriever.Content)
+    }else{
+        fmt.Println(&quot;not a mock retriever&quot;)
+    }
+    fmt.Println(&quot;Try a session&quot;)
+    fmt.Println(session(&amp;retriever))
+    fmt.Println(download(r))
+}
+func inspect(r Retriever){
+    switch v := r.(type) {
+    case *mock.Retriever:
+        fmt.Println(&quot;Contents:&quot;,v.Content)
+    case *real.Retriever:
+        fmt.Println(&quot;UserAgent:&quot;,v.UserAgent)
+    }
+}
+
+</code></pre>
+<p>应变成指针接收才能改变contents内容：</p>
+<pre><code class="language-go">package mock
+
+type Retriever struct {
+    Content string
+}
+
+func (r *Retriever) Post(url string, form map[string]string) string {
+    r.Content = form[&quot;contents&quot;]
+    return &quot;ok&quot;
+}
+
+func (r *Retriever) Get(url string) string {
+    return r.Content
+}
+
+
+</code></pre>
+<p>标准库中的写法，例子：</p>
+<p><img alt="1636969775227-4d034370-16e1-4ccc-bb06-4b5a7093f2b7.png" src="../img/wpZa7PfTDSKtSNol/1636969775227-4d034370-16e1-4ccc-bb06-4b5a7093f2b7-536178.png" /></p>
+<p><img alt="1636969785795-5e21179b-145a-4bbb-bd48-54d070289d8d.png" src="../img/wpZa7PfTDSKtSNol/1636969785795-5e21179b-145a-4bbb-bd48-54d070289d8d-312395.png" /></p>
+<h2 id="_1"></h2>
+<blockquote>
+<p>更新: 2022-02-17 16:20:03<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/kybspv">https://www.yuque.com/xiaoshan_wgo/codingnotes/kybspv</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

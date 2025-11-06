@@ -1,0 +1,652 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/JavaNotes/%E3%80%90JavaWeb%E3%80%91%E4%B8%AD%E9%97%B4%E4%BB%B6_%E5%B7%A5%E5%85%B7_%E5%8C%85%E7%AE%A1%E7%90%86%E5%AD%A6%E4%B9%A0/%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>常用注解 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              常用注解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、注解详解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、注解列表如下
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、JPA 注解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、springMVC 相关注解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、全局异常处理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、项目中具体配置解析和使用环境
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、项目中具体配置解析和使用环境">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mappedsuperclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      @MappedSuperclass：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#column" class="md-nav__link">
+    <span class="md-ellipsis">
+      @Column：
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1）数据库查询
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2）数据库插入
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3）数据库更新
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4）数据库删除
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">常用注解</h1>
+<p><a href="https://juejin.cn/post/7179038534711967800?searchId=202310201526191139C8794A8CFE1D5101#heading-1">肝了一周总结的SpringBoot常用注解大全，一目了然！ - 掘金</a></p>
+<h2 id="_2">一、注解详解</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong>注解</strong></th>
+<th><strong>解释</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">@SpringBootApplication</td>
+<td>申明让 springboot 自动给程序进行必要的配置，这个配置等同于：@Configuration ，@EnableAutoConfiguration 和 @ComponentScan 三个配置。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Autowired</td>
+<td>自动导入依赖的 bean</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Service</td>
+<td>一般用于修饰 service 层的组件</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Repository</td>
+<td>使用 @Repository 注解可以确保 DAO 或者 repositories 提供异常转译，这个注解修饰的 DAO 或者 repositories 类会被 ComponetScan 发现并配置，同时也不需要为它们提供 XML 配置项。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@ComponentScan</td>
+<td>表示将该类自动发现扫描组件。个人理解相当于，如果扫描到有 @Component、@Controller、@Service 等这些注解的类，并注册为 Bean，可以自动收集所有的 Spring 组件，包括 @Configuration 类。我们经常使用 @ComponentScan 注解搜索 beans，并结合 @Autowired 注解导入。可以自动收集所有的 Spring 组件，包括 @Configuration 类。我们经常使用 @ComponentScan 注解搜索 beans，并结合 @Autowired 注解导入。如果没有配置的话，Spring Boot 会扫描启动类所在包下以及子包下的使用了 @Service,@Repository 等注解的类。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Controller</td>
+<td>用于定义控制器类，在 spring 项目中由控制器负责将用户发来的 URL 请求转发到对应的服务接口（service 层），一般这个注解在类中，通常方法需要配合注解 @RequestMapping。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@ResponseBody</td>
+<td>表示该方法的返回结果直接写入 HTTP response body 中，一般在异步获取数据时使用，用于构建 RESTful 的 api。在使用 @RequestMapping 后，返回值通常解析为跳转路径，加上 @esponsebody 后返回结果不会被解析为跳转路径，而是直接写入 HTTP response body 中。比如异步获取 json 数据，加上 @Responsebody 后，会直接返回 json 数据。该注解一般会配合 @RequestMapping 一起使用。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@RestController</td>
+<td>用于标注控制层组件 (如 struts 中的 action)，@ResponseBody 和 @Controller 的合集。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@RequestMapping</td>
+<td>提供路由信息，负责 URL 到 Controller 中的具体函数的映射。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@EnableAutoConfiguration</td>
+<td>SpringBoot 自动配置（auto-configuration）：尝试根据你添加的 jar 依赖自动配置你的 Spring 应用。例如，如果你的 classpath 下存在 HSQLDB，并且你没有手动配置任何数据库连接 beans，那么我们将自动配置一个内存型（in-memory）数据库”。你可以将 @EnableAutoConfiguration 或者 @SpringBootApplication 注解添加到一个 @Configuration 类上来选择自动配置。如果发现应用了你不想要的特定自动配置类，你可以使用 @EnableAutoConfiguration 注解的排除属性来禁用它们。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Configuration</td>
+<td>相当于传统的 xml 配置文件，如果有些第三方库需要用到 xml 文件，建议仍然通过 @Configuration 类作为项目的配置主类——可以使用 @ImportResource 注解加载 xml 配置文件。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Import</td>
+<td>用来导入其他配置类。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@ImportResource</td>
+<td>用来加载 xml 配置文件。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Bean</td>
+<td>用 @Bean 标注方法等价于 XML 中配置的 bean。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Value</td>
+<td>注入 Spring boot application.properties 配置的属性的值。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Inject</td>
+<td>等价于默认的 @Autowired，只是没有 required 属性；</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Component</td>
+<td>泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Bean</td>
+<td>相当于 XML 中的, 放在方法的上面，而不是类，意思是产生一个 bean, 并交给 spring 管理。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@AutoWired</td>
+<td>自动导入依赖的 bean。byType 方式。把配置好的 Bean 拿来用，完成属性、方法的组装，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。当加上（required=false）时，就算找不到 bean 也不报错。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Qualifier</td>
+<td>当有多个同一类型的 Bean 时，可以用 @Qualifier(“name”) 来指定。与 @Autowired 配合使用。</td>
+</tr>
+<tr>
+<td style="text-align: center;">@Resource(name=”name”,type=”type”)：</td>
+<td><font style="color:rgb(37, 41, 51);">默认会根据对象的</font>名称自动注入依赖对象，如果想要根据类型进行注入，可以设置属性为 type = UmsAdminService.class。</td>
+</tr>
+<tr>
+<td style="text-align: center;"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">二、注解列表如下</h2>
+<p>@SpringBootApplication：包含了 @ComponentScan、@Configuration 和 @EnableAutoConfiguration 注解。其中</p>
+<p>@ComponentScan：让 spring Boot 扫描到 Configuration 类并把它加入到程序上下文。</p>
+<p>@Configuration ：等同于 spring 的 XML 配置文件；使用 Java 代码可以检查类型安全。</p>
+<p>@EnableAutoConfiguration ：自动配置。</p>
+<p>@ComponentScan ：组件扫描，可自动发现和装配一些 Bean。</p>
+<p>@Component 可配合 CommandLineRunner 使用，在程序启动后执行一些基础任务。</p>
+<p>@RestController：注解是 @Controller 和 @ResponseBody 的合集, 表示这是个控制器 bean, 并且是将函数的返回值直 接填入 HTTP 响应体中, 是 REST 风格的控制器。</p>
+<p>@Autowired：自动导入。</p>
+<p>@PathVariable：获取参数。</p>
+<p>@JsonBackReference：解决嵌套外链问题。</p>
+<p>@RepositoryRestResourcepublic：配合 spring-boot-starter-data-rest 使用。</p>
+<h2 id="jpa">三、JPA 注解</h2>
+<p>@Entity：@Table(name=”“)：表明这是一个实体类。一般用于 jpa 这两个注解一般一块使用，但是如果表名和实体类名相同的话，@Table 可以省略</p>
+<p>@MappedSuperClass: 用在确定是父类的 entity 上。父类的属性子类可以继承。</p>
+<p>@NoRepositoryBean: 一般用作父类的 repository，有这个注解，spring 不会去实例化该 repository。</p>
+<p>@Column：如果字段名与列名相同，则可以省略。</p>
+<p>@Id：表示该属性为主键。</p>
+<p>@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = “repair_seq”)：表示主键生成策略是 sequence（可以为 Auto、IDENTITY、native 等，Auto 表示可在多个数据库间切换），指定 sequence 的名字是 repair_seq。</p>
+<p>@SequenceGeneretor(name = “repair_seq”, sequenceName = “seq_repair”, allocationSize = 1)：name 为 sequence 的名称，以便使用，sequenceName 为数据库的 sequence 名称，两个名称可以一致。</p>
+<p>@Transient：表示该属性并非一个到数据库表的字段的映射, ORM 框架将忽略该属性。如果一个属性并非数据库表的字段映射, 就务必将其标示为 @Transient, 否则, ORM 框架默认其注解为 @Basic。@Basic(fetch=FetchType.LAZY)：标记可以指定实体属性的加载方式</p>
+<p>@JsonIgnore：作用是 json 序列化时将 Java bean 中的一些属性忽略掉, 序列化和反序列化都受影响。</p>
+<p>@JoinColumn（name=”loginId”）: 一对一：本表中指向另一个表的外键。一对多：另一个表指向本表的外键。</p>
+<p>@OneToOne、@OneToMany、@ManyToOne：对应 hibernate 配置文件中的一对一，一对多，多对一。</p>
+<h2 id="springmvc">四、springMVC 相关注解</h2>
+<p>@RequestMapping：@RequestMapping(“/path”)表示该控制器处理所有 “/path” 的 UR L 请求。RequestMapping 是一个用来处理请求地址映射的注解，可用于类或方法上。</p>
+<p>用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。该注解有六个属性：</p>
+<ul>
+<li>params: 指定 request 中必须包含某些参数值是，才让该方法处理。</li>
+<li>headers: 指定 request 中必须包含某些指定的 header 值，才能让该方法处理请求。</li>
+<li>value: 指定请求的实际地址，指定的地址可以是 URI Template 模式</li>
+<li>method: 指定请求的 method 类型， GET、POST、PUT、DELETE 等</li>
+<li>consumes: 指定处理请求的提交内容类型（Content-Type），如 application/json,text/html;</li>
+<li>produces: 指定返回的内容类型，仅当 request 请求头中的 (Accept) 类型中包含该指定类型才返回</li>
+</ul>
+<p>@RequestParam：用在方法的参数前面。</p>
+<pre><code class="language-plain">ini
+复制代码@RequestParam
+String a =request.getParameter(“a”)。
+</code></pre>
+<p>@PathVariable: 路径变量。</p>
+<p>参数与大括号里的名字一样要相同。</p>
+<h2 id="_4">五、全局异常处理</h2>
+<p>@ControllerAdvice：包含 @Component。可以被扫描到。统一处理异常。</p>
+<p>@ExceptionHandler（Exception.class）：用在方法上面表示遇到这个异常就执行以下方法。</p>
+<h2 id="_5">六、项目中具体配置解析和使用环境</h2>
+<h4 id="mappedsuperclass">@MappedSuperclass：</h4>
+<ol>
+<li>@MappedSuperclass 注解使用在父类上面，是用来标识父类的</li>
+<li>@MappedSuperclass 标识的类表示其不能映射到数据库表，因为其不是一个完整的实体类，但是它所拥有的属性能够映射在其子类对用的数据库表中</li>
+<li>@MappedSuperclass 标识的类不能再有 @Entity 或 @Table 注解</li>
+</ol>
+<h4 id="column">@Column：</h4>
+<p>\1. 当实体的属性与其映射的数据库表的列不同名时需要使用 @Column 标注说明，该属性通常置于实体的属性声明语句之前，还可与 @Id 标注一起使用。</p>
+<p>2.@Column 标注的常用属性是 name，用于设置映射数据库表的列名。此外，该标注还包含其它多个属性，如：unique、nullable、length、precision 等。具体如下：</p>
+<ul>
+<li>name 属性：name 属性定义了被标注字段在数据库表中所对应字段的名称</li>
+<li>unique 属性：unique 属性表示该字段是否为唯一标识，默认为 false，如果表中有一个字段需要唯一标识，则既可以使用该标记，也可以使用 @Table 注解中的 @UniqueConstraint</li>
+<li>nullable 属性：nullable 属性表示该字段是否可以为 null 值，默认为 true</li>
+<li>insertable 属性：insertable 属性表示在使用”INSERT” 语句插入数据时，是否需要插入该字段的值</li>
+<li>updateable 属性：updateable 属性表示在使用”UPDATE” 语句插入数据时，是否需要更新该字段的值</li>
+<li>insertable 和 updateable 属性：一般多用于只读的属性，例如主键和外键等，这些字段通常是自动生成的</li>
+<li>columnDefinition 属性：columnDefinition 属性表示创建表时，该字段创建的 SQL 语句，一般用于通过 Entity 生成表定义时使用，如果数据库中表已经建好，该属性没有必要使用</li>
+<li>table 属性：table 属性定义了包含当前字段的表名</li>
+<li>length 属性：length 属性表示字段的长度，当字段的类型为 varchar 时，该属性才有效，默认为 255 个字符</li>
+<li>precision 属性和 scale 属性：precision 属性和 scale 属性一起表示精度，当字段类型为 double 时，precision 表示数值的总长度，scale 表示小数点所占的位数</li>
+</ul>
+<p>具体如下：</p>
+<ol>
+<li>double 类型将在数据库中映射为 double 类型，precision 和 scale 属性无效</li>
+<li>double 类型若在 columnDefinition 属性中指定数字类型为 decimal 并指定精度，则最终以 columnDefinition 为准</li>
+<li>BigDecimal 类型在数据库中映射为 decimal 类型，precision 和 scale 属性有效</li>
+<li>precision 和 scale 属性只在 BigDecimal 类型中有效</li>
+</ol>
+<p>3.@Column 标注的 columnDefinition 属性: 表示该字段在数据库中的实际类型. 通常 ORM 框架可以根据属性类型自动判断数据库中字段的类型, 但是对于 Date 类型仍无法确定数据库中字段类型究竟是 DATE,TIME 还是 TIMESTAMP. 此外, String 的默认映射类型为 VARCHAR, 如果要将 String 类型映射到特定数据库的 BLOB 或 TEXT 字段类型.</p>
+<p>4.@Column 标注也可置于属性的 getter 方法之前</p>
+<p>@Getter 和 @Setter（Lombok）</p>
+<p>@Setter：注解在属性上；为属性提供 setting 方法 @Getter：注解在属性上；为属性提供 getting 方法</p>
+<ul>
+<li>@Data：注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了 equals、canEqual、hashCode、toString 方法</li>
+<li>@Setter：注解在属性上；为属性提供 setting 方法</li>
+<li>@Getter：注解在属性上；为属性提供 getting 方法</li>
+<li>@Log4j2 ：注解在类上；为类提供一个 属性名为 log 的 log4j 日志对象，和 @Log4j 注解类似</li>
+<li>@NoArgsConstructor：注解在类上；为类提供一个无参的构造方法</li>
+<li>@AllArgsConstructor：注解在类上；为类提供一个全参的构造方法</li>
+<li>@EqualsAndHashCode: 默认情况下，会使用所有非瞬态 (non-transient) 和非静态 (non-static) 字段来生成 equals 和 hascode 方法，也可以指定具体使用哪些属性。</li>
+<li>@toString: 生成 toString 方法，默认情况下，会输出类名、所有属性，属性会按照顺序输出，以逗号分割。</li>
+<li>@NoArgsConstructor, @RequiredArgsConstructor and @AllArgsConstructor 无参构造器、部分参数构造器、全参构造器，当我们需要重载多个构造器的时候，只能自己手写了</li>
+<li>@NonNull：注解在属性上，如果注解了，就必须不能为 Null</li>
+<li>@val: 注解在属性上，如果注解了，就是设置为 final 类型，可查看源码的注释知道</li>
+</ul>
+<p>当你在执行各种持久化方法的时候，实体的状态会随之改变，状态的改变会引发不同的生命周期事件。这些事件可以使用不同的注释符来指示发生时的回调函数。</p>
+<p>@javax.persistence.PostLoad：加载后。</p>
+<p>@javax.persistence.PrePersist：持久化前。</p>
+<p>@javax.persistence.PostPersist：持久化后。</p>
+<p>@javax.persistence.PreUpdate：更新前。</p>
+<p>@javax.persistence.PostUpdate：更新后。</p>
+<p>@javax.persistence.PreRemove：删除前。</p>
+<p>@javax.persistence.PostRemove：删除后。</p>
+<h4 id="1">1）数据库查询</h4>
+<p>@PostLoad 事件在下列情况下触发：</p>
+<p>执行 EntityManager.find() 或 getreference() 方法载入一个实体后。</p>
+<p>执行 JPQL 查询后。</p>
+<p>EntityManager.refresh() 方法被调用后。</p>
+<h4 id="2">2）数据库插入</h4>
+<p>@PrePersist 和 @PostPersist 事件在实体对象插入到数据库的过程中发生：</p>
+<p>@PrePersist 事件在调用 persist() 方法后立刻发生，此时的数据还没有真正插入进数据库。</p>
+<p>@PostPersist 事件在数据已经插入进数据库后发生。</p>
+<h4 id="3">3）数据库更新</h4>
+<p>@PreUpdate 和 @PostUpdate 事件的触发由更新实体引起：</p>
+<p>@PreUpdate 事件在实体的状态同步到数据库之前触发，此时的数据还没有真正更新到数据库。</p>
+<p>@PostUpdate 事件在实体的状态同步到数据库之后触发，同步在事务提交时发生。</p>
+<h4 id="4">4）数据库删除</h4>
+<p>@PreRemove 和 @PostRemove 事件的触发由删除实体引起：</p>
+<p>@PreRemove 事件在实体从数据库删除之前触发，即在调用 remove() 方法删除时发生，此时的数据还没有真正从数据库中删除。</p>
+<p>@PostRemove 事件在实体从数据库中删除后触发。</p>
+<blockquote>
+<p>更新: 2023-10-20 16:04:47<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/bqhlf5zlp6lorm4p">https://www.yuque.com/xiaoshan_wgo/codingnotes/bqhlf5zlp6lorm4p</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,477 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/JavaNotes/%E3%80%90%E5%88%86%E5%B8%83%E5%BC%8F_%E5%BE%AE%E6%9C%8D%E5%8A%A1%E3%80%91%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/SpringCloud%E5%92%8CSpringCloudAlibaba/%E3%80%90%E5%9F%BA%E7%A1%80%E3%80%91%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%9F%BA%E7%A1%80/%E3%80%902%E3%80%91LoadBalancer%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>【2】LoadBalancer 详细说明 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2loadbalancer" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【2】LoadBalancer 详细说明
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="2loadbalancer">【2】LoadBalancer 详细说明</h1>
+<p>负载均衡到底是如何实现的？</p>
+<h1 id="_1">负载均衡</h1>
+<p>实际上，在添加<code>@LoadBalanced</code>注解之后，会启用拦截器对发起的服务调用请求进行拦截（注意这里是针对发起的请求进行拦截），叫做<code>LoadBalancerInterceptor</code>，它实现<code>ClientHttpRequestInterceptor</code>接口：</p>
+<pre><code class="language-java">@FunctionalInterface
+public interface ClientHttpRequestInterceptor {
+    ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException;
+}
+</code></pre>
+<p>主要是对<code>intercept</code>方法的实现：</p>
+<pre><code class="language-java">public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, final ClientHttpRequestExecution execution) throws IOException {
+    URI originalUri = request.getURI();
+    String serviceName = originalUri.getHost();
+    Assert.state(serviceName != null, &quot;Request URI does not contain a valid hostname: &quot; + originalUri);
+    return (ClientHttpResponse)this.loadBalancer.execute(serviceName, this.requestFactory.createRequest(request, body, execution));
+}
+</code></pre>
+<p>打个断点看看实际是怎么在执行的，我看到：</p>
+<p><img alt="1747147530699-6ab08af0-4e2f-429a-a3fb-2995e753b4a7.webp" src="../img/B29dgh5rn2xK1ceG/1747147530699-6ab08af0-4e2f-429a-a3fb-2995e753b4a7-668061.webp" /></p>
+<p><img alt="1747147530734-5cf94cff-c15c-409b-85e6-b554bd147134.webp" src="../img/B29dgh5rn2xK1ceG/1747147530734-5cf94cff-c15c-409b-85e6-b554bd147134-324925.webp" /></p>
+<p>服务端会在发起请求时执行这些拦截器。</p>
+<p>那么这个拦截器做了什么事情呢，首先明确了，给过来的请求地址，并不是一个有效的主机名称，而是服务名称，那么怎么才能得到真正需要访问的主机名称呢，肯定是得找 Eureka/Nacos 获取的。</p>
+<p><code>loadBalancer.execute()</code>做了什么，它的具体实现为<code>BlockingLoadBalancerClient</code>：</p>
+<pre><code class="language-java">//从上面给进来了服务的名称和具体的请求实体
+public &lt;T&gt; T execute(String serviceId, LoadBalancerRequest&lt;T&gt; request) throws IOException {
+    String hint = this.getHint(serviceId);
+    LoadBalancerRequestAdapter&lt;T, DefaultRequestContext&gt; lbRequest = new LoadBalancerRequestAdapter(request, new DefaultRequestContext(request, hint));
+    Set&lt;LoadBalancerLifecycle&gt; supportedLifecycleProcessors = this.getSupportedLifecycleProcessors(serviceId);
+    supportedLifecycleProcessors.forEach((lifecycle) -&gt; {
+        lifecycle.onStart(lbRequest);
+    });
+    //可以看到在这里会调用choose方法自动获取对应的服务实例信息
+    ServiceInstance serviceInstance = this.choose(serviceId, lbRequest);
+    if (serviceInstance == null) {
+        supportedLifecycleProcessors.forEach((lifecycle) -&gt; {
+            lifecycle.onComplete(new CompletionContext(Status.DISCARD, lbRequest, new EmptyResponse()));
+        });
+        //没有发现任何此服务的实例就抛异常（之前的测试中可能已经遇到了）
+        throw new IllegalStateException(&quot;No instances available for &quot; + serviceId);
+    } else {
+        //成功获取到对应服务的实例，这时就可以发起HTTP请求获取信息了
+        return this.execute(serviceId, serviceInstance, lbRequest);
+    }
+}
+</code></pre>
+<p>所以，实际上在进行负载均衡的时候，会向Eureka发起请求，选择一个可用的对应服务，然后会返回此服务的主机地址等信息：</p>
+<p><img alt="1747147530521-32cf451b-4f26-4ceb-b255-008ccc1b3cb7.webp" src="../img/B29dgh5rn2xK1ceG/1747147530521-32cf451b-4f26-4ceb-b255-008ccc1b3cb7-530187.webp" /></p>
+<h1 id="_2">自定义负载均衡策略</h1>
+<p>LoadBalancer默认提供了两种负载均衡策略：</p>
+<ul>
+<li>RandomLoadBalancer - 随机分配策略</li>
+<li><strong>(默认)</strong> RoundRobinLoadBalancer - 轮询分配策略</li>
+</ul>
+<p>现在希望修改默认的负载均衡策略，可以进行指定，比如现在希望用户服务采用随机分配策略，需要先创建随机分配策略的配置类（不用加<code>@Configuration</code>）：</p>
+<pre><code class="language-java">public class LoadBalancerConfig {
+    //将官方提供的 RandomLoadBalancer 注册为Bean
+    @Bean
+    public ReactorLoadBalancer&lt;ServiceInstance&gt; randomLoadBalancer(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory){
+        String name = environment.getProperty(LoadBalancerClientFactory.PROPERTY_NAME);
+        return new RandomLoadBalancer(loadBalancerClientFactory.getLazyProvider(name, ServiceInstanceListSupplier.class), name);
+    }
+}
+</code></pre>
+<p>接着需要为对应的服务指定负载均衡策略，直接使用注解即可：</p>
+<pre><code class="language-java">@Configuration
+@LoadBalancerClient(value = &quot;userservice&quot;,      //指定为 userservice 服务，只要是调用此服务都会使用指定的策略
+                    configuration = LoadBalancerConfig.class)   //指定刚刚定义好的配置类
+public class BeanConfig {
+    @Bean
+    @LoadBalanced
+    RestTemplate template(){
+        return new RestTemplate();
+    }
+}
+</code></pre>
+<p>接着在<code>BlockingLoadBalancerClient</code>中添加断点，观察是否采用指定的策略进行请求：</p>
+<p><img alt="1747147530779-ecb0ddc0-c915-4052-a312-1fb3943dd748.webp" src="../img/B29dgh5rn2xK1ceG/1747147530779-ecb0ddc0-c915-4052-a312-1fb3943dd748-743798.webp" /></p>
+<p><img alt="1747147530526-15870af7-f317-4919-bfa5-4f33f3431789.webp" src="../img/B29dgh5rn2xK1ceG/1747147530526-15870af7-f317-4919-bfa5-4f33f3431789-123392.webp" /></p>
+<p>发现访问 userservice 服务的策略已经更改为指定的策略了。</p>
+<h1 id="openfeign">OpenFeign实现负载均衡</h1>
+<p>官方文档：<a href="https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/">https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/</a></p>
+<p>Feign 和 RestTemplate 一样，也是 HTTP 客户端请求工具，但是它的使用方式更加便捷。首先是依赖：</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>接着在启动类添加<code>@EnableFeignClients</code>注解：</p>
+<pre><code class="language-java">@SpringBootApplication
+@EnableFeignClients
+public class BorrowApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BorrowApplication.class, args);
+    }
+}
+</code></pre>
+<p>那么现在需要调用其他微服务提供的接口，该怎么做呢？直接创建一个对应服务的接口类即可：</p>
+<pre><code class="language-java">@FeignClient(&quot;userservice&quot;)   //声明为userservice服务的HTTP请求客户端
+public interface UserClient {
+}
+</code></pre>
+<p>接着直接创建所需类型的方法，比如之前的：</p>
+<pre><code class="language-java">RestTemplate template = new RestTemplate();
+User user = template.getForObject(&quot;http://userservice/user/&quot;+uid, User.class);
+</code></pre>
+<p>现在可以直接写成这样：</p>
+<pre><code class="language-java">@FeignClient(&quot;userservice&quot;)
+public interface UserClient {
+
+    //路径保证和其他微服务提供的一致即可
+    @RequestMapping(&quot;/user/{uid}&quot;)
+    User getUserById(@PathVariable(&quot;uid&quot;) int uid);  //参数和返回值也保持一致
+}
+</code></pre>
+<p>接着直接注入使用（有 Mybatis 那味了）：</p>
+<pre><code class="language-java">@Resource
+UserClient userClient;
+
+@Override
+public UserBorrowDetail getUserBorrowDetailByUid(int uid) {
+    List&lt;Borrow&gt; borrow = mapper.getBorrowsByUid(uid);
+
+    User user = userClient.getUserById(uid);
+    //这里不用再写IP，直接写服务名称bookservice
+    List&lt;Book&gt; bookList = borrow
+            .stream()
+            .map(b -&gt; template.getForObject(&quot;http://bookservice/book/&quot;+b.getBid(), Book.class))
+            .collect(Collectors.toList());
+    return new UserBorrowDetail(user, bookList);
+}
+</code></pre>
+<p>访问，可以看到结果依然是正确的：</p>
+<p><img alt="1747147531831-01395bb1-9fbc-4589-b9f6-e4a428eedc43.webp" src="../img/B29dgh5rn2xK1ceG/1747147531831-01395bb1-9fbc-4589-b9f6-e4a428eedc43-126479.webp" /></p>
+<p>并且可以观察一下两个用户微服务的调用情况，也是以负载均衡的形式进行的。</p>
+<p>按照同样的方法，接着将图书管理服务的调用也改成接口形式：</p>
+<p><img alt="1747147532460-fa93e996-cfb6-42fa-9454-6543acbcbb98.webp" src="../img/B29dgh5rn2xK1ceG/1747147532460-fa93e996-cfb6-42fa-9454-6543acbcbb98-957519.webp" /></p>
+<p>最后的 Service 代码就变成了：</p>
+<pre><code class="language-java">@Service
+public class BorrowServiceImpl implements BorrowService {
+
+    @Resource
+    BorrowMapper mapper;
+
+    @Resource
+    UserClient userClient;
+
+    @Resource
+    BookClient bookClient;
+
+    @Override
+    public UserBorrowDetail getUserBorrowDetailByUid(int uid) {
+        List&lt;Borrow&gt; borrow = mapper.getBorrowsByUid(uid);
+
+        User user = userClient.getUserById(uid);
+        List&lt;Book&gt; bookList = borrow
+                .stream()
+                .map(b -&gt; bookClient.getBookById(b.getBid()))
+                .collect(Collectors.toList());
+        return new UserBorrowDetail(user, bookList);
+    }
+}
+</code></pre>
+<p>继续访问进行测试：</p>
+<p><img alt="1747147532465-96a416a0-0c26-45f9-8d3e-8333672b1db3.webp" src="../img/B29dgh5rn2xK1ceG/1747147532465-96a416a0-0c26-45f9-8d3e-8333672b1db3-614268.webp" /></p>
+<blockquote>
+<p>更新: 2025-05-13 22:50:37<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/xs1bpiavfgeqsd1p">https://www.yuque.com/xiaoshan_wgo/codingnotes/xs1bpiavfgeqsd1p</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

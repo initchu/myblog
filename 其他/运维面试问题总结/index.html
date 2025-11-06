@@ -1,0 +1,2911 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E5%85%B6%E4%BB%96/%E8%BF%90%E7%BB%B4%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>IT运维面试问题总结 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#it" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              IT运维面试问题总结
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      一、集群相关基础组件
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、集群相关基础组件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      （一）ETCD
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（一）ETCD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 特点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 适应场景
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#haproxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      （二）HAProxy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（二）HAProxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 主要特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 常见负载均衡策略
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heartbeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      （三）Heartbeat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（三）Heartbeat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心机制
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keepalived" class="md-nav__link">
+    <span class="md-ellipsis">
+      （四）Keepalived
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（四）Keepalived">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 工作原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 主要模块及作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 健康检查机制（保证高可用）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      （五）LVS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（五）LVS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 主要作用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 工作模式及工作过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 常见调度算法（均衡策略）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      二、负载均衡核心对比
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、负载均衡核心对比">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      （一）四层与七层负载均衡的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvsnginxhaproxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      （二）LVS、Nginx、HAProxy 的异同
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（二）LVS、Nginx、HAProxy 的异同">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 相同点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 不同点
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      三、代理服务器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、代理服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 主要作用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      四、高可用与分布式理论
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、高可用与分布式理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rto-rpo" class="md-nav__link">
+    <span class="md-ellipsis">
+      （一）高可用集群的衡量维度（RTO &amp; RPO）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      （二）CAP 理论
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（二）CAP 理论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心结论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acid" class="md-nav__link">
+    <span class="md-ellipsis">
+      （三）ACID 理论
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kubernetesk8s" class="md-nav__link">
+    <span class="md-ellipsis">
+      五、Kubernetes（K8s）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Kubernetes（K8s）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      （一）基础概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      （二）核心组件及作用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（二）核心组件及作用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Master 控制组件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Node 组件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      （三）关键工具与部署方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（三）关键工具与部署方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 核心工具
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 常见部署方式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pod" class="md-nav__link">
+    <span class="md-ellipsis">
+      （四）Pod 核心机制
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（四）Pod 核心机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pod" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Pod 状态
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pod" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 创建 Pod 的主要流程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-restartpolicy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 重启策略（RestartPolicy）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 健康检查方式（探针）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-livenessprobe" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. LivenessProbe 探针的常见方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 常见调度方式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-daemonset" class="md-nav__link">
+    <span class="md-ellipsis">
+      （五）Deployment 与 DaemonSet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（五）Deployment 与 DaemonSet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Deployment 升级过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Deployment 升级策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-daemonset" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. DaemonSet 特性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      （六）Service 与网络
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（六）Service 与网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Service 类型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Service 分发策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-headless-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Headless Service
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 外部访问集群内服务的方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-ingress" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Ingress
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      （七）存储与持久化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（七）存储与持久化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 数据持久化方式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pv-pvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. PV 与 PVC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pv" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. PV 生命周期阶段
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 存储供应模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-csi-container-storage-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. CSI 模型（Container Storage Interface）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      （八）自动扩容与监控
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（八）自动扩容与监控">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hpahorizontal-pod-autoscaler" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. HPA（Horizontal Pod Autoscaler）自动扩容机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-metric-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Metric Service
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-efk" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. EFK 日志统一管理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      （九）安全机制
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（九）安全机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 安全控制维度
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-admissioncontrol" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 准入控制（AdmissionControl）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rbac" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. RBAC（基于角色的访问控制）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Secret
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-podsecuritypolicy" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. PodSecurityPolicy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      （十）网络模型与组件
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（十）网络模型与组件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-k8s" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. K8s 网络模型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cni-container-network-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. CNI 模型（Container Network Interface）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-network-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 网络策略（Network Policy）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-flannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Flannel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-calico" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Calico
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      （十一）其他核心操作
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（十一）其他核心操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Worker 节点加入集群的过程
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 优雅的节点关机维护
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 集群联邦
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helm" class="md-nav__link">
+    <span class="md-ellipsis">
+      （十二）Helm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（十二）Helm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心术语
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 优势
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#k8s" class="md-nav__link">
+    <span class="md-ellipsis">
+      （十三）K8s 优缺点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（十三）K8s 优缺点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 优势
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 缺点
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openshift" class="md-nav__link">
+    <span class="md-ellipsis">
+      六、OpenShift
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、OpenShift">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 主要特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Projects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 高可用实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-sdn" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. SDN 网络实现
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 角色与身份验证
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 角色与身份验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 角色
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 支持的身份验证类型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      七、中间件
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概念
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 核心作用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="it">IT运维面试问题总结</h1>
+<h2 id="_1">一、集群相关基础组件</h2>
+<h3 id="etcd">（一）ETCD</h3>
+<h4 id="1">1. 概念</h4>
+<p>etcd 是 CoreOS 团队发起的开源项目，是一个管理配置信息和服务发现（service discovery）的项目，目标是构建高可用的分布式键值（key-value）数据库，基于 Go 语言实现。</p>
+<h4 id="2">2. 特点</h4>
+<ul>
+<li>
+<p><strong>简单</strong>：支持 REST 风格的 HTTP+JSON API。</p>
+</li>
+<li>
+<p><strong>安全</strong>：支持 HTTPS 方式的访问。</p>
+</li>
+<li>
+<p><strong>快速</strong>：支持并发 1k/s 的写操作。</p>
+</li>
+<li>
+<p><strong>可靠</strong>：支持分布式结构，基于 Raft 一致性算法（通过选举主节点实现分布式系统一致性）。</p>
+</li>
+</ul>
+<h4 id="3">3. 适应场景</h4>
+<ul>
+<li>
+<p><strong>服务发现（Service Discovery）</strong>：解决分布式集群中进程/服务的查找与连接问题，本质是通过名字查找监听 UDP/TCP 端口的进程并建立连接。</p>
+</li>
+<li>
+<p><strong>消息发布与订阅</strong>：构建配置共享中心，数据提供者发布消息，使用者订阅主题，实现分布式系统配置的集中管理与动态更新（如将应用配置存于 etcd）。</p>
+</li>
+<li>
+<p><strong>负载均衡</strong>：依托自身分布式架构，集群化后每个核心节点可处理用户请求，适合存储小数据量、高访问频率的消息以实现负载均衡。</p>
+</li>
+<li>
+<p><strong>分布式通知与协调</strong>：基于 Watcher 机制，通过注册与异步通知，实现分布式系统间的数据变更实时处理。</p>
+</li>
+<li>
+<p><strong>分布式锁</strong>：基于 Raft 算法保证数据强一致性，支持“保持独占”“控制时序”两种锁服务使用方式。</p>
+</li>
+<li>
+<p><strong>集群监控与 Leader 竞选</strong>：实现简单且实时性强。</p>
+</li>
+</ul>
+<h3 id="haproxy">（二）HAProxy</h3>
+<h4 id="1_1">1. 概念</h4>
+<p>HAProxy 是提供高可用性、负载均衡及基于 TCP 和 HTTP 应用代理的免费、快速、可靠解决方案，适用于并发量大（1w+）且需会话保持或七层处理的 Web 站点，可安全整合至现有架构并保护 Web 服务器不暴露到网络。</p>
+<h4 id="2_1">2. 主要特性</h4>
+<ul>
+<li>
+<p>可靠性和稳定性优异，可与硬件级 F5 负载均衡设备媲美。</p>
+</li>
+<li>
+<p>支持高并发：最多维护 40000-50000 个并发连接，单位时间最大请求数 20000 个，最大处理能力达 10Git/s。</p>
+</li>
+<li>
+<p>负载均衡能力：支持 8 种负载均衡算法，支持会话保持。</p>
+</li>
+<li>
+<p>灵活扩展：支持虚拟主机功能，实现更灵活的 Web 负载均衡。</p>
+</li>
+<li>
+<p>独特功能：支持连接拒绝、全透明代理。</p>
+</li>
+<li>
+<p>访问控制：拥有强大的 ACL 支持。</p>
+</li>
+<li>
+<p>高效数据结构：独特的弹性二叉树数据结构，查询速度复杂度为 O(1)，不受数据条目增加影响。</p>
+</li>
+<li>
+<p>性能优化：支持客户端 keepalive、TCP 加速（零复制，类似 mmap 机制）、响应池（response buffering）。</p>
+</li>
+<li>
+<p>多协议支持：支持 RDP 协议。</p>
+</li>
+<li>
+<p>粘性策略：基于源的粘性（类似 Nginx 的 ip_hash），同一客户端请求在一定时间内调度到同一上游服务器。</p>
+</li>
+<li>
+<p>监控与管理：提供更好的统计数据接口（显示后端服务器接收/发送/拒绝/错误数据）、详细健康状态检测（含管理功能）、基于流量的健康评估机制、HTTP 认证、命令行管理接口。</p>
+</li>
+<li>
+<p>日志分析：自带日志分析器。</p>
+</li>
+</ul>
+<h4 id="3_1">3. 常见负载均衡策略</h4>
+<table>
+<thead>
+<tr>
+<th>策略名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>roundrobin</td>
+<td>简单轮询，依次分配请求到后端节点</td>
+</tr>
+<tr>
+<td>static-rr</td>
+<td>基于权重分配，权重高的节点优先获得请求，分配连接数更多</td>
+</tr>
+<tr>
+<td>leastconn</td>
+<td>最少连接者优先处理，将请求分配给当前连接数最少的节点</td>
+</tr>
+<tr>
+<td>source</td>
+<td>基于请求源 IP 分配，类似 Nginx 的 ip_hash 机制，保证同一 IP 请求到同一节点</td>
+</tr>
+<tr>
+<td>ri</td>
+<td>基于请求的 URI 分配</td>
+</tr>
+<tr>
+<td>rl_param</td>
+<td>基于 HTTP 请求头锁定每一次 HTTP 请求</td>
+</tr>
+<tr>
+<td>rdp-cookie(name)</td>
+<td>基于 cookie(name) 锁定并哈希每一次 TCP 请求</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heartbeat">（三）Heartbeat</h3>
+<h4 id="1_2">1. 概念</h4>
+<p>Heartbeat 是 Linux-HA 项目的组件，提供心跳检测、资源接管、集群服务监测、失效切换等功能，核心功能为<strong>心跳监测</strong>和<strong>资源接管</strong>。</p>
+<h4 id="2_2">2. 核心机制</h4>
+<ul>
+<li>
+<p>心跳监测：通过网络链路或串口进行，支持冗余链路，节点间相互发送报文告知自身状态；若指定时间内未收到对方报文，判定对方失效。</p>
+</li>
+<li>
+<p>资源接管：当检测到节点失效时，启动资源接管模块，接管失效节点上的资源或服务。</p>
+</li>
+</ul>
+<h3 id="keepalived">（四）Keepalived</h3>
+<h4 id="1_3">1. 概念</h4>
+<p>Keepalived 是基于 VRRP 协议的 LVS 服务高可用方案，解决静态路由单点故障问题。</p>
+<h4 id="2_3">2. 工作原理</h4>
+<ul>
+<li>
+<p>集群角色：包含主服务器（MASTER）和备份服务器（BACKUP），对外表现为一个虚拟 IP（VIP）。</p>
+</li>
+<li>
+<p>心跳机制：主服务器定期发送 VRRP 通告信息给备份服务器；若备份服务器收不到 VRRP 消息（主服务器异常），则接管虚拟 IP，继续提供服务，保证高可用。</p>
+</li>
+</ul>
+<h4 id="3_2">3. 主要模块及作用</h4>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>core</td>
+<td>核心模块，负责主进程启动、维护，以及全局配置文件的加载和解析</td>
+</tr>
+<tr>
+<td>vrrp</td>
+<td>实现 VRRP 协议，负责虚拟 IP 的管理和主备节点切换</td>
+</tr>
+<tr>
+<td>check</td>
+<td>健康检查模块，支持端口检查、URL 检查等方式，监测后端节点或服务状态</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4">4. 健康检查机制（保证高可用）</h4>
+<p>Keepalived 工作在 TCP/IP 模型的网络层（3 层）、传输层（4 层）和应用层（7 层），通过多维度健康检查剔除故障节点：</p>
+<ul>
+<li>
+<p><strong>网络层</strong>：采用 ICMP 协议向集群节点发送 ICMP 数据包，无响应则判定节点失效，从集群剔除。</p>
+</li>
+<li>
+<p><strong>传输层</strong>：利用 TCP 端口连接和扫描技术，检测节点特定端口（如 Web 服务 80 端口、SSH 22 端口），无响应则剔除节点。</p>
+</li>
+<li>
+<p><strong>应用层</strong>：支持 FTP、telnet、smtp、dns 等高层协议，用户可自定义监测逻辑，若监测结果与正常预期不符，剔除对应节点。</p>
+</li>
+</ul>
+<h3 id="lvs">（五）LVS</h3>
+<h4 id="1_4">1. 概念</h4>
+<p>LVS（Linux Virtual Server，Linux 虚拟服务器）是虚拟服务器集群系统，可在 Unix/Linux 平台实现负载均衡集群功能。</p>
+<h4 id="2_4">2. 主要作用</h4>
+<ul>
+<li>
+<p>负载分担：将大规模并发访问/数据流量分担到多台节点设备，减少用户响应时间，提升体验。</p>
+</li>
+<li>
+<p>并行处理：将重负载运算分担到多台节点并行处理，汇总结果返回用户，提升系统处理能力。</p>
+</li>
+<li>
+<p>高可用保障：实现 7*24 小时服务，单个/多个节点宕机不影响业务，集群负载均衡接收所有服务请求。</p>
+</li>
+</ul>
+<h4 id="3_3">3. 工作模式及工作过程</h4>
+<table>
+<thead>
+<tr>
+<th>工作模式</th>
+<th>原理</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS/NAT（NAT 模式）</td>
+<td>1. 负载均衡器接收客户端请求，按调度算法选择后端真实服务器（RS）；<br>2. 改写请求包目标 IP/端口为 RS 的 IP（RIP）；<br>3. RS 响应后，按默认路由将包发给负载均衡器；<br>4. 负载均衡器改写响应包源 IP 为虚拟 IP（VIP），返回客户端。</td>
+<td>集群服务器支持任意 TCP/IP 操作系统，负载均衡器只需一个合法 IP。</td>
+<td>扩展性有限，所有请求/应答需经负载均衡器，易成为系统瓶颈。</td>
+</tr>
+<tr>
+<td>VS/TUN（隧道模式）</td>
+<td>1. 负载均衡器接收请求，选择 RS；<br>2. 封装请求包为 IP 隧道（T-IP），转发给 RS；<br>3. RS 响应后，直接发给客户端，无需经负载均衡器。</td>
+<td>负载均衡器仅分发请求，RS 直接应答客户端，减少负载均衡器数据流动，无瓶颈，支持大请求量。</td>
+<td>RS 需合法 IP，且所有服务器需支持“IP Tunneling”。</td>
+</tr>
+<tr>
+<td>VS/DR（直接路由模式）</td>
+<td>1. 负载均衡器接收请求，选择 RS；<br>2. 改写请求包目标 MAC 地址为 RS 的 MAC（R-MAC）；<br>3. RS 响应后，直接发给客户端，无需经负载均衡器。</td>
+<td>同隧道模式，负载均衡器无数据瓶颈，支持大请求量。</td>
+<td>负载均衡器与 RS 需在同一物理网段（同一局域网），网卡需连接同一网段。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4_1">4. 常见调度算法（均衡策略）</h4>
+<p>LVS 调度算法分<strong>固定调度算法</strong>和<strong>动态调度算法</strong>两类：</p>
+<ul>
+<li>
+<p><strong>固定调度算法</strong>：</p>
+<ul>
+<li>
+<p>rr（轮询）：依次分配请求到 RS，适合 RS 处理性能接近的场景。</p>
+</li>
+<li>
+<p>wrr（加权轮询）：按 RS 权值分配，权值高的优先获请求，连接数更多；同权值 RS 连接数相同。</p>
+</li>
+<li>
+<p>dh（目的地址哈希）：以目的地址为关键字查静态 hash 表，获取目标 RS。</p>
+</li>
+<li>
+<p>sh（源地址哈希）：以源地址为关键字查静态 hash 表，获取目标 RS。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>动态调度算法</strong>：</p>
+<ul>
+<li>
+<p>wlc（加权最小连接数）：计算各 RS 的 Ti/Wi（Ti 为当前 TCP 连接数，Wi 为权值），选择最小值对应的 RS。</p>
+</li>
+<li>
+<p>lc（最小连接数）：IPVS 表存储活动连接，将请求发给当前连接最少的 RS。</p>
+</li>
+<li>
+<p>lblc（基于地址的最小连接数）：同一目的地址请求分配给未满负荷的同一 RS；否则分配给连接数最少的 RS，作为下次优先选择。</p>
+</li>
+<li>
+<p>lblcr（基于地址的带复制的最小连接数）：在 lblc 基础上，支持复制机制，提升负载均衡效果。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="_2">二、负载均衡核心对比</h2>
+<h3 id="_3">（一）四层与七层负载均衡的区别</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>四层负载均衡（4 层交换机）</th>
+<th>七层负载均衡（7 层交换机）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工作层级</td>
+<td>TCP/IP 模型的 IP 层（3 层）+ TCP/UDP 层（4 层）</td>
+<td>OSI 模型的应用层（7 层）</td>
+</tr>
+<tr>
+<td>实现原理</td>
+<td>基于 IP+端口分析流量，实现负载均衡</td>
+<td>基于报文内容（如 HTTP 头、URI），结合负载均衡算法选择后端服务器（“内容交换器”）</td>
+</tr>
+<tr>
+<td>支持协议</td>
+<td>TCP、UDP 等传输层协议</td>
+<td>HTTP、FTP、SMTP 等应用层协议</td>
+</tr>
+<tr>
+<td>典型产品</td>
+<td>LVS、F5</td>
+<td>HAProxy、Nginx</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lvsnginxhaproxy">（二）LVS、Nginx、HAProxy 的异同</h3>
+<h4 id="1_5">1. 相同点</h4>
+<p>三者均为<strong>软件负载均衡产品</strong>，用于实现请求分发和服务高可用。</p>
+<h4 id="2_5">2. 不同点</h4>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>LVS</th>
+<th>HAProxy</th>
+<th>Nginx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实现基础</td>
+<td>基于 Linux 操作系统实现（内核层）</td>
+<td>基于第三方应用实现（应用层）</td>
+<td>基于第三方应用实现（应用层）</td>
+</tr>
+<tr>
+<td>支持层级</td>
+<td>仅 4 层（IP 负载均衡），无法基于目录/URL 转发</td>
+<td>支持 4 层（TCP）和 7 层（HTTP），提供综合负载均衡解决方案</td>
+<td>支持 4 层和 7 层</td>
+</tr>
+<tr>
+<td>状态监测功能</td>
+<td>单一，仅基础节点状态检测</td>
+<td>丰富强大，支持端口、URL、脚本等多种检测方式</td>
+<td>支持端口检测，不支持 URL 检测</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>最优，工作在 4 层，无流量产生，资源消耗低，抗负载能力强</td>
+<td>优于 Nginx（并发处理），但低于 LVS（4 层模式）</td>
+<td>较高，支持几万并发，负载度低于 LVS</td>
+</tr>
+<tr>
+<td>功能扩展性</td>
+<td>不支持正则、动静分离</td>
+<td>支持 Session 保持、Cookie 引导、TCP 协议转发</td>
+<td>支持正则（比 HAProxy 灵活）、静态资源服务、反向缓存、Web 服务器功能</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>大型集群、高并发场景（如数据库负载均衡）</td>
+<td>中大型集群、需 7 层高级特性（如 URL 检测、Session 保持）的场景</td>
+<td>Web 服务（静态资源、反向代理）、中小型集群负载均衡</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">三、代理服务器</h2>
+<h3 id="1_6">1. 概念</h3>
+<p>代理服务器是位于客户端与原始（资源）服务器之间的服务器，客户端通过向代理服务器发送请求（指定目标原始服务器），由代理服务器转交请求并将获取的内容返回给客户端。</p>
+<h3 id="2_6">2. 主要作用</h3>
+<ul>
+<li>
+<p><strong>资源获取</strong>：代替客户端从原始服务器获取资源。</p>
+</li>
+<li>
+<p><strong>加速访问</strong>：代理服务器可能离原始服务器更近，减少网络延迟。</p>
+</li>
+<li>
+<p><strong>缓存作用</strong>：保存从原始服务器获取的资源，客户端可快速获取缓存内容。</p>
+</li>
+<li>
+<p><strong>隐藏真实地址</strong>：代理服务器代替客户端请求，隐藏客户端真实 IP 等信息。</p>
+</li>
+</ul>
+<h2 id="_5">四、高可用与分布式理论</h2>
+<h3 id="rto-rpo">（一）高可用集群的衡量维度（RTO &amp; RPO）</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>概念</th>
+<th>最优情况</th>
+<th>最坏情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTO（Recovery Time Objective，恢复时间目标）</td>
+<td>服务从故障到恢复的时间，衡量服务恢复速度</td>
+<td>0（立即恢复）</td>
+<td>无穷大（永久无法恢复）</td>
+</tr>
+<tr>
+<td>RPO（Recovery Point Objective，恢复点目标）</td>
+<td>灾难发生时允许丢失的数据量，衡量数据一致性</td>
+<td>0（无数据丢失，同步数据）</td>
+<td>大于 0（如 RPO=1d 表示丢失 1 天数据）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心</strong>：最佳恢复状态为 RTO=RPO=0，几乎无法实现，需根据业务需求平衡。</p>
+<h3 id="cap">（二）CAP 理论</h3>
+<h4 id="1_7">1. 核心定义</h4>
+<p>CAP 理论指出分布式系统需满足三个条件，最多同时较好满足两个：</p>
+<ul>
+<li>
+<p><strong>Consistency（一致性）</strong>：所有节点在同一时间具有相同的数据。</p>
+</li>
+<li>
+<p><strong>Availability（可用性）</strong>：保证每个请求无论成功/失败都有响应。</p>
+</li>
+<li>
+<p><strong>Partition tolerance（分区容错性）</strong>：系统中任意信息丢失或节点失败不影响系统继续运行。</p>
+</li>
+</ul>
+<h4 id="2_7">2. 核心结论</h4>
+<p>分布式系统无法同时满足一致性、可用性、分区容错性，需根据场景取舍（如分布式数据库优先一致性，Web 服务优先可用性）。</p>
+<h3 id="acid">（三）ACID 理论</h3>
+<p>ACID 是数据库事务的四个特性，保证事务的可靠性：</p>
+<ul>
+<li>
+<p><strong>原子性（Atomicity）</strong>：事务是不可分割的整体，要么全部执行，要么全部不执行（无部分执行）。</p>
+</li>
+<li>
+<p><strong>一致性（Consistency）</strong>：事务执行前、后数据库状态均一致（如转账前后总金额不变）。</p>
+</li>
+<li>
+<p><strong>隔离性（Isolation）</strong>：事务未提交前，其操作的数据对其他用户不可见，避免并发干扰。</p>
+</li>
+<li>
+<p><strong>持久性（Durable）</strong>：事务成功提交后，变更永久保存（记录到 redo 日志），即使系统故障也不丢失。</p>
+</li>
+</ul>
+<h2 id="kubernetesk8s">五、Kubernetes（K8s）</h2>
+<h3 id="_6">（一）基础概念</h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Master</td>
+<td>K8s 集群管理节点，负责集群管理和资源数据访问入口；运行 Etcd（可选）、kube-apiserver、kube-controller-manager、kube-scheduler</td>
+</tr>
+<tr>
+<td>Node（Worker）</td>
+<td>运行 Pod 的服务节点，Pod 运行的宿主机；运行 Docker Engine、kubelet、kube-proxy</td>
+</tr>
+<tr>
+<td>Pod</td>
+<td>运行于 Node 上，若干相关容器的组合；容器共享网络命名空间、IP、端口（可通过 <a href="http://localhost">localhost</a> 通信）；K8s 最小调度单位，可包含 1 个或多个容器</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>键值对（Key/Value），可附加到 Node、Pod、Service 等资源；通过 Label Selector 筛选资源</td>
+</tr>
+<tr>
+<td>Replication Controller（RC）</td>
+<td>管理 Pod 副本，保证集群中 Pod 副本数量与指定数量一致；核心用于弹性伸缩、动态扩容、滚动升级</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>基于 RC 升级，支持查看 Pod 部署进度；内部使用 RS（Replica Set）实现</td>
+</tr>
+<tr>
+<td>HPA（Horizontal Pod Autoscaler）</td>
+<td>Pod 横向自动扩容资源，通过分析 RC 控制的 Pod 负载，调整副本数量</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>定义 Pod 逻辑集合和访问策略，抽象真实服务；提供统一访问入口、代理和发现机制，关联相同 Label 的 Pod</td>
+</tr>
+<tr>
+<td>Volume</td>
+<td>Pod 中多容器可访问的共享目录，定义在 Pod 上，可被 1 个或多个容器挂载</td>
+</tr>
+<tr>
+<td>Namespace</td>
+<td>实现多租户资源隔离，将资源分配到不同 Namespace（如项目、小组），便于共享集群资源的同时分别管理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">（二）核心组件及作用</h3>
+<h4 id="1-master">1. Master 控制组件</h4>
+<table>
+<thead>
+<tr>
+<th>组件名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kube-apiserver</td>
+<td>K8s 系统入口，封装核心对象增删改查操作（RESTful API），集群内组件通信枢纽</td>
+</tr>
+<tr>
+<td>kube-scheduler</td>
+<td>为新创建的 Pod 选择节点（调度），负责集群资源调度</td>
+</tr>
+<tr>
+<td>kube-controller-manager</td>
+<td>执行各种控制器，保证集群正常运行，包含多个子控制器</td>
+</tr>
+<tr>
+<td>Replication Controller</td>
+<td>管理 RC，关联 RC 与 Pod，保证副本数量一致</td>
+</tr>
+<tr>
+<td>Node Controller</td>
+<td>管理 Node，定期检查健康状态，标识失效/有效节点</td>
+</tr>
+<tr>
+<td>Namespace Controller</td>
+<td>管理 Namespace，清理无效 Namespace 及旗下资源（Pod、Service 等）</td>
+</tr>
+<tr>
+<td>Service Controller</td>
+<td>管理 Service，提供负载均衡和服务代理</td>
+</tr>
+<tr>
+<td>EndPoints Controller</td>
+<td>管理 Endpoints，关联 Service 与 Pod，实时更新 Endpoints（Pod 变化时）</td>
+</tr>
+<tr>
+<td>Service Account Controller</td>
+<td>管理 Service Account，为每个 Namespace 创建默认 Service Account 及对应的 Secret</td>
+</tr>
+<tr>
+<td>Persistent Volume Controller</td>
+<td>管理 PV（Persistent Volume）和 PVC（Persistent Volume Claim），实现 PV 与 PVC 绑定、清理回收</td>
+</tr>
+<tr>
+<td>Daemon Set Controller</td>
+<td>管理 DaemonSet，创建 Daemon Pod，保证指定 Node 运行 Daemon Pod</td>
+</tr>
+<tr>
+<td>Deployment Controller</td>
+<td>管理 Deployment，关联 Deployment 与 RC，保证 Pod 数量，实现更新</td>
+</tr>
+<tr>
+<td>Job Controller</td>
+<td>管理 Job，为 Job 创建一次性任务 Pod，保证完成指定任务数</td>
+</tr>
+<tr>
+<td>Pod Autoscaler Controller</td>
+<td>实现 Pod 自动伸缩，定时获取监控数据，匹配策略后执行伸缩</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-node">2. Node 组件</h4>
+<ul>
+<li>
+<p><strong>kubelet</strong>：运行在每个 Node 上的代理服务，处理 Master 下发的任务，管理 Pod 及容器；注册节点信息，定期汇报节点资源使用情况，通过 cAdvisor 监控容器和节点资源。</p>
+</li>
+<li>
+<p><strong>kube-proxy</strong>：运行在所有 Node 上，监听 apiserver 中 Service 和 Endpoint 的变化，创建路由规则，提供 Service IP 和负载均衡功能（透明代理+负载均衡）。</p>
+</li>
+<li>
+<p><strong>Docker Engine</strong>：容器运行时，负责容器的创建、启动、停止等生命周期管理。</p>
+</li>
+</ul>
+<h3 id="_8">（三）关键工具与部署方式</h3>
+<h4 id="1_8">1. 核心工具</h4>
+<table>
+<thead>
+<tr>
+<th>工具名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Minikube</td>
+<td>本地运行单节点 K8s 集群的工具，用于开发和测试</td>
+</tr>
+<tr>
+<td>Kubectl</td>
+<td>命令行工具，用于控制 K8s 集群（如检查资源、创建/删除/更新组件、查看应用）</td>
+</tr>
+<tr>
+<td>cAdvisor</td>
+<td>集成于 kubelet 的监控组件，实时采集节点及容器的性能指标（CPU、内存等）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2_8">2. 常见部署方式</h4>
+<ul>
+<li>
+<p><strong>kubeadm</strong>：官方推荐方式，简化集群部署流程，支持快速初始化 Master 和 Node。</p>
+</li>
+<li>
+<p><strong>二进制部署</strong>：手动下载并部署各组件（kube-apiserver、kube-controller-manager 等），灵活性高，适合生产环境，但配置复杂。</p>
+</li>
+<li>
+<p><strong>Minikube</strong>：本地单节点部署，适合开发测试。</p>
+</li>
+</ul>
+<h3 id="pod">（四）Pod 核心机制</h3>
+<h4 id="1-pod">1. Pod 状态</h4>
+<table>
+<thead>
+<tr>
+<th>状态名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pending</td>
+<td>API Server 已创建 Pod，但 Pod 内至少一个容器镜像未创建（含下载中）</td>
+</tr>
+<tr>
+<td>Running</td>
+<td>Pod 内所有容器已创建，至少一个容器处于运行/启动/重启状态</td>
+</tr>
+<tr>
+<td>Succeeded</td>
+<td>Pod 内所有容器成功执行退出，且不会重启</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td>Pod 内所有容器已退出，至少一个容器退出为失败状态（退出码非 0）</td>
+</tr>
+<tr>
+<td>Unknown</td>
+<td>无法获取 Pod 状态（如网络通信故障）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-pod">2. 创建 Pod 的主要流程</h4>
+<ol>
+<li>
+<p>客户端提交 Pod 配置（如 YAML 文件）到 kube-apiserver。</p>
+</li>
+<li>
+<p>apiserver 通知 controller-manager 创建资源对象。</p>
+</li>
+<li>
+<p>controller-manager 通过 apiserver 将 Pod 配置存储到 Etcd。</p>
+</li>
+<li>
+<p>kube-scheduler 检测到 Pod 信息，执行<strong>预选</strong>（过滤不符合资源要求的 Node）和<strong>优选</strong>（挑选最优 Node），将配置发送到目标 Node 的 kubelet。</p>
+</li>
+<li>
+<p>kubelet 根据配置运行 Pod，运行成功后将状态返回给 scheduler，scheduler 存储状态到 Etcd。</p>
+</li>
+</ol>
+<h4 id="3-restartpolicy">3. 重启策略（RestartPolicy）</h4>
+<p>Pod 重启策略应用于所有容器，由 kubelet 在 Node 上执行，默认值为 <strong>Always</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>策略名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Always</td>
+<td>容器失效时，kubelet 自动重启容器</td>
+</tr>
+<tr>
+<td>OnFailure</td>
+<td>容器终止且退出码非 0 时，kubelet 自动重启容器</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>无论容器状态如何，kubelet 不重启容器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>策略与控制器的关联限制</strong>：</p>
+<ul>
+<li>
+<p>RC 和 DaemonSet：必须设为 Always（保证容器持续运行）。</p>
+</li>
+<li>
+<p>Job：设为 OnFailure 或 Never（确保执行完成后不重启）。</p>
+</li>
+<li>
+<p>kubelet（静态 Pod）：Pod 失效时重启，不进行健康检查（无论策略如何）。</p>
+</li>
+</ul>
+<h4 id="4_2">4. 健康检查方式（探针）</h4>
+<p>K8s 通过三类探针检查 Pod 健康状态：</p>
+<table>
+<thead>
+<tr>
+<th>探针类型</th>
+<th>作用</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LivenessProbe</td>
+<td>判断容器是否存活（running 状态）；探测失败则 kubelet 杀掉容器，按重启策略处理；无探针则默认“Success”</td>
+<td>保证容器运行状态正常（如应用死锁时重启）</td>
+</tr>
+<tr>
+<td>ReadinessProbe</td>
+<td>判断容器是否启动完成（ready 状态）；探测失败则修改 Pod 状态，Endpoint Controller 从 Service Endpoint 中移除该 Pod</td>
+<td>避免请求发送到未就绪的容器（如应用初始化中）</td>
+</tr>
+<tr>
+<td>StartupProbe</td>
+<td>启动检查，针对启动缓慢的业务；避免业务未启动完成被 LivenessProbe/ReadinessProbe 误杀</td>
+<td>如数据库、大型中间件（启动耗时较长）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="5-livenessprobe">5. LivenessProbe 探针的常见方式</h4>
+<ul>
+<li>
+<p><strong>ExecAction</strong>：在容器内执行命令，返回码为 0 则健康。</p>
+</li>
+<li>
+<p><strong>TCPSocketAction</strong>：通过容器 IP 和端口建立 TCP 连接，连接成功则健康。</p>
+</li>
+<li>
+<p><strong>HTTPGetAction</strong>：通过容器 IP、端口和路径调用 HTTP GET 方法，响应状态码 200-399 则健康。</p>
+</li>
+</ul>
+<h4 id="6">6. 常见调度方式</h4>
+<table>
+<thead>
+<tr>
+<th>调度方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deployment/RC</td>
+<td>自动部署多份 Pod 副本，监控副本数量，维持指定数量（弹性伸缩、滚动升级）</td>
+</tr>
+<tr>
+<td>NodeSelector</td>
+<td>定向调度：通过 Node 标签（Label）与 Pod 的 nodeSelector 匹配，将 Pod 调度到指定 Node</td>
+</tr>
+<tr>
+<td>NodeAffinity（亲和性调度）</td>
+<td>扩展调度能力，分两类规则：<br>1. requiredDuringSchedulingIgnoredDuringExecution（硬规则）：必须满足才调度；<br>2. preferredDuringSchedulingIgnoredDuringExecution（软规则）：优先满足，不强求，可设权重</td>
+</tr>
+<tr>
+<td>Taints 和 Tolerations（污点和容忍）</td>
+<td>Taints（污点）：使 Node 拒绝特定 Pod 运行；<br>Tolerations（容忍）：Pod 属性，允许运行在有 Taints 的 Node 上</td>
+</tr>
+<tr>
+<td>静态 Pod</td>
+<td>由 kubelet 管理，仅存在于特定 Node，无法通过 API Server 管理，不关联控制器，无健康检查</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deployment-daemonset">（五）Deployment 与 DaemonSet</h3>
+<h4 id="1-deployment">1. Deployment 升级过程</h4>
+<ol>
+<li>
+<p>初始创建 Deployment 时，系统创建一个 ReplicaSet（RS），并创建指定数量的 Pod 副本。</p>
+</li>
+<li>
+<p>更新 Deployment 时，系统创建新 RS，将其副本数扩展到 1，同时将旧 RS 缩减到（原数量-1）。</p>
+</li>
+<li>
+<p>按更新策略逐个调整新旧 RS 的副本数（如每次新增 1 个新 Pod，删除 1 个旧 Pod）。</p>
+</li>
+<li>
+<p>最终新 RS 运行指定数量的新版本 Pod，旧 RS 副本数缩减为 0。</p>
+</li>
+</ol>
+<h4 id="2-deployment">2. Deployment 升级策略</h4>
+<p>通过 <code>spec.strategy</code> 指定，默认值为 <strong>RollingUpdate</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>策略名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recreate（重建）</td>
+<td>更新时先杀掉所有运行中的旧 Pod，再创建新 Pod；适合无状态服务，会有服务中断</td>
+</tr>
+<tr>
+<td>RollingUpdate（滚动更新）</td>
+<td>逐个更新 Pod，保证服务不中断；可通过 <code>maxUnavailable</code>（最大不可用 Pod 数）和 <code>maxSurge</code>（最大超出 Pod 数）控制更新节奏</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-daemonset">3. DaemonSet 特性</h4>
+<ul>
+<li>
+<p><strong>部署规则</strong>：在每个 K8s 集群 Node 上运行一个 Pod，每个 Node 仅运行一个，不支持定义 <code>replicas</code>（副本数由 Node 数量决定）。</p>
+</li>
+<li>
+<p><strong>典型场景</strong>：</p>
+<ul>
+<li>
+<p>日志收集（如 Fluentd、Logstash）。</p>
+</li>
+<li>
+<p>节点监控（如 Prometheus Node Exporter）。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="service">（六）Service 与网络</h3>
+<h4 id="1-service">1. Service 类型</h4>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用</th>
+<th>访问方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ClusterIP</td>
+<td>虚拟服务 IP，仅集群内部 Pod 可访问；kube-proxy 通过 iptables 规则转发</td>
+<td>集群内通过 ClusterIP:Port 访问</td>
+</tr>
+<tr>
+<td>NodePort</td>
+<td>将 Service 端口映射到宿主机端口；外部客户端通过 Node IP:NodePort 访问</td>
+<td>外部：Node IP:NodePort；内部：ClusterIP:Port 或 Node IP:NodePort</td>
+</tr>
+<tr>
+<td>LoadBalancer</td>
+<td>结合外接负载均衡器（如公有云 LB），将外部流量分发到 Service；需指定 <code>spec.status.loadBalancer</code> 中的 LB IP</td>
+<td>外部通过 LB IP:Port 访问，LB 自动转发到后端 Pod</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-service">2. Service 分发策略</h4>
+<ul>
+<li>
+<p><strong>RoundRobin（轮询）</strong>：默认策略，依次转发请求到后端 Pod。</p>
+</li>
+<li>
+<p><strong>SessionAffinity（会话保持）</strong>：基于客户端 IP，第一次转发到某个 Pod 后，后续同一客户端请求均转发到该 Pod。</p>
+</li>
+</ul>
+<h4 id="3-headless-service">3. Headless Service</h4>
+<ul>
+<li>
+<p><strong>作用</strong>：不提供默认负载均衡，不为 Service 设置 ClusterIP；仅通过 Label Selector 返回后端 Pod 列表，由客户端自行处理负载均衡。</p>
+</li>
+<li>
+<p><strong>适用场景</strong>：需手动指定负载均衡器、应用需知道同组服务其他实例（如分布式数据库集群）。</p>
+</li>
+</ul>
+<h4 id="4_3">4. 外部访问集群内服务的方式</h4>
+<ul>
+<li>
+<p><strong>Pod 端口映射（hostPort）</strong>：将 Pod 端口映射到宿主机，外部通过“宿主机 IP:hostPort”访问。</p>
+</li>
+<li>
+<p><strong>Service NodePort</strong>：通过 NodePort 类型 Service，外部通过“Node IP:NodePort”访问。</p>
+</li>
+<li>
+<p><strong>Service LoadBalancer</strong>：公有云场景，通过外接 LB 访问（LB 自动关联 NodePort）。</p>
+</li>
+<li>
+<p><strong>Ingress</strong>：通过 Ingress 资源和 Ingress Controller，实现 HTTP 层路由（如基于域名、URL 路径转发到不同 Service）。</p>
+</li>
+</ul>
+<h4 id="5-ingress">5. Ingress</h4>
+<ul>
+<li>
+<p><strong>概念</strong>：Ingress 是 K8s 资源对象，用于将不同 URL 请求转发到后端不同 Service，实现 HTTP 层业务路由；需结合 Ingress Controller（如 Nginx Ingress Controller）实现负载均衡。</p>
+</li>
+<li>
+<p><strong>工作流程</strong>：Ingress Controller 监听 Ingress 规则和 Service/Endpoint 变化，生成反向代理配置（如 Nginx 配置），直接将客户端请求转发到后端 Pod（跳过 kube-proxy），流程为“Ingress Controller + Ingress 规则 → Services → Pods”。</p>
+</li>
+</ul>
+<h3 id="_9">（七）存储与持久化</h3>
+<h4 id="1_9">1. 数据持久化方式</h4>
+<table>
+<thead>
+<tr>
+<th>存储类型</th>
+<th>定义</th>
+<th>特性</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EmptyDir（空目录）</td>
+<td>Pod 内的临时共享目录，由 Pod 内部映射到宿主机</td>
+<td>同 Pod 内容器共享；Pod 删除时数据丢失；生命周期与 Pod 一致</td>
+<td>临时数据存储（如合并/排序算法）、容器间数据共享</td>
+</tr>
+<tr>
+<td>HostPath</td>
+<td>将宿主机已存在的目录/文件挂载到容器内部</td>
+<td>数据存储在宿主机，Pod 删除后数据不丢失；Pod 与 Node 耦合（仅能在指定 Node 恢复）</td>
+<td>需持久化但不要求跨 Node 访问的场景（如日志存储到宿主机）</td>
+</tr>
+<tr>
+<td>PersistentVolume（PV）</td>
+<td>对底层网络共享存储（如 NFS、GFS）的抽象，定义为集群“资源”</td>
+<td>独立于 Pod 生命周期；支持动态/静态供应；可跨 Node 访问</td>
+<td>有状态服务（如数据库）的数据持久化</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-pv-pvc">2. PV 与 PVC</h4>
+<ul>
+<li>
+<p><strong>PV（Persistent Volume）</strong>：集群级存储资源，由管理员创建，描述底层存储特性（如容量、访问模式）。</p>
+</li>
+<li>
+<p><strong>PVC（Persistent Volume Claim）</strong>：用户对存储资源的“申请”，指定所需存储容量、访问模式等，系统自动匹配 PV 并绑定。</p>
+</li>
+</ul>
+<h4 id="3-pv">3. PV 生命周期阶段</h4>
+<table>
+<thead>
+<tr>
+<th>阶段名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Available</td>
+<td>可用状态，未与任何 PVC 绑定</td>
+</tr>
+<tr>
+<td>Bound</td>
+<td>已与某个 PVC 绑定</td>
+</tr>
+<tr>
+<td>Released</td>
+<td>绑定的 PVC 已删除，资源已释放，但未被集群回收</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td>自动资源回收失败</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4_4">4. 存储供应模式</h4>
+<ul>
+<li>
+<p><strong>静态模式（Static）</strong>：管理员手工创建多个 PV，定义底层存储特性；用户创建 PVC 后，系统匹配 PV 绑定。</p>
+</li>
+<li>
+<p><strong>动态模式（Dynamic）</strong>：管理员通过 StorageClass 描述后端存储类型；用户创建 PVC 时指定 StorageClass，系统自动创建 PV 并绑定。</p>
+</li>
+</ul>
+<h4 id="5-csi-container-storage-interface">5. CSI 模型（Container Storage Interface）</h4>
+<ul>
+<li>
+<p><strong>概念</strong>：K8s 容器存储接口标准，存储提供方基于标准接口实现插件，解耦存储插件与 K8s 核心代码，部署独立。</p>
+</li>
+<li>
+<p><strong>核心组件</strong>：</p>
+<ul>
+<li>
+<p><strong>CSI Controller</strong>：从存储服务视角管理存储资源和存储卷（如创建/删除 PV）。</p>
+</li>
+<li>
+<p><strong>CSI Node</strong>：管理 Node 上的 Volume（如挂载/卸载 Volume 到容器）。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_10">（八）自动扩容与监控</h3>
+<h4 id="1-hpahorizontal-pod-autoscaler">1. HPA（Horizontal Pod Autoscaler）自动扩容机制</h4>
+<ul>
+<li>
+<p><strong>原理</strong>：</p>
+<ol>
+<li>
+<p>Metrics Server（如 Heapster）持续采集所有 Pod 副本的指标（CPU、内存）。</p>
+</li>
+<li>
+<p>HPA 控制器通过 Metrics Server API 获取指标，基于用户定义的扩缩容规则（如 CPU 使用率阈值）计算目标 Pod 副本数。</p>
+</li>
+<li>
+<p>若目标副本数与当前不同，HPA 向 Deployment/RC/ReplicaSet 发起 scale 操作，调整 Pod 数量。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>支持指标</strong>：核心指标（CPU、内存）、自定义指标（如请求 QPS，需 Prometheus 等组件）。</p>
+</li>
+</ul>
+<h4 id="2-metric-service">2. Metric Service</h4>
+<ul>
+<li>
+<p><strong>核心指标（Core Metrics）</strong>：Node、Pod 的 CPU 和内存使用指标，K8s 1.10+ 默认通过 Metrics Server 采集。</p>
+</li>
+<li>
+<p><strong>自定义指标（Custom Metrics）</strong>：如请求量、响应时间等，由 Prometheus、Grafana 等组件实现。</p>
+</li>
+</ul>
+<h4 id="3-efk">3. EFK 日志统一管理</h4>
+<ul>
+<li>
+<p><strong>组件构成</strong>：</p>
+<ul>
+<li>
+<p><strong>Elasticsearch</strong>：搜索引擎，负责存储日志和提供查询接口。</p>
+</li>
+<li>
+<p><strong>Fluentd</strong>：日志收集器，以 DaemonSet 方式部署在每个 Node，监控并收集 Node 上的系统日志和容器日志（挂载 <code>/var/lib/docker/containers</code> 和 <code>/var/log</code> 目录），处理后发送到 Elasticsearch。</p>
+</li>
+<li>
+<p><strong>Kibana</strong>：Web 可视化界面，用于浏览和搜索 Elasticsearch 中的日志。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>工作流程</strong>：Fluentd 收集日志 → 发送到 Elasticsearch 存储 → Kibana 展示日志。</p>
+</li>
+</ul>
+<h3 id="_11">（九）安全机制</h3>
+<h4 id="1_10">1. 安全控制维度</h4>
+<ul>
+<li>
+<p><strong>基础设施隔离</strong>：保证容器与宿主机的隔离（如命名空间、资源限制）。</p>
+</li>
+<li>
+<p><strong>最小权限原则</strong>：限制组件权限，确保组件仅执行授权操作。</p>
+</li>
+<li>
+<p><strong>用户权限划分</strong>：区分普通用户和管理员角色，避免越权操作。</p>
+</li>
+<li>
+<p><strong>API Server 认证授权</strong>：</p>
+<ul>
+<li>
+<p><strong>认证（Authentication）</strong>：通过 HTTPS、Token 识别客户端身份。</p>
+</li>
+<li>
+<p><strong>授权（Authorization）</strong>：通过 RBAC 等策略判断 API 调用是否合法。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>敏感数据保护</strong>：通过 Secret 存储密码、Token 等敏感数据（而非明文存储）。</p>
+</li>
+<li>
+<p><strong>准入机制（AdmissionControl）</strong>：API 请求经过认证授权后，执行准入操作（如资源限制检查、ServiceAccount 自动配置），最后操作目标对象。</p>
+</li>
+</ul>
+<h4 id="2-admissioncontrol">2. 准入控制（AdmissionControl）</h4>
+<ul>
+<li>
+<p><strong>执行顺序</strong>：认证 → 授权 → 准入控制 → 操作对象。</p>
+</li>
+<li>
+<p><strong>常用准入组件</strong>：</p>
+<ul>
+<li>
+<p><strong>AlwaysAdmit</strong>：允许所有请求。</p>
+</li>
+<li>
+<p><strong>AlwaysDeny</strong>：禁止所有请求（测试环境用）。</p>
+</li>
+<li>
+<p><strong>ServiceAccount</strong>：自动配置 ServiceAccount（如 Pod 无 ServiceAccount 时添加 default）。</p>
+</li>
+<li>
+<p><strong>LimitRanger</strong>：检查请求是否违反 Namespace 中的 LimitRange 约束（如资源限制）。</p>
+</li>
+<li>
+<p><strong>NamespaceExists</strong>：拒绝创建不存在的 Namespace 的请求。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-rbac">3. RBAC（基于角色的访问控制）</h4>
+<ul>
+<li>
+<p><strong>概念</strong>：通过角色（Role）定义权限，将角色绑定到用户/用户组（RoleBinding），实现权限管理。</p>
+</li>
+<li>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>
+<p>覆盖集群内所有资源和非资源权限。</p>
+</li>
+<li>
+<p>基于 API 对象实现，可通过 kubectl/API 操作。</p>
+</li>
+<li>
+<p>运行时可调整，无需重启 API Server。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-secret">4. Secret</h4>
+<ul>
+<li>
+<p><strong>作用</strong>：保管私密数据（密码、OAuth Tokens、SSH Keys 等），比明文存储更安全，便于分发。</p>
+</li>
+<li>
+<p><strong>使用方式</strong>：</p>
+<ol>
+<li>
+<p>Pod 通过 ServiceAccount 自动使用 Secret。</p>
+</li>
+<li>
+<p>将 Secret 挂载为 Pod 内的文件或环境变量。</p>
+</li>
+<li>
+<p>镜像下载时，通过 Pod 的 <code>spec.ImagePullSecrets</code> 引用 Secret（用于私有镜像仓库认证）。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="5-podsecuritypolicy">5. PodSecurityPolicy</h4>
+<ul>
+<li>
+<p><strong>概念</strong>：精细控制 Pod 对资源的使用方式和安全策略；开启后，默认禁止创建 Pod，需创建 PodSecurityPolicy 和 RBAC 授权策略才能创建 Pod。</p>
+</li>
+<li>
+<p><strong>支持的安全策略</strong>：</p>
+<ul>
+<li>
+<p>特权模式控制（<code>privileged</code>：是否允许 Pod 以特权模式运行）。</p>
+</li>
+<li>
+<p>宿主机资源控制（如 <code>hostPID</code>：是否共享宿主机进程空间）。</p>
+</li>
+<li>
+<p>用户/组控制（设置容器运行的 UID/GID 范围）。</p>
+</li>
+<li>
+<p>权限提升控制（<code>AllowPrivilegeEscalation</code>：容器子进程是否可提升权限）。</p>
+</li>
+<li>
+<p>SELinux 配置。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_12">（十）网络模型与组件</h3>
+<h4 id="1-k8s">1. K8s 网络模型</h4>
+<ul>
+<li>
+<p><strong>核心原则</strong>：每个 Pod 拥有独立 IP，所有 Pod 处于扁平网络空间，可直接通过 IP 通信（无论是否在同一 Node）。</p>
+</li>
+<li>
+<p><strong>Pod 内网络</strong>：同一 Pod 内的容器共享网络命名空间（IP、端口、网络设备），可通过 <a href="http://localhost">localhost</a> 通信。</p>
+</li>
+<li>
+<p><strong>IP 分配</strong>：IP 以 Pod 为单位分配，Pod 内所有容器共享该 IP。</p>
+</li>
+</ul>
+<h4 id="2-cni-container-network-interface">2. CNI 模型（Container Network Interface）</h4>
+<ul>
+<li>
+<p><strong>概念</strong>：容器网络插件化标准，定义容器网络操作规范，通过插件实现网络配置。</p>
+</li>
+<li>
+<p><strong>核心概念</strong>：</p>
+<ul>
+<li>
+<p><strong>容器（Container）</strong>：拥有独立 Linux 网络命名空间的环境（如 Docker 容器）。</p>
+</li>
+<li>
+<p><strong>网络（Network）</strong>：可互连的实体集合（容器、物理机、路由器等），各实体有唯一 IP。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>插件类型</strong>：</p>
+<ul>
+<li>
+<p><strong>CNI Plugin</strong>：负责为容器配置网络资源（如分配 IP、创建网络设备）。</p>
+</li>
+<li>
+<p><strong>IPAM Plugin</strong>：负责 IP 地址分配与管理（CNI Plugin 的一部分）。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-network-policy">3. 网络策略（Network Policy）</h4>
+<ul>
+<li>
+<p><strong>作用</strong>：实现 Pod 间网络访问的细粒度隔离，定义允许/禁止访问的客户端 Pod 列表。</p>
+</li>
+<li>
+<p><strong>工作原理</strong>：Policy Controller 监听 Network Policy 定义，通过 Node 上的 Agent（结合 CNI 插件）设置网络访问规则。</p>
+</li>
+</ul>
+<h4 id="4-flannel">4. Flannel</h4>
+<ul>
+<li>
+<p><strong>作用</strong>：K8s 底层网络实现方案，解决两个核心问题：</p>
+<ol>
+<li>
+<p>为每个 Node 上的 Docker 容器分配不冲突的 IP。</p>
+</li>
+<li>
+<p>建立覆盖网络（Overlay Network），将数据包原封不动传递到目标容器。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="5-calico">5. Calico</h4>
+<ul>
+<li>
+<p><strong>实现原理</strong>：基于 BGP 协议的纯三层网络方案，与 K8s、OpenStack 等集成良好：</p>
+<ol>
+<li>
+<p>每个计算节点通过 Linux Kernel 实现 vRouter，负责数据转发。</p>
+</li>
+<li>
+<p>vRouter 通过 BGP 协议向整个 Calico 网络广播本节点容器的路由信息，自动设置跨节点路由规则。</p>
+</li>
+<li>
+<p>容器间数据通过 IP 路由直接通信，无需 NAT、隧道或 Overlay Network，效率高。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="_13">（十一）其他核心操作</h3>
+<h4 id="1-worker">1. Worker 节点加入集群的过程</h4>
+<ol>
+<li>
+<p>在新 Worker 节点安装 Docker、kubelet、kube-proxy。</p>
+</li>
+<li>
+<p>配置 kubelet 和 kube-proxy 的启动参数，指定 Master URL（集群 Master 地址），启动服务。</p>
+</li>
+<li>
+<p>kubelet 通过自动注册机制，将节点信息注册到 Master 的 API Server。</p>
+</li>
+<li>
+<p>Master 接受注册后，将新节点纳入集群调度范围。</p>
+</li>
+</ol>
+<h4 id="2_9">2. 优雅的节点关机维护</h4>
+<ol>
+<li>
+<p>使用 <code>kubectl drain &lt;node-name&gt;</code> 驱逐节点上的所有 Pod（确保 Pod 调度到其他节点，服务不中断）。</p>
+</li>
+<li>
+<p>确认 Pod 全部驱逐后，执行关机维护。</p>
+</li>
+<li>
+<p>维护完成后，使用 <code>kubectl uncordon &lt;node-name&gt;</code> 解除节点封锁，允许 Pod 重新调度到该节点。</p>
+</li>
+</ol>
+<h4 id="3_4">3. 集群联邦</h4>
+<ul>
+<li>
+<p><strong>概念</strong>：将多个 K8s 集群作为一个整体管理，支持跨数据中心/云平台的集群统一控制。</p>
+</li>
+<li>
+<p><strong>作用</strong>：实现多集群资源调度、服务发现、配置共享，提升系统可用性和扩展性。</p>
+</li>
+</ul>
+<h3 id="helm">（十二）Helm</h3>
+<h4 id="1_11">1. 概念</h4>
+<p>Helm 是 K8s 的软件包管理工具，类似 Ubuntu 的 apt、CentOS 的 yum，用于打包、分发、安装和管理 K8s 应用资源。</p>
+<h4 id="2_10">2. 核心术语</h4>
+<ul>
+<li><strong>Chart</strong>：Helm 包，包含应用的所有 K8s 资源配置（YAML 文件），通常压缩为 <code>name-version.tgz</code> 格式。</li>
+</ul>
+<h4 id="3_5">3. 优势</h4>
+<ul>
+<li>
+<p><strong>统一管理</strong>：集中管理应用的分散 K8s 资源（Pod、Service、Deployment 等），支持配置更新。</p>
+</li>
+<li>
+<p><strong>模板复用</strong>：分发和复用应用模板（Chart），简化部署流程。</p>
+</li>
+<li>
+<p><strong>版本控制</strong>：管理应用版本，支持升级、回滚。</p>
+</li>
+<li>
+<p><strong>用户友好</strong>：</p>
+<ul>
+<li>
+<p>发布者：通过 Helm 打包应用、管理依赖、发布到仓库。</p>
+</li>
+<li>
+<p>使用者：无需编写复杂 YAML，通过 Helm 快速查找、安装、卸载应用。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="k8s">（十三）K8s 优缺点</h3>
+<h4 id="1_12">1. 优势</h4>
+<ul>
+<li>
+<p><strong>容器编排</strong>：自动化部署、调度、伸缩容器。</p>
+</li>
+<li>
+<p><strong>轻量级</strong>：资源消耗低，支持高密度部署。</p>
+</li>
+<li>
+<p><strong>开源</strong>：社区活跃，生态丰富。</p>
+</li>
+<li>
+<p><strong>弹性伸缩</strong>：基于 HPA 实现 Pod 自动扩缩容。</p>
+</li>
+<li>
+<p><strong>负载均衡</strong>：通过 Service 实现请求分发。</p>
+</li>
+<li>
+<p><strong>可移植</strong>：支持公有云、私有云、混合云、多云。</p>
+</li>
+<li>
+<p><strong>可扩展</strong>：模块化、插件化，支持自定义扩展。</p>
+</li>
+<li>
+<p><strong>自动化</strong>：自动部署、重启、复制、伸缩。</p>
+</li>
+</ul>
+<h4 id="2_11">2. 缺点</h4>
+<ul>
+<li>
+<p><strong>安装配置复杂</strong>：尤其是生产环境的高可用部署。</p>
+</li>
+<li>
+<p><strong>管理繁琐</strong>：组件多，需维护 Master、Node、网络、存储等。</p>
+</li>
+<li>
+<p><strong>运行编译耗时</strong>：大规模集群部署和编译需较长时间。</p>
+</li>
+<li>
+<p><strong>成本较高</strong>：需更多资源（如 Master 节点冗余），比简单部署昂贵。</p>
+</li>
+<li>
+<p><strong>过度设计</strong>：简单应用无需 K8s，反而增加复杂度。</p>
+</li>
+</ul>
+<h2 id="openshift">六、OpenShift</h2>
+<h3 id="1_13">1. 概念</h3>
+<p>OpenShift 是基于 Red Hat Enterprise Linux、Docker 和 K8s 的容器应用平台，为企业级应用提供安全、可伸缩的多租户操作系统，集成应用运行时和库，最小化配置和管理开销。</p>
+<h3 id="2_12">2. 主要特性</h3>
+<ul>
+<li>
+<p><strong>自助服务平台</strong>：开发人员通过 Source-to-Image（S2I）从模板或代码仓库创建应用；管理员可定义资源配额。</p>
+</li>
+<li>
+<p><strong>多语言支持</strong>：支持 Java、Node.js、PHP、Perl、Ruby 及中间件（Apache httpd、Tomcat、JBoss EAP 等）。</p>
+</li>
+<li>
+<p><strong>自动化</strong>：支持应用生命周期管理（自动重建、重新部署、伸缩、故障转移）。</p>
+</li>
+<li>
+<p><strong>用户界面</strong>：提供 Web UI（部署监控）和 CLI（远程管理）。</p>
+</li>
+<li>
+<p><strong>协作</strong>：支持组织内/社区项目共享。</p>
+</li>
+<li>
+<p><strong>可伸缩性与高可用</strong>：容器多租户、分布式平台，支持弹性、高可用（自动发现故障、重新部署）。</p>
+</li>
+<li>
+<p><strong>容器可移植性</strong>：基于标准容器镜像和 K8s，可部署到其他兼容平台。</p>
+</li>
+<li>
+<p><strong>开源</strong>：无厂商锁定。</p>
+</li>
+<li>
+<p><strong>安全性</strong>：SELinux 多层安全、RBAC 访问控制、集成 LDAP/OAuth 认证。</p>
+</li>
+<li>
+<p><strong>动态存储管理</strong>：基于 K8s PV/PVC 实现静态/动态存储。</p>
+</li>
+<li>
+<p><strong>部署灵活性</strong>：支持裸机、虚拟化、多厂商 IaaS 云。</p>
+</li>
+<li>
+<p><strong>企业级支持</strong>：Red Hat 支持，第三方容器/应用认证。</p>
+</li>
+<li>
+<p><strong>日志与监控</strong>：集中日志聚合、实时 metrics 收集与分析。</p>
+</li>
+<li>
+<p><strong>DevOps 集成</strong>：支持微服务架构，易与 CI/CD 工具集成。</p>
+</li>
+</ul>
+<h3 id="3-projects">3. Projects</h3>
+<ul>
+<li>
+<p><strong>概念</strong>：对 K8s 资源进行分组，实现多租户隔离；可分配资源配额（限制 Pod、Volume、Service 数量）。</p>
+</li>
+<li>
+<p><strong>作用</strong>：允许用户组独立组织和管理资源，用户需授权才能访问项目；用户创建项目后自动获得访问权限。</p>
+</li>
+</ul>
+<h3 id="4_5">4. 高可用实现</h3>
+<p>OpenShift 高可用分两方面：</p>
+<ul>
+<li>
+<p><strong>基础设施 HA（主机）</strong>：默认支持 Master 节点本机 HA（基于 Keepalived 等），保证 Master 高可用。</p>
+</li>
+<li>
+<p><strong>应用 HA（Pods）</strong>：K8s 自动调度 Pod 副本，Pod 失效时重建；节点失效时，调度 Pod 到其他节点；应用需自行维护状态（如 HTTP 会话复制、数据库复制）。</p>
+</li>
+</ul>
+<h3 id="5-sdn">5. SDN 网络实现</h3>
+<ul>
+<li>
+<p><strong>默认 Docker 网络局限</strong>：仅主机内容器可通信，跨主机容器无法通信。</p>
+</li>
+<li>
+<p><strong>SDN 原理</strong>：通过软件定义网络（SDN）解耦控制平面（流量处理软件）和数据平面（路由底层机制），实现跨集群容器通信；基于 Open vSwitch 创建 Overlay 网络。</p>
+</li>
+<li>
+<p><strong>SDN 插件</strong>：</p>
+<ol>
+<li>
+<p><strong>ovs-subnet</strong>：默认插件，flat 网络，所有 Pod/Service 可通信。</p>
+</li>
+<li>
+<p><strong>ovs-multitenant</strong>：多租户隔离，每个 Project 分配唯一 VNID（虚拟网络 ID），不同 Project 的 Pod/Service 不可通信。</p>
+</li>
+<li>
+<p><strong>ovs-network policy</strong>：支持管理员通过 NetworkPolicy 定义自定义隔离策略。</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>集群网络限制</strong>：Master 节点无法通过集群网络访问容器（除非 Master 同时为 Node 节点）。</p>
+</li>
+</ul>
+<h3 id="6_1">6. 角色与身份验证</h3>
+<h4 id="1_14">1. 角色</h4>
+<ul>
+<li>
+<p><strong>集群级角色</strong>：控制整个集群资源的访问权限。</p>
+</li>
+<li>
+<p><strong>本地角色</strong>：控制单个 Project 内资源的访问权限。</p>
+</li>
+<li>
+<p><strong>关联方式</strong>：用户/用户组可关联多个角色，获取对应权限。</p>
+</li>
+</ul>
+<h4 id="2_13">2. 支持的身份验证类型</h4>
+<ul>
+<li>
+<p><strong>Basic Authentication (Remote)</strong>：用户输入用户名/密码，OpenShift 向远程标识提供者验证。</p>
+</li>
+<li>
+<p><strong>Request Header Authentication</strong>：基于请求头（如 X-RemoteUser）验证，通常与认证代理配合。</p>
+</li>
+<li>
+<p><strong>Keystone Authentication</strong>：集成 OpenStack Keystone v3，用户使用 Keystone 凭证登录。</p>
+</li>
+<li>
+<p><strong>LDAP Authentication</strong>：用户使用 LDAP 凭证登录，OpenStack 搜索 LDAP 目录匹配条目并绑定验证。</p>
+</li>
+<li>
+<p><strong>GitHub Authentication</strong>：基于 OAuth 集成 GitHub，用户使用 GitHub 凭证登录，可限制访问特定 GitHub 组织。</p>
+</li>
+</ul>
+<h2 id="_14">七、中间件</h2>
+<h3 id="1_15">1. 概念</h3>
+<p>中间件是独立的系统软件或服务程序，位于客户机/服务器操作系统之间，连接两个独立应用程序或系统，实现不同技术间的资源共享和信息交换。</p>
+<h3 id="2_14">2. 核心作用</h3>
+<ul>
+<li>
+<p><strong>解耦</strong>：降低应用程序间的耦合度，使应用专注于核心业务逻辑。</p>
+</li>
+<li>
+<p><strong>桥接</strong>：实现不同技术栈、协议、数据格式的应用间通信（如 Java 应用与 Python 应用通信）。</p>
+</li>
+<li>
+<p><strong>复用</strong>：提供通用功能（如日志、监控、事务管理），避免重复开发。</p>
+<blockquote>
+<p>（注：文档部分内容可能由 AI 生成）</p>
+</blockquote>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

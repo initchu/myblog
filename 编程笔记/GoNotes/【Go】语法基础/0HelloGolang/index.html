@@ -1,0 +1,627 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/0HelloGolang/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>0 Hello Golang - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0-hello-golang" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0 Hello Golang
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#golang" class="md-nav__link">
+    <span class="md-ellipsis">
+      你好，Golang！
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK 命令行工具
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SDK 命令行工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#go-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      go build
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      go clean
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      go run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gofmt" class="md-nav__link">
+    <span class="md-ellipsis">
+      gofmt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      go install
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      go get
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="0-hello-golang">0 Hello Golang</h1>
+<h2 id="golang">你好，Golang！</h2>
+<pre><code class="language-go">package main
+import &quot;fmt&quot;
+func main(){
+    fmt.Println(&quot;Hello Golang!&quot;)
+}
+//单行注释
+
+/*
+这
+是
+多
+行
+注
+释
+ */
+</code></pre>
+<ol>
+<li><font style="color:rgb(51, 51, 51);">第一行内容为“package main”，它表示这个源码文件属于main包。main包是每个Go应用程序都包含的包，有且只有一个。</font></li>
+<li><font style="color:rgb(51, 51, 51);">第二行内容是“import “fmt"”，它的作用是导入名为“fmt”的包，目的在于稍后使用fmt包提供的各种能力。一旦某个包被导入，它必须被使用。</font></li>
+<li><font style="color:rgb(51, 51, 51);">从第三行开始到最后，是main()函数，这个函数比较特殊，它是Go程序的“入口”函数，是程序运行的起点。这个函数必须存在且只能存在一个，且必须声明在main包中。任何一个Go函数都要求使用成对的大括号将函数体包裹起来。</font></li>
+<li><font style="color:rgb(51, 51, 51);">第四行调用了fmt包中的Println()函数，这个函数的作用是将特定的内容输出到控制台上。</font></li>
+<li><font style="color:rgb(51, 51, 51);">第五行是main()函数的结束。</font></li>
+</ol>
+<h2 id="sdk">SDK 命令行工具</h2>
+<h3 id="go-build"><font style="color:rgb(51, 51, 51);">go build</font></h3>
+<p><font style="color:rgb(51, 51, 51);">go build命令的作用是编译Go源码，并生成可执行的文件。</font></p>
+<p><font style="color:rgb(51, 51, 51);">Go SDK 自 1.9 版本开始就支持并发编译了，能尽可能地发挥电脑的最大性能完成编译，所以 Go 源码的编译速度是非常快的。在编译过程中，除了我们自己写的代码外，如果使用了第三方的包，这些包会被一同编译。当我们执行go build命令后，会搜索当前目录下的go源码并完成编译。go build 命令还允许附加参数，方便开发者对编译参数进行配置，具体如下表所示：</font></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><font style="color:rgb(51, 51, 51);">参数名</font></th>
+<th><font style="color:rgb(51, 51, 51);">作用</font></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-v</font></td>
+<td><font style="color:rgb(51, 51, 51);">编译时显示包名</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-p x</font></td>
+<td><font style="color:rgb(51, 51, 51);">指定编译时并发的数量（使用x表示），该值默认为CPU的逻辑核心数</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-a</font></td>
+<td><font style="color:rgb(51, 51, 51);">强制进行重新构建</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-n</font></td>
+<td><font style="color:rgb(51, 51, 51);">仅输出编译时执行的所有命令</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-x</font></td>
+<td><font style="color:rgb(51, 51, 51);">执行编译并输出编译时执行的所有命令</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-race</font></td>
+<td><font style="color:rgb(51, 51, 51);">开启竞态检测</font></td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:rgb(51, 51, 51);">此外，如果我们希望只编译某个go源码文件或包，可在go build命令后添加文件或包名。例如，现有file1.go、file2.go和file3.go，我们只希望编译file1.go，便可如下执行：</font></p>
+<p><code>go build file1.go</code></p>
+<h3 id="go-clean"><font style="color:rgb(51, 51, 51);">go clean</font></h3>
+<p><font style="color:rgb(51, 51, 51);">go clean命令可以清理当前目录内的所有编译生成的文件，具体包括：</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">当前目录下生成的与包名或者 Go 源码文件同名的可执行文件，以及当前目录中_obj和_test目录中名为_testmain.go、test.out、build.out、a.out以及后缀为.5、.6、.8、.a、.o和.so的文件，这些文件通常是执行go build命令后生成的；</font></li>
+<li><font style="color:rgb(51, 51, 51);">当前目录下生成的包名加“.test”后缀为名的文件，这些文件通常是执行go test命令后生成的；</font></li>
+<li><font style="color:rgb(51, 51, 51);">工作区中pkg和bin目录的相应归档文件和可执行文件，这些文件通常是执行go install命令后生成的。</font></li>
+</ul>
+<p><font style="color:rgb(51, 51, 51);">go clean命令还允许附加参数，具体参数和作用如下表所示：</font></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><font style="color:rgb(51, 51, 51);">参数名</font></th>
+<th><font style="color:rgb(51, 51, 51);">作用</font></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-i</font></td>
+<td><font style="color:rgb(51, 51, 51);">清除关联的安装的包和可运行文件，这些文件通常是执行go install命令后生成的</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-n</font></td>
+<td><font style="color:rgb(51, 51, 51);">仅输出清理时执行的所有命令</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-r</font></td>
+<td><font style="color:rgb(51, 51, 51);">递归清除在 import 中引入的包</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-x</font></td>
+<td><font style="color:rgb(51, 51, 51);">执行清理并输出清理时执行的所有命令</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-cache</font></td>
+<td><font style="color:rgb(51, 51, 51);">清理缓存，这些缓存文件通常是执行go build命令后生成的</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:rgb(51, 51, 51);">-testcache</font></td>
+<td><font style="color:rgb(51, 51, 51);">清理测试结果</font></td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:rgb(51, 51, 51);">在团队式开发中，通常在每次提交代码前执行go clean命令，防止提交编译时生成的文件。</font></p>
+<h3 id="go-run"><font style="color:rgb(51, 51, 51);">go run</font></h3>
+<p><font style="color:rgb(51, 51, 51);">go run命令的作用是直接运行go源码，不在当前目录下生成任何可执行的文件。</font></p>
+<p><font style="color:rgb(51, 51, 51);">从原理上讲，go run只是将编译后生成的可执行文件放到临时目录中执行，工作目录仍然为当前目录。同时，go run命令允许添加参数，这些参数将作为go程序的可接受参数使用。</font></p>
+<p><font style="color:rgb(51, 51, 51);">由此可见，go run命令同样会执行编译操作。但要注意的是，go run不适用于包的执行。</font></p>
+<h3 id="gofmt"><font style="color:rgb(51, 51, 51);">gofmt</font></h3>
+<p><font style="color:rgb(51, 51, 51);">gofmt命令的作用是将代码按照Go语言官方提供的代码风格进行格式化操作。</font></p>
+<p><font style="color:rgb(51, 51, 51);"></font><font style="color:rgb(51, 51, 51);">gofmt和go fmt是两个不同的命令</font><font style="color:rgb(51, 51, 51);">。go fmt命令是gofmt的封装，go fmt支持两个参数：-n和-x，分别表示仅输出格式化时执行的命令，以及执行格式化并输出格式化时执行的命令。</font></p>
+<p><font style="color:rgb(51, 51, 51);">执行gofmt命令时，可指定文件或目录，也可不指定。当不指定时，gofmt命令会搜索当前目录中的go源码文件，并执行相应的格式化操作。</font></p>
+<p><font style="color:rgb(51, 51, 51);">gofmt命令还允许附加参数，具体参数和作用如下表所示：</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(51, 51, 51);">参数名</font></th>
+<th><font style="color:rgb(51, 51, 51);">作用</font></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-l</font></td>
+<td><font style="color:rgb(51, 51, 51);">仅输出需要进行代码格式化的源码文件的绝对路径</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-w</font></td>
+<td><font style="color:rgb(51, 51, 51);">进行代码格式化，并用改写后的源码覆盖原有源码</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-r rule</font></td>
+<td><font style="color:rgb(51, 51, 51);">添加自定义的代码格式化规则（使用rule表示），格式为：pattern -&gt; replacement</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-s</font></td>
+<td><font style="color:rgb(51, 51, 51);">开启源码简化</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-d</font></td>
+<td><font style="color:rgb(51, 51, 51);">对比输出代码格式化前后的不同，依赖diff命令</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-e</font></td>
+<td><font style="color:rgb(51, 51, 51);">输出所有的语法错误，默认只会打印每行第1个错误，且最多打印10个错误</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-comments</font></td>
+<td><font style="color:rgb(51, 51, 51);">是否保留代码注释，默认值为true</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-tabwidth x</font></td>
+<td><font style="color:rgb(51, 51, 51);">用于指定代码缩进的空格数量（使用x表示），默认值为8，该参数仅在-tabs参数为false时生效</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-tabs</font></td>
+<td><font style="color:rgb(51, 51, 51);">用于指定代码缩进是否使用tab（“\t”），默认值为true</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-cpuprofile filename</font></td>
+<td><font style="color:rgb(51, 51, 51);">是否开启CPU用量分析，需要给定记录文件（使用filename表示），分析结果将保存在这个文件中</font></td>
+</tr>
+</tbody>
+</table>
+<p>:::info
+💡 提示：使用 -s 参数进行源码简化的规则请参考：</p>
+<p>https://pkg.go.dev/cmd/gofmt#hdr-the_simplify_command</p>
+<p>:::</p>
+<h3 id="go-install"><font style="color:rgb(51, 51, 51);">go install</font></h3>
+<p><font style="color:rgb(51, 51, 51);">go install命令的作用和go build类似，都是将源码编译为可执行的文件，附加参数也基本通用，这里就不再赘述了。区别在于：</font></p>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">go install命令在编译源码后，会将可执行文件或库文件安装到约定的目录下；</font></li>
+<li><font style="color:rgb(51, 51, 51);">go install命令生成的可执行文件使用包名来命名；</font></li>
+<li><font style="color:rgb(51, 51, 51);">默认情况下，go install命令会将可执行文件安装到GOPATH\bin目录下，依赖的三方包会被安装到GOPATH\bin目录下。</font></li>
+</ul>
+<h3 id="go-get"><font style="color:rgb(51, 51, 51);">go get</font></h3>
+<p><font style="color:rgb(51, 51, 51);">go get命令的作用是获取源码包，这一操作包含两个步骤，分别是下载源码和执行go intall命令进行安装。使用时，仅需将源码仓库地址追加到go get后即可（访问</font><a href="https://link.juejin.cn/?target=https%3A%2F%2Fpkg.go.dev%2F">pkg.go.dev/</a><font style="color:rgb(51, 51, 51);">，搜索包名，在包详情页可以找到仓库地址），例如：</font></p>
+<p>go get github.com/ethereum/go-ethereum </p>
+<p><font style="color:rgb(51, 51, 51);">go get命令还允许附加参数，具体参数和作用如下表所示：</font></p>
+<table>
+<thead>
+<tr>
+<th><font style="color:rgb(51, 51, 51);">参数名</font></th>
+<th><font style="color:rgb(51, 51, 51);">作用</font></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-d</font></td>
+<td><font style="color:rgb(51, 51, 51);">仅下载源码包，不安装</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-f</font></td>
+<td><font style="color:rgb(51, 51, 51);">在执行-u参数操作时，不验证导入的每个包的获取状态</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-fix</font></td>
+<td><font style="color:rgb(51, 51, 51);">在下载源码包后先执行fix操作</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-t</font></td>
+<td><font style="color:rgb(51, 51, 51);">获取运行测试所需要的包</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-u</font></td>
+<td><font style="color:rgb(51, 51, 51);">更新源码包到最新版本</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-u=patch</font></td>
+<td><font style="color:rgb(51, 51, 51);">只小版本地更新源码包，如从1.1.0到1.1.16</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-v</font></td>
+<td><font style="color:rgb(51, 51, 51);">执行获取并显示实时日志</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(51, 51, 51);">-insecure</font></td>
+<td><font style="color:rgb(51, 51, 51);">允许通过未加密的HTTP方式获取</font></td>
+</tr>
+</tbody>
+</table>
+<p><font style="color:rgb(51, 51, 51);">若要指定所获取源码包的版本，可以通过添加“@版本号”的方式执行。如：</font></p>
+<p>go get github.com/ethereum/go-ethereum@v1.10.1 </p>
+<p><font style="color:rgb(51, 51, 51);">在使用Go SDK 1.17版本时，有一点需要额外注意：执行go get命令可能会收到警告，大意是go get命令是不建议使用的。此时，使用go install替换go get即可，原因是在未来的Go SDK版本中go get的作用等同于go get -d。</font></p>
+<p><font style="color:rgb(51, 51, 51);">如果你对“go get”命令感兴趣，可以阅读官方对它的说明：</font><a href="https://link.juejin.cn/?target=https%3A%2F%2Fdocs.studygolang.com%2Fdoc%2Fgo-get-install-deprecation">docs.studygolang.com/doc/go-get-…</a></p>
+<blockquote>
+<p>更新: 2022-04-13 18:30:47<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/zl31hr">https://www.yuque.com/xiaoshan_wgo/codingnotes/zl31hr</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

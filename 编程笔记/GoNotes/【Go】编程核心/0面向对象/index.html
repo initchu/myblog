@@ -1,0 +1,527 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83/0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>0 面向对象 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              0 面向对象
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      抽象思想
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      封装 - 方法和工厂模式
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      继承 - 匿名结构体
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      多态 - 接口
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="0">0 面向对象</h1>
+<h2 id="_1">抽象思想</h2>
+<p><strong>抽象</strong>始终贯穿在编程里面，是一种编程思想，即把一类事务的共有属性（字段）和行为（方法）提取出来，形成一个物理模型（模板），这种研究问题的方法被称为<strong>抽象（</strong><strong><font style="color:rgb(51, 51, 51);">Abstraction）</font></strong>。<font style="color:rgb(51, 51, 51);">一个类就是这样一种</font><a href="https://baike.baidu.com/item/%E6%8A%BD%E8%B1%A1/9021815#viewPageContent">抽象</a><font style="color:rgb(51, 51, 51);">，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</font></p>
+<p><a href="https://www.yuque.com/xiaoshan_wgo/fpuzg3/pywlu9">Go语言基础：结构体和方法</a></p>
+<p>Go中没有类的概念，是结构体的概念。</p>
+<p>结构体定义实例：</p>
+<pre><code class="language-go">package model
+type UserInfo struct{
+    Name string
+    Age int
+    Height float32
+    Eduschool string
+    Hobby []string
+    MoreInfo map[string] interface{}
+}
+</code></pre>
+<pre><code class="language-go">package main
+Alice := model.UserInfo{
+    Name: &quot;Alice&quot;,
+    Age := 18,
+    Height: 160,
+    Eduschool:&quot;华中师范大学&quot;,
+    Hobby: []string{&quot;coding&quot;,&quot;dancing&quot;},
+    MoreInfo: nil,
+}
+fmt.Println(Alice.Name,Alice.Age)
+</code></pre>
+<p>注： model包的使用，其中定义了UserInfo结构体。</p>
+<h2 id="-">封装 - 方法和工厂模式</h2>
+<p>封装就是把抽象出的<strong>字段和对字段的操作</strong>封装在一起，数据被保护在内部，程序的其他包只有通过被授权的操作（方法），才能对字段进行操作。目的是，不对外暴露公开的接口，增强安全，简化编程。</p>
+<p>Go语言中可以使用<a href="https://www.yuque.com/xiaoshan_wgo/fpuzg3/smo4ix">工厂模式</a>来生成对象，或者说Go语言用工厂模式来实现封装：</p>
+<pre><code class="language-go">//对上面的那个结构体进行封装，使用下面的这个方法就是被授权的操作，这样就实现了对字段的保护。
+func NewUserInfo(name string, age int, height float32, eduSchool string, hobby []string,moreInfo map[string]interface{}) *userInfo{
+    return &amp;userInfo{
+        Name: name,
+        Age := age,
+        Height: height,
+        Eduschool: eduSchool,
+        Hobby: hobby,
+        MoreInfo: moreInfo,
+
+    }
+}
+</code></pre>
+<p>这样外部可以直接调用<code>NewUserInfo</code>而可以不需要调用<code>UserInfo</code>，使用工厂模式的时候将首字母大写的<code>UserInfo</code>修改为<code>userInfo</code>，在Go语言中，首字母大写为公开类/结构体/方法。使用工厂模式/继承的办法，就可以实现安全和简化编程。</p>
+<h2 id="-_1">继承 - 匿名结构体</h2>
+<p>继承解决了代码复用的问题。</p>
+<p>子类继承父类，自动拥有父类的属性和方法。</p>
+<p>重写，父类引用指向子类对象。</p>
+<p>在Golang中，继承的实现方法是使用<strong>匿名结构体</strong>，这个结构体可以直接访问匿名结构体的字段和方法，从而实现继承特性。</p>
+<p>基本语法如下：</p>
+<pre><code class="language-go">type Goods struct{
+    Name string
+    Price int
+}
+type Book struct{
+    Goods //这个就是匿名结构体
+    Write string
+}
+</code></pre>
+<p>具体的案例使用</p>
+<pre><code class="language-go">package main
+type Student struct{
+    Name string
+    Age int
+    Score int
+}
+func (stu *Student) ShowInfo{
+    fmt.Println(stu.Name,stu.Age,stu.Score)
+}
+func (stu *Student) SetScore(score int){
+    stu.Score = score //把设置的参数赋值给对象的字段
+}
+type Pupil struct{
+    Student //嵌入匿名结构体
+}
+func(p *Pupil)testing(){
+    fmt.Println(&quot;Pupil is testing&quot;)
+}
+type Graduate struct{
+    Student //嵌入匿名结构体
+}
+func(p *Graduate)testing(){
+    fmt.Println(&quot;Graduate is testing&quot;)
+}
+func main(){
+    pupil := &amp;Pupil{}
+    pupil.Student.Name = &quot;Tom~&quot;
+    pupil.Student.Age = 8
+    pupil.testing()
+    pupil.Student.SetSocre(70)//pupil继承了Student的方法SetScore
+    pupil.Student.ShowInfo()
+
+    graduate := &amp;Graduate{}
+    graduate.Student.Name = &quot;Bob~&quot;
+    graduate.Student.Age = 28
+    graduate.testing()
+    graduate.Student.SetSocre(80)//pupil继承了Student的方法SetScore
+    graduate.Student.ShowInfo()
+}
+</code></pre>
+<p>注意事项:</p>
+<p>（1）结构体可以使用嵌套结构体所有字段和方法，不论首字母的大小写都可以使用。</p>
+<p>（2）匿名结构体字段访问是可以简化的，如上述的代码<code>graduate.Student.Age</code>可以直接写成<code>graduate.Age</code>。</p>
+<p>（3）当结构体和匿名结构体有相同的字段和方法的时候，采用<strong>就近原则</strong>。所以有时候，赋值字段的时候要明确是匿名结构体的字段（或方法）还是结构体的字段（或方法）。</p>
+<p>（4）结构体嵌入<strong>两个或多个</strong>匿名结构体（匿名结构体之间不同名），如果两个匿名结构体有相同的字段和方法，则<strong>必须指名</strong>匿名结构体的名字，否则编译报错。</p>
+<p>（5）如果struct嵌套了一个有名结构体，这种模式就是<strong>组合</strong>，如果是组合关系，那么在访问组合的结构体的字段和方法的时候，就必须带上结构体名字。</p>
+<p>（6）嵌套匿名结构体后，也可以在创建结构体变量（实例）时，直接指定各个匿名结构体字段的值。例如：</p>
+<pre><code class="language-go">package main
+type Student struct{
+    Name string
+    Age int
+    Score int
+}
+type Pupil struct{
+    *Student //嵌入匿名结构体
+}
+pupil := Pupil{&amp;Student{Name: &quot;Toms&quot;,
+                       Age : 8,
+                       Score: 90
+                      },
+              }
+fmt.Println(&quot;pupil&quot;,*Pupil.Student) //不加*，那么输出的就是地址，而不是值，如果有多个匿名函数取地址了，那么需要在后面再加一个*Puppil.xxxxx。
+</code></pre>
+<h2 id="-_2">多态 - 接口</h2>
+<p>多态就是，多种形态，Go中，通过接口来实现。</p>
+<p><a href="https://www.yuque.com/xiaoshan_wgo/gonotes/kybspv">1 接口</a></p>
+<p>在Go语言中，多态特征是通过接口实现的，<strong>可以按照统一的接口来调用不同的实现，这时接口的变量就呈现不同的形态</strong>。我们在实现接口方法过程中，<strong>括号里面的变量</strong>会根据传入的参数来判断到底要实现的是哪个实例的方法，这样就可以实现一个方法多个实例使用（多态）。</p>
+<p>接口体现多态有两种形式：</p>
+<ul>
+<li>多态参数：<ul>
+<li>比如在接口的Usb案例中，既可以接收手机变量，又可以接收相机变量，这就体现了Usb接口多态。</li>
+</ul>
+</li>
+<li>多态数组：<ul>
+<li>比如在Usb数组中，存放Phone结构体和Computer结构体变量。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-go">package main
+type Usber interface{ //接口和它的两个没有实现的方法
+    Start()
+    Stop()
+}
+type Phone struct{
+}
+type Camera struct{
+}
+
+func (p Phone) Start(){ //程序员1写的方法
+    fmt.Println(&quot;手机开始工作。。&quot;)
+}
+func (p Phone) Stop(){//程序员2写的方法
+    fmt.Println(&quot;手机停止工作。。&quot;)
+}
+
+func (c Camera) Start(){
+    fmt.Println(&quot;相机开始工作。。&quot;)
+}
+func (c Camera) Stop(){
+    fmt.Println(&quot;相机停止工作。。&quot;)
+}
+
+func main(){
+    var usbArr [3]Usb //多态数组
+    usbArr[0] = Phone{&quot;vivo&quot;}
+    usbArr[1] = Phone{&quot;小米&quot;}
+    usbArr[2] = Camera{&quot;尼康&quot;}
+}
+</code></pre>
+<blockquote>
+<p>更新: 2022-10-21 09:11:01<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/mume7m">https://www.yuque.com/xiaoshan_wgo/codingnotes/mume7m</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

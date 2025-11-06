@@ -1,0 +1,652 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E6%A1%86%E6%9E%B6/gRPC/%E5%AE%89%E5%85%A8%E8%AE%A4%E8%AF%81/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>安全认证 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              安全认证
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">安全认证</h1>
+<blockquote>
+<p>客户端和服务端之间调用，我们可以通过加入证书的方式，实现调用的安全性
+</p>
+</blockquote>
+<p>TLS（Transport Layer Security，安全传输层)，TLS 是建立在传输层 TCP 协议之上的协议，服务于应用层，它的前身是SSL（Secure Socket Layer，安全套接字层），它实现了将应用层的报文进行加密后再交由 TCP 进行传输的功能。</p>
+<p>TLS 协议主要解决如下三个网络安全问题。</p>
+<ul>
+<li>保密(message privacy)，保密通过加密 encryption 实现，所有信息都加密传输，第三方无法嗅探；</li>
+<li>完整性(message integrity)，通过 MAC 校验机制，一旦被篡改，通信双方会立刻发现；</li>
+<li>认证(mutual authentication)，双方认证,双方都可以配备证书，防止身份被冒充；</li>
+</ul>
+<h1 id="_2">生成自签证书</h1>
+<blockquote>
+<p>生产环境可以购买证书或者使用一些平台发放的免费证书
+</p>
+</blockquote>
+<ul>
+<li>安装 openssl<br />
+Win 网站下载：<a href="http://slproweb.com/products/Win32OpenSSL.html">http://slproweb.com/products/Win32OpenSSL.html</a></li>
+<li>生成<strong>私钥</strong>文件 </li>
+</ul>
+<pre><code class="language-shell">## 需要输入密码123456
+openssl genrsa -des3 -out ca.key 2048
+</code></pre>
+<ul>
+<li>创建<strong>证书（公钥）</strong>请求 </li>
+</ul>
+<pre><code class="language-shell">openssl req -new -key ca.key -out ca.csr
+</code></pre>
+<ul>
+<li>生成 ca.crt </li>
+</ul>
+<pre><code class="language-shell">openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
+</code></pre>
+<p>从之前下载的路径中（有时候在 C 盘）找到 openssl.cnf 文件，移到目录该下：</p>
+<p><img alt="1657159651602-a8ff049d-c65d-4b07-810b-88cb650815a0.png" src="../img/ixSS2WTNv-aJsufz/1657159651602-a8ff049d-c65d-4b07-810b-88cb650815a0-768598.png" /></p>
+<ol>
+<li>找到该文件的 copy_extensions = copy，去掉注释</li>
+</ol>
+<p><img alt="1657159630347-67ef60af-7c89-490f-9e3d-1314cf32ec07.png" src="../img/ixSS2WTNv-aJsufz/1657159630347-67ef60af-7c89-490f-9e3d-1314cf32ec07-859438.png" /></p>
+<ol>
+<li>找到 req_extensions = v3_req，去掉注释</li>
+</ol>
+<p><img alt="1657159733805-b3ed8993-944d-4559-8a77-4fdf541b4a4a.png" src="../img/ixSS2WTNv-aJsufz/1657159733805-b3ed8993-944d-4559-8a77-4fdf541b4a4a-508780.png" /></p>
+<ol>
+<li>找到<code>[ v3_req ]</code>，添加 <code>subjectAltName = @alt_names</code></li>
+</ol>
+<p><img alt="1657159908976-35cc783a-beae-4776-87de-a0b04604aa83.png" src="../img/ixSS2WTNv-aJsufz/1657159908976-35cc783a-beae-4776-87de-a0b04604aa83-050527.png" /></p>
+<ol>
+<li>添加新的标签 [ alt_names ] , 和标签字段 </li>
+</ol>
+<pre><code class="language-properties">[ alt_names ]
+
+DNS.1 = *.mszlu.com
+</code></pre>
+<p><img alt="1657160157603-d7aab76c-3909-4e7c-bca5-a598174852ef.png" src="../img/ixSS2WTNv-aJsufz/1657160157603-d7aab76c-3909-4e7c-bca5-a598174852ef-202686.png" /></p>
+<ol>
+<li>生成证书私钥server.key </li>
+</ol>
+<pre><code class="language-shell">openssl genpkey -algorithm RSA -out server.key
+</code></pre>
+<p><img alt="1657160286601-304032d8-37e1-41ff-953b-7c0086c55b11.png" src="../img/ixSS2WTNv-aJsufz/1657160286601-304032d8-37e1-41ff-953b-7c0086c55b11-341761.png" /></p>
+<ol>
+<li>通过私钥server.key生成证书请求文件server.csr</li>
+</ol>
+<p>openssl x509 -req -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt -days 365</p>
+<pre><code class="language-shell">openssl req -new -nodes -key server.key -out server.csr -days 3650 -config ./openssl.cnf -extensions v3_req
+</code></pre>
+<ol>
+<li>生成SAN证书 </li>
+</ol>
+<p>openssl x509 -req -days <font style="color:rgb(209, 154, 102);">365</font> -<font style="color:rgb(198, 120, 221);">in</font> server.csr -<font style="color:rgb(198, 120, 221);">out</font> server.pem \   -CA ca.crt -<font style="color:rgb(230, 192, 123);">CAkey</font> ca.key -<font style="color:rgb(230, 192, 123);">CAcreateserial</font> \ -extfile ./openssl.cnf -extensions v3_req</p>
+<pre><code class="language-shell">openssl x509 -req -days 365 -in server.csr -out server.pem -CA ca.crt -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
+</code></pre>
+<p><strong>key：</strong> 服务器上的私钥文件，用于对发送给客户端数据的加密，以及对从客户端接收到数据的解密。</p>
+<ul>
+<li><strong>csr：</strong> 证书签名请求文件，用于提交给证书颁发机构（CA）对证书签名。</li>
+<li><strong>crt：</strong> 由证书颁发机构（CA）签名后的证书，或者是开发者自签名的证书，包含证书持有人的信息，持有人的公钥，以及签署者的签名等信息。</li>
+<li><strong>pem：</strong> 是基于Base64编码的证书格式，扩展名包括PEM、CRT和CER。</li>
+</ul>
+<p>什么是 SAN？</p>
+<p>SAN（Subject Alternative Name）是 SSL 标准 x509 中定义的一个扩展。使用了 SAN 字段的 SSL 证书，可以扩展此证书支持的域名，使得一个证书可以支持多个不同域名的解析。</p>
+<p>参考链接：<a href="https://www.csdn.net/tags/MtTaAgxsNjI4NjI4LWJsb2cO0O0O.html">https://www.csdn.net/tags/MtTaAgxsNjI4NjI4LWJsb2cO0O0O.html</a></p>
+<h1 id="_3">服务端应用证书</h1>
+<p>将<code>server.key</code>和<code>server.pem</code> copy到程序中</p>
+<pre><code class="language-go">
+func main()  {
+
+    //添加证书
+    file, err2 := credentials.NewServerTLSFromFile(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)
+    if err2 != nil {
+        log.Fatal(&quot;证书生成错误&quot;,err2)
+    }
+    rpcServer := grpc.NewServer(grpc.Creds(file))
+
+    service.RegisterProdServiceServer(rpcServer,service.ProductService)
+
+    listener ,err := net.Listen(&quot;tcp&quot;,&quot;:8002&quot;)
+    if err != nil {
+        log.Fatal(&quot;启动监听出错&quot;,err)
+    }
+    err = rpcServer.Serve(listener)
+    if err != nil {
+        log.Fatal(&quot;启动服务出错&quot;,err)
+    }
+    fmt.Println(&quot;启动grpc服务端成功&quot;)
+}
+</code></pre>
+<h1 id="_4">客户端认证</h1>
+<p>公钥 copy 到客户端</p>
+<pre><code class="language-go">
+func main()  {
+    file, err2 := credentials.NewClientTLSFromFile(&quot;client/keys/mszlu.pem&quot;, &quot;*.mszlu.com&quot;)
+    if err2 != nil {
+        log.Fatal(&quot;证书错误&quot;,err2)
+    }
+    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(file))
+
+    if err != nil {
+        log.Fatal(&quot;服务端出错，连接不上&quot;,err)
+    }
+    defer conn.Close()
+
+    prodClient := service.NewProdServiceClient(conn)
+
+    request := &amp;service.ProductRequest{
+        ProdId: 123,
+    }
+    stockResponse, err := prodClient.GetProductStock(context.Background(), request)
+    if err != nil {
+        log.Fatal(&quot;查询库存出错&quot;,err)
+    }
+    fmt.Println(&quot;查询成功&quot;,stockResponse.ProdStock)
+}
+</code></pre>
+<p>上述认证方式为单向认证：</p>
+<p>中间人攻击</p>
+<h1 id="_5">双向认证</h1>
+<p>上面的server.pem和server.key 是服务端的 公钥和私钥。</p>
+<p>如果双向认证，客户端也需要生成对应的公钥和私钥。</p>
+<p>私钥：</p>
+<pre><code class="language-shell">openssl genpkey -algorithm RSA -out client.key
+</code></pre>
+<p>证书:</p>
+<pre><code class="language-shell">openssl req -new -nodes -key client.key -out client.csr -days 3650 -config ./openssl.cnf -extensions v3_req
+</code></pre>
+<p>SAN证书：</p>
+<pre><code class="language-shell">openssl x509 -req -days 365 -in client.csr -out client.pem -CA ca.crt -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
+</code></pre>
+<p>服务端：</p>
+<pre><code class="language-go">
+func main()  {
+
+    //添加证书
+    //file, err2 := credentials.NewServerTLSFromFile(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)
+    //if err2 != nil {
+    //  log.Fatal(&quot;证书生成错误&quot;,err2)
+    //}
+    // 证书认证-双向认证
+    // 从证书相关文件中读取和解析信息，得到证书公钥、密钥对
+    cert, err := tls.LoadX509KeyPair(&quot;keys/mszlu.pem&quot;, &quot;keys/mszlu.key&quot;)
+    if err != nil {
+        log.Fatal(&quot;证书读取错误&quot;,err)
+    }
+    // 创建一个新的、空的 CertPool
+    certPool := x509.NewCertPool()
+    ca, err := ioutil.ReadFile(&quot;keys/ca.crt&quot;)
+    if err != nil {
+        log.Fatal(&quot;ca证书读取错误&quot;,err)
+    }
+    // 尝试解析所传入的 PEM 编码的证书。如果解析成功会将其加到 CertPool 中，便于后面的使用
+    certPool.AppendCertsFromPEM(ca)
+    // 构建基于 TLS 的 TransportCredentials 选项
+    creds := credentials.NewTLS(&amp;tls.Config{
+        // 设置证书链，允许包含一个或多个
+        Certificates: []tls.Certificate{cert},
+        // 要求必须校验客户端的证书。可以根据实际情况选用以下参数
+        ClientAuth: tls.RequireAndVerifyClientCert,
+        // 设置根证书的集合，校验方式使用 ClientAuth 中设定的模式
+        ClientCAs: certPool,
+    })
+
+    rpcServer := grpc.NewServer(grpc.Creds(creds))
+
+    service.RegisterProdServiceServer(rpcServer,service.ProductService)
+
+    listener ,err := net.Listen(&quot;tcp&quot;,&quot;:8002&quot;)
+    if err != nil {
+        log.Fatal(&quot;启动监听出错&quot;,err)
+    }
+    err = rpcServer.Serve(listener)
+    if err != nil {
+        log.Fatal(&quot;启动服务出错&quot;,err)
+    }
+    fmt.Println(&quot;启动grpc服务端成功&quot;)
+}
+</code></pre>
+<p>客户端：</p>
+<pre><code class="language-go">
+func main()  {
+    //file, err2 := credentials.NewClientTLSFromFile(&quot;client/keys/mszlu.pem&quot;, &quot;*.mszlu.com&quot;)
+    //if err2 != nil {
+    //  log.Fatal(&quot;证书错误&quot;,err2)
+    //}
+    // 证书认证-双向认证
+    // 从证书相关文件中读取和解析信息，得到证书公钥、密钥对
+    cert, _ := tls.LoadX509KeyPair(&quot;client/keys/test.pem&quot;, &quot;client/keys/test.key&quot;)
+    // 创建一个新的、空的 CertPool
+    certPool := x509.NewCertPool()
+    ca, _ := ioutil.ReadFile(&quot;client/keys/ca.crt&quot;)
+    // 尝试解析所传入的 PEM 编码的证书。如果解析成功会将其加到 CertPool 中，便于后面的使用
+    certPool.AppendCertsFromPEM(ca)
+    // 构建基于 TLS 的 TransportCredentials 选项
+    creds := credentials.NewTLS(&amp;tls.Config{
+        // 设置证书链，允许包含一个或多个
+        Certificates: []tls.Certificate{cert},
+        // 要求必须校验客户端的证书。可以根据实际情况选用以下参数
+        ServerName: &quot;*.mszlu.com&quot;,
+        RootCAs:    certPool,
+    })
+
+    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(creds))
+
+    if err != nil {
+        log.Fatal(&quot;服务端出错，连接不上&quot;,err)
+    }
+    defer conn.Close()
+
+    prodClient := service.NewProdServiceClient(conn)
+
+    request := &amp;service.ProductRequest{
+        ProdId: 123,
+    }
+    stockResponse, err := prodClient.GetProductStock(context.Background(), request)
+    if err != nil {
+        log.Fatal(&quot;查询库存出错&quot;,err)
+    }
+    fmt.Println(&quot;查询成功&quot;,stockResponse.ProdStock)
+}
+</code></pre>
+<h1 id="token">Token认证</h1>
+<h2 id="_6">服务端添加用户名密码的校验</h2>
+<pre><code class="language-go">
+func main()  {
+    var authInterceptor grpc.UnaryServerInterceptor
+    authInterceptor = func(
+        ctx context.Context,
+        req interface{},
+        info *grpc.UnaryServerInfo,
+        handler grpc.UnaryHandler,
+    ) (resp interface{}, err error) {
+        //拦截普通方法请求，验证 Token
+        err = Auth(ctx)
+        if err != nil {
+            return
+        }
+        // 继续处理请求
+        return handler(ctx, req)
+    }
+    server := grpc.NewServer(grpc.UnaryInterceptor(authInterceptor))
+    service.RegisterProdServiceServer(server,service.ProductService)
+
+    listener, err := net.Listen(&quot;tcp&quot;, &quot;:8002&quot;)
+    if err != nil {
+        log.Fatal(&quot;服务监听端口失败&quot;, err)
+    }
+    err = server.Serve(listener)
+    if err != nil {
+        log.Fatal(&quot;服务、启动失败&quot;, err)
+    }
+    fmt.Println(&quot;启动成功&quot;)
+}
+
+
+func Auth(ctx context.Context) error {
+    md, ok := metadata.FromIncomingContext(ctx)
+    if !ok {
+        return fmt.Errorf(&quot;missing credentials&quot;)
+    }
+    var user string
+    var password string
+
+    if val, ok := md[&quot;user&quot;]; ok {
+        user = val[0]
+    }
+    if val, ok := md[&quot;password&quot;]; ok {
+        password = val[0]
+    }
+
+    if user != &quot;admin&quot; || password != &quot;admin&quot; {
+        return status.Errorf(codes.Unauthenticated, &quot;token不合法&quot;)
+    }
+    return nil
+}
+</code></pre>
+<h2 id="_7">客户端实现</h2>
+<p>客户端需要实现 <code>PerRPCCredentials</code> 接口。</p>
+<pre><code class="language-go">type PerRPCCredentials interface {
+    // GetRequestMetadata gets the current request metadata, refreshing
+    // tokens if required. This should be called by the transport layer on
+    // each request, and the data should be populated in headers or other
+    // context. If a status code is returned, it will be used as the status
+    // for the RPC. uri is the URI of the entry point for the request.
+    // When supported by the underlying implementation, ctx can be used for
+    // timeout and cancellation. Additionally, RequestInfo data will be
+    // available via ctx to this call.
+    // TODO(zhaoq): Define the set of the qualified keys instead of leaving
+    // it as an arbitrary string.
+    GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error)
+    // RequireTransportSecurity indicates whether the credentials requires
+    // transport security.
+    RequireTransportSecurity() bool
+}
+</code></pre>
+<p><code>GetRequestMetadata</code> 方法返回认证需要的必要信息，<code>RequireTransportSecurity</code> 方法表示是否启用安全链接，在生产环境中，一般都是启用的，但为了测试方便，暂时这里不启用了。</p>
+<p>实现接口：</p>
+<pre><code class="language-go">type Authentication struct {
+    User     string
+    Password string
+}
+
+func (a *Authentication) GetRequestMetadata(context.Context, ...string) (
+    map[string]string, error,
+) {
+    return map[string]string{&quot;user&quot;: a.User, &quot;password&quot;: a.Password}, nil
+}
+
+func (a *Authentication) RequireTransportSecurity() bool {
+    return false
+}
+</code></pre>
+<p>应用：</p>
+<pre><code class="language-go">user := &amp;auth.Authentication{
+        User: &quot;admin&quot;,
+        Password: &quot;admin&quot;,
+    }
+    conn, err := grpc.Dial(&quot;:8002&quot;, grpc.WithTransportCredentials(insecure.NewCredentials()),grpc.WithPerRPCCredentials(user))
+</code></pre>
+<blockquote>
+<p>更新: 2022-07-07 16:52:48<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/yolhce">https://www.yuque.com/xiaoshan_wgo/codingnotes/yolhce</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

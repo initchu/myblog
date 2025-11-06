@@ -1,0 +1,734 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/JavaNotes/%E3%80%90JavaSE%E3%80%91%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E3%80%903%E3%80%91%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>【3】 语法基础 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              【3】 语法基础
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3">【3】 语法基础</h1>
+<h1 id="_1">关键字、变量、名称规范、数据类型</h1>
+<h2 id="_2">关键字</h2>
+<p>关键字均为小写</p>
+<p><img alt="1670766634795-f67f4f2a-21c8-4f96-86c3-ace7420f0627.png" src="../img/w_2uuDz-Fh5N_9Gj/1670766634795-f67f4f2a-21c8-4f96-86c3-ace7420f0627-481980.png" /></p>
+<p><img alt="1670766638654-720699b8-859b-4566-9ec3-5260ee1d47b9.png" src="../img/w_2uuDz-Fh5N_9Gj/1670766638654-720699b8-859b-4566-9ec3-5260ee1d47b9-606865.png" /></p>
+<h2 id="_3">变量</h2>
+<ul>
+<li>在方法体外，类体内声明的变量称为<strong>成员变量</strong>。</li>
+<li>在方法体内部声明的变量称为<strong>局部变量</strong>。</li>
+</ul>
+<p><img alt="1670766747885-eb84f57a-c280-45ba-89e3-03310bd0caff.png" src="../img/w_2uuDz-Fh5N_9Gj/1670766747885-eb84f57a-c280-45ba-89e3-03310bd0caff-742412.png" /></p>
+<h2 id="_4">命名规范</h2>
+<h3 id="java">Java 中的名称命名规范</h3>
+<ul>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">包名</font></strong><font style="color:rgba(0, 0, 0, 0.75);">：多单词组成时</font><strong><font style="color:rgba(0, 0, 0, 0.75);">所有字母都小写</font></strong><font style="color:rgba(0, 0, 0, 0.75);">：xxxyyyzzz</font></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">类名</font></strong><font style="color:rgba(0, 0, 0, 0.75);">、</font><strong><font style="color:rgba(0, 0, 0, 0.75);">接口名</font></strong><font style="color:rgba(0, 0, 0, 0.75);">：多单词组成时，<strong></font></strong><font style="color:rgba(0, 0, 0, 0.75);">所有单词的首字母大写</font><strong><font style="color:rgba(0, 0, 0, 0.75);">：</strong>XxxYyyZzz</font></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">变量名</font></strong><font style="color:rgba(0, 0, 0, 0.75);">、方法名：多单词组成时，</font><strong><font style="color:rgba(0, 0, 0, 0.75);">第一个单词首字母小写，第二个单词开始每个单词首字母大写：xxxYyyZzz（驼峰）</font></strong></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">常量名</font></strong><font style="color:rgba(0, 0, 0, 0.75);">：</font><strong><font style="color:rgba(0, 0, 0, 0.75);">所有字母都大写。多单词时每个单词用下划线连接：XXX_YYY_ZZZ</font></strong></li>
+</ul>
+<h3 id="_5">注意点</h3>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">注意 1：在起名字时，为了提高阅读性，要尽量有意义，“见名知意”。</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">注意 2：java 采用 unicode 字符集，因此标识符也可以使用汉字声明，但是不建议使用。</font></li>
+</ul>
+<h2 id="_6">数据类型</h2>
+<p><img alt="1670766944401-df28a34f-487e-4376-b33f-241aad94472c.png" src="../img/w_2uuDz-Fh5N_9Gj/1670766944401-df28a34f-487e-4376-b33f-241aad94472c-032954.png" /></p>
+<h3 id="_7">类型转换</h3>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">自动类型转换：容量小的类型自动转换为容量大的数据类型。数据类型按容量大小排序为：<br />
+</font><img alt="1670766990591-70250a6c-5f7d-458f-ab1c-e266a0b6eaf2.png" src="../img/w_2uuDz-Fh5N_9Gj/1670766990591-70250a6c-5f7d-458f-ab1c-e266a0b6eaf2-483243.png" /></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">有多种类型的数据混合运算时，系统首先自动将所有数据转换成容量最大的那种数据类型，然后再进行计算。</font></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">byte,short,</font></strong><strong><font style="color:rgba(0, 0, 0, 0.75);"> </font></strong><strong><font style="color:rgb(255, 112, 8);">char</font></strong><strong><font style="color:rgba(0, 0, 0, 0.75);"> </font></strong><strong><font style="color:rgba(0, 0, 0, 0.75);">(煤焦)</font></strong><strong><font style="color:rgba(0, 0, 0, 0.75);"> </font></strong><strong><font style="color:rgba(0, 0, 0, 0.75);">之间不会相互转换，他们三者在计算时首先转换为int类型</font></strong><font style="color:rgba(0, 0, 0, 0.75);">。</font></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">boolean 类型不能与其它数据类型运算</font></strong><font style="color:rgba(0, 0, 0, 0.75);">。</font></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">当把任何基本数据类型的值和字符串(String)进行连接运算时(+)，基本数据类型的值将自动转化为字符串(String)类型</font></strong><font style="color:rgba(0, 0, 0, 0.75);">。</font></li>
+</ul>
+<pre><code class="language-java">/*
+基本数据类型之间的运算规则：
+
+前提：这里讨论只是7中基本数据类型变量的运算。不包含boolean类型的。
+1. 自动类型提升：
+    当容量小的数据类型的变量和容量大的数据类型的变量做运算时，结果自动提升为容量大的数据类型。
+    char、byte、short--&gt;int--&gt;long--&gt;float--&gt;double
+    特别的：当byte、char、short三种类型的变量做运算时，结果为int类型
+
+2. 强制类型转换：
+说明：此时容量大小指的是，表示数的范围的大和小。比如：float容量要大于long的容量
+*/
+class VariableTest2{
+    public static void main(String[] args) {
+        byte b1 = 2;
+        int i1 = 129;
+        //编译不通过
+//      byte b2 = b1 + i1;
+        int i2 = b1 + i1;
+        long l1 = b1 + i1;
+        System.out.println(i2);
+        System.out.println(l1);
+
+        float f = b1 + i1;
+        System.out.println(f);
+        //***************特别的**************************
+        char c1 = 'a';  //97
+        int i3 = 10;
+        int i4 = c1 + i3;
+        System.out.println(i4);
+
+        short s2 = 10;
+        //编译错误
+        //char c3 = c1 + s2;
+
+        byte b2 = 10;
+        //char c3 = c1 + b2;    //编译不通过
+        //short s3 = b2 + s2;   //编译不通过
+        //short s4 = b1 + b2;   //编译不通过
+    }
+}
+class VariableTest4{
+    public static void main(String[] args){
+        //1. 编码情况
+        long l = 123456;
+        System.out.println(l);
+        //编译失败：过大的整数
+        //long l1 = 452367894586235;
+        long l1 = 452367894586235L;
+
+        //**************************
+        //编译失败
+        //float f1 = 12.3;
+        //2. 编码情况2:
+        //整型变量，默认类型为int型
+        //浮点型变量，默认类型为double型
+        byte b = 12;
+    //  byte b1 = b + 1;    //编译失败
+    //  float f1 = b + 12.3;    //编译失败
+    }
+}
+
+</code></pre>
+<h3 id="-">引用数据类型的使用---字符串为例</h3>
+<pre><code class="language-java">/*
+String类型变量的使用
+1. String属于引用数据类型
+2. 声明String类型变量时，使用一对&quot;&quot;
+3. String可以和8种基本数据类型变量做运算，且运算只能是连接运算；+
+4. 运算的结果任然是String类型
+
+*/
+class StringTest{
+    public static void main(String[] args){
+
+        String s1 = &quot;Good Moon!&quot;;
+
+        System.out.println(s1);
+
+        String s2 = &quot;a&quot;;
+        String s3 = &quot;&quot;;
+
+        //char c = '';  //编译不通过，不能为空
+
+        //*******************************
+        int number = 1001;
+        String numberStr = &quot;学号:&quot;;
+        String info = numberStr + number;   //连接运算
+        boolean b1 = true;
+        String info1 = info + true;
+        System.out.println(info1);
+    }
+}
+
+</code></pre>
+<p><img alt="1670767382530-c0cb59a5-f584-484e-9196-3a4ced6d8894.png" src="../img/w_2uuDz-Fh5N_9Gj/1670767382530-c0cb59a5-f584-484e-9196-3a4ced6d8894-705167.png" /></p>
+<pre><code class="language-java">String str1 = 4; //判断对错：no
+String str2 = 3.5f + “”; //判断str2对错：yes
+System.out.println(str2); //输出：”3.5”
+System.out.println(3+4+“Hello!”); //输出：7Hello!
+System.out.println(“Hello!”+3+4); //输出：Hello!34
+System.out.println(‘a’+1+“Hello!”); //输出：98Hello!
+System.out.println(“Hello”+‘a’+1); //输出：Helloa1
+</code></pre>
+<h3 id="_8">强制类型转换</h3>
+<ul>
+<li>自动类型转换的逆过程，将容量大的数据类型转换为容量小的数据类型。使用时要加上强制转换符：()，但可能造成精度降低或溢出,格外要注意。</li>
+<li>通常，字符串不能直接转换为基本类型，但通过基本类型对应的包装类则可以实现把字符串转换成基本类型。</li>
+<li>如：String a = “43”; inti= Integer.parseInt(a);</li>
+<li>boolean 类型不可以转换为其它的数据类型。</li>
+</ul>
+<pre><code class="language-java">short s = 5;
+s = s-2; //判断：no
+byte b = 3;
+b = b + 4;//判断：no
+b = (byte)(b+4);//判断：yes
+char c = ‘a’;
+int i = 5;
+float d = .314F;
+double result = c+i+d; //判断：yes
+byte b = 5;
+short s = 3;
+short t = s + b;//判断：no
+</code></pre>
+<h1 id="_9">运算符</h1>
+<p><img alt="算术运算符" src="../img/w_2uuDz-Fh5N_9Gj/1670767575704-63f56cd8-091b-43c7-a69f-a0e061afe063-908915.png" /></p>
+<p><img alt="比较运算符" src="../img/w_2uuDz-Fh5N_9Gj/1670767583653-b87b0b48-df8c-4bfc-af9b-5c0c3f00439e-054554.png" /></p>
+<p><img alt="逻辑运算符" src="../img/w_2uuDz-Fh5N_9Gj/1670767588995-9f91bdec-fa08-461c-ab73-4db739161bd8-275123.png" /></p>
+<p><img alt="位运算符" src="../img/w_2uuDz-Fh5N_9Gj/1670767631909-1b67d137-0526-467d-a318-0ac0ff58539d-833088.png" /></p>
+<p><img alt="三元运算符" src="../img/w_2uuDz-Fh5N_9Gj/1670767644490-1231e97b-e3e2-4313-959d-324651ed38e7-182494.png" /></p>
+<h1 id="_10">流程控制</h1>
+<h2 id="_11">分支语句</h2>
+<p><img alt="1670767699810-b66f2625-60c0-4f27-aadf-d9648872abbd.png" src="../img/w_2uuDz-Fh5N_9Gj/1670767699810-b66f2625-60c0-4f27-aadf-d9648872abbd-529109.png" /></p>
+<p><img alt="1670767704817-900bb8b0-38f3-4693-abaf-a078c058fd52.png" src="../img/w_2uuDz-Fh5N_9Gj/1670767704817-900bb8b0-38f3-4693-abaf-a078c058fd52-171364.png" /></p>
+<p><img alt="switch-case 要有break" src="../img/w_2uuDz-Fh5N_9Gj/1670767751604-50c85aeb-7c79-4b6d-b185-4816b5703ceb-231458.png" /></p>
+<h2 id="_12">循环</h2>
+<h3 id="for">For 循环</h3>
+<pre><code class="language-java">/*
+For循环结构的使用
+一、循环结构的四个要素
+① 初始化条件
+② 循环条件
+③ 循环体
+④ 迭代条件
+
+二、for循环的结构
+for(①;②;④){
+    ③
+}
+*/
+class ForTest{
+    public static void main(String[] args){
+        for(int i=1;i &lt;= 5 ;i++){
+            System.out.println(&quot;Hello World!&quot;);
+        }
+
+        //练习：
+        int num = 1;
+        for(System.out.print('a');num &lt;= 3;System.out.print('c'),num++){
+            System.out.print('b');
+        }
+
+        //遍历100以内的偶数,获取所有偶数的和,输出偶数的个数
+        int sum = 0;    //记录所有偶数的和
+        int count = 0;
+        for(int i = 1;i &lt;= 100;i++){
+            if(i %2 == 0){
+                System.out.println(i);
+                sum += i;
+                count++;
+            }
+        }
+        System.out.println(&quot;100以内的偶数的和：&quot; + sum);
+        System.out.println(&quot;个数为：&quot; + count);
+    }
+}
+
+</code></pre>
+<h3 id="while">While 循环</h3>
+<pre><code class="language-java">/*
+While循环结构的使用
+一、循环结构的四个要素
+① 初始化条件
+② 循环条件
+③ 循环体
+④ 迭代条件
+
+二、while循环的结构
+①初始化部分
+while(②循环条件部分)｛
+    ③循环体部分;
+    ④迭代部分;
+}
+
+执行过程： ① - ② - ③ - ④ - ② -  ③ - ④ - ... - ② 
+
+说明：
+1.写while循环千万要小心不要丢了迭代条件。一旦丢了，就可能导致死循环！
+2.写程序要避免死循环。
+3.能用while循环的，可以用for循环，反之亦然。二者可以相互转换。
+区别：for循环和while循环的初始化条件部分的作用范围不同。
+
+算法：有限性。
+*/
+class WhileTest{
+    public static void main(String[] args){
+        //遍历100以内的所有偶数
+        int i = 1;
+        while(i &lt;= 100){
+            if(i % 2 == 0){
+                System.out.println(i);
+            }
+            i++;
+        }
+    }
+}
+
+</code></pre>
+<h3 id="do-while">do-while 循环</h3>
+<pre><code class="language-java">class DoWhileTest{
+    public static void main(String[] args){
+        //遍历 100 以内的所有偶数,并计算所有偶数的和和偶数的个数
+        int number = 1;
+        int sum = 0;    //记录总和
+        int count = 0;  //记录个数
+        do{
+            if(number % 2 == 0){
+                System.out.println(number);
+                sum += number;
+                count++;
+            }
+            number++;
+        }while(number &lt;= 100);
+
+        System.out.println(&quot;总和为：&quot; + sum);
+        System.out.println(&quot;个数为：&quot; + count);
+        //*********************************
+        int numb = 10;
+        while(numb &gt; 10){
+            System.out.println(&quot;hello:while&quot;);
+            numb--;
+        }
+
+        int numb2 = 10;
+        do{
+            System.out.println(&quot;hello：do-while&quot;);
+            numb2--;
+        }while(numb2 &gt; 10);
+    }
+}
+
+</code></pre>
+<h3 id="break">break 的使用</h3>
+<p>break 语句用于终止某个语句块的执行，break 语句出现在多层嵌套的语句块中时，可以通过标签指明要终止的是哪一层语句块</p>
+<pre><code class="language-java">label1: {   ......
+label2:     {   ......
+label3:         {   ......
+                    break label2;
+                    ......
+                }
+            }
+        }
+</code></pre>
+<h3 id="continue">continue 的使用</h3>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">continue 只能使用在循环结构中</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">continue 语句用于跳过其所在循环语句块的一次执行，继续下一次循环</font></li>
+<li><strong><font style="color:rgba(0, 0, 0, 0.75);">continue 语句出现在多层嵌套的循环语句体中时，可以通过标签指明要跳过的是哪一层循环</font></strong></li>
+</ul>
+<p>注意：</p>
+<p>:::info
++ break只能用于switch语句和循环语句中。
++ continue 只能用于循环语句中。
++ 二者功能类似，但continue是终止本次循环，break是终止本层循环。
++ break、continue之后不能有其他的语句，因为程序永远不会执行其后的语句。
++ 标号语句必须紧接在循环的头部。标号语句不能用在非循环语句的前面。
++ 很多语言都有goto语句，goto语句可以随意将控制转移到程序中的任意一条语句上，然后执行它。但使程序容易出错。Java中的break和continue是不同于goto的。</p>
+<p>:::</p>
+<h1 id="_13">数组</h1>
+<pre><code class="language-java">public class ArrayTest {
+    public static void main(String[] args) {
+
+        //1. 一维数组的声明和初始化
+        int num;    //声明
+        num = 10;   //初始化
+        int id = 1001;  //声明 + 初始化
+
+        int[] ids;  //声明
+        //1.1静态初始化:数组的初始化和数组元素的赋值操作同时进行
+        ids = new int[]{1001,1002,1003,1004};   
+        //1.2动态初始化:数组的初始化和数组元素的赋值操作分开进行
+        String[] names = new String[5]; 
+
+        //错误的写法：
+//      int[] arr1 = new int[]; //未赋值、未指明长度
+//      int[5] arr2 = new int[5];
+//      int[] arr3 = new int[3]{1,2,3};
+
+        //也是正确的写法：
+        int[] arr7 = {1,2,3,5,4};//类型推断
+
+        /*总结：数组一旦初始化完成，其长度就确定了。
+        */
+
+        //2.如何调用数组的指定位置的元素：通过角标的方式调用。
+        //数组的角标(或索引)从0开始的，到数组的长度-1结束
+        names[0] = &quot;张郃&quot;;
+        names[1] = &quot;王陵&quot;;
+        names[2] = &quot;张学良&quot;;
+        names[3] = &quot;王传志&quot;;   //charAt(0)
+        names[4] = &quot;李峰&quot;;
+//      names[5] = &quot;周礼&quot;;    //如果数组超过角标会通过编译，运行失败。
+
+        //3.如何获取数组的长度
+        //属性：length
+        System.out.println(names.length);   //5
+        System.out.println(ids.length); //4
+
+        //4.如何遍历数组
+//      System.out.println(names[0]);
+//      System.out.println(names[1]);
+//      System.out.println(names[2]);
+//      System.out.println(names[3]);
+//      System.out.println(names[4]);
+
+        for(int i = 0;i &lt; names.length;i++){
+            System.out.println(names[i]);
+        }
+
+    }
+}
+
+</code></pre>
+<pre><code class="language-java">/*
+ * 2. 从键盘读入学生成绩，找出最高分，并输出学生成绩等级。
+ * 成绩&gt;=最高分-10    等级为’A’   
+ * 成绩&gt;=最高分-20    等级为’B’
+ * 成绩&gt;=最高分-30    等级为’C’   
+ * 其余等级为’D’
+ * 提示：先读入学生人数，根据人数创建int数组，存放学生成绩。
+ */
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        //1.使用Scanner，读取学生的个数
+        Scanner scan = new Scanner(System.in);
+        System.out.print(&quot;请输入学生人数：&quot;);
+        int num = scan.nextInt(); //nextInt()是读取一行整数
+
+        //2.创建数组，存储学生成绩，动态初始化
+        int[] str = new int[num];
+        System.out.println(&quot;请输入&quot; + num + &quot;个学生成绩&quot;);
+
+        //3.给数组中的元素赋值
+        int maxnum = 0;
+        for(int i = 0;i &lt; str.length;i++){
+            str[i] = scan.nextInt();
+            //4.获取数组元素中的最大值：最高分
+            if(maxnum &lt; str[i]){
+                maxnum = str[i];
+            }
+        }
+
+        //5.根据每个学生成绩与最高分的差值，得到每个学生的等级，并输出等级和成绩
+        char Grade; //成绩等级
+        for(int i = 0;i &lt; str.length;i++){
+            if(maxnum - str[i] &lt;= 10){
+                Grade = 'A';
+            }else if(maxnum - str[i] &lt;= 20){
+                Grade = 'B';
+            }else if(maxnum - str[i] &lt;= 30){
+                Grade = 'C';
+            }else{
+                Grade = 'D';
+            }
+
+            System.out.println(&quot;student &quot; + i + &quot;score is&quot; + str[i] +
+                    &quot; grade is &quot; + Grade);
+        }
+    }
+}
+
+</code></pre>
+<h1 id="java_1">Java 的输入输出</h1>
+<p><a href="https://www.liaoxuefeng.com/wiki/1252599548343744/1255887264020640">输入和输出</a></p>
+<blockquote>
+<p>更新: 2022-12-15 13:30:39<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/cqze7p6a3bl52ge3">https://www.yuque.com/xiaoshan_wgo/codingnotes/cqze7p6a3bl52ge3</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

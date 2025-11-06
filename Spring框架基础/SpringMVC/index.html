@@ -1,0 +1,2333 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/Spring%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/SpringMVC/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>SpringMVC - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#springmvc" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SpringMVC
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#springmvc_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpringMVC系列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpringMVC系列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#springmvc_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      第一章、SpringMVC的引言
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第一章、SpringMVC的引言">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 什么是SpringMVC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 SpringMVC课程的学习要点
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 SpringMVC课程的学习要点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 SpringMVC的三种开发模式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 控制器开发
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springmvc_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpringMVC系列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpringMVC系列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#springmvc_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      第二章、第一个SpringMVC程序的开发
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第二章、第一个SpringMVC程序的开发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 开发版本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 环境搭建
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 环境搭建">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-jar" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 引入相关相关jar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 配置文件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 初始化配置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 编码开发
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 编码开发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.1 思路分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.2 编码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.3 一个控制器中，提供多个服务方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.4 注意
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 第一个程序的细节分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 第一个程序的细节分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.1 一种类型的SpringMVC控制器被创建几次
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-requestmapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.2 @RequestMapping注解
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.3 控制器方法参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.4 视图解析器（页面跳转）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.5 SpringMVC配置文件的默认设置【了解】
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springmvc_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpringMVC系列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpringMVC系列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#springmvc_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      第三章、SpringMVC控制器开发详解 一
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第三章、SpringMVC控制器开发详解 一">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 核心要点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 控制器接受客户端(client)请求参数详解
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 控制器接受客户端(client)请求参数详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-webclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.1 回顾：Web开发中如何接受Client请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-servlet-apiclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.2 基于Servlet API接受Client请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.3 基于简单变量接受Client请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324-pojoclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.4 基于POJO类型接受Client请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.5 接受一组简单变量的请求参数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#326-pojo" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.6 接受一组POJO类型对象的请求参数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 接受Client请求参数的总结
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-requestparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 @RequestParam注解
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 @RequestParam注解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-requestparam" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 @RequestParam注解详解
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 中文请求参数的乱码问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 中文请求参数的乱码问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-javaweb" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.1 回顾JavaWeb开发中中文乱码的解决方案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 SpringMVC的类型转换器
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 SpringMVC的类型转换器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.1 SpringMVC中的内置类型转换器
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#362-springmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.2 SpringMVC中自定义类型转换器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7 接受其他请求数据
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 接受其他请求数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.1 动态参数收集
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.2 接受cookie数据
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#373" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.3 接受请求头数据
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#springmvc_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      SpringMVC系列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SpringMVC系列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#springmvc_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      第四章、SpringMVC控制器开发详解 二
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第四章、SpringMVC控制器开发详解 二">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 核心要点
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-springmvcssm" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 SpringMVC控制器调用业务对象【SSM整合】
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 SpringMVC控制器调用业务对象【SSM整合】">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.1 核心思路分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2.2 编码
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="springmvc">SpringMVC</h1>
+<h3 id="springmvc_1">SpringMVC系列</h3>
+<hr />
+<h4 id="springmvc_2">第一章、SpringMVC的引言</h4>
+<h5 id="11-springmvc">1.1 什么是SpringMVC</h5>
+<pre><code class="language-markdown">1. 概念： SpringMVC是基于Spring Framework衍生而来的一个MVC框架。主要解决了原有MVC框架开发过程中,控制器（Controller)的问题。
+</code></pre>
+<ul>
+<li><strong>SpringMVC是一个MVC框架</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. MVC是一个架构思想，在JavaEE开发中多用于Web开发。
+2. 应用MVC架构思想开发应用，会把一个项目划分为了3个层次，M(Model) 模型层,V(View) 视图层,C(Controller) 控制层。
+        View       JSP
+        Model      Service+DAO
+        Controller Servlet
+3. MVC这种分层开发，体现了面向对象各司其职的设计思想，也更加有利于后续的项目维护（修改）。
+</code></pre>
+<ul>
+<li><strong>为什么要基于Spring Framework</strong> <ul>
+<li>通过工厂(容器)创建对象，解耦合 (IOC DI)。</li>
+<li>通过AOP的方式，为目标类(原始类)，增加额外功能。</li>
+<li>方便与第三方框架的集成 <ul>
+<li>MyBatis</li>
+<li>JPA</li>
+<li>MQ</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>原有MVC开发中控制器存在的问题</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. 原有MVC开发中的控制器是通过哪些技术实现的？
+2. 这些技术在实现控制器时，存在着哪些问题？
+</code></pre>
+<pre><code>-  **原有控制器的实现技术** 
+    * Servlet [基于Java Model2模式]
+    * Struts2中的Action
+-  **Servlet实现控制器存在的问题** 
+    *  **控制器的核心作用**
+</code></pre>
+<p><img alt="1641193877181-0dfe227f-5b09-471a-bdba-346e2669547f.png" src="../img/Q3eGMPdnfRAprnn2/1641193877181-0dfe227f-5b09-471a-bdba-346e2669547f-094255.png" /></p>
+<pre><code class="language-markdown">1. 接受用户的请求，调用业务功能（Service)，并根据处理结果控制程序的运行流程。
+</code></pre>
+<pre><code>    *  **控制器的核心代码**
+</code></pre>
+<p><img alt="1641193909363-92874a44-2fae-4a43-aee3-3713844e09d6.png" src="../img/Q3eGMPdnfRAprnn2/1641193909363-92874a44-2fae-4a43-aee3-3713844e09d6-493764.png" /></p>
+<pre><code class="language-markdown">1. 接受client请求参数
+2. 调用业务对象（Service)
+3. 流程跳转（页面跳转）
+</code></pre>
+<pre><code>    *  **控制器存在的问题** 
+        +  接受client请求参数
+</code></pre>
+<p><img alt="1641193980680-16f8eebb-d274-43fd-b278-dce3a2d88f6a.png" src="../img/Q3eGMPdnfRAprnn2/1641193980680-16f8eebb-d274-43fd-b278-dce3a2d88f6a-863389.png" /> </p>
+<pre><code class="language-markdown">1. 代码冗余
+2. 只能接受字符串类型的数据，需要手工进行类型转换
+3. 无法自动封装对象
+</code></pre>
+<pre><code>        +  调用业务对象（Service)
+</code></pre>
+<pre><code class="language-java">UserService userService = new UserServiceImpl(); //耦合代码
+boolean isLogin = userService.login(name,password);
+</code></pre>
+<pre><code class="language-markdown">1. 通过new的方式获得业务对象（service)，存在耦合
+</code></pre>
+<pre><code>        +  流程跳转(页面跳转)
+</code></pre>
+<p><img alt="1641194019819-10d0b396-baa0-491e-af4e-e08a662e6db4.png" src="../img/Q3eGMPdnfRAprnn2/1641194019819-10d0b396-baa0-491e-af4e-e08a662e6db4-656159.png" /></p>
+<pre><code class="language-markdown">1. 跳转路径耦合
+2. 与视图层技术的耦合
+</code></pre>
+<h5 id="12-springmvc">1.2  SpringMVC课程的学习要点</h5>
+<h6 id="121-springmvc">1.2.1 SpringMVC的三种开发模式</h6>
+<ul>
+<li><strong>传统视图开发【基础课程讲解】</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. 通过作用域（request,session)进行数据的传递。
+2. 通过视图层技术进行数据的展示（JSP,FreeMarker,Thymeleaf)。
+</code></pre>
+<ul>
+<li><strong>前后端分离开发【MVC高级课程讲解】</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. 多种新的请求发送方式
+2. Restful的访问
+3. 通过HttpMessageConverter进行数据响应
+</code></pre>
+<ul>
+<li><strong>Spring5 WebFlux开发【独立课程讲解】</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. 替换传统JavaWeb开发的一种新的Web开发方式。
+2. 通过NettyServer,进行Web通信。
+</code></pre>
+<h6 id="122">1.2.2 控制器开发</h6>
+<pre><code class="language-markdown">1. 接受client请求参数
+2. 调用业务对象
+3. 流程跳转
+</code></pre>
+<h3 id="springmvc_3">SpringMVC系列</h3>
+<hr />
+<h4 id="springmvc_4">第二章、第一个SpringMVC程序的开发</h4>
+<h5 id="21">2.1 开发版本</h5>
+<pre><code class="language-markdown">1. JDK1.8+
+2. Maven3.6+
+3. IDEA2021+
+4. SpringFramework 5.1.4 
+5. Tomcat8.5.29
+6. MySQL5.7.18
+</code></pre>
+<h5 id="22">2.2 环境搭建</h5>
+<h6 id="221-jar">2.2.1 <strong>引入相关相关jar</strong></h6>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;3.1.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+  &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+  &lt;version&gt;2.3.1&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+  &lt;version&gt;2.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+  &lt;artifactId&gt;druid&lt;/artifactId&gt;
+  &lt;version&gt;1.1.18&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+  &lt;version&gt;5.1.48&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+  &lt;version&gt;3.4.6&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;junit&lt;/groupId&gt;
+  &lt;artifactId&gt;junit&lt;/artifactId&gt;
+  &lt;version&gt;4.13&lt;/version&gt;
+  &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+  &lt;version&gt;5.1.4.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+  &lt;version&gt;5.1.14.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+  &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;
+  &lt;version&gt;1.8.8&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+  &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+  &lt;version&gt;1.8.3&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+  &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+  &lt;version&gt;1.7.25&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+  &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;
+  &lt;version&gt;1.7.25&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+  &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+  &lt;version&gt;1.2.3&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+  &lt;artifactId&gt;logback-core&lt;/artifactId&gt;
+  &lt;version&gt;1.2.3&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.logback-extensions&lt;/groupId&gt;
+  &lt;artifactId&gt;logback-ext-spring&lt;/artifactId&gt;
+  &lt;version&gt;0.1.4&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.yaml&lt;/groupId&gt;
+  &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
+  &lt;version&gt;1.25&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<blockquote>
+<p><strong>注意 SpringMVC比前面我们所学习的Spring，就多引入了一个jar包，叫做spring-webmvc.jar</strong>
+</p>
+</blockquote>
+<h6 id="222">2.2.2 配置文件</h6>
+<blockquote>
+<p><strong>SpringMVC的配置文件,就是Spring的配置文件。</strong>
+</p>
+</blockquote>
+<pre><code class="language-markdown">1. 名字可以随便命名,本次课程取名dispatcher.xml。
+2. 放置路径可以根据需要，随意放置,本次课程放置在资源目录的根下。
+</code></pre>
+<p><img alt="1641194179456-22a31dc5-6a34-42e9-b74a-7662d63714ce.png" src="../img/Q3eGMPdnfRAprnn2/1641194179456-22a31dc5-6a34-42e9-b74a-7662d63714ce-789333.png" /></p>
+<h6 id="223">2.2.3 <strong>初始化配置</strong></h6>
+<ul>
+<li><strong>web.xml</strong> </li>
+</ul>
+<pre><code class="language-xml">&lt;servlet&gt;
+  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;!--用于配置SpringMVC的配置文件--&gt;
+  &lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;
+  &lt;/init-param&gt;
+  &lt;!--设置servlet在Tomcat启动时自动加载创建--&gt;
+  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p><strong>DispatcherServlet</strong> </p>
+<pre><code class="language-java">1. DispatcherServlet称为前端控制器（中央控制器）
+2. DispatcherServlet的核心作用：
+        1. 用于创建Spring的工厂（容器）。
+           ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;dispatcher.xml&quot;);
+           因为DispatcherServlet封装的Spring工厂（容器）只能读取xml，所以无法迁移到纯注解编程
+        2. 控制SpringMVC内部的运行流程。
+</code></pre>
+<p><strong>SpringMVC的配置文件dispacher.xml</strong> </p>
+<pre><code class="language-xml">&lt;mvc:annotation-driven/&gt;
+
+&lt;context:component-scan base-package=&quot;com.baizhiedu&quot;/&gt;
+</code></pre>
+<p><strong>mvc:annotation-driven</strong> </p>
+<pre><code class="language-xml"># &lt;mvc:annotation-driven/&gt; 这段配置的主要作用：引入SpringMVC的核心功能。 
+# 主要引入了2个核心类型
+# 1.RequestMappingHandlerMapping
+# 2.RequestMappingHandlerAdapter
+
+1. RequestMappingHandlerMapping实现了HandlerMapping接口【了解】
+        它会处理@RequestMapping注解，并将其注册到请求映射表中。
+2. RequestMappingHandlerAdapter实现了 HandlerAdapter接口【了解】
+        它是处理请求的适配器，确定调用某个符合要求的控制器类中具体服务的方法。
+</code></pre>
+<p><strong>SpringMVC对mvc:annotation-driven的封装</strong><br />
+<img alt="1641194215545-b56b59b8-b048-44e1-8f39-99383d1a6219.png" src="../img/Q3eGMPdnfRAprnn2/1641194215545-b56b59b8-b048-44e1-8f39-99383d1a6219-247548.png" /><br />
+<strong>context:component-scan</strong>  </p>
+<pre><code class="language-xml">&lt;servlet&gt;
+  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;!--用于配置SpringMVC的配置文件--&gt;
+  &lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;
+  &lt;/init-param&gt;
+  &lt;!--设置servlet在Tomcat启动时自动加载创建--&gt;
+  &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<h5 id="23">2.3 编码开发</h5>
+<h6 id="231">2.3.1 思路分析</h6>
+<p><img alt="1641194339879-f2c25936-c3bd-4395-8634-365e9324a313.png" src="../img/Q3eGMPdnfRAprnn2/1641194339879-f2c25936-c3bd-4395-8634-365e9324a313-519733.png" /></p>
+<pre><code class="language-markdown">#  基本流程
+1. 开发一个类在上面加入@Controller注解
+2. 提供一个控制器方法:参数是HttpServletRequest,HttpServletResponse,返回值是String的，同时加入@RequestMapping注解定义请求路径
+3. 在控制方法中，完成核心开发功能，把对应JSP页面的路径，作为方法的返回值返回。
+</code></pre>
+<h6 id="232">2.3.2 编码</h6>
+<pre><code class="language-java">@Controller
+public class FirstController {
+
+  @RequestMapping(&quot;/first&quot;)
+  public String first(HttpServletRequest request, HttpServletResponse response) {
+
+    System.out.println(&quot;FirstController.first&quot;);
+
+    return &quot;/result.jsp&quot;;
+  }
+}
+
+必须要进行@Controller注解的扫描，&lt;context:component-scan base-package=&quot;com.baizhiedu&quot;/&gt;
+</code></pre>
+<h6 id="233">2.3.3 一个控制器中，提供多个服务方法</h6>
+<ul>
+<li><strong>Servlet作为控制器，一个类中只能提供一个服务方法</strong>   </li>
+</ul>
+<pre><code class="language-markdown">1. Servlet开发中，明确控制器的方法必须实现接口规定的service(HttpServletRequest,HttpServletResponse)方法，一个类中是能实现一次，所以一个类中只能有一个服务方法。
+</code></pre>
+<pre><code class="language-java">http://localhost:8989/basic/loginServlet
+
+public class LoginServlet extends HttpServlet {
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) 
+                                                       throws ServletException, IOException {
+
+    }
+}
+</code></pre>
+<ul>
+<li><strong>SpringMVC的控制器，一个类中可以提供多个对外服务的方法</strong>   </li>
+</ul>
+<pre><code class="language-markdown">1. SpringMVC控制器，没有对于方法名字的限制，所以可以提供多个服务方法
+</code></pre>
+<pre><code class="language-java">http://localhost:8989/basic/first
+
+http://localhost:8989/basic/second
+
+@Controller
+public class FirstController {
+
+  @RequestMapping(&quot;/first&quot;)
+  public String first(HttpServletRequest request, HttpServletResponse response) {
+        //第一个控制器功能
+    return &quot;/result.jsp&quot;;
+  }
+
+  @RequestMapping(value=&quot;/second&quot;) //在注解使用时，如果只有一个value属性的话，value属性名，可以省略。
+  public String second(HttpServletRequest request, HttpServletResponse response) {
+    //第二个控制器功能
+    return &quot;/result.jsp&quot;;
+  }
+
+}
+</code></pre>
+<h6 id="234">2.3.4 注意</h6>
+<pre><code class="language-markdown">1. SpringMVC我们开发的Controller，也称之为Handler（SpringMVC内部的叫法）
+</code></pre>
+<h5 id="24">2.4 第一个程序的细节分析</h5>
+<h6 id="241-springmvc">2.4.1 一种类型的SpringMVC控制器被创建几次</h6>
+<pre><code class="language-markdown">1. 回顾:Servlet控制器被创建的次数
+        一种类型的Servlet，只会被Tomcat创建一次，所以Servlet是单实例的。
+
+2. Servlet是单实例并不是单例设计模式
+
+3. SpringMVC的控制器被Spring创建的次数
+        可以只创建一次，也可以创建多次，默认是只创建一次。
+        控制器创建的次数，是由@Scope注解决定的。
+
+4. 默认情况下SpringMVC的控制器只会被创建一次，会存在线程安全的问题。
+</code></pre>
+<h6 id="242-requestmapping">2.4.2 @RequestMapping注解</h6>
+<pre><code class="language-java">1. 核心作用：为控制器方法提供外部访问的url路径。
+
+ http://localhost:8989/basic/first
+
+ @RequestMapping(&quot;/first&quot;)
+ public String first(HttpServletRequest request, HttpServletResponse response)
+</code></pre>
+<ul>
+<li><strong>路径分割符  / 可以省略</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/spring-mvc1/first
+
+@RequestMapping(&quot;first&quot;)
+public String first(HttpServletRequest request, HttpServletResponse response) 
+
+http://localhost:8989/spring-mvc1/first/third
+
+@RequestMapping(&quot;first/third&quot;)
+public String first(HttpServletRequest request, HttpServletResponse response) 
+
+#注意 多级目录开头可以不写 /
+</code></pre>
+<ul>
+<li><strong>在一个控制器方法上映射多个路径</strong><br />
+<strong>应用方式</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/basic/first
+http://localhost:8989/basic/third
+
+@Controller
+public class FirstController {
+
+  @RequestMapping(value={&quot;/first&quot;,&quot;/third&quot;})
+  public String first(HttpServletRequest request, HttpServletResponse response) {
+
+    System.out.println(&quot;FirstController.first&quot;);
+
+    return &quot;/result.jsp&quot;;
+  }
+}
+</code></pre>
+<ul>
+<li><strong>Controller类上加入@RequestMapping注解</strong><br />
+<strong>应用方式</strong> </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/basic/user/addUser
+
+http://localhost:8989/basic/user/deleteUser
+
+@Controller
+@RequestMapping(&quot;/user&quot;)
+public class UserController {
+
+    @RequestMapping(&quot;/addUser&quot;)
+    public String addUser() {
+        System.out.println(&quot;UserController.addUser&quot;);
+        return &quot;/index.jsp&quot;;
+    }
+
+    @RequestMapping(&quot;/deleteUser&quot;)
+    public String deleteUser() {
+        System.out.println(&quot;UserController.deleteUser&quot;);
+        return &quot;/index.jsp&quot;;
+    }
+}
+</code></pre>
+<p><strong>设计目的</strong><br />
+<img alt="1641194387534-0172496b-595e-48dd-a6a8-a0b72da9fc4e.png" src="../img/Q3eGMPdnfRAprnn2/1641194387534-0172496b-595e-48dd-a6a8-a0b72da9fc4e-394519.png" /><br />
+<strong>结论</strong>  </p>
+<pre><code class="language-markdown">1. 可以更好的按照功能，进行不同模块的区分,有利于项目的管理。
+</code></pre>
+<ul>
+<li><strong>@RequestMapping限定用户的请求方式</strong> <ul>
+<li><strong>请求方式</strong> </li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">1. 所谓请求方式指的就是Web开发中的 POST请求与GET请求
+</code></pre>
+<p><strong>回顾:Web开发中的POST请求与GET请求的区别</strong><br />
+<strong>  两种请求提交数据的区别</strong> </p>
+<pre><code class="language-java">1. GET请求:通过请求行(地址栏)提交数据(QueryString)，明文数据提交，不安全，提交的数据量小(不能超过2048字节)
+
+        http://localhost:8989/basic/user/queryUser?name=sunshuai&amp;password=123456
+
+2. POST请求: 通过请求体提交数据，密文提交（不是加密，指的是一般用户不可见），相对安全，提交数据量大(理论上没有限制)
+</code></pre>
+<p>**  两种请求发起方式的区别**  </p>
+<pre><code class="language-java">1. GET方式
+   浏览器地址栏:  http://localhost:8989/basic/firstController/first
+
+   超级链接:     &lt;a href=&quot;${pageContext.request.contextPath}/firstController/first&quot;&gt;超级链接&lt;/a&gt;
+
+   表单:        &lt;from action=&quot;${pageContext.request.contextPath}/firstController/first&quot;&gt;&lt;/form&gt;
+
+   javascript: location.href=;
+
+   ajax:       $.ajax({url:url,type:&quot;get&quot;,...})
+
+   专属工具或者库：POSTMAN、POSTWOMAN、RestfulToolKits、RestTemplate、HttpClient、OKHttp、NSMutableURLRequest
+
+2. POST方式
+   表单:       &lt;from action=&quot;${pageContext.request.contextPath}/firstController/first&quot; method=&quot;post&quot;&gt;&lt;/form&gt;
+
+   ajax:      $.ajax({url:url,type:&quot;post&quot;,...})
+
+   专属工具或者库：POSTMAN、POSTWOMAN、RestfulToolKits、RestTemplate、HttpClient、OKHttp、NSMutableURLRequest
+</code></pre>
+<pre><code>-  **@RequestMapping限定用户的请求方式**
+</code></pre>
+<pre><code class="language-java">1. 默认情况下:@RequestMapping注解，接受所有请求方式的访问（Post,Get,....）
+
+2. 通过@RequestMapping注解可以限定，某个控制器方法只接受特定的请求方式
+        @RequestMapping(method={RequestMethod.POST})
+        public String xxx(HttpServletRequest,HttpServletResponse)
+
+        @RequestMapping(method={RequestMethod.GET})
+        public String xxx(HttpServletRequest,HttpServletResponse)
+
+3. @RequestMapping注解可以同时限定多种请求方式的访问
+        @RequestMapping(method={RequestMethod.GET,RequestMethod.POST})
+        public String xxx(HttpServletRequest,HttpServletResponse)
+
+4. 当用户发起了@RequestMapping不支持的请求操作
+        SpringMVC在服务器端抛出一个405错误 Method Not Allowed
+</code></pre>
+<pre><code>-  **Http协议中其他的请求方式【了解】**
+</code></pre>
+<pre><code class="language-java">1. 除常规的POST，GET请求外，Http协议还提供了其他的请求方式
+        PUT、DELETE、OPTIONS...
+
+2. @RequestMapping注解，默认情况下也支持其他请求方式的访问，同时也可以根据需要进行限定。
+        @RequestMapping(method={RequestMethod.DELETE})
+        public String xxx(HttpServletRequest,HttpServletResponse)
+
+3. 除Post,Get这2种请求方式外，其他的请求方式浏览器支持的不好，可以使用专属工具或者库进行测试
+
+4. 其他的请求方式，大多数不支持响应视图技术（JSP,Thymeleaf),只能返回简单字符串或者JSON数据。
+</code></pre>
+<h6 id="243">2.4.3 控制器方法参数</h6>
+<pre><code class="language-markdown">1. SpringMVC在控制器方法参数设计的过程中，非常灵活，可以支持多种参数的设置方式，非常强大，它也把这种设计，叫做数据绑定。
+</code></pre>
+<ul>
+<li><strong>代码一</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
+public String first(HttpServletRequest request, HttpServletResponse response)
+</code></pre>
+<ul>
+<li><strong>代码二</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
+public String first(HttpServletRequest request)
+</code></pre>
+<ul>
+<li><strong>代码三</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
+public String first(HttpServletResponse response)
+</code></pre>
+<ul>
+<li><strong>代码四</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
+public String first(HttpServletRequest request, HttpServletResponse response,HttpSession session)
+
+注意：HttpSession也可以单独使用 或者 组合使用 
+     ServletContext(application) 不能应用在控制器方法中，做形参
+     session.getServletContext();
+         request.getSession().getServletContext();
+</code></pre>
+<ul>
+<li><strong>代码五</strong> <br />
+<strong>思考：</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/first&quot;)
+public String first()
+</code></pre>
+<pre><code class="language-markdown">1. 上述五种代码形式,在后续开发中，那种更加常用？
+        前四种不推荐的原因是：与Servlet API 解耦合。
+        第五种不推荐的原因是：单纯这种方式使用，无法接受client的请求参数
+
+        后续的课程中，还会进行详细讲解
+</code></pre>
+<h6 id="244">2.4.4 视图解析器（页面跳转）</h6>
+<ul>
+<li><strong>目前页面跳存在的问题</strong> <br />
+<img alt="1641194550486-a8c4ab23-a0f3-43c0-a75f-04beb10d8b73.png" src="../img/Q3eGMPdnfRAprnn2/1641194550486-a8c4ab23-a0f3-43c0-a75f-04beb10d8b73-808850.png" /></li>
+</ul>
+<pre><code class="language-markdown">1. 控制器中的跳转路径与实际视图路径存在耦合。
+</code></pre>
+<ul>
+<li><strong>视图解析器ViewResolver</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. 通过视图解析器(ViewResolver)，就可以解决跳转路径与实际视图路径耦合的问题。
+</code></pre>
+<pre><code>-  **思路分析**
+</code></pre>
+<p><img alt="1641194583304-491109e1-f8a5-4d75-bc9c-d82a82aa1571.png" src="../img/Q3eGMPdnfRAprnn2/1641194583304-491109e1-f8a5-4d75-bc9c-d82a82aa1571-509502.png" />
+    -  <strong>开发步骤</strong><br />
+<strong>配置文件开发</strong> <br />
+<strong>注解开发</strong>  </p>
+<pre><code class="language-java">&lt;bean id=&quot;resolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+     &lt;!--路径--&gt;
+     &lt;property name=&quot;prefix&quot; value=&quot;/&quot;/&gt;
+     &lt;!--文件类型--&gt;
+     &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+&lt;/bean&gt;
+
+@Controller
+public class FirstController {
+
+  @RequestMapping(&quot;/first&quot;)
+  public String first(HttpServletRequest request, HttpServletResponse response) {
+
+    System.out.println(&quot;FirstController.first&quot;);
+
+    return &quot;result&quot;; //实际处理时 SpringMVC就会把视图解析器与控制器方法中的逻辑视图名进行拼接 / result .jsp
+  }
+}
+</code></pre>
+<pre><code class="language-java">@Configuration
+public class AppConfig {
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix(&quot;/&quot;);
+        viewResolver.setSuffix(&quot;.jsp&quot;);
+        return viewResolver;
+    }
+}
+
+注意：
+     1. AppConfig配置Bean应该放置到&lt;context:component-scan/&gt; 扫描的路径下。
+     2. 结合前面所讲，目前因为DispatcherServlet封装的Spring工厂（容器）只能读取xml，所以无法进行纯注解替换。
+</code></pre>
+<h6 id="245-springmvc">2.4.5 SpringMVC配置文件的默认设置【了解】</h6>
+<pre><code class="language-xml">1. 如果在web.xml中没有设置SpringMVC配置文件的的路径,系统会查找默认配置文件
+     &lt;servlet&gt;
+     &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+     &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+     &lt;!--
+     &lt;init-param&gt;
+       &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+       &lt;param-value&gt;classpath:dispatcher.xml&lt;/param-value&gt;
+     &lt;/init-param&gt;
+     --&gt;
+     &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+   &lt;/servlet&gt;
+   &lt;servlet-mapping&gt;
+     &lt;servlet-name&gt;dispatcher&lt;/servlet-name&gt;
+     &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+
+2. SpringMVC默认配置文件的名字，放置位置是
+   /WEB-INF/[servlet-name]-servlet.xml
+
+   根据上述配置:SpringMVC配置文件的默认名字是
+   /WEB-INF/dispatcher-servlet.xml
+</code></pre>
+<h3 id="springmvc_5">SpringMVC系列</h3>
+<hr />
+<h4 id="springmvc_6">第三章、SpringMVC控制器开发详解 一</h4>
+<h5 id="31">3.1 核心要点</h5>
+<blockquote>
+<ol>
+<li><strong>接受客户端(client)请求参数 [讲解]</strong></li>
+<li><strong>调用业务对象</strong></li>
+<li><strong>页面跳转</strong></li>
+</ol>
+</blockquote>
+<h5 id="32-client">3.2 控制器接受客户端(client)请求参数详解</h5>
+<h6 id="321-webclient">3.2.1 回顾：Web开发中如何接受Client请求参数</h6>
+<p><img alt="1641194647385-2d81f880-1901-4e18-919a-bdba966c19ae.png" src="../img/Q3eGMPdnfRAprnn2/1641194647385-2d81f880-1901-4e18-919a-bdba966c19ae-723497.png" /></p>
+<h6 id="322-servlet-apiclient">3.2.2 基于Servlet API接受Client请求参数</h6>
+<pre><code class="language-java"> String name     = request.getParameter(&quot;name&quot;);
+ String password = request.getParameter(&quot;password&quot;);
+
+
+@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param1&quot;)
+    public String param1(HttpServletRequest request, HttpServletResponse response) {
+
+        String name     = request.getParameter(&quot;name&quot;);
+        String password = request.getParameter(&quot;password&quot;);
+
+        return &quot;param1&quot;;
+    }
+}
+
+注意：这种方式虽然最为直观、简单、但是代码冗余多且与ServletAPI存在耦合，所以在SpringMVC开发中并不建议使用。
+</code></pre>
+<h6 id="323-client">3.2.3 基于简单变量接受Client请求参数</h6>
+<pre><code class="language-markdown">1. 所谓简单变量：指的就是8种基本类型+String这些类型的变量。把这些类型的变量，作为控制器⽅法的形参，⽤于接受client提交的数据。
+</code></pre>
+<ul>
+<li><strong>思路分析</strong><br />
+<img alt="1641194687407-47900c3d-6a9a-4f8c-9ec4-481183735ccc.png" src="../img/Q3eGMPdnfRAprnn2/1641194687407-47900c3d-6a9a-4f8c-9ec4-481183735ccc-596278.png" /></li>
+<li><strong>代码</strong>  </li>
+</ul>
+<pre><code class="language-java">@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param2&quot;)
+    public String param2(String name, String password) {
+
+        return &quot;param2&quot;;
+    }
+
+}
+</code></pre>
+<ul>
+<li><strong>细节分析</strong> <ul>
+<li><strong>常见类型自动转换</strong>   </li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">客户端请求：http://localhost:8989/springmvc1/param/param2?name=sunshuai&amp;age=10 
+
+HTTP协议：传递的是 name &quot;sunshuai&quot; age &quot;10&quot;
+
+@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param2&quot;)
+    public String param2(String name, int age) {
+
+
+        return &quot;param2&quot;;
+    }
+
+}
+
+SpringMVC底层针对于age接受数据时会自动调用 int age = Integer.parseInt(&quot;10&quot;);
+</code></pre>
+<pre><code class="language-markdown">1. 常见类型泛指：8种基本类型及其包装器，String等常见类型。
+2. Date日期等特殊类型，默认不支持，需要程序员自定义类型转换器【后续讲解】
+</code></pre>
+<pre><code>-  **基本类型尽量使用包装器**
+</code></pre>
+<pre><code class="language-java">客户端请求：http://localhost:8989/springmvc1/param/param2?name=sunshuai&amp;age=10
+
+          http://localhost:8989/springmvc1/param/param2?name=sunshuai 
+
+@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param2&quot;)
+    public String param2(String name, int age) {
+
+
+        return &quot;param2&quot;;
+    }
+
+}
+
+程序报错：原因在于age参数。age在提交数据时没有提交内容，等同于null。而参数中age使用了int类型，是基本类型，无法存储null值，所以产生了错误。
+改正方式：
+         1. age参数使用包装器类型，可以存储null值
+       2. 为age参数设置默认值，但是需要@RequestParam注解配合使用。【后续讲解】
+</code></pre>
+<h6 id="324-pojoclient">3.2.4 基于POJO类型接受Client请求参数</h6>
+<ul>
+<li><strong>什么是POJO</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. POJO全程叫做Plain Ordinary Java Object（简单的Java对象)
+2. POJO类型对象的特点是：
+        1. 类型中如果存在成员变量，必须提供set get方法。
+        2. 提供默认无参构造
+        3. 可以实现Serializable，也可以不实现
+        4. 不实现容器或者框架所规定的接口
+3. 用户根据业务封装的实体、DTO这些类型就是POJO。
+</code></pre>
+<ul>
+<li><strong>使用场景</strong></li>
+</ul>
+<p><img alt="1641194807076-94e9dde0-f505-45f5-86cd-90f17252aff0.png" src="../img/Q3eGMPdnfRAprnn2/1641194807076-94e9dde0-f505-45f5-86cd-90f17252aff0-860623.png" />  </p>
+<ul>
+<li><strong>代码</strong>  </li>
+</ul>
+<pre><code class="language-java">public class User implements Serializable {
+    private String name;
+    private String password;
+    private Integer age;
+}
+
+@RequestMapping(&quot;/param3&quot;)
+public String param3(User user) {
+
+  return &quot;param3&quot;;
+}
+
+http://localhost:8989/springmvc1/xxController?name=suns&amp;password=123456&amp;age=10
+
+&lt;a href=&quot;/springmvc1/xxxController?name=suns&amp;password=123456&amp;age=10&quot;&gt;发送请求&lt;/a&gt;
+
+姓名: &lt;input type=&quot;text&quot;     name=&quot;name&quot;/&gt;
+密码: &lt;input type=&quot;password&quot; name=&quot;password'/&gt;
+年龄: &lt;input type=&quot;text&quot;     name =&quot;age&quot;/&gt;
+
+POJO的成员变量的名字要和请求参数的key或者表单name属性的值严格对应。
+</code></pre>
+<ul>
+<li><strong>注意1</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/springmvc1/xxxController?name=sunshuai&amp;password=123456&amp;age=10
+
+@RequestMapping(&quot;/param3&quot;)
+public String param3(String name,User user) {
+
+  return &quot;param3&quot;;
+}
+
+name形参与user对象中的name属性，都会获取对应的内容。这个特点在后续学习前端后端分离开发时，是会使用。
+</code></pre>
+<ul>
+<li><strong>注意2</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1. 如果SpringMVC发现控制器形参类型，是8种基本类型+String的话，他会通过形参名与请求参数的key对应，接受数据。
+2. 如果SpringMVC发现控制器形参类型，不是8种基本类型+String的话，他会查找对应形参类型的属性名与请求参数的key对应，接受数据
+3. 如果存在自定义类型转换器不适用于上述规律 【后续讲解】
+</code></pre>
+<h6 id="325">3.2.5 接受一组简单变量的请求参数</h6>
+<ul>
+<li><strong>使用场景</strong></li>
+</ul>
+<p><img alt="1641194720437-a4059770-a99d-4b14-a10f-ad9b75b96381.png" src="../img/Q3eGMPdnfRAprnn2/1641194720437-a4059770-a99d-4b14-a10f-ad9b75b96381-982880.png" /></p>
+<ul>
+<li><strong>代码</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/param1&quot;)
+public String param1(int[] ids) {
+  for (int i : ids) {
+    System.out.println(&quot;i = &quot; + i);
+  }
+  return &quot;result1&quot;;
+}
+</code></pre>
+<ul>
+<li><strong>细节分析</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/param1&quot;)
+public String param1(List&lt;Integer&gt; ids) {
+  for (Integer id : ids) {
+    System.out.println(&quot;id = &quot; + id);
+  }
+  return &quot;result1&quot;;
+}
+
+抛出异常：SpringMVC无法提供具体的实现类，实例化形参。
+
+@RequestMapping(&quot;/param1&quot;)
+public String param1(ArrayList&lt;Integer&gt; ids) {
+  for (Integer id : ids) {
+    System.out.println(&quot;id = &quot; + id);
+  }
+  return &quot;result1&quot;;
+}
+
+没有异常，但是接受不到数据：SpringMVC会按照POJO的匹配方式，进行成员变量查找。
+</code></pre>
+<h6 id="326-pojo">3.2.6 接受一组POJO类型对象的请求参数</h6>
+<ul>
+<li><strong>使用场景</strong><br />
+<img alt="1641194766789-9edfec92-7d9e-4015-a314-3f3482f527b6.png" src="../img/Q3eGMPdnfRAprnn2/1641194766789-9edfec92-7d9e-4015-a314-3f3482f527b6-617963.png" /></li>
+<li><strong>代码</strong>  </li>
+</ul>
+<pre><code class="language-java">&lt;form action=&quot;${pageContext.request.contextPath}/param/param1&quot; method=&quot;post&quot;&gt;
+  userName1:&lt;input type=&quot;text&quot; name=&quot;users[0].name&quot;/&gt;    &lt;br/&gt;
+  password1:&lt;input type=&quot;text&quot; name=&quot;users[0].password&quot;/&gt;&lt;br/&gt;
+  age1      &lt;input type=&quot;text&quot; name=&quot;users[0].age&quot;/&gt;     &lt;br/&gt;
+  &lt;hr/&gt;
+  userName2&lt;input type=&quot;text&quot;  name=&quot;users[1].name&quot;/&gt;     &lt;br/&gt;
+  password2&lt;input type=&quot;text&quot;  name=&quot;users[1].password&quot;/&gt; &lt;br/&gt;
+  age2     &lt;input type=&quot;text&quot;  name=&quot;users[1].age&quot;/&gt;      &lt;br/&gt;
+
+  &lt;input type=&quot;submit&quot; value=&quot;reg&quot;/&gt;
+&lt;/form&gt;
+
+
+public class UsersDTO {
+  private List&lt;User&gt; users = new ArrayList&lt;&gt;();
+
+  public List&lt;User&gt; getUsers() {
+    return users;
+  }
+
+  public void setUsers(List&lt;User&gt; users) {
+    this.users = users;
+  }
+}
+
+@RequestMapping(&quot;/param1&quot;)
+public String param1(UsersDTO usersDTO) {
+
+  List&lt;User&gt; users = usersDTO.getUsers();
+
+  for (User user : users) {
+    System.out.println(&quot;user = &quot; + user);
+  }
+
+  return &quot;param1&quot;;
+}
+</code></pre>
+<h5 id="33-client">3.3 接受Client请求参数的总结</h5>
+<p><img alt="1641194884226-3f83862c-3d2d-49a4-9ee6-73790a6e5d5c.png" src="../img/Q3eGMPdnfRAprnn2/1641194884226-3f83862c-3d2d-49a4-9ee6-73790a6e5d5c-412902.png" /></p>
+<h5 id="34-requestparam">3.4 @RequestParam注解</h5>
+<pre><code class="language-java">1.  @RequestParam注解：用于修饰控制器方法的形参。
+
+    @RequestMapping(&quot;/param1&quot;)
+    public String param1(@RequestParam String name,@RequestParam String password){
+
+        }
+</code></pre>
+<h6 id="341-requestparam">3.4.1 @RequestParam注解详解</h6>
+<ul>
+<li><strong>解决请求参数与方法形参名字不一致的问题</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/springmvc1/paramContrller/param?n=sunshuai&amp;p=123456
+
+&lt;a href=&quot;/springmvc1/paramController/param?n=sunshuai&amp;p=123456&quot;&gt;点击&lt;/a&gt;
+
+&lt;form action=&quot;/springmvc1/paramController/param&quot; method=&quot;post&quot;&gt;
+   username：&lt;input type=&quot;text&quot;    name=&quot;n&quot;/&gt;
+   password: &lt;input type=&quot;password&quot; name=&quot;p&quot;/&gt;
+&lt;/form&gt;
+
+@RequestMapping(&quot;/param1&quot;)
+public String param1(@RequestParam（&quot;n&quot;) String name,@RequestParam(&quot;p&quot;) String password){
+
+}
+</code></pre>
+<ul>
+<li><strong>注意</strong>  </li>
+</ul>
+<pre><code class="language-java">1.  @RequestParam注解简写形式：不书写value属性的内容，@RequestParam默认会把对应形参名作为value属性的值。
+    @RequestMapping(&quot;/param1&quot;)
+    public String param1(@RequestParam(&quot;n&quot;) String name,@RequestParam(&quot;p&quot;) String password){
+
+    }
+    @RequestMapping(&quot;/param1&quot;)
+    public String param1(@RequestParam String name,@RequestParam String password){
+
+    }
+
+2.  使用了@RequestParam注解的形参，客户端必须传递数据，不能省略。否则报错。后面的相关知识点可以解决这个问题。
+
+3.  POJO类型的形参，不能与@RequestParam注解联用。
+        报400错误
+
+4.  典型的应用场景
+    http://localhost:8989/springmvc1/paramContrller/param1?id&lt;=10
+    @RequestMapping(&quot;/param1&quot;)
+    public String param1(@RequestParam（&quot;id&lt;&quot;) Integer id) {
+
+    }
+    在前后端分离的开发中会涉及的到
+</code></pre>
+<ul>
+<li><strong>@RequestParam的required属性</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1.  在使用@RequestParam注解时，可以应用required属性。
+        required = true时：@RequestParam修饰的控制器方法参数，客户端必须提交数据，否则报错，默认值
+        required = false时:@RequestParam修饰的控制器方法参数，客户端可以传递数，也可以不传递。
+
+2.  解决使用@RequestParam注解，客户端必须传递数据的问题。
+</code></pre>
+<ul>
+<li><strong>@RequestParam的defaultValue属性</strong> <ul>
+<li><strong>客户端没有提交数据的时候，给对应的形参提供默认值</strong>  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/springmvc1/paramContrller/param1?name=sunshuai
+
+@RequestMapping(&quot;/param1&quot;)
+public String param1(@RequestParam String name, @RequestParam(defaultValue = &quot;99999&quot;) String password) {
+  System.out.println(&quot;name = &quot; + name);
+  System.out.println(&quot;password = &quot; + password);
+  return &quot;param1&quot;;
+}
+
+注意：如果使用了defaultValue,则required属性也默认被设置成了false
+</code></pre>
+<pre><code>-  **解决控制器方法形参，使用包装器的问题**
+</code></pre>
+<pre><code class="language-java">客户端请求：http://localhost:8989/springmvc1/param/param2?name=sunshuai 
+
+@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param2&quot;)
+    public String param2(String name, int age) {
+
+
+        return &quot;param2&quot;;
+    }
+
+}
+
+解决方案1：
+@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param2&quot;)
+    public String param2(String name, Integer age) {
+
+
+        return &quot;param2&quot;;
+    }
+
+}
+
+解决方案2：
+@Controller
+@RequestMapping(&quot;/param&quot;)
+public class ParamController {
+
+    @RequestMapping(&quot;/param2&quot;)
+    public String param2(String name, @RequestParam(defaultValue = &quot;0&quot;) int age) {
+
+
+        return &quot;param2&quot;;
+    }
+
+}
+</code></pre>
+<pre><code>-  **defaultValue典型的使用场景**
+</code></pre>
+<pre><code class="language-java">默认值操作，一个典型的应用场景是：分页首页查询，不传页号的设计
+
+http://localhost:8989/ems/employee/findAllEmployees
+http://localhost:8989/ems/employee/findAllEmployees?pageNum=2
+http://localhost:8989/ems/employee/findAllEmployees?pageNum=3
+
+@RequestMapping(&quot;/findAllEmployees&quot;)
+public String findAllEmployees(Model model, @RequestParam(value = &quot;pageNum&quot;,defaultValue = &quot;1&quot;) Integer pageNum)
+</code></pre>
+<h5 id="35">3.5 中文请求参数的乱码问题</h5>
+<h6 id="351-javaweb">3.5.1 回顾JavaWeb开发中中文乱码的解决方案</h6>
+<ul>
+<li><strong>GET请求乱码的解决方案</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/springmvc1/paramContrller/param?name=孙帅&amp;p=123456
+
+
+TOMCAT8以前版本:
+
+$TOMCAT_HOME/conf/server.xml
+
+&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;
+           connectionTimeout=&quot;20000&quot;
+           redirectPort=&quot;8443&quot;
+           URIEncoding=&quot;UTF-8&quot;/&gt;
+
+TOMCAT8版本及后续版本:
+
+Tomcat8及其后续版本中，修改了Connector相关源码，已经默认支持UTF-8字符集。但是如果使用GBK还需要上述配置
+</code></pre>
+<ul>
+<li><strong>POST请求乱码的解决方案</strong>  </li>
+</ul>
+<pre><code class="language-java">&lt;form action=&quot;/springmvc1/paramController/param&quot; method=&quot;post&quot;&gt;
+     username：&lt;input type=&quot;text&quot;     name=&quot;name&quot;/&gt;
+     password: &lt;input type=&quot;password&quot; name=&quot;password&quot;/&gt;
+&lt;/form&gt;
+
+底层解决方案：
+       request.setCharaceterEncoding(&quot;UTF-8&quot;)
+
+开发常用方式：
+       通过过滤器解决
+
+ public class EncodingFilter implements Filter {
+
+    @Override
+      public void doFilter(ServletRequest req,ServletResponse resp,FilterChain chain){
+        HttpServletRequest request = (HttpServletRequest) req;
+          request.setCharacterEncoding(&quot;UTF-8&quot;);
+      }
+}
+</code></pre>
+<h5 id="36-springmvc">3.6 SpringMVC的类型转换器</h5>
+<h6 id="361-springmvc">3.6.1 SpringMVC中的内置类型转换器</h6>
+<ul>
+<li><strong>分析</strong><br />
+<img alt="1641194925177-cb09ce03-f451-4b61-bee2-ba802aaeeba9.png" src="../img/Q3eGMPdnfRAprnn2/1641194925177-cb09ce03-f451-4b61-bee2-ba802aaeeba9-624305.png" /></li>
+<li><strong>内置类型转换器的概念</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1.  SpringMVC提供了内置类型转换器，把客户端提交的字符串类型的请求参数，转换成控制器方法参数需要的数据类型。
+
+2.  SpringMVC并不是对于所有的类型，都提供了内置的类型转换器，他只是提供了常见类型的转换器
+                比如：8种基本类型，常见的集合类型等
+</code></pre>
+<ul>
+<li><strong>原理分析</strong><br />
+<img alt="1641194955582-979e2ca7-0f47-4242-b9ce-8eceadf9d112.png" src="../img/Q3eGMPdnfRAprnn2/1641194955582-979e2ca7-0f47-4242-b9ce-8eceadf9d112-851928.png" /></li>
+</ul>
+<pre><code class="language-markdown">1. 在SpringMVC启动时，会通过&lt;mvc:annotation-driven/&gt; 把FormattingConversionServiceFactoryBean。引入到SpringMVC体系中。FormattingConversionServiceFactoryBean存储了SpringMVC中所有的内置类型转换器。后续client提交请求参数时，如果对应控制器方法形参不是字符串类型，那么FormattingConversionServiceFactoryBean就会调用对应的类型转化器，进行类型转换，最终完成控制器方法形参的赋值。
+</code></pre>
+<h6 id="362-springmvc">3.6.2 SpringMVC中自定义类型转换器</h6>
+<pre><code class="language-markdown">1. SpringMVC在接受客户端提交请求参数时，如果请求参数对应的控制器方法形参，是非常规数据类型，SpringMVC默认情况下无法进行类型转换。会抛出异常，程序员可以通过自定义类型转换器解决上述问题。
+        如：日期类型
+</code></pre>
+<ul>
+<li><strong>思路分析</strong><br />
+<img alt="1641194983705-58c9cb5e-5949-4a2e-9f4c-8e4744103fd7.png" src="../img/Q3eGMPdnfRAprnn2/1641194983705-58c9cb5e-5949-4a2e-9f4c-8e4744103fd7-739535.png" /></li>
+<li><strong>编码</strong>  </li>
+</ul>
+<pre><code class="language-java">public class DateConverter implements Converter&lt;String, Date&gt; {
+  @Override
+  public Date convert(String source) {
+    Date result = null;
+    try {
+      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+      result = simpleDateFormat.parse(source);
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+    return result;
+  }
+}
+
+&lt;!--配置类型转换器，让Spring进行对象的创建--&gt;
+&lt;bean id=&quot;converter&quot; class=&quot;com.baizhiedu.DateConverter&quot;&gt;
+&lt;/bean&gt;
+
+&lt;!--进行类型转换器注册，让SpringMVC能够识别日期类型转换的类型转换器--&gt;
+&lt;bean id=&quot;formattingConversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+  &lt;property name=&quot;converters&quot;&gt;
+    &lt;set&gt;
+      &lt;ref bean=&quot;converter&quot;/&gt;
+    &lt;/set&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;mvc:annotation-driven conversion-service=&quot;formattingConversionService&quot;/&gt;
+
+
+&lt;!--上述第一步 第二步写法 还可以合二为一--&gt;
+&lt;bean id=&quot;formattingConversionService&quot; class=&quot;org.springframework.format.support.FormattingConversionServiceFactoryBean&quot;&gt;
+  &lt;property name=&quot;converters&quot;&gt;
+    &lt;set&gt;
+       &lt;bean id=&quot;converter&quot; class=&quot;com.baizhiedu.DateConverter&quot;/&gt;
+    &lt;/set&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+<h5 id="37">3.7 接受其他请求数据</h5>
+<h6 id="371">3.7.1 动态参数收集</h6>
+<ul>
+<li><strong>分析</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/param/param2/param1?name=sunshuai
+http://localhost:8989/param/param2/param1?name=xiaohei
+
+@RequestMapping(&quot;/param10&quot;)
+public String param10(String name) {
+
+  return &quot;param1&quot;;
+}
+</code></pre>
+<ul>
+<li><strong>单值动态参数收集</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/param/param2/param1?name=sunshuai
+http://localhost:8989/param/param2/param1?age=10
+
+
+@RequestMapping(&quot;/param10&quot;)
+public String param10(@RequestParam Map&lt;String, String&gt; param) {
+
+  return &quot;param1&quot;;
+}
+
+注意：如果需要接受动态参数，必须保证Map的形参前面加入@RequestParam注解，否则接受不到数据。
+</code></pre>
+<ul>
+<li><strong>多值动态参数收集</strong>  </li>
+</ul>
+<pre><code class="language-java">http://localhost:8989/param/param10?id=1&amp;id=2&amp;id=3
+
+第一种解决思路：
+
+@RequestMapping(&quot;/param1&quot;)
+public String param1(int[] id) {
+  for (int i : ids) {
+    System.out.println(&quot;i = &quot; + i);
+  }
+  return &quot;result1&quot;;
+}
+
+问题：
+http://localhost:8989/param/param10?id=1&amp;id=2&amp;id=3
+http://localhost:8989/param/param10?name=sunshuai1&amp;name=sunshuai2&amp;name=sunshuai3
+
+第二种解决思路：
+
+@RequestMapping(&quot;/param11&quot;)
+public String param11(@RequestParam MultiValueMap&lt;String, String&gt; params) {
+
+  System.out.println(&quot;ParamController.param11&quot;);
+
+  return &quot;param1&quot;;
+}
+</code></pre>
+<ul>
+<li><strong>典型应用场景</strong><br />
+<img alt="1641195019126-d6f3a880-e9a5-468b-900b-ff5ae0534ff6.png" src="../img/Q3eGMPdnfRAprnn2/1641195019126-d6f3a880-e9a5-468b-900b-ff5ae0534ff6-881330.png" /></li>
+</ul>
+<h6 id="372-cookie">3.7.2 接受cookie数据</h6>
+<ul>
+<li><strong>Servlet中获取的方式</strong>  </li>
+</ul>
+<pre><code class="language-java">#Cookie创建的代码
+Cookie cookie = new Cookie(&quot;name&quot;,&quot;value&quot;);
+
+#核心代码
+Cookie[] cookies = request.getCookies();
+for (Cookie cookie : cookies) {
+  if (&quot;cookieName&quot;.equals(cookie.getName())) {
+    System.out.println(&quot;cookie.getValue() = &quot; + cookie.getValue());
+  }
+}
+</code></pre>
+<ul>
+<li><strong>SpringMVC中获取Cookie</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/other1&quot;)
+public String other1(HttpServletRequest request) {
+  Cookie[] cookies = request.getCookies();
+  for (Cookie cookie : cookies) {
+    if (&quot;name&quot;.equals(cookie.getName())) {
+      System.out.println(&quot;cookie.getValue() = &quot; + cookie.getValue());
+    }
+  }
+  return &quot;other1&quot;;
+}
+
+# 第一种基于Servlet API获取Cookie，存在与Servlet API的耦合问题，不建议后续使用
+
+
+@RequestMapping(&quot;/other2&quot;)
+public String other2(@CookieValue(&quot;name&quot;) String cookieValue) {
+  System.out.println(&quot;OtherController.other1 &quot;+cookieValue );
+  return &quot;other2&quot;;
+}
+</code></pre>
+<h6 id="373">3.7.3 接受请求头数据</h6>
+<ul>
+<li><strong>什么是请求头</strong>  </li>
+</ul>
+<pre><code class="language-markdown">1.  Http协议规定：客户端浏览器在发起请求时，除了提交数据外，还会通过请求头向服务器端提交一些额外的附加息。
+        比如语言信息，浏览器的版本，客户端操作系统类型，是否缓存数据等信息。
+
+2.  在后续的开发中，特殊场景下，甚至会自定义请求头携带一些特殊数据。
+</code></pre>
+<ul>
+<li><strong>获取请求头的方式</strong> <ul>
+<li><strong>Servlet中的获取方式</strong>  </li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">#核心代码
+String value = request.getHeader(&quot;key&quot;);
+</code></pre>
+<pre><code>-  **SpringMVC中的获取方式**
+</code></pre>
+<pre><code class="language-java">@RequestMapping(&quot;/other3&quot;)
+public String other3(HttpServletRequest request) {
+  String host = request.getHeader(&quot;host&quot;);
+  System.out.println(&quot;host = &quot; + host);
+  return &quot;other3&quot;;
+}
+
+# 第一种基于Servlet API获取请求头，存在与Servlet API的耦合问题，不建议后续使用
+
+@RequestMapping(&quot;/other4&quot;)
+public String other4(@RequestHeader(&quot;host&quot;) String host) {
+  System.out.println(&quot;@RequestHeader host = &quot; + host);
+  return &quot;other4&quot;;
+}
+</code></pre>
+<h3 id="springmvc_7">SpringMVC系列</h3>
+<hr />
+<h4 id="springmvc_8">第四章、SpringMVC控制器开发详解 二</h4>
+<h5 id="41">4.1 核心要点</h5>
+<blockquote>
+<ol>
+<li><strong>接受客户端(client)请求参数 [讲解完毕]</strong></li>
+<li><strong>调用业务对象[讲解]</strong></li>
+<li><strong>页面跳转</strong></li>
+</ol>
+</blockquote>
+<h5 id="42-springmvcssm">4.2 SpringMVC控制器调用业务对象【SSM整合】</h5>
+<h6 id="421">4.2.1 核心思路分析</h6>
+<p><img alt="1641195090057-96fc53bc-5745-42f1-aab1-aade17a469a2.png" src="../img/Q3eGMPdnfRAprnn2/1641195090057-96fc53bc-5745-42f1-aab1-aade17a469a2-149557.png" /></p>
+<h6 id="422">4.2.2 编码</h6>
+<ul>
+<li><strong>dispatcher.xml</strong>  </li>
+</ul>
+<pre><code class="language-xml">&lt;context:component-scan base-package=&quot;com.baizhiedu&quot;/&gt;
+
+&lt;mvc:annotation-driven/&gt;
+
+&lt;bean id=&quot;resolver&quot; class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+  &lt;!--路径--&gt;
+  &lt;property name=&quot;prefix&quot; value=&quot;/jsp/&quot;/&gt;
+  &lt;!--文件类型--&gt;
+  &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+  &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+  &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/suns?useSSL=false&quot;/&gt;
+  &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+  &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;sqlSessionFactoryBean&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+  &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+  &lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.baizhiedu.entity&quot;/&gt;
+  &lt;property name=&quot;mapperLocations&quot;&gt;
+    &lt;list&gt;
+      &lt;value&gt;classpath:com.baizhiedu.mapper/*Mapper.xml&lt;/value&gt;
+    &lt;/list&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;mapperScannerConfigurer&quot; class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+  &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactoryBean&quot;/&gt;
+  &lt;property name=&quot;basePackage&quot; value=&quot;com.baizhiedu.dao&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+  &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+&lt;/bean&gt;
+
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+</code></pre>
+<ul>
+<li><strong>DAO</strong>  </li>
+</ul>
+<pre><code class="language-java">public class User{
+  private Integer id;
+  private String name;
+  private String password;
+  set get  
+}
+
+create table t_user(
+    id integer primary key auto_increment,
+    name varchar(12),
+    password varchar(12)
+);
+
+
+public interface UserDAO {
+    public void save(User user);
+}
+
+&lt;mapper namespace=&quot;com.baizhiedu.dao.UserDAO&quot;&gt;
+   &lt;insert id=&quot;save&quot; parameterType=&quot;User&quot;&gt;
+       insert into t_user (name,password) values (#{name},#{password})
+   &lt;/insert&gt;
+&lt;/mapper&gt;
+</code></pre>
+<ul>
+<li><strong>Service</strong>  </li>
+</ul>
+<pre><code class="language-java">public interface UserService {
+    public void register(User user);
+}
+
+@Service
+@Transactional
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private UserDAO userDAO;
+
+    @Override
+    public void register(User user) {
+        userDAO.save(user);
+    }
+}
+</code></pre>
+<ul>
+<li><strong>Controller</strong>  </li>
+</ul>
+<pre><code class="language-java">@RequestMapping(&quot;/user&quot;)
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(&quot;/addUser&quot;)
+    public String addUser(User user) {
+
+        userService.register(user);
+
+        return &quot;addUser&quot;;
+    }
+}
+</code></pre>
+<blockquote>
+<p>更新: 2022-01-12 22:10:04<br />
+原文: <a href="https://www.yuque.com/u12209896/it1egr/cdvr8w">https://www.yuque.com/u12209896/it1egr/cdvr8w</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

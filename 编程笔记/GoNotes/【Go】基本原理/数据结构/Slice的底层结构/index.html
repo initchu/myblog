@@ -1,0 +1,475 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/Slice%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Slice 的底层结构 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#slice" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Slice 的底层结构
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#slicearray" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slice和Array对比
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slice_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slice细节
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#printslice" class="md-nav__link">
+    <span class="md-ellipsis">
+      PrintSlice函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#printarray" class="md-nav__link">
+    <span class="md-ellipsis">
+      PrintArray函数
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slicearray_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slice和Array在函数传参上的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      总结
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="slice">Slice 的底层结构</h1>
+<h2 id="slicearray">Slice和Array对比</h2>
+<p>slice： </p>
+<pre><code class="language-go">var s []int
+s := make([]int,len,cap)
+</code></pre>
+<p>array：</p>
+<pre><code class="language-go">var a [length] int
+</code></pre>
+<p>对比一下切片和数组的定义方式，很明显可以看出，array在定义的过程中指定了<code>length</code>长度，而slice并没有。这说明，slice是可以动态的进行扩容和缩容。</p>
+<h2 id="slice_1">Slice细节</h2>
+<p>slice 的结构体定义:</p>
+<pre><code class="language-go">type slice struct{
+    array unsafe.Pointer
+    len int //长度
+    cap int //容量
+}
+</code></pre>
+<p>来看以下程序：</p>
+<pre><code class="language-go">package main
+func printSlice(s []int){
+    print(len(s))
+    print(cap(s))
+}
+func printArray(a [100]int){
+    print(len{a})
+    print(cap(a))
+}
+func main(){
+    s := make([]int,100)
+    printSlice(s)
+    var a[100]int
+    printArray(a)
+}
+
+</code></pre>
+<p>运行结果：</p>
+<p><img alt="1642425319247-384ab57e-df63-4227-ab47-8e01af2c7d1d.png" src="../img/WDtjojBv7SWzTxeu/1642425319247-384ab57e-df63-4227-ab47-8e01af2c7d1d-797187.png" /></p>
+<p>我们可以通过查看汇编代码的方式来该段代码的内容。</p>
+<p><a href="https://colobu.com/2018/12/29/get-assembly-output-for-go-programs/">取得Go的汇编代码的方法</a></p>
+<h2 id="printslice">PrintSlice函数</h2>
+<p><img alt="1642425293912-c0db348e-093a-4c3a-9104-72d88c40f4d1.png" src="../img/WDtjojBv7SWzTxeu/1642425293912-c0db348e-093a-4c3a-9104-72d88c40f4d1-132100.png" /></p>
+<p>当我们看到类似红框中的一个数字后面跟着一个括号，括号里面是一个寄存器，这里只需要知道这是去内存地址中取值了就可以，其他的就当作英语的本意看就可以了。</p>
+<p>第一行代码，就是从内存地址中取出来一个值，挪到了新的函数栈上，并且调用了printint方法。这时候，就可以看出来，针对Slice来说，它的长度以及它的容量其实是一个变量。</p>
+<h2 id="printarray">PrintArray函数</h2>
+<p><img alt="1642425893186-b17d819b-464a-40c4-b62c-42761f57b037.png" src="../img/WDtjojBv7SWzTxeu/1642425893186-b17d819b-464a-40c4-b62c-42761f57b037-121011.png" /></p>
+<p>查看红框中的部分，和Slice红框中对比，他变成了0x64，0x64是汇编语言中的常量，翻译成十进制就是100。实际上这行代码的意思就是，把一个常量move到了一个函数调用栈上面。所以针对array来说，这个长度在定义了之后是不可以改变的。</p>
+<h2 id="slicearray_1">Slice和Array在函数传参上的区别</h2>
+<p><img alt="1642426206659-b3f4faae-8b2b-4f77-a3df-70712eb753f7.png" src="../img/WDtjojBv7SWzTxeu/1642426206659-b3f4faae-8b2b-4f77-a3df-70712eb753f7-733775.png" /></p>
+<p>红框部分可以注意到，这两句就是指向array的porinter 放到了栈上实际上在函数传参的时候，slice传的是它底层的结构体。</p>
+<p><img alt="1642426533061-77619863-9dd4-4f52-8b71-268f2d4c6e5d.png" src="../img/WDtjojBv7SWzTxeu/1642426533061-77619863-9dd4-4f52-8b71-268f2d4c6e5d-094325.png" /></p>
+<p>duffcooy从内存中copy-&gt;值传递</p>
+<p><img alt="1642426544215-99a98e0e-dd42-4388-ada9-b1b4f75d348a.png" src="../img/WDtjojBv7SWzTxeu/1642426544215-99a98e0e-dd42-4388-ada9-b1b4f75d348a-417276.png" /></p>
+<p>如果在go里面传递数组会怎么样呢？</p>
+<p>写了两个benchmark：<img alt="1642426778506-35184815-8757-4f96-9551-dd3e2b3b917c.png" src="../img/WDtjojBv7SWzTxeu/1642426778506-35184815-8757-4f96-9551-dd3e2b3b917c-253869.png" /></p>
+<pre><code class="language-go">func callSlice(s []int){
+}
+func BenchmarkCallSlice(b *testing.B){
+    s := make([]int,10000)
+        for i := 0;i &lt; b.N; i++{
+            callSlice(s)
+        }
+}
+</code></pre>
+<pre><code class="language-go">func callArray(a [10000]int){
+}
+func BenchmarkCallSlice(b *testing.B){
+    var a [10000]int
+        for i : =0;i &lt; b.N; i++{
+            callArray(a)
+        }
+}
+</code></pre>
+<p><img alt="1642427503153-aabe32d6-ffc3-47af-85e9-1395516a19b6.png" src="../img/WDtjojBv7SWzTxeu/1642427503153-aabe32d6-ffc3-47af-85e9-1395516a19b6-089787.png" /></p>
+<p>结论：传递数组的开销太大</p>
+<p>面试题： <a href="https://www.mianshigee.com/question/128686pjm/">为什么go中会有数组?</a></p>
+<p><strong><font style="color:rgb(33, 37, 41);">1.</font></strong><font style="color:rgb(33, 37, 41);"> 具有可比性意味着</font><strong><font style="color:rgb(33, 37, 41);">您可以将数组用作地图中的键</font></strong><font style="color:rgb(33, 37, 41);">，但不能</font><strong><font style="color:rgb(33, 37, 41);">用作</font></strong><font style="color:rgb(33, 37, 41);">切片。</font><a href="https://golang.org/doc/faq#map_keys">常见问题解答：为什么地图不允许切片作为键？</a></p>
+<p><strong><font style="color:rgb(33, 37, 41);">2.</font></strong><font style="color:rgb(33, 37, 41);"> </font><strong><font style="color:rgb(33, 37, 41);">数组可以提供更高的编译时安全性。</font></strong></p>
+<p><strong><font style="color:rgb(33, 37, 41);"></font></strong></p>
+<p><strong><font style="color:rgb(33, 37, 41);">3.</font></strong><font style="color:rgb(33, 37, 41);"> 同样， </font><strong><font style="color:rgb(33, 37, 41);">传递或分配数组值也将隐式创建</font></strong><font style="color:rgb(33, 37, 41);"> 整个数组 </font><strong><font style="color:rgb(33, 37, 41);">的副本</font></strong><font style="color:rgb(33, 37, 41);"> ，因此它将与原始值“分离”。如果您传递一个切片，它将仍然仅复制切片</font><em><font style="color:rgb(33, 37, 41);">标头</font></em><font style="color:rgb(33, 37, 41);">，但切片值（标头）将指向相同的后备数组。这可能是您想要的，也可能不是。如果要从“原始”切片“分离”切片，则必须显式复制内容，例如使用内置</font><a href="https://golang.org/pkg/builtin/#copy">copy()</a><font style="color:rgb(33, 37, 41);">函数复制到新切片。</font></p>
+<p><font style="color:rgb(33, 37, 41);"></font></p>
+<p><strong><font style="color:rgb(33, 37, 41);">4.</font></strong><font style="color:rgb(33, 37, 41);"> 同样，由于数组长度是数组类型的一部分，所以 </font><strong><font style="color:rgb(33, 37, 41);">长度不同的数组是不同的类型</font></strong><font style="color:rgb(33, 37, 41);">。一方面，这可能是“痛苦中的事情”（例如，编写一个带有类型参数的函数</font><font style="color:rgb(232, 62, 140);">[4]int</font><font style="color:rgb(33, 37, 41);">，您不能使用该函数来处理和处理类型数组</font><font style="color:rgb(232, 62, 140);">[5]int</font><font style="color:rgb(33, 37, 41);">），但这也可能是一个优势：可以用于</font><strong><font style="color:rgb(33, 37, 41);">显式指定</font></strong><font style="color:rgb(33, 37, 41);"> 所需数组 </font><strong><font style="color:rgb(33, 37, 41);">的长度</font></strong><font style="color:rgb(33, 37, 41);">。例如，您想编写一个使用IPv4地址的函数，可以使用type对其进行建模</font><font style="color:rgb(232, 62, 140);">[4]byte</font><font style="color:rgb(33, 37, 41);">。现在，您有了编译时的保证，即传递给您的函数的值将恰好具有4个字节，不多也不少（无论如何这都是无效的IPv4地址）。</font></p>
+<p><font style="color:rgb(33, 37, 41);"></font></p>
+<p><strong><font style="color:rgb(33, 37, 41);">5.</font></strong><font style="color:rgb(33, 37, 41);"> 与之前的内容有关， </font><strong><font style="color:rgb(33, 37, 41);">数组长度也可以用于记录目的</font></strong><font style="color:rgb(33, 37, 41);">。类型</font><font style="color:rgb(232, 62, 140);">[4]byte</font><font style="color:rgb(33, 37, 41);">正确记录了IPv4有4个字节。一个</font><font style="color:rgb(232, 62, 140);">rgb</font><font style="color:rgb(33, 37, 41);">类型的可变</font><font style="color:rgb(232, 62, 140);">[3]byte</font><font style="color:rgb(33, 37, 41);">告诉有对每个颜色成分1个字节。在某些情况下，甚至可以将其取出并单独记录；例如在</font><a href="https://golang.org/pkg/crypto/md5/">crypto/md5</a><font style="color:rgb(33, 37, 41);">包中：</font><a href="https://golang.org/pkg/crypto/md5/#Sum">md5.Sum()</a><font style="color:rgb(33, 37, 41);">返回类型为的值，</font><font style="color:rgb(232, 62, 140);">[Size]byte</font><font style="color:rgb(33, 37, 41);">其中</font><font style="color:rgb(232, 62, 140);">md5.Size</font><font style="color:rgb(33, 37, 41);">一个常数为</font><font style="color:rgb(232, 62, 140);">16</font><font style="color:rgb(33, 37, 41);">：MD5校验和的长度。</font></p>
+<p><font style="color:rgb(33, 37, 41);"></font></p>
+<p><strong><font style="color:rgb(33, 37, 41);">6.</font></strong><font style="color:rgb(33, 37, 41);"> 在 </font><strong><font style="color:rgb(33, 37, 41);">计划结构类型的内存布局</font></strong><font style="color:rgb(33, 37, 41);">时，它们也非常有用，请参阅此处的JimB答案，以及</font><a href="https://stackoverflow.com/a/30705048/1705598">更多详细信息和实际示例</a><font style="color:rgb(33, 37, 41);">。</font></p>
+<p><font style="color:rgb(33, 37, 41);"></font></p>
+<p><strong><font style="color:rgb(33, 37, 41);">7.</font></strong><font style="color:rgb(33, 37, 41);"> 同样，由于切片是标头，并且它们（几乎）总是按原样传递（没有指针）， </font><strong><font style="color:rgb(33, 37, 41);">因此语言规范对切片的指针比对数组的指针更具限制性</font></strong><font style="color:rgb(33, 37, 41);">。例如，规范提供了多个用于操作数组指针的简写，而在切片时会给出编译时错误（因为很少使用指向切片的指针，如果仍然需要/必须这样做，则必须明确处理。）</font></p>
+<p><font style="color:rgb(33, 37, 41);">这样的例子是：</font></p>
+<ul>
+<li><font style="color:rgb(33, 37, 41);">分割</font><font style="color:rgb(232, 62, 140);">p</font><font style="color:rgb(33, 37, 41);">指向array：的指针</font><font style="color:rgb(232, 62, 140);">p[low:high]</font><font style="color:rgb(33, 37, 41);">是的简写</font><font style="color:rgb(232, 62, 140);">(*p)[low:high]</font><font style="color:rgb(33, 37, 41);">。如果</font><font style="color:rgb(232, 62, 140);">p</font><font style="color:rgb(33, 37, 41);">是指向slice的指针，则为编译时错误（</font><a href="https://golang.org/ref/spec#Slice_expressions">规范：slice表达式</a><font style="color:rgb(33, 37, 41);">）。</font></li>
+<li><font style="color:rgb(33, 37, 41);">索引</font><font style="color:rgb(232, 62, 140);">p</font><font style="color:rgb(33, 37, 41);">数组指针：</font><font style="color:rgb(232, 62, 140);">p[i]</font><font style="color:rgb(33, 37, 41);">是的简写</font><font style="color:rgb(232, 62, 140);">(*p)[i]</font><font style="color:rgb(33, 37, 41);">。如果</font><font style="color:rgb(232, 62, 140);">p</font><font style="color:rgb(33, 37, 41);">is是指向切片的指针，则这是编译时错误（</font><a href="https://golang.org/ref/spec#Index_expressions">规范：Index expressions</a><font style="color:rgb(33, 37, 41);">）。</font></li>
+</ul>
+<p><strong><font style="color:rgb(33, 37, 41);">8.</font></strong><font style="color:rgb(33, 37, 41);"> </font><strong><font style="color:rgb(33, 37, 41);">访问（单个）数组元素</font></strong><font style="color:rgb(33, 37, 41);"> 比访问切片元素 </font><strong><font style="color:rgb(33, 37, 41);">更有效</font></strong><font style="color:rgb(33, 37, 41);"> ；像分片一样，运行时必须经过隐式指针取消引用。另外， </font><em><font style="color:rgb(33, 37, 41);">“如果表达式的类型是数组或指向数组的指针，则表达式</font>__<font style="color:rgb(232, 62, 140);">len(s)</font>__<font style="color:rgb(33, 37, 41);">和</font>__<font style="color:rgb(232, 62, 140);">cap(s)</font>__<font style="color:rgb(33, 37, 41);">为常量</font>__<font style="color:rgb(232, 62, 140);">s</font>__<font style="color:rgb(33, 37, 41);">”</font></em><font style="color:rgb(33, 37, 41);">。</font></p>
+<p><font style="color:rgb(33, 37, 41);"></font></p>
+<h2 id="_1"><font style="color:rgb(33, 37, 41);">总结</font></h2>
+<p><font style="color:rgb(78, 89, 105);">1. Go中只有值传递，指针也是值的一种。</font></p>
+<p><font style="color:rgb(78, 89, 105);">2. array因为是固定长度，其占用的内存大小编译期就可以确定，因此可以分配到栈上，其通过函数调用传递的时候，是需要复制完整的array的，而slice因为是动态数据结构，只有（pointer,len,cap）这个结构才是固定的，这些在函数传递slice中会被拷贝。 </font></p>
+<p><font style="color:rgb(78, 89, 105);">3. Go语言汇编可以看到完整函数调用等完整实现细节，其写法类似AT&amp;T风格，传递是从左到右。</font></p>
+<p><font style="color:rgb(33, 37, 41);"></font></p>
+<blockquote>
+<p>更新: 2022-01-17 22:01:08<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/xq76oa">https://www.yuque.com/xiaoshan_wgo/codingnotes/xq76oa</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

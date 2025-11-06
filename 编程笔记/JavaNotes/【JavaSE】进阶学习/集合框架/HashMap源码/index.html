@@ -1,0 +1,433 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/JavaNotes/%E3%80%90JavaSE%E3%80%91%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/HashMap%E6%BA%90%E7%A0%81/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>HashMap 源码 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hashmap" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HashMap 源码
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="hashmap">HashMap 源码</h1>
+<pre><code class="language-java">put(&quot;aaa&quot;,444);
+</code></pre>
+<pre><code class="language-java">public V put(K key, V value) {
+    return putVal(hash(key), key, value, false, true);
+}
+</code></pre>
+<h1 id="_1">扰动函数</h1>
+<pre><code class="language-java">static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre>
+<p>在HashMap存放元素时候有上面这样一段代码来处理哈希值，这是 java 8 的散列值扰动函数，用于优化散列效果。</p>
+<p>目的是：数据分配均匀，也就是散列的效果更好，减少了hash的碰撞，让数据存放和获取的效率更佳。</p>
+<h1 id="_2">负载因子</h1>
+<p><strong>负载因子是做什么的？</strong></p>
+<p>负载因子，可以理解成一辆车可承重重量超过某个阈值时，把货放到新的车上。</p>
+<p>那么在HashMap中，<strong><u>负载因子决定了数据量多少了以后进行扩容</u></strong>。</p>
+<p>比如，我们准备了7个元素，但是最后还有3个位置空余，2个位置存放了2个元素。 </p>
+<p>所以可能即使你数据比数组容量大时也是不一定能正正好好的把数组占满的，而是在某些小标位置出现了大量的碰撞，只能在同一个位置用链表存放，那么这样就失去了Map数组的性能。</p>
+<p>所以，要选择一个合理的大小下进行扩容，<strong><u>默认值0.75就是说当阈值容量占了3/4时赶紧扩容，减少Hash碰撞</u></strong>。</p>
+<p>同时0.75是一个默认构造值，在创建HashMap也可以调整，比如你希望用更多的空间换取时间，可以把负载因子调的更小一些，减少碰撞。</p>
+<h1 id="_3">添加元素</h1>
+<p>添加元素的时候考虑有三种情况：</p>
+<ol>
+<li>数组位置为null</li>
+<li>数组位置不为null，键不重复，挂在下面形成链表或者红黑树</li>
+<li>数组位置不为null，键重复，元素覆盖</li>
+</ol>
+<pre><code class="language-java">// 1. 哈希值
+// 2. 键
+// 3. 值
+// 4. 如果键重复了是否保留，
+//  true：老元素的值保留，不会覆盖
+//  false：表示老元素的值不保留，会进行覆盖
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent,boolean evict) {
+    // 定义一个局部变量，记录哈希表的数组的地址值（之前有个堆里面的，不用那个是因为写方法里面会更快）
+    Node&lt;K,V&gt;[] tab; 
+    // 临时的第三方变量，用来记录键值对对对象的地址值
+    Node&lt;K,V&gt; p; 
+    // 数组长度和索引
+    int n, i; 
+    // 1. 如果当前是第一次添加数据，底层创建一个默认长度为16，加载因子为0.75的数组
+    // 2. 如果不是第一次添加数据，会看数组中的元素是否达到了扩容的条件
+    // 如果没有达到扩容条件，底层不会做任何操作
+    // 如果达到了，底层会把数据扩容为原来的两倍，并把数据全部转移到新的哈希表中
+    if ((tab = table) == null || (n = tab.length) == 0){
+        tab = resize();
+        // 把当前数组的长度复制给 n
+        n = (tab).length;
+    }
+    // 拿这数组长度的跟键的哈希值进行计算，计算出当前键值对对象，在数组中应存入的位置
+    i = (n-1) &amp; hash; // index
+    // 获取数组中对应元素的数据
+    p = tab[i];
+
+    if ((p == null){
+        // 创建一个键值对对象，直接放到数组当中
+        tab[i] = newNode(hash, key, value, null);
+    } else {
+        // 键不重复，挂在下面形成链表或者红黑树
+        Node&lt;K,V&gt; e; K k;
+
+        // 数组中的哈希值和要添加的元素值进行比较,键不一样返回 false
+        boolean b1 = p.hash == hash;
+
+        if (b1 &amp;&amp;((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p; 
+        else if (p instanceof TreeNode)
+            // 从数组中取出来的键值对是不是是不是红黑树的节点
+            // 如果是，则调用 putTreeVal 按照红黑树的规则添加
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            // 如果从数组中后取出来的键值对不是红黑树中的节点
+            // 表示挂在链表下
+            for (int binCount = 0; ; ++binCount) { 
+                if ((e = p.next) == null) {
+                    // 创建新节点挂在链表下面
+                    p.next = newNode(hash, key, value, null);
+                    // 判断长度是否超过8
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        // treeifyBin 会判断数组的长度是否大于等于64，
+                        // 大于则转化成红黑树
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                // 如果哈希值一样，就会调用equals放啊比较内部的属性值是否相同
+                if (e.hash == hash &amp;&amp;((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        // 键重复，元素覆盖 
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            // onlyIfAbsent: 如果键重复了是否保留，
+            //  true：老元素的值保留，不会覆盖
+            //  false：表示老元素的值不保留，会进行覆盖
+            if (!onlyIfAbsent || oldValue == null){
+                // 仅修改键值对里面的值，键值对还是原来的
+                e.value = value;
+            }
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    // 用于判断并发修改异常判断的值
+    ++modCount;
+    // size 先自增
+    // threshold：记录的是 数组的长度 * 0.75，哈希表的扩容时机 16 * 0.75 = 12
+    if (++size &gt; threshold){
+        resize();
+    }
+    // 这是个linkHashMap有关的，在hashMap中忽略这段逻辑
+    afterNodeInsertion(evict);
+    // 没有覆盖任何元素，返回null
+    return null;
+}
+</code></pre>
+<blockquote>
+<p>更新: 2024-05-21 09:45:34<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/nrivza3r37ieur6x">https://www.yuque.com/xiaoshan_wgo/codingnotes/nrivza3r37ieur6x</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1237 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/Spring%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80/SpringBoot/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>SpringBoot - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#springboot" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SpringBoot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      第1章 系统总览
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      第2章 自动化装配
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第2章 自动化装配">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      自动配置特性
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      自动配置【源码分析】-自动包规则原理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自动配置【源码分析】-自动包规则原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enableautoconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      @EnableAutoConfiguration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autoconfigurationpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      @AutoConfigurationPackage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#importautoconfigurationimportselectorclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      @Import({AutoConfigurationImportSelector.class})
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      修改默认配置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-springapplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      第3章 理解SpringApplication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-web-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      第4章 Web MVC核心
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-web-mvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      第5章 Web MVC视图应用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-web-mvc-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      第6章 Web MVC REST应用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-servlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      第7章 Servlet
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-reactive-webflux" class="md-nav__link">
+    <span class="md-ellipsis">
+      第8章 Reactive --&gt;WebFlux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-webflux" class="md-nav__link">
+    <span class="md-ellipsis">
+      第9章 WebFlux核心
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      第10章 外部化配置
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      第11章 日志记录
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第11章 日志记录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、日志框架
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2slf4j" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、SLF4j使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2、SLF4j使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1slf4j-httpswwwslf4jorg" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、如何在系统中使用SLF4j https://www.slf4j.org
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、遗留问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3springboot" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、SpringBoot日志关系
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4、日志使用；
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4、日志使用；">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、默认配置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、指定配置
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5、切换日志框架
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="springboot">SpringBoot</h1>
+<h2 id="1">第1章 系统总览</h2>
+<h2 id="2">第2章 自动化装配</h2>
+<p>自动化配置</p>
+<pre><code class="language-java">@SpringBootApplication
+public class SbApplication {
+
+    public static void main(String[] args) {
+        ConfigurableApplicationContext applicationContext = springApplication.run(args);
+        //查看容器里的组件
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            System.out.println(&quot;beanDefinitionName = &quot; + beanDefinitionName);
+        }
+
+    }
+
+}
+</code></pre>
+<h3 id="_1"><font style="color:rgb(79, 79, 79);">自动配置特性</font></h3>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">自动配好Tomcat</font><ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">引入Tomcat依赖。</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">配置Tomcat</font></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+    &lt;version&gt;2.3.4.RELEASE&lt;/version&gt;
+    &lt;scope&gt;compile&lt;/scope&gt;
+&lt;/dependency&gt;
+
+</code></pre>
+<ul>
+<li><font style="color:rgb(77, 77, 77);">自动配好SpringMVC</font><ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">引入SpringMVC全套组件</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">自动配好SpringMVC常用组件（功能）</font></li>
+</ul>
+</li>
+<li><font style="color:rgb(77, 77, 77);">自动配好Web常见功能，如：字符编码问题</font><ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">SpringBoot帮我们配置好了所有web开发的常见场景</font></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">public static void main(String[] args) {
+    //1、返回我们IOC容器
+    ConfigurableApplicationContext run = SpringApplication.run(MainApplication.class, args);
+
+    //2、查看容器里面的组件
+    String[] names = run.getBeanDefinitionNames();
+    for (String name : names) {
+        System.out.println(name);
+    }
+}
+
+</code></pre>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">默认的包结构</font><ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">主程序所在包及其下面的所有子包里面的组件都会被默认扫描进来</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">无需以前的包扫描配置</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">想要改变扫描路径</font><ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">@SpringBootApplication(scanBasePackages=“com.lun”)</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">@ComponentScan 指定扫描路径</font></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">@SpringBootApplication
+等同于
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(&quot;com.lun&quot;)
+
+</code></pre>
+<ul>
+<li><font style="color:rgb(77, 77, 77);">各种配置拥有默认值</font><ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">默认配置最终都是映射到某个类上，如：</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">MultipartProperties</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">配置文件的值最终会绑定每个类上(使用的是</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">@ConfigurationProperties 注解</font><font style="color:rgba(0, 0, 0, 0.75);">)，这个类会在容器中创建对象</font></li>
+</ul>
+</li>
+<li><font style="color:rgb(77, 77, 77);">按需加载所有自动配置项</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">非常多的starter</font></li>
+<li><font style="color:rgba(0, 0, 0, 0.75);">引入了哪些场景这个场景的自动配置才会开启（比如</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">web场景 引入依赖 spring-boot-starter-web</font><font style="color:rgba(0, 0, 0, 0.75);">）</font></li>
+</ul>
+<pre><code class="language-xml">   &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.75);">SpringBoot所有的自动配置功能都在 spring-boot-autoconfigure 包里面</font></li>
+</ul>
+<p><font style="color:rgba(0, 0, 0, 0.75);"></font></p>
+<h3 id="-"><font style="color:rgb(79, 79, 79);">自动配置【源码分析】-自动包规则原理</font></h3>
+<p>spring-boot-autoconfigure 包提供给了我们全场景的自动配置。</p>
+<ol>
+<li>利用getAutoConfigurationEntry(annotationMetadata);给容器中批量导入一些组件</li>
+<li>调用List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes)获取到所有需要导入到容器中的配置类</li>
+<li>利用工厂加载 Map<String, List\<String>> loadSpringFactories(@Nullable ClassLoader classLoader);得到所有的组件</li>
+<li>从META-INF/spring.factories位置来加载一个文件。<ol>
+<li>默认扫描我们当前系统里面所有META-INF/spring.factories位置的文件</li>
+<li>spring-boot-autoconfigure-2.3.4.RELEASE.jar包里面也有META-INF/spring.factories</li>
+</ol>
+</li>
+</ol>
+<p><img alt="1641482054777-caf98852-fb71-4080-a26c-fd10ad29e00f.png" src="../img/zhpflWjxeL2Olbax/1641482054777-caf98852-fb71-4080-a26c-fd10ad29e00f-592514.png" /></p>
+<pre><code class="language-xml"># 文件里面写死了spring-boot一启动就要给容器中加载的所有配置类
+# spring-boot-autoconfigure-2.3.4.RELEASE.jar/META-INF/spring.factories
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
+org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\
+...
+
+</code></pre>
+<p><font style="color:rgb(77, 77, 77);">虽然我们127个场景的所有自动配置启动的时候默认全部加载，但是</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">xxxxAutoConfiguration</font><font style="color:rgb(77, 77, 77);">按照条件装配规则（</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">@Conditional</font><font style="color:rgb(77, 77, 77);">），最终会按需配置。</font></p>
+<p><font style="color:rgb(77, 77, 77);">如</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">AopAutoConfiguration</font><font style="color:rgb(77, 77, 77);">类：</font></p>
+<pre><code class="language-java"> @ConditionalOnClass({Advice.class}):就是只有你导入了Advice这个类，AOP才生效
+
+@ConditionalOnBean         //   当给定的在bean存在时,则实例化当前Bean
+@ConditionalOnMissingBean  //   当给定的在bean不存在时,则实例化当前Bean
+@ConditionalOnClass        //   当给定的类名在类路径上存在，则实例化当前Bean
+@ConditionalOnMissingClass //   当给定的类名在类路径上不存在，则实例化当前Bean
+</code></pre>
+<pre><code class="language-java">//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
+package org.springframework.boot.autoconfigure.aop;
+
+import org.aspectj.weaver.Advice;
+import org.springframework.aop.config.AopConfigUtils;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+@Configuration(
+    proxyBeanMethods = false
+)
+//解读：配置文件中是否有：spring.aop.auto=true ,matchIfMissing表示默认就是true
+@ConditionalOnProperty(
+    prefix = &quot;spring.aop&quot;,
+    name = {&quot;auto&quot;},
+    havingValue = &quot;true&quot;,
+    matchIfMissing = true
+)
+public class AopAutoConfiguration {
+    public AopAutoConfiguration() {
+    }
+
+    //这个会生效
+    @Configuration(
+        proxyBeanMethods = false
+    )
+    //没有这个包org.aspectj.weaver.Advice会生效，因为我们有两种AOP的实现，一种是jdk需要实现接口，一种是aspectj。
+    @ConditionalOnMissingClass({&quot;org.aspectj.weaver.Advice&quot;})
+    @ConditionalOnProperty(
+        prefix = &quot;spring.aop&quot;,
+        name = {&quot;proxy-target-class&quot;},
+        havingValue = &quot;true&quot;,
+        matchIfMissing = true
+    )
+    static class ClassProxyingConfiguration {
+        ClassProxyingConfiguration() {
+        }
+
+        @Bean
+        static BeanFactoryPostProcessor forceAutoProxyCreatorToUseClassProxying() {
+            return (beanFactory) -&gt; {
+                if (beanFactory instanceof BeanDefinitionRegistry) {
+                    BeanDefinitionRegistry registry = (BeanDefinitionRegistry)beanFactory;
+                    AopConfigUtils.registerAutoProxyCreatorIfNecessary(registry);
+                    AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);
+                }
+
+            };
+        }
+    }
+
+
+    //这个不会生效
+    @Configuration(
+        proxyBeanMethods = false
+    )
+    @ConditionalOnClass({Advice.class})
+    static class AspectJAutoProxyingConfiguration {
+        AspectJAutoProxyingConfiguration() {
+        }
+
+        @Configuration(
+            proxyBeanMethods = false
+        )
+        @EnableAspectJAutoProxy(
+            proxyTargetClass = true
+        )
+        @ConditionalOnProperty(
+            prefix = &quot;spring.aop&quot;,
+            name = {&quot;proxy-target-class&quot;},
+            havingValue = &quot;true&quot;,
+            matchIfMissing = true
+        )
+        static class CglibAutoProxyConfiguration {
+            CglibAutoProxyConfiguration() {
+            }
+        }
+
+        @Configuration(
+            proxyBeanMethods = false
+        )
+        @EnableAspectJAutoProxy(
+            proxyTargetClass = false
+        )
+        @ConditionalOnProperty(
+            prefix = &quot;spring.aop&quot;,
+            name = {&quot;proxy-target-class&quot;},
+            havingValue = &quot;false&quot;
+        )
+        static class JdkDynamicAutoProxyConfiguration {
+            JdkDynamicAutoProxyConfiguration() {
+            }
+        }
+    }
+}
+
+</code></pre>
+<h4 id="enableautoconfiguration"><font style="color:rgb(79, 79, 79);">@EnableAutoConfiguration</font></h4>
+<pre><code class="language-xml">@AutoConfigurationPackage
+@Import({AutoConfigurationImportSelector.class})
+public @interface EnableAutoConfiguration {
+    String ENABLED_OVERRIDE_PROPERTY = &quot;spring.boot.enableautoconfiguration&quot;;
+
+    Class&lt;?&gt;[] exclude() default {};
+
+    String[] excludeName() default {};
+}
+</code></pre>
+<h4 id="autoconfigurationpackage">@AutoConfigurationPackage</h4>
+<pre><code class="language-xml">@Import({Registrar.class}) //给容器中导入一个组件
+public @interface AutoConfigurationPackage {
+    String[] basePackages() default {};
+
+    Class&lt;?&gt;[] basePackageClasses() default {};
+}
+</code></pre>
+<p>利用Register给容器中导入一系列的组件</p>
+<pre><code class="language-xml">static class Registrar implements ImportBeanDefinitionRegistrar, DeterminableImports {
+        Registrar() {
+        }
+
+//AnnotationMetadata 获取main方法类中的注解信息
+        public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
+//getPackageNames() ：将基础包获取到封装到数组中
+            AutoConfigurationPackages.register(registry, (String[])(new AutoConfigurationPackages.PackageImports(metadata)).getPackageNames().toArray(new String[0]));
+        }
+
+//导入一系列组件
+        public Set&lt;Object&gt; determineImports(AnnotationMetadata metadata) {
+            return Collections.singleton(new AutoConfigurationPackages.PackageImports(metadata));
+        }
+    }
+</code></pre>
+<h4 id="importautoconfigurationimportselectorclass">@Import({AutoConfigurationImportSelector.<font style="color:#cc7832;">class</font>})</h4>
+<blockquote>
+<p>详情可以看@Import注解 导入xxxSelector,可以去spring章节去看
+</p>
+</blockquote>
+<p>AutoConfigurationImportSelector Class:</p>
+<p>主要方法：getAutoConfigurationEntry（）</p>
+<pre><code class="language-java">    public String[] selectImports(AnnotationMetadata annotationMetadata) {
+        if (!this.isEnabled(annotationMetadata)) {
+            return NO_IMPORTS;
+        } else {
+            AutoConfigurationImportSelector.AutoConfigurationEntry autoConfigurationEntry = this.getAutoConfigurationEntry(annotationMetadata);
+            return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
+        }
+    }   
+</code></pre>
+<p>getAutoConfigurationEntry（）：</p>
+<pre><code class="language-java"> protected AutoConfigurationImportSelector.AutoConfigurationEntry getAutoConfigurationEntry(AnnotationMetadata annotationMetadata) {
+        if (!this.isEnabled(annotationMetadata)) {
+            return EMPTY_ENTRY;
+        } else {
+            AnnotationAttributes attributes = this.getAttributes(annotationMetadata);
+            List&lt;String&gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);
+            configurations = this.removeDuplicates(configurations);
+            Set&lt;String&gt; exclusions = this.getExclusions(annotationMetadata, attributes);
+            this.checkExcludedClasses(configurations, exclusions);
+            configurations.removeAll(exclusions);
+            configurations = this.getConfigurationClassFilter().filter(configurations);
+            this.fireAutoConfigurationImportEvents(configurations, exclusions);
+            return new AutoConfigurationImportSelector.AutoConfigurationEntry(configurations, exclusions);
+        }
+    }
+</code></pre>
+<h4 id="_2">修改默认配置</h4>
+<p><font style="color:rgb(77, 77, 77);">以</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">DispatcherServletAutoConfiguration</font><font style="color:rgb(77, 77, 77);">的内部类</font><font style="color:rgb(199, 37, 78);background-color:rgb(249, 242, 244);">DispatcherServletConfiguration</font><font style="color:rgb(77, 77, 77);">为例子:</font></p>
+<pre><code class="language-java">@Bean
+@ConditionalOnBean(MultipartResolver.class)  //容器中有这个类型组件
+@ConditionalOnMissingBean(name = DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME) //容器中没有这个名字 multipartResolver 的组件
+public MultipartResolver multipartResolver(MultipartResolver resolver) {
+    //给@Bean标注的方法传入了对象参数，这个参数的值就会从容器中找。
+    //SpringMVC multipartResolver。防止有些用户配置的文件上传解析器不符合规范
+    // Detect if the user has created a MultipartResolver but named it incorrectly
+    return resolver;//给容器中加入了文件上传解析器；
+}
+
+</code></pre>
+<p>SpringBoot默认会在底层配好所有的组件，但是如果用户自己配置了以用户的优先。</p>
+<p>总结：</p>
+<ul>
+<li>SpringBoot先加载所有的自动配置类 xxxxxAutoConfiguration</li>
+<li>每个自动配置类按照条件进行生效，默认都会绑定配置文件指定的值。（xxxxProperties里面读取，xxxProperties和配置文件进行了绑定）</li>
+<li>生效的配置类就会给容器中装配很多组件</li>
+<li>只要容器中有这些组件，相当于这些功能就有了</li>
+<li>定制化配置<ul>
+<li>用户直接自己@Bean替换底层的组件</li>
+<li>用户去看这个组件是获取的配置文件什么值就去修改。</li>
+</ul>
+</li>
+</ul>
+<p>xxxxxAutoConfiguration —&gt; 组件 —&gt; xxxxProperties里面拿值 ----&gt; application.properties</p>
+<h2 id="3-springapplication">第3章 理解SpringApplication</h2>
+<h2 id="4-web-mvc">第4章 Web MVC核心</h2>
+<h2 id="5-web-mvc">第5章 Web MVC视图应用</h2>
+<h2 id="6-web-mvc-rest">第6章 Web MVC REST应用</h2>
+<h2 id="7-servlet">第7章 Servlet</h2>
+<h2 id="8-reactive-webflux">第8章 Reactive --&gt;WebFlux</h2>
+<h2 id="9-webflux">第9章 WebFlux核心</h2>
+<h2 id="10">第10章 外部化配置</h2>
+<h2 id="11">第11章 日志记录</h2>
+<h3 id="1_1">1、日志框架</h3>
+<p>小张；开发一个大型系统；</p>
+<pre><code>    1、System.out.println("")；将关键数据打印在控制台；去掉？写在一个文件？
+
+
+
+    2、框架来记录系统的一些运行时信息；日志框架 ；  zhanglogging.jar；
+
+
+
+    3、高大上的几个功能？异步模式？自动归档？xxxx？  zhanglogging-good.jar？
+
+
+
+    4、将以前框架卸下来？换上新的框架，重新修改之前相关的API；zhanglogging-prefect.jar；
+
+
+
+    5、JDBC---数据库驱动；
+
+
+
+        写了一个统一的接口层；日志门面（日志的一个抽象层）；logging-abstract.jar；
+
+
+
+        给项目中导入具体的日志实现就行了；我们之前的日志框架都是实现的抽象层；
+</code></pre>
+<p><strong>市面上的日志框架；</strong></p>
+<p>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j....</p>
+<table>
+<thead>
+<tr>
+<th>日志门面  （日志的抽象层）</th>
+<th>日志实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~~JCL（Jakarta  Commons Logging）~~    SLF4j（Simple  Logging Facade for Java）    ~~<strong>jboss-logging</strong>~~</td>
+<td>Log4j  JUL（java.util.logging）  Log4j2  <strong>Logback</strong></td>
+</tr>
+</tbody>
+</table>
+<p>左边选一个门面（抽象层）、右边来选一个实现；</p>
+<p>日志门面：  SLF4J；</p>
+<p>日志实现：Logback；</p>
+<p>SpringBoot：底层是Spring框架，Spring框架默认是用JCL；‘</p>
+<pre><code>**SpringBoot选用 SLF4j和logback；**
+</code></pre>
+<h3 id="2slf4j">2、SLF4j使用</h3>
+<h4 id="1slf4j-httpswwwslf4jorg">1、如何在系统中使用SLF4j   <a href="https://www.slf4j.org">https://www.slf4j.org</a></h4>
+<p>以后开发的时候，日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法；</p>
+<p>给系统里面导入slf4j的jar和  logback的实现jar</p>
+<pre><code class="language-java">import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    Logger logger = LoggerFactory.getLogger(HelloWorld.class);
+    logger.info(&quot;Hello World&quot;);
+  }
+}
+</code></pre>
+<p>图示；</p>
+<p><img alt="1641215589430-e7993c8b-55d9-4763-83e3-c6f92c104052.png" src="../img/zhpflWjxeL2Olbax/1641215589430-e7993c8b-55d9-4763-83e3-c6f92c104052-961419.png" /></p>
+<p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；</strong></p>
+<p>Adapter(适配层)</p>
+<p>因为log4j实现的比较早，比slf4j 抽象层出现的早，根本没有想到会有slf4j抽象层，所以他引用了一个抽象层，这个抽象层既有slf4j的功能，也有log4j的功能。其实就是使用了适配器模式。这个适配层上面实现了slf4j的方法,而方法里面真正要进行日志记录的时候，又调用的是log4j的方法。</p>
+<h4 id="2_1">2、遗留问题</h4>
+<p><img alt="1641215573606-6504eb28-4b3d-43cf-86c0-561bb066c548.png" src="../img/zhpflWjxeL2Olbax/1641215573606-6504eb28-4b3d-43cf-86c0-561bb066c548-780941.png" /></p>
+<p>a（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
+<p>统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？</p>
+<p><strong>如何让系统中所有的日志都统一到slf4j；</strong></p>
+<p>1、将系统中其他日志框架先排除出去；</p>
+<p>2、用中间包来替换原有的日志框架；</p>
+<p>3、我们导入slf4j其他的实现</p>
+<h3 id="3springboot">3、SpringBoot日志关系</h3>
+<pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>SpringBoot使用它来做日志功能；</p>
+<pre><code class="language-xml">    &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>底层依赖关系</p>
+<p><img alt="1641215623108-5e0f847e-b6f0-4530-85e2-77cd37d2f123.png" src="../img/zhpflWjxeL2Olbax/1641215623108-5e0f847e-b6f0-4530-85e2-77cd37d2f123-723942.png" /></p>
+<p>总结：</p>
+<pre><code>1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录
+
+
+
+2）、SpringBoot也把其他的日志都替换成了slf4j；
+
+
+
+3）、中间替换包？
+</code></pre>
+<pre><code class="language-java">@SuppressWarnings(&quot;rawtypes&quot;)
+public abstract class LogFactory {
+
+    static String UNSUPPORTED_OPERATION_IN_JCL_OVER_SLF4J = &quot;http://www.slf4j.org/codes.html#unsupported_operation_in_jcl_over_slf4j&quot;;
+
+    static LogFactory logFactory = new SLF4JLogFactory();
+</code></pre>
+<p><img alt="1641215635326-5362ff84-2272-4137-a9af-853f1321a0af.png" src="../img/zhpflWjxeL2Olbax/1641215635326-5362ff84-2272-4137-a9af-853f1321a0af-349215.png" /></p>
+<pre><code class="language-java">转换包的作用：把其他框架的日志转化为slf4j来记录
+</code></pre>
+<pre><code>4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？
+
+
+
+        Spring框架用的是commons-logging；
+</code></pre>
+<pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;commons-logging&lt;/groupId&gt;
+                    &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p><strong>SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可；</strong></p>
+<h3 id="4">4、日志使用；</h3>
+<h4 id="1_2">1、默认配置</h4>
+<p>SpringBoot默认帮我们配置好了日志；</p>
+<pre><code class="language-java">    //记录器
+    Logger logger = LoggerFactory.getLogger(getClass());
+    @Test
+    public void contextLoads() {
+        //System.out.println();
+
+        //日志的级别；
+        //由低到高   trace&lt;debug&lt;info&lt;warn&lt;error
+        //可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效
+        logger.trace(&quot;这是trace日志...&quot;);
+        logger.debug(&quot;这是debug日志...&quot;);
+        //SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别
+        logger.info(&quot;这是info日志...&quot;);
+        logger.warn(&quot;这是warn日志...&quot;);
+        logger.error(&quot;这是error日志...&quot;);
+
+
+    }
+</code></pre>
+<pre><code class="language-plain">    日志输出格式：
+        %d表示日期时间，
+        %thread表示线程名，
+        %-5level：级别从左显示5个字符宽度
+        %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+        %msg：日志消息，
+        %n是换行符
+    --&gt;
+    %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n
+</code></pre>
+<p>SpringBoot修改日志的默认配置</p>
+<pre><code class="language-properties">logging.level.com.atguigu=trace
+
+
+#logging.path=
+# 不指定路径在当前项目下生成springboot.log日志
+# 可以指定完整的路径；
+#logging.file=G:/springboot.log
+
+# 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件
+logging.path=/spring/log
+
+#  在控制台输出的日志的格式
+logging.pattern.console=%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n
+# 指定文件中日志输出的格式
+logging.pattern.file=%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>logging.file</th>
+<th>logging.path</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(none)</td>
+<td>(none)</td>
+<td></td>
+<td>只在控制台输出</td>
+</tr>
+<tr>
+<td>指定文件名</td>
+<td>(none)</td>
+<td>my.log</td>
+<td>输出日志到my.log文件</td>
+</tr>
+<tr>
+<td>(none)</td>
+<td>指定目录</td>
+<td>/var/log</td>
+<td>输出到指定目录的 spring.log 文件中</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2_2">2、指定配置</h4>
+<p>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用他默认配置的了</p>
+<table>
+<thead>
+<tr>
+<th>Logging System</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logback</td>
+<td><code>logback-spring.xml</code><br/>, <code>logback-spring.groovy</code><br/>, <code>logback.xml</code><br/> or <code>logback.groovy</code></td>
+</tr>
+<tr>
+<td>Log4j2</td>
+<td><code>log4j2-spring.xml</code><br/> or <code>log4j2.xml</code></td>
+</tr>
+<tr>
+<td>JDK (Java Util Logging)</td>
+<td><code>logging.properties</code></td>
+</tr>
+</tbody>
+</table>
+<p>logback.xml：直接就被日志框架识别了；</p>
+<p><strong>logback-spring.xml</strong>：日志框架就不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用SpringBoot的高级Profile功能</p>
+<pre><code class="language-xml">&lt;springProfile name=&quot;staging&quot;&gt;
+    &lt;!-- configuration to be enabled when the &quot;staging&quot; profile is active --&gt;
+    可以指定某段配置只在某个环境下生效
+&lt;/springProfile&gt;
+</code></pre>
+<p>如：</p>
+<pre><code class="language-xml">&lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;!--
+        日志输出格式：
+            %d表示日期时间，
+            %thread表示线程名，
+            %-5level：级别从左显示5个字符宽度
+            %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+            %msg：日志消息，
+            %n是换行符
+        --&gt;
+        &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;
+            &lt;springProfile name=&quot;dev&quot;&gt;
+                &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss.SSS} ----&gt; [%thread] ---&gt; %-5level %logger{50} - %msg%n&lt;/pattern&gt;
+            &lt;/springProfile&gt;
+            &lt;springProfile name=&quot;!dev&quot;&gt;
+                &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss.SSS} ==== [%thread] ==== %-5level %logger{50} - %msg%n&lt;/pattern&gt;
+            &lt;/springProfile&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+</code></pre>
+<p>如果使用logback.xml作为日志配置文件，还要使用profile功能，会有以下错误</p>
+<p><code>no applicable action for [springProfile]</code></p>
+<h3 id="5">5、切换日志框架</h3>
+<p>可以按照slf4j的日志适配图，进行相关的切换；</p>
+<p>slf4j+log4j的方式；</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+  &lt;exclusions&gt;
+    &lt;exclusion&gt;
+      &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+      &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+    &lt;/exclusion&gt;
+    &lt;exclusion&gt;
+      &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
+      &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;/exclusion&gt;
+  &lt;/exclusions&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+  &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>切换为log4j2</p>
+<pre><code class="language-xml">   &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+
+&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="_3"></h2>
+<blockquote>
+<p>更新: 2022-01-07 00:05:30<br />
+原文: <a href="https://www.yuque.com/u12209896/it1egr/ksw4n6">https://www.yuque.com/u12209896/it1egr/ksw4n6</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

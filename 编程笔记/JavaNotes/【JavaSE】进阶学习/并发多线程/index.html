@@ -1,0 +1,1321 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/JavaNotes/%E3%80%90JavaSE%E3%80%91%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>并发多线程 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              并发多线程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">并发多线程</h1>
+<h1 id="_2">多线程三种实现方式</h1>
+<h2 id="thread">实现多线程方式一：继承Thread类</h2>
+<ul>
+<li>方法介绍 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void run()</td>
+<td>在线程开启后，此方法将被调用执行</td>
+</tr>
+<tr>
+<td>void start()</td>
+<td>使此线程开始执行，Java虚拟机会调用run方法()</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>实现步骤 <ul>
+<li>定义一个类MyThread继承Thread类</li>
+<li>在MyThread类中重写run()方法</li>
+<li>创建MyThread类的对象</li>
+<li>启动线程</li>
+</ul>
+</li>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">
+// MyThreadDemo.java
+public class MyThreadDemo {
+    public static void main(String[] args) {
+        MyThread my1 = new MyThread();
+        MyThread my2 = new MyThread();
+
+        my1.start();
+        my2.start();
+    }
+}
+
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        for(int i=0; i&lt;100; i++) {
+            System.out.println(i);
+        }
+    }
+}
+</code></pre>
+<h2 id="runnable">实现多线程方式二：实现Runnable接口</h2>
+<ul>
+<li>Thread构造方法 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thread(Runnable target)</td>
+<td>分配一个新的Thread对象</td>
+</tr>
+<tr>
+<td>Thread(Runnable target, String name)</td>
+<td>分配一个新的Thread对象</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>实现步骤 <ul>
+<li>定义一个类MyRunnable实现Runnable接口</li>
+<li>在MyRunnable类中重写run()方法</li>
+<li>创建MyRunnable类的对象</li>
+<li>创建Thread类的对象，把MyRunnable对象作为构造方法的参数</li>
+<li>启动线程</li>
+</ul>
+</li>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        for(int i=0; i&lt;100; i++) {
+            System.out.println(Thread.currentThread().getName()+&quot;:&quot;+i);
+        }
+    }
+}
+
+public class MyRunnableDemo {
+    public static void main(String[] args) {
+        // 创建MyRunnable类的对象
+        MyRunnable my = new MyRunnable();
+
+        // 创建Thread类的对象，把MyRunnable对象作为构造方法的参数
+        // Thread(Runnable target)
+        // Thread t1 = new Thread(my);
+        // Thread t2 = new Thread(my);
+        // Thread(Runnable target, String name)
+        Thread t1 = new Thread(my, &quot;坦克&quot;);
+        Thread t2 = new Thread(my, &quot;飞机&quot;);
+
+        // 启动线程
+        t1.start();
+        t2.start();
+    }
+}
+</code></pre>
+<h2 id="callable">实现多线程方式三: 实现Callable接口【应用】</h2>
+<ul>
+<li>方法介绍 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V call()</td>
+<td>计算结果，如果无法计算结果，则抛出一个异常</td>
+</tr>
+<tr>
+<td>FutureTask(Callable callable)</td>
+<td>创建一个 FutureTask，一旦运行就执行给定的 Callable</td>
+</tr>
+<tr>
+<td>V get()</td>
+<td>如有必要，等待计算完成，然后获取其结果</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>实现步骤 <ul>
+<li>定义一个类MyCallable实现Callable接口</li>
+<li>在MyCallable类中重写call()方法</li>
+<li>创建MyCallable类的对象</li>
+<li>创建Future的实现类FutureTask对象，把MyCallable对象作为构造方法的参数</li>
+<li>创建Thread类的对象，把FutureTask对象作为构造方法的参数</li>
+<li>启动线程</li>
+<li>再调用get方法，就可以获取线程结束之后的结果。</li>
+</ul>
+</li>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">public class MyCallable implements Callable&lt;String&gt; {
+    @Override
+    public String call() throws Exception {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(&quot;跟女孩表白&quot; + i);
+        }
+        //返回值就表示线程运行完毕之后的结果
+        return &quot;答应&quot;;
+    }
+}
+public class Demo {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        //线程开启之后需要执行里面的call方法
+        MyCallable mc = new MyCallable();
+
+        //Thread t1 = new Thread(mc);
+
+        //可以获取线程执行完毕之后的结果.也可以作为参数传递给Thread对象
+        FutureTask&lt;String&gt; ft = new FutureTask&lt;&gt;(mc);
+
+        //创建线程对象
+        Thread t1 = new Thread(ft);
+
+        //String s = ft.get(); get不能在开启线程之前，否则会阻塞在这里
+        //开启线程
+        t1.start();
+
+        String s = ft.get();
+        System.out.println(s);
+    }
+}
+</code></pre>
+<h2 id="_3">三种实现方式的对比</h2>
+<ul>
+<li>实现Runnable、Callable接口 <ul>
+<li>好处: 扩展性强，实现该接口的同时还可以继承其他的类</li>
+<li>缺点: 编程相对复杂，不能直接使用Thread类中的方法</li>
+</ul>
+</li>
+<li>继承Thread类 <ul>
+<li>好处: 编程比较简单，可以直接使用Thread类中的方法</li>
+<li>缺点: 可以扩展性较差，不能再继承其他的类</li>
+</ul>
+</li>
+</ul>
+<h1 id="_4">常见成员方法</h1>
+<h2 id="_5">设置和获取线程名称</h2>
+<ul>
+<li>方法介绍 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>方法名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void  setName(String name)</td>
+<td>将此线程的名称更改为等于参数name</td>
+</tr>
+<tr>
+<td>String  getName()</td>
+<td>返回此线程的名称</td>
+</tr>
+<tr>
+<td>static Thread  currentThread()</td>
+<td>返回对当前正在执行的线程对象的引用</td>
+</tr>
+</tbody>
+</table>
+<p>:::color3
+细节：</p>
+<ul>
+<li>如果没有给线程设置名字，线程也是有默认的名字的，Thread-X【序号】</li>
+</ul>
+<p><img alt="1716345900637-3c100011-297d-456e-8eeb-e9e58f2d482d.png" src="../img/83K3LrHVUHMOzz-6/1716345900637-3c100011-297d-456e-8eeb-e9e58f2d482d-666172.png" /> </p>
+<p>:::</p>
+<ul>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">public class MyThread extends Thread {
+    public MyThread() {}
+    public MyThread(String name) {
+        super(name);
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(getName()+&quot;:&quot;+i);
+        }
+    }
+}
+public class MyThreadDemo {
+    public static void main(String[] args) {
+        MyThread my1 = new MyThread();
+        MyThread my2 = new MyThread();
+
+        //void setName(String name)：将此线程的名称更改为等于参数 name
+        my1.setName(&quot;高铁&quot;);
+        my2.setName(&quot;飞机&quot;);
+
+        //Thread(String name)
+        MyThread my1 = new MyThread(&quot;高铁&quot;);
+        MyThread my2 = new MyThread(&quot;飞机&quot;);
+
+        my1.start();
+        my2.start();
+
+        //static Thread currentThread() 返回对当前正在执行的线程对象的引用
+        System.out.println(Thread.currentThread().getName()); // main
+    }
+}
+</code></pre>
+<p>:::color3
+<font style="color:rgb(44, 44, 54);">最后一行代码是在 main 方法中执行的，而在Java程序中，main 方法是程序的起点，它默认是运行在一个名为 "main" 的线程中的。因此，Thread.currentThread().getName() 在这里会输出 "main"，表示这是主线程。</font></p>
+<p>:::</p>
+<h2 id="_6">线程休眠</h2>
+<ul>
+<li>相关方法 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>方法名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static void sleep(long millis)</td>
+<td>使当前正在执行的线程停留（暂停执行）指定的毫秒数</td>
+</tr>
+</tbody>
+</table>
+<p>:::color3
+细节：</p>
+<ul>
+<li>那条线程执行到 sleep 这条线程就会在这里停留</li>
+<li>方法的参数是毫秒</li>
+<li>当时间到了之后，线程会自动的醒来，继续执行下面的方法</li>
+</ul>
+<p>:::</p>
+<ul>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(Thread.currentThread().getName() + &quot;---&quot; + i);
+        }
+    }
+}
+public class Demo {
+    public static void main(String[] args) throws InterruptedException {
+        /*System.out.println(&quot;睡觉前&quot;);
+        Thread.sleep(3000);
+        System.out.println(&quot;睡醒了&quot;);*/
+
+        MyRunnable mr = new MyRunnable();
+
+        Thread t1 = new Thread(mr);
+        Thread t2 = new Thread(mr);
+
+        t1.start();
+        t2.start();
+    }
+}
+</code></pre>
+<h2 id="_7">线程优先级</h2>
+<ul>
+<li>线程调度 <ul>
+<li>两种调度方式 <ul>
+<li>分时调度模型：所有线程轮流使用 CPU 的使用权，平均分配每个线程占用 CPU 的时间片</li>
+<li>抢占式调度模型：优先让优先级高的线程使用 CPU，如果线程的优先级相同，那么会随机选择一个，优先级高的线程获取的 CPU 时间片相对多一些</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Java 使用的是抢占式调度模型 <ul>
+<li>抢占式具备<strong>随机性</strong></li>
+<li>假如计算机只有一个 CPU，那么 CPU 在某一个时刻只能执行一条指令，线程只有得到CPU时间片，也就是使用权，才可以执行指令。所以说多线程程序的执行是有随机性，因为谁抢到CPU的使用权是不一定的</li>
+<li>优先级默认是5</li>
+</ul>
+</li>
+</ul>
+<p><img alt="优先级的最小、默认、最大值" src="../img/83K3LrHVUHMOzz-6/1716346928088-ce53968b-e6ec-4004-8afa-5999470ed585-196123.png" /></p>
+<ul>
+<li>优先级相关方法 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>方法名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>final int getPriority()</td>
+<td>返回此线程的优先级</td>
+</tr>
+<tr>
+<td>final void setPriority(int newPriority)</td>
+<td>更改此线程的优先级线程默认优先级是5；线程优先级的范围是：1-10</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">public class MyCallable implements Callable&lt;String&gt; {
+    @Override
+    public String call() throws Exception {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(Thread.currentThread().getName() + &quot;---&quot; + i);
+        }
+        return &quot;线程执行完毕了&quot;;
+    }
+}
+public class Demo {
+    public static void main(String[] args) {
+        //优先级: 1 - 10 默认值:5
+        MyCallable mc = new MyCallable();
+
+        FutureTask&lt;String&gt; ft = new FutureTask&lt;&gt;(mc);
+
+        Thread t1 = new Thread(ft);
+        t1.setName(&quot;飞机&quot;);
+        t1.setPriority(10);
+        //System.out.println(t1.getPriority());//5
+        t1.start();
+
+        MyCallable mc2 = new MyCallable();
+
+        FutureTask&lt;String&gt; ft2 = new FutureTask&lt;&gt;(mc2);
+
+        Thread t2 = new Thread(ft2);
+        t2.setName(&quot;坦克&quot;);
+        t2.setPriority(1);
+        //System.out.println(t2.getPriority());//5
+        t2.start();
+    }
+}
+</code></pre>
+<h2 id="_8">守护线程</h2>
+<ul>
+<li>相关方法 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>方法名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void setDaemon(boolean on)</td>
+<td>将此线程标记为守护线程，当运行的线程都是守护线程时，Java虚拟机将退出</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>当其他的非守护线程执行完毕了之后，守护线程就陆陆续续的结束了。 </li>
+</ul>
+<p><img alt="1716347343680-d91be7ee-2139-4b0f-8872-4078a91f1f78.png" src="../img/83K3LrHVUHMOzz-6/1716347343680-d91be7ee-2139-4b0f-8872-4078a91f1f78-459267.png" /></p>
+<ul>
+<li>当聊天窗口（非守护线程）关了，传输文件（守护线程）也被关掉的。</li>
+<li>代码演示 </li>
+</ul>
+<pre><code class="language-java">public class MyThread1 extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 10; i++) {
+            System.out.println(getName() + &quot;---&quot; + i);
+        }
+    }
+}
+public class MyThread2 extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(getName() + &quot;---&quot; + i);
+        }
+    }
+}
+public class Demo {
+    public static void main(String[] args) {
+        MyThread1 t1 = new MyThread1();
+        MyThread2 t2 = new MyThread2();
+
+        t1.setName(&quot;线程1&quot;);
+        t2.setName(&quot;线程2&quot;);
+
+        //把第二个线程设置为守护线程
+        //当普通线程执行完之后,那么守护线程也没有继续运行下去的必要了.
+        t2.setDaemon(true);
+
+        t1.start();
+        t2.start();
+    }
+}
+</code></pre>
+<h2 id="_9">礼让线程（了解）</h2>
+<table>
+<thead>
+<tr>
+<th><strong>方法名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>static void yield</td>
+<td>出让线程/礼让线程，让出当前CPU的执行权</td>
+</tr>
+</tbody>
+</table>
+<p>:::color3
+这个方法只是尽可能的会让结果均匀一些。</p>
+<p>:::</p>
+<pre><code class="language-java">public class ThreadDemo{
+    public static void main(String[] args){
+        MyTread t1  = new MyThread();
+        MyTread t2  = new MyThread();        
+        t1.setName(&quot;线程1&quot;);
+        t2.setName(&quot;线程2&quot;);
+
+        t1.start();
+        t2.start();
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class MyTread extends Thread{
+    @Override
+    public void run(){
+        for(int i =1;i&lt;100;i++){
+            SyStem.out.println(getName + &quot;@&quot; + i);
+        }
+        // 表示出让当前 CPU 的执行权
+        Thread.yield();
+    }
+}
+</code></pre>
+<h2 id="_10">插入线程（了解）</h2>
+<table>
+<thead>
+<tr>
+<th><strong>方法名</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>final void join</td>
+<td>插入线程/插队线程</td>
+</tr>
+</tbody>
+</table>
+<p>:::color3
+这个方法只是尽可能的会让结果均匀一些。</p>
+<p>:::</p>
+<pre><code class="language-java">public class ThreadDemo{
+    public static void main(String[] args){
+        MyTread t = new MyTread();
+        t.setName(&quot;土豆&quot;);
+        t.start();
+
+        // 表示把t这个线程插入到当前线程之前
+        // t:土豆
+        // 当前线程：main
+        t.join();
+
+        //执行在main线程当中的
+        for(int i =0;i&lt;10;i++){
+            Sout(&quot;main线程&quot; + i);
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class MyTread extends Thread{
+    @Override
+    public void run(){
+        for(int i =1;i&lt;100;i++){
+            SyStem.out.println(getName + &quot;@&quot; + i);
+        }
+    }
+}
+</code></pre>
+<h1 id="_11">线程的生命周期</h1>
+<p><img alt="线程的生命周期" src="../img/83K3LrHVUHMOzz-6/1716374228061-00003f67-75cd-4425-9497-8cec95e88504-620686.png" /></p>
+<p><img alt="线程的生命周期" src="../img/83K3LrHVUHMOzz-6/1716537133696-a90d1d26-85b1-4c5b-9609-6dfbbc91e2ab-452117.png" /></p>
+<h1 id="_12">线程同步问题</h1>
+<p>当多个线程操作同一个数据的时候会一些出现问题，比如：</p>
+<ul>
+<li>可能会超出范围</li>
+<li>相同的数据被访问了多次</li>
+</ul>
+<p>假设这三条线程，都在跑下述的代码：</p>
+<pre><code class="language-java">while(true){
+    if(ticket &lt; 100){
+        try {
+            Tread.sleep(10);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+        ticket++;
+        sout(&quot;在卖第&quot;+ ticket + &quot;张票!&quot;);
+    }else{
+        break;
+    }
+}
+</code></pre>
+<p>假设线程1执行了ticket 99 自增变成了100，还没来得及打印，线程2 就开始ticket++ 就变成了101，所以这样的情况，就超出范围了。</p>
+<p>假设线程1，抢到了执行权，这个时候 线程1 睡觉 10 毫秒，然后 线程2 抢到了，线程2 开始睡 10 毫秒，这个时‘候线程3 就会进来，睡 10 毫秒，然后这三条会陆陆续续的醒来。后面继续假设，线程1醒来了，执行 ticket++，0 变成了 1，但是还没来得及打印呢，执行权被线程2抢走了，这个时候线程2的 ticket 可能也是1。这样就会发生相同的数据被访问了多次的情况。</p>
+<p>造成问题的核心原因：</p>
+<ul>
+<li>线程执行时候，具有随机性</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>给操作的这段代码给锁起来，其他的线程就算抢夺到了执行权也得等着。让他们执行线程。</li>
+</ul>
+<pre><code class="language-java">synchronized（锁）{
+    操作共享数据的代码
+}
+</code></pre>
+<p>锁有几个特点：</p>
+<ul>
+<li>锁默认打开，有一个线程进去了，锁自动关闭</li>
+<li>里面的代码全部执行完毕，线程出来，锁自动打开</li>
+</ul>
+<pre><code class="language-java">// 随便一个锁对象
+static Object obj = new Object();
+
+
+
+while(true){
+    // 同步代码块
+    synchronized(obj){
+        if(ticket &lt; 100){
+            try {
+                Tread.sleep(10);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            ticket++;
+            sout(&quot;在卖第&quot;+ ticket + &quot;张票!&quot;);
+        }else{
+            break;
+        }
+    }
+}
+</code></pre>
+<p>:::color3
+细节：</p>
+<ol>
+<li>synchronized不能写在循环的外面，不然就指定了一个线程去循环了。</li>
+<li>如果synchronized的锁对象不唯一，那这个锁就毫无意义。<ol>
+<li>比如锁设置为 this 就会非同步，因为 this 代表当前执行的线程，这会导致不同的线程使用不同的锁</li>
+<li>可以用 当前类的字节码文件，<code>类名.class</code> 当成锁，这个对象能确保是唯一的，例如下面的代码</li>
+</ol>
+</li>
+</ol>
+<p>:::</p>
+<pre><code class="language-java">// 表示这个类的所有的对象，都共享ticket数据
+static int ticket = 0;
+
+while(true){
+    // 同步代码块
+    synchronized(MyThread.class){
+        if(ticket &lt; 100){
+            try {
+                Tread.sleep(10);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            ticket++;
+            sout(&quot;在卖第&quot;+ ticket + &quot;张票!&quot;);
+        }else{
+            break;
+        }
+    }
+}
+</code></pre>
+<p>加上锁的部分，所以这个时候线程的生命周期变成了：</p>
+<p><img alt="线程的生命周期" src="../img/83K3LrHVUHMOzz-6/1716537133696-a90d1d26-85b1-4c5b-9609-6dfbbc91e2ab-452117.png" /></p>
+<p><img alt="1716796937844-291e19a5-34db-4445-ba9f-10bf909cb3d2.png" src="../img/83K3LrHVUHMOzz-6/1716796937844-291e19a5-34db-4445-ba9f-10bf909cb3d2-148294.png" /></p>
+<h1 id="_13">同步方法</h1>
+<p>可以把synchronized关键字加到方法上。</p>
+<h2 id="_14">同步方法两个特点</h2>
+<ol>
+<li>同步方法是所属方法里面的所有的代码</li>
+<li>锁对象不能自己制定</li>
+</ol>
+<pre><code class="language-java">修饰符 synchronized 返回值类型 方法名（方法参数) {...}
+</code></pre>
+<p>非静态：this</p>
+<p>静态：类字节码文件</p>
+<p>举个例子：</p>
+<pre><code class="language-java">public class MyRunnable implements Runnable{
+    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
+    int ticket = 0;
+    @Override
+    public void run(){
+        // 1. 循环
+        // 2.同步代码块（同步方法）
+        // 3.判断共享数据是否到了末尾，如果到了末尾
+        // 4.判断共享数据是否到了末尾，如果没到末尾
+
+        while(true){
+            synchronized(MyRunnable.class){
+                if(ticket == 100){
+                    break;
+                }else{
+                    try {
+                        Thread.sleep(10)
+                    }catch(InterruptedException){
+                        e.printStackTrace();
+                    }
+                    ticket ++;
+                    sout(Thread.getName() + ticket);
+                }
+
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">public static void main(){
+    MyRunnable mr = new MyRunnable();
+    // 开启三个线程
+}
+</code></pre>
+<p>把上面的同步代码块，放到同步方法中：</p>
+<p>选中代码块，按下 IDEA 中 ctrl alt + M 就可以快速，抽出方法。</p>
+<pre><code class="language-java">public class MyRunnable implements Runnable{
+    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
+    int ticket = 0;
+    @Override
+    public void run(){
+        // 1. 循环
+        // 2.同步代码块（同步方法）
+        // 3.判断共享数据是否到了末尾，如果到了末尾
+        // 4.判断共享数据是否到了末尾，如果没到末尾
+
+        while(true){
+            synchronized(MyRunnable.class){
+                if(method()) break;
+            }
+        }
+    }
+    private synchronized boolean method(){
+        if(ticket == 100){
+            return true;
+        }else{
+            ticket ++;
+            sout(Thread.getName() + ticket);
+        }
+        return false;
+    }
+
+}
+</code></pre>
+<h2 id="stringbuilder-stringbuffer">StringBuilder 和 StringBuffer</h2>
+<p>拼接字符串的时候经常会使用这两个方法？那这两个方法有什么区别呢？</p>
+<p>StringBuilder是线程不安全的，如果需要同步，建议使用 StringBuffer。</p>
+<p>观察远吗 发现 StringBuffer 所有的方法上都有 synchronized 。</p>
+<p>如果代码是单线程的，使用 StringBuilder 就行。</p>
+<h1 id="lock">Lock 锁</h1>
+<p>前面的例子用的都是自动的锁，JDK 5 之后提供了一个新的锁对象 Lock。</p>
+<p>虽然我们可以理解同步代码块和同步方法的锁对象的问题，</p>
+<p>但是并没有直接看到哪里上了锁，在哪里释放了锁，</p>
+<p>为了更清晰的表达如何加锁和释放锁，JDK5以后提供了一个新的锁对象Lock。</p>
+<p>Lock 实现提供比使用 synchronized 方法和语句可以获得更广泛的锁定操作。</p>
+<p>Lock 中提供了获得锁和释放锁的方法：</p>
+<ul>
+<li>void lock()：获得锁</li>
+<li>void lock()：释放锁</li>
+</ul>
+<p>Lock 是接口不能直接实例化，这里采用它的的实现类 ReentrantLock 来实例化 ReentrantLock 的构造方法。</p>
+<p>ReentrantLock():创建一个 ReentrantLock 的实例。</p>
+<pre><code class="language-java">public class MyRunnable implements Runnable{
+    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
+    int ticket = 0;
+    Lock lock = new ReentrantLock();
+    @Override
+    public void run(){
+        // 1. 循环
+        // 2.同步代码块（同步方法）
+        // 3.判断共享数据是否到了末尾，如果到了末尾
+        // 4.判断共享数据是否到了末尾，如果没到末尾
+        while(true){
+            // synchronized(MyRunnable.class){
+            lock.lock():
+                if(ticket == 100){
+                    break;
+                }else{
+                    try {
+                        Thread.sleep(10)
+                    }catch(InterruptedException){
+                        e.printStackTrace();
+                    }
+                    ticket ++;
+                    sout(Thread.getName() + ticket);
+                }
+            lock.unlock();
+            //}
+        }
+    }
+}
+</code></pre>
+<p>假设 线程1 一直在循环里面执行，当线程1执行到最后一次 ticket = 100，这个时候直接 break，但是我的锁还没有解锁。这个时候我的 线程2 和线程3都在等待，所以当下的时候我的锁没有停止，这个时候在break前面加上lock.unlock()也可以，但是lock.unlock()是一个扫尾的代码，所以为了简化，我们可以写在 finnally 里面，如下</p>
+<pre><code class="language-java">public class MyRunnable implements Runnable{
+    // 使用 Runnable 创建的就不需要 static 了，因为 Runnable，这个ticket会被多次调用，始终都是固定的值
+    int ticket = 0;
+    Lock lock = new ReentrantLock();
+    @Override
+    public void run(){
+        // 1. 循环
+        // 2.同步代码块（同步方法）
+        // 3.判断共享数据是否到了末尾，如果到了末尾
+        // 4.判断共享数据是否到了末尾，如果没到末尾
+        while(true){
+            // synchronized(MyRunnable.class){
+            lock.lock():
+            try{    
+            if(ticket == 100){
+                    break;
+                }else{
+                    try {
+                        Thread.sleep(10)
+                    }catch(InterruptedException){
+                        e.printStackTrace();
+                    }
+                    ticket ++;
+                    sout(Thread.getName() + ticket);
+                }
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }finally{
+                lock.unlock();
+            }
+            lock.unlock();
+            //}
+        }
+    }
+}
+</code></pre>
+<p>死锁错误：假设线程a，和线程b。两个不一样的锁，都在等着对方释放锁，这个时候程序就会卡死。</p>
+<p><img alt="1716792792344-a1dca34e-942f-48e0-809f-95db50ed534f.png" src="../img/83K3LrHVUHMOzz-6/1716792792344-a1dca34e-942f-48e0-809f-95db50ed534f-345460.png" /></p>
+<h1 id="_15">生产者和消费者</h1>
+<h2 id="_16">普通的等待唤醒机制</h2>
+<p><img alt="案例" src="../img/83K3LrHVUHMOzz-6/1716793638626-cda5f6cf-0b08-4031-ae2c-6f060787d926-210544.png" /></p>
+<p><img alt="1716793652991-53d312bf-991c-4607-acfb-b3868dca1305.png" src="../img/83K3LrHVUHMOzz-6/1716793652991-53d312bf-991c-4607-acfb-b3868dca1305-909115.png" /></p>
+<pre><code class="language-java">public class Desk{
+    /**
+    * 作用：控制生产者和消费者的执行
+    **/
+    // 是否有面条 0:没有面条 1:有面条
+    public static int foodFlag = 0;
+
+    // 总个数
+    public static int count = 10;
+
+    //锁对象
+    public static Object lock = new Object();
+
+}
+</code></pre>
+<pre><code class="language-java">public class Foodie extends Thread{
+    @Override
+    public void run(){
+        // 1. 循环
+        // 2. 同步代码块（同步方法）
+        // 3. 判断共享数据是否到了末尾（到了末尾）
+        // 4. 判断共享数据是否到了末尾（没有到末尾，执行核心逻辑）
+        while(true){
+            synchronized(Desk.lock){
+                if(Desk.conut==0){
+                    break;
+                }else{
+                    // 先去判断桌子上是否有吃的
+                    if(Desk.foodFlag == 0){
+                        // 没有就等待
+                        try{
+                            Desk.lock.wait(); //让当前线程和锁绑定
+                           }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    }else{
+                        // 把吃的总数 -1
+                        Desk.count--;
+                        sout(吃,还能吃&quot;+Desk.count+&quot;碗&quot;);
+                        // 吃完之后，唤醒厨师继续做
+                        Desk.lock.notifyAll();
+                        // 修改桌子的状态
+                        Desk.foodFlag = 0;
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class Cook extends Thread{
+    @Override
+    public void run(){
+        // 1. 循环
+        // 2. 同步代码块（同步方法）
+        // 3. 判断共享数据是否到了末尾（到了末尾）
+        // 4. 判断共享数据是否到了末尾（没有到末尾，执行核心逻辑）
+        while(true){
+            synchronized(Desk.lock){
+                if(Desk.conut == 0){
+                    break;
+                }else{
+                    // 判断桌子上是否有食物
+                    if(Desk.foodFlag==1){
+                        // 如果有，就等待
+                        try{
+                            Desk.lock.wait();
+                        }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                    }else{
+                        // 如果没有，就制作食物
+                        Desk.count++;
+                        sout(&quot;做了一碗食物&quot;);
+                        // 修改桌子上的食物状态
+                        Desk.foodFlag == 1;
+                        // 叫醒消费者
+                        Desk.lock.notifyAll();
+                    }
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<pre><code class="language-java">public class ThreadDemo{
+    main{
+        Cook c = new Cook();
+        Foodie f = new Foodie();
+        c.setName(&quot;厨师&quot;);
+        f.setName(&quot;吃货&quot;);
+        c.start();
+        f.start();
+    }
+}
+</code></pre>
+<h2 id="_17">引入阻塞队列</h2>
+<p><img alt="阻塞队列" src="../img/83K3LrHVUHMOzz-6/1716795997458-3b0c066c-b1ea-4b4e-a1ac-62d43eeb032c-040559.png" /></p>
+<p>请注意：生产者和消费者必须使用同一个阻塞队列。<img alt="1716796766162-3f947769-8826-420e-b6bf-164754f73806.png" src="../img/83K3LrHVUHMOzz-6/1716796766162-3f947769-8826-420e-b6bf-164754f73806-616866.png" /></p>
+<p><img alt="1716796828036-7faf88ed-4a10-4d78-aa56-1c695f700d43.png" src="../img/83K3LrHVUHMOzz-6/1716796828036-7faf88ed-4a10-4d78-aa56-1c695f700d43-997843.png" /></p>
+<p>上述的有个细节，打印的语句定义在了锁的外面，所以有时候打印的顺序是乱的。</p>
+<p><img alt="1716796931182-36b08276-a447-47cb-8f80-2bfc58ad6d95.png" src="../img/83K3LrHVUHMOzz-6/1716796931182-36b08276-a447-47cb-8f80-2bfc58ad6d95-636637.png" /></p>
+<p>在java虚拟机当中，只有当前状态，没有定义运行中的状态。</p>
+<p><img alt="线程的6种状态" src="../img/83K3LrHVUHMOzz-6/1716797071495-095f7572-8b56-468f-8a94-46c80d16378f-214413.png" /></p>
+<h1 id="_18">线程池</h1>
+<p>线程池的实现思路：</p>
+<ol>
+<li>创建一个池子，池子是空的；<ol>
+<li>Executors，线程池的工具类通过调用方法返回不同类型的线程池对象。</li>
+</ol>
+</li>
+</ol>
+<p><img alt="1716800188041-4fef7276-bc47-4715-add5-3af8762daa3a.png" src="../img/83K3LrHVUHMOzz-6/1716800188041-4fef7276-bc47-4715-add5-3af8762daa3a-058806.png" /></p>
+<ol>
+<li>提交任务时，池子会创建新的线程对象，任务执行完毕，线程归还给池子。下回再次提交任务的时候，不需要创建新的线程，直接复用已有的线程即可；</li>
+<li>但是如果提交任务时候，池子中没有空闲线程，也无法创建新的线程， 任务就会排队等待。</li>
+</ol>
+<p><img alt="1716800615313-dbff3c97-2b2a-4036-814f-a4950ee0ac2f.png" src="../img/83K3LrHVUHMOzz-6/1716800615313-dbff3c97-2b2a-4036-814f-a4950ee0ac2f-209548.png" /></p>
+<p>一般来说，线程池是不会被销毁的。</p>
+<p><img alt="1716800575131-981d0cda-11dc-4ddc-9ae6-f6e6c1dafefb.png" src="../img/83K3LrHVUHMOzz-6/1716800575131-981d0cda-11dc-4ddc-9ae6-f6e6c1dafefb-595761.png" /></p>
+<pre><code class="language-java">public static void main(String[] args) {
+    ExecutorService executorService = new ThreadPoolExecutor(3, 5, 1L, TimeUnit.SECONDS, new LinkedBlockingDeque&lt;&gt;(3), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+    for (int i = 0; i &lt; 10; i++) {
+        executorService.execute(()-&gt;{
+            System.out.println(Thread.currentThread().getName()+&quot;办理业务&quot;);
+        });
+    }
+    executorService.shutdown();
+}
+</code></pre>
+<p>结果就是五个线程办理业务。当i&lt;=3的时候，123个线程分别处理123，然后我因为LinkedBlockingDeque的大小可以等待3个人，所以当i&lt;=6的时候，我仍旧是123三个线程来处理，当7以上的时候，就可能要让线程45开始工作了，因为没有可以等待的业务了。</p>
+<pre><code class="language-java">pool-1-thread-1办理业务
+pool-1-thread-1办理业务
+pool-1-thread-1办理业务
+pool-1-thread-2办理业务
+pool-1-thread-4办理业务
+pool-1-thread-4办理业务
+pool-1-thread-5办理业务
+pool-1-thread-3办理业务
+pool-1-thread-2办理业务
+pool-1-thread-1办理业务
+</code></pre>
+<pre><code class="language-java">public ThreadPoolExecutor(int corePoolSize,
+                          int maximumPoolSize,
+                          long keepAliveTime,
+                          TimeUnit unit,
+                          BlockingQueue&lt;Runnable&gt; workQueue,
+                          ThreadFactory threadFactory,
+                          RejectedExecutionHandler handler) {
+    if (corePoolSize &lt; 0 ||
+        maximumPoolSize &lt;= 0 ||
+        maximumPoolSize &lt; corePoolSize ||
+        keepAliveTime &lt; 0)
+        throw new IllegalArgumentException();
+    if (workQueue == null || threadFactory == null || handler == null)
+        throw new NullPointerException();
+    this.acc = System.getSecurityManager() == null ?
+            null :
+            AccessController.getContext();
+    this.corePoolSize = corePoolSize;
+    this.maximumPoolSize = maximumPoolSize;
+    this.workQueue = workQueue;
+    this.keepAliveTime = unit.toNanos(keepAliveTime);
+    this.threadFactory = threadFactory;
+    this.handler = handler;
+}
+</code></pre>
+<h1 id="_19">自定义线程池</h1>
+<p>模拟饭店经营的场景，来自定义线程池，此类场景，有几大核心元素：</p>
+<ol>
+<li>正式员工数量</li>
+<li>餐厅最大员工数</li>
+<li>临时员工空闲多长时间被辞退的值</li>
+<li>临时员工空闲多长时间被辞退的单位</li>
+<li>排队的客户</li>
+<li>从哪里招人</li>
+<li>当饭店排队人数过多，超出的顾客请下次再来（拒绝服务）</li>
+</ol>
+<p>上述对应的几个元素，对应的就是线程池的下面一个属性：</p>
+<ol>
+<li>核心线程数量</li>
+<li>线程池中最大线程的数量</li>
+<li>空闲时间（值）</li>
+<li>空闲时间（单位）</li>
+<li>阻塞队列</li>
+<li>创建线程的方式</li>
+<li>要执行的任务过多时的解决方案</li>
+</ol>
+<blockquote>
+<p>更新: 2025-06-03 16:36:54<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/agb4y1ddw02l382t">https://www.yuque.com/xiaoshan_wgo/codingnotes/agb4y1ddw02l382t</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

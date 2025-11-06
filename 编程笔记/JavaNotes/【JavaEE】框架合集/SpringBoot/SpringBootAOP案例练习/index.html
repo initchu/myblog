@@ -1,0 +1,554 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/JavaNotes/%E3%80%90JavaEE%E3%80%91%E6%A1%86%E6%9E%B6%E5%90%88%E9%9B%86/SpringBoot/SpringBootAOP%E6%A1%88%E4%BE%8B%E7%BB%83%E4%B9%A0/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Spring Boot AOP 案例练习 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spring-boot-aop" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Spring Boot AOP 案例练习
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="spring-boot-aop">Spring Boot AOP 案例练习</h1>
+<h1 id="_1"><font style="color:rgb(28, 31, 33);">概述</font></h1>
+<p><font style="color:rgb(73, 73, 73);">Spring 最重要的两个功能，就是依赖注入（DI）和面向切面编程 （AOP）。</font></p>
+<p><font style="color:rgb(73, 73, 73);">AOP 为我们提供了处理问题的全局化视角，使用得当可以极大提高编程效率。</font></p>
+<p><font style="color:rgb(73, 73, 73);">Spring Boot 中使用 AOP 与 Spring 中使用 AOP 几乎没有什么区别，只是建议尽量使用 Java 配置代替 XML 配置。</font></p>
+<h1 id="_2"><font style="color:rgb(28, 31, 33);">构建项目</font></h1>
+<p><font style="color:rgb(73, 73, 73);">首先，需要构建一个 Spring Boot 项目并引入 AOP 依赖。</font></p>
+<h2 id="spring-initializr"><font style="color:rgb(28, 31, 33);">使用 Spring Initializr 创建项目</font></h2>
+<p><font style="color:rgb(28, 31, 33);">引入项目依赖</font></p>
+<p><font style="color:rgb(73, 73, 73);">我们引入 Web 项目依赖与 AOP 依赖。</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">&lt;!-- Web项目依赖 --&gt;
+    &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;!-- AOP --&gt;
+    &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+</code></pre>
+<h2 id="_3"><font style="color:rgb(28, 31, 33);">新建控制层、服务层、数据访问层</font></h2>
+<p><font style="color:rgb(73, 73, 73);">为了便于后续的演示，我们依次新建控制类、服务类、数据访问类，并将其放入对应的包中，项目结构如下：</font></p>
+<p><img alt="1671526148604-ef862575-5540-41ce-ac76-61aace066ebc.png" src="../img/Fyr2iJDC9Ajthlo0/1671526148604-ef862575-5540-41ce-ac76-61aace066ebc-123628.png" /></p>
+<p><font style="color:rgb(28, 31, 33);">项目结构</font></p>
+<p><font style="color:rgb(73, 73, 73);">各个类代码如下，注意此处仅仅是为了演示 AOP 的使用，并未真实访问数据库，而是直接返回了测试数据。</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">/**
+* 商品控制器类
+*/
+@RestController
+    public class GoodsController {
+        @Autowired
+        private GoodsService goodsService;
+
+        /**
+* 获取商品列表
+*/
+        @GetMapping(&quot;/goods&quot;)
+        public List getList() {
+            return goodsService.getList();
+        }
+    }
+
+</code></pre>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">/**
+* 商品服务类
+*/
+@Service
+    public class GoodsService {
+        @Autowired
+        private GoodsDao goodsDao;
+
+        /**
+* 获取商品信息列表
+*/
+        public List getList() {
+            return goodsDao.getList();
+        }
+    }
+
+</code></pre>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">/**
+* 商品数据库访问类
+*/
+@Repository // 标注数据访问类
+    public class GoodsDao {
+        /**
+* 查询商品列表
+*/
+        public List getList() {
+            return new ArrayList();
+        }
+    }
+
+</code></pre>
+<h1 id="aop"><font style="color:rgb(28, 31, 33);">使用 AOP 记录日志</font></h1>
+<p><font style="color:rgb(73, 73, 73);">如果要记录对控制器接口的访问日志，可以定义一个切面，切入点即为控制器中的接口方法，然后通过前置通知来打印日志。</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">/**
+* 日志切面
+*/
+@Component
+    @Aspect // 标注为切面
+    public class LogAspect {
+        private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+        // 切入点表达式，表示切入点为控制器包中的所有方法
+        @Pointcut(&quot;within(com.imooc.springbootaop.controller..*)&quot;)
+        public void LogAspect() {
+        }
+
+        // 切入点之前执行
+        @Before(&quot;LogAspect()&quot;)
+        public void doBefore(JoinPoint joinPoint) {
+            logger.info(&quot;访问时间：{}--访问接口:{}&quot;, new Date(), joinPoint.getSignature());
+        }
+    }
+
+</code></pre>
+<p><font style="color:rgb(73, 73, 73);">启动项目后，访问控制器中的方法之前会先执行 doBefore 方法。控制台打印如下：</font></p>
+<pre><code class="language-java">2020-05-25 22:14:12.317  INFO 9992 --- [nio-8080-exec-2] com.imooc.springbootaop.LogAspect        : 
+    访问时间：Mon May 25 22:14:12 CST 2020--访问接口:List com.imooc.springbootaop.controller.GoodsController.getList()
+</code></pre>
+<h1 id="aop_1"><font style="color:rgb(28, 31, 33);">使用 AOP 监控性能</font></h1>
+<p><font style="color:rgb(73, 73, 73);">在研发项目的性能测试阶段，或者项目部署后，我们会希望查看服务层方法执行的时间。以便精准的了解项目中哪些服务方法执行速度慢，后续可以针对性的进行性能优化。</font></p>
+<p><font style="color:rgb(73, 73, 73);">此时我们就可以使用 AOP 的环绕通知，监控服务方法的执行时间。</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">/**
+* 服务层方法切面
+*/
+@Component
+    @Aspect // 标注为切面
+    public class ServiceAspect {
+        private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+        // 切入点表达式，表示切入点为服务层包中的所有方法
+        @Pointcut(&quot;within(com.imooc.springbootaop.service..*)&quot;)
+        public void ServiceAspect() {
+        }
+
+        @Around(&quot;ServiceAspect()&quot;) // 环绕通知
+        public Object deAround(ProceedingJoinPoint joinPoint) throws Throwable {
+            long startTime = System.currentTimeMillis();// 记录开始时间
+            Object result = joinPoint.proceed();
+            logger.info(&quot;服务层方法:{}--执行时间:{}毫秒&quot;, joinPoint.getSignature(), System.currentTimeMillis() - startTime);
+            return result;
+        }
+    }
+
+</code></pre>
+<p><font style="color:rgb(73, 73, 73);">当服务层方法被调用时，控制台输入日志如下：</font></p>
+<pre><code class="language-plain">2020-05-25 22:25:56.830  INFO 4800 --- [nio-8080-exec-1] com.imooc.springbootaop.ServiceAspect    : 
+服务层方法:List com.imooc.springbootaop.service.GoodsService.getList()--执行时间:3毫秒
+</code></pre>
+<p><strong><font style="color:rgb(73, 73, 73);">Tips</font></strong><font style="color:rgb(73, 73, 73);">：正常情况下，用户查看页面或进行更新操作时，耗时超过 1.5 秒，就会感觉到明显的迟滞感。由于前后端交互也需要耗时，按正态分布的话，大部分交互耗时在 0.4秒 左右。所以在我参与的项目中，会对耗时超过 1.1 秒的服务层方法进行跟踪分析，通过优化 SQL 语句、优化算法、添加缓存等方式缩短方法执行时间。上面的数值均为我个人的经验参考值，还要视乎具体的服务器、网络、应用场景来确定合理的监控临界值。</font></p>
+<h1 id="aop_2"><font style="color:rgb(28, 31, 33);">使用 AOP 统一后端返回值格式</font></h1>
+<p><font style="color:rgb(73, 73, 73);">前后端分离的项目结构中，前端通过 Ajax 请求后端接口，此时最好使用统一的返回值格式供前端处理。此处就可以借助 AOP 来实现正常情况、异常情况返回值的格式统一。</font></p>
+<h2 id="_4"><font style="color:rgb(28, 31, 33);">定义返回值类</font></h2>
+<p><font style="color:rgb(73, 73, 73);">首先定义返回值类，它属于业务逻辑对象 （Bussiness Object），所以此处命名为 ResultBo ，代码如下：</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">public class ResultBo&lt;T&gt; {
+    /**
+* 错误码 0表示没有错误(异常) 其他数字代表具体错误码
+*/
+    private int code;
+    /**
+* 后端返回消息
+*/
+    private String msg;
+    /**
+* 后端返回的数据
+*/
+    private T data;
+    /**
+* 无参数构造函数
+*/
+    public ResultBo() {
+        this.code = 0;
+        this.msg = &quot;操作成功&quot;;
+    }
+    /**
+* 带数据data构造函数
+*/
+    public ResultBo(T data) {
+        this();
+        this.data = data;
+    }
+    /**
+* 存在异常的构造函数
+*/
+    public ResultBo(Exception ex) {
+        this.code = 99999;// 其他未定义异常
+        this.msg = ex.getMessage();
+    }
+    // 省略 get set
+}
+
+</code></pre>
+<h2 id="_5"><font style="color:rgb(28, 31, 33);">修改控制层返回值类型</font></h2>
+<p><font style="color:rgb(73, 73, 73);">对所有的控制层方法进行修改，保证返回值均通过 ResultBo 包装，另外我们再定义一个方法，模拟抛出异常的控制层方法。</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-plain">    /**
+     * 获取商品列表
+     */
+    @GetMapping(&quot;/goods&quot;)
+    public ResultBo getList() {
+        return new ResultBo(goodsService.getList());
+    }
+    /**
+     * 模拟抛出异常的方法
+     */
+    @GetMapping(&quot;/test&quot;)
+    public ResultBo test() {
+        int a = 1 / 0;
+        return new ResultBo(goodsService.getList());
+    }
+
+</code></pre>
+<h2 id="_6"><font style="color:rgb(28, 31, 33);">定义切面处理异常返回值</font></h2>
+<p><font style="color:rgb(73, 73, 73);">正常控制层方法都返回 ResultBo 类型对象，然后我们需要定义切面，处理控制层抛出的异常。当发生异常时，同样返回 ResultBo 类型的对象，并且对象中包含异常信息。</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-java">/**
+* 返回值切面
+*/
+@Component
+    @Aspect
+    public class ResultAspect {
+        // 切入点表达式，表示切入点为返回类型ResultBo的所有方法
+        @Pointcut(&quot;execution(public com.imooc.springbootaop.ResultBo *(..))&quot;)
+        public void ResultAspect() {
+        }
+
+        // 环绕通知
+        @Around(&quot;ResultAspect()&quot;)
+        public Object deAround(ProceedingJoinPoint joinPoint) throws Throwable {
+            try {
+                return joinPoint.proceed();// 返回正常结果
+            } catch (Exception ex) {
+                return new ResultBo&lt;&gt;(ex);// 被切入的方法执行异常时，返回ResultBo
+            }
+        }
+    }
+
+</code></pre>
+<h2 id="_7"><font style="color:rgb(28, 31, 33);">测试</font></h2>
+<p><font style="color:rgb(73, 73, 73);">启动项目，访问</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(76, 118, 201);">http://127.0.0.1:8080/goods</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(73, 73, 73);">返回数据如下：</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-plain">{&quot;code&quot;:0,&quot;msg&quot;:&quot;操作成功&quot;,&quot;data&quot;:[]}
+
+</code></pre>
+<p><font style="color:rgb(73, 73, 73);">然后访问</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(76, 118, 201);">http://127.0.0.1:8080/test</font><font style="color:rgb(73, 73, 73);"> </font><font style="color:rgb(73, 73, 73);">，返回数据如下：</font></p>
+<p><strong><font style="color:rgb(73, 73, 73);">实例：</font></strong></p>
+<pre><code class="language-shell">{&quot;code&quot;:99999,&quot;msg&quot;:&quot;/ by zero&quot;,&quot;data&quot;:null}
+
+</code></pre>
+<p><font style="color:rgb(73, 73, 73);">前端可以根据返回值的 code， 来判断后端是否正常响应。如果 code 为 0 ，则进行正常业务逻辑操作；如果 code 非 0 ，则可以弹窗显示 msg 提示信息。</font></p>
+<blockquote>
+<p>更新: 2022-12-20 16:56:34<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/eyxng78g4xnbskfk">https://www.yuque.com/xiaoshan_wgo/codingnotes/eyxng78g4xnbskfk</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

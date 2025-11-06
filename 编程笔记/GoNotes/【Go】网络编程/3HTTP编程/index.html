@@ -1,0 +1,767 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/3HTTP%E7%BC%96%E7%A8%8B/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>3 HTTP 编程 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-http" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 HTTP 编程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3-http">3 HTTP 编程</h1>
+<h1 id="http">HTTP 的简单使用</h1>
+<h2 id="http-server">HTTP Server</h2>
+<p>服务端处理请求和响应</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+)
+
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, &quot;Hello!&quot;) //把返回的内容写入 http.ResponseWrite
+}
+func main() {
+    http.HandleFunc(&quot;/&quot;, HelloHandler)
+    http.ListenAndServe(&quot;:5656&quot;, nil)
+}
+</code></pre>
+<h2 id="http-client">HTTP Client</h2>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;net/http&quot;
+    &quot;os&quot;
+    &quot;strings&quot;
+)
+
+func get() {
+    if resp, err := http.Get(&quot;http://127.0.0.1:8080&quot;); err != nil {
+        fmt.Println(&quot;err!&quot;)
+    } else {
+        defer resp.Body.Close()
+        io.Copy(os.Stdout, resp.Body)
+        os.Stdout.WriteString(&quot;\n&quot;)
+    }
+}
+
+func post() {
+    reader := strings.NewReader(&quot;hello server&quot;)
+    if resp, err := http.Post(&quot;http://127.0.0.1:8080&quot;, &quot;text/plain&quot;, reader); err != nil {
+        fmt.Println(err)
+    } else {
+        defer resp.Body.Close()
+        io.Copy(os.Stdout, resp.Body)
+        os.Stdout.WriteString(&quot;\n&quot;)
+    }
+
+}
+func main() {
+    get()
+    post()
+}
+</code></pre>
+<h2 id="httprouter">httprouter 的使用</h2>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;github.com/julienschmidt/httprouter&quot;
+    &quot;io&quot;
+    &quot;net/http&quot;
+    &quot;os&quot;
+)
+
+func getHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+    fmt.Printf(&quot;Method:%s\n&quot;, r.Method)
+    fmt.Println(&quot;request body:&quot;)
+    io.Copy(os.Stdout, r.Body)
+    fmt.Println()
+    w.Write([]byte(&quot;you &quot;))
+}
+
+func main() {
+    router := httprouter.New()
+    router.POST(&quot;/user/:name/:type/*addr&quot;,getHandler)
+}
+
+</code></pre>
+<p>使用 router 编写路由规则，客户端请求的路径应于 router 的路径相对应，在上述代码中的 <code>/user/:name/:type/*addr</code>的含义是：</p>
+<p><code>/user/</code>：必须包含 /user/ 的路径进行请求</p>
+<p><code>/:name/</code>：赋值给<code>name</code>变量</p>
+<p><code>/*addr</code>：后面的参数全部赋值给<code>addr</code></p>
+<h1 id="_1">请求报文和响应报文的格式分析</h1>
+<h2 id="_2">请求报文格式查看</h2>
+<p>服务端逻辑：</p>
+<blockquote>
+<p><strong>先创建一个监听 Listenner，使用 net 包中的 Listen 方法，记得最后关闭监听；</strong></p>
+<p><strong>随后使这个监听 Listenner 的 Accept 方法管道阻塞等待客户端连接，记得关闭该管道；</strong></p>
+<p><strong>conn.RemoteAddr().String() 获取客服端的网络地址；</strong></p>
+<p><strong>创建一个缓冲区 buf，等待用户发送的数据；</strong></p>
+<p><strong>切片截取有效数据。</strong>
+</p>
+</blockquote>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;log&quot;
+    &quot;net&quot;
+)
+
+func main() {
+    //创建、监听socket
+    listenner, err := net.Listen(&quot;tcp&quot;, &quot;127.0.0.1:8000&quot;)
+    if err != nil {
+        log.Fatal(err) //log.Fatal()会产生panic
+    }
+
+    defer listenner.Close()
+
+    conn, err := listenner.Accept() //阻塞等待客户端连接
+    if err != nil {
+        log.Println(err)
+        return
+    }
+
+    defer conn.Close() //此函数结束时，关闭连接套接字
+
+    //conn.RemoteAddr().String() 表示连接了一个远程客户端
+    ipAddr := conn.RemoteAddr().String()
+    fmt.Println(ipAddr, &quot;连接成功&quot;)
+
+    buf := make([]byte, 4096) //缓冲区，用于接收客户端发送的数据
+
+    //阻塞等待用户发送的数据
+    n, err := conn.Read(buf) //n代码接收数据的长度
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+
+    //切片截取，只截取有效数据
+    result := buf[:n]
+    fmt.Printf(&quot;接收到数据来自[%s]==&gt;:\n%s\n&quot;, ipAddr, string(result))
+}
+
+</code></pre>
+<p>服务端运行成功。</p>
+<p><img alt="代码运行结果" src="../img/PmL2BPNAYfJqW2hZ/1649859213167-57051323-89e3-4e0b-8704-6fddb28a5a68-749532.png" /></p>
+<p>HTTP 请求报文由<u>请求行、请求头部、空行、请求包体</u>4个部分组成，如下图所示：</p>
+<p><img alt="HTTP 请求报文" src="../img/PmL2BPNAYfJqW2hZ/1649900791842-6bb5d748-e7f7-4929-b32f-3fd642b89845-823129.jpeg" /></p>
+<p><strong>请求行</strong></p>
+<p>HTTP的 Get/Post 请求：</p>
+<p>GET：</p>
+<ul>
+<li>当客户端要从服务器中读取某个资源时，使用 GET 方法。GET 方法要求服务器将 URL 定位的资源放在响应报文的数据部分，回送给客户端，即向服务器请求某个资源。</li>
+<li>使用 GET 方法时，请求参数和对应的值附加在 URL 后面，利用一个问号(“?”)代表 URL 的结尾与请求参数的开始，传递参数长度受限制，因此 GET 方法不适合用于上传数据。</li>
+<li>通过 GET 方法来获取网页时，参数会显示在浏览器地址栏上，因此保密性很差。</li>
+</ul>
+<p>POST：</p>
+<ul>
+<li>当客户端给服务器提供信息较多时可以使用 POST 方法，POST 方法向服务器提交数据，比如完成表单数据的提交，将数据提交给服务器处理。</li>
+<li>GET 一般用于获取/查询资源信息，POST 会附带用户数据，一般用于更新资源信息。POST 方法将请求参数封装在 HTTP 请求数据中，而且长度没有限制，因为 POST 携带的数据，在 HTTP 的请求正文中，以名称/值的形式出现，可以传输大量数据。</li>
+</ul>
+<p><strong>请求头部</strong></p>
+<p>请求头部为请求报文添加了一些附加信息，由“名/值”对组成，每行一对，名和值之间使用冒号分隔。</p>
+<p>请求头部通知服务器有关于客户端请求的信息，典型的请求头有：</p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:#444444;">请求头</font></strong></th>
+<th><strong><font style="color:#444444;">含义</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:black;">User-Agent</font></td>
+<td><font style="color:black;">请求的浏览器类型</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">Accept</font></td>
+<td><font style="color:black;">客户端可识别的响应内容类型列表，星号</font><font style="color:black;">“ * ”</font><font style="color:black;">用于按范围将类型分组，用</font><font style="color:black;">“ <em>/</em> ”</font><font style="color:black;">指示可接受全部类型，用</font><font style="color:black;">“ type/* ”</font><font style="color:black;">指示可接受</font><font style="color:black;"> type </font><font style="color:black;">类型的所有子类型</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">Accept-Language</font></td>
+<td><font style="color:black;">客户端可接受的自然语言</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">Accept-Encoding</font></td>
+<td><font style="color:black;">客户端可接受的编码压缩格式</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">Accept-Charset</font></td>
+<td><font style="color:black;">可接受的应答的字符集</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">Host</font></td>
+<td><font style="color:black;">请求的主机名，允许多个域名同处一个</font><font style="color:black;">IP </font><font style="color:black;">地址，即虚拟主机</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">connection</font></td>
+<td><font style="color:black;">连接方式</font><font style="color:black;">(close</font><font style="color:black;">或</font><font style="color:black;">keepalive)</font></td>
+</tr>
+<tr>
+<td><font style="color:black;">Cookie</font></td>
+<td><font style="color:black;">存储于客户端扩展字段，向同一域名的服务端发送属于该域的</font><font style="color:black;">cookie</font></td>
+</tr>
+</tbody>
+</table>
+<p><strong>空行</strong></p>
+<p>最后一个请求头之后是一个空行，发送回车符和换行符，通知服务器以下不再有请求头。</p>
+<p><strong>请求包体</strong></p>
+<p>请求包体不在GET方法中使用，而是POST方法中使用。</p>
+<p>POST方法适用于需要客户填写表单的场合。与请求包体相关的最常使用的是包体类型Content-Type和包体长度Content-Length。</p>
+<h2 id="_3">响应报文查看</h2>
+<p>客户端来查看服务端响应后的报文是什么。</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+)
+
+//服务端编写的业务逻辑处理程序
+func myHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintln(w, &quot;hello world&quot;)
+}
+
+func main() {
+    http.HandleFunc(&quot;/go&quot;, myHandler)
+
+    //在指定的地址进行监听，开启一个HTTP
+    http.ListenAndServe(&quot;127.0.0.1:8000&quot;, nil)
+}
+
+</code></pre>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;log&quot;
+    &quot;net&quot;
+)
+
+func main() {
+    //客户端主动连接服务器
+    conn, err := net.Dial(&quot;tcp&quot;, &quot;127.0.0.1:8000&quot;)
+    if err != nil {
+        log.Fatal(err) //log.Fatal()会产生panic
+        return
+    }
+
+    defer conn.Close() //关闭
+
+    requestHeader := &quot;GET /go HTTP/1.1\r\nAccept: image/gif, image/jpeg, image/pjpeg, application/x-ms-application, application/xaml+xml, application/x-ms-xbap, */*\r\nAccept-Language: zh-Hans-CN,zh-Hans;q=0.8,en-US;q=0.5,en;q=0.3\r\nUser-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)\r\nAccept-Encoding: gzip, deflate\r\nHost: 127.0.0.1:8000\r\nConnection: Keep-Alive\r\n\r\n&quot;
+
+    //先发送请求包
+    conn.Write([]byte(requestHeader))
+
+    buf := make([]byte, 4096) //缓冲区
+
+    //阻塞等待服务器回复的数据
+    n, err := conn.Read(buf) //n代码接收数据的长度
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+    //切片截取，只截取有效数据
+    result := buf[:n]
+    fmt.Printf(&quot;接收到数据[%d]:\n%s\n&quot;, n, string(result))
+}
+
+</code></pre>
+<p>客户端响应成功：</p>
+<p><img alt="1649902027384-e3700143-37f5-4ca1-a95f-1c6694641c34.png" src="../img/PmL2BPNAYfJqW2hZ/1649902027384-e3700143-37f5-4ca1-a95f-1c6694641c34-602186.png" /></p>
+<p>响应报文格式说明:</p>
+<p>HTTP 响应报文由<u>状态行</u>、<u>响应头部</u>、<u>空行</u>、<u>响应包体</u>4个部分组成，如下图所示：</p>
+<p><strong>状态行</strong></p>
+<p>状态行由 HTTP 协议版本<u>字段</u>、<u>状态码</u>和<u>状态码的描述文本</u>3个部分组成，他们之间使用空格隔开。</p>
+<p>状态码由三位数字组成，第一位数字表示响应的类型，常用的状态码有五大类如下所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><strong><font style="color:#444444;">状态码</font></strong></th>
+<th><strong><font style="color:#444444;">含义</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><font style="color:black;">1xx</font></td>
+<td><font style="color:black;">表示服务器已接收了客户端请求，客户端可继续发送请求</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:black;">2xx</font></td>
+<td><font style="color:black;">表示服务器已成功接收到请求并进行处理</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:black;">3xx</font></td>
+<td><font style="color:black;">表示服务器要求客户端重定向</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:black;">4xx</font></td>
+<td><font style="color:black;">表示客户端的请求有非法内容</font></td>
+</tr>
+<tr>
+<td style="text-align: center;"><font style="color:black;">5xx</font></td>
+<td><font style="color:black;">表示服务器未能正常处理客户端的请求而出现意外错误</font></td>
+</tr>
+</tbody>
+</table>
+<p>常见的状态码举例：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><font style="color:#444444;">状态码</font></strong></th>
+<th><strong><font style="color:#444444;">含义</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">200 OK</td>
+<td>客户端请求成功</td>
+</tr>
+<tr>
+<td style="text-align: left;">400 Bad Request</td>
+<td>请求报文有语法错误</td>
+</tr>
+<tr>
+<td style="text-align: left;">401 Unauthorized</td>
+<td>未授权</td>
+</tr>
+<tr>
+<td style="text-align: left;">403 Forbidden</td>
+<td>服务器拒绝服务</td>
+</tr>
+<tr>
+<td style="text-align: left;">404 Not Found</td>
+<td>请求的资源不存在</td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:black;">500 Internal Server Error</font></td>
+<td><font style="color:black;">服务器内部错误</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:black;">503 Server Unavailable</font></td>
+<td><font style="color:black;">服务器临时不能处理客户端请求</font><font style="color:black;">(</font><font style="color:black;">稍后可能可以</font><font style="color:black;">)</font></td>
+</tr>
+</tbody>
+</table>
+<p><strong>响应头部</strong></p>
+<p>响应头可能包括：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><font style="color:#444444;">响应头</font></strong></th>
+<th><strong><font style="color:#444444;">含义</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><font style="color:black;">Location</font></td>
+<td><font style="color:black;">Location</font><font style="color:black;">响应报头域用于重定向接受者到一个新的位置</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:black;">Server</font></td>
+<td><font style="color:black;">Server </font><font style="color:black;">响应报头域包含了服务器用来处理请求的软件信息及其版本</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:black;">Vary</font></td>
+<td><font style="color:black;">指示不可缓存的请求头列表</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:black;">Connection</font></td>
+<td><font style="color:black;">连接方式</font></td>
+</tr>
+</tbody>
+</table>
+<p><strong>空行</strong></p>
+<p>最后一个响应头部之后是一个空行，发送回车符和换行符，通知服务器以下不再有响应头部。</p>
+<p><strong>响应包体</strong></p>
+<p>服务器返回给客户端的文本信息。</p>
+<h1 id="http_1">完整的 HTTP 编程案例</h1>
+<h2 id="http_2">HTTP 服务端</h2>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;net/http&quot;
+)
+
+//服务端编写的业务逻辑处理程序
+//hander函数： 具有func(w http.ResponseWriter, r *http.Requests)签名的函数
+//w 是给客户端回复数据，r 是读取客户端发送的数据
+func myHandler(w http.ResponseWriter, r *http.Request) {
+    fmt.Println(r.RemoteAddr, &quot;连接成功&quot;)  //r.RemoteAddr远程网络地址
+    fmt.Println(&quot;method = &quot;, r.Method) //请求方法
+    fmt.Println(&quot;url = &quot;, r.URL.Path)
+    fmt.Println(&quot;header = &quot;, r.Header)
+    fmt.Println(&quot;body = &quot;, r.Body)
+    w.Write([]byte(&quot;hello go&quot;)) //给客户端回复数据
+}
+
+func main() {
+    http.HandleFunc(&quot;/go&quot;, myHandler)
+
+    //该方法用于在指定的 TCP 网络地址 addr 进行监听，然后调用服务端处理程序来处理传入的连接请求。
+    //该方法有两个参数：第一个参数 addr 即监听地址；第二个参数表示服务端处理程序，通常为空
+    //第二个参数为空意味着服务端调用 http.DefaultServeMux 进行处理
+    http.ListenAndServe(&quot;127.0.0.1:8000&quot;, nil)
+}
+
+</code></pre>
+<p>:::info
+注：</p>
+<ul>
+<li>hander 函数： 具有 func(w http.ResponseWriter, r *http.Requests) 签名的函数</li>
+<li>handler 处理器(函数): 经过 HandlerFunc 结构包装的handler函数，它实现了 ServeHTTP 接口方法的函数。调用 handler 处理器的 ServeHTTP 方法时，即调用 handler 函数本身。</li>
+<li>handler 对象：实现了 Handler 接口 ServeHTTP 方法的结构。</li>
+</ul>
+<p>:::</p>
+<p>Go语言中<code>http package</code>包含<code>Handle</code>和<code>HandleFunc</code>两个函数。</p>
+<p>参考文章：<a href="https://www.jianshu.com/p/3b5c4fc0695c">https://www.jianshu.com/p/3b5c4fc0695c</a> 二者的区别。</p>
+<h2 id="http_3">HTTP 客户端</h2>
+<pre><code class="language-go">func main() {
+
+    //get方式请求一个资源
+    //resp, err := http.Get(&quot;http://www.baidu.com&quot;)
+    //resp, err := http.Get(&quot;http://www.neihan8.com/article/index.html&quot;)
+    resp, err := http.Get(&quot;http://127.0.0.1:8000/go&quot;)
+    if err != nil {
+        log.Println(err)
+        return
+    }
+
+    defer resp.Body.Close() //关闭
+
+    fmt.Println(&quot;header = &quot;, resp.Header)
+    fmt.Printf(&quot;resp status %s\nstatusCode %d\n&quot;, resp.Status, resp.StatusCode)
+    fmt.Printf(&quot;body type = %T\n&quot;, resp.Body)
+
+    buf := make([]byte, 2048) //切片缓冲区
+    var tmp string
+
+    for {
+        n, err := resp.Body.Read(buf) //读取body包内容
+        if err != nil &amp;&amp; err != io.EOF {
+            fmt.Println(err)
+            return
+        }
+
+        if n == 0 {
+            fmt.Println(&quot;读取内容结束&quot;)
+            break
+        }
+        tmp += string(buf[:n]) //累加读取的内容
+    }
+
+    fmt.Println(&quot;buf = &quot;, string(tmp))
+}
+
+</code></pre>
+<blockquote>
+<p>更新: 2022-06-05 22:44:05<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/ym5t99">https://www.yuque.com/xiaoshan_wgo/codingnotes/ym5t99</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

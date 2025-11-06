@@ -1,0 +1,4357 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%AC%94_%E9%9D%A2%E8%AF%95/%E4%BA%8C%E6%89%8B%E8%B5%84%E6%96%99%E9%9D%A2%E7%BB%8F%E5%90%88%E9%9B%86%E6%95%B4%E7%90%86/Golang%E4%BB%A3%E7%A0%81%E9%A2%98-Github%E6%95%B4%E7%90%86/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Golang 代码题 - Github 整理 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#golang-github" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Golang 代码题 - Github 整理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 下面这段代码的输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 下面这段代码的输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      解析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 下段代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 下段代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      解析:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 下面代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 下面代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      解析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 下面这段代码有什么错误吗？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 下面这段代码有什么错误吗？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      解析
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 下面几段代码能否通过编译，如果能，输出什么?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 下面能否通过编译?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-p-name" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 通过指针变量 p 访问其成员变量 name，有哪几种方式？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 通过指针变量 p 访问其成员变量 name，有哪几种方式？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 关于字符串连接，下面语法正确的是？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-iota" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 关于iota，下面代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 关于iota，下面代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 下面赋值正确的是?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 下面赋值正确的是?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. 关于channel，下面语法正确的是?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. 关于channel，下面语法正确的是?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      12. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      13. 下面选择哪个？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. 下面选择哪个？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      14. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="14. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.下面代码输出什么？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      16. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-cap" class="md-nav__link">
+    <span class="md-ellipsis">
+      17. 下列哪个类型可以使用 cap()函数？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="17. 下列哪个类型可以使用 cap()函数？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      18. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="18. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    <span class="md-ellipsis">
+      19. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="19. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20" class="md-nav__link">
+    <span class="md-ellipsis">
+      20. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      21. 定义一个全局字符串变量，下列正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21. 定义一个全局字符串变量，下列正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      22. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="22. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      23. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="23. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      24. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="24. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      25. 关于可变参数的函数调用正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="25. 关于可变参数的函数调用正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-yes-nil" class="md-nav__link">
+    <span class="md-ellipsis">
+      26. 下列代码中下划线处可填入哪个变量会打印"yes nil"？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="26. 下列代码中下划线处可填入哪个变量会打印&#34;yes nil&#34;？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      27. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="27. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-abc" class="md-nav__link">
+    <span class="md-ellipsis">
+      28. 切片a,b,c的容量分别是多少？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="28. 切片a,b,c的容量分别是多少？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      29. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="29. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-f1f2f3" class="md-nav__link">
+    <span class="md-ellipsis">
+      30. 函数 f1(),f2(),f3()分别返回什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="30. 函数 f1(),f2(),f3()分别返回什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      31. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="31. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      输出
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      32. 下面的两个切片声明中有什么区别？哪个更可取？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="32. 下面的两个切片声明中有什么区别？哪个更可取？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-abcd" class="md-nav__link">
+    <span class="md-ellipsis">
+      33. A,B,C,D那个有语法错误？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="33. A,B,C,D那个有语法错误？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      34. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="34. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      35. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="35. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" class="md-nav__link">
+    <span class="md-ellipsis">
+      36. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="36. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37" class="md-nav__link">
+    <span class="md-ellipsis">
+      37. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="37. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38" class="md-nav__link">
+    <span class="md-ellipsis">
+      38. 下面代码是否可以编译通过？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="38. 下面代码是否可以编译通过？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39" class="md-nav__link">
+    <span class="md-ellipsis">
+      39. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="39. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      39. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="39. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      41. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="41. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      42. 下列代码是否可以编译通过？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="42. 下列代码是否可以编译通过？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+      正确写法
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      43. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="43. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      44. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="44. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      45. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="45. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+      解决方案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      46. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="46. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47" class="md-nav__link">
+    <span class="md-ellipsis">
+      47. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="47. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" class="md-nav__link">
+    <span class="md-ellipsis">
+      48. 下面代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="48. 下面代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" class="md-nav__link">
+    <span class="md-ellipsis">
+      49. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="49. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#50" class="md-nav__link">
+    <span class="md-ellipsis">
+      50. 关于协程，下列说法正确的有？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="50. 关于协程，下列说法正确的有？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      51.关于循环语句，下面说法正确的有？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="51.关于循环语句，下面说法正确的有？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      52. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="52. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      53. .关于switch语句，下面说法正确的有?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="53. .关于switch语句，下面说法正确的有?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-add" class="md-nav__link">
+    <span class="md-ellipsis">
+      54. 下列Add函数定义正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="54. 下列Add函数定义正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-bool-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      55. 关于 bool 变量 b 的赋值，下面错误的用法是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="55. 关于 bool 变量 b 的赋值，下面错误的用法是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56" class="md-nav__link">
+    <span class="md-ellipsis">
+      56. 关于变量的自增和自减操作，下面语句正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="56. 关于变量的自增和自减操作，下面语句正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-getpodaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      56. 关于GetPodAction定义，下面赋值正确的是
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="56. 关于GetPodAction定义，下面赋值正确的是">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58" class="md-nav__link">
+    <span class="md-ellipsis">
+      58. 关于整型切片的初始化，下面正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="58. 关于整型切片的初始化，下面正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#59" class="md-nav__link">
+    <span class="md-ellipsis">
+      59. 下列代码是否会触发异常？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="59. 下列代码是否会触发异常？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#60-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      60. 关于channel的特性，下面说法正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="60. 关于channel的特性，下面说法正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      61. 下列代码有什么问题？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="61. 下列代码有什么问题？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      62. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="62. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      63. 关于无缓冲和有冲突的channel，下面说法正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="63. 关于无缓冲和有冲突的channel，下面说法正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      64. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="64. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-select" class="md-nav__link">
+    <span class="md-ellipsis">
+      65. 关于select机制，下面说法正确的是?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="65. 关于select机制，下面说法正确的是?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      66. 下列代码有什么问题？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="66. 下列代码有什么问题？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_68" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      67. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="67. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_69" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      68. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="68. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_70" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#69" class="md-nav__link">
+    <span class="md-ellipsis">
+      69. 下列代码输出什么？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="69. 下列代码输出什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_71" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#70" class="md-nav__link">
+    <span class="md-ellipsis">
+      70. 下列代码有什么问题？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="70. 下列代码有什么问题？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_72" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      71. 下列函数能否正确输出?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="71. 下列函数能否正确输出?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_73" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      72. 下列代码是否正确?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="72. 下列代码是否正确?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_74" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_75" class="md-nav__link">
+    <span class="md-ellipsis">
+      修复
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      73. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="73. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_76" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_77" class="md-nav__link">
+    <span class="md-ellipsis">
+      修复
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      74. 关于 channel 下面描述正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="74. 关于 channel 下面描述正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_78" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      75. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="75. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_79" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76-panic" class="md-nav__link">
+    <span class="md-ellipsis">
+      76. 下列哪一行会panic?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="76. 下列哪一行会panic?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_80" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77-panic" class="md-nav__link">
+    <span class="md-ellipsis">
+      77. 下列哪行代码会panic?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="77. 下列哪行代码会panic?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_81" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#78" class="md-nav__link">
+    <span class="md-ellipsis">
+      78. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="78. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_82" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_83" class="md-nav__link">
+    <span class="md-ellipsis">
+      修复
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#79" class="md-nav__link">
+    <span class="md-ellipsis">
+      79. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="79. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_84" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#80-panic" class="md-nav__link">
+    <span class="md-ellipsis">
+      80. 下列那行代码会panic?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="80. 下列那行代码会panic?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_85" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      81. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="81. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_86" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      82. 下列代码输出什么?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_87" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      83. 关于字符串拼接,下列正确的是?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="83. 关于字符串拼接,下列正确的是?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_88" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      84. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="84. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_89" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_90" class="md-nav__link">
+    <span class="md-ellipsis">
+      修复
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      85. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="85. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_91" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      86. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="86. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_92" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      87. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="87. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_93" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#88" class="md-nav__link">
+    <span class="md-ellipsis">
+      88. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="88. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_94" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#89" class="md-nav__link">
+    <span class="md-ellipsis">
+      89. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="89. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_95" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#90" class="md-nav__link">
+    <span class="md-ellipsis">
+      90. 下列代码有什么问题?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="90. 下列代码有什么问题?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_96" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_97" class="md-nav__link">
+    <span class="md-ellipsis">
+      修复
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      91. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="91. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_98" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      92. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="92. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_99" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      93. 下列代码输出什么?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="93. 下列代码输出什么?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_100" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_101" class="md-nav__link">
+    <span class="md-ellipsis">
+      修复
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      94. 下列代码是否可以编译通过?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="94. 下列代码是否可以编译通过?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_102" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#95-map" class="md-nav__link">
+    <span class="md-ellipsis">
+      95. 关于map，下面说法正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="95. 关于map，下面说法正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_103" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    <span class="md-ellipsis">
+      96. 关于同步锁，下面说法正确的是？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="96. 关于同步锁，下面说法正确的是？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_104" class="md-nav__link">
+    <span class="md-ellipsis">
+      答案
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="golang-github">Golang 代码题 - Github 整理</h1>
+<h3 id="1">1. 下面这段代码的输出什么?</h3>
+<pre><code class="language-go">func Test1(t *testing.T) {
+    defer func() { fmt.Println(&quot;打印前&quot;) }()
+    defer func() { fmt.Println(&quot;打印中&quot;) }()
+    defer func() { fmt.Println(&quot;打印后&quot;) }()
+    panic(&quot;触发异常&quot;)
+}
+</code></pre>
+<h4 id="_1">输出</h4>
+<blockquote>
+<p>打印后</p>
+<p>打印中</p>
+<p>打印前</p>
+<p>panic: 触发异常
+</p>
+</blockquote>
+<h4 id="_2">解析</h4>
+<blockquote>
+<p>defer 的执行顺序是先进后出,发生panic后，会先执行defer
+</p>
+</blockquote>
+<h3 id="2">2. 下段代码输出什么?</h3>
+<pre><code class="language-go">func Test2(t *testing.T) {
+    slice := []int{0, 1, 2, 3}
+    m := make(map[int]*int)
+
+    for key, val := range slice {
+        m[key] = &amp;val
+    }
+
+    for k, v := range m {
+        fmt.Printf(&quot;key: %d, value: %d \n&quot;, k, *v)
+    }
+}
+</code></pre>
+<h4 id="_3">输出</h4>
+<blockquote>
+<p>key: 0, value: 3</p>
+<p>key: 1, value: 3</p>
+<p>key: 2, value: 3</p>
+<p>key: 3, value: 3
+</p>
+</blockquote>
+<h4 id="_4">解析:</h4>
+<blockquote>
+<p>for range 循环的时候会创建每个元素的副本，而不是元素的引用，<br />
+所以 m[key] = &amp;val 取的都是变量 val 的地址，所以最后 map 中的所有元素的值都是变量 val 的地址，<br />
+因为最后 val 被赋值为3，所有输出都是3.
+</p>
+</blockquote>
+<h3 id="3">3. 下面代码输出什么?</h3>
+<pre><code class="language-go">func Test3(t *testing.T) {
+    i := make([]int, 5)
+    i = append(i, 1, 2, 3)
+    fmt.Println(i)
+
+    j := make([]int, 0)
+    j = append(j, 1, 2, 3, 4)
+    fmt.Println(j)
+}
+</code></pre>
+<h4 id="_5">输出</h4>
+<blockquote>
+<p>[0 0 0 0 0 1 2 3]</p>
+<p>[1 2 3 4]
+</p>
+</blockquote>
+<h4 id="_6">解析</h4>
+<blockquote>
+<p>make如果输入值，会默认给其初始化默认值
+</p>
+</blockquote>
+<h3 id="4">4. 下面这段代码有什么错误吗？</h3>
+<pre><code class="language-go">func funcMui(x,y int)(sum int,error){
+    return x+y,nil
+}
+</code></pre>
+<h4 id="_7">解析</h4>
+<blockquote>
+<p>第二个返回值没有命名,在函数有多个返回值时，只要有一个返回值有命名，<br />
+其他的也必须命名。如果有多个返回值必须加上括号()；<br />
+如果只有一个返回值且命名也必须加上括号()。<br />
+这里的第一个返回值有命名 sum，第二个没有命名，所以错误。
+</p>
+</blockquote>
+<h3 id="5">5. 下面几段代码能否通过编译，如果能，输出什么?</h3>
+<pre><code class="language-go">func main() {
+    list := new([]int)
+    // 编译错误
+    // new([]int) 之后的 list 是一个未设置长度的 *[]int 类型的指针
+    // 不能对未设置长度的指针执行 append 操作。
+    list = append(list, 1)
+    fmt.Println(list)
+
+    s1 := []int{1, 2, 3}
+    s2 := []int{4, 5}
+    // 编译错误，s2需要展开
+    s1 = append(s1, s2)
+    fmt.Println(s1)
+}
+</code></pre>
+<h3 id="6">6. 下面能否通过编译?</h3>
+<pre><code class="language-go">func Test7(t *testing.T) {
+    sn1 := struct {
+        age  int
+        name string
+    }{age: 11, name: &quot;qq&quot;}
+    sn2 := struct {
+        age  int
+        name string
+    }{age: 11, name: &quot;qq&quot;}
+    // true
+    if sn1 == sn2 {
+        fmt.Println(&quot;sn1 == sn2&quot;)
+    }
+
+    sm1 := struct {
+        age int
+        m   map[string]string
+    }{age: 11, m: map[string]string{&quot;a&quot;: &quot;1&quot;}}
+    sm2 := struct {
+        age int
+        m   map[string]string
+    }{age: 11, m: map[string]string{&quot;a&quot;: &quot;1&quot;}}
+    // 编译错误，含有map、slice类型的struct不能进行比较
+    if sm1 == sm2 {
+        fmt.Println(&quot;sm1 == sm2&quot;)
+    }
+}
+</code></pre>
+<h3 id="7-p-name">7. 通过指针变量 p 访问其成员变量 name，有哪几种方式？</h3>
+<p>A. p.name</p>
+<p>B. (&amp;p).name</p>
+<p>C. (*p).name</p>
+<p>D. p-&gt;name</p>
+<h4 id="_8">答案</h4>
+<blockquote>
+<p>AC
+</p>
+</blockquote>
+<h3 id="8">8. 关于字符串连接，下面语法正确的是？</h3>
+<p>A. str := 'abc' + '123'</p>
+<p>B. str := "abc" + "123"</p>
+<p>C. str := '123' + "abc"</p>
+<p>D. fmt.Sprintf("abc%d", 123)</p>
+<h3 id="_9">答案</h3>
+<blockquote>
+<p>BD</p>
+<p>golang单引号''中的内容表示单个字符（rune）,反引号``中的内容表示不可转义的字符串
+</p>
+</blockquote>
+<h3 id="9-iota">9. 关于iota，下面代码输出什么?</h3>
+<pre><code class="language-go">func Test10(t *testing.T) {
+    const (
+        x = iota
+        _
+        y
+        z = &quot;pi&quot;
+        k
+        p = iota
+        q
+    )
+    fmt.Println(x, y, z, k, p, q)
+}
+</code></pre>
+<h4 id="_10">输出</h4>
+<blockquote>
+<p>0 2 pi pi 5 6
+</p>
+</blockquote>
+<h3 id="10">10. 下面赋值正确的是?</h3>
+<p>A. var x = nil</p>
+<p>B. var x interface{} = nil</p>
+<p>C. var x string = nil</p>
+<p>D. var x error = nil</p>
+<h4 id="_11">答案</h4>
+<blockquote>
+<p>BD
+</p>
+</blockquote>
+<h3 id="11-channel">11. 关于channel，下面语法正确的是?</h3>
+<p>A. var ch chan int</p>
+<p>B. ch := make(chan int)</p>
+<p>C. &lt;- ch</p>
+<p>D. ch &lt;-</p>
+<h4 id="_12">答案</h4>
+<blockquote>
+<p>ABC</p>
+<p>写 chan 时，&lt;- 右端必须要有值
+</p>
+</blockquote>
+<h3 id="12">12. 下面代码输出什么？</h3>
+<pre><code class="language-go">func hello(num ...int) {
+    num[0] = 18
+}
+
+func Test13(t *testing.T) {
+    i := []int{5, 6, 7}
+    hello(i...)
+    fmt.Println(i[0])
+}
+</code></pre>
+<p>A.18</p>
+<p>B.5</p>
+<p>C.Compilation error</p>
+<h4 id="_13">答案</h4>
+<blockquote>
+<p>A</p>
+<p>可变参数是指针传递
+</p>
+</blockquote>
+<h3 id="13">13. 下面选择哪个？</h3>
+<pre><code class="language-go">func main() {  
+    a := 5
+    b := 8.1
+    fmt.Println(a + b)
+}
+</code></pre>
+<p>A.13.1</p>
+<p>B.13</p>
+<p>C.compilation error</p>
+<h4 id="_14">答案</h4>
+<blockquote>
+<p>C</p>
+<p>整形与浮点形不能相加
+</p>
+</blockquote>
+<h3 id="14">14. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test15(t *testing.T) {
+    a := [5]int{1, 2, 3, 4, 5}
+    s := a[3:4:4]
+    fmt.Println(s[0])
+}
+</code></pre>
+<p>A.3</p>
+<p>B.4</p>
+<p>C.compilation error</p>
+<h4 id="_15">答案</h4>
+<blockquote>
+<p>B</p>
+<p>a[3:4][0] = 4 切片的长度是1，容量是2</p>
+<p>a[4:4][0] 报越界错误</p>
+<p>a[3:4:4][0] = 4 切片的长度是1，容量是1，最后一个4表示切片容量的最大坐标(不含)
+</p>
+</blockquote>
+<h3 id="15">15.下面代码输出什么？</h3>
+<pre><code class="language-go">package main
+import &quot;fmt&quot;
+func main(){
+    var a uint = 0
+    var b uint = 1
+    c := a - b
+    fmt.Println(c)
+} //补码，64位，2^64-1
+</code></pre>
+<h3 id="16">16. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test16(t *testing.T) {
+    a := [2]int{5, 6}
+    b := [3]int{5, 6}
+    if a == b {
+        fmt.Println(&quot;equal&quot;)
+    } else {
+        fmt.Println(&quot;not equal&quot;)
+    }
+}
+</code></pre>
+<p>A. compilation error</p>
+<p>B. equal</p>
+<p>C. not equal</p>
+<h4 id="_16">答案</h4>
+<blockquote>
+<p>A 编译错误</p>
+<p>对于数组而言，一个数组是由数组中的值和数组的长度两部分组成的，如果两个数组长度不同，那么两个数组是属于<br />
+不同类型的，是不能进行比较的
+</p>
+</blockquote>
+<h3 id="17-cap">17. 下列哪个类型可以使用 cap()函数？</h3>
+<p>A. array</p>
+<p>B. slice</p>
+<p>C. map</p>
+<p>D. channel</p>
+<h4 id="_17">答案</h4>
+<blockquote>
+<p>A B D<br />
+array 返回数组的元素个数；<br />
+slice 返回 slice 的最大容量；<br />
+channel 返回 channel 的容量；
+</p>
+</blockquote>
+<h3 id="18">18. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test18(t *testing.T) {
+    var i interface{}
+    if i == nil {
+        fmt.Println(&quot;nil&quot;)
+        return
+    }
+    fmt.Println(&quot;not nil&quot;)
+}
+</code></pre>
+<p>A. nil</p>
+<p>B. not nil</p>
+<p>C. compilation error</p>
+<h4 id="_18">答案</h4>
+<blockquote>
+<p>A</p>
+<p>当且仅当接口的动态值和动态类型都为 nil 时，接口类型值才为 nil。
+</p>
+</blockquote>
+<h3 id="19">19. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test19(t *testing.T) {
+    s := make(map[string]int)
+    delete(s, &quot;h&quot;)
+    fmt.Println(s[&quot;h&quot;])
+}
+</code></pre>
+<p>A. runtime panic</p>
+<p>B. 0</p>
+<p>C. compilation error</p>
+<h4 id="_19">答案</h4>
+<blockquote>
+<p>B</p>
+<p>删除 map 不存在的键值对时，不会报错，相当于没有任何作用；<br />
+获取不存在的键值对时，返回值类型对应的零值，所以返回 0</p>
+<p>可以使用if v, ok := s["h"]; ok {}的方式判断键值对是否存在
+</p>
+</blockquote>
+<h3 id="20">20. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test20(t *testing.T) {
+    i := -5
+    j := +5
+    fmt.Printf(&quot;%+d %+d&quot;, i, j)
+}
+</code></pre>
+<p>A. -5 +5</p>
+<p>B. +5 +5</p>
+<p>C. 0  0</p>
+<h4 id="_20">答案</h4>
+<blockquote>
+<p>A</p>
+<p>%+d 是带符号输出
+</p>
+</blockquote>
+<h3 id="21">21. 定义一个全局字符串变量，下列正确的是？</h3>
+<p>A. var str string</p>
+<p>B. str := ""</p>
+<p>C. str = ""</p>
+<p>D. var str = ""</p>
+<h4 id="_21">答案</h4>
+<blockquote>
+<p>A D</p>
+<p>B 只支持局部变量声明；C 是赋值，str 必须在这之前已经声明；
+</p>
+</blockquote>
+<h3 id="22">22. 下列代码输出什么？</h3>
+<pre><code class="language-go">func f(i int) {
+    fmt.Println(i)
+}
+func Test22(t *testing.T) {
+    i := 5
+    defer f(i)
+    i = i + 10
+}
+</code></pre>
+<h4 id="_22">输出</h4>
+<blockquote>
+<p>5</p>
+<p>f() 函数的参数在执行 defer 语句的时候会保存一份副本，<br />
+在实际调用 f() 函数时用，所以是 5.
+</p>
+</blockquote>
+<h3 id="23">23. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test23(t *testing.T) {
+    str := &quot;hello&quot;
+    str[0] = 'x'
+    fmt.Println(str)
+}
+</code></pre>
+<p>A. hello</p>
+<p>B. xello</p>
+<p>C. compilation error</p>
+<h4 id="_23">答案</h4>
+<blockquote>
+<p>C 编译错误</p>
+<p>Go 语言中的字符串是只读的
+</p>
+</blockquote>
+<h3 id="24">24. 下面代码输出什么？</h3>
+<pre><code class="language-go">func inc(p *int) int {
+    *p++
+    return *p
+}
+
+func Test24(t *testing.T) {
+    p := 1
+    inc(&amp;p)
+    fmt.Println(p)
+}
+</code></pre>
+<p>A. 1</p>
+<p>B. 2</p>
+<p>C. 3</p>
+<h4 id="_24">答案</h4>
+<blockquote>
+<p>B
+</p>
+</blockquote>
+<h3 id="25">25. 关于可变参数的函数调用正确的是？</h3>
+<pre><code class="language-go">func add(args ...int) int {
+    sum := 0
+    for _, arg := range args {
+        sum += arg
+    }    
+    return sum
+}
+</code></pre>
+<p>A. add(1, 2)</p>
+<p>B. add(1, 3, 7)</p>
+<p>C. add([]int{1, 2})</p>
+<p>D. add([]int{1, 3, 7}…)</p>
+<h4 id="_25">答案</h4>
+<blockquote>
+<p>A B D
+</p>
+</blockquote>
+<h3 id="26-yes-nil">26. 下列代码中下划线处可填入哪个变量会打印"yes nil"？</h3>
+<pre><code class="language-go">func Test26(t *testing.T) {
+    var s1 []int
+    var s2 = []int{}
+    if ___ == nil {
+        fmt.Println(&quot;yes nil&quot;)
+    } else {
+        fmt.Println(&quot;no nil&quot;)
+    }
+}
+</code></pre>
+<p>A. s1</p>
+<p>B. s2</p>
+<p>C. s1、s2 都可以</p>
+<h4 id="_26">答案</h4>
+<blockquote>
+<p>A</p>
+<p>nil 切片和空切片。nil 切片和 nil 相等，一般用来表示一个不存在的切片；<br />
+空切片和 nil 不相等，表示一个空的集合
+</p>
+</blockquote>
+<h3 id="27">27. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test27(t *testing.T) {
+    i := 65 
+    fmt.Println(string(i))
+}
+</code></pre>
+<p>A. A</p>
+<p>B. 65</p>
+<p>C. compilation error</p>
+<h4 id="_27">答案</h4>
+<blockquote>
+<p>A</p>
+<p>UTF-8 编码中，十进制数字 65 对应的符号是 A
+</p>
+</blockquote>
+<h3 id="28-abc">28. 切片a,b,c的容量分别是多少？</h3>
+<pre><code class="language-go">func Test28(t *testing.T) {
+    s := [3]int{1, 2, 3}
+    a := s[:0]
+    b := s[:2]
+    c := s[1:2:cap(s)]
+    fmt.Println(cap(a))
+    fmt.Println(cap(b))
+    fmt.Println(cap(c))
+}
+</code></pre>
+<h4 id="_28">输出</h4>
+<blockquote>
+<p>3 3 2</p>
+<p>操作符 [i:j:k]，k 主要是用来限制切片的容量，<br />
+但是不能大于数组的长度 ，截取得到的切片长度和容量计算方法是 j-i、k-i
+</p>
+</blockquote>
+<h3 id="29">29. 下面代码输出什么？</h3>
+<pre><code class="language-go">func increaseA() int {
+    var i int
+    defer func() {
+        i++ }()
+    return i
+}
+func increaseB() (r int) {
+    defer func() {
+        r++ }()
+    return r
+}
+func Test29(t *testing.T) {
+    fmt.Println(increaseA())
+    fmt.Println(increaseB())
+}
+</code></pre>
+<h4 id="_29">输出</h4>
+<blockquote>
+<p>0 1
+</p>
+</blockquote>
+<h3 id="30-f1f2f3">30. 函数 f1(),f2(),f3()分别返回什么？</h3>
+<pre><code class="language-go">func f1() (r int) { 
+    defer func() {      
+        r++ 
+    }()
+    return 0
+}
+func f2() (r int) {
+    t := 5  defer func() {
+        t = t + 5   
+    }() 
+    return t
+}
+func f3() (r int) { 
+    defer func(r int) {
+        r = r + 5   
+    }(r)    
+    return 1
+}
+func Test30(t *testing.T) {
+    fmt.Println(f1())
+    fmt.Println(f2())
+    fmt.Println(f3())
+}
+</code></pre>
+<h4 id="_30">输出</h4>
+<blockquote>
+<p>1 5 1
+</p>
+</blockquote>
+<h3 id="31">31. 下面代码输出什么？</h3>
+<pre><code class="language-go">type Person struct {
+    age int
+}
+func Test31(t *testing.T) {
+    person := &amp;Person{28}
+    // 1    
+    defer fmt.Println(person.age)
+    // 2
+    defer func(p *Person) {
+        fmt.Println(p.age)
+    }(person)
+    // 3
+    defer func() {
+        fmt.Println(person.age)
+    }()
+    person.age = 29
+}
+</code></pre>
+<h4 id="_31">输出</h4>
+<blockquote>
+<p>29 29 28</p>
+<p>1.person.age 此时是将 28 当做 defer 函数的参数，会把 28 缓存在栈中，等到最后执行该 defer 语句的时候取出，即输出 28；</p>
+<p>2.defer 缓存的是结构体 Person{28} 的地址，最终 Person{28} 的 age 被重新赋值为 29，所以 defer 语句最后执行的时候，依靠缓存的地址取出的 age 便是 29，即输出 29；</p>
+<p>3.闭包引用，输出 29；
+</p>
+</blockquote>
+<h3 id="32">32. 下面的两个切片声明中有什么区别？哪个更可取？</h3>
+<p>A. var a []int</p>
+<p>B. a := []int{}</p>
+<h4 id="_32">答案</h4>
+<blockquote>
+<p>A</p>
+<p>A 声明的是 nil 切片；B 声明的是长度和容量都为 0 的空切片。<br />
+A的声明不会分配内存，优先选择
+</p>
+</blockquote>
+<h3 id="33-abcd">33. A,B,C,D那个有语法错误？</h3>
+<pre><code class="language-go">type S struct {}
+func m(x interface{}) {
+}
+func g(x *interface{}) {
+}
+func Test33(t *testing.T) {
+    s := S{}
+    p := &amp;s m(s)
+    //A
+    g(s)
+    //B
+    m(p)
+    //C
+    g(p)
+    //D
+}
+</code></pre>
+<h4 id="_33">答案</h4>
+<blockquote>
+<p>B D 会编译错误</p>
+<p>函数参数为 interface{} 时可以接收任何类型的参数，包括用户自定义类型等，<br />
+即使是接收指针类型也用 interface{}，而不是使用 *interface{}。<br />
+永远不要使用一个指针指向一个接口类型，因为它已经是一个指针。
+</p>
+</blockquote>
+<h3 id="34">34. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test34(t *testing.T) {
+    s1 := []int{1, 2, 3}
+    s2 := s1[1:]
+    s2[1] = 4
+    fmt.Println(s1)
+    s2 = append(s2, 5, 6, 7)
+    fmt.Println(s1)
+}
+</code></pre>
+<h4 id="_34">答案</h4>
+<blockquote>
+<p>[1 2 4]</p>
+<p>[1 2 4]</p>
+<p>golang 中切片底层的数据结构是数组。当使用 s1[1:] 获得切片 s2，和 s1 共享同一个底层数组<br />
+这会导致 s2[1] = 4 语句影响 s1。<br />
+而 append 操作会导致底层数组扩容，生成新的数组，因此追加数据后的 s2 不会影响 s1
+</p>
+</blockquote>
+<h3 id="35">35. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test35(t *testing.T) {
+    if a := 1; false {
+
+    } else if b := 2; false {
+
+    } else {
+        println(a, b)
+    }
+}
+</code></pre>
+<h4 id="_35">答案</h4>
+<blockquote>
+<p>1 2
+</p>
+</blockquote>
+<h3 id="36">36. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test36(t *testing.T){
+    a := 1
+    b := 2
+    defer calc(&quot;A&quot;, a, calc(&quot;10&quot;, a, b))
+    a = 0
+    defer calc(&quot;B&quot;, a, calc(&quot;20&quot;, a, b))
+    b = 1
+}
+func calc(index string, a, b int) int {
+    ret := a + b
+    fmt.Println(index, a, b, ret)
+    return ret
+}
+</code></pre>
+<h4 id="_36">答案</h4>
+<blockquote>
+<p>10 1 2 3</p>
+<p>20 0 2 2</p>
+<p>B 0 2 2</p>
+<p>A 1 3 4
+</p>
+</blockquote>
+<h3 id="37">37. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test37(t *testing.T) {
+    m := map[int]string{0: &quot;zero&quot;, 1: &quot;one&quot;}
+    for k, v := range m {
+        fmt.Println(k, v)
+    }
+}
+</code></pre>
+<h4 id="_37">答案</h4>
+<blockquote>
+<p>0 zero</p>
+<p>1 one</p>
+<p>或者</p>
+<p>1 one</p>
+<p>0 zero</p>
+<p>map输出是无序的
+</p>
+</blockquote>
+<h3 id="38">38. 下面代码是否可以编译通过？</h3>
+<pre><code class="language-go">type People interface {
+    Speak(string) string
+}
+type Student struct{}
+func (stu *Student) Speak(think string) {
+    fmt.Println(think)
+}
+func main() {
+    var peo People = Student{}
+    think := &quot;speak&quot;
+    fmt.Println(peo.Speak(think))
+}
+</code></pre>
+<h4 id="_38">答案</h4>
+<blockquote>
+<p>不能编译通过，因为是 *Student 实现了Speak，并不是 值类型的Student，<br />
+但是如果是 Student 类型实现了Speak方法，那么用 值类型的<code>Student{}</code> 或是指针类型的<code>&amp;Student{}</code>都可以访问到该方法
+</p>
+</blockquote>
+<h3 id="39">39. 下面代码输出什么？</h3>
+<pre><code class="language-go">const (
+    a = iota
+    b = iota
+)
+const (
+    name = &quot;name&quot;
+    c    = iota 
+    d    = iota
+)
+func Test39(t *testing.T) {
+    fmt.Println(a)
+    fmt.Println(b)
+    fmt.Println(c)
+    fmt.Println(d)
+}
+</code></pre>
+<h4 id="_39">答案</h4>
+<blockquote>
+<p>0 1 1 2</p>
+<p>iota 在 const 关键字出现时将被重置为0，const中每新增一行常量声明将使 iota 计数一次。
+</p>
+</blockquote>
+<h3 id="39_1">39. 下面代码输出什么？</h3>
+<pre><code class="language-go">type People interface { 
+    Show()
+}
+type Student struct{}
+func (stu *Student) Show() {
+}
+func Test40(t *testing.T) {
+    var s *Student
+    if s == nil {
+        fmt.Println(&quot;s is nil&quot;)
+    } else {
+        fmt.Println(&quot;s is not nil&quot;)
+    }
+    var p People = s
+    if p == nil {
+        fmt.Println(&quot;p is nil&quot;)
+    } else {
+        fmt.Println(&quot;p is not nil&quot;)
+    }
+}
+</code></pre>
+<h4 id="_40">答案</h4>
+<blockquote>
+<p>s is nil</p>
+<p>p is not nil</p>
+<p>当且仅当动态值和动态类型都为 nil 时，接口类型值才为 nil。上面的代码，给变量 p 赋值之后，<br />
+p 的动态值是 nil，但是动态类型却是 *Student，是一个 nil 指针，所以相等条件不成立。
+</p>
+</blockquote>
+<h3 id="41">41. 下列代码输出什么？</h3>
+<pre><code class="language-go">type Direction intconst (
+    North Direction = iota
+    East
+    South
+    West
+)
+func (d Direction) String() string {
+    return [...]string{&quot;North&quot;, &quot;East&quot;, &quot;South&quot;, &quot;West&quot;}[d]
+}
+func Test41(t *testing.T) {
+    fmt.Println(South)
+}
+</code></pre>
+<h4 id="_41">答案</h4>
+<blockquote>
+<p>South
+</p>
+</blockquote>
+<h3 id="42">42. 下列代码是否可以编译通过？</h3>
+<pre><code class="language-go">type Square struct {
+    x, y int
+}
+var m = map[string]Square{
+    &quot;foo&quot;: Square{2, 3},
+}
+func Test42(t *testing.T) {
+    m[&quot;foo&quot;].x = 1
+    fmt.Println(m[&quot;foo&quot;].x)
+}
+</code></pre>
+<h4 id="_42">答案</h4>
+<blockquote>
+<p>编译失败， m["foo"].x = 4 报错</p>
+<p>对于类似 X = Y的赋值操作，必须知道 X 的地址，才能够将 Y 的值赋给 X，<br />
+但 go 中的 map 的 value 本身是不可寻址的
+</p>
+</blockquote>
+<h4 id="_43">正确写法</h4>
+<p>有两种解决方法：</p>
+<p>第一种：</p>
+<pre><code class="language-go">square := m[&quot;foo&quot;]
+square.x = 1
+m[&quot;foo&quot;] = square
+</code></pre>
+<p>第二种：</p>
+<pre><code class="language-go">var m = map[string]*Math{
+    &quot;foo&quot;: &amp;Math{2, 3},
+}
+m[&quot;foo&quot;].x = 1
+</code></pre>
+<h3 id="43">43. 下面代码输出什么？</h3>
+<pre><code class="language-go">var p *intfunc foo() (*int, error) {    var i int = 5   return &amp;i, nil}func bar() { //use p fmt.Println(*p)}func Test43(t *testing.T) { p, err := foo() if err != nil {     fmt.Println(err)        return  }   bar()   fmt.Println(*p)}
+</code></pre>
+<h4 id="_44">答案</h4>
+<blockquote>
+<p>bar 函数会发生panic，空指针异常</p>
+<p>因为 err 前面没有声明，所以 p, err := foo() 中的 p 是重新声明的局部变量，而不是我们在前面声明的全局变量 p
+</p>
+</blockquote>
+<h3 id="44">44. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test44(t *testing.T) {
+    v := []int{1, 2, 3}
+    for i := range v {
+        v = append(v, i)
+        fmt.Println(v)
+    }
+}
+</code></pre>
+<h4 id="_45">答案</h4>
+<blockquote>
+<p>[1 2 3 0]</p>
+<p>[1 2 3 0 1]</p>
+<p>[1 2 3 0 1 2]
+</p>
+</blockquote>
+<h3 id="45">45. 下面代码输出什么？</h3>
+<pre><code class="language-go">func Test45(t *testing.T) {
+    var m = [...]int{1, 2, 3}
+    for i, v := range m {
+        go func() {
+            fmt.Println(i, v)
+        }()
+    }
+    time.Sleep(time.Second * 1)
+}
+</code></pre>
+<h4 id="_46">答案</h4>
+<blockquote>
+<p>2 3</p>
+<p>2 3</p>
+<p>2 3</p>
+<p>for range 使用短变量声明(:=)的形式迭代变量，<br />
+需要注意的是，变量 i、v 在每次循环体中都会被重用，而不是重新声明。
+</p>
+</blockquote>
+<h4 id="_47">解决方案</h4>
+<blockquote>
+<p>有两种解决方式
+</p>
+</blockquote>
+<p>第一种(推荐)</p>
+<pre><code class="language-go">for i, v := range m {
+    go func(i,v int) {
+        fmt.Println(i, v)
+    }(i,v)
+}
+</code></pre>
+<p>第二种</p>
+<pre><code class="language-go">for i, v := range m {
+    i := i
+    // 这里的 := 会重新声明变量，而不是重用
+    v := v
+    go func() {
+        fmt.Println(i, v)
+    }()
+}
+</code></pre>
+<h3 id="46">46. 下面代码输出什么？</h3>
+<pre><code class="language-go">func f46(n int) (r int) {
+    defer func() {
+        r += n
+        recover()
+    }() 
+    var f func()
+    defer f()
+    f = func() {
+        r += 2
+    }
+    return n + 1
+}
+func Test46(t *testing.T) {
+    fmt.Println(f46(3))
+}
+</code></pre>
+<h4 id="_48">答案</h4>
+<blockquote>
+<p>7
+</p>
+</blockquote>
+<h3 id="47">47. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test47(t *testing.T) {
+    var a = [5]int{1, 2, 3, 4, 5}
+    var r [5]int
+    for i, v := range a {
+        if i == 0 {
+            a[1] = 12
+            a[2] = 13
+        }
+        r[i] = v
+    }
+    fmt.Println(&quot;r = &quot;, r)
+    fmt.Println(&quot;a = &quot;, a)
+}
+</code></pre>
+<h4 id="_49">答案</h4>
+<blockquote>
+<p>r =  [1 2 3 4 5]</p>
+<p>a =  [1 12 13 4 5]
+</p>
+</blockquote>
+<h3 id="48">48. 下面代码输出什么？</h3>
+<pre><code class="language-go">func change(s ...int) {
+    s = append(s, 3)
+}
+func Test48(t *testing.T) {
+    slice := make([]int, 5, 5)
+    slice[0] = 1
+    slice[1] = 2
+    // 1
+    change(slice...)
+    fmt.Println(slice)
+    // 2
+    change(slice[0:2]...)
+    fmt.Println(slice)
+}
+</code></pre>
+<h4 id="_50">答案</h4>
+<blockquote>
+<p>[1 2 0 0 0]</p>
+<p>[1 2 3 0 0]</p>
+<p>1.change函数内部append时超出了s的容量，生成了新的底层数组的切片，<br />
+未对change函数外的切片产生影响。</p>
+<p>2.change函数收到的切片长度小于容量，append没有重新生成底层数组，<br />
+直接修改了底层数组对应位置的值，影响到了change函数外的切片。
+</p>
+</blockquote>
+<h3 id="49">49. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test49(t *testing.T) {
+    var m = map[string]int{
+        &quot;A&quot;: 21,
+        &quot;B&quot;: 22,
+        &quot;C&quot;: 23,
+    }
+    counter := 0
+    for k, v := range m {
+        if counter == 0 {
+            delete(m, &quot;A&quot;)
+        }
+        counter++
+        fmt.Println(k, v)
+    }
+    fmt.Println(&quot;counter is &quot;, counter)
+}
+</code></pre>
+<h4 id="_51">答案</h4>
+<blockquote>
+<p>counter is 2 或者 counter is 3</p>
+<p>for range map 是无序的，若先遍历到A则counter是3，否则是2
+</p>
+</blockquote>
+<h3 id="50">50. 关于协程，下列说法正确的有？</h3>
+<p>A. 协程和线程都可以实现程序的并发执行；</p>
+<p>B. 线程比协程更轻量级；</p>
+<p>C. 协程不存在死锁问题；</p>
+<p>D. 通过 channel 来进行协程间的通信；</p>
+<h4 id="_52">答案</h4>
+<blockquote>
+<p>A D
+</p>
+</blockquote>
+<h3 id="51">51.关于循环语句，下面说法正确的有？</h3>
+<p>A. 循环语句既支持 for 关键字，也支持 while 和 do-while；</p>
+<p>B. 关键字 for 的基本使用方法与 C/C++ 中没有任何差异；</p>
+<p>C. for 循环支持 continue 和 break 来控制循环，但是它提供了一个更高级的 break，可以选择中断哪一个循环；</p>
+<p>D. for 循环不支持以逗号为间隔的多个赋值语句，必须使用平行赋值的方式来初始化多个变量；</p>
+<h4 id="_53">答案</h4>
+<blockquote>
+<p>C D
+</p>
+</blockquote>
+<h3 id="52">52. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test52(t *testing.T) {
+    i := 1
+    s := []string{&quot;A&quot;, &quot;B&quot;, &quot;C&quot;}
+    i, s[i-1] = 2, &quot;Z&quot;
+    fmt.Printf(&quot;s: %v \n&quot;, s)
+}
+</code></pre>
+<h4 id="_54">答案</h4>
+<blockquote>
+<p>s: [Z B C]
+</p>
+</blockquote>
+<h3 id="53-switch">53. .关于switch语句，下面说法正确的有?</h3>
+<p>A. 条件表达式必须为常量或者整数；</p>
+<p>B. 单个case中，可以出现多个结果选项；</p>
+<p>C. 需要用break来明确退出一个case；</p>
+<p>D. 只有在case中明确添加fallthrough关键字，才会继续执行紧跟的下一个case；</p>
+<h4 id="_55">答案</h4>
+<blockquote>
+<p>B D
+</p>
+</blockquote>
+<h3 id="54-add">54. 下列Add函数定义正确的是？</h3>
+<pre><code class="language-go">func Test54(t *testing.T) {
+    var a Integer = 1
+    var b Integer = 2
+    var i interface{} = &amp;a
+    sum := i.(*Integer).Add(b)
+    fmt.Println(sum)
+}
+</code></pre>
+<pre><code class="language-go">//A
+type Integer intfunc (a Integer) Add(b Integer) Integer {
+    return a + b
+}
+//B
+type Integer intfunc (a Integer) Add(b *Integer) Integer {
+    return a + *b
+}
+//C
+type Integer intfunc (a *Integer) Add(b Integer) Integer {
+    return *a + b
+}
+//D
+type Integer intfunc (a *Integer) Add(b *Integer) Integer {
+    return *a + *b
+}
+</code></pre>
+<h4 id="_56">答案</h4>
+<blockquote>
+<p>A C
+</p>
+</blockquote>
+<h3 id="55-bool-b">55. 关于 bool 变量 b 的赋值，下面错误的用法是？</h3>
+<p>A. b = true</p>
+<p>B. b = 1</p>
+<p>C. b = bool(1)</p>
+<p>D. b = (1 == 2)</p>
+<h4 id="_57">答案</h4>
+<blockquote>
+<p>B C
+</p>
+</blockquote>
+<h3 id="56">56. 关于变量的自增和自减操作，下面语句正确的是？</h3>
+<p>A.</p>
+<pre><code class="language-go">i := 1i++
+</code></pre>
+<p>B.</p>
+<pre><code class="language-go">i := 1j = i++
+</code></pre>
+<p>C.</p>
+<pre><code class="language-go">i := 1++i
+</code></pre>
+<p>D.</p>
+<pre><code class="language-go">i := 1i--
+</code></pre>
+<h4 id="_58">答案</h4>
+<blockquote>
+<p>A D</p>
+<p>go 里面没有 ++i 和 --i
+</p>
+</blockquote>
+<h3 id="56-getpodaction">56. 关于GetPodAction定义，下面赋值正确的是</h3>
+<pre><code class="language-go">type Fragment interface {
+    Exec(transInfo *TransInfo) 
+    error
+}
+type GetPodAction struct {}
+func (g GetPodAction) Exec(transInfo *TransInfo) error {
+    ...        
+    return nil
+}
+</code></pre>
+<p>A. var fragment Fragment = new(GetPodAction)</p>
+<p>B. var fragment Fragment = GetPodAction</p>
+<p>C. var fragment Fragment = &amp;GetPodAction{}</p>
+<p>D. var fragment Fragment = GetPodAction{}</p>
+<h4 id="_59">答案</h4>
+<blockquote>
+<p>A C D
+</p>
+</blockquote>
+<h3 id="58">58. 关于整型切片的初始化，下面正确的是？</h3>
+<p>A. s := make([]int)</p>
+<p>B. s := make([]int, 0)</p>
+<p>C. s := make([]int, 5, 10)</p>
+<p>D. s := []int{1, 2, 3, 4, 5}</p>
+<h4 id="_60">答案</h4>
+<blockquote>
+<p>B C D
+</p>
+</blockquote>
+<h3 id="59">59. 下列代码是否会触发异常？</h3>
+<pre><code class="language-go">func Test59(t *testing.T) {
+    runtime.GOMAXPROCS(1)
+    intChan := make(chan int, 1)
+    stringChan := make(chan string, 1)
+    intChan &lt;- 1
+    stringChan &lt;- &quot;hello&quot;
+    select {
+        case value := &lt;-intChan:
+        fmt.Println(value)  
+        case value := &lt;-stringChan:
+        panic(value)
+    }
+}
+</code></pre>
+<h4 id="_61">答案</h4>
+<blockquote>
+<p>不一定，当两个chan同时有值时，select 会随机选择一个可用通道做收发操作
+</p>
+</blockquote>
+<h3 id="60-channel">60. 关于channel的特性，下面说法正确的是？</h3>
+<p>A. 给一个 nil channel 发送数据，造成永远阻塞</p>
+<p>B. 从一个 nil channel 接收数据，造成永远阻塞</p>
+<p>C. 给一个已经关闭的 channel 发送数据，引起 panic</p>
+<p>D. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值</p>
+<h4 id="_62">答案</h4>
+<blockquote>
+<p>A B C D
+</p>
+</blockquote>
+<h3 id="61">61. 下列代码有什么问题？</h3>
+<pre><code class="language-go">const i = 100
+var j = 123
+func main() {
+    fmt.Println(&amp;j, j)
+    fmt.Println(&amp;i, i)
+}
+</code></pre>
+<h4 id="_63">答案</h4>
+<blockquote>
+<p>Go语言中，常量无法寻址, 是不能进行取指针操作的
+</p>
+</blockquote>
+<h3 id="62">62. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test62(t *testing.T) {
+    x := []string{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;}
+    for v := range x {
+        fmt.Print(v)
+    }
+}
+</code></pre>
+<h4 id="_64">答案</h4>
+<blockquote>
+<p>012</p>
+<p>range 一个返回值时，这个值是下标，两个值时，第一个是下标，第二个是值，当 x 为 map时，第一个是key，第二个是value
+</p>
+</blockquote>
+<h3 id="63-channel">63. 关于无缓冲和有冲突的channel，下面说法正确的是？</h3>
+<p>A. 无缓冲的channel是默认的缓冲为1的channel；</p>
+<p>B. 无缓冲的channel和有缓冲的channel都是同步的；</p>
+<p>C. 无缓冲的channel和有缓冲的channel都是非同步的；</p>
+<p>D. 无缓冲的channel是同步的，而有缓冲的channel是非同步的；</p>
+<h4 id="_65">答案</h4>
+<blockquote>
+<p>D
+</p>
+</blockquote>
+<h3 id="64">64. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Foo(x interface{}) {
+    if x == nil {
+        fmt.Println(&quot;empty interface&quot;)
+        return
+    }
+    fmt.Println(&quot;non-empty interface&quot;)
+}
+func Test64(t *testing.T) {
+    var x *int = nil
+    Foo(x)
+}
+</code></pre>
+<h4 id="_66">答案</h4>
+<blockquote>
+<p>non-empty interface</p>
+<p>接口除了有静态类型，还有动态类型和动态值，<br />
+当且仅当动态值和动态类型都为 nil 时，接口类型值才为 nil。<br />
+这里的 x 的动态类型是 *int，所以 x 不为 nil
+</p>
+</blockquote>
+<h3 id="65-select">65. 关于select机制，下面说法正确的是?</h3>
+<p>A. select机制用来处理异步IO问题；</p>
+<p>B. select机制最大的一条限制就是每个case语句里必须是一个IO操作；</p>
+<p>C. golang在语言级别支持select关键字；</p>
+<p>D. select关键字的用法与switch语句非常类似，后面要带判断条件；</p>
+<h4 id="_67">答案</h4>
+<blockquote>
+<p>A B C
+</p>
+</blockquote>
+<h3 id="66">66. 下列代码有什么问题？</h3>
+<pre><code class="language-go">func Stop(stop &lt;-chan bool) {
+    close(stop)
+}
+</code></pre>
+<h4 id="_68">答案</h4>
+<blockquote>
+<p>只可以接收数据的 channel 不可以被关闭
+</p>
+</blockquote>
+<h3 id="67">67. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test67(t *testing.T) {
+    var x = []int{2: 2, 3, 0: 1}
+    fmt.Println(x)
+}
+</code></pre>
+<h4 id="_69">答案</h4>
+<blockquote>
+<p>[1 0 2 3]
+</p>
+</blockquote>
+<h3 id="68">68. 下列代码输出什么？</h3>
+<pre><code class="language-go">func incr(p *int) int {
+    *p++
+    return *p
+}
+func Test68(t *testing.T) {
+    v := 1  incr(&amp;v)
+    fmt.Println(v)
+}
+</code></pre>
+<h4 id="_70">答案</h4>
+<blockquote>
+<p>2
+</p>
+</blockquote>
+<h3 id="69">69. 下列代码输出什么？</h3>
+<pre><code class="language-go">func Test69(t *testing.T){
+    var a = []int{1, 2, 3, 4, 5}
+    var r = make([]int, 0)
+    for i, v := range a {
+        if i == 0 {
+            a = append(a, 6, 7)
+        }
+        r = append(r, v)
+    }
+    fmt.Println(r)
+}
+</code></pre>
+<h4 id="_71">答案</h4>
+<blockquote>
+<p>[1 2 3 4 5]</p>
+<p>a 在 for range 过程中增加了两个元素<br />
+len 由 5 增加到 7，但 for range 时会使用 a 的副本 a' 参与循环，副本的 len 依旧是 5，<br />
+因此 for range 只会循环 5 次，也就只获取 a 对应的底层数组的前 5 个元素。
+</p>
+</blockquote>
+<h3 id="70">70. 下列代码有什么问题？</h3>
+<pre><code class="language-go">func main() {
+    var s []int
+    s = append(s,1)
+    var m map[string]int
+    m[&quot;one&quot;] = 1
+}
+</code></pre>
+<h4 id="_72">答案</h4>
+<blockquote>
+<p>切片可以开箱即用，但 map 需要用 make函数 进行初始化之后才能赋值
+</p>
+</blockquote>
+<h3 id="71">71. 下列函数能否正确输出?</h3>
+<pre><code class="language-go">func main() {
+    var fn1 = func() {}
+    var fn2 = func() {}
+    if fn1 != fn2 {
+        println(&quot;fn1 not equal fn2&quot;)
+    }
+}
+</code></pre>
+<h4 id="_73">答案</h4>
+<blockquote>
+<p>编译错误，func 只能与 nil 做比较
+</p>
+</blockquote>
+<h3 id="72">72. 下列代码是否正确?</h3>
+<pre><code class="language-go">type T struct {    
+    n int
+}
+func main() {
+    m := make(map[int]T)
+    m[0].n = 1
+    fmt.Println(m[0].n)
+}
+</code></pre>
+<h4 id="_74">答案</h4>
+<blockquote>
+<p>编译错误, map[key]struct 中 struct 是不可寻址的，所以无法直接赋值。
+</p>
+</blockquote>
+<h4 id="_75">修复</h4>
+<pre><code class="language-go">func main() {   
+    m := make(map[int]T)
+    t := T{1}
+    m[0] = t
+    fmt.Println(m[0].n)
+}
+</code></pre>
+<h3 id="73">73. 下列代码有什么问题?</h3>
+<pre><code class="language-go">type X struct {}
+func (x *X) test()  {
+    println(x)
+}
+func main() {
+    var a *X
+    a.test()
+    X{}.test()
+}
+</code></pre>
+<h4 id="_76">答案</h4>
+<blockquote>
+<p>X{} 是不可寻址的，不能直接调用方法
+</p>
+</blockquote>
+<h4 id="_77">修复</h4>
+<pre><code class="language-go">func main() {
+    var a *X
+    a.test()
+    // 为其定义一个变量，让其可寻址
+    var x = X{}
+    x.test()
+}
+</code></pre>
+<h3 id="74-channel">74. 关于 channel 下面描述正确的是？</h3>
+<p>A. 向已关闭的通道发送数据会引发 panic；</p>
+<p>B. 从已关闭的缓冲通道接收数据，返回已缓冲数据或者零值；</p>
+<p>C. 无论接收还是接收，nil 通道都会阻塞；</p>
+<p>D. close() 可以用于只接收通道；</p>
+<p>E. 单向通道可以转换为双向通道；</p>
+<p>F. 不能在单向通道上做逆向操作（例如：只发送通道用于接收）；</p>
+<h4 id="_78">答案</h4>
+<blockquote>
+<p>A B C F
+</p>
+</blockquote>
+<h3 id="75">75. 下列代码输出什么?</h3>
+<pre><code class="language-go">func Test75(t *testing.T) {
+    s := make([]int, 3, 9)
+    fmt.Println(len(s))
+    s2 := s[4:8]
+    fmt.Println(len(s2))
+}
+</code></pre>
+<h4 id="_79">答案</h4>
+<blockquote>
+<p>3 4
+</p>
+</blockquote>
+<h3 id="76-panic">76. 下列哪一行会panic?</h3>
+<pre><code class="language-go">func Test76(t *testing.T) {
+    var x interface{}
+    var y interface{} = []int{3, 5}
+    _ = x == x  
+    _ = x == y  
+    _ = y == y
+}
+</code></pre>
+<h4 id="_80">答案</h4>
+<blockquote>
+<p>_ = y == y 会发生panic, 因为两个比较值的动态类型为同一个不可比较类型
+</p>
+</blockquote>
+<h3 id="77-panic">77. 下列哪行代码会panic?</h3>
+<pre><code class="language-go">func Test77(t *testing.T) {
+    x := make([]int, 2, 10)
+    _ = x[6:10] 
+    _ = x[6:]
+    _ = x[2:]
+}
+</code></pre>
+<h4 id="_81">答案</h4>
+<blockquote>
+<p>_ = x[6:] 这一行会发生panic, 截取符号 [i:j]，<br />
+如果 j 省略，默认是原切片或者数组的长度，x 的长度是 2，小于起始下标 6 ，所以 panic
+</p>
+</blockquote>
+<h3 id="78">78. 下列代码有什么问题?</h3>
+<pre><code class="language-go">type data struct {
+    sync.Mutex
+}
+func (d data) test(s string) {
+    d.Lock()
+    defer d.Unlock()
+    for i := 0; i &lt; 5; i++ {
+        fmt.Println(s, i)
+        time.Sleep(time.Second)
+    }
+}
+func Test78(t *testing.T) {
+    var wg sync.WaitGroup
+    wg.Add(2)
+    var d data
+    go func() {     defer wg.Done()     d.test(&quot;read&quot;)  }() go func() {     defer wg.Done()     d.test(&quot;write&quot;) }() wg.Wait()}
+</code></pre>
+<h4 id="_82">答案</h4>
+<blockquote>
+<p>锁失效。将 Mutex 作为匿名字段时，相关的方法必须使用指针接收者，否则会导致锁机制失效。
+</p>
+</blockquote>
+<h4 id="_83">修复</h4>
+<pre><code class="language-go">// 指针接收者
+func (d *data) test(s string)  {        d.Lock()   defer d.Unlock()   for i:=0;i&lt;5 ;i++  {      fmt.Println(s,i)      time.Sleep(time.Second)   }}
+</code></pre>
+<h3 id="79">79. 下列代码输出什么?</h3>
+<pre><code class="language-go">func Test79(t *testing.T) {
+    var k = 1
+    var s = []int{1, 2}
+    k, s[k] = 0, 3
+    fmt.Println(s[0] + s[1])
+}
+</code></pre>
+<h4 id="_84">答案</h4>
+<blockquote>
+<p>4
+</p>
+</blockquote>
+<h3 id="80-panic">80. 下列那行代码会panic?</h3>
+<pre><code class="language-go">func Test80(t *testing.T) {
+    nil := 123
+    fmt.Println(nil)
+    var _ map[string]int = nil
+}
+</code></pre>
+<h4 id="_85">答案</h4>
+<blockquote>
+<p>var _ map[string]int = nil 会编译错误， 当前作用域中，<br />
+预定义的 nil 被覆盖，此时 nil 是 int 类型值，不能赋值给 map 类型。
+</p>
+</blockquote>
+<h3 id="81">81. 下列代码输出什么?</h3>
+<pre><code class="language-go">func Test81(t *testing.T) {
+    var x int8 = -128
+    var y = x / -1
+    fmt.Println(y)
+}
+</code></pre>
+<h4 id="_86">答案</h4>
+<blockquote>
+<p>-128, 因为溢出 int8为 -128 ~ 127 之间
+</p>
+</blockquote>
+<h3 id="82">82. 下列代码输出什么?</h3>
+<pre><code class="language-go">func Test82(t *testing.T) {
+    defer func() {
+        fmt.Println(recover())
+    }()
+    defer func() {
+        defer fmt.Println(recover())
+        panic(1)
+    }()
+    defer recover() panic(2)
+}
+</code></pre>
+<h3 id="_87">答案</h3>
+<blockquote>
+<p>2 1, recover() 必须在 defer函数体内使用才有效，所以 defer recover() 是无效的
+</p>
+</blockquote>
+<h3 id="83">83. 关于字符串拼接,下列正确的是?</h3>
+<p>A. str := 'abc' + '123'</p>
+<p>B. str := "abc" + "123"</p>
+<p>C. str ：= '123' + "abc"</p>
+<p>D. fmt.Sprintf("abc%d", 123)</p>
+<h4 id="_88">答案</h4>
+<blockquote>
+<p>B D 双引号用来表示字符串 string，其实质是一个 byte 类型的数组，单引号表示 rune 类型。
+</p>
+</blockquote>
+<h3 id="84">84. 下列代码有什么问题?</h3>
+<pre><code class="language-go">func main() {
+    runtime.GOMAXPROCS(1)
+    go func() {
+        for i:=0;i&lt;10 ;i++  {
+            fmt.Println(i)
+        }
+    }()
+    for {}
+}
+</code></pre>
+<h4 id="_89">答案</h4>
+<blockquote>
+<p>for{} 独占 CPU 资源导致其他 Goroutine 饿死
+</p>
+</blockquote>
+<h4 id="_90">修复</h4>
+<pre><code class="language-go">func main() {
+    runtime.GOMAXPROCS(1)
+    go func() {
+        for i:=0;i&lt;10 ;i++  {
+            fmt.Println(i)
+        }
+    }()
+    select {}
+}
+</code></pre>
+<h3 id="85">85. 下列代码有什么问题?</h3>
+<pre><code class="language-go">func main() {
+    f, err := os.Open(&quot;file&quot;)
+    defer f.Close()
+    if err != nil {
+        return
+    }
+    b, err := ioutil.ReadAll(f)
+    println(string(b))
+}
+</code></pre>
+<h4 id="_91">答案</h4>
+<blockquote>
+<p>应该先判断 err, 再用defer 关闭文件句柄
+</p>
+</blockquote>
+<h3 id="86">86. 下列代码有什么问题?</h3>
+<pre><code class="language-go">func main() {
+    var wg sync.WaitGroup
+    wg.Add(1)
+    go func() {
+        fmt.Println(&quot;1&quot;)
+        wg.Done()
+        wg.Add(1)
+    }()
+    wg.Wait()
+}
+</code></pre>
+<h4 id="_92">答案</h4>
+<blockquote>
+<p>协程里面，使用 wg.Add(1) 但是没有 wg.Done()，导致 panic()。
+</p>
+</blockquote>
+<h3 id="87">87. 下列代码输出什么?</h3>
+<pre><code class="language-go">func printI(num ...int) {
+    num[0] = 18
+}
+func Test87(t *testing.T) {
+    i := []int{5, 6, 7} 
+    printI(i...)
+    fmt.Println(i[0])
+}
+</code></pre>
+<h4 id="_93">答案</h4>
+<blockquote>
+<p>18, 可变参数是指针传递
+</p>
+</blockquote>
+<h3 id="88">88. 下列代码输出什么?</h3>
+<pre><code class="language-go">func alwaysFalse() bool {
+    return false
+}
+func Test88(t *testing.T) {
+    switch alwaysFalse();
+    {
+        case true:
+        println(true)
+        case false:
+        println(false)
+    }
+}
+</code></pre>
+<h4 id="_94">答案</h4>
+<blockquote>
+<p>true, Go代码断行规则
+</p>
+</blockquote>
+<h3 id="89">89. 下列代码有什么问题?</h3>
+<pre><code class="language-go">type ConfigOne struct {
+    Daemon string
+}
+func (c *ConfigOne) String() string {
+    return fmt.Sprintf(&quot;print: %v&quot;, c)
+}
+func main() {
+    c := &amp;ConfigOne{}
+    c.String()
+}
+</code></pre>
+<h4 id="_95">答案</h4>
+<blockquote>
+<p>无限循环，栈溢出, 如果结构体类型定义了 String() 方法，<br />
+使用 Printf()、Print() 、 Println() 、 Sprintf() 等格式化输出时会自动使用 String() 方法。
+</p>
+</blockquote>
+<h3 id="90">90. 下列代码有什么问题?</h3>
+<pre><code class="language-go">func main() {
+    wg := sync.WaitGroup{}
+    for i := 0; i &lt; 5; i++ {
+        go func(wg sync.WaitGroup, i int) {
+            wg.Add(1)
+            fmt.Printf(&quot;i:%d\n&quot;, i)
+            wg.Done()
+        }(wg, i)
+    }
+    wg.Wait()
+    fmt.Println(&quot;exit&quot;)
+}
+</code></pre>
+<h4 id="_96">答案</h4>
+<blockquote>
+<ol>
+<li>在协程中使用了 <code>wg.Add(1)</code> </li>
+<li>使用了 sync.WaitGroup 副本 
+</li>
+</ol>
+</blockquote>
+<h4 id="_97">修复</h4>
+<pre><code class="language-go">func main() {
+    wg := sync.WaitGroup{}
+    for i := 0; i &lt; 5; i++ {
+        wg.Add(1)
+        go func(i int) {
+            fmt.Printf(&quot;i:%d\n&quot;, i)
+            wg.Done()
+        }(i)
+    }
+    wg.Wait()
+    fmt.Println(&quot;exit&quot;)
+}
+</code></pre>
+<h3 id="91">91. 下列代码输出什么?</h3>
+<pre><code class="language-go">func main() {
+    a := [3]int{0, 1, 2}
+    s := a[1:2]
+    s[0] = 11
+    s = append(s, 12)
+    s = append(s, 13)
+    s[0] = 21
+    fmt.Println(a)
+    fmt.Println(s)
+}
+</code></pre>
+<h4 id="_98">答案</h4>
+<blockquote>
+<p>[0 11 12]</p>
+<p>[21 12 13]
+</p>
+</blockquote>
+<h3 id="92">92. 下列代码输出什么?</h3>
+<pre><code class="language-go">func Test92(t *testing.T) {
+    fmt.Println(strings.TrimRight(&quot;ABBA&quot;, &quot;BA&quot;))
+}
+</code></pre>
+<h4 id="_99">答案</h4>
+<blockquote>
+<p>输出空字符串, TrimRight() 会将第二个参数字符串里面所有的字符拿出来处理，<br />
+只要与其中任何一个字符相等，便会将其删除。想正确地截取字符串，可以参考 TrimSuffix() 函数。
+</p>
+</blockquote>
+<h3 id="93">93. 下列代码输出什么?</h3>
+<pre><code class="language-go">func Test93(t *testing.T) {
+    var src, dst []int
+    src = []int{1, 2, 3}
+    copy(dst, src)
+    fmt.Println(dst)
+}
+</code></pre>
+<h4 id="_100">答案</h4>
+<blockquote>
+<p>输出 [], 如果想要将 src 完全拷贝至 dst，必须给 dst 分配足够的内存空间。
+</p>
+</blockquote>
+<h4 id="_101">修复</h4>
+<pre><code class="language-go">func Test93(t *testing.T) {
+    var src, dst []int
+    src = []int{1, 2, 3}
+    dst = make([]int, len(src))
+    copy(dst, src)
+    fmt.Println(dst)
+}
+</code></pre>
+<p>或者直接使用<code>append</code></p>
+<pre><code class="language-go">func Test93(t *testing.T) { var src, dst []int  src = []int{1, 2, 3}    dst = append(dst, src...)   fmt.Println(dst)}
+</code></pre>
+<h3 id="94">94. 下列代码是否可以编译通过?</h3>
+<pre><code class="language-go">type User struct {   Name string} func (u *User) SetName(name string) {    u.Name = name    fmt.Println(u.Name)}type Employee Userfunc main() {    employee := new(Employee)    employee.SetName(&quot;Jack&quot;)}
+</code></pre>
+<h4 id="_102">答案</h4>
+<blockquote>
+<p>编译不通过, 当使用 type 声明一个新类型，它不会继承原有类型的方法集。
+</p>
+</blockquote>
+<h3 id="95-map">95. 关于map，下面说法正确的是？</h3>
+<p>A. map 反序列化时 json.unmarshal() 的入参必须为 map 的地址；</p>
+<p>B. 在函数调用中传递 map，则子函数中对 map 元素的增加不会导致父函数中 map 的修改；</p>
+<p>C. 在函数调用中传递 map，则子函数中对 map 元素的修改不会导致父函数中 map 的修改；</p>
+<p>D. 不能使用内置函数 delete() 删除 map 的元素</p>
+<h4 id="_103">答案</h4>
+<blockquote>
+<p>A
+</p>
+</blockquote>
+<h3 id="96">96. 关于同步锁，下面说法正确的是？</h3>
+<p>A. 当一个 goroutine 获得了 Mutex 后，其他 goroutine 就只能乖乖的等待，除非该 goroutine 释放这个 Mutex；</p>
+<p>B. RWMutex 在读锁占用的情况下，会阻止写，但不阻止读；</p>
+<p>C. RWMutex 在写锁占用情况下，会阻止任何其他 goroutine（无论读和写）进来，整个锁相当于由该 goroutine 独占；</p>
+<p>D. Lock() 操作需要保证有 Unlock() 或 RUnlock() 调用与之对应；</p>
+<h4 id="_104">答案</h4>
+<blockquote>
+<p>A B C , 106
+</p>
+<p>更新: 2022-03-17 22:06:13<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/zkt3vp">https://www.yuque.com/xiaoshan_wgo/codingnotes/zkt3vp</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1096 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/FrontNotes/HTML/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>HTML - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#html" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HTML
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="html">HTML</h1>
+<h1 id="html_1">HTML常用标签</h1>
+<h2 id="1">1.排版标签</h2>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:#262626;">标签名</font></strong></th>
+<th><strong><font style="color:#262626;">定义</font></strong></th>
+<th><strong><font style="color:#262626;">说明</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:#262626;"><h1...6></h1...6></font></td>
+<td><font style="color:#262626;">标题标签</font></td>
+<td><font style="color:#262626;">作为标题使用，并且依据重要性递减</font></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><p></p></font></td>
+<td><font style="color:#262626;">段落标签</font></td>
+<td><font style="color:#262626;">可以把 HTML 文档分割为若干段落</font></td>
+</tr>
+<tr>
+<td><font style="color:#E8323C;"><hr/></font></td>
+<td><font style="color:#262626;">水平线标签</font></td>
+<td><font style="color:#262626;"></font></td>
+</tr>
+<tr>
+<td><font style="color:#E8323C;"><br/></font></td>
+<td><font style="color:#262626;">换行标签</font></td>
+<td></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><div></div></font></td>
+<td><font style="color:#262626;">div标签</font></td>
+<td><font style="color:#262626;">用来布局的，但是现在一行只能放一个div</font></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><span></span></font></td>
+<td><font style="color:#262626;">span标签</font></td>
+<td><font style="color:#262626;">用来布局的，一行上可以放好多个span</font></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:#262626;">标签名</font></strong></th>
+<th><strong><font style="color:#262626;">说明</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:#262626;"><article></article></font></td>
+<td>表示文档、页面、应用或网站中的独立结构，其意在成为可独立分配的或可复用的结构</td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><aside></aside></font></td>
+<td></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><footer></footer></font></td>
+<td></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><header></header></font></td>
+<td></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><main></main></font></td>
+<td>body 或应用的主体部分</td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><nav></nav></font></td>
+<td></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><section></section></font></td>
+<td>表示一个包含在HTML文档中的独立部分</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2">2.文本格式化标签</h2>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:#262626;">标签名</font></strong></th>
+<th><strong><font style="color:#262626;">样式</font></strong></th>
+<th><strong><font style="color:#262626;">说明</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:#262626;"><b></b></font><br/><strong><font style="color:#262626;"><strong></strong></font></strong></td>
+<td><font style="color:#262626;">粗体</font></td>
+<td><font style="color:#262626;">推荐使用strong</font></td>
+</tr>
+<tr>
+<td><font style="color:#262626;"><i></i></font><br/><strong><font style="color:#262626;"><em></em></font></strong></td>
+<td><font style="color:#262626;">斜体</font></td>
+<td><font style="color:#262626;">推荐使用em</font></td>
+</tr>
+<tr>
+<td><s></s><br/><strong><del></del></strong></td>
+<td><font style="color:#262626;">删除线</font></td>
+<td><font style="color:#262626;">推荐使用del</font></td>
+</tr>
+<tr>
+<td><u></u><br/><strong><ins></ins></strong></td>
+<td><font style="color:#262626;">下划线</font></td>
+<td><font style="color:#262626;">推荐使用ins</font></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><font style="color:#333333;"> </font><font style="color:rgb(18, 18, 18);">在默认的 HTML 样式表定义中，b 和 strong 的样式一样，为 { font-weight: bolder }；而 em 的默认样式为 { font-style: italic }，与 i 相同。b 和 i 是样式上强调，strong 和 em 是语义上强调。strong&gt;em</font>
+</p>
+</blockquote>
+<p><img alt="1642349773856-40b38dbf-fd82-4711-9403-805b70f3f021.png" src="../img/XmkTu9s-61_9J-Wr/1642349773856-40b38dbf-fd82-4711-9403-805b70f3f021-475023.png" /></p>
+<table>
+<thead>
+<tr>
+<th><strong>标签名</strong></th>
+<th><strong>样式</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><abbr></abbr ></td>
+<td>缩写</td>
+<td>推荐使用strong</td>
+</tr>
+<tr>
+<td><address></address></td>
+<td>联系信息</td>
+<td>看起来只是斜体，但表示了语义信息</td>
+</tr>
+<tr>
+<td><q></q><br/>&lt;blockquote</blockquote></td>
+<td>短引用<br/>块引用</td>
+<td>所有文本都会从常规文本中分离出来，增加外边距</td>
+</tr>
+<tr>
+<td><cite></cite></td>
+<td>引用</td>
+<td>比如书籍或杂志的标题。</td>
+</tr>
+<tr>
+<td><code></code></td>
+<td>代码</td>
+<td>以浏览器的默认等宽字体显示</td>
+</tr>
+<tr>
+<td><sup></sup><br/><sub></sub></td>
+<td>上标文本<br/>下标文本</td>
+<td></td>
+</tr>
+<tr>
+<td><small></small><br/><big></big></td>
+<td>呈现小号字体效果</td>
+<td>font-size: smaller;</td>
+</tr>
+<tr>
+<td><pre></pre></td>
+<td><font style="color:rgb(0, 0, 0);">预格式文本</font></td>
+<td><font style="color:#333333;">保留空格和换行符，</font><font style="color:rgb(0, 0, 0);background-color:rgb(253, 252, 248);">而文本也会呈现为等宽字体</font></td>
+</tr>
+<tr>
+<td><data></data><br/><time></time></td>
+<td><font style="color:rgb(0, 0, 0);">添加语义</font><br/>添加时间</td>
+<td><font style="color:rgb(27, 27, 27);">将一个指定内容和机器可读的翻译联系在一起</font><br/>让以机器可读的格式表示日期和时间</td>
+</tr>
+<tr>
+<td><var></var></td>
+<td>变量</td>
+<td>样式斜体</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-html">&lt;data value=&quot;21053&quot;&gt;圣女果&lt;/data&gt;
+
+&lt;p&gt;我在 &lt;time datetime=&quot;2010-02-14&quot;&gt;情人节&lt;/time&gt; 有个约会。&lt;/p&gt;
+
+&lt;pre&gt;
+for i = 1 to 10
+     print i
+&lt;/pre&gt;
+</code></pre>
+<h2 id="3">3.链接标签</h2>
+<p><a> 标签定义超链接，用于从一张页面链接到另一张页面。</p>
+<pre><code class="language-html">&lt;a href=&quot;跳转目标&quot; target=&quot;目标窗口的弹出方式&quot;&gt;文本或图像&lt;/a&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>href</td>
+<td>用于指定链接目标的url地址</td>
+</tr>
+<tr>
+<td>target</td>
+<td>用于指定链接页面的打开方式，<strong>_blank</strong>，_parent<br/><strong>_self</strong>，_top</td>
+</tr>
+<tr>
+<td>type</td>
+<td>规定被链接目标的的 MIME 类型。</td>
+</tr>
+</tbody>
+</table>
+<p>href 属性值定义为<code>#</code>(即<code>href="#"</code>)，表示该链接暂时为一个空链接，会返回页面顶部。</p>
+<h3 id="_1">锚点定位</h3>
+<pre><code class="language-html">1. 使用相应的id名标注跳转目标的位置。 
+  &lt;h3 id=&quot;two&quot;&gt;第2集&lt;/h3&gt; 
+
+2. 使用&lt;a href=&quot;#id名&quot;&gt;链接文本&lt;/a&gt;创建链接文本
+  &lt;a href=&quot;#two&quot;&gt;
+</code></pre>
+<h3 id="base">base 标签</h3>
+<pre><code class="language-html">&lt;base target=&quot;_blank&quot; /&gt;
+</code></pre>
+<p>**总结： **</p>
+<ul>
+<li>base 可以设置整体链接的打开状态   </li>
+<li>base 写到  <head>  之间</li>
+<li>把所有的连接 都默认添加 target="_blank"</li>
+</ul>
+<h2 id="_2"></h2>
+<h2 id="4">4.注释标签</h2>
+<p>在HTML中还有一种特殊的标签——注释标签。如果需要在HTML文档中添加一些便于阅读和理解但又不需要显示在页面中的注释文字，就需要使用注释标签。</p>
+<pre><code class="language-html">&lt;!-- 注释语句 --&gt; 
+&lt;div&gt;...&lt;/div&gt;
+</code></pre>
+<p>注释内容前后各一个空格字符，注释位于要注释代码的上面，单独占一行。</p>
+<h2 id="6">6. 特殊字符</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>显示结果</strong></th>
+<th style="text-align: left;"><strong>描述</strong></th>
+<th style="text-align: left;"><strong>实体名称</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);"> </font></strong></td>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">空格</font></strong></td>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">&nbsp;</font></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">&lt;</font></strong></td>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">小于号</font></strong></td>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">&lt;</font></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">&gt;</font></strong></td>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">大于号</font></strong></td>
+<td style="text-align: left;"><strong><font style="color:rgb(0, 0, 0);">&gt;</font></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&amp;</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">和号</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&amp;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">"</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">引号</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&quot;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">'</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">撇号 </font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&apos; (IE不支持)</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">￠</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">分（cent）</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&cent;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">£</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">镑（pound）</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&pound;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">¥</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">元（yen）</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&yen;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">€</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">欧元（euro）</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&euro;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">§</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">小节</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&sect;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">©</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">版权（copyright）</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&copy;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">®</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">注册商标</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&reg;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">™</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">商标</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&trade;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">×</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">乘号</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&times;</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">÷</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">除号</font></td>
+<td style="text-align: left;"><font style="color:rgb(0, 0, 0);">&divide;</font></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_3">表格</h1>
+<h2 id="1_1">1. 创建表格</h2>
+<pre><code class="language-html">&lt;table border=&quot;1&quot;&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Company&lt;/th&gt;
+    &lt;th&gt;Address&lt;/th&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td&gt;Apple, Inc.&lt;/td&gt;
+    &lt;td&gt;1 Infinite Loop Cupertino, CA 95014&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<p><img alt="1642414808463-8a93c9c2-305c-4d4d-bd4a-b9ead9316abe.png" src="../img/XmkTu9s-61_9J-Wr/1642414808463-8a93c9c2-305c-4d4d-bd4a-b9ead9316abe-298119.png" /></p>
+<p>**总结： **</p>
+<ul>
+<li>一个完整的表格有表格标签（table），行标签（tr），单元格标签（td）组成，没有列的标签</li>
+<li><code>&lt;tr&gt;</code>中只能嵌套<code>&lt;td&gt;</code> 类的单元格</li>
+<li><code>&lt;td&gt;</code>标签，就像一个容器，可以容纳所有的元素</li>
+<li><code>&lt;th&gt;</code>一般表头单元格位于表格的第一行或第一列，并且文本加粗居中，只需用表头标签<th></th>替代相应的单元格标签<td></td>即可</li>
+</ul>
+<blockquote>
+<p><font style="color:rgb(51, 51, 51);background-color:rgb(246, 244, 240);">tr=table row; td=table data cell; th=table header cell</font>
+</p>
+</blockquote>
+<p><font style="color:rgb(51, 51, 51);background-color:rgb(246, 244, 240);"></font></p>
+<h2 id="2theadtbodytfoot">2.thead/tbody/tfoot</h2>
+<blockquote>
+<p><font style="color:rgb(77, 77, 77);">thead, tbody, tfoot三个标签的使用目的是把一个表格分成三个大的部分，每个部分存放不同的东西，这样这个表格就会比较有结构</font>
+</p>
+</blockquote>
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+thead {color:green}
+tbody {color:blue;height:50px}
+tfoot {color:red}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table border=&quot;1&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Month&lt;/th&gt;
+      &lt;th&gt;Savings&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;January&lt;/td&gt;
+      &lt;td&gt;$100&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;February&lt;/td&gt;
+      &lt;td&gt;$80&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sum&lt;/td&gt;
+      &lt;td&gt;$180&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p><img alt="1642415160074-c8ff7ad9-23ae-4df9-983b-84c12e1312ca.png" src="../img/XmkTu9s-61_9J-Wr/1642415160074-c8ff7ad9-23ae-4df9-983b-84c12e1312ca-792844.png" /></p>
+<h2 id="3_1">3. 表格属性</h2>
+<p><font style="color:#333333;">表格有部分属性我们不常用，这里重点记住 cellspacing 、 cellpadding。</font></p>
+<p><img alt="1595041760004-4d130bb1-7f8e-4378-ac51-a4eba57257b8.png" src="../img/XmkTu9s-61_9J-Wr/1595041760004-4d130bb1-7f8e-4378-ac51-a4eba57257b8-469827.png" /></p>
+<p><img alt="1595041803367-d506be61-a1f3-45ea-8fdc-feae4cc07017.png" src="../img/XmkTu9s-61_9J-Wr/1595041803367-d506be61-a1f3-45ea-8fdc-feae4cc07017-858449.png" /></p>
+<h2 id="4-caption">4. 表格标题 caption</h2>
+<p><strong>定义和用法</strong></p>
+<pre><code class="language-html">&lt;table border=&quot;1&quot;&gt;
+&lt;caption&gt;我的标题&lt;/caption&gt;
+&lt;tr&gt;
+  &lt;td&gt;100&lt;/td&gt;
+  &lt;td&gt;200&lt;/td&gt;
+  &lt;td&gt;300&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;400&lt;/td&gt;
+  &lt;td&gt;500&lt;/td&gt;
+  &lt;td&gt;600&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<p><img alt="1642414670954-8ef654a6-3644-4427-bbb6-ba8ddd085809.png" src="../img/XmkTu9s-61_9J-Wr/1642414670954-8ef654a6-3644-4427-bbb6-ba8ddd085809-578883.png" /></p>
+<p>**注意： **</p>
+<ol>
+<li>caption 元素定义<strong>表格标题</strong>，通常这个标题会被居中且显示于表格之上。</li>
+<li>caption 标签必须紧随 table 标签之后。</li>
+<li>这个标签只存在 表格里面才有意义。</li>
+</ol>
+<h2 id="5">5.合并单元格</h2>
+<h3 id="51-2">5.1 合并单元格2种方式</h3>
+<ul>
+<li>跨行合并：<code>rowspan="合并单元格的个数"</code>      </li>
+<li>跨列合并：<code>colspan="合并单元格的个数"</code></li>
+</ul>
+<h3 id="52">5.2 合并单元格顺序</h3>
+<p>**合并的顺序我们按照   先上 后下   先左  后右 的顺序 **</p>
+<h3 id="53">5.3 合并单元格三步曲</h3>
+<ol>
+<li>先确定是跨行还是跨列合并</li>
+<li>根据先上-后下-先左-后右的原则找到目标单元格，然后写上合并方式 还有要合并的单元格数量 ，比如 ：</li>
+</ol>
+<p><code>&lt;td colspan="3"&gt; &lt;/td&gt;</code></p>
+<ol>
+<li>删除多余的单元格 单元格      </li>
+</ol>
+<p><img alt="1595042058420-bb952823-193f-4e2e-b518-3f8d1c64fa1e.png" src="../img/XmkTu9s-61_9J-Wr/1595042058420-bb952823-193f-4e2e-b518-3f8d1c64fa1e-955762.png" /></p>
+<h1 id="_4">列表</h1>
+<h2 id="1-ul">1.无序列表 ul</h2>
+<pre><code class="language-html">&lt;ul&gt;
+  &lt;li&gt;列表项1&lt;/li&gt;
+  &lt;li&gt;列表项2&lt;/li&gt;
+  &lt;li&gt;列表项3&lt;/li&gt;
+  ......
+&lt;/ul&gt;
+</code></pre>
+<h2 id="2-ol">2.  有序列表 ol</h2>
+<ul>
+<li><font style="color:#E8323C;">reversed </font>属性产生倒序的数字列表。</li>
+<li><font style="color:#E8323C;">start </font>属性的值是一个整数，表示数字列表的起始编号。</li>
+<li><font style="color:#E8323C;">type </font>属性指定数字编号的样式<ul>
+<li>a：小写字母</li>
+<li>A：大写字母</li>
+<li>i：小写罗马数字</li>
+<li>I：大写罗马数字</li>
+<li>1：整数（默认值）</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-html">&lt;ol reversed&gt;
+  &lt;li&gt;列表项1&lt;/li&gt;
+  &lt;li&gt;列表项2&lt;/li&gt;
+  &lt;li&gt;列表项3&lt;/li&gt;
+  ......
+&lt;/ol&gt;
+</code></pre>
+<h2 id="3_2">3 自定义列表</h2>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dl></font><font style="color:rgb(74, 74, 74);">标签是一个块级元素，表示一组术语的列表（description list）。术语名（description term）由</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dt></font><font style="color:rgb(74, 74, 74);">标签定义，术语解释（description detail）由</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dd></font><font style="color:rgb(74, 74, 74);">标签定义。</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dl></font><font style="color:rgb(74, 74, 74);">常用来定义词汇表。</font></p>
+<pre><code class="language-html">&lt;dl&gt;
+  &lt;dt&gt;CPU&lt;/dt&gt;
+  &lt;dd&gt;中央处理器&lt;/dd&gt;
+
+  &lt;dt&gt;Memory&lt;/dt&gt;
+  &lt;dd&gt;内存&lt;/dd&gt;
+
+  &lt;dt&gt;Hard Disk&lt;/dt&gt;
+  &lt;dd&gt;硬盘&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dt></font><font style="color:rgb(74, 74, 74);">和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dd></font><font style="color:rgb(74, 74, 74);">都是块级元素，</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dd></font><font style="color:rgb(74, 74, 74);">默认会在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dt></font><font style="color:rgb(74, 74, 74);">下方缩进显示。上面代码的默认渲染结果如下</font></p>
+<pre><code class="language-html">CPU
+  中央处理器
+
+Memory
+  内存
+
+Hard Disk
+  硬盘
+</code></pre>
+<h1 id="_5">表单</h1>
+<h2 id="form"><font style="color:rgb(27, 27, 27);">form</font></h2>
+<pre><code class="language-html">&lt;form action=&quot;https://example.com/api&quot; method=&quot;post&quot;&gt;
+  &lt;label for=&quot;POST-name&quot;&gt;用户名：&lt;/label&gt;
+  &lt;input id=&quot;POST-name&quot; type=&quot;text&quot; name=&quot;user&quot;&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">有以下属性</font></p>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">accept-charset</font><font style="color:rgb(74, 74, 74);">：服务器接受的字符编码列表，使用空格分隔，默认与网页编码相同。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">action</font><font style="color:rgb(74, 74, 74);">：服务器接收数据的 URL。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autocomplete</font><font style="color:rgb(74, 74, 74);">：如果用户没有填写某个控件，浏览器是否可以自动填写该值。它的可能取值分别为</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">off</font><font style="color:rgb(74, 74, 74);">（不自动填写）和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">on</font><font style="color:rgb(74, 74, 74);">（自动填写）。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">method</font><font style="color:rgb(74, 74, 74);">：提交数据的 HTTP 方法，可能的值有</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">post</font><font style="color:rgb(74, 74, 74);">（表单数据作为 HTTP 数据体发送），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">get</font><font style="color:rgb(74, 74, 74);">（表单数据作为 URL 的查询字符串发送），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">dialog</font><font style="color:rgb(74, 74, 74);">（表单位于</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><dialog></font><font style="color:rgb(74, 74, 74);">内部使用）。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">enctype</font><font style="color:rgb(74, 74, 74);">：当</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">method</font><font style="color:rgb(74, 74, 74);">属性等于</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">post</font><font style="color:rgb(74, 74, 74);">时，该属性指定提交给服务器的 MIME 类型。可能的值为</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">application/x-www-form-urlencoded</font><font style="color:rgb(74, 74, 74);">（默认值），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">multipart/form-data</font><font style="color:rgb(74, 74, 74);">（文件上传的情况），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">text/plain</font><font style="color:rgb(74, 74, 74);">。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">：表单的名称，应该在网页中是唯一的。注意，如果一个控件没有设置</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">属性，那么这个控件的值就不会作为键值对，向服务器发送。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">novalidate</font><font style="color:rgb(74, 74, 74);">：布尔属性，表单提交时是否取消验证。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">target</font><font style="color:rgb(74, 74, 74);">：在哪个窗口展示服务器返回的数据，可能的值有</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_self</font><font style="color:rgb(74, 74, 74);">（当前窗口），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_blank</font><font style="color:rgb(74, 74, 74);">（新建窗口），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_parent</font><font style="color:rgb(74, 74, 74);">（父窗口），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_top</font><font style="color:rgb(74, 74, 74);">（顶层窗口），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><iframe></font><font style="color:rgb(74, 74, 74);">标签的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">属性（即表单返回结果展示在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><iframe></font><font style="color:rgb(74, 74, 74);">窗口）。</font></li>
+</ul>
+<h3 id="enctype"><font style="color:rgb(54, 54, 54);">enctype 属性</font></h3>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">application/x-www-form-urlencoded</font></li>
+</ul>
+<p><font style="color:rgb(74, 74, 74);">控件名和控件值之间用</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">=</font><font style="color:rgb(74, 74, 74);">分隔。控件按照出现顺序排列，控件之间用</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">&amp;</font><font style="color:rgb(74, 74, 74);">分隔。</font></p>
+<p><font style="color:rgb(74, 74, 74);"></font></p>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">multipart/form-data</font></li>
+</ul>
+<pre><code class="language-html">&lt;form action=&quot;https://example.com/api&quot;
+      enctype=&quot;multipart/form-data&quot;
+      method=&quot;post&quot;&gt;
+  用户名：&lt;input type=&quot;text&quot; name=&quot;submit-name&quot;&gt;&lt;br&gt;
+  文件：&lt;input type=&quot;file&quot; name=&quot;files&quot;&gt;&lt;br&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;上传&quot;&gt; &lt;input type=&quot;reset&quot; value=&quot;清除&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<p><font style="color:rgb(74, 74, 74);">浏览器将这个表单发成多个数据块。最上面使用</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">Content-Type</font><font style="color:rgb(74, 74, 74);">字段告诉服务器，数据格式是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">multipart/form-data</font><font style="color:rgb(74, 74, 74);">（即多个数据块），每个数据块的分隔标志是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">--AaB03x</font><font style="color:rgb(74, 74, 74);">。</font></p>
+<pre><code class="language-http">Content-Type: multipart/form-data; boundary=--AaB03x
+
+--AaB03x
+Content-Disposition: form-data; name=&quot;submit-name&quot;
+
+Larry
+--AaB03x
+Content-Disposition: form-data; name=&quot;files&quot;; filename=&quot;file1.txt&quot;
+Content-Type: text/plain
+
+... contents of file1.txt ...
+--AaB03x--
+</code></pre>
+<h2 id="label">label</h2>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><label></font><font style="color:rgb(74, 74, 74);">标签是一个行内元素，提供控件的文字说明，帮助用户理解控件的目的。</font></p>
+<pre><code class="language-html">&lt;label for=&quot;user&quot;&gt;用户名：&lt;/label&gt;
+&lt;input type=&quot;text&quot; name=&quot;user&quot; id=&quot;user&quot;&gt;
+</code></pre>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><label></font><font style="color:rgb(74, 74, 74);">的属性如下。</font></p>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">for</font><font style="color:rgb(74, 74, 74);">：关联控件的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">form</font><font style="color:rgb(74, 74, 74);">：关联表单的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。设置了该属性后，</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><label></font><font style="color:rgb(74, 74, 74);">可以放置在页面的任何位置，否则只能放在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">内部</font></li>
+</ul>
+<p><font style="color:rgb(74, 74, 74);">控件也可以放在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><label></font><font style="color:rgb(74, 74, 74);">之中，这时不需要</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">for</font><font style="color:rgb(74, 74, 74);">属性和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。</font></p>
+<pre><code class="language-html">&lt;label&gt;用户名：
+  &lt;input type=&quot;text&quot; name=&quot;user&quot;&gt;
+&lt;/label&gt;
+</code></pre>
+<h2 id="input">input</h2>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><input></font><font style="color:rgb(74, 74, 74);">标签是一个行内元素，用来接收用户的输入。它是一个单独使用的标签，没有结束标志。</font></p>
+<p><font style="color:rgb(74, 74, 74);">它有多种类型，取决于</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">type</font><font style="color:rgb(74, 74, 74);">属性的值，默认值是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">text</font><font style="color:rgb(74, 74, 74);">，表示一个输入框。</font></p>
+<pre><code class="language-html">&lt;input&gt;
+&lt;!-- 等同于 --&gt;
+&lt;input type=&quot;text&quot;&gt;
+</code></pre>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><input></font><font style="color:rgb(74, 74, 74);">的属性非常多，有些属性是某个类型专用的，放在下文的“类型”部分介绍。这里介绍一些所有类型的共同属性。</font></p>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autofocus</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否在页面加载时自动获得焦点。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">disabled</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否禁用该控件。一旦设置，该控件将变灰，用户可以看到，但是无法操作。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">form</font><font style="color:rgb(74, 74, 74);">：关联表单的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。设置了该属性后，控件可以放置在页面的任何位置，否则只能放在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">内部。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">list</font><font style="color:rgb(74, 74, 74);">：关联的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><datalist></font><font style="color:rgb(74, 74, 74);">的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性，设置该控件相关的数据列表，详见后文。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">：控件的名称，主要用于向服务器提交数据时，控件键值对的键名。注意，只有设置了</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">属性的控件，才会向服务器提交，不设置就不会提交。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">readonly</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否为只读。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">required</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否为必填。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">type</font><font style="color:rgb(74, 74, 74);">：控件类型，详见下文。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">value</font><font style="color:rgb(74, 74, 74);">：控件的值。</font></li>
+</ul>
+<h3 id="type"><font style="color:rgb(74, 74, 74);">type类型</font></h3>
+<table>
+<thead>
+<tr>
+<th><strong>值</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~~<font style="color:rgb(0, 0, 0);">button</font>~~</td>
+<td><font style="color:rgb(0, 0, 0);">直接使用 <button></font></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(0, 0, 0);">checkbox</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">定义复选框。</font></td>
+</tr>
+<tr>
+<td><strong><font style="color:rgb(0, 0, 0);">file</font></strong></td>
+<td><font style="color:rgb(0, 0, 0);">定义输入字段和 "浏览"按钮，供文件上传。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(0, 0, 0);">hidden</font></td>
+<td><font style="color:rgb(0, 0, 0);">定义隐藏的输入字段。</font></td>
+</tr>
+<tr>
+<td>~~<font style="color:rgb(0, 0, 0);">image</font>~~</td>
+<td><font style="color:rgb(0, 0, 0);">定义图像形式的提交按钮，和submit一样</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(0, 0, 0);">password</font></td>
+<td><font style="color:rgb(0, 0, 0);">定义密码字段。</font><font style="color:rgb(0, 0, 0);background-color:rgb(253, 252, 248);">字符会被掩码（显示为星号或原点）</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(0, 0, 0);">radio</font></td>
+<td><font style="color:rgb(0, 0, 0);">定义单选按钮。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(0, 0, 0);">reset</font></td>
+<td><font style="color:rgb(0, 0, 0);">定义重置按钮。重置按钮会清除表单中的所有数据。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(0, 0, 0);">submit</font></td>
+<td><font style="color:rgb(0, 0, 0);">定义提交按钮。提交按钮会把表单数据发送到服务器。</font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(0, 0, 0);">text</font></td>
+<td><font style="color:rgb(0, 0, 0);">定义单行的输入字段，用户可在其中输入文本。默认宽度为 20 个字符。</font></td>
+</tr>
+<tr>
+<td>....</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input">https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input</a></p>
+<h2 id="button">button</h2>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><button></font><font style="color:rgb(74, 74, 74);">具有以下属性。</font></p>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autofocus</font><font style="color:rgb(74, 74, 74);">：布尔属性，表示网页加载时，焦点就在这个按钮。网页里面只能有一个元素，具有这个属性。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">disabled</font><font style="color:rgb(74, 74, 74);">：布尔属性，表示按钮不可用，会导致按钮变灰，不可点击。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">：按钮的名称（与</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">value</font><font style="color:rgb(74, 74, 74);">属性配合使用），将以</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name=value</font><font style="color:rgb(74, 74, 74);">的形式，随表单一起提交到服务器。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">value</font><font style="color:rgb(74, 74, 74);">：按钮的值（与</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">属性配合使用），将以</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name=value</font><font style="color:rgb(74, 74, 74);">的形式，随表单一起提交到服务器。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">type</font><font style="color:rgb(74, 74, 74);">：按钮的类型，可能的值有三种：</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">submit</font><font style="color:rgb(74, 74, 74);">（点击后将数据提交给服务器），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">reset</font><font style="color:rgb(74, 74, 74);">（将所有控件的值重置为初始值），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">button</font><font style="color:rgb(74, 74, 74);">（没有默认行为，由脚本指定按钮的行为）。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">form</font><font style="color:rgb(74, 74, 74);">：指定按钮关联的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">表单，值为</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。如果省略该属性，默认关联按钮所在父表单。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">formaction</font><font style="color:rgb(74, 74, 74);">：数据提交到服务器的目标 URL，会覆盖</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">元素的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">action</font><font style="color:rgb(74, 74, 74);">属性。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">formenctype</font><font style="color:rgb(74, 74, 74);">：数据提交到服务器的编码方式，会覆盖</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">元素的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">enctype</font><font style="color:rgb(74, 74, 74);">属性。可能的值有三种：</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">application/x-www-form-urlencoded</font><font style="color:rgb(74, 74, 74);">（默认值），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">multipart/form-data</font><font style="color:rgb(74, 74, 74);">（只用于文件上传），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">text/plain</font><font style="color:rgb(74, 74, 74);">。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">formmethod</font><font style="color:rgb(74, 74, 74);">：数据提交到服务器使用的 HTTP 方法，会覆盖</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">元素的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">method</font><font style="color:rgb(74, 74, 74);">属性，可能的值为</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">post</font><font style="color:rgb(74, 74, 74);">或</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">get</font><font style="color:rgb(74, 74, 74);">。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">formnovalidate</font><font style="color:rgb(74, 74, 74);">：布尔属性，数据提交到服务器时关闭本地验证，会覆盖</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">元素的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">novalidate</font><font style="color:rgb(74, 74, 74);">属性。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">formtarget</font><font style="color:rgb(74, 74, 74);">：数据提交到服务器后，展示服务器返回数据的窗口，会覆盖</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><form></font><font style="color:rgb(74, 74, 74);">元素的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">target</font><font style="color:rgb(74, 74, 74);">属性。可能的值有</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_self</font><font style="color:rgb(74, 74, 74);">（当前窗口），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_blank</font><font style="color:rgb(74, 74, 74);">（新的空窗口）、</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_parent</font><font style="color:rgb(74, 74, 74);">（父窗口）、</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">_top</font><font style="color:rgb(74, 74, 74);">（顶层窗口）。</font></li>
+</ul>
+<h2 id="select">select</h2>
+<pre><code class="language-html">&lt;select&gt;
+  &lt;option value=&quot;volvo&quot;&gt;Volvo&lt;/option&gt;
+  &lt;option value=&quot;saab&quot;&gt;Saab&lt;/option&gt;
+  &lt;option value=&quot;opel&quot;&gt;Opel&lt;/option&gt;
+  &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><select></font><font style="color:rgb(74, 74, 74);">有如下属性。</font></p>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autofocus</font><font style="color:rgb(74, 74, 74);">：布尔属性，页面加载时是否自动获得焦点。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">disabled</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否禁用当前控件。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">form</font><font style="color:rgb(74, 74, 74);">：关联表单的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">multiple</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否可以选择多个菜单项。默认情况下，只能选择一项。一旦设置，多数浏览器会显示一个滚动列表框。用户可能需要按住</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">Shift</font><font style="color:rgb(74, 74, 74);">或其他功能键，选中多项。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">：控件名。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">required</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否为必填控件。</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">size</font><font style="color:rgb(74, 74, 74);">：设置了</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">multiple</font><font style="color:rgb(74, 74, 74);">属性时，页面显示时一次可见的行数，其他行需要滚动查看。</font></li>
+</ul>
+<pre><code class="language-html">&lt;select&gt;
+  &lt;optgroup label=&quot;Swedish Cars&quot;&gt;
+    &lt;option value=&quot;volvo&quot;&gt;Volvo&lt;/option&gt;
+    &lt;option value=&quot;saab&quot;&gt;Saab&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label=&quot;German Cars&quot;&gt;
+    &lt;option value=&quot;mercedes&quot;&gt;Mercedes&lt;/option&gt;
+    &lt;option value=&quot;audi&quot;&gt;Audi&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;
+</code></pre>
+<ul>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><option></font><font style="color:rgb(74, 74, 74);">标签用在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><select></font><font style="color:rgb(74, 74, 74);">、</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><optgroup></font><font style="color:rgb(74, 74, 74);">、</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><datalist></font><font style="color:rgb(74, 74, 74);">里面，表示一个菜单项</font></li>
+<li><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><optgroup></font><font style="color:rgb(74, 74, 74);">表示菜单项的分组，通常用在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><select></font><font style="color:rgb(74, 74, 74);">内部.</font></li>
+</ul>
+<p><strong><font style="color:rgb(38, 38, 38);">datalist</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><datalist></font><font style="color:rgb(74, 74, 74);">标签是一个容器标签，用于为指定控件提供一组相关数据，通常用于生成输入提示。它的内部使用</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><option></font><font style="color:rgb(74, 74, 74);">，生成每个菜单项。</font><font style="color:rgb(38, 38, 38);"><br />
+</font></p>
+<p><img alt="1642417292948-06a848d0-15e1-4de5-8f7c-f72d9116ad4a.png" src="../img/XmkTu9s-61_9J-Wr/1642417292948-06a848d0-15e1-4de5-8f7c-f72d9116ad4a-706918.png" /></p>
+<p><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);"><br />
+</font><strong><font style="color:rgb(38, 38, 38);">textarea</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(74, 74, 74);">该标签有如下属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autofocus</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否自动获得焦点。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">cols</font><font style="color:rgb(74, 74, 74);">：文本框的宽度，单位为字符，默认值为20。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">disabled</font><font style="color:rgb(74, 74, 74);">：布尔属性，是否禁用该控件。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">form</font><font style="color:rgb(74, 74, 74);">：关联表单的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">id</font><font style="color:rgb(74, 74, 74);">属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">maxlength</font><font style="color:rgb(74, 74, 74);">：允许输入的最大字符数。如果未指定此值，用户可以输入无限数量的字符。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">minlength</font><font style="color:rgb(74, 74, 74);">：允许输入的最小字符数。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">name</font><font style="color:rgb(74, 74, 74);">：控件的名称。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">placeholder</font><font style="color:rgb(74, 74, 74);">：输入为空时显示的提示文本。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">readonly</font><font style="color:rgb(74, 74, 74);">：布尔属性，控件是否为只读。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">required</font><font style="color:rgb(74, 74, 74);">：布尔属性，控件是否为必填。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">rows</font><font style="color:rgb(74, 74, 74);">：文本框的高度，单位为行。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">spellcheck</font><font style="color:rgb(74, 74, 74);">：是否打开浏览器的拼写检查。可能的值有</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">true</font><font style="color:rgb(74, 74, 74);">（打开），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">default</font><font style="color:rgb(74, 74, 74);">（由父元素或网页设置决定），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">false</font><font style="color:rgb(74, 74, 74);">（关闭）。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">wrap</font><font style="color:rgb(74, 74, 74);">：输入的文本是否自动换行。可能的值有</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">hard</font><font style="color:rgb(74, 74, 74);">（浏览器自动插入换行符</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">CR + LF</font><font style="color:rgb(74, 74, 74);">，使得每行不超过控件的宽度），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">soft</font><font style="color:rgb(74, 74, 74);">（输入内容超过宽度时自动换行，但不会加入新的换行符，并且浏览器保证所有换行符都是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">CR + LR</font><font style="color:rgb(74, 74, 74);">，这是默认值），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">off</font><font style="color:rgb(74, 74, 74);">（关闭自动换行，单行长度超过宽度时，会出现水平滚动条）。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);"><br />
+</font><strong><font style="color:rgb(38, 38, 38);">progress</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">max</font><font style="color:rgb(74, 74, 74);">：进度条的最大值，应该是一个大于</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">0</font><font style="color:rgb(74, 74, 74);">的浮点数。默认值为1。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">value</font><font style="color:rgb(74, 74, 74);">：进度条的当前值。它必须是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">0</font><font style="color:rgb(74, 74, 74);">和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">max</font><font style="color:rgb(74, 74, 74);">属性之间的一个有效浮点数。如果省略了</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">max</font><font style="color:rgb(74, 74, 74);">属性，该值则必须在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">0</font><font style="color:rgb(74, 74, 74);">和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">1</font><font style="color:rgb(74, 74, 74);">之间。如果省略了</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">value</font><font style="color:rgb(74, 74, 74);">属性，则进度条会出现滚动，表明正在进行中，无法知道完成的进度。</font><font style="color:rgb(38, 38, 38);"><br />
+</font></p>
+<p><img alt="1642417445053-acbf1500-7016-4ae3-a583-8c22cd9c1772.png" src="../img/XmkTu9s-61_9J-Wr/1642417445053-acbf1500-7016-4ae3-a583-8c22cd9c1772-307198.png" /></p>
+<p><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);"><br />
+</font><strong><font style="color:rgb(27, 27, 27);">fieldset</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(27, 27, 27);">对表单中的控制元素进行分组</font><font style="color:rgb(38, 38, 38);"><br />
+</font></p>
+<p><img alt="1642417797583-3a2b94b4-91c1-4bc1-b840-d66b901228f5.png" src="../img/XmkTu9s-61_9J-Wr/1642417797583-3a2b94b4-91c1-4bc1-b840-d66b901228f5-682715.png" /><font style="color:rgb(38, 38, 38);">  </p>
+<p></font><strong><font style="color:rgb(38, 38, 38);">多媒体</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><strong><font style="color:rgb(38, 38, 38);">img</font></strong></p>
+<table>
+<thead>
+<tr>
+<th><strong><font style="color:rgb(38, 38, 38);">属性</font></strong><font style="color:rgb(38, 38, 38);">   </font></th>
+<th><strong><font style="color:rgb(38, 38, 38);">值</font></strong><font style="color:rgb(38, 38, 38);">   </font></th>
+<th><strong><font style="color:rgb(38, 38, 38);">说明</font></strong><font style="color:rgb(38, 38, 38);">   </font></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><font style="color:rgb(38, 38, 38);">alt</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">text</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">规定图像的替代文本。</font><font style="color:rgb(38, 38, 38);">   </font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(38, 38, 38);">src</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">URL</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">规定显示图像的 URL。</font><font style="color:rgb(38, 38, 38);">   </font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(38, 38, 38);">height</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">●</font><font style="color:rgb(0, 0, 0);">pixels</font><font style="color:rgb(38, 38, 38);">   </font><font style="color:rgb(0, 0, 0);">●</font><font style="color:rgb(0, 0, 0);">%</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">定义图像的高度。</font><font style="color:rgb(38, 38, 38);">   </font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(38, 38, 38);">width</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">●</font><font style="color:rgb(0, 0, 0);">pixels</font><font style="color:rgb(38, 38, 38);">   </font><font style="color:rgb(0, 0, 0);">●</font><font style="color:rgb(0, 0, 0);">%</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(0, 0, 0);">设置图像的宽度。</font><font style="color:rgb(38, 38, 38);">   </font></td>
+</tr>
+<tr>
+<td><font style="color:rgb(38, 38, 38);">title</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(38, 38, 38);">text</font><font style="color:rgb(38, 38, 38);">   </font></td>
+<td><font style="color:rgb(27, 27, 27);">title</font><font style="color:rgb(27, 27, 27);"> 元素的值一般作为提示条(tooltip)呈现给用户，在光标于图片上停下后显示出来。</font><font style="color:rgb(38, 38, 38);">   </font></td>
+</tr>
+</tbody>
+</table>
+<p><strong><font style="color:rgb(63, 63, 63);background-color:rgb(253, 252, 248);">figure</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">HTML <figure> 元素代表一段独立的内容, 经常与说明（caption） <figcaption> 配合使用, 并且作为一个独立的引用单元。当它属于主内容流（main flow）时，它的位置独立于主体。这个标签经常是在主文中引用的图片，插图，表格，代码段等等，当这部分转移到附录中或者其他页面时不会影响到主体。<br />
+</font><strong><font style="color:rgb(38, 38, 38);">picture</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><img></font><font style="color:rgb(74, 74, 74);">标签的</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">srcset</font><font style="color:rgb(74, 74, 74);">属性和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">sizes</font><font style="color:rgb(74, 74, 74);">属性分别解决了像素密度和屏幕大小的适配，但如果要同时适配不同像素密度、不同大小的屏幕，就要用到</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><picture></font><font style="color:rgb(74, 74, 74);">标签。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><picture></font><font style="color:rgb(74, 74, 74);">是一个容器标签，内部使用</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><source></font><font style="color:rgb(74, 74, 74);">和</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><img></font><font style="color:rgb(74, 74, 74);">，指定不同情况下加载的图像。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(74, 74, 74);">除了响应式图像，</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><picture></font><font style="color:rgb(74, 74, 74);">标签还可以用来选择不同格式的图像。比如，如果当前浏览器支持 Webp 格式，就加载这种格式的图像，否则加载 PNG 图像。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><strong><font style="color:rgb(38, 38, 38);">video</font></strong><font style="color:rgb(38, 38, 38);"></font></p>
+<p><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><video></font><font style="color:rgb(74, 74, 74);">有以下属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">src</font><font style="color:rgb(74, 74, 74);">：视频文件的网址。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">controls</font><font style="color:rgb(74, 74, 74);">：播放器是否显示控制栏。该属性是布尔属性，不用赋值，只要写上属性名，就表示打开。如果不想使用浏览器默认的播放器，而想使用自定义播放器，就不要使用该属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">width</font><font style="color:rgb(74, 74, 74);">：视频播放器的宽度，单位像素。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">height</font><font style="color:rgb(74, 74, 74);">：视频播放器的高度，单位像素。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autoplay</font><font style="color:rgb(74, 74, 74);">：视频是否自动播放，该属性为布尔属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">loop</font><font style="color:rgb(74, 74, 74);">：视频是否循环播放，该属性为布尔属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">muted</font><font style="color:rgb(74, 74, 74);">：是否默认静音，该属性为布尔属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">poster</font><font style="color:rgb(74, 74, 74);">：视频播放器的封面图片的 URL。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">preload</font><font style="color:rgb(74, 74, 74);">：视频播放之前，是否缓冲视频文件。这个属性仅适合没有设置</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">autoplay</font><font style="color:rgb(74, 74, 74);">的情况。它有三个值，分别是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">none</font><font style="color:rgb(74, 74, 74);">（不缓冲）、</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">metadata</font><font style="color:rgb(74, 74, 74);">（仅仅缓冲视频文件的元数据）、</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">auto</font><font style="color:rgb(74, 74, 74);">（可以缓冲整个文件）。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">playsinline</font><font style="color:rgb(74, 74, 74);">：iPhone 的 Safari 浏览器播放视频时，会自动全屏，该属性可以禁止这种行为。该属性为布尔属性。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">crossorigin</font><font style="color:rgb(74, 74, 74);">：是否采用跨域的方式加载视频。它可以取两个值，分别是</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">anonymous</font><font style="color:rgb(74, 74, 74);">（跨域请求时，不发送用户凭证，主要是 Cookie），</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">use-credentials</font><font style="color:rgb(74, 74, 74);">（跨域时发送用户凭证）。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">currentTime</font><font style="color:rgb(74, 74, 74);">：指定当前播放位置（双精度浮点数，单位为秒）。如果尚未开始播放，则会从这个属性指定的位置开始播放。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(38, 38, 38);">●</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">duration</font><font style="color:rgb(74, 74, 74);">：该属性只读，指示时间轴上的持续播放时间（总长度），值为双精度浮点数（单位为秒）。如果是流媒体，没有已知的结束时间，属性值为</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">+Infinity</font><font style="color:rgb(74, 74, 74);">。</font><font style="color:rgb(38, 38, 38);"><br />
+</font><strong><font style="color:rgb(38, 38, 38);">track</font></strong><font style="color:rgb(38, 38, 38);"><br />
+</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><track></font><font style="color:rgb(74, 74, 74);">标签用于指定视频的字幕，格式是 WebVTT （</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);">.vtt</font><font style="color:rgb(74, 74, 74);">文件），放置在</font><font style="color:rgb(218, 16, 57);background-color:rgb(245, 245, 245);"><video></font><font style="color:rgb(74, 74, 74);">标签内部。它是一个单独使用的标签，没有结束标签。</font><font style="color:rgb(38, 38, 38);"></font></p>
+<blockquote>
+<p>更新: 2024-02-18 17:25:37<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/acs1xdmtegmnvrur">https://www.yuque.com/xiaoshan_wgo/codingnotes/acs1xdmtegmnvrur</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

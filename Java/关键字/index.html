@@ -1,0 +1,921 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/Java/%E5%85%B3%E9%94%AE%E5%AD%97/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>关键字 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              关键字
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finalfinallyfinalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      final、finally、finalize 的区别?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 中的final关键字有哪些用法？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finalfinallyfinalize_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      final，finally，finalize 的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transient" class="md-nav__link">
+    <span class="md-ellipsis">
+      transient关键字的作用？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final-finally-finalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      final, finally, finalize 的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final" class="md-nav__link">
+    <span class="md-ellipsis">
+      final关键字的作用？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      常见的关键字有哪些？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 关键字
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#static" class="md-nav__link">
+    <span class="md-ellipsis">
+      static 关键字的使用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      final 关键字
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    <span class="md-ellipsis">
+      abstract 关键字
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native" class="md-nav__link">
+    <span class="md-ellipsis">
+      native 关键字
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronized" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchronized 关键字
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      final的用途
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#staticfinal" class="md-nav__link">
+    <span class="md-ellipsis">
+      static和final的区别和用途
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#final_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      关于 final 关键字的一些总结
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      创建一个对象用什么运算符?对象实体与对象引用有何不同?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#finalfinallyfinalize_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      final、finally、finalize的区别
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="final、finally、finalize的区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#final-finally-finalize_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      final、 finally、 finalize 的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-goto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 有没有 goto ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publicprivateprotected" class="md-nav__link">
+    <span class="md-ellipsis">
+      访问修饰符public，private，protected，以及不写（默认）时的区别？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      访问修饰符限制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oopublicprivateprotecteddefault" class="md-nav__link">
+    <span class="md-ellipsis">
+      请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">关键字</h1>
+<h2 id="_2">参考</h2>
+<p><a href="https://www.yuque.com/joyo/interview/aimqk9zz52iregro">volatile</a></p>
+<h2 id="finalfinallyfinalize">final、finally、finalize 的区别?</h2>
+<ul>
+<li>final：修饰符（关键字）有三种用法：如果一个类被声明为final，意味着它不能再派生出新的子类，即不能被继承，因此它和abstract是反义词。将变量声明为final，可以保证它们在使用中不被改变，被声明为final 的变量必须在声明时给定初值，而在以后的引用中只能读取不可修改。被声明为final 的方法也同样只能使用，不能在子类中被重写。</li>
+<li>finally：通常放在try…catch的后面构造总是执行代码块，这就意味着程序无论正常执行还是发生异常，这里的代码只要JVM不关闭都能执行，可以将释放外部资源的代码写在finally块中。</li>
+<li>finalize：Object类中定义的方法，Java中允许使用finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。这个方法是由垃圾收集器在销毁对象时调用的，通过重写finalize() 方法可以整理系统资源或者执行其他清理工作。</li>
+</ul>
+<h2 id="java-final">Java 中的final关键字有哪些用法？</h2>
+<p>(1)修饰类：表示该类不能被继承；</p>
+<p>(2)修饰方法：表示方法不能被重写；</p>
+<p>(3)修饰变量：表示变量只能一次赋值以后值不能被修改（常量）。</p>
+<h2 id="finalfinallyfinalize_1"><font style="color:#CF1322;">final，finally，finalize 的区别 </font></h2>
+<p><font style="color:rgb(51,51,51);">final：变量、类、方法的修饰符，被 final 修饰的类不能被继承，变量或方法被 final 修饰则不能被修改和重写。 </font></p>
+<p><font style="color:rgb(51,51,51);">finally：异常处理时提供 finally 块来执行清除操作，不管有没有异常抛出，此处代码都会被执行。如果 try 语句块中包含 return 语句，finally 语句块是在 return 之后运行； </font></p>
+<p><font style="color:rgb(51,51,51);">finalize：Object 类中定义的方法，若子类覆盖了 finalize()方法，在在垃圾收集器将对象从内存中清除前，会执行该方法，确定对象是否会被回收。 </font></p>
+<h2 id="transient">transient关键字的作用？</h2>
+<p><font style="color:rgb(51,51,51);">Java</font><font style="color:rgb(51,51,51);">语言的关键字，变量修饰符，如果用</font><font style="color:rgb(51,51,51);">transient</font><font style="color:rgb(51,51,51);">声明一个实例变量，当对象存储时，它的值不需要维</font><font style="color:rgb(51,51,51);">持。</font></p>
+<p><font style="color:rgb(51,51,51);">也就是说被transient修饰的成员变量，在序列化的时候其值会被忽略，在被反序列化后， transient 变量的值被设为初始值， 如 int 型的是 0，对象型的是 null。</font></p>
+<h2 id="final-finally-finalize">final, finally, finalize 的区别</h2>
+<p><font style="color:rgb(51,51,51);">final </font><font style="color:rgb(51,51,51);">用于修饰属性、方法和类</font><font style="color:rgb(51,51,51);">, </font><font style="color:rgb(51,51,51);">分别表示属性不能被重新赋值，方法不可被覆盖，类不可被继承。</font></p>
+<p><font style="color:rgb(51,51,51);">finally 是异常处理语句结构的一部分，一般以</font><font style="color:rgb(245,0,88);">try-catch-finally </font><font style="color:rgb(51,51,51);">出现，</font><font style="color:rgb(245,0,88);">finally </font><font style="color:rgb(51,51,51);">代码块表示总是被执行。</font></p>
+<p><font style="color:rgb(51,51,51);">finalize  是Object类的一个方法，该方法一般由垃圾回收器来调用，当我们调用</font><font style="color:rgb(245,0,88);">System.gc() </font><font style="color:rgb(51,51,51);">方法的时候，由垃圾回收器调用</font><font style="color:rgb(245,0,88);">finalize() </font><font style="color:rgb(51,51,51);">方法，回收垃圾，JVM并不保证此方法总被调用。</font></p>
+<h2 id="final">final关键字的作用？</h2>
+<p><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);"> </font><font style="color:rgb(51,51,51);">修饰的类不能被继承</font><font style="color:rgb(51,51,51);">。</font></p>
+<p><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);"> </font><font style="color:rgb(51,51,51);">修饰的方法不能被重写</font><font style="color:rgb(51,51,51);">。</font></p>
+<p><font style="color:rgb(51,51,51);">final  修饰的变量叫常量，常量必须初始化，初始化之后值就不能被修改。</font></p>
+<h2 id="_3">常见的关键字有哪些？</h2>
+<ul>
+<li><strong><font style="color:rgb(51,51,51);">static</font></strong></li>
+</ul>
+<p><font style="color:rgb(51,51,51);">static</font><font style="color:rgb(51,51,51);">可以用来修饰类的成员方法、类的成员变量</font><font style="color:rgb(51,51,51);">。</font></p>
+<p><font style="color:rgb(51,51,51);">static</font><font style="color:rgb(51,51,51);">变量也称作</font><strong><font style="color:rgb(51,51,51);">静态变量</font></strong><font style="color:rgb(51,51,51);">，静态变量和非静态变量的区别是：静态变量被所有的对象所共享，在内存中</font><font style="color:rgb(51,51,51);">只有一个副本，它当且仅当在类初次加载时会被初始化。而非静态变量是对象所拥有的，在创建对象的时候被初始化，存在多个副本，各个对象拥有的副本互不影响。</font></p>
+<p><font style="color:rgb(51,51,51);">以下例子，age为非静态变量，则p1打印结果是：</font><font style="color:rgb(245,0,88);">Name:zhangsan, Age:10 </font><font style="color:rgb(51,51,51);">；若age使用static修饰，则p1打印结果是：</font><font style="color:rgb(245,0,88);">Name:zhangsan, Age:12 </font><font style="color:rgb(51,51,51);">，因为static变量在内存只有一个副本。</font></p>
+<pre><code class="language-java">public class Person { 
+    String name;
+    int age;
+
+    public String toString() {
+        return &quot;Name:&quot; + name + &quot;, Age:&quot; + age;
+    }
+
+    public static void main(String[] args) {
+        Person p1 = new Person();
+        p1.name = &quot;zhangsan&quot;; p1.age = 10;
+        Person p2 = new Person(); p2.name = &quot;lisi&quot;;
+        p2.age = 12; 
+        System.out.println(p1);
+        System.out.println(p2);
+    }
+
+    /**Output
+     *Name:zhangsan, Age:10
+     *Name:lisi, Age:12
+     *///~
+}
+</code></pre>
+<p><font style="color:rgb(51,51,51);">static方法一般称作</font><strong><font style="color:rgb(51,51,51);">静态方法</font></strong><font style="color:rgb(51,51,51);">。静态方法不依赖于任何对象就可以进行访问，通过类名即可调用静态方法。</font></p>
+<pre><code class="language-java">public class Utils {
+    public static void print(String s) { 
+        System.out.println(&quot;hello world: &quot; + s);
+    }
+
+    public static void main(String[] args) {
+        Utils.print(&quot;程序员大彬&quot;);
+    }
+}
+</code></pre>
+<p><strong><font style="color:rgb(51,51,51);">静态代码块</font></strong><font style="color:rgb(51,51,51);">只会在类加载的时候执行一次。以下例子，startDate和endDate在类加载的时候进行赋值。</font></p>
+<pre><code class="language-java">class Person {
+    private Date birthDate;
+    private static Date startDate, endDate; 
+    static{
+        startDate = Date.valueOf(&quot;2008&quot;); 
+        endDate = Date.valueOf(&quot;2021&quot;);
+    }
+
+    public Person(Date birthDate) { 
+        this.birthDate = birthDate;
+    }
+}
+</code></pre>
+<p><strong><font style="color:rgb(51,51,51);">静态内部类</font></strong></p>
+<p><strong><font style="color:rgb(51,51,51);">在静态方法里</font></strong><font style="color:rgb(51,51,51);">，使用⾮静态内部类依赖于外部类的实例，也就是说需要先创建外部类实例，才能用这个实例去创建非静态内部类。⽽静态内部类不需要。</font></p>
+<pre><code class="language-java">public class OuterClass { 
+    class InnerClass {
+    }
+    static class StaticInnerClass {
+    }
+    public static void main(String[] args) {
+        //  在静态方法里，不能直接使用OuterClass.this去创建InnerClass的实例
+        //  需要先创建OuterClass的实例o，然后通过o创建InnerClass的实例
+        // InnerClass innerClass = new InnerClass(); 
+        OuterClass outerClass = new OuterClass(); 
+        InnerClass innerClass = outerClass.new InnerClass();
+        StaticInnerClass staticInnerClass = new StaticInnerClass();
+
+
+        outerClass.test();
+    }
+
+
+    public void nonStaticMethod() {
+        InnerClass innerClass = new InnerClass(); 
+        System.out.println(&quot;nonStaticMethod...&quot;);
+    }
+}
+</code></pre>
+<ul>
+<li><strong><font style="color:rgb(51,51,51);">final</font></strong></li>
+</ul>
+<p><font style="color:rgb(51,51,51);">1.</font><font style="color:rgb(51,51,51);"> </font><strong><font style="color:rgb(51,51,51);">基本数据</font></strong><font style="color:rgb(51,51,51);">类型用</font><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);">修饰，则不能修改，是常量；</font><strong><font style="color:rgb(51,51,51);">对象引用</font></strong><font style="color:rgb(51,51,51);">用</font><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);">修饰，则引用只能指向该对象，</font><font style="color:rgb(51,51,51);">不能指向别的对象，但是对象本身可以修改。</font></p>
+<p><font style="color:rgb(51,51,51);">2.</font><font style="color:rgb(51,51,51);"> </font><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);">修饰的方法不能被子类重</font><font style="color:rgb(51,51,51);">写</font></p>
+<p><font style="color:rgb(51,51,51);">3.</font><font style="color:rgb(51,51,51);"> </font><font style="color:rgb(51,51,51);">final</font><font style="color:rgb(51,51,51);">修饰的类不能被继承</font><font style="color:rgb(51,51,51);">。</font></p>
+<ul>
+<li><strong><font style="color:rgb(51,51,51);">this</font></strong></li>
+</ul>
+<p><font style="color:rgb(245,0,88);">this.</font><font style="color:rgb(245,0,88);">属性名称</font><font style="color:rgb(245,0,88);"> </font><font style="color:rgb(51,51,51);">指访问类中的成员变量，可以用来区分成员变量和局部变量。如下代码所示</font><font style="color:rgb(51,51,51);">，</font></p>
+<p><font style="color:rgb(245,0,88);">this.name </font><font style="color:rgb(51,51,51);">访问类Person当前实例的变量。</font></p>
+<pre><code class="language-java">/**
+ * @description:
+ *@author: 程序员大彬
+ *@time: 2021-08-17 00:29
+ */
+public class Person { 
+    String name;
+    int age;
+
+    public Person(String name, int age) { 
+        this.name = name;
+        this.age = age;
+    }
+}
+</code></pre>
+<p><font style="color:rgb(245,0,88);">this.方法名称 </font><font style="color:rgb(51,51,51);">用来访问本类的方法。以下代码中，</font><font style="color:rgb(245,0,88);">this.born() </font><font style="color:rgb(51,51,51);">调用类 Person 的当前实例的方法。</font></p>
+<pre><code class="language-java">/**
+*@description:
+*@author: 程序员大彬
+*@time: 2021-08-17 00:29
+*/
+public class Person {
+    String name;
+    int age;
+
+
+    public Person(String name, int age) { 
+        this.born();
+        this.name = name; 
+        this.age = age;
+    }
+
+
+    void born() {
+    }
+}
+</code></pre>
+<ul>
+<li><strong><font style="color:rgb(51,51,51);">super</font></strong></li>
+</ul>
+<p><font style="color:rgb(51,51,51);">super  关键字用于在子类中访问父类的变量和方法。</font></p>
+<pre><code class="language-java">class A {
+    protected String name = &quot;大彬&quot;;
+
+
+    public void getName() {
+        System.out.println(&quot;父类:&quot; + name);
+    }
+}
+
+
+public class B extends A {
+    @Override
+    public void getName() { 
+        System.out.println(super.name); super.getName();
+    }
+
+
+    public static void main(String[] args) {
+        B b = new B();
+        b.getName();
+    }
+    /**
+     *大彬
+     *父类:大彬
+     */
+}
+</code></pre>
+<p><font style="color:rgb(51,51,51);">在子类B中，我们重写了父类的</font><font style="color:rgb(245,0,88);">getName() </font><font style="color:rgb(51,51,51);">方法，如果在重写的</font><font style="color:rgb(245,0,88);">getName() </font><font style="color:rgb(51,51,51);">方法中我们要调用父类的相同方法，必须要通过super关键字显式指出。</font></p>
+<h2 id="java">Java 关键字</h2>
+<p>Java的关键字有哪些？</p>
+<p>1、48个关键字：abstract、assert、boolean、break、byte、case、catch、char、class、continue、default、do、double、else、enum、extends、final、finally、float、for、if、implements、import、int、interface、instanceof、long、native、new、package、private、protected、public、return、short、static、strictfp、super、switch、synchronized、this、throw、throws、transient、try、void、volatile、while。</p>
+<p>2、2个保留字（现在没用以后可能用到作为关键字）：goto、const。</p>
+<p>3、3个特殊直接量：true、false、null。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_46822367/article/details/120953556">Java关键字（48个关键字、2个保留字、3个特殊直接量）_爱打羽球的码猿的博客-CSDN博客_java关键字</a>
+</p>
+</blockquote>
+<h2 id="static">static 关键字的使用</h2>
+<p>1）类成员，直接使用类名.成员 调用。</p>
+<p>2）静态方法只能访问静态成员。</p>
+<p>3）静态方法不能使用this、super 关键字。</p>
+<p>4）静态方法不能被非静态方法重写或重载。</p>
+<h2 id="final_1">final 关键字</h2>
+<p>1） 被final 修饰的变量为常量不能改变。</p>
+<p>2） 被final 修饰的方法不可以重写。</p>
+<p>3） 被final 修饰的类不能被继承。 </p>
+<h2 id="abstract">abstract 关键字</h2>
+<p>1） 被abstract 修饰的类不能实例化。</p>
+<p>2） 被abstract 修饰的方法只能在子类中实现。</p>
+<h2 id="native">native 关键字</h2>
+<p>非 Java 语言的编写，例如 JNI 技术。</p>
+<h2 id="synchronized">synchronized 关键字</h2>
+<p>多线程的同步访问控制。</p>
+<h2 id="final_2"><font style="color:rgb(49,49,49);">final的用途</font></h2>
+<ol>
+<li>final 修饰类时，这个类不能被继承了</li>
+<li>final 修饰方法，此方法就不能被重写。 eg：object类中的getClas 方法</li>
+<li>final 修饰变量，这个时候的变量就是一个常量。<ol>
+<li>final 可以修饰属性</li>
+<li>final 可以修饰局部变量，尤其是使用final修饰形参时，表明此形参是一个常量，当我们调用此方法时，给给常量形参赋一个实参，一旦赋值以后，就只能在方法体内使用此形参，但不能进行重新赋值</li>
+</ol>
+</li>
+<li>static final 用来修饰属性 ：全局变量</li>
+</ol>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_45933454/article/details/112985755">final的作用_阿离83的博客-CSDN博客_final的作用</a>
+</p>
+</blockquote>
+<h2 id="staticfinal"><font style="color:rgb(36,41,46);">static和final的区别和用途</font></h2>
+<ul>
+<li>Static<ul>
+<li>修饰变量：静态变量随着类加载时被完成初始化，内存中只有一个，且JVM也只会为它分配一次内存，所有类共享静态变量。</li>
+<li>修饰方法：在类加载的时候就存在，不依赖任何实例；static方法必须实现，不能用abstract修饰。</li>
+<li>修饰代码块：在类加载完之后就会执行代码块中的内容。</li>
+<li>父类静态代码块 -&gt; 子类静态代码块 -&gt; 父类非静态代码块 -&gt; 父类构造方法 -&gt; 子类非静态代码块 -&gt; 子类构造方法</li>
+</ul>
+</li>
+<li>Final<ul>
+<li>修饰变量：<ul>
+<li>编译期常量：类加载的过程完成初始化，编译后带入到任何计算式中。只能是基本类型。</li>
+<li>运行时常量：基本数据类型或引用数据类型。引用不可变，但引用的对象内容可变。</li>
+</ul>
+</li>
+<li>修饰方法：不能被继承，不能被子类修改。</li>
+<li>修饰类：不能被继承。</li>
+<li>修饰形参：final形参不可变</li>
+</ul>
+</li>
+</ul>
+<h2 id="final_3"><font style="color:rgb(36,41,46);">关于 final 关键字的一些总结</font></h2>
+<p><font style="color:rgb(36,41,46);">final 关键字主要用在三个地方：变量、方法、类。</font></p>
+<p><font style="color:rgb(36,41,46);">1. 对于一个final 变量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后便不能再让其指向另一个对象。</font></p>
+<p><font style="color:rgb(36,41,46);">2.</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">当用</font><font style="color:rgb(36,41,46);">final</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">修饰一个类时，表明这个类不能被继承。</font><font style="color:rgb(36,41,46);">final</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">类中的所有成员</font><font style="color:rgb(36,41,46);">方法都会被隐式地指定为</font><font style="color:rgb(36,41,46);">final </font><font style="color:rgb(36,41,46);">方法。</font></p>
+<p><font style="color:rgb(36,41,46);">3.</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">使用</font><font style="color:rgb(36,41,46);">final</font><font style="color:rgb(36,41,46);"> </font><font style="color:rgb(36,41,46);">方法的原因有两个。</font></p>
+<p><font style="color:rgb(36,41,46);">第一个原因是把方法锁定，以防任何继承类修改它的含义；</font></p>
+<p><font style="color:rgb(36,41,46);">第二个原因是效率。在早期的Java 实现版本中，会将final 方法转为内嵌调用。但是如果方法过于庞大，可能看不到内嵌调用带来的任何性能提升（现在的Java 版本已经不需要使用final 方法进行这些优化了）。类中所有的private 方法都隐式地指定为final。</font></p>
+<h2 id="_4"><font style="color:rgb(36,41,46);">创建一个对象用什么运算符?对象实体与对象引用有何不同?</font></h2>
+<p><font style="color:rgb(36,41,46);">new 运算符，new 创建对象实例（对象实例在堆内存中），对象引用指向对象实例（对象引用存放在栈内存中）。一个对象引用可以指向0 个或1 个对象（一根绳子可以不系气球，也可以系一个气球）;一个对象可以有n 个引用指向它（可以用n 条绳子系住一个气球）。</font></p>
+<h2 id="finalfinallyfinalize_2">final、finally、finalize的区别</h2>
+<ul>
+<li>final可以修饰类、变量、方法，修饰类表示该类不能被继承、修饰方法表示该方法不能被重写、修饰变量表示该变量是一个常量不能被重新赋值。</li>
+<li>finally一般作用在try-catch代码块中，在处理异常的时候，通常我们将一定要执行的代码方法finally代码块中，表示不管是否出现异常，该代码块都会执行，一般用来存放一些关闭资源的代码。</li>
+<li>finalize是一个方法，属于Object类的一个方法，而Object类是所有类的父类，该方法一般由垃圾回收器来调用，当我们调用System.gc() 方法的时候，由垃圾回收器调用finalize()，回收垃圾，一个对象是否可回收的最后判断。</li>
+</ul>
+<h3 id="final-finally-finalize_1"><font style="color:#E8323C;">final、 finally、 finalize 的区别</font></h3>
+<ol>
+<li>final</li>
+</ol>
+<p>修饰符（关键字）。</p>
+<p>如果一个类被声明为final，意味着它不能再派生出新的子类，不能作为父类被继承。因此一个类不能既被声明为 abstract的，又被声明为final的。将变量或方法声明为final，可以保证它们在使用中不被改变。被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。被声明为final的方法也同样只能使用，不能重载。</p>
+<ol>
+<li>finally</li>
+</ol>
+<p>代码块。</p>
+<p>在异常处理时提供 finally 块来执行任何清除操作。如果抛出一个异常，那么相匹配的 catch 子句就会执行，然后控制就会进入 finally 块（如果有的话）。</p>
+<ol>
+<li>finalize</li>
+</ol>
+<p>方法名。</p>
+<p>Java 技术允许使用 finalize() 方法在垃圾收集器将对象从内存中清除出去之前做必要的清理工作。</p>
+<p>这个方法是由垃圾收集器在确定这个对象没有被引用时对这个对象调用的，换句话说，finalize() 方法是在垃圾收集器删除对象之前对这个对象调用的。。</p>
+<p>它是在 Object 类中定义的，因此所有的类都继承了它，子类覆盖 finalize() 方法以<u>整理系统资源或者执行其他清理工作</u>。</p>
+<p>finalize()方法是对象逃脱死亡命运的最后一次机会。当对象没有被任何引用链相连时，会被GC第一次标记，并将对象放入F-Queue中。稍后，GC会对F-Queue中的对象进行第二次小规模的标记，对象如果要在finalize()中成功拯救自己，需要重新与引用链上的任何一个对象建立关联，譬如把自己(this关键字)赋值给某个类变量或对象的成员变量，那在第二次标记时它将被移除“即将回收”的集合。</p>
+<p>特点：</p>
+<p>（1）对象可以在被GC时自我拯救</p>
+<p>（2）这种自救的机会只有一次，因为一个对象的finalize()方法最多只会被系统自动调用一次</p>
+<h3 id="java-goto"><font style="color:#CF1322;">Java 有没有 goto ?</font></h3>
+<p><font style="color:rgb(79,79,79);">goto 是Java中的保留字，在目前版本的Java中没有使用。（根据James Gosling（Java之父）编写的《The Java Programming Language》一书的附录中给出了一个Java关键字列表，其中有goto和const，但是这两个是目前无法使用的关键字，因此有些地方将其称之为保留字，其实保留字这个词应该有更广泛的意义，因为熟悉C语言的程序员都知道，在系统类库中使用过的有特殊意义的单词或单词的组合都被视为保留字）</font></p>
+<h3 id="publicprivateprotected">访问修饰符public，private，protected，以及不写（默认）时的区别？</h3>
+<p>区别如下：</p>
+<table>
+<thead>
+<tr>
+<th>作用域</th>
+<th>当前类</th>
+<th>同包</th>
+<th>子类</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>default</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>private</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">访问修饰符限制</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>private</th>
+<th>protected</th>
+<th>friendly(default)</th>
+<th>public</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同包不同</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>同包子类</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>不同包不同类</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>不同包子类</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+<h3 id="oopublicprivateprotecteddefault">请结合OO设计理念，谈谈访问修饰符public、private、protected、default在应用设计中的作用</h3>
+<blockquote>
+<p><a href="https://www.jb51.net/article/114223.htm">浅谈java中OO的概念和设计原则(必看)_java_脚本之家</a></p>
+<p><a href="http://java.atguigu.com/news/2936.html">访问修饰符 public、private、protected、default 在应用设计中的作用-尚硅谷java培训</a>
+</p>
+<p>更新: 2022-12-02 23:35:00<br />
+原文: <a href="https://www.yuque.com/joyo/interview/wo4qum">https://www.yuque.com/joyo/interview/wo4qum</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

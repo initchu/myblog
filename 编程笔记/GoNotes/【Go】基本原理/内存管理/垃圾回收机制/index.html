@@ -1,0 +1,416 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>垃圾回收机制 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              垃圾回收机制
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">垃圾回收机制</h1>
+<h1 id="go-v13-mark-and-sweep">Go V1.3 之前的标记清除（mark and sweep）法</h1>
+<p>在Go V1.3之前是采用<strong>标记清除法</strong>。</p>
+<p>流程是：</p>
+<ol>
+<li>暂停业务逻辑，找出不可达的对象，和可达的对象。</li>
+<li>开始标记，程序找出它所有可达的对象，并做上标记。</li>
+<li>标记完了之后，开始清除未标记的对象。</li>
+<li>停止暂停，让程序继续跑，然后循环重复这个过程，直到 process 程序生命周期接属</li>
+</ol>
+<p>该方法存在一些缺点:</p>
+<ol>
+<li>STW ，stop the world 会让程序暂停，程序出现卡顿；</li>
+<li>标记需要扫描整个 heap</li>
+<li>清除数据会产生 heap 碎片</li>
+<li>将第四步和第三步换位置，缩短 STW 的范围<img alt="STW 暂停范围" src="../img/cSw5ZeTbFEdTv8c2/1663066494858-877ae499-5560-4fa8-af5c-f54ac640d649-346456.png" /></li>
+</ol>
+<h2 id="heap">拓展：heap 碎片</h2>
+<h3 id="heap-stack">Heap 堆和 Stack 栈的区别</h3>
+<p><font style="color:rgb(61, 70, 77);">堆与栈的区别有：</font></p>
+<ol>
+<li><font style="color:rgb(61, 70, 77);">栈由系统自动分配，而堆是人为申请开辟；</font></li>
+<li><font style="color:rgb(61, 70, 77);">栈获得的空间较小，而堆获得的空间较大；</font></li>
+<li><font style="color:rgb(61, 70, 77);">栈由系统自动分配，速度较快，而堆一般速度比较慢；</font></li>
+<li><font style="color:rgb(61, 70, 77);">栈是连续的空间，而堆是不连续的空间。</font></li>
+</ol>
+<h3 id="_2">操作系统存储管理中的内部碎片和外部碎片</h3>
+<h5 id="_3">内部碎片</h5>
+<p><strong>固定分区存储管理</strong>会产生内部碎片。</p>
+<p>固定分区存储管理将主存发划分为<strong>系统区</strong>和<strong>用户区</strong>。系统区存放操作系统驻留代码和数据，用户区划分为若干个连续区域，每个区域的位置固定，大小可以相同也可以不同，但是每个区域在任意时刻只能装入一道作业，一旦划分好区域，主存中的分区个数就固定了。</p>
+<p>当我们在 10 KB 大小的一个分区中装入 8KB 大小的程序时，此时的分区有 2KB 被浪费掉了，而且由于每个分区只能装入一个程序，所以这 2KB 大小的空间也不能被其他的程序使用，此时我们可以说产生了 2KB 的内部碎片。当内部积累到一定程度时，将严重影响主存空间的利用率个系统的运行效率。</p>
+<h5 id="_4">外部碎片</h5>
+<p><strong>可变分区存储管理</strong>可能产生外部碎片。</p>
+<p>在可变分区存储管理中，主存中的分区不是事先划分好的，而是在主存空间充足时，根据该作页需要的空间大小分配一个分区给他，实现了作业大小等于分区大小，解决了内部碎片的问题。那么作业大小等于分区大小为什么还会产生碎片呢?</p>
+<p>例子：</p>
+<p><img alt="1663068272167-c67746f0-58c2-47f5-8539-0f494ba25760.png" src="../img/cSw5ZeTbFEdTv8c2/1663068272167-c67746f0-58c2-47f5-8539-0f494ba25760-089489.png" /></p>
+<p>我们可以看到，上图的四个分区中有三个正在被使用，一个未被使用，那么当我们要装入大小为 12KB 的作业时，系统会为我们在 15 KB 的空闲区中划分出一个 12 个 KB 大小的分区，这样这个 15KB 大小的分区就变成了一个 12 KB 大小的分区和一个 3 KB 大小的分区，12 KB 大小的分区被作业占用了，3KB 大小的分区因为太小所以能容纳的作业<strong>太少</strong>，所以被占用的可能性也很小，很多个这种小的内存空间长时间不被占用就是一种对内存空间的浪费，我们称之为外部碎片。</p>
+<h5 id="_5">总结原因</h5>
+<p>内部碎片和外部碎片本质上都是对内存空间的浪费，区分二者的最主要特征就是：内部碎片产生与分区内，外部碎片产生于分区外，内外是相对于分区而言的。</p>
+<p><strong>内部碎片产生的原因：</strong></p>
+<p>在固定分区中，固定分区的大小大于等于作业大小，当分区大小大于作业大小时就会产生不能被其他作业利用的碎片，称为内部碎片。在固定分区存储管理中，10 KB 大小的分区装入 8 KB 大小的作业，分区内产生了 2 KB 大小的内部碎片。</p>
+<p><strong>外部碎片产生的原因：</strong></p>
+<p>在可变分区存储管理中，系统划分给作业的分区大小等于作业大小，在分区内就不会产生多余的空间，但是在分区外就可能产生小的内存碎片，因为太小不能被分配给作业，小的碎片长期积累浪费了大量的内存空间，我们称之为外部碎片。</p>
+<h1 id="go-v15">Go V1.5 三色标记法</h1>
+<h2 id="_6">三色标记法概述</h2>
+<p>在Go V1.5 的时候采用了<strong>三色标记法</strong>。</p>
+<p>三色标记法是指在标记过程中将对象标记为<strong>黑色、灰色或者白色</strong>。黑色代表存活对象，灰色代表正在标 </p>
+<p>记中，白色表示死亡对象；</p>
+<ul>
+<li>最开始的时候，所有的对象都是白色的； </li>
+<li>而后从 GC root 出发，先将对象标记为灰色，再将其引用对象标记为灰色，最后把自己从灰色变为黑色； </li>
+</ul>
+<p>具体过程如下：</p>
+<ol>
+<li>全部节点标记白色。</li>
+<li>每次 GC 回收开始, 然后从根节点开始遍历所有对象，把遍历到的对象从白色集合放入“灰色”集合。</li>
+<li>遍历灰色集合，将灰色对象引用的对象从白色集合放入灰色集合，之后将此灰色对象放入黑色集合。</li>
+<li>重复第三步，直到灰色中无任何对象。</li>
+<li>回收所有的白色标记表的对象，也就是回收垃圾。</li>
+</ol>
+<h2 id="_7">三色标记法误标记问题</h2>
+<p>**存在误标记的问题：这个标记过程可以和应用线程并发运行，不过这个时候可能存在一个问题，就是可能一个对象被标记为黑色（即存活），但是随后应用线程更新了指向它的引用，它变成了死对象。这个时候，标记结束之后，该对象依旧会被认为还存活着（活死人，假阴性）。 **</p>
+<p>举例子：</p>
+<p><img alt="1663070724273-4033b3ce-b320-468f-bb41-4d82a2ce02d9.png" src="../img/cSw5ZeTbFEdTv8c2/1663070724273-4033b3ce-b320-468f-bb41-4d82a2ce02d9-091055.png" /></p>
+<p>已经标记为灰色的对象 2，有指针p指向白色的对象3。</p>
+<p><img alt="1663070761002-0795ca28-91af-4987-9c15-917d126e6bf6.png" src="../img/cSw5ZeTbFEdTv8c2/1663070761002-0795ca28-91af-4987-9c15-917d126e6bf6-296122.png" /></p>
+<p>在还没扫描到对象 2，已经标记为黑色的对象 4 创建指针 q，指向了对象 3。</p>
+<p><img alt="1663070940328-dcaaa562-f592-41af-a3d6-5655f2cfcf10.png" src="../img/cSw5ZeTbFEdTv8c2/1663070940328-dcaaa562-f592-41af-a3d6-5655f2cfcf10-368571.png" /></p>
+<p>这时候，对象 2 将指针 p 移除，对象 3 就被挂在了已经扫描完成的黑色的对象 4 下。</p>
+<p><strong>总结</strong></p>
+<p>如果三色标记法不被 STW 保护，在以下条件下会发生对象丢失的现象：</p>
+<ul>
+<li>一个白色对象被黑色对象引用（白色被挂在黑色下）</li>
+<li>灰色对象与它之间的可达关系的白色对象遭到破坏（灰色同时丢了该白色）</li>
+</ul>
+<h1 id="_8">强弱三色不变式</h1>
+<p>破坏以下条件则不会发生对象丢失：</p>
+<ul>
+<li>一个白色对象被黑色对象引用（白色被挂在黑色下）</li>
+<li>灰色对象与它之间的可达关系的白色对象遭到破坏（灰色同时丢了该白色）</li>
+</ul>
+<p>为此，引入了强弱三色不变式。</p>
+<h2 id="_9">强三色不变式</h2>
+<p>强制性的不允许黑色对象引用白色对象。</p>
+<h2 id="_10">弱三色不变式</h2>
+<p>黑色对象可以引用白色，但是白色也会被灰色引用，或者可达的上游路线上有灰色。</p>
+<h1 id="_11">屏障机制</h1>
+<p>屏障机制就是采用强三色不变式和弱三色不变式的机制来保证对象不会被丢失。</p>
+<p>屏障就是当程序执行的流程过程中，可以加一个判断定式，这就是屏障的含义。思想与钩子函数类似。</p>
+<p>有两种：</p>
+<ul>
+<li>插入屏障：什么时候触发，当一个对象被引用则会被触发</li>
+<li>删除屏障：如果对象被删除，就触发这个删除屏障</li>
+</ul>
+<h2 id="_12">插入写屏障</h2>
+<p>比如说 A 引用 B 的时候，B 被标记为灰色。（A 通过索引可以找到 B ，那么 B 必须标记为灰色。）</p>
+<p><img alt="1663314176723-7bc3c0e9-542a-4026-bcf0-b38425184e65.png" src="../img/cSw5ZeTbFEdTv8c2/1663314176723-7bc3c0e9-542a-4026-bcf0-b38425184e65-169508.png" /></p>
+<p>插入屏障不在栈上使用。</p>
+<h2 id="_13">删除写屏障</h2>
+<p><img alt="1663328584497-1e9cf761-cb5d-449e-a1f0-0491c0c23485.png" src="../img/cSw5ZeTbFEdTv8c2/1663328584497-1e9cf761-cb5d-449e-a1f0-0491c0c23485-913781.png" /></p>
+<h2 id="_14">混合写屏障</h2>
+<p><img alt="1663328605135-13c5468a-4f4b-4325-b280-b285bcaf8f4d.png" src="../img/cSw5ZeTbFEdTv8c2/1663328605135-13c5468a-4f4b-4325-b280-b285bcaf8f4d-913198.png" /></p>
+<p><img alt="1663328635396-bd0fcaae-49d7-4aeb-884a-8d34471fc6c4.png" src="../img/cSw5ZeTbFEdTv8c2/1663328635396-bd0fcaae-49d7-4aeb-884a-8d34471fc6c4-562944.png" /></p>
+<blockquote>
+<p>更新: 2022-11-07 17:04:23<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/evi3g1">https://www.yuque.com/xiaoshan_wgo/codingnotes/evi3g1</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

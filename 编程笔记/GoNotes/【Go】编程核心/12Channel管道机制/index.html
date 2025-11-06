@@ -1,0 +1,638 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83/12Channel%E7%AE%A1%E9%81%93%E6%9C%BA%E5%88%B6/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>12 Channel 管道机制 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12-channel" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12 Channel 管道机制
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      需求场景
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutex" class="md-nav__link">
+    <span class="md-ellipsis">
+      全局互斥锁Mutex解决资源竞争问题
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Channel管道机制解决资源争夺问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Channel管道机制解决资源争夺问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#channel_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Channel的基本介绍
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      管道的定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      管道的使用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      管道的关闭
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      管道的遍历
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#goroutinechannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      goroutine和channel结合
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="12-channel">12 Channel 管道机制</h1>
+<h2 id="_1">需求场景</h2>
+<p>假设有这样一个场景，想要将协程和主线程计算后产生的数据存放到全局的Map中。</p>
+<p>例如，编写一个函数来计算各个数的阶乘，并放入到map中，启动了多个协程进行计算机，统计的结果放入到map中。</p>
+<pre><code class="language-go">package main
+var (
+    myMap = make(map[int]int, 10)
+)
+//test 计算n!
+func test(n int){
+    res := 1
+    for i := 1; i &lt; n; i++{
+        res *= i
+    }
+    myMap[n] = res
+}
+func main(){
+    //开启多个协程
+    for i := 1;i &lt;= 200; i++{
+        go test(i)
+    }
+    time.Sleep(time.Second* 10)
+    for i,v := range myMap{
+        fmt.Printf(&quot;map[%d]=%d\n&quot;,i,v)
+    }
+}
+</code></pre>
+<p>运行结果，存入之后是混乱的。</p>
+<p>值得考虑的是，需要保证不同的协程之间避免出现资源的争夺问题。</p>
+<p>有两种办法可以解决，第一种是使用全局互斥锁来解决，第二种办法是使用管道机制。</p>
+<h2 id="mutex">全局互斥锁Mutex解决资源竞争问题</h2>
+<pre><code class="language-go">package main
+var (
+    myMap = make(map[int]int, 10)
+    //声明一共全局的互斥锁lock
+    //sync是包，全拼&quot;synchornized&quot;是同步的意思
+    //Mutex是互斥的意思
+    lock sync.Mutex
+)
+//test 计算n!
+func test(n int){
+    res := 1
+    for i := 1; i &lt; n; i++{
+        res *= i
+    }
+
+    //加锁
+    lock.Lock()
+    myMap[n] = res
+    //存入之后解锁
+    lock.Unlock()
+}
+func main(){
+    //开启多个协程
+    for i := 1;i &lt;= 200; i++{
+        go test(i)
+    }
+    time.Sleep(time.Second* 10)
+    lock.Lock()
+    for i,v := range myMap{
+        fmt.Printf(&quot;map[%d]=%d\n&quot;,i,v)
+    }
+    lock.Unlock()
+}
+</code></pre>
+<p>为什么在第28行也要加一个互斥锁？</p>
+<p>按理说十秒钟之后上面的协程都应该执行完毕了，后面的打印就不会出现资源竞争的问题了。在实际的运行中，还是可能在打印部分出现资源竞争问题，因为虽然我们从程序设计上可以知道10秒就可以执行完所有的协程，但是主线程并不知道，因此底层仍可能出现资源争夺，这里加入互斥锁就可以解决这个问题。😅</p>
+<h2 id="channel">Channel管道机制解决资源争夺问题</h2>
+<p>前面使用全局互斥锁来解决goroutine的通信并不完美，这是因为：</p>
+<ul>
+<li>主线程在等待所有goroutine全部完成的时间很难确定</li>
+<li>如果主线程休眠时间长了，会加长等待时间，如果等待时间短了，可能还有goroutine处于工作状态，这时也会随主线程的退出而销毁</li>
+<li>通过全局互斥锁来实现通讯，也没有利用多个协程同时对全局变量进行读写操作</li>
+</ul>
+<h3 id="channel_1">Channel的基本介绍</h3>
+<ul>
+<li>channel本质是一个数据结构-队列</li>
+<li>数据是先进先出的</li>
+<li>管道可以保证线程安全，多个协程访问的时候，不需要加锁，channel本身就是线程安全的</li>
+<li>channel是由类型的，一个string的channel只能存放string类型的数据</li>
+</ul>
+<h3 id="_2">管道的定义</h3>
+<pre><code class="language-go">var intChan chan int
+var mapChan chan map[int]string
+var perChan chan Person
+var perChan2 chan *Person
+</code></pre>
+<p>管道是引用类型</p>
+<p><code>channel</code>必须初始化才能写入数据，即<code>make</code>后才能使用。</p>
+<p>管道是由类型的，<code>intChan</code>只能写入整数<code>int</code></p>
+<h3 id="_3">管道的使用</h3>
+<pre><code class="language-go">package main
+func main(){
+    //1.创建一共可以存放3个int类型的管道
+    var intChan chan int
+    intChan = make(chan int, 3)
+    //2.查看intChan是什么
+    fmt.Printf(&quot;intChan的值 = %v,intChan本身的地址 = %p\n&quot;,intChan,&amp;intChan) //值就是一个地址
+    //3.向管道写入数据
+    intChan &lt;- 10
+    num := 211
+    intChan &lt;-num
+    intChan &lt;- 50 
+    //给管道写入数据的时候，不能超过其容量
+    fmt.Printf(&quot;channel len = %v cap = %v \n&quot;,len(intChan),cap(intChan))//3，3
+    //3.从管道中读取数据
+    var num2 int
+    num2 = &lt;-intChan //管道的数据推给了num2,先进先出
+    fmt.Println(&quot;num2 = &quot;,num2)
+    fmt.Printf(&quot;channel len = %v cap = %v \n&quot;,len(intChan),cap(intChan)) //2,3
+    //6.在没有使用协程的情况下，如果我们的管道数据已经全部取出，再取就会报告deadkock死锁,阻塞
+    num3 := &lt;-intChan //211
+    num4 := &lt;-intChan //50
+    num5 := &lt;-intChan //deadlock
+    fmt.Println(&quot;num3 =&quot;,num3 ,&quot;num4 = &quot;,num4, &quot;num5 = &quot;,num5)
+}
+</code></pre>
+<p>总结：</p>
+<ul>
+<li>channel中只能存放<strong>指定</strong>的数据类型</li>
+<li>channel的数据放满了之后，就不能再放入了</li>
+<li>如果从channel取出数据后，可以继续放入</li>
+<li>在没有使用协程的情况下，如果channel数据取完了，再取，就会报告deadlock</li>
+</ul>
+<p>管道的使用注意事项：</p>
+<p><strong>只能存放指定的数据类型之空接口！</strong></p>
+<pre><code class="language-go">package main
+type Cat struct{
+    Name string
+    Age int
+}
+func main(){
+    //定义一个存放任意数据类型的管道，3个数据
+    a11Chan := make(chan interface{},3)
+    a11Chan &lt;- 10
+    a11Chan &lt;-&quot;tom jack&quot;
+    cat = Cat{&quot;小花猫&quot;, 4}
+    a11Chan &lt;- cat
+    //我们希望获取到管道中的第三个元素，则先将前两个推出
+    &lt;-a11Chan
+    &lt;-a11Chan
+    newCat := &lt;-allChan
+    fmt.Printf(&quot;newCat type = %T&quot;,newCat) //
+    //转一下类型断言 
+    //a := newCat.(cat)
+    fmt.Printf(&quot;newCat.Name= %v&quot;,newCat.Name)//如果没有类型断言是报错的，管道存放的是空接口，里面是没有字段和方法的
+}
+</code></pre>
+<h3 id="_4">管道的关闭</h3>
+<p>使用内置函数close可以关闭channel，当channel关闭后，就不能再向channel写入数据了，但是仍然可以从该channel读取数据。</p>
+<pre><code class="language-go">package main
+func main(){
+    intChan := make(chan int, 3)
+    intChan&lt;- 100
+    intChan&lt;- 200
+    close(intChan)//关闭channel
+    fmt.Println(&quot;运行成功&quot;)
+    //读取数据
+    n1 := &lt;-intChan
+    fmt.Println(&quot;n1=&quot;,n1)
+}
+</code></pre>
+<h3 id="_5">管道的遍历</h3>
+<p>channel不能使用普通的遍历循环。</p>
+<p>channel支持<code>for - range</code>的方式进行遍历：</p>
+<ul>
+<li>在遍历的时候，如果channel没有关闭，则会出现<code>deadlock</code>的错误</li>
+<li>在遍历的时候，如果channel已经关闭，则会正常遍历数据，遍历完之后，就会退出遍历 </li>
+</ul>
+<pre><code class="language-go">package main
+func main(){
+    intChan := make(chan int, 100)
+    for i:= 0; i&lt;100; i++{
+        intChan&lt;- i*2
+    } 
+    //Close(intChan)
+    //如果管道没有关闭，则在读取结束后，出现死锁的错误
+    for v:= range intChan{
+        fmt.Println(&quot;v=&quot;, v)
+    }
+}
+</code></pre>
+<p>注意❌：遍历管道的时候不能使用普通的<code>for</code>循环：<code>&lt;font style="color:#E8323C;"&gt;for i := 0; i &lt; len(intChan); i++{}&lt;/font&gt;</code></p>
+<h2 id="goroutinechannel">goroutine和channel结合</h2>
+<p>在一个管道中，我们需要实现以下要求：</p>
+<ul>
+<li>开启一个writeData协程，向管道intChan中写入50个整数。</li>
+<li>开启一个readData协程，从管道中读取writeData写入的数据。</li>
+<li>主线程需要等待writeData和readData协程都完成工作才能退出。</li>
+</ul>
+<p>设计思路是：</p>
+<p>开启两个<strong>协程（读和写）</strong>同时执行，同时使用两个<strong>管道</strong>，其中一个管道<code>intChan</code>用来存放数据，当<strong>读协程</strong>执行读完，向另一个管道<code>exitChan</code>中写入一个<code>true</code>，并关闭第二个管道。设置第二个管道的原因是，当开启协程之后，主线程仍旧往下执行，设置一个持续读取的循环，直到读取到了<code>eixtChan</code>里面的<code>true</code>，就证明了这两个协程执行完毕，也就是保证了“主线程需要等待writeData和readData协程都完成工作才能退出”这一个条件。</p>
+<pre><code class="language-go"> package main
+//writeData 写数据
+func writeData(intChane chan int){
+    for i := 1; i &lt;= 50; i++{
+        //放入数据
+        intChan &lt;- i
+        fmt.Println(&quot;writeData&quot;,i)
+    }
+    close(intChan)//关闭
+}
+// readData 读数据
+func readData(intChan chan int, exitChan chan bool){
+    for{
+        v, ok := &lt;-intChan
+        if !ok{
+            break
+        }
+        fmt.Printf(&quot;readData = %v\n&quot;,v)
+    }
+    exitChan&lt;- true
+    close(exitChan)//读完数据关闭管道
+}
+func main(){
+    //创建两个管道
+    intChan := make(chan int, 50)
+    exitChan := make(chan bool, 1)
+    go writeData(intChan)
+    go readData(intChan, exitChan)
+    for{ //防止主线程退出，一直读exitChan管道,读到了就退出 
+        _,ok := &lt;-exitChan
+        if !ok{
+            break
+        }
+    }
+}
+
+</code></pre>
+<p><strong>❗</strong><strong> 注意：如果编译器发现只向管道写入数据，而没有读取，则会出现</strong><code>**deadlock**</code><strong>，原因发生了阻塞，</strong><code>**intChan**</code><strong>容量是10，而代码writeData会写入50个数据，因此会阻塞在writeData的</strong><code>**ch &lt;- i**</code><strong> 。</strong></p>
+<blockquote>
+<p>更新: 2022-02-21 13:46:51<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/ptkuec">https://www.yuque.com/xiaoshan_wgo/codingnotes/ptkuec</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

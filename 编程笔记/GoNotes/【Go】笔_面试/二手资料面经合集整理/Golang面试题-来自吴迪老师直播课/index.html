@@ -1,0 +1,789 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/GoNotes/%E3%80%90Go%E3%80%91%E7%AC%94_%E9%9D%A2%E8%AF%95/%E4%BA%8C%E6%89%8B%E8%B5%84%E6%96%99%E9%9D%A2%E7%BB%8F%E5%90%88%E9%9B%86%E6%95%B4%E7%90%86/Golang%E9%9D%A2%E8%AF%95%E9%A2%98-%E6%9D%A5%E8%87%AA%E5%90%B4%E8%BF%AA%E8%80%81%E5%B8%88%E7%9B%B4%E6%92%AD%E8%AF%BE/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Golang 面试题 - 来自吴迪老师直播课 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#golang-" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Golang 面试题 - 来自吴迪老师直播课
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1golang" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.简单介绍一下Golang
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2golang" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.Golang是否可以声明一个类？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3go" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.Go是否支持泛型
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.一些区别
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.一些区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）切片和数组的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2）方法和函数的区别
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="（2）方法和函数的区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      调用方式不一样
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3makenew" class="md-nav__link">
+    <span class="md-ellipsis">
+      （3）make与new的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4maininit" class="md-nav__link">
+    <span class="md-ellipsis">
+      （4）main和init函数的区别
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5channelmutex" class="md-nav__link">
+    <span class="md-ellipsis">
+      （5）channel和mutex锁机制的区别
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5go-runbuildgetinstall" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.比较一下go run/build/get/install几个命令的异同？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6make" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.一个通过make()命令创建的缓冲区被分配了一块内存后。如何销毁缓冲区并回收内存？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.Slice 切片
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.Slice 切片">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1） Slice结构是怎么样的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-slice-grow" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2） Slice grow 规律是什么
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8map" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.Map相关问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.Map相关问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1map" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）Map 元素可以取地址么？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2map-recover" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2）Map 可以并发读写么？可以 recover 么？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3syncmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      （3）sync.Map 适合什么场景用？实现上有什么问题？如何优化？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4map" class="md-nav__link">
+    <span class="md-ellipsis">
+      （4）Map 用的底层数据结构是什么？相比另一种有什么优劣？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5map" class="md-nav__link">
+    <span class="md-ellipsis">
+      （5）Map 是如何扩容的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6map" class="md-nav__link">
+    <span class="md-ellipsis">
+      （6）Map 会缩容么？
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.Channel相关问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.Channel相关问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-buffer-channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）有无 Buffer Channel 的区别？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2channel-close-readwriteclose" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2）Channel close 后 read/write/close 分别会发生什么？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      （3）Channel 底层实现原理是什么样的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4channel" class="md-nav__link">
+    <span class="md-ellipsis">
+      （4）Channel 和调度是如何交互的？
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.interface 相关问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.interface 相关问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1interface-nil" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）interface 如何判 nil？
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.调度相关问题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.调度相关问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1gomaxprocs-gc" class="md-nav__link">
+    <span class="md-ellipsis">
+      （1）GOMAXPROCS 代表了什么？如何影响调度、GC 的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      （2）如何控制协程数量？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-kubernetes-runtimecpunum" class="md-nav__link">
+    <span class="md-ellipsis">
+      （3）在 Kubernetes 集群中，有没有遇到过 runtime.CPUNum 获取不正
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      （4）确的问题？如何解决的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5stw" class="md-nav__link">
+    <span class="md-ellipsis">
+      （5）STW 怎么实现的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      （6）Runtime 初始化流程是什么样的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      （7）抢占式调度是如何实现的？
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8goroutine-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      （8）goroutine stack 默认多少？如何扩缩容的？
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="golang-">Golang 面试题 - 来自吴迪老师直播课</h1>
+<p>（一些有关go语言特性的问题）</p>
+<p><a href="https://www.yuque.com/attachments/yuque/0/2022/zip/21525551/1647178905368-cb25d699-132f-4870-9728-bc98f21edc3f.zip">优质原创计算机+后端知识总结-Github掘金计划.zip</a></p>
+<h3 id="1golang">1.简单介绍一下Golang</h3>
+<p>谷歌开发的一种系统编程语言，他具有内置的垃圾回收机制，支持高并发，代码可以编译成单个可执行二进制文件，不需要添加库或者运行时环境即可在服务器上执行。</p>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>简单的部署方式：可直接编译成机器码，不依赖其他库，直接运行就可以部署。</li>
+<li>静态类型语言：编译的时候可以检查出来隐藏的大多数问题。</li>
+<li>语言层面的并发：天生的基因支持，充分的利用多核。</li>
+<li>强大的标准库：runtime系统的调度机制，高效的GC垃圾回收，丰富的标准库。</li>
+</ul>
+<h3 id="2golang">2.Golang是否可以声明一个类？</h3>
+<p>当然可以，结构体可以是一个类<br />
+type Person struct{...}<br />
+怎么理解面向对象的呢，封装管理可以使编程更加方便。封装性（变量为属性，函数为方法），继承性（可以少些代码），多态（多种不同的子类形态，抽象：接口）<br />
+（复习所有面向对象的相关知识点）</p>
+<h3 id="3go">3.Go是否支持泛型</h3>
+<h3 id="4">4.一些区别</h3>
+<h4 id="1">（1）切片和数组的区别</h4>
+<p>数组是固定长度的，切片（简单来说可以“理解”成动态数组）可以保存不确定个数的数据。</p>
+<p>数组的长度不可改变，在特定场景中这样的集合就不太适用，Go中提供了一种灵活，功能强悍的内置类型Slices切片(“动态数组"),与数组相比切片的长度是不固定的，可以追加元素，在追加时可能使切片的容量增大。</p>
+<p>切片中有两个概念：一是len<strong>长度</strong>，二是<strong>cap容量</strong>，长度是指已经被赋过值的最大下标+1，可通过内置函数len()获得。容量是指切片目前可容纳的最多元素个数，可通过内置函数cap()获得。切片是引用类型，因此在当传递切片时将引用同一指针，修改值将会影响其他的对象。</p>
+<p>切片<strong>是引用类型</strong>，切片在使用时需要注意其操作。所以当引用改变其中元素的值时，其它的所有引用都会改变该值。</p>
+<p>切片可以通过数组来初始化，也可以通过内置函数make()初始化 .初始化时len=cap,在追加元素时如果容量cap不足时将按len的2倍扩容。</p>
+<h4 id="2">（2）方法和函数的区别</h4>
+<h5 id="_1">调用方式不一样</h5>
+<pre><code class="language-plain">函数的调用方式：函数名（实参列表）
+方法的调用方式：变量.方法名字（实参列表）
+</code></pre>
+<p>方法是包含了接收者的函数：方法在func关键字后是<strong>接收者</strong>而不是函数名，接收者可以是自己定义的一个类型，这个类型可以是struct，interface，甚至我们可以重定义基本数据类型。我们可以给他一些我们想要的方法来满足我们的实际工程中的需求。</p>
+<p>对于普通函数，接收者为值类型时候，不能将指针类型的数据直接传递，反之亦然。</p>
+<p>对于方法（如struct的方法）接收者为值类型时候，可以直接用指针类型的变量调用方法，反过来同样也可以。</p>
+<h4 id="3makenew">（3）make与new的区别</h4>
+<p>简单的说，new只分配内存，make用于slice，map，和channel的初始化。需要注意的是：channel在make之后打印出来的也是内存地址，是个特殊类型。</p>
+<h4 id="4maininit">（4）main和init函数的区别</h4>
+<p>init函数为初始化操作，main函数为程序入口</p>
+<h4 id="5channelmutex">（5）channel和mutex锁机制的区别</h4>
+<p>channel原理： 当channel能存放的元素数量为0时表示为阻塞型channel。当管道无数据时，需要从管道取数据的协程会被阻塞，不会向下执行。 所以可以通过多个协程应用同一个channel，从而实现协程间的同步。channel的使用场景： 1. 需要协程通信时     2. 需要管道传输数据时。</p>
+<p>Mutex原理： 互斥锁用来防止资源竞争，多个协程使用同一把排它锁时，原来是并发运行的话将变为线性运行。排它锁针对任意操作都是排它的，没有读写区分。若一个goroutine获得锁，则其他goroutine会一直阻塞到他释放锁后才能获得锁。<br />
+mutex使用场景： 解决协程并发时对同一资源的竞争问题。</p>
+<h3 id="5go-runbuildgetinstall">5.比较一下go run/build/get/install几个命令的异同？</h3>
+<p>go run xxx.go 直接编译并运行go文件，产生的可执行程序在临时文件夹；</p>
+<p>go build xxx.go :<br />
+在当前目前产生同名的可执行文件。</p>
+<p>go get mypack:下载包源码到当前的GOPATH/src目录下；</p>
+<p>go install mypack:对指定包进行编译安装，如果mypack是一个类库包，则在当前GOPATH/pgk下生成对应的包文件，如果mypack是一个含有main主程序的包，则在当前GOPATH/bin下生成可执行程序；</p>
+<h3 id="6make">6.一个通过make()命令创建的缓冲区被分配了一块内存后。如何销毁缓冲区并回收内存？</h3>
+<pre><code class="language-plain">buffer = nil
+</code></pre>
+<p>在运行时候，buffer = nil 将启动垃圾回收。make()能创建的类型包括：切片，map，管道，三者都是引用类型（追问GO语言的引用类型？）<br />
+引用类型的值的内存分配是在堆中，栈中使用一个地址指向，需要回收时，将栈中的指针/引用指向即可nil</p>
+<h3 id="7slice">7.Slice 切片</h3>
+<h4 id="1-slice">（1） Slice结构是怎么样的</h4>
+<h4 id="2-slice-grow">（2） Slice grow 规律是什么</h4>
+<pre><code class="language-go">type slice struct {
+    array unsafe.Pointer
+    len int
+    cap int
+}
+</code></pre>
+<h3 id="8map">8.Map相关问题</h3>
+<h4 id="1map">（1）Map 元素可以取地址么？</h4>
+<h4 id="2map-recover">（2）Map 可以并发读写么？可以 recover 么？</h4>
+<h4 id="3syncmap">（3）sync.Map 适合什么场景用？实现上有什么问题？如何优化？</h4>
+<h4 id="4map">（4）Map 用的底层数据结构是什么？相比另一种有什么优劣？</h4>
+<h4 id="5map">（5）Map 是如何扩容的？</h4>
+<h4 id="6map">（6）Map 会缩容么？</h4>
+<h3 id="9channel">9.Channel相关问题</h3>
+<h4 id="1-buffer-channel">（1）有无 Buffer Channel 的区别？</h4>
+<h4 id="2channel-close-readwriteclose">（2）Channel close 后 read/write/close 分别会发生什么？</h4>
+<h4 id="3channel">（3）Channel 底层实现原理是什么样的？</h4>
+<h4 id="4channel">（4）Channel 和调度是如何交互的？</h4>
+<h3 id="10interface">10.interface 相关问题</h3>
+<h4 id="1interface-nil">（1）interface 如何判 nil？</h4>
+<h3 id="11">11.调度相关问题</h3>
+<h4 id="1gomaxprocs-gc">（1）GOMAXPROCS 代表了什么？如何影响调度、GC 的？</h4>
+<h4 id="2_1">（2）如何控制协程数量？</h4>
+<h4 id="3-kubernetes-runtimecpunum"><font style="color:#D46B08;">（3）在 Kubernetes 集群中，有没有遇到过 runtime.CPUNum 获取不正 </font></h4>
+<h4 id="4_1"><font style="color:#D46B08;">（4）确的问题？如何解决的？ </font></h4>
+<h4 id="5stw"><font style="color:#D46B08;">（5）STW 怎么实现的？ </font></h4>
+<h4 id="6runtime"><font style="color:#D46B08;">（6）Runtime 初始化流程是什么样的？ </font></h4>
+<h4 id="7"><font style="color:#D46B08;">（7）抢占式调度是如何实现的？ </font></h4>
+<h4 id="8goroutine-stack"><font style="color:#D46B08;">（8）goroutine stack 默认多少？如何扩缩容的？</font></h4>
+<blockquote>
+<p>更新: 2022-04-13 14:52:35<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/kp4s1d">https://www.yuque.com/xiaoshan_wgo/codingnotes/kp4s1d</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

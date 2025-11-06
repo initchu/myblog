@@ -1,0 +1,713 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/FrontNotes/CSS/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>CSS - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#css" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CSS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 概念
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 引入CSS样式表的方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 引入CSS样式表的方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 行内式（内联样式）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 内部样式表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 外部样式表
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="css">CSS</h1>
+<h2 id="1">1 概念</h2>
+<ul>
+<li>概念：CSS(Cascading Style Sheets)  ，通常称为CSS样式表或<strong>层叠样式表</strong>（级联样式表）。</li>
+<li>作用：<ul>
+<li>主要用于<strong>设置</strong> HTML页面中的文本内容（字体、大小、对齐方式等）、图片的外形（宽高、边框样式、边距等）以及<strong>版面的布局和外观显示样式。</strong></li>
+<li>CSS以HTML为基础，提供了丰富的功能，如字体、颜色、背景的控制及整体排版等，而且还可以针对不同的浏览器设置不同的样式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-css">2 引入CSS样式表的方式</h2>
+<h3 id="1_1">1 行内式（内联样式）</h3>
+<p>是通过标签的style属性来设置元素的样式</p>
+<pre><code class="language-css">&lt;div style=&quot;color: red; font-size: 12px;&quot;&gt;青春不常在，抓紧谈恋爱&lt;/div&gt;
+</code></pre>
+<h3 id="2">2 内部样式表</h3>
+<p>是将CSS代码集中写在HTML文档头部标签中，并且用style标签定义。</p>
+<pre><code class="language-css">&lt;style&gt;
+     div {
+        color: red;
+        font-size: 12px;
+     }
+&lt;/style&gt;
+</code></pre>
+<ul>
+<li>注意：<ul>
+<li>style标签一般位于head标签中，当然理论上他可以放在HTML文档的任何地方。</li>
+<li>type="text/css"  在html5中可以<strong>省略</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3">3 外部样式表</h3>
+<ul>
+<li>是将所有的样式放在一个或多个以<strong>.CSS</strong>为扩展名的外部样式表文件中，</li>
+<li>通过link标签将外部样式表文件链接到HTML文档中</li>
+</ul>
+<pre><code class="language-html">&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;css文件路径&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+<ul>
+<li>注意：<ul>
+<li>link 是个单标签</li>
+<li>link标签需要放在head头部标签中，并且指定link标签的三个属性</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rel</td>
+<td>定义当前文档与被链接文档之间的关系，在这里需要指定为“<strong>stylesheet</strong>”，表示被链接的文档是一个样式表文件。</td>
+</tr>
+<tr>
+<td>type</td>
+<td>定义所链接文档的类型，在这里需要指定为“<strong>text/CSS</strong>”，表示链接的外部文件为CSS样式表。我们都可以<strong>省略</strong></td>
+</tr>
+<tr>
+<td>href</td>
+<td>定义所链接外部样式表文件的URL，可以是相对路径，也可以是绝对路径。</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="_1">二、层叠与继承</h1>
+<h2 id="1_2">1 层叠性</h2>
+<p><font style="color:#333333;">Stylesheets </font><strong>cascade（样式表层叠）</strong><font style="color:#333333;"> </font></p>
+<p>有三个因素需要考虑，根据重要性排序如下，前面的更重要：</p>
+<h3 id="1_3">1. 重要性</h3>
+<p>在CSS中，属性值后面加上 !important 可以让这条规则优先于其他规则。</p>
+<h3 id="2_1">2. 优先级</h3>
+<blockquote>
+<p><strong>优先级:!important语法 &gt;行内式&gt; ID选择器 &gt; 类选择器 &gt; 元素选择器</strong>
+</p>
+<p>!important &gt; 内联样式 &gt; ID 选择器 &gt; 类选择器 = 属性选择器 = 伪类选择器 &gt; 标签选择器 = 伪元素选择器 &gt; 通配符选择器 &gt; 继承 &gt; 浏览器默认属性
+</p>
+</blockquote>
+<p>一个选择器的优先级可以说是由四个部分相加 (分量)，可以认为是个四位数的四个位数：</p>
+<ol>
+<li><strong>千位</strong>： 如果声明在 <code>[style](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes#attr-style)</code> 的属性（内联样式）则该位得一分。这样的声明没有选择器，所以它得分总是1000。</li>
+<li><strong>百位</strong>： 选择器中包含ID选择器则该位得一分。</li>
+<li><strong>十位</strong>： 选择器中包含类选择器、属性选择器或者伪类则该位得一分。</li>
+<li><strong>个位</strong>：选择器中包含元素、伪元素选择器则该位得一分。</li>
+</ol>
+<p><strong>注</strong>: 通用选择器 (<code>*</code>)，组合符 (<code>+</code>, <code>&gt;</code>, <code>~</code>, ' ')，和否定伪类 (<code>:not</code>) 不会影响优先级。</p>
+<p><strong>警告: </strong>在进行计算时不允许进行进位，例如，20 个类选择器仅仅意味着 20 个十位，而不能视为 两个百位，也就是说，无论多少个类选择器的权重叠加，都不会超过一个 ID 选择器。</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>千位</th>
+<th>百位</th>
+<th>十位</th>
+<th>个位</th>
+<th>优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>h1</code></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0001</td>
+</tr>
+<tr>
+<td><code>h1 + p::first-letter</code></td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>0003</td>
+</tr>
+<tr>
+<td><code>li &gt; a[href*="en-US"] &gt; .inline-warning</code></td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>2</td>
+<td>0022</td>
+</tr>
+<tr>
+<td><code>#identifier</code></td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>内联样式</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3_1">3. 资源顺序</h3>
+<p><font style="color:#333333;">简单的说，css规则的顺序很重要；当应用两条同级别的规则到一个元素的时候，写在后面的就是实际使用的规则。</font></p>
+<h2 id="2_2">2 继承性</h2>
+<ul>
+<li>关于文字样式的，都能够继承； 所有关于盒子的、定位的、布局的属性都不能继承。</li>
+<li><font style="color:#333333;">哪些属性属于默认继承很大程度上是由常识决定的。</font></li>
+</ul>
+<p><strong>默认继承的 ("Inherited: Yes") 的属性：</strong><strong><font style="color:#F5222D;">（大多是和文本相关的）</font></strong></p>
+<ul>
+<li>所有元素默认继承：visibility、cursor</li>
+<li>文本属性默认继承：letter-spacing、word-spacing、white-space、line-height、color、font、 font-family、font-size、font-style、font-variant、font-weight、text-indent、text-align、text-shadow、text-transform、direction</li>
+<li>列表元素默认继承：list-style、list-style-type、list-style-position、list-style-image</li>
+<li>表格元素默认继承：border-collapse</li>
+</ul>
+<hr />
+<p><strong>默认不继承的("Inherited: No") 的属性：</strong></p>
+<ul>
+<li>所有元素默认不继承：all、display、overflow、contain</li>
+<li>文本属性默认不继承：vertical-align、text-decoration、text-overflow</li>
+<li>盒子属性默认不继承：width、height、padding、margin、border、min-width、min-height、max-width、max-height</li>
+<li>背景属性默认不继承：background、background-color、background-image、background-repeat、background-position、background-attachment</li>
+<li>定位属性默认不继承：float、clear、position、top、right、bottom、left、z-index</li>
+<li>内容属性默认不继承：content、counter-reset、counter-increment</li>
+<li>轮廓属性默认不继承：outline-style、outline-width、outline-color、outline</li>
+<li>页面属性默认不继承：size、page-break-before、page-break-after</li>
+<li>声音属性默认不继承：pause-before、pause-after、pause、cue-before、cue-after、cue、play-during</li>
+</ul>
+<h3 id="_2">控制继承</h3>
+<ul>
+<li><code>[inherit](https://developer.mozilla.org/zh-CN/docs/Web/CSS/inherit)</code>设置该属性会使子元素属性和父元素相同。实际上，就是 "开启继承".</li>
+<li><code>[initial](https://developer.mozilla.org/zh-CN/docs/Web/CSS/initial)</code>设置属性值和浏览器默认样式相同。如果浏览器默认样式中未设置且该属性是自然继承的，那么会设置为 <code>inherit</code> 。</li>
+<li><code>[unset](https://developer.mozilla.org/zh-CN/docs/Web/CSS/unset)</code>将属性重置为自然值，也就是如果属性是自然继承那么就是 <code>inherit</code>，否则和 <code>initial</code>一样</li>
+</ul>
+<p>注：initial 和 unset 不被IE支持， 还有一个新的属性, <code>[revert](https://developer.mozilla.org/zh-CN/docs/Web/CSS/revert)</code>， 只有很少的浏览器支持。</p>
+<hr />
+<h1 id="display">三、显示模式（display）</h1>
+<p>标签以什么方式进行显示，比如div 自己占一行， 比如span 一行可以放很多个。HTML标签一般分为块标签和行内标签两种类型，它们也称块元素和行内元素。</p>
+<h2 id="1-block-level">1 块级元素(block-level)</h2>
+<p>每个块元素通常都会独自占据一整行或多整行，可以对其设置宽度、高度、对齐等属性，常用于网页布局和网页结构的搭建。常见的块元素有<h1>~<h6>、<p>、<div>、<ul>、<ol>、<li>等，其中<div>标签是最典型的块元素。</p>
+<p><strong>块级元素的特点：</strong></p>
+<ul>
+<li>比较霸道，自己独占一行</li>
+<li>高度，宽度、外边距以及内边距都可以控制。</li>
+<li><strong><font style="color:#F5222D;">宽度默认是容器（父级宽度）的100%</font></strong></li>
+<li>是一个容器及盒子，里面可以放行内或者块级元素。</li>
+<li>同理还有这些标签h1,h2,h3,h4,h5,h6,dt，他们都是文字类块级标签，里面不能放其他块级元素。</li>
+</ul>
+<h2 id="2-inline-level">2 行内元素(inline-level)</h2>
+<p>常见的行内元素有<a>、<strong>、<b>、<em>、<i>、<del>、<s>、<ins>、<u>、<span>等，其中<span>标签最典型的行内元素。有的地方称为内联元素</p>
+<p><strong>行内元素的特点：</strong></p>
+<ul>
+<li>相邻行内元素在一行上，一行可以显示多个。</li>
+<li><strong><font style="color:#F5222D;">高、宽直接设置是无效的</font></strong><font style="color:#F5222D;">。</font></li>
+<li><strong><font style="color:#F5222D;">默认宽度就是它本身内容的宽度</font></strong><font style="color:#F5222D;">。</font></li>
+<li>行内元素只能容纳文本或则其他行内元素。</li>
+</ul>
+<h2 id="3-inline-block">3 行内块元素（inline-block）</h2>
+<p>在行内元素中有几个特殊的标签——<img />、<input />、<td>，可以对它们设置宽高和对齐属性，有些资料可能会称它们为行内块元素。</p>
+<p><strong>行内块元素的特点：</strong></p>
+<ul>
+<li>和相邻行内元素（行内块）在一行上,但是之间会有空白缝隙。一行可以显示多个</li>
+<li>默认宽度就是它本身内容的宽度。</li>
+<li>高度，行高、外边距以及内边距都可以控制。</li>
+</ul>
+<p><strong><font style="color:#F5222D;">行内块之间会有间隙：</font></strong>间隙来自于标签之间的空白</p>
+<p>解决方法：</p>
+<ul>
+<li><font style="color:rgb(77, 77, 77);">标签之间不换行（不优雅）</font></li>
+<li><font style="color:rgb(77, 77, 77);">给父元素设置font-size:0 ，</font><strong><font style="color:rgb(77, 77, 77);">子元素别忘了设置font-size</font></strong></li>
+</ul>
+<h2 id="4">4 总结</h2>
+<table>
+<thead>
+<tr>
+<th>元素模式</th>
+<th>元素排列</th>
+<th>设置样式</th>
+<th>默认宽度</th>
+<th>包含</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>块级元素</td>
+<td>一行只能放一个块级元素</td>
+<td>可以设置宽度高度</td>
+<td>容器的100%</td>
+<td>容器级可以包含任何标签</td>
+</tr>
+<tr>
+<td>行内元素</td>
+<td>一行可以放多个行内元素</td>
+<td>不可以直接设置宽度高度</td>
+<td>它本身内容的宽度</td>
+<td>容纳文本或则其他行内元素</td>
+</tr>
+<tr>
+<td>行内块元素</td>
+<td>一行放多个行内块元素</td>
+<td>可以设置宽度和高度</td>
+<td>它本身内容的宽度</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="_3">四、元素的显示与隐藏</h1>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">目的（本质）   让一个元素在页面中消失或者显示出来</font></li>
+</ul>
+<h3 id="71-display"><font style="color:rgb(51, 51, 51);">7.1. display 显示（重点）</font></h3>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">display 设置或检索对象是否及如何显示。</font></li>
+<li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;display: none&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);"> 隐藏对象</font></li>
+<li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;display：block&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">  除了转换为块级元素之外，同时还有显示元素的意思。</font></li>
+<li><font style="color:rgb(51, 51, 51);">特点： display 隐藏元素后，</font><strong><font style="color:rgb(51, 51, 51);">不再占</font></strong><font style="color:rgb(51, 51, 51);">有原来的位置。</font></li>
+</ul>
+<h3 id="72-visibility"><font style="color:rgb(51, 51, 51);">7.2. visibility 可见性 （了解）</font></h3>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">visibility 属性用于指定一个元素应可见还是隐藏。</font></li>
+<li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;visibility：visible&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">　元素可视</font></li>
+<li><code>&lt;font style="color:rgb(51, 51, 51);"&gt;visibility：hidden&lt;/font&gt;</code><font style="color:rgb(51, 51, 51);">　  元素隐藏</font></li>
+<li>
+<p><font style="color:rgb(51, 51, 51);">特点：</font><strong><font style="color:rgb(51, 51, 51);">visibility 隐藏元素后，继续占有原来的位置</font></strong><font style="color:rgb(51, 51, 51);">。</font></p>
+</li>
+<li>
+<p><font style="color:rgb(51, 51, 51);">如果隐藏元素想要原来位置， 就用 visibility：hidden</font></p>
+</li>
+<li><font style="color:rgb(51, 51, 51);">如果隐藏元素不想要原来位置， 就用 display：none (用处更多 重点）</font></li>
+</ul>
+<h3 id="73-overflow"><font style="color:rgb(51, 51, 51);">7.3. overflow 溢出（重点）</font></h3>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">overflow 属性指定了如果内容溢出一个元素的框（超过其指定高度及宽度） 时，会发生什么。</font></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">属性值</font></strong></th>
+<th style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">描述</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">visible</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">不剪切内容也不添加滚动条</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">hidden</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">不显示超过对象尺寸的内容，超出的部分隐藏掉</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">scroll</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">不管超出内容否，总是显示滚动条</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">auto</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">超出自动显示滚动条，不超出不显示滚动条</font></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><font style="color:rgb(51, 51, 51);">一般情况下，我们都不想让溢出的内容显示出来，因为溢出的部分会影响布局。</font></li>
+<li><font style="color:rgb(51, 51, 51);">但是如果有定位的盒子， 请慎用overflow:hidden 因为它会隐藏多余的部分。</font></li>
+<li><font style="color:rgb(51, 51, 51);">实际开发场景：</font><ol>
+<li><font style="color:rgb(51, 51, 51);">清除浮动</font></li>
+<li><font style="color:rgb(51, 51, 51);">隐藏超出内容，隐藏掉, 不允许内容超过父盒子。</font></li>
+</ol>
+</li>
+</ul>
+<h3 id="74"><font style="color:rgb(51, 51, 51);">7.4. 显示与隐藏总结</font></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">属性</font></strong></th>
+<th style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">区别</font></strong></th>
+<th style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">用途</font></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">display 显示 （重点）</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">隐藏对象，不保留位置</font></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">配合后面js做特效，比如下拉菜单，原先没有，鼠标经过，显示下拉菜单， 应用极为广泛</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">visibility 可见性 （了解）</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">隐藏对象，保留位置</font></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">使用较少</font></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><font style="color:rgb(51, 51, 51);">overflow 溢出（重点）</font></strong></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">只是隐藏超出大小的部分</font></td>
+<td style="text-align: left;"><font style="color:rgb(51, 51, 51);">1. 可以清除浮动 2. 保证盒子里面的内容不会超出该盒子范围</font></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>更新: 2024-02-18 17:26:21<br />
+原文: <a href="https://www.yuque.com/xiaoshan_wgo/codingnotes/rux51l1wspfiugxk">https://www.yuque.com/xiaoshan_wgo/codingnotes/rux51l1wspfiugxk</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

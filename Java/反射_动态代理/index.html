@@ -1,0 +1,987 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/Java/%E5%8F%8D%E5%B0%84_%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>反射/动态代理 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              反射/动态代理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      java反射的作用与原理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      反射
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      谈谈的 Java 反射的理解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      怎么通过反射访问某各类的私有属性？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      反射是否可以调用私有方法？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      反射在框架中的运用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java实现反射的三种方法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java反射机制
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classforname-classloader" class="md-nav__link">
+    <span class="md-ellipsis">
+      反射中 Class.forName 和 ClassLoader 区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      说说你对 Java 反射的理解
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是反射？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      反射有哪些应用场景呢？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      描述动态代理的几种实现方式，分别说出相应的优缺点
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      静态代理和动态代理的区别，什么场景使用？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cglib" class="md-nav__link">
+    <span class="md-ellipsis">
+      为什么CGlib方式可以对未实现接口的类实现代理。
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      怎么利用反射获取类中的对象？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态代理的原理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jdkcglib" class="md-nav__link">
+    <span class="md-ellipsis">
+      JDK动态代理与CGlib动态代理区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cglib_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态代理与cglib实现的区别
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态代理是如何实现的？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jdkproxycglib" class="md-nav__link">
+    <span class="md-ellipsis">
+      JDKProxy和CGLib有什么区别？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lombok" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lombok是通过反射实现的吗？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      动态代理的使用场景有哪些？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spring中的动态代理是通过什么方式实现的？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      32.什么是代理，为什么要用动态代理？
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="32.什么是代理，为什么要用动态代理？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1、从静态代理到动态代理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2、动态代理实现原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3jdk-proxy-cblib" class="md-nav__link">
+    <span class="md-ellipsis">
+      3、JDK Proxy 和 CBLib对比
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">反射/动态代理</h1>
+<h3 id="java"><font style="color:#CF1322;">java反射的作用与原理</font></h3>
+<p><font style="color:rgb(51,51,51);">J</font>AVA反射机制是在<strong>运行状态</strong>中，对于任意一个类，都能够知道这个<strong>类的所有属性和方法</strong>。对于任意一个对象，都能够调用它的任意一个方法和属性。这种<strong>动态获取的信息</strong>以及<strong>动态调用对象的方法的功能</strong>称为java语言的<strong><font style="color:#389E0D;">反射机制</font></strong>。</p>
+<p>在JAVA中，只有给定<strong>类的名字</strong>，就可以通过反射机制来获取<strong>类的所有信息</strong>，可以<strong>动态地创建对象和编译</strong>。JAVA语言编译之后会生成一个.class文件，反射就是通过<strong>字节码文件</strong>找到某一个类，以及类中的方法和属性等。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/sinat_38259539/article/details/71799078">Java基础之—反射（非常重要）_敬业小码哥的博客-CSDN博客_java反射</a>
+</p>
+</blockquote>
+<h3 id="_2"><font style="color:#E8323C;">反射</font></h3>
+<ul>
+<li>反射就是<u>把java类中的成员映射成一个个的Java对象</u></li>
+<li>可以<strong>获取类的相关信息</strong>，可以<strong>进行设置</strong>，可以<strong>代理</strong></li>
+<li><font style="color:rgb(0,0,0);">spring 的</font><u><font style="color:rgb(0,0,0);"> ioc/di 也是反射</font></u><font style="color:rgb(0,0,0);"></font></li>
+<li><font style="color:rgb(0,0,0);">javaBean和jsp之间调用也是反射</font></li>
+<li><font style="color:rgb(0,0,0);">struts的 FormBean 和页面之间也是通过反射调用</font></li>
+<li><font style="color:rgb(0,0,0);">JDBC 的 classForName()也是反射</font></li>
+<li><font style="color:rgb(0,0,0);">hibernate的 find(Class clazz) 也是反射</font></li>
+</ul>
+<h3 id="java_1"><font style="color:#CF1322;">谈谈的 Java 反射的理解</font></h3>
+<ul>
+<li>通过反射，我们可以<strong><u>获取类的运行时内部结构</u></strong>。</li>
+</ul>
+<h3 id="_3"><font style="color:#CF1322;">怎么通过反射访问某各类的私有属性？</font></h3>
+<ul>
+<li>反射 API 中有个方法 <code>getDeclaredFields()</code></li>
+</ul>
+<h3 id="_4">反射是否可以调用私有方法？</h3>
+<p>可以，需要设置调用Method对象的<code>setAccessible(true)</code>方法。</p>
+<h3 id="_5">反射<font style="color:rgb(0, 0, 0);background-color:rgb(250, 250, 250);">在框架中的运用</font></h3>
+<ul>
+<li>JDK动态代理；</li>
+<li>Spring xml装配bean；</li>
+<li>JDBC加载驱动Class.forName("com.mysql.jdbc.Driver");</li>
+</ul>
+<h3 id="java_2"><font style="color:rgb(51,51,51);">Java实现反射的三种方法</font></h3>
+<ol>
+<li><font style="color:rgb(51,51,51);">通过</font><strong><font style="color:rgb(51,51,51);">new对象</font></strong><font style="color:rgb(51,51,51);">实现反射机制 </font></li>
+<li><font style="color:rgb(51,51,51);">通过</font><strong><font style="color:rgb(51,51,51);">路径</font></strong><font style="color:rgb(51,51,51);">实现反射机制 </font></li>
+<li><font style="color:rgb(51,51,51);">通过</font><strong><font style="color:rgb(51,51,51);">类名</font></strong><font style="color:rgb(51,51,51);">实现反射机制</font></li>
+</ol>
+<pre><code class="language-java">public class Student {
+    private int id;
+    String name;
+    protected boolean sex;
+    public float score;
+}
+</code></pre>
+<pre><code class="language-java">public class Get {
+    //获取反射机制三种方式
+    public static void main(String[] args) throws ClassNotFoundException {
+
+        //方式一(通过建立对象)
+        Student stu = new Student();
+        Class classobj1 = stu.getClass();
+        System.out.println(classobj1.getName());
+
+        //方式二（所在通过路径-相对路径）
+        Class classobj2 = Class.forName(&quot;fanshe.Student&quot;);
+        System.out.println(classobj2.getName());
+
+        //方式三（通过类名）
+        Class classobj3 = Student.class;
+        System.out.println(classobj3.getName());
+    }
+}
+</code></pre>
+<h3 id="java_3">Java反射机制</h3>
+<p>Java 反射机制是在<strong>运行状态</strong>中，对于任意一个类，都能够获得这个类的<strong>所有属性和方法</strong>，对于任意一个对象都能够调用它的任意一个属性和方法。<u>这种在运行时动态的获取信息以及动态调用对象的方法的功能称为 Java 的</u><strong><u>反射机制</u></strong><u>。</u></p>
+<p><strong>Class 类</strong>与<strong> java.lang.reflect 类库</strong>一起对反射的概念进行了支持，该类库包含了<strong>Field</strong>、<strong>Method</strong>和<strong>Constructor</strong> 类 (每个类<u>都实现了 Member 接口</u>)。这些类型的对象时由 JVM 在<strong>运行时</strong>创建的，用以表示未知类里对应的成员。</p>
+<p>这样你就可以使用 Constructor 创建新的对象，用 get() 和 set() 方法读取和修改与 Field 对象关联的字段，用<code>invoke()</code>方法调用与 Method 对象关联的方法。另外，还可以调用 <code>getFields()</code>、<code>getMethods()</code> 和 <code>getConstructors()</code>等很便利的方法，以返回表示字段，方法，以及构造器的对象的数组。这样匿名对象的信息就能在运行时被完全确定下来，而在编译时不需要知道任何事情。</p>
+<pre><code class="language-java">import java.lang.reflect.Constructor;
+public class ReflectTest {
+    public static void main(String[] args) throws Exception {
+        Class clazz = null;
+        clazz = Class.forName(&quot;com.jas.reflect.Fruit&quot;);
+        Constructor&lt;Fruit&gt; constructor1 = clazz.getConstructor();
+        Constructor&lt;Fruit&gt; constructor2 = clazz.getConstructor(String.class);
+        Fruit fruit1 = constructor1.newInstance();
+        Fruit fruit2 = constructor2.newInstance(&quot;Apple&quot;);
+    }
+}
+class Fruit{
+    public Fruit(){
+        System.out.println(&quot;无参构造器 Run...........&quot;);
+    }
+    public Fruit(String type){
+        System.out.println(&quot;有参构造器 Run...........&quot; + type);
+    }
+}
+</code></pre>
+<pre><code class="language-plain">运行结果： 
+无参构造器 Run……….. 
+有参构造器 Run………..Apple
+</code></pre>
+<h3 id="classforname-classloader">反射中 Class.forName 和 ClassLoader 区别</h3>
+<ul>
+<li><code>Class.forName()</code>除了<u>将类的.class文件加载到jvm中</u>之外，还<u>会对类进行解释，执行类中的static块</u>。<br />
+而<code>ClassLoader</code>只干一件事情，就是<u>将.class文件加载到jvm中</u>，<strong>不会执行static中的内容</strong>，<u>只有在newInstance才会去执行static块。</u></li>
+<li><code>Class.forName</code>得到的class是<strong><u>已经初始化完成</u></strong>的，<code>Classloder.loaderClass</code>得到的class是<u>还没有</u><strong><u>链接</u></strong>的。</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/L13763338360/article/details/106014430/">class.forname和classloader区别_L13763338360的博客-CSDN博客_class.forname和classloader区别</a></p>
+<p><a href="https://blog.csdn.net/zhangdx001/article/details/106946544">ClassLoader和Class.forname的区别_加班狗的微博的博客-CSDN博客_class.forname和classloader区别</a>
+</p>
+</blockquote>
+<h3 id="java_4"><font style="color:rgb(0,0,0);">说说你对 Java 反射的理解 </font></h3>
+<p><font style="color:rgb(0,0,0);">在运行状态中，对任意一个类，都能知道这个类的所有属性和方法，对任意一个对象，都能调用它的任意一个方法和属性。这种能动态获取信息及动态调用对象方法的功能称为 java 语言的反射机制。 </font></p>
+<p><font style="color:rgb(0,0,0);">反射的作用：开发过程中，经常会遇到某个类的某个成员变量、方法或属性是私有的，或只对系统应用开放，这里就可以利用 java 的反射机制通过反射来获取所需的私有成员或是方法。</font></p>
+<p><font style="color:rgb(0,0,0);">1) </font><font style="color:rgb(0,0,0);">获取类的 </font><font style="color:rgb(0,0,0);">Class </font><font style="color:rgb(0,0,0);">对象实例 </font></p>
+<pre><code class="language-java">Class clz = Class.forName(&quot;com.zhenai.api.Apple&quot;); 
+</code></pre>
+<p><font style="color:rgb(0,0,0);">2) 根据 Class 对象实例获取 Constructor 对象 </font></p>
+<pre><code class="language-java">Constructor appConstructor = clz.getConstructor(); 
+</code></pre>
+<p><font style="color:rgb(0,0,0);">3) 使用 Constructor 对象的 newInstance 方法获取反射类对象 </font></p>
+<pre><code class="language-java">Object appleObj = appConstructor.newInstance(); 
+</code></pre>
+<p><font style="color:rgb(0,0,0);">4) </font><font style="color:rgb(0,0,0);">获取方法的 </font><font style="color:rgb(0,0,0);">Method </font><font style="color:rgb(0,0,0);">对象 </font></p>
+<pre><code class="language-java">Method setPriceMethod = clz.getMethod(&quot;setPrice&quot;, int.class);
+</code></pre>
+<p>5) <font style="color:rgb(0,0,0);">利用 invoke 方法调用方法</font></p>
+<pre><code class="language-java">setPriceMethod.invoke(appleObj, 14); 
+</code></pre>
+<p><font style="color:rgb(0,0,0);">6) 通过 </font><strong><font style="color:rgb(0,0,0);">getFields() </font></strong><font style="color:rgb(0,0,0);">可以获取 Class 类的属性，但</font><u><font style="color:rgb(0,0,0);">无法获取私有属性</font></u><font style="color:rgb(0,0,0);">，而 </font><strong><font style="color:rgb(0,0,0);">getDeclaredFields()</font></strong><font style="color:rgb(0,0,0);">可以获取到包括</font><u><font style="color:rgb(0,0,0);">私有属性在内的所有属性</font></u><font style="color:rgb(0,0,0);">。</font><u><font style="color:rgb(0,0,0);">带有 Declared 修饰的方法可以反射到私有的方法，没有 Declared 修饰的只能用来反射公有的方法</font></u><font style="color:rgb(0,0,0);">，其他如 Annotation、Field、Constructor 也是如此。</font></p>
+<h3 id="_6">什么是反射？</h3>
+<p><strong><font style="color:rgb(51,51,51);">动态获取的信息</font></strong><font style="color:rgb(51,51,51);">以及</font><strong><font style="color:rgb(51,51,51);">动态调用对象的方法</font></strong><font style="color:rgb(51,51,51);">的功能称为Java语言的反射机制。</font></p>
+<p><font style="color:rgb(51,51,51);">在运行状态中，对于任意一个类，能够知道这个类的所有属性和方法。对于任意一个对象，能够调用它</font><font style="color:rgb(51,51,51);">的任意一个方法和属性。</font></p>
+<h3 id="_7">反射有哪些应用场景呢？</h3>
+<ol>
+<li><font style="color:rgb(51,51,51);">JDBC连接数据库时使用</font><font style="color:rgb(245,0,88);">Class.forName() </font><font style="color:rgb(51,51,51);">通过反射加载数据库的驱动程序</font></li>
+<li><font style="color:rgb(51,51,51);">Eclispe、IDEA等开发工具利用反射动态解析对象的类型与结构，动态提示对象的属性和方法</font></li>
+<li><font style="color:rgb(51,51,51);">Web服务器中利用反射调用了Sevlet的 </font><font style="color:rgb(245,0,88);">service </font><font style="color:rgb(51,51,51);">方法</font></li>
+<li><strong><font style="color:rgb(51,51,51);">JDK动态代理</font></strong><font style="color:rgb(51,51,51);">底层依赖反射实现</font></li>
+</ol>
+<h3 id="_8">描述动态代理的几种实现方式，分别说出相应的优缺点</h3>
+<ul>
+<li><strong><font style="color:rgb(18, 18, 18);">动态代理实现的集中实现方式</font></strong><ul>
+<li><font style="color:rgb(18, 18, 18);">JDK原生动态代理</font></li>
+<li><font style="color:rgb(18, 18, 18);">CGLIB动态代理</font></li>
+</ul>
+</li>
+<li><strong><font style="color:rgb(18, 18, 18);">动态代理的本质</font></strong></li>
+<li><font style="color:rgb(18, 18, 18);">首先了解一下动态代理类对应的class文件是什么时候生成的？</font></li>
+</ul>
+<p><font style="color:rgb(18, 18, 18);">首先通过一张图了解一下Java源文件实例对象的一个简单的流程：</font></p>
+<p><img alt="1664601151900-d9eedf14-477e-49ba-9458-b1d3c485e19a.png" src="../img/dctqUZ-2JRhSjfTU/1664601151900-d9eedf14-477e-49ba-9458-b1d3c485e19a-786679.png" /></p>
+<ol>
+<li><font style="color:rgb(18, 18, 18);">动态代理的本质<br />
+</font><font style="color:rgb(18, 18, 18);">简述：通过一定的技术，省略源文件的编写，</font><u><font style="color:rgb(18, 18, 18);">直接在</font></u><strong><u><font style="color:rgb(18, 18, 18);">运行期间</font></u></strong><u><font style="color:rgb(18, 18, 18);">，生成相应的Java字节码文件</font></u><font style="color:rgb(18, 18, 18);">；</font></li>
+</ol>
+<p><img alt="1664601151858-a416065b-3255-4403-93a5-427f4a6b1353.png" src="../img/dctqUZ-2JRhSjfTU/1664601151858-a416065b-3255-4403-93a5-427f4a6b1353-047522.png" /></p>
+<ul>
+<li><strong><font style="color:rgb(18, 18, 18);">JDK原生动态代理</font></strong></li>
+<li><font style="color:rgb(18, 18, 18);">JDK原生动态代理中两个重要的小伙伴</font><ol>
+<li><strong><font style="color:rgb(18, 18, 18);">Proxy</font></strong><font style="color:rgb(18, 18, 18);">：Proxy是</font><strong><font style="color:rgb(18, 18, 18);">所有动态代理的父类</font></strong><font style="color:rgb(18, 18, 18);">；它提供了一个</font><u><font style="color:rgb(18, 18, 18);">创建</font></u><strong><u><font style="color:rgb(18, 18, 18);">代理的Class对象</font></u></strong><u><font style="color:rgb(18, 18, 18);">的静态方法</font></u><font style="color:rgb(18, 18, 18);">，用来配置生成</font><strong><font style="color:rgb(18, 18, 18);">代理类Class文件的方法与参数</font></strong><font style="color:rgb(18, 18, 18);">。这个方法是</font><code>&lt;font style="color:rgb(18, 18, 18);"&gt;Proxy.newProxyInstance(类加载器，类实现的接口，InvocationHandler实现类)&lt;/font&gt;</code><font style="color:rgb(18, 18, 18);">，返回值是Object类型，通过接口类型强转换，即可使用代理类；</font></li>
+<li><strong><font style="color:rgb(18, 18, 18);">InvacationHandler</font></strong><font style="color:rgb(18, 18, 18);">：</font><u><font style="color:rgb(18, 18, 18);">每个动态代理实例都有一个关联的InvocationHandler</font></u><font style="color:rgb(18, 18, 18);">；</font><u><font style="color:rgb(18, 18, 18);">被代理类的代理方法被调用时，方法将被转发到InvocationalHandler的</font></u><strong><u><font style="color:rgb(18, 18, 18);">invoke</font></u></strong><u><font style="color:rgb(18, 18, 18);">方法执行。</font></u><font style="color:rgb(18, 18, 18);"></font></li>
+<li><font style="color:rgb(18, 18, 18);">小结：Proxy就是用来生成代理类的，InvocationalHandler使用来对被代理方法进行</font><strong><font style="color:rgb(18, 18, 18);">扩展</font></strong><font style="color:rgb(18, 18, 18);">的。</font></li>
+</ol>
+</li>
+<li><font style="color:rgb(18, 18, 18);">原理图下：<br />
+</font></li>
+</ul>
+<p><img alt="1664601151952-3eae9db3-f1df-497d-890d-02190a650854.png" src="../img/dctqUZ-2JRhSjfTU/1664601151952-3eae9db3-f1df-497d-890d-02190a650854-459589.png" /></p>
+<ol>
+<li><font style="color:rgb(18, 18, 18);">实战演练</font><ol>
+<li><font style="color:rgb(18, 18, 18);">实体类</font></li>
+</ol>
+</li>
+</ol>
+<p><img alt="1664601151300-cd11edd8-5761-4799-87f9-6bac64661e5a.png" src="../img/dctqUZ-2JRhSjfTU/1664601151300-cd11edd8-5761-4799-87f9-6bac64661e5a-819609.png" /></p>
+<pre><code>2. &lt;font style="color:rgb(18, 18, 18);"&gt;被代理类实现接口&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601153212-4f49834a-f887-4550-bd85-19fd9c256374.png" src="../img/dctqUZ-2JRhSjfTU/1664601153212-4f49834a-f887-4550-bd85-19fd9c256374-034521.png" /></p>
+<pre><code>3. &lt;font style="color:rgb(18, 18, 18);"&gt;被代理类&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601153267-36d61428-32cb-4738-a90e-d3a8e354a734.png" src="../img/dctqUZ-2JRhSjfTU/1664601153267-36d61428-32cb-4738-a90e-d3a8e354a734-438521.png" /></p>
+<pre><code>4. &lt;font style="color:rgb(18, 18, 18);"&gt;JDK动态代理实现类&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601153514-ddefdad9-0c86-460e-a2bd-56006f2c453f.png" src="../img/dctqUZ-2JRhSjfTU/1664601153514-ddefdad9-0c86-460e-a2bd-56006f2c453f-600108.png" /></p>
+<pre><code>5. &lt;font style="color:rgb(18, 18, 18);"&gt;测试类&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601153424-6b5058d1-afbd-4608-ba35-709feef693e5.png" src="../img/dctqUZ-2JRhSjfTU/1664601153424-6b5058d1-afbd-4608-ba35-709feef693e5-010536.png" /></p>
+<pre><code>6. &lt;font style="color:rgb(18, 18, 18);"&gt;测试结果&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601153456-0a1a5e73-1d48-4c47-887b-62f4cda02c95.png" src="../img/dctqUZ-2JRhSjfTU/1664601153456-0a1a5e73-1d48-4c47-887b-62f4cda02c95-534385.png" /></p>
+<ol>
+<li><font style="color:rgb(18, 18, 18);">总结：两个个要素</font><ol>
+<li><font style="color:rgb(18, 18, 18);">被代理类必须实现一个接口；</font></li>
+<li><font style="color:rgb(18, 18, 18);">InvocationalHandler只是用来做业务增强的，并不能真正的实现业务，也就是内部还是需要调用被代理类的业务方法去实现业务，不能对业务内部进行修改。</font></li>
+</ol>
+</li>
+<li><strong><font style="color:rgb(18, 18, 18);">CGLB动态代理</font></strong></li>
+</ol>
+<p><font style="color:rgb(18, 18, 18);">CGLB全称是Code Generation Library，是一个基于</font><strong><font style="color:rgb(18, 18, 18);">ASM</font></strong><font style="color:rgb(18, 18, 18);">（</font>ASM Java 字节码操纵框架<font style="color:rgb(18, 18, 18);">）的字节码生成库，允许我们在运行时对字节码文件进行修改和动态生成。</font></p>
+<ol>
+<li><font style="color:rgb(18, 18, 18);">CGLB的两个小伙伴</font><ol>
+<li><strong><font style="color:rgb(18, 18, 18);">Enchancer</font></strong><font style="color:rgb(18, 18, 18);">：来</font><u><font style="color:rgb(18, 18, 18);">指定要代理的目标对象</font></u><font style="color:rgb(18, 18, 18);">；</font><strong><font style="color:rgb(18, 18, 18);">实际处理逻辑的对象</font></strong><font style="color:rgb(18, 18, 18);">；最终通过</font><strong><font style="color:rgb(18, 18, 18);">create()</font></strong><font style="color:rgb(18, 18, 18);">方法得到代理对象，对这个对象的</font><strong><font style="color:rgb(18, 18, 18);">非final()方法</font></strong><font style="color:rgb(18, 18, 18);">的调用都会转发给代理对象；</font></li>
+<li><strong><font style="color:rgb(18, 18, 18);">MethodInterceptor</font></strong><font style="color:rgb(18, 18, 18);">：动态代理的方法调用都会转发到</font><strong><font style="color:rgb(18, 18, 18);">intercept()</font></strong><font style="color:rgb(18, 18, 18);">上进行增强；</font></li>
+</ol>
+</li>
+<li><font style="color:rgb(18, 18, 18);">原理图</font></li>
+</ol>
+<p><img alt="1664601153810-a195c463-4fcb-4ff8-ac39-ebb1badd5275.png" src="../img/dctqUZ-2JRhSjfTU/1664601153810-a195c463-4fcb-4ff8-ac39-ebb1badd5275-591398.png" /></p>
+<ol>
+<li><font style="color:rgb(18, 18, 18);">实战演练</font><ol>
+<li><font style="color:rgb(18, 18, 18);">添加依赖</font></li>
+</ol>
+</li>
+</ol>
+<p><img alt="1664601153718-96c6a615-0088-4188-b455-5540725b9830.png" src="../img/dctqUZ-2JRhSjfTU/1664601153718-96c6a615-0088-4188-b455-5540725b9830-338267.png" /></p>
+<pre><code>2. &lt;font style="color:rgb(18, 18, 18);"&gt;被代理类&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601154430-ec3c9b4d-e5d4-455f-adc0-c1de9a6dce3a.png" src="../img/dctqUZ-2JRhSjfTU/1664601154430-ec3c9b4d-e5d4-455f-adc0-c1de9a6dce3a-137016.png" /></p>
+<pre><code>3. &lt;font style="color:rgb(18, 18, 18);"&gt;CGLB动态代理实现类&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601155245-37667fbe-bed9-44f1-8a47-783829567800.png" src="../img/dctqUZ-2JRhSjfTU/1664601155245-37667fbe-bed9-44f1-8a47-783829567800-655222.png" /></p>
+<pre><code>4. &lt;font style="color:rgb(18, 18, 18);"&gt;测试类
+</code></pre>
+<p></font></p>
+<p><img alt="1664601155208-5e11bfc1-0915-4b4c-82de-f940fe836360.png" src="../img/dctqUZ-2JRhSjfTU/1664601155208-5e11bfc1-0915-4b4c-82de-f940fe836360-145489.png" /></p>
+<pre><code>5. &lt;font style="color:rgb(18, 18, 18);"&gt;测试结果&lt;/font&gt;
+</code></pre>
+<p><img alt="1664601154643-247a36ba-f2b3-4346-82cb-57ff318d1fe5.png" src="../img/dctqUZ-2JRhSjfTU/1664601154643-247a36ba-f2b3-4346-82cb-57ff318d1fe5-495879.png" /></p>
+<ol>
+<li><font style="color:rgb(18, 18, 18);">总结：</font><ol>
+<li><font style="color:rgb(18, 18, 18);">CGLB动态代理实现方式降低了被代理对象的要求</font></li>
+<li><font style="color:rgb(18, 18, 18);">CGLB动态代理对于</font><u><font style="color:rgb(18, 18, 18);">被代理对象的final方法无法进行增强</font></u></li>
+</ol>
+</li>
+<li><strong><font style="color:rgb(18, 18, 18);">两种动态代理的优缺点对照表</font></strong></li>
+</ol>
+<p><img alt="1664601154655-4707a343-b502-42b2-9117-712b0c662a46.png" src="../img/dctqUZ-2JRhSjfTU/1664601154655-4707a343-b502-42b2-9117-712b0c662a46-537072.png" /></p>
+<blockquote>
+<p><a href="https://zhuanlan.zhihu.com/p/149775781">动态代理的几种实现方式及优缺点</a></p>
+<p><a href="https://blog.csdn.net/jingyoushui/article/details/104299347">动态代理的几种实现方式及优缺点_静幽水1的博客-CSDN博客_动态代理的方式</a>
+</p>
+</blockquote>
+<h3 id="_9"><font style="color:rgb(0,0,0);">静态代理和动态代理的区别，什么场景使用？ </font></h3>
+<p><font style="color:rgb(0,0,0);">代理是一种常用的设计模式，目的是：</font><u><font style="color:rgb(0,0,0);">为其他对象提供一个代理以控制对某个对象的访问，将两个类的关系解耦</font></u><font style="color:rgb(0,0,0);">。</font><u><font style="color:rgb(0,0,0);">代理类和委托类都要实现相同的接口</font></u><font style="color:rgb(0,0,0);">，因为代理真正调用的是</font><strong><font style="color:rgb(0,0,0);">委托类的方法</font></strong><font style="color:rgb(0,0,0);">。 </font></p>
+<ul>
+<li><strong><font style="color:rgb(0,0,0);">区别</font></strong><font style="color:rgb(0,0,0);">： </font></li>
+<li><strong><font style="color:rgb(0,0,0);">静态代理</font></strong><font style="color:rgb(0,0,0);">：由程序员创建或是由特定工具生成，在代码</font><strong><font style="color:rgb(0,0,0);">编译时就确定</font></strong><font style="color:rgb(0,0,0);">了被代理的类是哪一个是静态代理。静态代理通常</font><strong><font style="color:rgb(0,0,0);">只代理一个类</font></strong><font style="color:rgb(0,0,0);">。</font></li>
+<li><strong><font style="color:rgb(0,0,0);">动态代理</font></strong><font style="color:rgb(0,0,0);">：在代码</font><strong><font style="color:rgb(0,0,0);">运行期间</font></strong><font style="color:rgb(0,0,0);">，运用</font><strong><font style="color:rgb(0,0,0);">反射机制</font></strong><font style="color:rgb(0,0,0);">动态创建生成。动态代理代理的是一个接口下的</font><strong><font style="color:rgb(0,0,0);">多个实现类</font></strong><font style="color:rgb(0,0,0);">。</font></li>
+</ul>
+<p><strong><font style="color:rgb(0,0,0);">动态代理类实现步骤</font></strong><font style="color:rgb(0,0,0);">：</font></p>
+<ol>
+<li><font style="color:rgb(0,0,0);">实现 InvocationHandler 接口创建自己的调用处理器；</font></li>
+<li><font style="color:rgb(0,0,0);">给 Proxy 类提供ClassLoader 和代理接口类型数组创建动态代理类；</font></li>
+<li><font style="color:rgb(0,0,0);">利用反射机制得到动态代理类的构造函数；</font></li>
+<li><font style="color:rgb(0,0,0);">利用动态代理类的构造函数创建动态代理类对象； </font></li>
+</ol>
+<p><strong><font style="color:rgb(0,0,0);">使用场景</font></strong><font style="color:rgb(0,0,0);">：</font></p>
+<ol>
+<li><font style="color:rgb(0,0,0);">Retrofit 中直接调用接口的方法；</font></li>
+<li><font style="color:rgb(0,0,0);">Spring 的 AOP 机制。</font></li>
+</ol>
+<h3 id="cglib">为什么CGlib方式可以对未实现接口的类实现代理。</h3>
+<p>JDK实现动态代理需要<strong>实现类</strong><u>通过</u><strong><u>接口</u></strong><u>定义业务方法</u>，对于没有接口的类，如何实现动态代理呢，这就需要CGLib了。</p>
+<p>CGLib采用了非常底层的<strong>字节码技术</strong>，其原理是<u>通过字节码技术为一个类创建</u><strong><u>子类</u></strong>，并<u>在</u><strong><u>子类</u></strong><u>中采用方法拦截的技术拦截</u><strong><u>所有父类方法</u></strong><u>的调用</u>，顺势织入横切逻辑。</p>
+<p>JDK动态代理与CGLib动态代理均是实现Spring AOP的基础。</p>
+<p>JDK动态代理的原理是根据定义好的规则，<u>用传入的接口创建一个新类</u>，这就是为什么采用动态代理时只能用接口引用指向代理，而不能用传入的类引用执行动态类。</p>
+<p>CGLib是通过创建一个类的子类，用asm库<u>动态修改子类的代码</u>来实现的，所以可以用传入的类引用执行代理类。</p>
+<p>CGLib创建的动态代理对象性能比JDK创建的动态代理对象的<strong>性能高</strong>不少，但是，CGLib在创建代理对象时所<u>花费的时间却比JDK</u><strong><u>多</u></strong>得多。所以，对于<strong>单例</strong>的对象，因为无需频繁创建对象，<strong>用CGLib合适</strong>。反之，使用JDK方式要更为合适一些。同时，由于CGLib由于是采用动态创建子类的方法，<u>对于</u><strong><u>final方法</u></strong><u>，无法进行代理</u>。</p>
+<blockquote>
+<p><a href="https://www.cnblogs.com/chenliangcl/p/7239709.html">CGLib方式对接口实现代理 - 仗剑走天涯| - 博客园</a>
+</p>
+</blockquote>
+<h3 id="_10">怎么利用反射获取类中的对象？</h3>
+<ol>
+<li>
+<p>方式一：如果我们有一个实例变量，可以通过该实例变量提供的getClass()方法获取：</p>
+<p>String s = “Hello”;</p>
+<p>Class cls = s.getClass();</p>
+</li>
+<li>
+<p>方式二：如果知道一个class的完整类名，可以通过静态方法Class.forName()获取：</p>
+<p>Class cls = Class.forName(“java.lang.String”);</p>
+</li>
+<li>
+<p>方式三：直接通过一个class的静态变量class获取：</p>
+<p>Class cls = String.class;</p>
+</li>
+</ol>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_45210565/article/details/116283226">【反射】反射获取类对象的三种方式_鱼与宇的博客-CSDN博客_反射获取对象的三种方式</a>
+</p>
+</blockquote>
+<h3 id="_11"><font style="color:#CF1322;">动态代理的原理 </font></h3>
+<p>动态代理基于<strong>反射</strong>实现，调用者通过<strong>代理对象</strong>来访问方法的时候，代理对象可以做相应的处理，然后通过反射调用被代理对象的方法。</p>
+<h3 id="jdkcglib"><font style="color:#CF1322;">JDK动态代理与CGlib动态代理区别</font></h3>
+<ul>
+<li><strong>JDK动态代理<br />
+</strong>利用反射机制生成一个实现代理接口的匿名类，在调用具体方法前调用InvokeHandler来处理。</li>
+<li><strong>CGlib动态代理<br />
+</strong>利用ASM（开源的Java字节码编辑库，操作字节码）开源包，将代理对象类的class文件加载进来，通过修改其字节码生成子类来处理。</li>
+<li>区别<ul>
+<li>JDK代理只能对实现接口的类生成代理；</li>
+<li>CGlib是针对类实现代理，对指定的类生成一个子类，并覆盖其中的方法，这种通过继承类的实现方式，不能代理final修饰的类。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/weixin_36759405/article/details/82770422">动态代理的两种方式以及区别_编码小农的博客-CSDN博客_动态代理两种方式的区别</a></p>
+<p><a href="https://www.bilibili.com/video/BV12b4y1B7h2/?zw">9动态代理是如何实现的？JDK Proxy 和 CGLib 有什么区别？_哔哩哔哩_bilibili</a></p>
+<p><a href="https://blog.csdn.net/Hellowenpan/article/details/123482681">JDK动态代理原理解析_wen-pan的博客-CSDN博客_jdk动态代理实现原理</a>
+</p>
+</blockquote>
+<h3 id="cglib_1">动态代理与cglib实现的区别</h3>
+<ul>
+<li>JDK动态代理只能对实现了接口的类生成代理，而不能针对类.</li>
+<li>CGLIB是针对类实现代理，主要是对指定的类生成一个子类，覆盖其中的方法因为是继承，所以该类或方法最好不要声明成 final。</li>
+<li>JDK代理是不需要以来第三方的库，只要JDK环境就可以进行代理</li>
+<li>CGLib 必须依赖于CGLib的类库，但是它需要类来实现任何接口代理的是指定的类生成一个子类，覆盖其中的方法，是一种继承。</li>
+</ul>
+<h3 id="_12">动态代理是如何实现的？</h3>
+<p>常用实现方式是反射</p>
+<p>是一种行为方式，而反射或ASM只是它的一种实现手段而已</p>
+<ul>
+<li>反射机制<ul>
+<li>指程序在运行期间可以访问、检测和修改其本身状态或行为的一种能力</li>
+<li>使用反射我们可以调用任意一个类对象以及类对象中包含的属性及方法</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://www.bilibili.com/video/BV12b4y1B7h2/?zw&amp;vd_source=1ff9a2c4f611f17f5b87eab05ff01a5e">9动态代理是如何实现的？JDK Proxy 和 CGLib 有什么区别？_哔哩哔哩_bilibili</a>
+</p>
+</blockquote>
+<h3 id="jdkproxycglib">JDKProxy和CGLib有什么区别？</h3>
+<ul>
+<li>JDKProxy是Java语言自带的功能，无需通过加载第三方类实现</li>
+<li>Java对JDKProxy提供了稳定的支持，并且会持续的升级和更新JDKProxy</li>
+</ul>
+<blockquote>
+<p>例如Java8版本中的JDKProxy性能相比于之前版本提升了很多
+</p>
+</blockquote>
+<ul>
+<li>JDKProxy是通过拦截器加反射的方式实现的</li>
+<li>JDKProxy只能代理继承接口的类</li>
+<li>JDKProxy实现和调用起来比较简单</li>
+<li>CGLib是第三方提供的工具，基于ASM实现的，性能比较高</li>
+<li>CGLib无需通过接口来实现，它是通过实现子类的方式来完成调用的</li>
+</ul>
+<h3 id="lombok">Lombok是通过反射实现的吗？</h3>
+<ul>
+<li>Lombok的实现和反射没有任何关系</li>
+<li>反射是程序在运行期的一种自省（introspect）能力</li>
+<li>Lombok的实现是在编译期就完成了</li>
+<li>在JDK6的JSR-269提案通过了一组被称为“<strong>插入式注解处理器</strong>”的标准API，可以提前至<strong>编译期</strong>对代码中的特定注解进行处理， 从而影响到编译器的工作过程。</li>
+<li>在Javac 解析成<strong>抽象语法树</strong>(AST)之后，Lombok 根据自己的注解处理器，动态的修改 AST，增加新的节点(所谓代码)，最终通过分析和生成字节码。</li>
+</ul>
+<p><img alt="1668876277961-f20f588b-8183-46d3-b116-1f91664cdb69.png" src="../img/dctqUZ-2JRhSjfTU/1668876277961-f20f588b-8183-46d3-b116-1f91664cdb69-380318.png" /></p>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/900ed1ef9b86">Lombok底层实现原理</a><br />
+<a href="https://blog.csdn.net/qq_43437874/article/details/117292238">二、Lombok实现原理_云烟成雨TD的博客-CSDN博客</a>
+</p>
+</blockquote>
+<h3 id="_13">动态代理的使用场景有哪些？</h3>
+<ol>
+<li>Retrofit 中直接调用接口的方法；</li>
+<li>Spring 的 AOP 机制。</li>
+</ol>
+<blockquote>
+<p>Retrofit：<font style="color:rgb(51, 51, 51);">A type-safe HTTP client for Android and the JVM. </font>
+</p>
+</blockquote>
+<h3 id="spring">Spring中的动态代理是通过什么方式实现的？</h3>
+<ul>
+<li>JDK Proxy</li>
+<li>CGLib</li>
+</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_40205337/article/details/111410861">Spring学习(五)：动态代理的两种实现方式（全网最容易懂）_P@ssW0rd的博客-CSDN博客</a>
+</p>
+</blockquote>
+<h3 id="32">32.什么是代理，为什么要用动态代理？</h3>
+<p>一说到代理，大家可能都会联想到 JDK Proxy、Cglib、AOP等等，这些都算是动态代理。另外，我花了 1 个多星期把往期的面试题解析配套文档准备好了，想获取的小伙伴可以在我的煮叶简介中找到。</p>
+<p>为什么我们需要动态代理呢？ 在解答这个问题之前，先跟大家聊清楚什么是静态代理。</p>
+<h4 id="1">1、从静态代理到动态代理</h4>
+<p>静态代理呢是代理模式的一种实现形态。代理模式的官方原文是这样的:</p>
+<p><img alt="1671095724706-3d19f35b-f69d-4944-acfe-f2fcec14af0e.png" src="../img/dctqUZ-2JRhSjfTU/1671095724706-3d19f35b-f69d-4944-acfe-f2fcec14af0e-357044.png" /></p>
+<p>大致意思是，为其他对象提供一种代理项或占位符，以控制对这个对象的访问。什么意思呢？ 代理模式最核心的思想是创建一个代理对象作为在客户端和目标对象之间中介。</p>
+<p>主要目的是保护目标对象和增强目标对象。</p>
+<p><img alt="1671095741726-1c6667d7-9926-40ae-8bf5-66491793d590.png" src="../img/dctqUZ-2JRhSjfTU/1671095741726-1c6667d7-9926-40ae-8bf5-66491793d590-339731.png" /></p>
+<p>那什么是静态代理？ 就相当于是这个代理对象需要手动来创建，而且一个代理对象只能服务于一种类型的对象，那么，当有 n 个业务的目标对象时，就需要 n 个静态代理，这样就不利于业务的扩展。</p>
+<p>举一个例子，有个程序员张三，平时加班比较多，加上公司的异性同事又少，也不太善于和身边的人沟通，自己又缺少人脉和资源，所以一直没有找对象。这个时候张三的父亲张老三就着急了，利用自己的人脉，经常给张三安排相亲。那张老三就是张三的代理相亲对象。</p>
+<p>那么，问题来了。一般情况下，张老三是不会给李四去安排相亲的，因为张老三是不会关心李四有没有对象这个事情的，只有李老四才会关心李四有没有对象。这个时候，就出现一个新的职业 -- 媒婆。媒婆会关心张三、李四、王五、赵六是否有对象，媒婆就成了所有有相亲需求的代理对象，这种一个代理对象就可以服务于所有相关的业务对象，就相当于动态代理对象。</p>
+<p><img alt="1671095800224-9285db76-219d-4f75-a3ce-89e86e10c545.png" src="../img/dctqUZ-2JRhSjfTU/1671095800224-9285db76-219d-4f75-a3ce-89e86e10c545-599919.png" /></p>
+<p>那为什么需要动态代理呢？ 我总结为以下两个原因：</p>
+<p>1、可以减少代理对象的个数，降低程序复杂度。</p>
+<p>2、易于复杂业务的动态扩展。</p>
+<h4 id="2">2、动态代理实现原理</h4>
+<p>那在 Java 中动态代理的实现原理是怎样的呢？ 以</p>
+<p>JDK Proxy 为例，我归纳为以下 5 个步骤：</p>
+<p>第 1 步： 拿到目标对象的引用，并且通过反射获取目标对象的所有接口</p>
+<p>第 2 步： 重新生成一个新的代理类，实现目标类所有的接口方法；</p>
+<p>第 3 步： 把增强的逻辑代码加入到新生成的代理类源代码中。</p>
+<p>第 4 步： 动态编译代理类的源代码并生成.字节码，也就是 class 文件。</p>
+<p>第 5 步： 加载并执行新生成的代理对象。</p>
+<p><img alt="1671095839719-418c2aee-09b4-4fb1-9d15-49332918b966.png" src="../img/dctqUZ-2JRhSjfTU/1671095839719-418c2aee-09b4-4fb1-9d15-49332918b966-768898.png" /></p>
+<p>目前，主流动态代理API 有两种，分别是JDK Proxy和 CGLib，CGLib 的实现原理我就不详细赘述了，如果想详细了解的小伙伴可以在评论区回复 666 ，我可以单独再拍一期视频详细介绍。好了，最后，还是给大家介绍一下 CBLib 和 JDK Proxy的区别。</p>
+<h4 id="3jdk-proxy-cblib">3、JDK Proxy 和 CBLib对比</h4>
+<p>关于 JDK Proxy 和 CBLib 的区别我归纳为以下 3 点：</p>
+<p>第 1 点： JDK Proxy 是实现目标对象的接口，而 GGLib 是继承目标对象</p>
+<p>第 2 点： JDK Proxy 和 CGLib 都是在运行期生成字节码。</p>
+<p>第 3 点： JJDK Proxy 是通过反射调用目标对象的方法，而CGLib 是采用 FastClass 机制来调用</p>
+<p><img alt="1671095899914-64b9232e-6861-4b36-a7dd-88d15f105f9c.png" src="../img/dctqUZ-2JRhSjfTU/1671095899914-64b9232e-6861-4b36-a7dd-88d15f105f9c-649107.png" /></p>
+<blockquote>
+<p>更新: 2022-12-19 23:29:48<br />
+原文: <a href="https://www.yuque.com/joyo/interview/ipitqr">https://www.yuque.com/joyo/interview/ipitqr</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

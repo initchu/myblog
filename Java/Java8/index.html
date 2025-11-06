@@ -1,0 +1,521 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="褚成志">
+      
+      
+        <link rel="canonical" href="http://blog.chucz.asia/Java/Java8/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Java 8 - 褚成志的技术博客</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#java-8" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="褚成志的技术博客" class="md-header__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            褚成志的技术博客
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Java 8
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="褚成志的技术博客" class="md-nav__button md-logo" aria-label="褚成志的技术博客" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    褚成志的技术博客
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    首页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#java-8_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 8 新特性简介
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是函数式编程？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-8_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java 8中的可选项是什么？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-8_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      解释Java 8中间操作与终端操作？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是Lambda表达式？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambda_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lambda函数的优点
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java8metaspacepermgen-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      什么是Java8中的MetaSpace？它与PermGen Space有何不同？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lambdalambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lambda表达式的参数列表与Lambda箭头运算符有何不同？
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-8_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      java 8 流式使⽤
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java17181910" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java1.7与1.8、1.9、10 新特性
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Java8的新特性有哪些？
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="java-8">Java 8</h1>
+<p>参考链接</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_37891300/article/details/82817900">Java 8 新特性 及 常见 面试题_牵梦u的博客-CSDN博客_jdk8新特性面试题</a></p>
+<p><a href="https://blog.csdn.net/pzq915981048/article/details/89011881">Java面试题--java8_青春季风暴的博客-CSDN博客_java8面试题</a></p>
+<p><a href="https://www.cnblogs.com/jobbible/archive/2019/02/14/10374405.html">JAVA面试题（8） - 程序员Logger - 博客园</a>
+</p>
+</blockquote>
+<h3 id="java-8_1">Java 8 新特性简介</h3>
+<ol>
+<li>代码更少（增加了新语法：Lambda 表达式）</li>
+<li>强大的 Stream API（集合数据的操作）</li>
+<li>最大化的减少空指针异常：Optional类的使用</li>
+<li>接口的新特性</li>
+<li>注解的新特性</li>
+<li>集合的底层 源码实现</li>
+<li>新日期时间的 api</li>
+</ol>
+<h3 id="_1">什么是函数式编程？</h3>
+<p>函数式编程就是一种抽象程度很高的<strong>编程范式</strong>，纯粹的函数式编程语言编写的函数<strong>没有变量</strong>。因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用。而允许使用变量的程序设计语言，由于函数内部的变量状态不确定，同样的输入，可能得到不同的输出。因此，这种函数是有副作用的。 函数式编程的一个特点就是，<u>允许把函数本身作为参数传入另一个函数，还允许返回一个函数</u>！ 函数式编程最早是数学家阿隆佐·邱奇研究的一套<strong>函数变换逻辑</strong>，又称Lambda Calculus（λ-Calculus），所以也经常把函数式编程称为Lambda计算。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/a1472750149/article/details/122471795">一文弄懂Java8函数式编程深入浅出_Java云海.的博客-CSDN博客_深入浅出java</a>
+</p>
+</blockquote>
+<h3 id="java-8_2">Java 8中的可选项是什么？</h3>
+<p>Java 8引入了一个新的容器类<code>java.util.Optional</code>。如果某个值可用，它将包装这个值。如果该值不可用，则应返回空的可选项。因此，它代表空值、缺失值。</p>
+<p>这个类有各种实用方法，如<code>isPresent()</code>，它可以帮助用户避免使用空值检查。由于不直接返回值，而是返回包装器对象，所以用户可以避免空指针异常。</p>
+<h3 id="java-8_3">解释Java 8中间操作与终端操作？</h3>
+<p>流操作可以分为两部分：</p>
+<ul>
+<li><strong>中间操作</strong></li>
+</ul>
+<p><strong>返回另一个Stream</strong>的中间操作，允许操作以<strong>查询</strong>的形式连接。</p>
+<ul>
+<li><strong>终端操作</strong></li>
+</ul>
+<p>产生<strong>非流</strong>，结果如：<strong>原始值</strong>，<strong>集合</strong>或根本<strong>没有值</strong>。</p>
+<h3 id="lambda">什么是Lambda表达式？</h3>
+<ul>
+<li>Lambda Expression可以定义为允许用户<u>将方法作为参数传递</u>的<strong>匿名函数</strong>。这<u>有助于删除大量的样板代码</u>。Lambda函数<u>没有访问修饰符（私有，公共或受保护），没有返回类型声明和没有名称</u>。</li>
+<li>Lambda表达式允许用户将“函数”传递给代码。所以，与以前需要一整套的接口/抽象类相比，我们可以更容易地编写代码。例如，假设我们的代码具有一些复杂的循环/条件逻辑或工作流程。使用lambda表达式，在那些有难度的地方，可以得到很好的解决。</li>
+</ul>
+<h3 id="lambda_1">Lambda函数的优点</h3>
+<p>直到Java 8列表和集合通常由客户端代码从集合中获取迭代器来处理，然后使用它迭代其元素并依次处理每个元素。如果要并行处理不同的元素，那么客户代码而不是集合的责任就是组织它。 通过Java 8，可以更轻松地在多个线程上分发集合的处理。 集合现在可以在内部组织自己的迭代，将并行化的责任从客户端代码转移到库代码中。</p>
+<p><strong>更少的代码行</strong>。如上所述，用户必须仅以声明方式声明要执行的操作。 </p>
+<pre><code class="language-java">n -&gt; System.out.println(&quot;Hello World&quot;+ n); 
+</code></pre>
+<p>所以用户必须键入减少的代码量。</p>
+<p>使用Java 8 Lambda表达式可以实现<strong>更高的效率</strong>。通过使用具有多核的CPU，用户可以通过使用lambda并行处理集合来利用多核CPU。</p>
+<h3 id="java8metaspacepermgen-space">什么是Java8中的MetaSpace？它与PermGen Space有何不同？</h3>
+<p>使用JDK8时，<strong>permGen</strong>空间已被删除。那么现在将元数据信息存储在哪里？</p>
+<p>此元数据现在存储在<strong>本机内存</strong>中，称为“<strong>MetaSpace</strong>”。该内存不是连续的Java堆内存，它允许通过垃圾收集、自动调整、<strong>元数据并发解除分配</strong>来改进PermGen空间。</p>
+<h3 id="lambdalambda">Lambda表达式的参数列表与Lambda箭头运算符有何不同？</h3>
+<p>Lambda表达式可以一次携带零个，一个或甚至多个参数。另一方面，Lambda箭头运算符使用图标“-&gt;”将这些参数从列表和主体中分离出来。</p>
+<h3 id="java-8_4"><font style="color:#CF1322;">java 8 流式使⽤</font></h3>
+<pre><code class="language-java">List&lt;Integer&gt; evens = nums.stream().filter(num -&gt; num % 2 == 0).collect(Collectors.toList());
+// 1、stream()操作将集合转换成一个流，
+// 2、filter()执行我们自定义的筛选处理，这里是通过lambda表达式筛选出所有偶数，
+// 3、最后我们通过collect()对结果进行封装处理，并通过Collectors.toList()指定其封装成为一个List集合返回。
+</code></pre>
+<h3 id="java17181910"><font style="color:#CF1322;background-color:rgb(255,255,255);">Java1.7与1.8、1.9、10 新特性</font></h3>
+<ul>
+<li>1.7</li>
+<li><strong>switch中可以使用字串</strong>了</li>
+<li>运用List tempList = new ArrayList&lt;&gt;(); 即<strong>泛型实例化类型自动推断</strong></li>
+<li>语法上支持集合，而不一定是数组</li>
+<li>新增一些取环境信息的工具方法</li>
+<li>Boolean类型反转，空指针安全，参与位运算</li>
+<li>两个char间的equals</li>
+<li>安全的加减乘除</li>
+<li>map集合支持并发请求，且可以写成 Map map = {name:"xxx",age:18};</li>
+<li>1.8</li>
+<li>允许在接口中有默认方法实现</li>
+<li><strong>Lambda表达式</strong></li>
+<li><strong>函数式接口</strong></li>
+<li>方法和构造函数引用</li>
+<li>Lambda的范围</li>
+<li>内置函数式接口</li>
+<li>Streams</li>
+<li>Parallel Streams</li>
+<li>Map</li>
+<li>时间日期API</li>
+<li>Annotations</li>
+<li>1.9</li>
+<li>Jigsaw 项目;模块化源码</li>
+<li>简化进程API</li>
+<li>轻量级 JSON API</li>
+<li>钱和货币的API</li>
+<li>改善锁争用机制</li>
+<li>代码分段缓存</li>
+<li>智能Java编译, 第二阶段</li>
+<li>HTTP 2.0客户端</li>
+<li>Kulla计划: Java的REPL实现</li>
+</ul>
+<h3 id="java8">Java8的新特性有哪些？</h3>
+<ul>
+<li><font style="color:rgb(51,51,51);">Lambda  表达式：Lambda允许把函数作为一个方法的参数</font></li>
+<li><font style="color:rgb(51,51,51);">Stream API ：新添加的Stream API（java.util.stream） 把真正的函数式编程风格引入到Java中默认方法：默认方法就是一个在接口里面有了一个实现的方法。</font></li>
+<li><font style="color:rgb(51,51,51);">Optional 类：Optional 类已经成为 Java 8 类库的一部分，用来解决空指针异常。</font></li>
+<li><font style="color:rgb(51,51,51);">Date Time API ：加强对日期与时间的处理。</font></li>
+</ul>
+<blockquote>
+<p>更新: 2023-10-25 14:21:50<br />
+原文: <a href="https://www.yuque.com/joyo/interview/au19r8">https://www.yuque.com/joyo/interview/au19r8</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
